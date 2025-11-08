@@ -18,7 +18,8 @@ export const metadata: Metadata = {
     default: 'Rami Kronbi | AI & Computer Vision Engineer | Project Manager',
     template: '%s | Rami Kronbi'
   },
-  description: 'Portfolio of Rami Kronbi - AI and Computer Vision Engineer specializing in machine learning, deep learning, and computer vision solutions. Aspiring Project Manager with expertise in TensorFlow, PyTorch, and OpenCV.',
+  description:
+    'Portfolio of Rami Kronbi - AI and Computer Vision Engineer specializing in machine learning, deep learning, and computer vision solutions. Aspiring Project Manager with expertise in TensorFlow, PyTorch, and OpenCV.',
   keywords: [
     'Rami Kronbi',
     'AI Engineer',
@@ -50,9 +51,9 @@ export const metadata: Metadata = {
     telephone: false,
   },
   alternates: {
-    canonical: '/',
+    canonical: 'https://ramikronbi.com/',
     languages: {
-      'en-US': '/',
+      'en-US': 'https://ramikronbi.com/',
     },
   },
   openGraph: {
@@ -61,7 +62,8 @@ export const metadata: Metadata = {
     url: 'https://ramikronbi.com',
     siteName: 'Rami Kronbi Portfolio',
     title: 'Rami Kronbi | AI & Computer Vision Engineer | Project Manager',
-    description: 'Portfolio of Rami Kronbi - AI and Computer Vision Engineer specializing in machine learning, deep learning, and computer vision solutions. Aspiring Project Manager with expertise in TensorFlow, PyTorch, and OpenCV.',
+    description:
+      'Portfolio of Rami Kronbi - AI and Computer Vision Engineer specializing in machine learning, deep learning, and computer vision solutions. Aspiring Project Manager with expertise in TensorFlow, PyTorch, and OpenCV.',
     images: [
       {
         url: '/og-image.jpg',
@@ -75,7 +77,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Rami Kronbi | AI & Computer Vision Engineer | Project Manager',
-    description: 'Portfolio of Rami Kronbi - AI and Computer Vision Engineer specializing in machine learning, deep learning, and computer vision solutions.',
+    description:
+      'Portfolio of Rami Kronbi - AI and Computer Vision Engineer specializing in machine learning, deep learning, and computer vision solutions.',
     images: ['/og-image.jpg'],
     creator: '@yourtwitter', // Update with your Twitter handle
     site: '@yourtwitter', // Update with your Twitter handle
@@ -132,10 +135,14 @@ export default function RootLayout({
       <head>
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
         <link rel="dns-prefetch" href="https://github.com" />
         <link rel="dns-prefetch" href="https://www.linkedin.com" />
-        
+
         {/* Additional SEO Meta Tags */}
         <meta name="geo.region" content="US" />
         <meta name="geo.placename" content="United States" />
@@ -153,4 +160,3 @@ export default function RootLayout({
     </html>
   )
 }
-
