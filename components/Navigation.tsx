@@ -33,7 +33,7 @@ export default function Navigation() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+        isScrolled || isMobileMenuOpen
           ? 'bg-dark-surface/95 backdrop-blur-md shadow-lg'
           : 'bg-transparent'
       }`}
