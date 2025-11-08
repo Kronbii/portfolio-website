@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
 
     // Send email using Resend
     const { data, error } = await resend.emails.send({
-      from: 'Portfolio Contact <onboarding@resend.dev>', // Update with your verified domain if you have one
+      from: 'Portfolio Contact <contact@ramikronbi.com>', // Update with your verified domain if you have one
       to: ['ramykronby@gmail.com'],
       subject: `New Contact Form Submission from ${name}`,
       html: `
