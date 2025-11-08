@@ -21,14 +21,31 @@ export default function Contact() {
     setIsSubmitting(true)
     setSubmitStatus('idle')
 
-    // Placeholder: You'll need to set up a form handler (e.g., Formspree, EmailJS, or API route)
-    // For now, this is a placeholder that simulates form submission
-    setTimeout(() => {
-      setIsSubmitting(false)
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message')
+      }
+
       setSubmitStatus('success')
       setFormData({ name: '', email: '', message: '' })
-      setTimeout(() => setSubmitStatus('idle'), 3000)
-    }, 1000)
+      setTimeout(() => setSubmitStatus('idle'), 5000)
+    } catch (error) {
+      console.error('Error submitting form:', error)
+      setSubmitStatus('error')
+      setTimeout(() => setSubmitStatus('idle'), 5000)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -124,6 +141,15 @@ export default function Contact() {
                   Thank you! I&apos;ll get back to you soon.
                 </motion.p>
               )}
+              {submitStatus === 'error' && (
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-red-500 text-center"
+                >
+                  Something went wrong. Please try again or email me directly.
+                </motion.p>
+              )}
             </form>
           </motion.div>
 
@@ -161,12 +187,12 @@ export default function Contact() {
                   <span>LinkedIn</span>
                 </motion.a>
                 <motion.a
-                  href="mailto:your.email@example.com"
+                  href="mailto:ramykronby@gmail.com"
                   className="flex items-center space-x-3 text-dark-text2 hover:text-primary-500 transition-colors group"
                   whileHover={{ x: 5 }}
                 >
                   <FiMail size={24} />
-                  <span>[Placeholder: your.email@example.com]</span>
+                  <span>ramykronby@gmail.com</span>
                 </motion.a>
               </div>
             </div>
