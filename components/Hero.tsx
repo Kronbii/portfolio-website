@@ -92,7 +92,7 @@ export default function Hero() {
               className="text-5xl md:text-7xl font-bold mb-6"
             >
               <span className="text-dark-text">Hi, I&apos;m </span>
-              <span className="text-primary-500">Rami Kronbi</span>
+              <span className="text-primary-500 whitespace-nowrap">Rami Kronbi</span>
             </motion.h1>
 
             <motion.p
