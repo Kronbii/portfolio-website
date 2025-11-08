@@ -4,7 +4,7 @@ export default function StructuredData() {
     '@type': 'Person',
     name: 'Rami Kronbi',
     jobTitle: 'AI & Computer Vision Engineer',
-    url: 'https://ramikronbi.vercel.app',
+    url: 'https://ramikronbi.com',
     sameAs: [
       'https://github.com/Kronbii', // Update with your GitHub
       'https://www.linkedin.com/in/rami-kronbi/', // Update with your LinkedIn
@@ -26,7 +26,7 @@ export default function StructuredData() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'Rami Kronbi Portfolio',
-    url: 'https://ramikronbi.vercel.app',
+    url: 'https://ramikronbi.com',
     author: {
       '@type': 'Person',
       name: 'Rami Kronbi',

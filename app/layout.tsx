@@ -25,14 +25,14 @@ export const metadata: Metadata = {
   authors: [{ name: 'Rami Kronbi' }],
   creator: 'Rami Kronbi',
   publisher: 'Rami Kronbi',
-  metadataBase: new URL('https://ramikronbi.vercel.app'),
+  metadataBase: new URL('https://ramikronbi.com'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://ramikronbi.vercel.app',
+    url: 'https://ramikronbi.com',
     siteName: 'Rami Kronbi Portfolio',
     title: 'Rami Kronbi | AI & Computer Vision Engineer | Project Manager',
     description: 'Portfolio of Rami Kronbi - AI and Computer Vision Engineer specializing in machine learning, deep learning, and computer vision solutions.',
