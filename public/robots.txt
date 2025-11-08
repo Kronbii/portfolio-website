@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://ramikronbi.com/sitemap.xml
+Host: ramikronbi.com
