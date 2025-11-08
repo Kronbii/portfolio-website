@@ -121,7 +121,7 @@ export default function Contact() {
                   animate={{ opacity: 1 }}
                   className="text-primary-500 text-center"
                 >
-                  Thank you! I'll get back to you soon.
+                  Thank you! I&apos;ll get back to you soon.
                 </motion.p>
               )}
             </form>
@@ -137,7 +137,7 @@ export default function Contact() {
             <div>
               <h3 className="text-2xl font-bold mb-4 text-dark-text">Connect With Me</h3>
               <p className="text-dark-text2 mb-6">
-                [Placeholder: Add a personal message about how people can reach you or what you're looking for.]
+                [Placeholder: Add a personal message about how people can reach you or what you&apos;re looking for.]
               </p>
               <div className="space-y-4">
                 <motion.a

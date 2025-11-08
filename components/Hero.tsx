@@ -91,7 +91,7 @@ export default function Hero() {
               transition={{ duration: 0.8 }}
               className="text-5xl md:text-7xl font-bold mb-6"
             >
-              <span className="text-dark-text">Hi, I'm </span>
+              <span className="text-dark-text">Hi, I&apos;m </span>
               <span className="text-primary-500">Rami Kronbi</span>
             </motion.h1>
 

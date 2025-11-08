@@ -43,7 +43,7 @@ export default function About() {
           </p>
           <p className="text-lg text-dark-text2 leading-relaxed">
             [Placeholder: Add a personal touch - what you enjoy outside of work, 
-            your values, or what you're looking for in your next opportunity.]
+            your values, or what you&apos;re looking for in your next opportunity.]
           </p>
         </motion.div>
       </div>
