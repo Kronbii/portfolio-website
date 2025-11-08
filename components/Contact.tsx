@@ -141,7 +141,7 @@ export default function Contact() {
               </p>
               <div className="space-y-4">
                 <motion.a
-                  href="https://github.com/yourusername"
+                  href="https://github.com/Kronbii"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-3 text-dark-text2 hover:text-primary-500 transition-colors group"
@@ -151,7 +151,7 @@ export default function Contact() {
                   <span>GitHub</span>
                 </motion.a>
                 <motion.a
-                  href="https://linkedin.com/in/yourusername"
+                  href="https://www.linkedin.com/in/rami-kronbi/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-3 text-dark-text2 hover:text-primary-500 transition-colors group"

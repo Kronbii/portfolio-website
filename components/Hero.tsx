@@ -120,7 +120,7 @@ export default function Hero() {
               className="flex justify-center md:justify-start space-x-6 mb-12"
             >
               <motion.a
-                href="https://github.com/yourusername"
+                href="https://github.com/Kronbii"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-3xl text-dark-text2 hover:text-primary-500 transition-colors"
@@ -131,7 +131,7 @@ export default function Hero() {
                 <FiGithub />
               </motion.a>
               <motion.a
-                href="https://linkedin.com/in/yourusername"
+                href="https://www.linkedin.com/in/rami-kronbi/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-3xl text-dark-text2 hover:text-primary-500 transition-colors"
