@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     template: '%s | Rami Kronbi'
   },
   description:
-    'Portfolio of Rami Kronbi - AI and Computer Vision Engineer specializing in machine learning, deep learning, and computer vision solutions. Aspiring Project Manager with expertise in TensorFlow, PyTorch, and OpenCV.',
+    'Rami Kronbi - AI and Computer Vision Engineer specializing in machine learning, deep learning, and computer vision solutions. Aspiring Project Manager with expertise in TensorFlow, PyTorch, and OpenCV.',
   keywords: [
     'Rami Kronbi',
     'AI Engineer',
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Rami Kronbi', url: 'https://ramikronbi.com' }],
   creator: 'Rami Kronbi',
   publisher: 'Rami Kronbi',
-  applicationName: 'Rami Kronbi Portfolio',
+  applicationName: 'Rami Kronbi',
   referrer: 'origin-when-cross-origin',
   formatDetection: {
     email: false,
@@ -60,10 +60,10 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://ramikronbi.com',
-    siteName: 'Rami Kronbi Portfolio',
+    siteName: 'Rami Kronbi',
     title: 'Rami Kronbi | AI & Computer Vision Engineer | Project Manager',
     description:
-      'Portfolio of Rami Kronbi - AI and Computer Vision Engineer specializing in machine learning, deep learning, and computer vision solutions. Aspiring Project Manager with expertise in TensorFlow, PyTorch, and OpenCV.',
+      'Rami Kronbi - AI and Computer Vision Engineer specializing in machine learning, deep learning, and computer vision solutions. Aspiring Project Manager with expertise in TensorFlow, PyTorch, and OpenCV.',
     images: [
       {
         url: 'https://ramikronbi.com/og-image.jpg',
@@ -78,10 +78,10 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Rami Kronbi | AI & Computer Vision Engineer | Project Manager',
     description:
-      'Portfolio of Rami Kronbi - AI and Computer Vision Engineer specializing in machine learning, deep learning, and computer vision solutions.',
+      'Rami Kronbi - AI and Computer Vision Engineer specializing in machine learning, deep learning, and computer vision solutions.',
     images: ['https://ramikronbi.com/og-image.jpg'],
-    creator: '@yourtwitter', // Update with your Twitter handle
-    site: '@yourtwitter', // Update with your Twitter handle
+    creator: '@kronbii', // Update with your Twitter handle
+    site: '@kronbii', // Update with your Twitter handle
   },
   robots: {
     index: true,

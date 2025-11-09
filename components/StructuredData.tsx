@@ -6,6 +6,7 @@ export default function StructuredData() {
     jobTitle: 'AI & Computer Vision Engineer',
     url: 'https://ramikronbi.com',
     image: 'https://ramikronbi.com/icon-512.png',
+    logo: 'https://ramikronbi.com/icon-512.png',
     sameAs: [
       'https://github.com/Kronbii',
       'https://www.linkedin.com/in/rami-kronbi/'
@@ -43,6 +44,19 @@ export default function StructuredData() {
     }
   }
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Rami Kronbi',
+        item: 'https://ramikronbi.com',
+      },
+    ],
+  }
+
   return (
     <>
       {/* Person Schema */}
@@ -58,6 +72,14 @@ export default function StructuredData() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(websiteSchema)
+        }}
+      />
+
+      {/* Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema)
         }}
       />
     </>
