@@ -15,22 +15,22 @@ const services: Service[] = [
   {
     icon: <FiCpu size={32} />,
     title: 'AI Development',
-    description: '[Placeholder: Describe the AI development services you offer. What kind of AI solutions can you build?]',
+    description: 'I design and build end-to-end AI systems ranging from embedded and edge intelligence to large-scale predictive models. My work covers real-time AI, robotics integration, and advanced classification systems—delivering full-cycle development from data collection to deployment',
   },
   {
     icon: <FiEye size={32} />,
     title: 'Computer Vision Solutions',
-    description: '[Placeholder: Describe your computer vision services. What types of CV problems can you solve?]',
+    description: 'I develop advanced computer vision pipelines for object detection, tracking, segmentation, image calibration, stitching, and real-time perception. Leveraging OpenCV, PyTorch, TensorFlow, TensorRT, and TFLite, I create optimized vision solutions for embedded and real-time environments',
   },
   {
     icon: <FiCode size={32} />,
     title: 'Machine Learning Consulting',
-    description: '[Placeholder: Describe your ML consulting services. How do you help clients with ML projects?]',
+    description: 'I help organizations design, evaluate, and optimize their machine learning strategies—from feasibility analysis and data preparation to model deployment and scaling. My consulting focuses on making ML systems reliable, interpretable, and production-ready, empowering teams to adopt AI efficiently',
   },
   {
     icon: <FiUsers size={32} />,
-    title: 'Project Management',
-    description: '[Placeholder: Describe your project management services. What PM methodologies do you use?]',
+    title: 'Robotics Solutions',
+    description: 'I build custom robotics solutions with a strong focus on intelligent software, AI integration, and perception systems. My experience spans autonomous vehicles, drones, and guided robots, offering end-to-end R&D that bridges robotics control, vision, and decision-making',
   },
 ]
 

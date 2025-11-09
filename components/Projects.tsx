@@ -19,31 +19,55 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: 'Project 1',
-    description: '[Placeholder: Brief description of your project]',
-    longDescription: '[Placeholder: Detailed description of your project. What problem does it solve? What technologies did you use? What were the key features and challenges?]',
-    githubUrl: 'https://github.com/yourusername/project1',
-    technologies: ['Python', 'TensorFlow', 'OpenCV'],
-    image: '/projects/project1.jpg',
-    features: ['Feature 1', 'Feature 2', 'Feature 3'],
+    title: 'Thermal Super-Resolution with IMDN',
+    description:
+      'A high-performance thermal super-resolution system achieving 34.2 dB PSNR at 229+ FPS using a novel IMDN-based architecture optimized for real-time thermal imaging.',
+    longDescription:
+      'This project introduces the first real-time thermal super-resolution framework built on the Information Multi-Distillation Network (IMDN). It delivers 34.2 dB PSNR and 229+ FPS, outperforming existing methods while remaining lightweight (0.69M parameters). The system integrates a thermal-aware loss function and a cross-domain transfer approach to adapt RGB-pretrained models to thermal data, resulting in superior detail preservation and speed. Applications span autonomous driving, industrial monitoring, thermal surveillance, and medical diagnostics. Developed with PyTorch, TensorRT, and OpenCV, this solution establishes a new state-of-the-art benchmark for real-time thermal enhancement.',
+    githubUrl: 'https://github.com/Kronbii/thermal-super-resolution',
+    technologies: ['Python', 'PyTorch', 'TensorRT', 'OpenCV'],
+    image: '/projects/thermal-sr.png',
+    features: [
+      '34.2 dB PSNR at 229+ FPS real-time inference',
+      'Thermal-aware multi-component loss function',
+      'Cross-domain RGB-to-thermal transfer learning',
+      'Lightweight IMDN architecture (0.69M parameters)',
+      'Applications in robotics, security, and autonomous systems',
+    ],
   },
   {
-    title: 'Project 2',
-    description: '[Placeholder: Brief description of your project]',
-    longDescription: '[Placeholder: Detailed description of your project. What problem does it solve? What technologies did you use? What were the key features and challenges?]',
-    githubUrl: 'https://github.com/yourusername/project2',
-    technologies: ['Python', 'PyTorch', 'Computer Vision'],
-    image: '/projects/project2.jpg',
-    features: ['Feature 1', 'Feature 2', 'Feature 3'],
-  },
+    title: 'Autonomous Race Car (WRO 2023 Winner)',
+    description:
+      'An open-source autonomous race vehicle built in just 20 days for the WRO Future Engineers challenge. Combines embedded control, sensor fusion, and Jetson-powered computer vision for real-time navigation and decision-making.',
+    longDescription:
+      'This project showcases a fully integrated autonomous vehicle developed from scratch in only 20 days for the World Robot Olympiad Future Engineers 2023 competition. The system combines a Jetson Nano for high-level computer vision and an Arduino Mega for deterministic real-time control using PID steering stabilization and sensor fusion from IMU and color sensors. Designed as a dual-MCU platform, it achieves smooth autonomous cornering, traffic sign detection, and dynamic pathing. Built with OpenCV, C++, and Python, the project demonstrates robust teamwork, rapid prototyping, and reliable embedded AI performance on a tight schedule.',
+    githubUrl: 'https://github.com/Kronbii/autonomous-race-car',
+    technologies: ['Python', 'C++', 'OpenCV', 'Arduino', 'Jetson Nano'],
+    image: '/projects/race-car.png',
+    features: [
+      'End-to-end autonomous vehicle built in 20 days',
+      'Jetson-based traffic sign and lane detection',
+      'Arduino PID control with IMU and color sensors',
+      'Dual-MCU architecture for modular expandability',
+      'Designed and deployed for WRO Future Engineers 2023',
+    ],
+  },  
   {
-    title: 'Project 3',
-    description: '[Placeholder: Brief description of your project]',
-    longDescription: '[Placeholder: Detailed description of your project. What problem does it solve? What technologies did you use? What were the key features and challenges?]',
-    githubUrl: 'https://github.com/yourusername/project3',
-    technologies: ['Python', 'Deep Learning', 'AI'],
-    image: '/projects/project3.jpg',
-    features: ['Feature 1', 'Feature 2', 'Feature 3'],
+    title: 'Smart Learning Table for Classrooms',
+    description:
+      'An IoT-powered, AI-assisted smart desk that combines hardware control, computer vision, and ergonomic intelligence to enhance classroom learning and posture health.',
+    longDescription:
+      'The Smart Learning Table is an interactive, sensor-driven workstation designed to improve engagement, comfort, and learning outcomes in classrooms and offices. Built with ESP32 microcontrollers, motorized actuators, and OpenCV-based vision tracking, the desk automatically adjusts height and tilt, monitors user posture, and provides real-time visual feedback. It supports multiple control interfaces, including a web dashboard and Bluetooth controllers, and integrates posture analytics for ergonomic insights. Developed as a collaborative university project, it demonstrates a seamless fusion of IoT, embedded systems, and AI for human-centered design.',
+    githubUrl: 'https://github.com/Kronbii/smart-interactive-desk',
+    technologies: ['Python', 'OpenCV', 'ESP32', 'React', 'MQTT'],
+    image: '/projects/smart-desk.png',
+    features: [
+      'Motorized height and tilt adjustment via actuators',
+      'Posture tracking using computer vision and sensors',
+      'Web dashboard and Bluetooth controller interfaces',
+      'Real-time visual feedback through LEDs and displays',
+      'IoT connectivity with data logging and analytics',
+    ],
   },
 ]
 
