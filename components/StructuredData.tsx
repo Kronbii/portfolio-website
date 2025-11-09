@@ -6,8 +6,8 @@ export default function StructuredData() {
     jobTitle: 'AI & Computer Vision Engineer',
     url: 'https://ramikronbi.com',
     sameAs: [
-      'https://github.com/Kronbii', // Update with your GitHub
-      'https://www.linkedin.com/in/rami-kronbi/', // Update with your LinkedIn
+      'https://github.com/Kronbii',
+      'https://www.linkedin.com/in/rami-kronbi/'
     ],
     knowsAbout: [
       'Artificial Intelligence',
@@ -19,18 +19,25 @@ export default function StructuredData() {
       'OpenCV',
       'Project Management'
     ],
-    description: 'AI and Computer Vision Engineer specializing in machine learning, deep learning, and computer vision solutions. Aspiring Project Manager.',
+    description:
+      'AI and Computer Vision Engineer specializing in machine learning, deep learning, and computer vision solutions. Aspiring Project Manager.'
   }
 
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'Rami Kronbi Portfolio',
+    alternateName: 'Rami Kronbi',
     url: 'https://ramikronbi.com',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: 'https://ramikronbi.com/?q={search_term_string}',
+      'query-input': 'required name=search_term_string'
+    },
     author: {
       '@type': 'Person',
-      name: 'Rami Kronbi',
-    },
+      name: 'Rami Kronbi'
+    }
   }
 
   return (
@@ -46,4 +53,3 @@ export default function StructuredData() {
     </>
   )
 }
-

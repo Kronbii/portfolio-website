@@ -152,6 +152,10 @@ export default function RootLayout({
         <meta name="rating" content="general" />
         <meta name="coverage" content="worldwide" />
         <meta name="target" content="all" />
+        <meta name="application-name" content="Rami Kronbi" />
+        <meta name="apple-mobile-web-app-title" content="Rami Kronbi" />
+        <meta property="og:site_name" content="Rami Kronbi" />
+
       </head>
       <body>
         <StructuredData />
