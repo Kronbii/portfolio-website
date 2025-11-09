@@ -66,7 +66,7 @@ export const metadata: Metadata = {
       'Portfolio of Rami Kronbi - AI and Computer Vision Engineer specializing in machine learning, deep learning, and computer vision solutions. Aspiring Project Manager with expertise in TensorFlow, PyTorch, and OpenCV.',
     images: [
       {
-        url: '/og-image.jpg',
+        url: 'https://ramikronbi.com/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'Rami Kronbi - AI & Computer Vision Engineer',
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     title: 'Rami Kronbi | AI & Computer Vision Engineer | Project Manager',
     description:
       'Portfolio of Rami Kronbi - AI and Computer Vision Engineer specializing in machine learning, deep learning, and computer vision solutions.',
-    images: ['/og-image.jpg'],
+    images: ['https://ramikronbi.com/og-image.jpg'],
     creator: '@yourtwitter', // Update with your Twitter handle
     site: '@yourtwitter', // Update with your Twitter handle
   },
