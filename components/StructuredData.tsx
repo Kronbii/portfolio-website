@@ -26,8 +26,8 @@ export default function StructuredData() {
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Rami Kronbi Portfolio',
-    alternateName: 'Rami Kronbi',
+    name: 'Rami Kronbi',
+    alternateName: 'Rami Kronbi Portfolio',
     url: 'https://ramikronbi.com',
     potentialAction: {
       '@type': 'SearchAction',
