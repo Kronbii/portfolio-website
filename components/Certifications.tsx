@@ -15,26 +15,12 @@ interface Certification {
 
 const certifications: Certification[] = [
   {
-    name: '[Placeholder: Certification Name]',
-    issuer: '[Placeholder: Issuing Organization]',
-    date: '[Placeholder: Date]',
-    credentialId: '[Placeholder: Credential ID if applicable]',
-    link: '[Placeholder: Verification Link]',
-  },
-  {
-    name: '[Placeholder: Certification Name]',
-    issuer: '[Placeholder: Issuing Organization]',
-    date: '[Placeholder: Date]',
-    credentialId: '[Placeholder: Credential ID if applicable]',
-    link: '[Placeholder: Verification Link]',
-  },
-  {
-    name: '[Placeholder: Certification Name]',
-    issuer: '[Placeholder: Issuing Organization]',
-    date: '[Placeholder: Date]',
-    credentialId: '[Placeholder: Credential ID if applicable]',
-    link: '[Placeholder: Verification Link]',
-  },
+    name: 'Google Project Management: Professional Certificate',
+    issuer: 'Google / Coursera',
+    date: 'April 2023',
+    credentialId: 'V3EHQ5F4K9TQ',
+    link: 'https://www.coursera.org/account/accomplishments/professional-cert/V3EHQ5F4K9TQ',
+  },  
 ]
 
 export default function Certifications() {

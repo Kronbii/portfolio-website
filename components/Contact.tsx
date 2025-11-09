@@ -69,7 +69,7 @@ export default function Contact() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-center text-dark-text2 mb-12 text-lg"
         >
-          [Placeholder: A brief message inviting people to contact you. What are you looking for? New opportunities? Collaborations?]
+          I’m always looking for new challenges and opportunities to grow. Whether you’re interested in a collaboration, a new project, or just want to chat about AI and robotics, I’d love to hear from you.
         </motion.p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -163,7 +163,7 @@ export default function Contact() {
             <div>
               <h3 className="text-2xl font-bold mb-4 text-dark-text">Connect With Me</h3>
               <p className="text-dark-text2 mb-6">
-                [Placeholder: Add a personal message about how people can reach you or what you&apos;re looking for.]
+                I’m always open to collaborating on innovative AI, computer vision, or robotics projects that make a real impact. Feel free to reach out if you’re looking to build something bold or explore new possibilities together.
               </p>
               <div className="space-y-4">
                 <motion.a

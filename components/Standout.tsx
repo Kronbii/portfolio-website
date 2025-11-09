@@ -14,23 +14,27 @@ interface StandoutFeature {
 const standoutFeatures: StandoutFeature[] = [
   {
     icon: <FiZap size={32} />,
-    title: '[Placeholder: What Makes You Stand Out 1]',
-    description: '[Placeholder: Describe a unique quality, skill, or approach that sets you apart from others in the field. Be specific and compelling.]',
+    title: 'Real-Time Innovation',
+    description:
+      'I build AI and robotics systems that don’t just work — they react. My focus is on creating intelligent, real-time solutions that blend machine learning, perception, and control into one seamless experience.',
   },
   {
     icon: <FiTarget size={32} />,
-    title: '[Placeholder: What Makes You Stand Out 2]',
-    description: '[Placeholder: Describe another unique quality, skill, or approach that sets you apart from others in the field. Be specific and compelling.]',
+    title: 'Creator with a Project Manager’s Mindset',
+    description:
+      'I approach every idea like a creator and every execution like a project manager — balancing vision with structure. I design systems with creativity, plan them with precision, and deliver them with purpose.',
   },
   {
     icon: <FiTrendingUp size={32} />,
-    title: '[Placeholder: What Makes You Stand Out 3]',
-    description: '[Placeholder: Describe another unique quality, skill, or approach that sets you apart from others in the field. Be specific and compelling.]',
+    title: 'Relentless Learner and Adapter',
+    description:
+      'I learn fast, adapt faster, and thrive under change. Whether it’s new tech, tools, or environments, I shift gears instantly — turning challenges into opportunities for growth and reinvention.',
   },
   {
     icon: <FiHeart size={32} />,
-    title: '[Placeholder: What Makes You Stand Out 4]',
-    description: '[Placeholder: Describe another unique quality, skill, or approach that sets you apart from others in the field. Be specific and compelling.]',
+    title: 'Driven by Impact, Not Routine',
+    description:
+      'I’m motivated by creating things that matter — tools, systems, and ideas that push boundaries. My goal isn’t just to build products; it’s to leave a mark, break barriers, and inspire innovation wherever I go.',
   },
 ]
 
@@ -59,7 +63,7 @@ export default function Standout() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-center text-dark-text2 mb-12 text-lg max-w-2xl mx-auto"
         >
-          [Placeholder: A brief introduction to this section. Why should someone choose you over others?]
+          I blend deep technical skill with a project manager’s mindset to turn complex ideas into real, impactful systems. I move fast, adapt faster, and focus on creating results that truly matter.
         </motion.p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
