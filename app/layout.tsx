@@ -6,7 +6,7 @@ import StructuredData from '@/components/StructuredData'
 const siteUrl = 'https://ramikronbi.com'
 const siteName = 'Rami Kronbi'
 const siteDescription =
-  'Rami Kronbi - AI and Computer Vision Engineer specializing in machine learning, deep learning, and computer vision solutions. Aspiring Project Manager with expertise in TensorFlow, PyTorch, and OpenCV.'
+  'Rami Kronbi - AI and Computer Vision Engineer.'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
