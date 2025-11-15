@@ -8,15 +8,15 @@ import { FiGithub, FiLinkedin, FiMail, FiSend, FiClock, FiCheckCircle } from 're
 const contactSteps = [
   {
     title: 'Discovery call',
-    description: '30 minutes to align on goals, constraints, and what success looks like.',
+    description: '30 minutes to frame goals, constraints, and success signals.',
   },
   {
     title: 'Solution blueprint',
-    description: 'Within 72 hours you receive scope, budget, and timeline options.',
+    description: 'Within 72 hours you get scope, budget, and timeline options.',
   },
   {
     title: 'Build + reporting',
-    description: 'We ship in weekly iterations with transparent documentation and demos.',
+    description: 'Weekly iterations with demos and lightweight documentation.',
   },
 ]
 
@@ -84,7 +84,7 @@ export default function Contact() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-center text-dark-text2 mb-12 text-lg"
         >
-          Share what you&apos;re building, the outcomes you need, and I&apos;ll reply within 24 hours with the next steps.
+          Tell me what you&apos;re building, the outcome you want, and I&apos;ll reply within 24 hours.
         </motion.p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -186,7 +186,7 @@ export default function Contact() {
                   <FiClock size={32} />
                 </div>
               </div>
-              <p className="mt-4 text-dark-text2">Next kickoff window: February 2025 · Response time: within 24 hours.</p>
+              <p className="mt-4 text-dark-text2">Next kickoff: Feb 2025 · Replies within 24 hours.</p>
             </div>
 
             <div className="rounded-3xl border border-white/10 bg-dark-surface2/80 p-6 space-y-4">

@@ -56,9 +56,9 @@ export default function Hero() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.15 }}
-              className="text-lg text-dark-text2 max-w-2xl"
+              className="text-base sm:text-lg text-dark-text2 max-w-2xl"
             >
-              I help founders and teams go from idea → working product without drowning in technical overhead. Think of me as your mix of mechatronics engineer, CV specialist, and certified project manager.
+              I bridge hardware, ML, and delivery so you get a working prototype fast — no juggling agencies.
             </motion.p>
 
             <motion.div

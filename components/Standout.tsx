@@ -15,26 +15,22 @@ const standoutFeatures: StandoutFeature[] = [
   {
     icon: <FiZap size={32} />,
     title: 'Realtime-grade engineering',
-    description:
-      'Hardware, firmware, ML, and perception stitched together so robots can react within milliseconds — not minutes.',
+    description: 'Hardware, firmware, ML, and perception stitched into one responsive brain.',
   },
   {
     icon: <FiTarget size={32} />,
     title: 'One partner, many hats',
-    description:
-      'Engineer, strategist, and PM. I translate executive language into technical sprint plans and keep every stakeholder looped in.',
+    description: 'Engineer, strategist, PM — I keep execs and sprint teams in sync.',
   },
   {
     icon: <FiTrendingUp size={32} />,
     title: 'Adaptive problem solving',
-    description:
-      'I lean into experimentation while safeguarding scope. When constraints shift, the roadmap adapts — without losing sight of ROI.',
+    description: 'Constraints shift; the roadmap flexes without losing sight of ROI.',
   },
   {
     icon: <FiHeart size={32} />,
     title: 'Impact over deliverables',
-    description:
-      'Every sprint points to business value: faster pilots, safer robots, better insights. Vanity metrics are not part of the vocabulary.',
+    description: 'Every sprint points to measurable value: faster pilots, safer robots.',
   },
 ]
 
@@ -63,7 +59,7 @@ export default function Standout() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-center text-dark-text2 mb-10 text-base max-w-2xl mx-auto"
         >
-          Every partnership combines experimentation, sharp storytelling, and ruthless execution. Here is what that feels like.
+          Engagements stay simple: experiment together, tell the story, ship the result.
         </motion.p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

@@ -14,31 +14,31 @@ interface SkillCategory {
 const skillCategories: SkillCategory[] = [
   {
     category: 'Vision & Perception Systems',
-    tagline: 'Detection, tracking, calibration, SLAM, and synthetic data for robotics and inspection.',
+    tagline: 'Detection, tracking, calibration, SLAM, synthetic data.',
     skills: ['OpenCV', 'TensorRT', 'YOLO/Detectron', 'Image calibration', 'Stereo depth'],
     confidence: 95,
   },
   {
     category: 'AI & ML Engineering',
-    tagline: 'Model architecture design, experimentation, evaluation, and ML Ops automation.',
+    tagline: 'Model design, experimentation, evaluation, ML Ops.',
     skills: ['PyTorch', 'TensorFlow', 'Lightning', 'ONNX', 'MLflow'],
     confidence: 92,
   },
   {
     category: 'Edge & Embedded Intelligence',
-    tagline: 'Deploying performant models on Jetson, ESP32, Arduino, and custom mechatronics stacks.',
+    tagline: 'Deploying models on Jetson, ESP32, Arduino, custom mechatronics.',
     skills: ['Jetson Nano/Orin', 'C++', 'Python', 'ROS', 'ESP32/Arduino'],
     confidence: 90,
   },
   {
     category: 'Product & Delivery Leadership',
-    tagline: 'Google PM-certified planning, stakeholder alignment, and agile execution.',
+    tagline: 'Google PM-certified planning, stakeholder alignment, agile execution.',
     skills: ['Agile & Scrum', 'Roadmapping', 'Risk modeling', 'Team coaching', 'Executive comms'],
     confidence: 93,
   },
   {
     category: 'Tools & Collaboration Stack',
-    tagline: 'The infrastructure that keeps projects transparent, versioned, and observable.',
+    tagline: 'Infra that keeps work transparent, versioned, and observable.',
     skills: ['Git / GitHub', 'Docker', 'Linux', 'Notion & Miro', 'JIRA / Linear'],
     confidence: 88,
   },
