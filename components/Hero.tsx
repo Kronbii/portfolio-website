@@ -14,9 +14,9 @@ import Image from 'next/image'
 import { useState, type Dispatch, type SetStateAction } from 'react'
 
 const heroMetrics = [
-  { value: '18+', label: 'AI launches' },
+  { value: '30+', label: 'Client projects shipped' },
   { value: '4x', label: 'Faster delivery' },
-  { value: '7', label: 'Teams led' },
+  { value: '2', label: 'Teams led' },
 ]
 
 const focusChips = ['Vision & robotics', 'Edge optimization', 'Project leadership']
