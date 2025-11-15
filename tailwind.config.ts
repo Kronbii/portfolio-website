@@ -21,6 +21,30 @@ const config: Config = {
           800: '#166534',
           900: '#14532d',
         },
+        secondary: {
+          50: '#f0f9ff',
+          100: '#e0f2fe',
+          200: '#bae6fd',
+          300: '#7dd3fc',
+          400: '#38bdf8',
+          500: '#0ea5e9',
+          600: '#0284c7',
+          700: '#0369a1',
+          800: '#075985',
+          900: '#0c4a6e',
+        },
+        accent: {
+          50: '#f8f5ff',
+          100: '#f0e9ff',
+          200: '#d7c7ff',
+          300: '#b697f8',
+          400: '#a277f2',
+          500: '#8b5cf6',
+          600: '#6d28d9',
+          700: '#5b21b6',
+          800: '#4c1d95',
+          900: '#3b0764',
+        },
         dark: {
           bg: '#0a0a0a',
           surface: '#111111',
@@ -29,11 +53,22 @@ const config: Config = {
           text2: '#a3a3a3',
         },
       },
+      boxShadow: {
+        glow: '0 0 40px rgba(34, 197, 94, 0.35)',
+        'accent-glow': '0 0 50px rgba(142, 92, 246, 0.25)',
+      },
+      backgroundImage: {
+        'grid-dots': 'radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px)',
+        'radial-light': 'radial-gradient(circle at top, rgba(34,197,94,0.25), transparent 55%)',
+      },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-in-out',
         'slide-up': 'slideUp 0.6s ease-out',
         'slide-down': 'slideDown 0.6s ease-out',
         'scale-in': 'scaleIn 0.5s ease-out',
+        'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+        'float-slow': 'float 8s ease-in-out infinite',
+        'spin-slow': 'spin 12s linear infinite',
       },
       keyframes: {
         fadeIn: {
@@ -52,10 +87,18 @@ const config: Config = {
           '0%': { transform: 'scale(0.9)', opacity: '0' },
           '100%': { transform: 'scale(1)', opacity: '1' },
         },
+        pulseGlow: {
+          '0%, 100%': { opacity: '0.4', transform: 'scale(0.95)' },
+          '50%': { opacity: '1', transform: 'scale(1.05)' },
+        },
+        float: {
+          '0%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-15px)' },
+          '100%': { transform: 'translateY(0px)' },
+        },
       },
     },
   },
   plugins: [],
 }
 export default config
-

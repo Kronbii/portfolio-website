@@ -1,6 +1,14 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import StructuredData from '@/components/StructuredData'
+import { Space_Grotesk } from 'next/font/google'
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-sans',
+})
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -131,7 +139,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <head>
         <title>Rami Kronbi</title>
         {/* Preconnect to external domains for performance */}
@@ -157,11 +165,18 @@ export default function RootLayout({
         <meta name="application-name" content="Rami Kronbi" />
         <meta name="apple-mobile-web-app-title" content="Rami Kronbi" />
         <meta property="og:site_name" content="Rami Kronbi" />
-
       </head>
-      <body>
+      <body className={`${spaceGrotesk.className} bg-dark-bg text-dark-text antialiased`}>
+        <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(34,197,94,0.12),_transparent_55%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,_rgba(14,165,233,0.12),_transparent_60%)]" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[70vw] h-[70vw] bg-gradient-to-r from-primary-500/10 via-secondary-500/10 to-accent-500/15 blur-[200px]" />
+          <div className="absolute -bottom-32 right-0 w-[45vw] h-[45vw] bg-accent-500/15 blur-[220px]" />
+        </div>
         <StructuredData />
-        {children}
+        <div className="relative z-10">
+          {children}
+        </div>
       </body>
     </html>
   )

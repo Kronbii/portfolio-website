@@ -3,34 +3,44 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { FiCode, FiCpu, FiEye, FiUsers } from 'react-icons/fi'
+import { FiCode, FiCpu, FiEye, FiUsers, FiCheck } from 'react-icons/fi'
 
 interface Service {
   icon: React.ReactNode
   title: string
-  description: string
+  punchline: string
+  timeline: string
+  highlights: string[]
 }
 
 const services: Service[] = [
   {
-    icon: <FiCpu size={32} />,
-    title: 'AI Development',
-    description: 'I design and build end-to-end AI systems ranging from embedded and edge intelligence to large-scale predictive models. My work covers real-time AI, robotics integration, and advanced classification systems—delivering full-cycle development from data collection to deployment',
+    icon: <FiCpu size={28} />,
+    title: 'AI Sprint Lead',
+    punchline: 'Scope, prototype, and validate AI ideas without hiring a full team.',
+    timeline: '4-8 weeks',
+    highlights: ['Roadmap + KPIs', 'Hands-on build', 'Weekly reviews'],
   },
   {
-    icon: <FiEye size={32} />,
-    title: 'Computer Vision Solutions',
-    description: 'I develop advanced computer vision pipelines for object detection, tracking, segmentation, image calibration, stitching, and real-time perception. Leveraging OpenCV, PyTorch, TensorFlow, TensorRT, and TFLite, I create optimized vision solutions for embedded and real-time environments',
+    icon: <FiEye size={28} />,
+    title: 'Computer Vision Systems',
+    punchline: 'Perception stacks tuned for robotics, inspection, and edge devices.',
+    timeline: '3-6 weeks',
+    highlights: ['Dataset plan', 'Model + optimization', 'Deployment ready'],
   },
   {
-    icon: <FiCode size={32} />,
-    title: 'Machine Learning Consulting',
-    description: 'I help organizations design, evaluate, and optimize their machine learning strategies—from feasibility analysis and data preparation to model deployment and scaling. My consulting focuses on making ML systems reliable, interpretable, and production-ready, empowering teams to adopt AI efficiently',
+    icon: <FiCode size={28} />,
+    title: 'ML Advisory',
+    punchline: 'Audits, hiring support, and process upgrades for growing teams.',
+    timeline: '2-4 weeks',
+    highlights: ['Architecture audit', 'Team enablement', 'Hiring support'],
   },
   {
-    icon: <FiUsers size={32} />,
-    title: 'Robotics Solutions',
-    description: 'I build custom robotics solutions with a strong focus on intelligent software, AI integration, and perception systems. My experience spans autonomous vehicles, drones, and guided robots, offering end-to-end R&D that bridges robotics control, vision, and decision-making',
+    icon: <FiUsers size={28} />,
+    title: 'Robotics & Autonomy',
+    punchline: 'Sensor fusion, control, and system design with PM rigor.',
+    timeline: '4-10 weeks',
+    highlights: ['Firmware + CV', 'Sim + field tests', 'Documentation'],
   },
 ]
 
@@ -42,37 +52,68 @@ export default function Services() {
     <section
       id="services"
       ref={ref}
-      className="py-20 px-4 sm:px-6 lg:px-8"
+      className="py-24 px-4 sm:px-6 lg:px-8"
     >
-      <div className="max-w-7xl mx-auto">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold mb-12 text-center"
-        >
-          Services I <span className="text-primary-500">Offer</span>
-        </motion.h2>
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="text-sm uppercase tracking-[0.4em] text-dark-text2"
+          >
+            Signature engagements
+          </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-4xl md:text-5xl font-semibold tracking-tight"
+          >
+            Services with <span className="text-gradient">clear outcomes</span>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-4 text-lg text-dark-text2"
+          >
+            Choose the level of partnership you need — from hands-on delivery to executive advisory. Every engagement ships with documentation, reporting, and a measurable ROI target.
+          </motion.p>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {services.map((service, index) => (
             <motion.div
-              key={index}
+              key={service.title}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-dark-surface2 rounded-lg p-8 border border-dark-surface2 hover:border-primary-500/50 transition-all duration-300 group"
-              whileHover={{ scale: 1.02 }}
+              className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur"
+              whileHover={{ y: -4 }}
             >
-              <div className="text-primary-500 mb-4 group-hover:text-primary-400 transition-colors">
-                {service.icon}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3 text-primary-400">
+                  {service.icon}
+                  <span className="text-xs uppercase tracking-wide text-dark-text2">{service.timeline}</span>
+                </div>
               </div>
-              <h3 className="text-2xl font-bold mb-3 text-dark-text">
+              <h3 className="mt-4 text-2xl font-semibold text-dark-text">
                 {service.title}
               </h3>
-              <p className="text-dark-text2 leading-relaxed">
-                {service.description}
+              <p className="mt-2 text-dark-text2 text-sm leading-relaxed">
+                {service.punchline}
               </p>
+              <div className="mt-4 space-y-2">
+                {service.highlights.map((item) => (
+                  <div key={item} className="flex items-center space-x-2 text-sm text-dark-text">
+                    <span className="text-primary-400">
+                      <FiCheck />
+                    </span>
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
             </motion.div>
           ))}
         </div>
@@ -80,4 +121,3 @@ export default function Services() {
     </section>
   )
 }
-
