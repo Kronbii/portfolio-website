@@ -103,24 +103,16 @@ export default function Projects() {
             transition={{ duration: 0.5 }}
             className="text-center text-sm uppercase tracking-[0.4em] text-dark-text2"
           >
-            Case Studies
+            Portfolio Projects
           </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-3xl md:text-4xl font-semibold mb-3 text-center"
+            className="text-3xl md:text-4xl font-semibold mb-3 pb-8 text-center"
           >
-            Proof that <span className="text-gradient">AI ships fast</span>
+            Real work,<span className="text-gradient"> delivered with impact</span>
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="text-center text-dark-text2 mb-10 text-base max-w-2xl mx-auto"
-          >
-            Tap into a few builds below. Each started as a napkin idea and ended as a working, demo-ready product.
-          </motion.p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project, index) => (
