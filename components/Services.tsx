@@ -16,7 +16,7 @@ interface Service {
 const services: Service[] = [
   {
     icon: <FiCpu size={28} />,
-    title: 'AI Sprint Lead',
+    title: 'AI Solutions',
     punchline: 'Scope, prototype, and validate AI ideas without a full in-house team.',
     timeline: '4-8 weeks',
     highlights: ['Roadmap + KPIs', 'Hands-on build', 'Weekly reviews'],
@@ -72,14 +72,6 @@ export default function Services() {
           >
             Services with <span className="text-gradient">clear outcomes</span>
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-4 text-lg text-dark-text2"
-          >
-            Choose the level of partnership you need — from hands-on delivery to executive advisory. Every engagement ships with documentation, reporting, and a measurable ROI target.
-          </motion.p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
