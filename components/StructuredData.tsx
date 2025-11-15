@@ -37,7 +37,7 @@ export default function StructuredData() {
     '@type': 'WebSite',
     '@id': `${baseUrl}/#website`,
     name: siteName,
-    alternateName: ['Rami Kronbi Portfolio', 'ramikronbi.com'],
+    alternateName: ['Rami Kronbi Portfolio'],
     url: baseUrl,
     description: 'Rami Kronbi - AI and Computer Vision Engineer Portfolio',
     image: ogImage,
