@@ -6,18 +6,22 @@ import { useRef } from 'react'
 import { Briefcase, GraduationCap, Award, Users } from 'lucide-react'
 
 const quickStats = [
-  { value: '6+', label: 'Years shipping AI/CV products' },
-  { value: '12', label: 'Awards & podiums' },
-  { value: 'Founder', label: 'EVOID Studio' },
-]
+  { value: 'Engineer', label: 'Bachelor of Mechatronics Engineering' },
+  { value: 'Founder', label: 'EVOID Tech Solutions' },
+  { value: 'Leader', label: 'Nasa Space Apps, Astronomyclub' },
 
-const focusAreas = ['Autonomous mobility', 'Industrial inspection', 'Immersive education', 'Robotics research']
+]
 
 const milestones = [
   {
     period: 'Now',
-    title: 'Founder & AI Lead · EVOID',
+    title: 'Founder & Tech Lead · EVOID',
     description: 'Building bespoke AI/CV and robotics products for startups + industry teams.',
+  },
+  {
+    period: '2025',
+    title: 'Full Time Applied AI and CV Enginner',
+    description: 'Improving runway safety at Oreyeon LDA.',
   },
   {
     period: '2023',
@@ -26,8 +30,8 @@ const milestones = [
   },
   {
     period: '2022',
-    title: 'Google Project Management Certified',
-    description: 'Blending PMI-style delivery with hands-on engineering.',
+    title: 'Nasa Space Apps Tech Lead and Volunteer',
+    description: 'Took part in leading the largest global hackathon in Lebanon.',
   },
 ]
 
@@ -86,14 +90,6 @@ export default function About() {
             >
               Mechatronics engineer turned AI/CV builder. I stay hands-on across strategy, firmware, and ML so you work with one partner instead of five.
             </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-4 text-base md:text-lg text-dark-text2 leading-relaxed"
-            >
-              Through <strong>EVOID</strong> I run fast, transparent engagements — scoped roadmaps, weekly demos, and one point of accountability.
-            </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -114,21 +110,9 @@ export default function About() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="rounded-3xl border border-white/10 bg-dark-surface2/80 p-6 backdrop-blur"
-        >
-          <p className="text-xs uppercase tracking-[0.4em] text-dark-text2">Focus verticals</p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {focusAreas.map((area) => (
-              <span
-                key={area}
-                className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-dark-text"
-              >
-                {area}
-              </span>
-            ))}
-          </div>
+          className="rounded-3xl border border-white/10 bg-dark-surface2/80 p-6 backdrop-blur">
 
-          <div className="mt-6 border-t border-white/10 pt-6 space-y-4">
+          <div className="mt-6 border-t border-none pt-none space-y-8">
             {milestones.map((item, index) => (
               <div key={item.title} className="relative pl-6">
                 <span className="absolute left-0 top-1.5 h-3 w-3 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500" />
@@ -138,21 +122,6 @@ export default function About() {
                 <p className="text-xs uppercase tracking-wide text-dark-text2">{item.period}</p>
                 <h3 className="text-lg font-semibold text-dark-text">{item.title}</h3>
                 <p className="text-sm text-dark-text2 leading-relaxed">{item.description}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-6 grid sm:grid-cols-2 gap-3">
-            {infoCards.map((card) => (
-              <div
-                key={card.title}
-                className="rounded-2xl border border-white/10 bg-white/5 p-4 flex items-start space-x-3"
-              >
-                <div className="text-primary-400">{card.icon}</div>
-                <div>
-                  <p className="text-xs uppercase tracking-wide text-dark-text2">{card.title}</p>
-                  <p className="text-sm text-dark-text leading-relaxed">{card.description}</p>
-                </div>
               </div>
             ))}
           </div>

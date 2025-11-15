@@ -14,22 +14,26 @@ import Image from 'next/image'
 import { useState, type Dispatch, type SetStateAction } from 'react'
 
 const heroMetrics = [
-  { value: '18+', label: 'AI launches' },
+  { value: '30+', label: 'Client projects shipped' },
   { value: '4x', label: 'Faster delivery' },
-  { value: '7', label: 'Teams led' },
+  { value: '2', label: 'Teams led' },
 ]
 
 const focusChips = ['Vision & robotics', 'Edge optimization', 'Project leadership']
+// const heroHighlights = [
+  // {
+    // title: 'Who I am',
+    // detail: 'Rami Kronbi — mechatronics engineer turned AI & CV builder at EVOID.',
+  // },
+  // {
+    // title: 'How I work',
+    // detail: 'I stay embedded with founders, sketching ideas, hiking, and shipping robotics experiments.',
+  // },
+// ]
+
 const heroHighlights = [
-  {
-    title: 'Who I am',
-    detail: 'Rami Kronbi — mechatronics engineer turned AI & CV builder at EVOID.',
-  },
-  {
-    title: 'How I work',
-    detail: 'I stay embedded with founders, sketching ideas, hiking, and shipping robotics experiments.',
-  },
 ]
+
 
 export default function Hero() {
   const [imageError, setImageError] = useState(false)
@@ -66,37 +70,6 @@ export default function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.15 }}
-              className="rounded-3xl border border-white/10 bg-white/10 p-6 backdrop-blur"
-            >
-              <div className="space-y-3">
-                {heroHighlights.map((highlight) => (
-                  <div key={highlight.title} className="flex items-start space-x-3 text-dark-text">
-                    <span className="text-primary-400 mt-1">
-                      <FiCheck size={16} />
-                    </span>
-                    <div>
-                      <p className="font-semibold">{highlight.title}</p>
-                      <p className="text-sm text-dark-text2">{highlight.detail}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {focusChips.map((chip) => (
-                  <span
-                    key={chip}
-                    className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs uppercase tracking-wide text-dark-text"
-                  >
-                    {chip}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.25 }}
               className="flex flex-col sm:flex-row gap-4"
             >
@@ -106,7 +79,7 @@ export default function Hero() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Book a discovery call
+                Book a service call
                 <FiArrowUpRight className="ml-2 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
               </motion.a>
               <motion.a
@@ -115,7 +88,7 @@ export default function Hero() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                View case studies
+                View portfolio
               </motion.a>
             </motion.div>
 
@@ -179,7 +152,7 @@ function IntroSection() {
           <span className="absolute inline-flex h-full w-full rounded-full bg-primary-500 opacity-75 animate-ping"></span>
           <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary-400"></span>
         </span>
-        <span>Available for Feb 2025</span>
+        <span>portfolio ahead!</span>
       </motion.div>
 
       <motion.h1

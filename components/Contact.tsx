@@ -67,7 +67,7 @@ export default function Contact() {
     <section
       id="contact"
       ref={ref}
-      className="py-24 px-4 sm:px-6 lg:px-8 bg-dark-surface"
+      className="py-24 px-4 sm:px-6 lg:px-8"
     >
       <div className="max-w-6xl mx-auto">
         <motion.h2
@@ -186,22 +186,7 @@ export default function Contact() {
                   <FiClock size={32} />
                 </div>
               </div>
-              <p className="mt-4 text-dark-text2">Next kickoff: Feb 2025 · Replies within 24 hours.</p>
-            </div>
-
-            <div className="rounded-3xl border border-white/10 bg-dark-surface2/80 p-6 space-y-4">
-              <p className="text-sm uppercase tracking-[0.4em] text-dark-text2">How it works</p>
-              {contactSteps.map((step) => (
-                <div key={step.title} className="flex items-start space-x-3">
-                  <span className="text-primary-400 mt-1">
-                    <FiCheckCircle />
-                  </span>
-                  <div>
-                    <p className="font-semibold text-dark-text">{step.title}</p>
-                    <p className="text-sm text-dark-text2">{step.description}</p>
-                  </div>
-                </div>
-              ))}
+              <p className="mt-4 text-dark-text2">Next kickoff: Dec 2025 · Replies within 24 hours.</p>
             </div>
 
             <div className="rounded-3xl border border-white/10 bg-white/5 p-6">

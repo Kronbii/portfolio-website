@@ -11,7 +11,6 @@ const navItems = [
   { name: 'Skills', href: '#skills' },
   { name: 'Services', href: '#services' },
   { name: 'Certifications', href: '#certifications' },
-  { name: 'Standout', href: '#standout' },
   { name: 'Contact', href: '#contact' },
 ]
 
@@ -62,7 +61,7 @@ export default function Navigation() {
                 RK
               </span>
               <div className="hidden sm:block">
-                <p className="text-sm uppercase tracking-widest text-dark-text2">AI & CV Lead</p>
+                <p className="text-sm uppercase tracking-widest text-dark-text2">AI & CV Engineer</p>
                 <p className="-mt-1 text-base text-dark-text">Rami Kronbi</p>
               </div>
             </motion.a>
@@ -84,7 +83,7 @@ export default function Navigation() {
                 className="group inline-flex items-center space-x-1 rounded-full border border-primary-400/60 bg-primary-500/10 px-4 py-2 text-sm font-semibold text-dark-text"
                 whileHover={{ scale: 1.03 }}
               >
-                <span>Book Rami</span>
+                <span>Book a call</span>
                 <FiArrowUpRight className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </motion.a>
             </div>
