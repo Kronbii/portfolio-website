@@ -42,45 +42,16 @@ export default function Hero() {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-          <div className="order-1 space-y-6">
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center space-x-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.3em] text-dark-text2"
-            >
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-primary-500 opacity-75 animate-ping"></span>
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary-400"></span>
-              </span>
-              <span>Available for Feb 2025</span>
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight"
-            >
-              Hi, I&apos;m <span className="text-gradient">Rami Kronbi</span> — building AI so you don&apos;t have to.
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.05 }}
-              className="text-sm uppercase tracking-[0.3em] text-dark-text2"
-            >
-              Rami Kronbi · AI & Computer Vision Engineer · Founder, EVOID
-            </motion.p>
+        <div className="flex flex-col gap-10 lg:grid lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+          <div className="lg:hidden">
+            <IntroSection />
           </div>
 
-          <div className="order-2 lg:order-2 lg:row-span-2">
-            <HeroPortrait imageError={imageError} setImageError={setImageError} />
-          </div>
+          <div className="order-3 lg:order-1 space-y-6">
+            <div className="hidden lg:block">
+              <IntroSection />
+            </div>
 
-          <div className="order-3 space-y-6">
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -168,9 +139,50 @@ export default function Hero() {
               ))}
             </div>
           </div>
+
+          <div className="order-2 lg:order-2">
+            <HeroPortrait imageError={imageError} setImageError={setImageError} />
+          </div>
         </div>
       </div>
     </section>
+  )
+}
+
+function IntroSection() {
+  return (
+    <div className="space-y-6">
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="inline-flex items-center space-x-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.3em] text-dark-text2"
+      >
+        <span className="relative flex h-2.5 w-2.5">
+          <span className="absolute inline-flex h-full w-full rounded-full bg-primary-500 opacity-75 animate-ping"></span>
+          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary-400"></span>
+        </span>
+        <span>Available for Feb 2025</span>
+      </motion.div>
+
+      <motion.h1
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight"
+      >
+        Hi, I&apos;m <span className="text-gradient">Rami Kronbi</span> — building AI so you don&apos;t have to.
+      </motion.h1>
+
+      <motion.p
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.05 }}
+        className="text-sm uppercase tracking-[0.3em] text-dark-text2"
+      >
+        Rami Kronbi · AI & Computer Vision Engineer · Founder, EVOID
+      </motion.p>
+    </div>
   )
 }
 
@@ -213,7 +225,7 @@ function HeroPortrait({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="absolute -left-2 top-4 sm:-left-5 sm:top-6 w-40 sm:w-44 rounded-2xl border border-white/25 bg-white/10 p-3 shadow-[0_6px_18px_rgba(0,0,0,0.35)] backdrop-blur-2xl"
+        className="absolute -left-2 top-4 sm:-left-5 sm:top-6 lg:-left-6 lg:top-8 w-36 sm:w-44 lg:w-48 rounded-2xl border border-white/25 bg-white/10 p-3 shadow-[0_6px_18px_rgba(0,0,0,0.35)] backdrop-blur-2xl"
       >
         <div className="flex items-center gap-2 text-primary-200">
           <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-primary-500/25 text-primary-100">
@@ -230,7 +242,7 @@ function HeroPortrait({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.3 }}
-        className="absolute -right-2 bottom-4 sm:-right-4 sm:bottom-6 w-40 sm:w-48 rounded-2xl border border-white/25 bg-gradient-to-br from-white/10 to-white/5 p-3 shadow-[0_8px_22px_rgba(3,105,161,0.35)] backdrop-blur-2xl"
+        className="absolute -right-2 bottom-4 sm:-right-4 sm:bottom-6 lg:-right-6 lg:bottom-6 w-36 sm:w-48 rounded-2xl border border-white/25 bg-gradient-to-br from-white/10 to-white/5 p-3 shadow-[0_8px_22px_rgba(3,105,161,0.35)] backdrop-blur-2xl"
       >
         <div className="flex items-center gap-2 text-secondary-200">
           <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-secondary-500/30 text-secondary-50">
