@@ -133,6 +133,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <title>Rami Kronbi</title>
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -144,6 +145,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.linkedin.com" />
 
         {/* Additional SEO Meta Tags */}
+        <meta name="author" content="Rami Kronbi" />
         <meta name="geo.region" content="US" />
         <meta name="geo.placename" content="United States" />
         <meta name="language" content="English" />
