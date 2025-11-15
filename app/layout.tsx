@@ -1,7 +1,12 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
-import StructuredData from '@/components/StructuredData'
 import { Space_Grotesk } from 'next/font/google'
+import StructuredData from '@/components/StructuredData'
+
+const siteUrl = 'https://ramikronbi.com'
+const siteName = 'Rami Kronbi'
+const siteDescription =
+  'Rami Kronbi - AI and Computer Vision Engineer specializing in machine learning, deep learning, and computer vision solutions. Aspiring Project Manager with expertise in TensorFlow, PyTorch, and OpenCV.'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -21,13 +26,12 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://ramikronbi.com'),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: 'Rami Kronbi | AI & Computer Vision Engineer | Project Manager',
-    template: '%s | Rami Kronbi'
+    default: siteName,
+    template: `%s | ${siteName}`
   },
-  description:
-    'Rami Kronbi - AI and Computer Vision Engineer specializing in machine learning, deep learning, and computer vision solutions. Aspiring Project Manager with expertise in TensorFlow, PyTorch, and OpenCV.',
+  description: siteDescription,
   keywords: [
     'Rami Kronbi',
     'AI Engineer',
@@ -48,10 +52,10 @@ export const metadata: Metadata = {
     'AI Consultant',
     'ML Consultant'
   ],
-  authors: [{ name: 'Rami Kronbi', url: 'https://ramikronbi.com' }],
-  creator: 'Rami Kronbi',
-  publisher: 'Rami Kronbi',
-  applicationName: 'Rami Kronbi',
+  authors: [{ name: siteName, url: siteUrl }],
+  creator: siteName,
+  publisher: siteName,
+  applicationName: siteName,
   referrer: 'origin-when-cross-origin',
   formatDetection: {
     email: false,
@@ -59,22 +63,21 @@ export const metadata: Metadata = {
     telephone: false,
   },
   alternates: {
-    canonical: 'https://ramikronbi.com/',
+    canonical: `${siteUrl}/`,
     languages: {
-      'en-US': 'https://ramikronbi.com/',
+      'en-US': `${siteUrl}/`,
     },
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://ramikronbi.com',
-    siteName: 'Rami Kronbi',
-    title: 'Rami Kronbi | AI & Computer Vision Engineer | Project Manager',
-    description:
-      'Rami Kronbi - AI and Computer Vision Engineer specializing in machine learning, deep learning, and computer vision solutions. Aspiring Project Manager with expertise in TensorFlow, PyTorch, and OpenCV.',
+    url: siteUrl,
+    siteName,
+    title: `${siteName} | AI & Computer Vision Engineer | Project Manager`,
+    description: siteDescription,
     images: [
       {
-        url: 'https://ramikronbi.com/og-image.jpg',
+        url: `${siteUrl}/og-image.jpg`,
         width: 1200,
         height: 630,
         alt: 'Rami Kronbi - AI & Computer Vision Engineer',
@@ -84,10 +87,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Rami Kronbi | AI & Computer Vision Engineer | Project Manager',
-    description:
-      'Rami Kronbi - AI and Computer Vision Engineer specializing in machine learning, deep learning, and computer vision solutions.',
-    images: ['https://ramikronbi.com/og-image.jpg'],
+    title: `${siteName} | AI & Computer Vision Engineer | Project Manager`,
+    description: siteDescription,
+    images: [`${siteUrl}/og-image.jpg`],
     creator: '@kronbii', // Update with your Twitter handle
     site: '@kronbii', // Update with your Twitter handle
   },
@@ -105,6 +107,9 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-48x48.png', type: 'image/png', sizes: '48x48' },
+      { url: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
       { url: '/icon-192.png', type: 'image/png', sizes: '192x192' },
       { url: '/icon-512.png', type: 'image/png', sizes: '512x512' },
     ],
@@ -116,7 +121,7 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
   verification: {
     // Add your verification codes here when you get them
-    google: 'google-site-verification=NYZnC5C68zUWoECvjepE8pdOfwlGSfp6V1siItS1Ss4',
+    google: 'NYZnC5C68zUWoECvjepE8pdOfwlGSfp6V1siItS1Ss4',
     // yandex: 'your-yandex-verification-code',
     // yahoo: 'your-yahoo-verification-code',
     // other: {
@@ -129,7 +134,9 @@ export const metadata: Metadata = {
     'mobile-web-app-capable': 'yes',
     'apple-mobile-web-app-capable': 'yes',
     'apple-mobile-web-app-status-bar-style': 'black-translucent',
-    'apple-mobile-web-app-title': 'Rami Kronbi',
+    'apple-mobile-web-app-title': siteName,
+    'msapplication-TileColor': '#0a0a0a',
+    site_name: siteName,
   },
 }
 
@@ -141,7 +148,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <title>Rami Kronbi</title>
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -162,9 +168,6 @@ export default function RootLayout({
         <meta name="rating" content="general" />
         <meta name="coverage" content="worldwide" />
         <meta name="target" content="all" />
-        <meta name="application-name" content="Rami Kronbi" />
-        <meta name="apple-mobile-web-app-title" content="Rami Kronbi" />
-        <meta property="og:site_name" content="Rami Kronbi" />
       </head>
       <body className={`${spaceGrotesk.className} bg-dark-bg text-dark-text antialiased`}>
         <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">

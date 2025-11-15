@@ -1,13 +1,19 @@
 export default function StructuredData() {
+  const baseUrl = 'https://ramikronbi.com'
+  const siteName = 'Rami Kronbi'
+  const profileImage = `${baseUrl}/profile.jpg`
+  const logoImage = `${baseUrl}/icon-512.png`
+  const ogImage = `${baseUrl}/og-image.jpg`
+
   const personSchema = {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    '@id': 'https://ramikronbi.com/#person',
-    name: 'Rami Kronbi',
+    '@id': `${baseUrl}/#person`,
+    name: siteName,
     jobTitle: 'AI & Computer Vision Engineer',
-    url: 'https://ramikronbi.com',
-    image: 'https://ramikronbi.com/profile.jpg',
-    logo: 'https://ramikronbi.com/icon-512.png',
+    url: baseUrl,
+    image: profileImage,
+    logo: logoImage,
     sameAs: [
       'https://github.com/Kronbii',
       'https://www.linkedin.com/in/rami-kronbi/'
@@ -29,20 +35,21 @@ export default function StructuredData() {
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    '@id': 'https://ramikronbi.com/#website',
-    name: 'Rami Kronbi',
+    '@id': `${baseUrl}/#website`,
+    name: siteName,
     alternateName: ['Rami Kronbi Portfolio', 'ramikronbi.com'],
-    url: 'https://ramikronbi.com',
+    url: baseUrl,
     description: 'Rami Kronbi - AI and Computer Vision Engineer Portfolio',
+    image: ogImage,
     publisher: {
-      '@id': 'https://ramikronbi.com/#person'
+      '@id': `${baseUrl}/#person`
     },
     inLanguage: 'en-US',
     potentialAction: {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: 'https://ramikronbi.com/?q={search_term_string}'
+        urlTemplate: `${baseUrl}/?q={search_term_string}`
       },
       'query-input': 'required name=search_term_string'
     }
@@ -51,35 +58,42 @@ export default function StructuredData() {
   const profilePageSchema = {
     '@context': 'https://schema.org',
     '@type': 'ProfilePage',
-    '@id': 'https://ramikronbi.com/#profilepage',
+    '@id': `${baseUrl}/#profilepage`,
     mainEntity: {
-      '@id': 'https://ramikronbi.com/#person'
+      '@id': `${baseUrl}/#person`
     },
     name: 'Rami Kronbi - AI & Computer Vision Engineer',
     description: 'Professional portfolio and contact information for Rami Kronbi',
-    url: 'https://ramikronbi.com',
+    url: baseUrl,
     inLanguage: 'en-US',
     isPartOf: {
-      '@id': 'https://ramikronbi.com/#website'
+      '@id': `${baseUrl}/#website`
+    },
+    primaryImageOfPage: {
+      '@type': 'ImageObject',
+      url: ogImage,
+      width: 1200,
+      height: 630
     }
   }
 
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    '@id': 'https://ramikronbi.com/#organization',
-    name: 'Rami Kronbi',
-    url: 'https://ramikronbi.com',
+    '@id': `${baseUrl}/#organization`,
+    name: siteName,
+    url: baseUrl,
     logo: {
       '@type': 'ImageObject',
-      url: 'https://ramikronbi.com/icon-512.png',
+      url: logoImage,
       width: 512,
       height: 512
     },
     sameAs: [
       'https://github.com/Kronbii',
       'https://www.linkedin.com/in/rami-kronbi/'
-    ]
+    ],
+    image: logoImage
   }
 
   const breadcrumbSchema = {
@@ -89,11 +103,28 @@ export default function StructuredData() {
       {
         '@type': 'ListItem',
         position: 1,
-        name: 'Rami Kronbi',
-        item: 'https://ramikronbi.com',
+        name: siteName,
+        item: baseUrl,
       },
     ],
   }
+
+  const navigationTargets = [
+    { name: 'Home', hash: '#home' },
+    { name: 'Services', hash: '#services' },
+    { name: 'About', hash: '#about' },
+    { name: 'Projects', hash: '#projects' },
+    { name: 'Skills', hash: '#skills' },
+    { name: 'Certifications', hash: '#certifications' },
+    { name: 'Contact', hash: '#contact' },
+  ]
+
+  const siteNavigationSchema = navigationTargets.map((item) => ({
+    '@context': 'https://schema.org',
+    '@type': 'SiteNavigationElement',
+    name: item.name,
+    url: `${baseUrl}/${item.hash}`,
+  }))
 
   return (
     <>
@@ -134,6 +165,14 @@ export default function StructuredData() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(breadcrumbSchema)
+        }}
+      />
+
+      {/* Site Navigation Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(siteNavigationSchema)
         }}
       />
     </>
