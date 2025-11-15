@@ -8,64 +8,39 @@ import { FiCode, FiCpu, FiEye, FiUsers, FiCheck } from 'react-icons/fi'
 interface Service {
   icon: React.ReactNode
   title: string
-  description: string
+  punchline: string
   timeline: string
-  result: string
-  deliverables: string[]
+  highlights: string[]
 }
 
 const services: Service[] = [
   {
-    icon: <FiCpu size={32} />,
-    title: 'AI Development',
-    description:
-      'Fractional AI lead who can scope, architect, and ship intelligent products that align with OKRs and budgets.',
-    timeline: '4-10 weeks',
-    result: 'Strategy + sprint plan + launch-ready AI stack',
-    deliverables: [
-      'Discovery workshop & success metrics',
-      'Architecture, roadmap, and sprint ownership',
-      'Model experimentation, QA, and documentation',
-    ],
+    icon: <FiCpu size={28} />,
+    title: 'AI Sprint Lead',
+    punchline: 'Scope, prototype, and validate AI ideas without hiring a full team.',
+    timeline: '4-8 weeks',
+    highlights: ['Roadmap + KPIs', 'Hands-on build', 'Weekly reviews'],
   },
   {
-    icon: <FiEye size={32} />,
-    title: 'Computer Vision Solutions',
-    description:
-      'Designing perception systems for industrial, defense, and autonomous products with a focus on latency and reliability.',
-    timeline: '3-8 weeks',
-    result: 'Realtime CV stack optimized for Jetson/TensorRT',
-    deliverables: [
-      'Dataset strategy + labeling workflow',
-      'Model training, validation, and stress testing',
-      'On-device optimization + monitoring hooks',
-    ],
+    icon: <FiEye size={28} />,
+    title: 'Computer Vision Systems',
+    punchline: 'Perception stacks tuned for robotics, inspection, and edge devices.',
+    timeline: '3-6 weeks',
+    highlights: ['Dataset plan', 'Model + optimization', 'Deployment ready'],
   },
   {
-    icon: <FiCode size={32} />,
-    title: 'Machine Learning Consulting',
-    description:
-      'Hands-on advisor for founders and teams who need technical diligence, hiring support, or ML workflow upgrades.',
+    icon: <FiCode size={28} />,
+    title: 'ML Advisory',
+    punchline: 'Audits, hiring support, and process upgrades for growing teams.',
     timeline: '2-4 weeks',
-    result: 'Actionable audit + talent enablement plan',
-    deliverables: [
-      'Stack + process audit with risk map',
-      'Team enablement, pairing, and playbooks',
-      'Hiring support + interview frameworks',
-    ],
+    highlights: ['Architecture audit', 'Team enablement', 'Hiring support'],
   },
   {
-    icon: <FiUsers size={32} />,
-    title: 'Robotics Solutions',
-    description:
-      'Full-stack robotics partner blending control, sensor fusion, and autonomy with PM rigor.',
-    timeline: '4-12 weeks',
-    result: 'Integrated autonomy stack + field-ready testing',
-    deliverables: [
-      'Hardware abstraction + firmware pairing',
-      'Sensor fusion + safety failsafes',
-      'Simulation, tuning, and deployment support',
-    ],
+    icon: <FiUsers size={28} />,
+    title: 'Robotics & Autonomy',
+    punchline: 'Sensor fusion, control, and system design with PM rigor.',
+    timeline: '4-10 weeks',
+    highlights: ['Firmware + CV', 'Sim + field tests', 'Documentation'],
   },
 ]
 
@@ -80,7 +55,7 @@ export default function Services() {
       className="py-24 px-4 sm:px-6 lg:px-8"
     >
       <div className="max-w-6xl mx-auto">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-14">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -95,7 +70,7 @@ export default function Services() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl md:text-5xl font-semibold tracking-tight"
           >
-            Services built for <span className="text-gradient">leaders who need outcomes</span>
+            Services with <span className="text-gradient">clear outcomes</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -107,44 +82,37 @@ export default function Services() {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-lg"
-              whileHover={{ y: -6, scale: 1.01 }}
+              className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur"
+              whileHover={{ y: -4 }}
             >
-              <div className="absolute inset-0 opacity-0 transition-opacity duration-500 pointer-events-none group-hover:opacity-100" />
-              <div className="flex items-start justify-between">
-                <div className="text-primary-400 bg-primary-500/10 border border-primary-500/20 rounded-2xl p-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3 text-primary-400">
                   {service.icon}
+                  <span className="text-xs uppercase tracking-wide text-dark-text2">{service.timeline}</span>
                 </div>
-                <span className="rounded-full border border-white/15 bg-dark-surface/60 px-4 py-1 text-xs uppercase tracking-wide text-dark-text2">
-                  {service.timeline}
-                </span>
               </div>
-              <h3 className="mt-6 text-2xl font-semibold text-dark-text">
+              <h3 className="mt-4 text-2xl font-semibold text-dark-text">
                 {service.title}
               </h3>
-              <p className="mt-3 text-dark-text2 leading-relaxed">
-                {service.description}
+              <p className="mt-2 text-dark-text2 text-sm leading-relaxed">
+                {service.punchline}
               </p>
-              <div className="mt-6 space-y-3">
-                {service.deliverables.map((item) => (
-                  <div key={item} className="flex items-start space-x-3 text-sm text-dark-text2">
-                    <span className="mt-0.5 text-primary-400">
+              <div className="mt-4 space-y-2">
+                {service.highlights.map((item) => (
+                  <div key={item} className="flex items-center space-x-2 text-sm text-dark-text">
+                    <span className="text-primary-400">
                       <FiCheck />
                     </span>
                     <span>{item}</span>
                   </div>
                 ))}
-              </div>
-              <div className="mt-8 flex items-center justify-between text-sm text-dark-text2">
-                <span>Outcome</span>
-                <span className="text-dark-text font-semibold">{service.result}</span>
               </div>
             </motion.div>
           ))}

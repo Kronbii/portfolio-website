@@ -34,7 +34,7 @@ const standoutFeatures: StandoutFeature[] = [
     icon: <FiHeart size={32} />,
     title: 'Impact over deliverables',
     description:
-      'Every sprint points to business value: faster pilots, safer robots, better insights. Vanity metrics aren’t part of the vocabulary.',
+      'Every sprint points to business value: faster pilots, safer robots, better insights. Vanity metrics are not part of the vocabulary.',
   },
 ]
 
@@ -61,9 +61,9 @@ export default function Standout() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center text-dark-text2 mb-12 text-lg max-w-2xl mx-auto"
+          className="text-center text-dark-text2 mb-10 text-base max-w-2xl mx-auto"
         >
-          Every partnership combines experimentation, sharp storytelling, and ruthless execution. Here’s what that feels like.
+          Every partnership combines experimentation, sharp storytelling, and ruthless execution. Here is what that feels like.
         </motion.p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

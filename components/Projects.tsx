@@ -109,20 +109,20 @@ export default function Projects() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-semibold mb-4 text-center"
+            className="text-3xl md:text-4xl font-semibold mb-3 text-center"
           >
-            Proof that <span className="text-gradient">AI products can launch fast</span>
+            Proof that <span className="text-gradient">AI ships fast</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="text-center text-dark-text2 mb-12 text-lg max-w-2xl mx-auto"
+            className="text-center text-dark-text2 mb-10 text-base max-w-2xl mx-auto"
           >
-            Each build started as a napkin idea. Scroll through to see how I merge experimentation with delivery discipline for robotics, defense, and education teams.
+            Tap into a few builds below. Each started as a napkin idea and ended as a working, demo-ready product.
           </motion.p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project, index) => (
               <motion.div
                 key={index}
