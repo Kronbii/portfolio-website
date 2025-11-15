@@ -152,7 +152,7 @@ function IntroSection() {
           <span className="absolute inline-flex h-full w-full rounded-full bg-primary-500 opacity-75 animate-ping"></span>
           <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary-400"></span>
         </span>
-        <span>Available for Feb 2025</span>
+        <span>portfolio ahead!</span>
       </motion.div>
 
       <motion.h1
