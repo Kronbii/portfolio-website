@@ -8,6 +8,7 @@ import {
   FiArrowUpRight,
   FiCompass,
   FiWind,
+  FiCheck,
 } from 'react-icons/fi'
 import Image from 'next/image'
 import { useState, type Dispatch, type SetStateAction } from 'react'
@@ -19,6 +20,16 @@ const heroMetrics = [
 ]
 
 const focusChips = ['Vision & robotics', 'Edge optimization', 'Project leadership']
+const heroHighlights = [
+  {
+    title: 'Who I am',
+    detail: 'Rami Kronbi — mechatronics engineer turned AI & CV builder at EVOID.',
+  },
+  {
+    title: 'How I work',
+    detail: 'I stay embedded with founders, sketching ideas, hiking, and shipping robotics experiments.',
+  },
+]
 
 export default function Hero() {
   const [imageError, setImageError] = useState(false)
@@ -52,29 +63,35 @@ export default function Hero() {
               <IntroSection />
             </div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.15 }}
-              className="text-lg text-dark-text2 max-w-2xl"
-            >
-              I help founders and teams go from idea → working product without drowning in technical overhead. Think of me as your mix of mechatronics engineer, CV specialist, and certified project manager.
-            </motion.p>
-
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex flex-wrap gap-3"
+              transition={{ duration: 0.8, delay: 0.15 }}
+              className="rounded-3xl border border-white/10 bg-white/10 p-6 backdrop-blur"
             >
-              {focusChips.map((chip) => (
-                <span
-                  key={chip}
-                  className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm text-dark-text"
-                >
-                  {chip}
-                </span>
-              ))}
+              <div className="space-y-3">
+                {heroHighlights.map((highlight) => (
+                  <div key={highlight.title} className="flex items-start space-x-3 text-dark-text">
+                    <span className="text-primary-400 mt-1">
+                      <FiCheck size={16} />
+                    </span>
+                    <div>
+                      <p className="font-semibold">{highlight.title}</p>
+                      <p className="text-sm text-dark-text2">{highlight.detail}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {focusChips.map((chip) => (
+                  <span
+                    key={chip}
+                    className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs uppercase tracking-wide text-dark-text"
+                  >
+                    {chip}
+                  </span>
+                ))}
+              </div>
             </motion.div>
 
             <motion.div

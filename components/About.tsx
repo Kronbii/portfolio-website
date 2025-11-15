@@ -78,22 +78,22 @@ export default function About() {
           >
             About <span className="text-gradient">Rami Kronbi</span>
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-base md:text-lg text-dark-text2 leading-relaxed"
-          >
-            Mechatronics engineer turned AI & Computer Vision specialist. I bridge strategy, hardware, and ML so founders don&apos;t have to juggle five vendors. My work spans robotics, education, and defense — always with a bias toward shippable prototypes and clean handoffs.
-          </motion.p>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-4 text-base md:text-lg text-dark-text2 leading-relaxed"
-          >
-            I founded <strong>EVOID</strong> to partner with teams who need momentum fast. Expect clear scopes, weekly reporting, and a single point of accountability from kickoff to deployment.
-          </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-base md:text-lg text-dark-text2 leading-relaxed"
+            >
+              Mechatronics engineer turned AI/CV builder. I stay hands-on across strategy, firmware, and ML so you work with one partner instead of five.
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="mt-4 text-base md:text-lg text-dark-text2 leading-relaxed"
+            >
+              Through <strong>EVOID</strong> I run fast, transparent engagements — scoped roadmaps, weekly demos, and one point of accountability.
+            </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
