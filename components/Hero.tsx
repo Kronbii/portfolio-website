@@ -91,7 +91,7 @@ export default function Hero() {
               ))}
             </div>
 
-                        <div className="flex flex-wrap items-center gap-6 pt-2">
+              <div className="flex flex-wrap items-center gap-6 pt-2">
               <div className="flex space-x-4 text-lg">
                 {[
                   { icon: <FiGithub />, href: 'https://github.com/Kronbii', title: 'GitHub' },
