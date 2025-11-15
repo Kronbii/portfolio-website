@@ -6,29 +6,41 @@ import { useRef } from 'react'
 
 interface SkillCategory {
   category: string
+  tagline: string
   skills: string[]
+  confidence: number
 }
 
 const skillCategories: SkillCategory[] = [
   {
-    category: 'AI & Machine Learning',
-    skills: ['TensorFlow', 'PyTorch', 'Scikit-learn', 'Keras', 'Deep Learning'],
+    category: 'Vision & Perception Systems',
+    tagline: 'Detection, tracking, calibration, SLAM, and synthetic data for robotics and inspection.',
+    skills: ['OpenCV', 'TensorRT', 'YOLO/Detectron', 'Image calibration', 'Stereo depth'],
+    confidence: 95,
   },
   {
-    category: 'Computer Vision',
-    skills: ['OpenCV', 'Image Processing', 'Object Detection', 'Image Segmentation', 'Feature Extraction'],
+    category: 'AI & ML Engineering',
+    tagline: 'Model architecture design, experimentation, evaluation, and ML Ops automation.',
+    skills: ['PyTorch', 'TensorFlow', 'Lightning', 'ONNX', 'MLflow'],
+    confidence: 92,
   },
   {
-    category: 'Programming Languages',
-    skills: ['Python', 'C++', 'JavaScript', 'TypeScript', 'MATLAB'],
+    category: 'Edge & Embedded Intelligence',
+    tagline: 'Deploying performant models on Jetson, ESP32, Arduino, and custom mechatronics stacks.',
+    skills: ['Jetson Nano/Orin', 'C++', 'Python', 'ROS', 'ESP32/Arduino'],
+    confidence: 90,
   },
   {
-    category: 'Tools & Frameworks',
-    skills: ['Git', 'Docker', 'Linux', 'Jupyter', 'VS Code'],
+    category: 'Product & Delivery Leadership',
+    tagline: 'Google PM-certified planning, stakeholder alignment, and agile execution.',
+    skills: ['Agile & Scrum', 'Roadmapping', 'Risk modeling', 'Team coaching', 'Executive comms'],
+    confidence: 93,
   },
   {
-    category: 'Project Management',
-    skills: ['Agile', 'Scrum', 'Project Planning', 'Team Coordination'],
+    category: 'Tools & Collaboration Stack',
+    tagline: 'The infrastructure that keeps projects transparent, versioned, and observable.',
+    skills: ['Git / GitHub', 'Docker', 'Linux', 'Notion & Miro', 'JIRA / Linear'],
+    confidence: 88,
   },
 ]
 
@@ -59,19 +71,31 @@ export default function Skills() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-dark-surface2 rounded-lg p-6 border border-dark-surface2 hover:border-primary-500/50 transition-all duration-300"
+              className="rounded-3xl border border-white/10 bg-dark-surface2/80 p-6 backdrop-blur"
             >
-              <h3 className="text-xl font-bold mb-4 text-primary-500">
-                {category.category}
-              </h3>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex items-center justify-between">
+                <h3 className="text-xl font-semibold text-dark-text">
+                  {category.category}
+                </h3>
+                <span className="text-sm text-dark-text2">{category.confidence}%</span>
+              </div>
+              <p className="mt-2 text-sm text-dark-text2">{category.tagline}</p>
+              <div className="mt-4 h-1.5 rounded-full bg-white/10 overflow-hidden">
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={isInView ? { width: `${category.confidence}%` } : {}}
+                  transition={{ duration: 0.8, delay: 0.1 * index }}
+                  className="h-full rounded-full bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500"
+                />
+              </div>
+              <div className="mt-4 flex flex-wrap gap-2">
                 {category.skills.map((skill, skillIndex) => (
                   <motion.span
                     key={skillIndex}
-                    initial={{ opacity: 0 }}
-                    animate={isInView ? { opacity: 1 } : {}}
-                    transition={{ delay: index * 0.1 + skillIndex * 0.05 }}
-                    className="px-3 py-1 bg-primary-500/20 text-primary-400 rounded-full text-sm"
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 0.1 * index + skillIndex * 0.04 }}
+                    className="px-3 py-1 rounded-full border border-white/10 bg-white/5 text-sm text-dark-text"
                   >
                     {skill}
                   </motion.span>
@@ -84,4 +108,3 @@ export default function Skills() {
     </section>
   )
 }
-

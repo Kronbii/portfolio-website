@@ -96,22 +96,30 @@ export default function Projects() {
         ref={ref}
         className="py-20 px-4 sm:px-6 lg:px-8"
       >
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="text-center text-sm uppercase tracking-[0.4em] text-dark-text2"
+          >
+            Case Studies
+          </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-bold mb-4 text-center"
+            className="text-4xl md:text-5xl font-semibold mb-4 text-center"
           >
-            My <span className="text-primary-500">Projects</span>
+            Proof that <span className="text-gradient">AI products can launch fast</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
             className="text-center text-dark-text2 mb-12 text-lg max-w-2xl mx-auto"
           >
-            Click on any project to explore it in detail
+            Each build started as a napkin idea. Scroll through to see how I merge experimentation with delivery discipline for robotics, defense, and education teams.
           </motion.p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -121,11 +129,11 @@ export default function Projects() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-dark-surface2 rounded-lg overflow-hidden hover:bg-dark-surface transition-all duration-300 border border-dark-surface2 hover:border-primary-500/50 group cursor-pointer"
+                className="group relative overflow-hidden rounded-3xl border border-white/10 bg-dark-surface2/80 hover:border-primary-500/50 transition-all duration-300 cursor-pointer"
                 whileHover={{ y: -8, scale: 1.02 }}
                 onClick={() => openProject(index)}
               >
-                <div className="relative w-full h-48 overflow-hidden bg-dark-surface">
+                <div className="relative w-full h-52 overflow-hidden bg-dark-surface">
                   {project.image && !imageErrors[index] ? (
                     <>
                       <Image
@@ -144,13 +152,16 @@ export default function Projects() {
                   )}
                 </div>
                 <div className="p-6">
-                  <h3 className="text-2xl font-bold mb-3 text-primary-500 group-hover:text-primary-400 transition-colors">
+                  <h3 className="text-2xl font-semibold mb-2 text-dark-text group-hover:text-primary-400 transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-dark-text2 mb-4 leading-relaxed line-clamp-3">
+                  <p className="text-sm uppercase tracking-wide text-dark-text2 mb-3">
+                    Featured build
+                  </p>
+                  <p className="text-dark-text2 mb-5 leading-relaxed line-clamp-3">
                     {project.description}
                   </p>
-                  <div className="flex flex-wrap gap-2 mb-4">
+                  <div className="flex flex-wrap gap-2 mb-5">
                     {project.technologies.slice(0, 3).map((tech, techIndex) => (
                       <span
                         key={techIndex}
@@ -165,13 +176,23 @@ export default function Projects() {
                       </span>
                     )}
                   </div>
-                  <div className="text-primary-500 text-sm font-semibold group-hover:text-primary-400 transition-colors">
-                    View Details →
+                  <div className="text-primary-400 text-sm font-semibold group-hover:text-primary-300 transition-colors">
+                    Tap for outcomes →
                   </div>
                 </div>
               </motion.div>
             ))}
           </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="mt-12 rounded-3xl border border-white/10 bg-white/5 p-6 text-center"
+          >
+            <p className="text-dark-text text-lg">
+              Want a similar transformation? <a href="#contact" className="text-primary-400 underline-offset-4 hover:underline">Let&apos;s design your roadmap</a> and launch faster.
+            </p>
+          </motion.div>
         </div>
       </section>
 
@@ -193,7 +214,7 @@ export default function Projects() {
               className="fixed inset-4 md:inset-8 lg:inset-16 z-50 overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="bg-dark-surface rounded-lg border border-primary-500/30 shadow-2xl max-w-5xl mx-auto">
+              <div className="bg-dark-surface rounded-3xl border border-white/10 shadow-2xl max-w-5xl mx-auto overflow-hidden">
                 {projects[selectedProject] && (
                   <>
                     {/* Modal Header */}
@@ -299,4 +320,3 @@ export default function Projects() {
     </>
   )
 }
-

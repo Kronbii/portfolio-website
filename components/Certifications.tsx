@@ -31,17 +31,21 @@ export default function Certifications() {
     <section
       id="certifications"
       ref={ref}
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-dark-surface"
+      className="py-24 px-4 sm:px-6 lg:px-8 bg-dark-surface"
     >
       <div className="max-w-4xl mx-auto">
-        <motion.h2
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold mb-12 text-center"
+          className="text-center mb-12"
         >
-          <span className="text-primary-500">Certifications</span>
-        </motion.h2>
+          <p className="text-sm uppercase tracking-[0.4em] text-dark-text2">Proof of execution</p>
+          <h2 className="text-4xl md:text-5xl font-semibold mt-3">Certifications & recognition</h2>
+          <p className="mt-4 text-lg text-dark-text2">
+            The same rigor I bring to your project is backed by accredited training and global wins.
+          </p>
+        </motion.div>
 
         <div className="space-y-6">
           {certifications.map((cert, index) => (
@@ -50,13 +54,13 @@ export default function Certifications() {
               initial={{ opacity: 0, x: -30 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-dark-surface2 rounded-lg p-6 border border-dark-surface2 hover:border-primary-500/50 transition-all duration-300 flex items-start space-x-4"
+              className="rounded-3xl border border-white/10 bg-dark-surface2/80 p-6 flex items-start space-x-4"
             >
-              <div className="text-primary-500 flex-shrink-0 mt-1">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-500/10 text-primary-400">
                 <FiAward size={24} />
               </div>
               <div className="flex-1">
-                <h3 className="text-xl font-bold mb-1 text-dark-text">
+                <h3 className="text-xl font-semibold text-dark-text">
                   {cert.name}
                 </h3>
                 <p className="text-dark-text2 mb-2">
@@ -64,18 +68,16 @@ export default function Certifications() {
                 </p>
                 <div className="flex flex-wrap gap-4 text-sm text-dark-text2">
                   <span>Issued: {cert.date}</span>
-                  {cert.credentialId && (
-                    <span>ID: {cert.credentialId}</span>
-                  )}
+                  {cert.credentialId && <span>ID: {cert.credentialId}</span>}
                 </div>
                 {cert.link && (
                   <a
                     href={cert.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-primary-500 hover:text-primary-400 transition-colors text-sm mt-2 inline-block"
+                    className="text-primary-400 hover:text-primary-300 transition-colors text-sm mt-3 inline-flex items-center"
                   >
-                    Verify Certificate →
+                    Verify certificate
                   </a>
                 )}
               </div>
@@ -86,4 +88,3 @@ export default function Certifications() {
     </section>
   )
 }
-

@@ -3,7 +3,22 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
-import { FiGithub, FiLinkedin, FiMail, FiSend } from 'react-icons/fi'
+import { FiGithub, FiLinkedin, FiMail, FiSend, FiClock, FiCheckCircle } from 'react-icons/fi'
+
+const contactSteps = [
+  {
+    title: 'Discovery call',
+    description: '30 minutes to align on goals, constraints, and what success looks like.',
+  },
+  {
+    title: 'Solution blueprint',
+    description: 'Within 72 hours you receive scope, budget, and timeline options.',
+  },
+  {
+    title: 'Build + reporting',
+    description: 'We ship in weekly iterations with transparent documentation and demos.',
+  },
+]
 
 export default function Contact() {
   const ref = useRef(null)
@@ -52,16 +67,16 @@ export default function Contact() {
     <section
       id="contact"
       ref={ref}
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-dark-surface"
+      className="py-24 px-4 sm:px-6 lg:px-8 bg-dark-surface"
     >
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold mb-4 text-center"
+          className="text-4xl md:text-5xl font-semibold mb-4 text-center"
         >
-          Get In <span className="text-primary-500">Touch</span>
+          Let&apos;s build your next intelligent product
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -69,7 +84,7 @@ export default function Contact() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-center text-dark-text2 mb-12 text-lg"
         >
-          I’m always looking for new challenges and opportunities to grow. Whether you’re interested in a collaboration, a new project, or just want to chat about AI and robotics, I’d love to hear from you.
+          Share what you&apos;re building, the outcomes you need, and I&apos;ll reply within 24 hours with the next steps.
         </motion.p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -78,6 +93,7 @@ export default function Contact() {
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
+            className="rounded-3xl border border-white/10 bg-dark-surface2/80 p-8 backdrop-blur"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
@@ -125,7 +141,7 @@ export default function Contact() {
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-primary-500 hover:bg-primary-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 text-white font-semibold py-3 px-6 rounded-2xl transition-opacity flex items-center justify-center space-x-2 disabled:opacity-60 disabled:cursor-not-allowed"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -160,39 +176,73 @@ export default function Contact() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="space-y-8"
           >
-            <div>
-              <h3 className="text-2xl font-bold mb-4 text-dark-text">Connect With Me</h3>
-              <p className="text-dark-text2 mb-6">
-                I’m always open to collaborating on innovative AI, computer vision, or robotics projects that make a real impact. Feel free to reach out if you’re looking to build something bold or explore new possibilities together.
-              </p>
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm uppercase tracking-[0.4em] text-dark-text2">Availability</p>
+                  <p className="mt-2 text-2xl font-semibold text-dark-text">2 client openings</p>
+                </div>
+                <div className="text-primary-400">
+                  <FiClock size={32} />
+                </div>
+              </div>
+              <p className="mt-4 text-dark-text2">Next kickoff window: February 2025 · Response time: within 24 hours.</p>
+            </div>
+
+            <div className="rounded-3xl border border-white/10 bg-dark-surface2/80 p-6 space-y-4">
+              <p className="text-sm uppercase tracking-[0.4em] text-dark-text2">How it works</p>
+              {contactSteps.map((step) => (
+                <div key={step.title} className="flex items-start space-x-3">
+                  <span className="text-primary-400 mt-1">
+                    <FiCheckCircle />
+                  </span>
+                  <div>
+                    <p className="font-semibold text-dark-text">{step.title}</p>
+                    <p className="text-sm text-dark-text2">{step.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
+              <h3 className="text-xl font-semibold text-dark-text mb-4">Preferred channels</h3>
               <div className="space-y-4">
                 <motion.a
                   href="https://github.com/Kronbii"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center space-x-3 text-dark-text2 hover:text-primary-500 transition-colors group"
-                  whileHover={{ x: 5 }}
+                  className="flex items-center justify-between rounded-2xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-dark-text"
+                  whileHover={{ x: 4 }}
                 >
-                  <FiGithub size={24} />
-                  <span>GitHub</span>
+                  <div className="flex items-center space-x-3">
+                    <FiGithub size={22} />
+                    <span>GitHub</span>
+                  </div>
+                  <span className="text-sm text-dark-text2">Case studies</span>
                 </motion.a>
                 <motion.a
                   href="https://www.linkedin.com/in/rami-kronbi/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center space-x-3 text-dark-text2 hover:text-primary-500 transition-colors group"
-                  whileHover={{ x: 5 }}
+                  className="flex items-center justify-between rounded-2xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-dark-text"
+                  whileHover={{ x: 4 }}
                 >
-                  <FiLinkedin size={24} />
-                  <span>LinkedIn</span>
+                  <div className="flex items-center space-x-3">
+                    <FiLinkedin size={22} />
+                    <span>LinkedIn</span>
+                  </div>
+                  <span className="text-sm text-dark-text2">Professional updates</span>
                 </motion.a>
                 <motion.a
                   href="mailto:ramykronby@gmail.com"
-                  className="flex items-center space-x-3 text-dark-text2 hover:text-primary-500 transition-colors group"
-                  whileHover={{ x: 5 }}
+                  className="flex items-center justify-between rounded-2xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-dark-text"
+                  whileHover={{ x: 4 }}
                 >
-                  <FiMail size={24} />
-                  <span>ramykronby@gmail.com</span>
+                  <div className="flex items-center space-x-3">
+                    <FiMail size={22} />
+                    <span>ramykronby@gmail.com</span>
+                  </div>
+                  <span className="text-sm text-dark-text2">Best for briefs</span>
                 </motion.a>
               </div>
             </div>
@@ -202,4 +252,3 @@ export default function Contact() {
     </section>
   )
 }
-
