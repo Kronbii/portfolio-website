@@ -6,6 +6,8 @@ import {
   FiLinkedin,
   FiMail,
   FiArrowUpRight,
+  FiCompass,
+  FiWind,
 } from 'react-icons/fi'
 import Image from 'next/image'
 import { useState } from 'react'
@@ -58,18 +60,27 @@ export default function Hero() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight"
+            className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight"
           >
-            AI & CV products that feel effortless to use and deploy.
+            Hi, I&apos;m <span className="text-gradient">Rami Kronbi</span> — building AI so you don&apos;t have to.
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
+            transition={{ duration: 0.8, delay: 0.05 }}
+            className="text-sm uppercase tracking-[0.3em] text-dark-text2"
+          >
+            Rami Kronbi · AI & Computer Vision Engineer · Founder, EVOID
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.15 }}
             className="text-lg text-dark-text2 max-w-2xl"
           >
-            I&apos;m Rami, an AI + Computer Vision engineer with a project manager&apos;s mindset. I help founders and teams go from idea → working product without drowning in technical overhead.
+            I help founders and teams go from idea → working product without drowning in technical overhead. Think of me as your mix of mechatronics engineer, CV specialist, and certified project manager.
           </motion.p>
 
           <motion.div
@@ -182,22 +193,34 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="absolute -left-6 top-10 w-48 rounded-2xl border border-primary-500/30 bg-dark-surface/80 p-4 shadow-glow backdrop-blur-lg"
+            className="absolute -left-5 top-6 w-44 rounded-2xl border border-white/25 bg-white/10 p-3.5 shadow-[0_6px_18px_rgba(0,0,0,0.35)] backdrop-blur-2xl"
           >
-            <p className="text-xs uppercase text-dark-text2">Signature Outcome</p>
-            <p className="text-2xl font-semibold text-primary-400">Vision in weeks</p>
-            <p className="text-sm text-dark-text2">From concept to deployable prototype in under 6 weeks.</p>
+            <div className="flex items-center gap-2 text-primary-200">
+              <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-primary-500/25 text-primary-100">
+                <FiCompass size={16} />
+              </span>
+              <span className="text-[9px] uppercase tracking-[0.35em] text-white/80">Fun fact</span>
+            </div>
+            <p className="mt-2 text-sm font-semibold leading-snug text-white/90">
+              Born to explore space, forced to C++
+            </p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="absolute -right-4 bottom-8 w-56 rounded-2xl border border-secondary-500/30 bg-dark-surface/80 p-4 shadow-[0_0_30px_rgba(14,165,233,0.15)] backdrop-blur"
+            className="absolute -right-4 bottom-6 w-48 rounded-2xl border border-white/25 bg-gradient-to-br from-white/10 to-white/5 p-3.5 shadow-[0_8px_22px_rgba(3,105,161,0.35)] backdrop-blur-2xl"
           >
-            <p className="text-xs uppercase text-dark-text2">Delivery rhythm</p>
-            <p className="text-2xl font-semibold text-dark-text">Weekly demos</p>
-            <p className="text-sm text-dark-text2">Clear reporting + async notes.</p>
+            <div className="flex items-center gap-2 text-secondary-200">
+              <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-secondary-500/30 text-secondary-50">
+                <FiWind size={16} />
+              </span>
+              <span className="text-[9px] uppercase tracking-[0.35em] text-white/80">Alter ego</span>
+            </div>
+            <p className="mt-2 text-sm font-semibold leading-snug text-white/90">
+              An engineer? a pilot? idk
+            </p>
           </motion.div>
         </div>
       </div>
