@@ -20,7 +20,7 @@ Design specifications:
 
 Content to include:
 - Large text: "Rami Kronbi" (prominent, white or light gray)
-- Subtitle: "AI & Computer Vision Engineer | Project Manager"
+- Subtitle: "AI & Computer Vision Engineer"
 - Website URL: "ramikronbi.vercel.app" (smaller, muted green or gray)
 - Subtle tech/AI visual elements (optional): abstract geometric shapes, circuit patterns, or neural network nodes in muted green - very subtle, not overwhelming
 
@@ -51,7 +51,7 @@ Layout:
 ## Alternative Shorter Prompt:
 
 ```
-Professional Open Graph image, 1200x630px, dark theme (#0a0a0a background), muted green accents (#22c55e), modern tech portfolio style. Text: "Rami Kronbi" large and prominent in white, subtitle "AI & Computer Vision Engineer | Project Manager" in light gray, website URL "ramikronbi.vercel.app" at bottom in muted green. Subtle abstract tech elements (geometric shapes, neural network patterns) in muted green, very subtle. Professional, clean, modern, balanced design - not too minimal, not too busy.
+Professional Open Graph image, 1200x630px, dark theme (#0a0a0a background), muted green accents (#22c55e), modern tech portfolio style. Text: "Rami Kronbi" large and prominent in white, subtitle "AI & Computer Vision Engineer" in light gray, website URL "ramikronbi.vercel.app" at bottom in muted green. Subtle abstract tech elements (geometric shapes, neural network patterns) in muted green, very subtle. Professional, clean, modern, balanced design - not too minimal, not too busy.
 ```
 
 ---
@@ -60,7 +60,7 @@ Professional Open Graph image, 1200x630px, dark theme (#0a0a0a background), mute
 
 ### DALL-E 3:
 ```
-A professional Open Graph social media image, 1200x630 pixels, dark background color #0a0a0a, with muted green accent color #22c55e. Modern tech portfolio design. Large white text "Rami Kronbi" at top, subtitle "AI & Computer Vision Engineer | Project Manager" in light gray, website "ramikronbi.vercel.app" at bottom in muted green. Subtle abstract geometric tech patterns in muted green. Professional, clean, modern aesthetic.
+A professional Open Graph social media image, 1200x630 pixels, dark background color #0a0a0a, with muted green accent color #22c55e. Modern tech portfolio design. Large white text "Rami Kronbi" at top, subtitle "AI & Computer Vision Engineer" in light gray, website "ramikronbi.vercel.app" at bottom in muted green. Subtle abstract geometric tech patterns in muted green. Professional, clean, modern aesthetic.
 ```
 
 ### Midjourney:
