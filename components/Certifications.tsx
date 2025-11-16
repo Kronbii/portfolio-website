@@ -18,8 +18,8 @@ const certifications: Certification[] = [
     name: 'Google Project Management: Professional Certificate',
     issuer: 'Google / Coursera',
     date: 'Ongoing',
-    credentialId: 'To be assigned',
-    link: 'https://www.coursera.org/professional-certificates/google-project-management?utm_medium=sem&utm_source=gg&utm_campaign=b2c_emea_google-project-management_google_ftcof_professional-certificates_cx_dr_bau_gg_pmax_pr_s2_en_m_hyb_24-04_x&campaignid=21164196160&adgroupid=&device=c&keyword=&matchtype=&network=x&devicemodel=&creativeid=&assetgroupid=6566730656&targetid=&extensionid=&placement=&gad_source=1&gad_campaignid=21160697975&gbraid=0AAAAADdKX6YlM5lJhoqI1AqfWG3ZyqBoP&gclid=Cj0KCQiA5uDIBhDAARIsAOxj0CHWHWE9THEPQIvVfQP-wwk73wBZp2eWjvPaG5ddn6kCLFzmOUmKewwaAhefEALw_wcB',
+    credentialId: 'JDQM5WZLUW27',
+    link: 'https://www.coursera.org/account/accomplishments/records/JDQM5WZLUW27',
   },  
 ]
 
