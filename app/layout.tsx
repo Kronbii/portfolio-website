@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: siteUrl,
     siteName,
-    title: `${siteName} | AI & Computer Vision Engineer | Project Manager`,
+    title: `${siteName} | AI & Computer Vision Engineer`,
     description: siteDescription,
     images: [
       {
@@ -87,7 +87,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${siteName} | AI & Computer Vision Engineer | Project Manager`,
+    title: `${siteName} | AI & Computer Vision Engineer`,
     description: siteDescription,
     images: [`${siteUrl}/og-image.jpg`],
     creator: '@kronbii', // Update with your Twitter handle
