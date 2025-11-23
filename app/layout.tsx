@@ -38,7 +38,6 @@ export const metadata: Metadata = {
     'Computer Vision Engineer',
     'Machine Learning',
     'Deep Learning',
-    'Project Manager',
     'TensorFlow',
     'PyTorch',
     'OpenCV',
@@ -57,11 +56,6 @@ export const metadata: Metadata = {
   publisher: siteName,
   applicationName: siteName,
   referrer: 'origin-when-cross-origin',
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
   alternates: {
     canonical: `${siteUrl}/`,
     languages: {
@@ -80,8 +74,7 @@ export const metadata: Metadata = {
         url: `${siteUrl}/og-image.jpg`,
         width: 1200,
         height: 630,
-        alt: 'Rami Kronbi - AI & Computer Vision Engineer',
-        type: 'image/jpeg',
+        alt: `${siteName} - AI & Computer Vision Engineer`,
       },
     ],
   },
@@ -90,8 +83,8 @@ export const metadata: Metadata = {
     title: `${siteName} | AI & Computer Vision Engineer`,
     description: siteDescription,
     images: [`${siteUrl}/og-image.jpg`],
-    creator: '@kronbii', // Update with your Twitter handle
-    site: '@kronbii', // Update with your Twitter handle
+    creator: '@kronbii',
+    site: '@kronbii',
   },
   robots: {
     index: true,
@@ -120,24 +113,10 @@ export const metadata: Metadata = {
   },
   manifest: '/manifest.json',
   verification: {
-    // Add your verification codes here when you get them
     google: 'NYZnC5C68zUWoECvjepE8pdOfwlGSfp6V1siItS1Ss4',
-    // yandex: 'your-yandex-verification-code',
-    // yahoo: 'your-yahoo-verification-code',
-    // other: {
-    //   'facebook-domain-verification': 'your-facebook-verification-code',
-    // },
   },
   category: 'Portfolio',
   classification: 'Professional Portfolio',
-  other: {
-    'mobile-web-app-capable': 'yes',
-    'apple-mobile-web-app-capable': 'yes',
-    'apple-mobile-web-app-status-bar-style': 'black-translucent',
-    'apple-mobile-web-app-title': siteName,
-    'msapplication-TileColor': '#0a0a0a',
-    site_name: siteName,
-  },
 }
 
 export default function RootLayout({
@@ -148,35 +127,37 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        {/* Preconnect to external domains for performance */}
+        {/* Proper Website Identity Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Rami Kronbi",
+              "alternateName": "RamiKronbi",
+              "url": "https://ramikronbi.com/"
+            })
+          }}
+        />
+
+        {/* Preconnect */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
-        <link rel="dns-prefetch" href="https://github.com" />
-        <link rel="dns-prefetch" href="https://www.linkedin.com" />
 
-        {/* Additional SEO Meta Tags */}
+        {/* Author and metadata */}
         <meta name="author" content="Rami Kronbi" />
-        <meta name="geo.region" content="US" />
-        <meta name="geo.placename" content="United States" />
         <meta name="language" content="English" />
-        <meta name="revisit-after" content="7 days" />
-        <meta name="distribution" content="global" />
-        <meta name="rating" content="general" />
-        <meta name="coverage" content="worldwide" />
-        <meta name="target" content="all" />
       </head>
+
       <body className={`${spaceGrotesk.className} bg-dark-bg text-dark-text antialiased`}>
-        <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(34,197,94,0.12),_transparent_55%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,_rgba(14,165,233,0.12),_transparent_60%)]" />
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[70vw] h-[70vw] bg-gradient-to-r from-primary-500/10 via-secondary-500/10 to-accent-500/15 blur-[200px]" />
-          <div className="absolute -bottom-32 right-0 w-[45vw] h-[45vw] bg-accent-500/15 blur-[220px]" />
-        </div>
+        {/* All other structured data */}
         <StructuredData />
+
         <div className="relative z-10">
           {children}
         </div>
