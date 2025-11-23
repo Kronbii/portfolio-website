@@ -5,8 +5,7 @@ import StructuredData from '@/components/StructuredData'
 
 const siteUrl = 'https://ramikronbi.com'
 const siteName = 'Rami Kronbi'
-const siteDescription =
-  'Rami Kronbi - AI and Computer Vision Engineer.'
+const siteDescription = 'Rami Kronbi - AI and Computer Vision Engineer.'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -29,7 +28,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: siteName,
-    template: `%s | ${siteName}`
+    template: `%s | ${siteName}`,
   },
   description: siteDescription,
   keywords: [
@@ -42,31 +41,22 @@ export const metadata: Metadata = {
     'PyTorch',
     'OpenCV',
     'Artificial Intelligence',
-    'CV Engineer',
-    'ML Engineer',
     'Data Science',
     'Neural Networks',
     'Image Processing',
     'Object Detection',
-    'AI Consultant',
-    'ML Consultant'
   ],
   authors: [{ name: siteName, url: siteUrl }],
   creator: siteName,
   publisher: siteName,
-  applicationName: siteName,
-  referrer: 'origin-when-cross-origin',
   alternates: {
     canonical: `${siteUrl}/`,
-    languages: {
-      'en-US': `${siteUrl}/`,
-    },
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: siteUrl,
     siteName,
+    url: siteUrl,
     title: `${siteName} | AI & Computer Vision Engineer`,
     description: siteDescription,
     images: [
@@ -84,7 +74,6 @@ export const metadata: Metadata = {
     description: siteDescription,
     images: [`${siteUrl}/og-image.jpg`],
     creator: '@kronbii',
-    site: '@kronbii',
   },
   robots: {
     index: true,
@@ -107,7 +96,11 @@ export const metadata: Metadata = {
       { url: '/icon-512.png', type: 'image/png', sizes: '512x512' },
     ],
     apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      {
+        url: '/apple-touch-icon.png',
+        sizes: '180x180',
+        type: 'image/png',
+      },
     ],
     shortcut: '/favicon.ico',
   },
@@ -115,29 +108,23 @@ export const metadata: Metadata = {
   verification: {
     google: 'NYZnC5C68zUWoECvjepE8pdOfwlGSfp6V1siItS1Ss4',
   },
-  category: 'Portfolio',
-  classification: 'Professional Portfolio',
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        {/* Proper Website Identity Schema */}
+        {/* REQUIRED FIX: Correct Website Identity Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              "name": "Rami Kronbi",
-              "alternateName": "RamiKronbi",
-              "url": "https://ramikronbi.com/"
-            })
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'Rami Kronbi',
+              alternateName: 'RamiKronbi',
+              url: 'https://ramikronbi.com/',
+            }),
           }}
         />
 
@@ -149,18 +136,17 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
 
-        {/* Author and metadata */}
+        {/* Basic */}
         <meta name="author" content="Rami Kronbi" />
         <meta name="language" content="English" />
       </head>
 
-      <body className={`${spaceGrotesk.className} bg-dark-bg text-dark-text antialiased`}>
-        {/* All other structured data */}
+      <body
+        className={`${spaceGrotesk.className} bg-dark-bg text-dark-text antialiased`}
+      >
         <StructuredData />
 
-        <div className="relative z-10">
-          {children}
-        </div>
+        <div className="relative z-10">{children}</div>
       </body>
     </html>
   )
