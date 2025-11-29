@@ -9,6 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Shadcn/ui standard colors
+        foreground: '#e5e5e5',
+        background: '#0a0a0a',
         primary: {
           50: '#f0fdf4',
           100: '#dcfce7',

@@ -5,6 +5,7 @@ import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { FiGithub, FiExternalLink, FiX, FiImage } from 'react-icons/fi'
 import Image from 'next/image'
+import { HoverButton } from '@/components/ui/hover-button'
 
 interface Project {
   title: string
@@ -229,12 +230,14 @@ export default function Projects() {
                           </div>
                         )}
                       </div>
-                      <button
+                      <HoverButton
                         onClick={closeProject}
-                        className="absolute top-4 right-4 bg-dark-surface/90 hover:bg-dark-surface text-dark-text2 hover:text-primary-500 rounded-full p-2 transition-colors z-10"
+                        variant="outline"
+                        className="absolute top-4 right-4 bg-dark-surface/90 hover:bg-dark-surface text-dark-text2 hover:text-primary-500 rounded-full p-2 z-10"
+                        aria-label="Close project"
                       >
                         <FiX size={24} />
-                      </button>
+                      </HoverButton>
                     </div>
 
                     {/* Modal Content */}
@@ -276,29 +279,23 @@ export default function Projects() {
                       </div>
 
                       <div className="flex flex-wrap gap-4">
-                        <motion.a
+                        <HoverButton
                           href={projects[selectedProject].githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center space-x-2 px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors font-semibold"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
+                          variant="gradient"
+                          className="flex items-center space-x-2"
                         >
                           <FiGithub size={20} />
                           <span>View on GitHub</span>
-                        </motion.a>
+                        </HoverButton>
                         {projects[selectedProject].demoUrl && (
-                          <motion.a
+                          <HoverButton
                             href={projects[selectedProject].demoUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center space-x-2 px-6 py-3 bg-dark-surface2 hover:bg-dark-surface text-dark-text border border-primary-500/50 hover:border-primary-500 rounded-lg transition-colors font-semibold"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
+                            variant="outline"
+                            className="flex items-center space-x-2"
                           >
                             <FiExternalLink size={20} />
                             <span>Live Demo</span>
-                          </motion.a>
+                          </HoverButton>
                         )}
                       </div>
                     </div>

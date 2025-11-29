@@ -12,6 +12,7 @@ import {
 } from 'react-icons/fi'
 import Image from 'next/image'
 import { useState, type Dispatch, type SetStateAction } from 'react'
+import { HoverButton } from '@/components/ui/hover-button'
 
 const heroMetrics = [
   { value: '30+', label: 'Client projects' },
@@ -57,23 +58,20 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.25 }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <motion.a
+              <HoverButton
                 href="#contact"
-                className="group inline-flex items-center justify-center rounded-full bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 px-8 py-4 text-base font-semibold text-white"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                variant="outline"
+                className="inline-flex items-center justify-center"
               >
-                Book a service call
-                <FiArrowUpRight className="ml-2 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </motion.a>
-              <motion.a
+                Book a call
+              </HoverButton>
+              <HoverButton
                 href="#projects"
-                className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-8 py-4 text-base font-semibold text-dark-text"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                variant="outline"
+                className="inline-flex items-center justify-center"
               >
                 View portfolio
-              </motion.a>
+              </HoverButton>
             </motion.div>
 
             <div className="grid grid-cols-3 gap-3 sm:max-w-md">

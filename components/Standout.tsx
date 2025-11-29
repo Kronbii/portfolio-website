@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { FiZap, FiTarget, FiTrendingUp, FiHeart } from 'react-icons/fi'
+import { HoverButton } from '@/components/ui/hover-button'
 
 interface StandoutFeature {
   icon: React.ReactNode
@@ -94,12 +95,13 @@ export default function Standout() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-12 text-center"
         >
-          <a
+          <HoverButton
             href="#contact"
-            className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-8 py-3 text-sm font-semibold uppercase tracking-widest text-dark-text hover:border-primary-500/60"
+            variant="outline"
+            className="text-sm uppercase tracking-widest"
           >
             Build something bold with me
-          </a>
+          </HoverButton>
         </motion.div>
       </div>
     </section>
