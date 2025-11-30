@@ -143,7 +143,7 @@ export default function Services() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="text-sm uppercase tracking-[0.4em] text-dark-text2"
+            className="text-sm uppercase tracking-[0.4em] text-light-text2 dark:text-dark-text2"
           >
             Signature engagements
           </motion.p>
@@ -171,24 +171,24 @@ export default function Services() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8 backdrop-blur flex-shrink-0 w-[85%] sm:w-[80%] lg:w-[75%] snap-center"
+                className="group relative overflow-hidden rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-white/[0.03] p-6 sm:p-8 backdrop-blur flex-shrink-0 w-[85%] sm:w-[80%] lg:w-[75%] snap-center shadow-sm dark:shadow-none"
                 whileHover={{ y: -4 }}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3 text-primary-400">
                     {service.icon}
-                    <span className="text-xs uppercase tracking-wide text-dark-text2">{service.timeline}</span>
+                    <span className="text-xs uppercase tracking-wide text-light-text2 dark:text-dark-text2">{service.timeline}</span>
                   </div>
                 </div>
-                <h3 className="mt-4 text-2xl sm:text-3xl font-semibold text-dark-text">
+                <h3 className="mt-4 text-2xl sm:text-3xl font-semibold text-light-text dark:text-dark-text">
                   {service.title}
                 </h3>
-                <p className="mt-2 text-dark-text2 text-sm sm:text-base leading-relaxed">
+                <p className="mt-2 text-light-text2 dark:text-dark-text2 text-sm sm:text-base leading-relaxed">
                   {service.punchline}
                 </p>
                 <div className="mt-4 space-y-2">
                   {service.highlights.map((item) => (
-                    <div key={item} className="flex items-center space-x-2 text-sm sm:text-base text-dark-text">
+                    <div key={item} className="flex items-center space-x-2 text-sm sm:text-base text-light-text dark:text-dark-text">
                       <span className="text-primary-400">
                         <FiCheck />
                       </span>
@@ -206,7 +206,7 @@ export default function Services() {
           <button
             onClick={scrollLeft}
             disabled={!canScrollLeft}
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/10 backdrop-blur-lg text-dark-text hover:border-primary-500/60 hover:text-primary-300 hover:bg-white/15 transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-white/15 disabled:hover:text-dark-text disabled:hover:bg-white/10"
+            className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-light-text dark:text-dark-text hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-light-border/50 dark:disabled:hover:border-white/15 disabled:hover:text-light-text dark:disabled:hover:text-dark-text disabled:hover:bg-light-surface2/50 dark:disabled:hover:bg-white/10"
             aria-label="Previous service"
           >
             <FiChevronLeft size={20} />
@@ -219,7 +219,7 @@ export default function Services() {
                 className={`h-2 rounded-full transition-all ${
                   index === currentIndex
                     ? 'w-8 bg-primary-500'
-                    : 'w-2 bg-white/20 hover:bg-white/30'
+                    : 'w-2 bg-light-border dark:bg-white/20 hover:bg-light-text2/30 dark:hover:bg-white/30'
                 }`}
                 aria-label={`Go to service ${index + 1}`}
               />
@@ -228,7 +228,7 @@ export default function Services() {
           <button
             onClick={scrollRight}
             disabled={!canScrollRight}
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/10 backdrop-blur-lg text-dark-text hover:border-primary-500/60 hover:text-primary-300 hover:bg-white/15 transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-white/15 disabled:hover:text-dark-text disabled:hover:bg-white/10"
+            className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-light-text dark:text-dark-text hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-light-border/50 dark:disabled:hover:border-white/15 disabled:hover:text-light-text dark:disabled:hover:text-dark-text disabled:hover:bg-light-surface2/50 dark:disabled:hover:bg-white/10"
             aria-label="Next service"
           >
             <FiChevronRight size={20} />

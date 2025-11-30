@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import { Space_Grotesk } from 'next/font/google'
 import StructuredData from '@/components/StructuredData'
+import { ThemeProvider } from '@/components/ThemeProvider'
 
 const siteUrl = 'https://ramikronbi.com'
 const siteName = 'Rami Kronbi'
@@ -112,7 +113,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
         {/* REQUIRED FIX: Correct Website Identity Schema */}
         <script
@@ -142,11 +143,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
 
       <body
-        className={`${spaceGrotesk.className} bg-dark-bg text-dark-text antialiased`}
+        className={`${spaceGrotesk.className} bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text antialiased`}
       >
-        <StructuredData />
-
-        <div className="relative z-10">{children}</div>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <StructuredData />
+          <div className="relative z-10">{children}</div>
+        </ThemeProvider>
       </body>
     </html>
   )

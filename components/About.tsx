@@ -19,7 +19,7 @@ export default function About() {
     <section
       id="about"
       ref={ref}
-      className="py-20 px-4 sm:px-6 lg:px-12 bg-dark-surface/70"
+      className="py-20 px-4 sm:px-6 lg:px-12 bg-light-surface/70 dark:bg-dark-surface/70"
     >
       <div className="max-w-6xl mx-auto grid gap-12 lg:grid-cols-[1fr_1fr] items-start">
         {/* Left side - Text content */}
@@ -36,7 +36,7 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-base md:text-lg text-dark-text2 leading-relaxed"
+            className="text-base md:text-lg text-light-text2 dark:text-dark-text2 leading-relaxed"
           >
             Mechatronics engineer turned AI/CV builder. I stay hands-on across strategy, firmware, and ML so you work with one partner instead of five.
           </motion.p>
@@ -56,10 +56,10 @@ export default function About() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-              className="rounded-2xl border border-white/10 bg-dark-surface2/80 p-6 text-center backdrop-blur hover:border-primary-500/50 transition-all duration-300"
+              className="rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface2/80 p-6 text-center backdrop-blur hover:border-primary-500/50 transition-all duration-300 shadow-sm dark:shadow-none"
             >
               <p className="text-2xl font-semibold text-gradient">{card.value}</p>
-              <p className="mt-2 text-sm text-dark-text2">{card.label}</p>
+              <p className="mt-2 text-sm text-light-text2 dark:text-dark-text2">{card.label}</p>
             </motion.div>
           ))}
         </motion.div>

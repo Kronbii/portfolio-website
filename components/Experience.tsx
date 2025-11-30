@@ -42,7 +42,7 @@ export default function Experience() {
           initial={{ opacity: 0, y: 10 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="text-center text-sm uppercase tracking-[0.4em] text-dark-text2"
+          className="text-center text-sm uppercase tracking-[0.4em] text-light-text2 dark:text-dark-text2"
         >
           Journey & Milestones
         </motion.p>
@@ -62,7 +62,7 @@ export default function Experience() {
           className="relative"
         >
           {/* Center line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/10 -translate-x-1/2" />
+          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-light-border dark:bg-white/10 -translate-x-1/2" />
           
           <div className="space-y-12">
             {milestones.map((item, index) => {
@@ -79,13 +79,13 @@ export default function Experience() {
                     <>
                       {/* Content on left */}
                       <div className="pr-8 text-right">
-                        <p className="text-xs uppercase tracking-wide text-dark-text2 mb-1">{item.period}</p>
-                        <h3 className="text-lg font-semibold text-dark-text mb-2">{item.title}</h3>
-                        <p className="text-sm text-dark-text2 leading-relaxed">{item.description}</p>
+                        <p className="text-xs uppercase tracking-wide text-light-text2 dark:text-dark-text2 mb-1">{item.period}</p>
+                        <h3 className="text-lg font-semibold text-light-text dark:text-dark-text mb-2">{item.title}</h3>
+                        <p className="text-sm text-light-text2 dark:text-dark-text2 leading-relaxed">{item.description}</p>
                       </div>
                       {/* Dot in center */}
                       <div className="absolute left-1/2 top-2 -translate-x-1/2">
-                        <span className="block h-4 w-4 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 ring-4 ring-dark-bg" />
+                        <span className="block h-4 w-4 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 ring-4 ring-light-bg dark:ring-dark-bg" />
                       </div>
                       {/* Empty space on right */}
                       <div />
@@ -96,13 +96,13 @@ export default function Experience() {
                       <div />
                       {/* Dot in center */}
                       <div className="absolute left-1/2 top-2 -translate-x-1/2">
-                        <span className="block h-4 w-4 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 ring-4 ring-dark-bg" />
+                        <span className="block h-4 w-4 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 ring-4 ring-light-bg dark:ring-dark-bg" />
                       </div>
                       {/* Content on right */}
                       <div className="pl-8 text-left">
-                        <p className="text-xs uppercase tracking-wide text-dark-text2 mb-1">{item.period}</p>
-                        <h3 className="text-lg font-semibold text-dark-text mb-2">{item.title}</h3>
-                        <p className="text-sm text-dark-text2 leading-relaxed">{item.description}</p>
+                        <p className="text-xs uppercase tracking-wide text-light-text2 dark:text-dark-text2 mb-1">{item.period}</p>
+                        <h3 className="text-lg font-semibold text-light-text dark:text-dark-text mb-2">{item.title}</h3>
+                        <p className="text-sm text-light-text2 dark:text-dark-text2 leading-relaxed">{item.description}</p>
                       </div>
                     </>
                   )}

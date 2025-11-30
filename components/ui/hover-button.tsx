@@ -120,9 +120,9 @@ const HoverButton = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Hove
     )
 
     const variantClasses = {
-      default: "backdrop-blur-lg bg-[rgba(43,55,80,0.1)]",
+      default: "backdrop-blur-lg bg-light-surface2/50 dark:bg-[rgba(43,55,80,0.1)] text-light-text dark:text-foreground",
       gradient: "bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 text-white",
-      outline: "border border-white/15 bg-white/5 backdrop-blur-lg",
+      outline: "border border-light-border/50 dark:border-white/15 bg-light-surface2/30 dark:bg-white/5 backdrop-blur-lg text-light-text dark:text-foreground",
     }
 
     const commonProps = {
