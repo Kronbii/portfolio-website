@@ -46,7 +46,7 @@ export default function Skills() {
     <section
       id="skills"
       ref={ref}
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-light-surface dark:bg-dark-surface"
+      className="min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8 bg-light-surface dark:bg-dark-surface"
     >
       <div className="max-w-5xl mx-auto">
         <motion.h2

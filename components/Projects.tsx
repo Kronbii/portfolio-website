@@ -95,7 +95,7 @@ export default function Projects() {
       <section
         id="projects"
         ref={ref}
-        className="py-20 px-4 sm:px-6 lg:px-8"
+        className="min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8"
       >
         <div className="max-w-6xl mx-auto">
           <motion.p

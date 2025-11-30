@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
 
@@ -27,15 +27,104 @@ const milestones = [
   },
 ]
 
+function TimelineItem({ 
+  item, 
+  index, 
+  progress 
+}: { 
+  item: typeof milestones[0]
+  index: number
+  progress: any
+}) {
+  const isLeft = index % 2 === 0
+  const itemRef = useRef(null)
+  
+  // Each item has its own trigger range based on its position
+  const itemStart = index / milestones.length
+  const itemEnd = (index + 0.7) / milestones.length
+  
+  // Transform progress to item-specific opacity and position
+  const opacity = useTransform(progress, [itemStart, itemEnd], [0, 1])
+  const x = useTransform(progress, [itemStart, itemEnd], [isLeft ? -40 : 40, 0])
+  const scale = useTransform(progress, [itemStart, itemEnd], [0.8, 1])
+  
+  // Smooth spring for the dot
+  const dotScale = useTransform(progress, [itemStart, itemStart + 0.1], [0, 1])
+  const dotOpacity = useTransform(progress, [itemStart, itemStart + 0.05], [0, 1])
+
+  return (
+    <motion.div
+      ref={itemRef}
+      style={{ opacity, x, scale }}
+      className="relative grid grid-cols-2 gap-8 items-center"
+    >
+      {isLeft ? (
+        <>
+          {/* Content on left */}
+          <div className="pr-8 text-right">
+            <p className="text-xs uppercase tracking-wide text-light-text2 dark:text-dark-text2 mb-1">{item.period}</p>
+            <h3 className="text-lg font-semibold text-light-text dark:text-dark-text mb-2">{item.title}</h3>
+            <p className="text-sm text-light-text2 dark:text-dark-text2 leading-relaxed">{item.description}</p>
+          </div>
+          {/* Dot in center */}
+          <div className="absolute left-1/2 top-2 -translate-x-1/2">
+            <motion.span 
+              style={{ scale: dotScale, opacity: dotOpacity }}
+              className="block h-4 w-4 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 ring-4 ring-light-bg dark:ring-dark-bg" 
+            />
+          </div>
+          {/* Empty space on right */}
+          <div />
+        </>
+      ) : (
+        <>
+          {/* Empty space on left */}
+          <div />
+          {/* Dot in center */}
+          <div className="absolute left-1/2 top-2 -translate-x-1/2">
+            <motion.span 
+              style={{ scale: dotScale, opacity: dotOpacity }}
+              className="block h-4 w-4 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 ring-4 ring-light-bg dark:ring-dark-bg" 
+            />
+          </div>
+          {/* Content on right */}
+          <div className="pl-8 text-left">
+            <p className="text-xs uppercase tracking-wide text-light-text2 dark:text-dark-text2 mb-1">{item.period}</p>
+            <h3 className="text-lg font-semibold text-light-text dark:text-dark-text mb-2">{item.title}</h3>
+            <p className="text-sm text-light-text2 dark:text-dark-text2 leading-relaxed">{item.description}</p>
+          </div>
+        </>
+      )}
+    </motion.div>
+  )
+}
+
 export default function Experience() {
+  const containerRef = useRef(null)
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.3 })
+  const isInView = useInView(ref, { once: true, amount: 0.1 })
+  
+  // Track scroll progress through the timeline section
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 0.8", "end 0.5"]
+  })
+  
+  // Smooth the scroll progress for fluid animations
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  })
+  
+  // Transform for the growing line
+  const lineHeight = useTransform(smoothProgress, [0, 1], ["0%", "100%"])
 
   return (
     <section
       id="experience"
       ref={ref}
-      className="py-20 px-4 sm:px-6 lg:px-12"
+      className="min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-12"
     >
       <div className="max-w-4xl mx-auto">
         <motion.p
@@ -55,62 +144,33 @@ export default function Experience() {
           Professional <span className="text-gradient">Experience</span>
         </motion.h2>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative"
-        >
-          {/* Center line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-light-border dark:bg-white/10 -translate-x-1/2" />
+        <div ref={containerRef} className="relative">
+          {/* Background line (subtle) */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-light-border/30 dark:bg-white/5 -translate-x-1/2" />
+          
+          {/* Animated growing line */}
+          <motion.div 
+            style={{ height: lineHeight }}
+            className="absolute left-1/2 top-0 w-px bg-gradient-to-b from-primary-500 via-secondary-500 to-primary-500 -translate-x-1/2 origin-top"
+          />
+          
+          {/* Glowing effect on the line tip */}
+          <motion.div 
+            style={{ top: lineHeight }}
+            className="absolute left-1/2 w-3 h-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary-500 blur-sm opacity-80"
+          />
           
           <div className="space-y-12">
-            {milestones.map((item, index) => {
-              const isLeft = index % 2 === 0
-              return (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, x: isLeft ? -20 : 20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                  className="relative grid grid-cols-2 gap-8 items-center"
-                >
-                  {isLeft ? (
-                    <>
-                      {/* Content on left */}
-                      <div className="pr-8 text-right">
-                        <p className="text-xs uppercase tracking-wide text-light-text2 dark:text-dark-text2 mb-1">{item.period}</p>
-                        <h3 className="text-lg font-semibold text-light-text dark:text-dark-text mb-2">{item.title}</h3>
-                        <p className="text-sm text-light-text2 dark:text-dark-text2 leading-relaxed">{item.description}</p>
-                      </div>
-                      {/* Dot in center */}
-                      <div className="absolute left-1/2 top-2 -translate-x-1/2">
-                        <span className="block h-4 w-4 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 ring-4 ring-light-bg dark:ring-dark-bg" />
-                      </div>
-                      {/* Empty space on right */}
-                      <div />
-                    </>
-                  ) : (
-                    <>
-                      {/* Empty space on left */}
-                      <div />
-                      {/* Dot in center */}
-                      <div className="absolute left-1/2 top-2 -translate-x-1/2">
-                        <span className="block h-4 w-4 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 ring-4 ring-light-bg dark:ring-dark-bg" />
-                      </div>
-                      {/* Content on right */}
-                      <div className="pl-8 text-left">
-                        <p className="text-xs uppercase tracking-wide text-light-text2 dark:text-dark-text2 mb-1">{item.period}</p>
-                        <h3 className="text-lg font-semibold text-light-text dark:text-dark-text mb-2">{item.title}</h3>
-                        <p className="text-sm text-light-text2 dark:text-dark-text2 leading-relaxed">{item.description}</p>
-                      </div>
-                    </>
-                  )}
-                </motion.div>
-              )
-            })}
+            {milestones.map((item, index) => (
+              <TimelineItem
+                key={item.title}
+                item={item}
+                index={index}
+                progress={smoothProgress}
+              />
+            ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )
