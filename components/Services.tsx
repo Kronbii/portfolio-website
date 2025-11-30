@@ -63,9 +63,9 @@ export default function Services() {
       const firstCard = cardsRef.current[0]
       if (!container || !firstCard) return
       
-      // Calculate card width including gap
+      // Calculate card width including gap (gap-4 on mobile, gap-6 on sm+)
       const cardWidth = firstCard.offsetWidth
-      const gap = 24 // gap-6 = 24px
+      const gap = window.innerWidth >= 640 ? 24 : 16
       const scrollPosition = (cardWidth + gap) * 1 // Scroll to second card
       
       container.scrollLeft = scrollPosition
@@ -85,7 +85,7 @@ export default function Services() {
     const firstCard = cardsRef.current[0]
     if (firstCard) {
       const cardWidth = firstCard.offsetWidth
-      const gap = 24
+      const gap = window.innerWidth >= 640 ? 24 : 16
       const newIndex = Math.round(scrollLeft / (cardWidth + gap))
       setCurrentIndex(newIndex)
     }
@@ -112,7 +112,7 @@ export default function Services() {
     if (!firstCard) return
     
     const cardWidth = firstCard.offsetWidth
-    const gap = 24
+    const gap = window.innerWidth >= 640 ? 24 : 16
     scrollContainerRef.current.scrollTo({
       left: index * (cardWidth + gap),
       behavior: 'smooth',
@@ -159,9 +159,9 @@ export default function Services() {
 
         <div
           ref={scrollContainerRef}
-          className="overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8"
+          className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth"
         >
-          <div className="flex gap-6">
+          <div className="flex gap-4 sm:gap-6 px-4 sm:px-6 lg:px-[calc((100vw-72rem)/2+1.5rem)] w-max">
             {services.map((service, index) => (
               <motion.div
                 key={service.title}
@@ -171,7 +171,7 @@ export default function Services() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group relative overflow-hidden rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-white/[0.03] p-6 sm:p-8 backdrop-blur flex-shrink-0 w-[85%] sm:w-[80%] lg:w-[75%] snap-center shadow-sm dark:shadow-none"
+                className="group relative overflow-hidden rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-white/[0.03] p-5 sm:p-8 backdrop-blur flex-shrink-0 w-[280px] sm:w-[320px] lg:w-[400px] snap-center shadow-sm dark:shadow-none"
                 whileHover={{ y: -4 }}
               >
                 <div className="flex items-center justify-between">
