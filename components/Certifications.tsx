@@ -31,7 +31,7 @@ export default function Certifications() {
     <section
       id="certifications"
       ref={ref}
-      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 bg-light-surface dark:bg-dark-surface"
+      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 bg-light-surface/70 dark:bg-dark-surface"
     >
       <div className="max-w-4xl mx-auto">
         <motion.div
