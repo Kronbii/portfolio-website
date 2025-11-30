@@ -22,7 +22,7 @@ const communityItems: CommunityItem[] = [
     id: '2',
     type: 'leadership',
     title: 'NASA Space Apps Beirut',
-    tagline: 'Organizing the largest global hackathon - in Beirut',
+    tagline: 'Organizing the Beirut chapter of NASA’s Space Apps—the world’s largest global hackathon',
     image: '/projects/nasa-space-apps.jpeg',
     imagePosition: '50% 50%',
     date: '2022 - 2025',
@@ -30,8 +30,8 @@ const communityItems: CommunityItem[] = [
   {
     id: '3',
     type: 'leadership',
-    title: 'Nasna',
-    tagline: 'non-profit NGO that leverages data to help people during war crisis in Lebanon',
+    title: '"Nasna" - crisis support',
+    tagline: 'Founder of a nonprofit NGO that applies data to deliver aid and crisis support to communities impacted by the war in Lebanon.',
     image: '/projects/nasna.jpeg',
     imagePosition: '50% 35%',
     date: '2024',
@@ -41,10 +41,10 @@ const communityItems: CommunityItem[] = [
     id: '4',
     type: 'leadership',
     title: 'National Physics Day',
-    tagline: 'Organized national STEM event',
+    tagline: 'Leading and organizing Lebanon’s biggest annual event for the physics and astronomy community.',
     image: '/projects/physics-day-1.jpg',
     imagePosition: '50% 35%',
-    date: '2024',
+    date: '2021 - 2025',
   },
 ]
 
