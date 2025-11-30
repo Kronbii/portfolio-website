@@ -3,15 +3,14 @@
 import { useState, useEffect } from 'react'
 import { motion, useScroll, useSpring } from 'framer-motion'
 import { FiMenu, FiX, FiArrowUpRight } from 'react-icons/fi'
+import { HoverButton } from '@/components/ui/hover-button'
 
 const navItems = [
-  { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Services', href: '#services' },
+  { name: 'Experience', href: '#projects' },
+  { name: 'Community', href: '#community' },
   { name: 'Certifications', href: '#certifications' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Services', href: '#services' },
 ]
 
 export default function Navigation() {
@@ -57,11 +56,7 @@ export default function Navigation() {
               className="flex items-center space-x-2 text-lg font-semibold text-dark-text"
               whileHover={{ scale: 1.02 }}
             >
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 text-white font-bold">
-                RK
-              </span>
               <div className="hidden sm:block">
-                <p className="text-sm uppercase tracking-widest text-dark-text2">AI & CV Engineer</p>
                 <p className="-mt-1 text-base text-dark-text">Rami Kronbi</p>
               </div>
             </motion.a>
@@ -78,23 +73,23 @@ export default function Navigation() {
                 </motion.a>
               ))}
               <span className="h-6 w-px bg-white/10" />
-              <motion.a
+              <HoverButton
                 href="#contact"
-                className="group inline-flex items-center space-x-1 rounded-full border border-primary-400/60 bg-primary-500/10 px-4 py-2 text-sm font-semibold text-dark-text"
-                whileHover={{ scale: 1.03 }}
+                variant="outline"
+                className="group inline-flex items-center space-x-1 px-4 py-2 text-sm"
               >
-                <span>Book a call</span>
+                <span>Quick Call</span>
                 <FiArrowUpRight className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-              </motion.a>
+              </HoverButton>
             </div>
 
-            <button
-              className="lg:hidden inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/15 text-dark-text"
+            <HoverButton
+              className="lg:hidden inline-flex h-12 w-12 items-center justify-center p-0"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle navigation"
             >
               {isMobileMenuOpen ? <FiX size={22} /> : <FiMenu size={22} />}
-            </button>
+            </HoverButton>
           </div>
 
           {isMobileMenuOpen && (
@@ -116,13 +111,14 @@ export default function Navigation() {
                   </a>
                 ))}
               </div>
-              <a
+              <HoverButton
                 href="#contact"
-                className="mt-6 flex items-center justify-center rounded-2xl bg-gradient-to-r from-primary-500 to-secondary-500 py-3 text-base font-semibold text-white"
+                variant="gradient"
+                className="mt-6 w-full"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Book Rami
-              </a>
+              </HoverButton>
             </motion.div>
           )}
         </div>

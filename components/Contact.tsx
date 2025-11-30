@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { FiGithub, FiLinkedin, FiMail, FiSend, FiClock, FiCheckCircle } from 'react-icons/fi'
+import { HoverButton } from '@/components/ui/hover-button'
 
 const contactSteps = [
   {
@@ -138,16 +139,15 @@ export default function Contact() {
                   placeholder="Your message..."
                 />
               </div>
-              <motion.button
+              <HoverButton
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 text-white font-semibold py-3 px-6 rounded-2xl transition-opacity flex items-center justify-center space-x-2 disabled:opacity-60 disabled:cursor-not-allowed"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                variant="gradient"
+                className="w-full flex items-center justify-center space-x-2 disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 <FiSend />
                 <span>{isSubmitting ? 'Sending...' : submitStatus === 'success' ? 'Sent!' : 'Send Message'}</span>
-              </motion.button>
+              </HoverButton>
               {submitStatus === 'success' && (
                 <motion.p
                   initial={{ opacity: 0 }}
