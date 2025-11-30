@@ -109,7 +109,7 @@ const HoverButton = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Hove
 
     const baseClasses = cn(
       "relative isolate px-8 py-3 rounded-3xl",
-      "text-foreground font-medium text-base leading-6",
+      "text-slate-900 dark:text-white font-medium text-base leading-6",
       "cursor-pointer overflow-hidden inline-flex items-center justify-center",
       "before:content-[''] before:absolute before:inset-0",
       "before:rounded-[inherit] before:pointer-events-none",

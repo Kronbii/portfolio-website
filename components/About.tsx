@@ -3,126 +3,135 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { Briefcase, GraduationCap, Award, Users } from 'lucide-react'
+import { Cpu, Eye, Rocket } from 'lucide-react'
 
-const quickStats = [
-  { value: 'Engineer', label: 'Bachelor of Mechatronics Engineering' },
-  { value: 'Founder', label: 'EVOID Tech Solutions' },
-  { value: 'Leader', label: 'Nasa Space Apps, Astronomyclub' },
-
+const highlights = [
+  {
+    icon: <Cpu className="w-6 h-6" />,
+    title: 'AI Engineering',
+    description: 'Deep learning, model optimization, and production-ready ML systems.',
+  },
+  {
+    icon: <Eye className="w-6 h-6" />,
+    title: 'Computer Vision',
+    description: 'Real-time perception, object detection, and visual understanding.',
+  },
+  {
+    icon: <Rocket className="w-6 h-6" />,
+    title: 'Product Delivery',
+    description: 'End-to-end development with Google PM-certified methodology.',
+  },
 ]
 
-const milestones = [
-  {
-    period: 'Now',
-    title: 'Founder & Tech Lead · EVOID',
-    description: 'Building bespoke AI/CV and robotics products for startups + industry teams.',
-  },
-  {
-    period: '2025',
-    title: 'Full Time Applied AI and CV Enginner',
-    description: 'Improving runway safety at Oreyeon LDA.',
-  },
-  {
-    period: '2023',
-    title: 'WRO Future Engineers Champion',
-    description: 'Led an autonomous race-car build from concept to podium in 20 days.',
-  },
-  {
-    period: '2022',
-    title: 'Nasa Space Apps Tech Lead and Volunteer',
-    description: 'Took part in leading the largest global hackathon in Lebanon.',
-  },
+const techStack = [
+  'Python',
+  'PyTorch',
+  'TensorFlow',
+  'TensorRT',
+  'OpenCV',
+  'ONNX',
+  'C++',
+  'Next.js',
+  'Three.js',
+  'Docker',
 ]
 
 export default function About() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.3 })
+  const isInView = useInView(ref, { once: true, amount: 0.2 })
 
-  const infoCards = [
-    {
-      icon: <Briefcase className="w-6 h-6 text-primary-400" />,
-      title: 'Experience',
-      description:
-        'Mechatronics Engineer, AI Developer, and Founder at EVOID with hands-on leadership in technical and creative projects.',
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 },
     },
-    {
-      icon: <GraduationCap className="w-6 h-6 text-primary-400" />,
-      title: 'Education',
-      description:
-        'B.E. in Mechatronics Engineering, complemented by Google Project Management certification.',
-    },
-    {
-      icon: <Award className="w-6 h-6 text-primary-400" />,
-      title: 'Certified',
-      description:
-        'Google Project Management Certified, with specialized expertise in AI, ML, and Computer Vision.',
-    },
-    {
-      icon: <Users className="w-6 h-6 text-primary-400" />,
-      title: 'Community',
-      description:
-        'Leader of multiple university and community clubs — Astronomy, Engineering, AI, and Scouts.',
-    },
-  ]
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  }
 
   return (
     <section
       id="about"
       ref={ref}
-      className="py-20 px-4 sm:px-6 lg:px-12 bg-dark-surface/70"
+      className="py-24 sm:py-32 relative"
     >
-      <div className="max-w-6xl mx-auto grid gap-12 lg:grid-cols-[1fr_0.9fr] items-start">
-        <div>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-semibold mb-4"
-          >
-            About <span className="text-gradient">Rami Kronbi</span>
-          </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-base md:text-lg text-dark-text2 leading-relaxed"
-            >
-              Mechatronics engineer turned AI/CV builder. I stay hands-on across strategy, firmware, and ML so you work with one partner instead of five.
-            </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4"
-          >
-            {quickStats.map((stat) => (
-              <div key={stat.label} className="rounded-2xl border border-white/10 bg-dark-surface2/80 p-5 text-center">
-                <p className="text-2xl font-semibold text-gradient">{stat.value}</p>
-                <p className="mt-1 text-sm text-dark-text2">{stat.label}</p>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-surface/50 to-transparent pointer-events-none" />
+      
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="rounded-3xl border border-white/10 bg-dark-surface2/80 p-6 backdrop-blur">
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <span className="inline-block text-xs uppercase tracking-[0.3em] text-gemini-500 font-medium mb-4">
+            About Me
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-6">
+            Building AI that <span className="text-gradient">makes sense</span>
+          </h2>
+          <p className="text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            Mechatronics engineer turned AI/CV specialist. I stay hands-on across strategy, 
+            firmware, and ML — so you work with one partner instead of five.
+          </p>
+        </motion.div>
 
-          <div className="mt-6 border-t border-none pt-none space-y-8">
-            {milestones.map((item, index) => (
-              <div key={item.title} className="relative pl-6">
-                <span className="absolute left-0 top-1.5 h-3 w-3 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500" />
-                {index < milestones.length - 1 && (
-                  <span className="absolute left-1.5 top-4 bottom-[-1rem] w-px bg-white/10" />
-                )}
-                <p className="text-xs uppercase tracking-wide text-dark-text2">{item.period}</p>
-                <h3 className="text-lg font-semibold text-dark-text">{item.title}</h3>
-                <p className="text-sm text-dark-text2 leading-relaxed">{item.description}</p>
+        {/* Highlight cards */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="grid md:grid-cols-3 gap-6 mb-16"
+        >
+          {highlights.map((item, index) => (
+            <motion.div
+              key={item.title}
+              variants={itemVariants}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="group"
+            >
+              <div className="glass-card p-6 h-full transition-all duration-300 hover:shadow-glow">
+                <div className="w-12 h-12 rounded-2xl bg-gemini-gradient flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {item.icon}
+                </div>
+                <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                  {item.description}
+                </p>
               </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Tech stack */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-center"
+        >
+          <h3 className="text-sm uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 font-medium mb-6">
+            Tech Stack
+          </h3>
+          <div className="flex flex-wrap justify-center gap-3">
+            {techStack.map((tech, index) => (
+              <motion.span
+                key={tech}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.3, delay: 0.5 + index * 0.05 }}
+                className="px-4 py-2 rounded-full glass text-sm font-medium text-slate-900 dark:text-white hover:bg-gemini-500/10 hover:border-gemini-500/30 transition-colors cursor-default"
+              >
+                {tech}
+              </motion.span>
             ))}
           </div>
         </motion.div>

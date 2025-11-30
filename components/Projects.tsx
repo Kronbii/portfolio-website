@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { FiGithub, FiExternalLink, FiX, FiImage } from 'react-icons/fi'
@@ -52,7 +52,7 @@ const projects: Project[] = [
       'Dual-MCU architecture for modular expandability',
       'Designed and deployed for WRO Future Engineers 2023',
     ],
-  },  
+  },
   {
     title: 'Smart Learning Table for Classrooms',
     description:
@@ -72,19 +72,119 @@ const projects: Project[] = [
   },
 ]
 
-export default function Projects() {
+function ProjectCard({
+  project,
+  index,
+  onClick,
+}: {
+  project: Project
+  index: number
+  onClick: () => void
+}) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
+  const [imageError, setImageError] = useState(false)
+
+  // Mouse tracking for tilt effect
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+  
+  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 15 })
+  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 15 })
+  
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['5deg', '-5deg'])
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-5deg', '5deg'])
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const xPos = (e.clientX - rect.left) / rect.width - 0.5
+    const yPos = (e.clientY - rect.top) / rect.height - 0.5
+    x.set(xPos)
+    y.set(yPos)
+  }
+
+  const handleMouseLeave = () => {
+    x.set(0)
+    y.set(0)
+  }
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      onClick={onClick}
+      className="group cursor-pointer perspective-1000"
+    >
+      <div className="glass-card overflow-hidden transition-all duration-300 hover:shadow-glow group-hover:border-gemini-500/30">
+        {/* Image */}
+        <div className="relative w-full h-48 sm:h-56 overflow-hidden bg-slate-100 dark:bg-slate-800">
+          {project.image && !imageError ? (
+            <>
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                onError={() => setImageError(true)}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-[#050508] via-background/20 to-transparent opacity-60" />
+            </>
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-slate-500 dark:text-slate-400">
+              <FiImage size={48} />
+            </div>
+          )}
+          
+          {/* Hover gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-gemini-500/0 to-purple-500/0 group-hover:from-gemini-500/10 group-hover:to-purple-500/10 transition-colors duration-300" />
+        </div>
+
+        {/* Content */}
+        <div className="p-6">
+          <h3 className="text-xl font-semibold text-slate-900 dark:text-white group-hover:text-gradient transition-colors duration-300 mb-2">
+            {project.title}
+          </h3>
+          <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed line-clamp-3 mb-4">
+            {project.description}
+          </p>
+
+          {/* Tech chips */}
+          <div className="flex flex-wrap gap-2 mb-4">
+            {project.technologies.slice(0, 3).map((tech, techIndex) => (
+              <span
+                key={techIndex}
+                className="px-3 py-1 text-xs font-medium rounded-full bg-gemini-500/10 text-gemini-400 border border-gemini-500/20"
+              >
+                {tech}
+              </span>
+            ))}
+            {project.technologies.length > 3 && (
+              <span className="px-3 py-1 text-xs font-medium rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
+                +{project.technologies.length - 3}
+              </span>
+            )}
+          </div>
+
+          {/* View more hint */}
+          <div className="text-sm font-medium text-gemini-500 group-hover:text-gemini-400 transition-colors">
+            View details →
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
+export default function Projects() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, amount: 0.1 })
   const [selectedProject, setSelectedProject] = useState<number | null>(null)
   const [imageErrors, setImageErrors] = useState<{ [key: number]: boolean }>({})
-
-  const openProject = (index: number) => {
-    setSelectedProject(index)
-  }
-
-  const closeProject = () => {
-    setSelectedProject(null)
-  }
 
   const handleImageError = (index: number) => {
     setImageErrors((prev) => ({ ...prev, [index]: true }))
@@ -95,96 +195,57 @@ export default function Projects() {
       <section
         id="projects"
         ref={ref}
-        className="py-20 px-4 sm:px-6 lg:px-8"
+        className="py-24 sm:py-32 relative"
       >
-        <div className="max-w-6xl mx-auto">
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="text-center text-sm uppercase tracking-[0.4em] text-dark-text2"
-          >
-            Portfolio Projects
-          </motion.p>
-          <motion.h2
+        {/* Background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-surface/50 to-transparent pointer-events-none" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Section header */}
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-3xl md:text-4xl font-semibold mb-3 pb-8 text-center"
+            className="text-center mb-16"
           >
-            Real work,<span className="text-gradient"> delivered with impact</span>
-          </motion.h2>
+            <span className="inline-block text-xs uppercase tracking-[0.3em] text-gemini-500 font-medium mb-4">
+              Portfolio
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-6">
+              Featured <span className="text-gradient">Projects</span>
+            </h2>
+            <p className="text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">
+              Real-world AI and computer vision systems, delivered with measurable impact.
+            </p>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Projects grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
-              <motion.div
+              <ProjectCard
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group relative overflow-hidden rounded-3xl border border-white/10 bg-dark-surface2/80 hover:border-primary-500/50 transition-all duration-300 cursor-pointer"
-                whileHover={{ y: -8, scale: 1.02 }}
-                onClick={() => openProject(index)}
-              >
-                <div className="relative w-full h-52 overflow-hidden bg-dark-surface">
-                  {project.image && !imageErrors[index] ? (
-                    <>
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-500"
-                        onError={() => handleImageError(index)}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-dark-surface2 to-transparent" />
-                    </>
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-primary-500/30">
-                      <FiImage size={48} />
-                    </div>
-                  )}
-                </div>
-                <div className="p-6">
-                  <h3 className="text-2xl font-semibold mb-2 text-dark-text group-hover:text-primary-400 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm uppercase tracking-wide text-dark-text2 mb-3">
-                    Featured build
-                  </p>
-                  <p className="text-dark-text2 mb-5 leading-relaxed line-clamp-3">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-5">
-                    {project.technologies.slice(0, 3).map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-3 py-1 bg-primary-500/20 text-primary-400 rounded-full text-sm"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                    {project.technologies.length > 3 && (
-                      <span className="px-3 py-1 bg-primary-500/10 text-primary-500 rounded-full text-sm">
-                        +{project.technologies.length - 3}
-                      </span>
-                    )}
-                  </div>
-                  <div className="text-primary-400 text-sm font-semibold group-hover:text-primary-300 transition-colors">
-                    Tap for outcomes →
-                  </div>
-                </div>
-              </motion.div>
+                project={project}
+                index={index}
+                onClick={() => setSelectedProject(index)}
+              />
             ))}
           </div>
+
+          {/* CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-12 rounded-3xl border border-white/10 bg-white/5 p-6 text-center"
+            className="mt-16 text-center"
           >
-            <p className="text-dark-text text-lg">
-              Want a similar transformation? <a href="#contact" className="text-primary-400 underline-offset-4 hover:underline">Let&apos;s design your roadmap</a> and launch faster.
-            </p>
+            <div className="glass-card inline-block px-8 py-6">
+              <p className="text-lg text-slate-900 dark:text-white mb-4">
+                Want a similar transformation for your business?
+              </p>
+              <HoverButton href="#contact" variant="gradient">
+                Let&apos;s discuss your project
+              </HoverButton>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -197,66 +258,69 @@ export default function Projects() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
-              onClick={closeProject}
+              className="fixed inset-0 bg-white dark:bg-[#050508]/80 backdrop-blur-md z-50"
+              onClick={() => setSelectedProject(null)}
             />
             <motion.div
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               className="fixed inset-4 md:inset-8 lg:inset-16 z-50 overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="bg-dark-surface rounded-3xl border border-white/10 shadow-2xl max-w-5xl mx-auto overflow-hidden">
+              <div className="glass-card max-w-5xl mx-auto overflow-hidden">
                 {projects[selectedProject] && (
                   <>
                     {/* Modal Header */}
                     <div className="relative">
-                      <div className="relative w-full h-64 md:h-96 overflow-hidden bg-dark-surface2">
+                      <div className="relative w-full h-64 md:h-80 overflow-hidden bg-slate-100 dark:bg-slate-800">
                         {projects[selectedProject].image && !imageErrors[selectedProject] ? (
                           <>
                             <Image
-                              src={projects[selectedProject].image}
+                              src={projects[selectedProject].image!}
                               alt={projects[selectedProject].title}
                               fill
                               className="object-cover"
                               onError={() => handleImageError(selectedProject)}
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-dark-surface to-transparent" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-[#050508] via-background/50 to-transparent" />
                           </>
                         ) : (
-                          <div className="w-full h-full flex items-center justify-center text-primary-500/30">
+                          <div className="w-full h-full flex items-center justify-center text-slate-500 dark:text-slate-400">
                             <FiImage size={64} />
                           </div>
                         )}
                       </div>
-                      <HoverButton
-                        onClick={closeProject}
-                        variant="outline"
-                        className="absolute top-4 right-4 bg-dark-surface/90 hover:bg-dark-surface text-dark-text2 hover:text-primary-500 rounded-full p-2 z-10"
+                      <button
+                        onClick={() => setSelectedProject(null)}
+                        className="absolute top-4 right-4 p-3 rounded-full glass hover:bg-white/10 transition-colors z-10"
                         aria-label="Close project"
                       >
                         <FiX size={24} />
-                      </HoverButton>
+                      </button>
                     </div>
 
                     {/* Modal Content */}
                     <div className="p-6 md:p-8">
-                      <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary-500">
+                      <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gradient">
                         {projects[selectedProject].title}
                       </h2>
-                      
-                      <p className="text-lg text-dark-text2 mb-6 leading-relaxed">
-                        {projects[selectedProject].longDescription || projects[selectedProject].description}
+
+                      <p className="text-slate-500 dark:text-slate-400 leading-relaxed mb-6">
+                        {projects[selectedProject].longDescription ||
+                          projects[selectedProject].description}
                       </p>
 
                       {projects[selectedProject].features && (
                         <div className="mb-6">
-                          <h3 className="text-xl font-bold mb-3 text-dark-text">Key Features</h3>
+                          <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">
+                            Key Features
+                          </h3>
                           <ul className="space-y-2">
                             {projects[selectedProject].features!.map((feature, idx) => (
-                              <li key={idx} className="flex items-start space-x-2 text-dark-text2">
-                                <span className="text-primary-500 mt-1">•</span>
+                              <li key={idx} className="flex items-start gap-3 text-slate-500 dark:text-slate-400">
+                                <span className="w-1.5 h-1.5 rounded-full bg-gemini-500 mt-2 flex-shrink-0" />
                                 <span>{feature}</span>
                               </li>
                             ))}
@@ -265,12 +329,14 @@ export default function Projects() {
                       )}
 
                       <div className="mb-6">
-                        <h3 className="text-xl font-bold mb-3 text-dark-text">Technologies</h3>
+                        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">
+                          Technologies
+                        </h3>
                         <div className="flex flex-wrap gap-2">
                           {projects[selectedProject].technologies.map((tech, techIndex) => (
                             <span
                               key={techIndex}
-                              className="px-4 py-2 bg-primary-500/20 text-primary-400 rounded-full text-sm font-medium"
+                              className="px-4 py-2 text-sm font-medium rounded-full bg-gemini-500/10 text-gemini-400 border border-gemini-500/20"
                             >
                               {tech}
                             </span>
@@ -282,7 +348,7 @@ export default function Projects() {
                         <HoverButton
                           href={projects[selectedProject].githubUrl}
                           variant="gradient"
-                          className="flex items-center space-x-2"
+                          className="flex items-center gap-2"
                         >
                           <FiGithub size={20} />
                           <span>View on GitHub</span>
@@ -291,7 +357,7 @@ export default function Projects() {
                           <HoverButton
                             href={projects[selectedProject].demoUrl}
                             variant="outline"
-                            className="flex items-center space-x-2"
+                            className="flex items-center gap-2"
                           >
                             <FiExternalLink size={20} />
                             <span>Live Demo</span>

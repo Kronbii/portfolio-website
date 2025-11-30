@@ -6,23 +6,46 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        // Shadcn/ui standard colors
-        foreground: '#e5e5e5',
-        background: '#0a0a0a',
+        // Gemini Blue gradient palette
+        gemini: {
+          50: '#e8f4ff',
+          100: '#d5ebff',
+          200: '#b3d9ff',
+          300: '#85c1ff',
+          400: '#569eff',
+          500: '#4285f4',
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
+          950: '#172554',
+        },
+        
+        // Accent colors for gradients
+        accent: {
+          blue: '#4285f4',
+          purple: '#8b5cf6',
+          cyan: '#06b6d4',
+          pink: '#ec4899',
+          teal: '#14b8a6',
+        },
+        
+        // Primary colors (Gemini inspired)
         primary: {
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#22c55e',
-          600: '#16a34a',
-          700: '#15803d',
-          800: '#166534',
-          900: '#14532d',
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#4285f4',
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
         },
         secondary: {
           50: '#f0f9ff',
@@ -36,18 +59,6 @@ const config: Config = {
           800: '#075985',
           900: '#0c4a6e',
         },
-        accent: {
-          50: '#f8f5ff',
-          100: '#f0e9ff',
-          200: '#d7c7ff',
-          300: '#b697f8',
-          400: '#a277f2',
-          500: '#8b5cf6',
-          600: '#6d28d9',
-          700: '#5b21b6',
-          800: '#4c1d95',
-          900: '#3b0764',
-        },
         dark: {
           bg: '#0a0a0a',
           surface: '#111111',
@@ -56,22 +67,40 @@ const config: Config = {
           text2: '#a3a3a3',
         },
       },
+      fontFamily: {
+        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-display)', 'system-ui', 'sans-serif'],
+      },
       boxShadow: {
-        glow: '0 0 40px rgba(34, 197, 94, 0.35)',
-        'accent-glow': '0 0 50px rgba(142, 92, 246, 0.25)',
+        'glow': '0 0 40px rgba(66, 133, 244, 0.3)',
+        'glow-lg': '0 0 60px rgba(66, 133, 244, 0.4)',
+        'glow-purple': '0 0 50px rgba(139, 92, 246, 0.25)',
+        'glass': '0 8px 32px rgba(0, 0, 0, 0.12)',
+        'glass-lg': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+        'inset-glow': 'inset 0 1px 1px rgba(255, 255, 255, 0.1)',
       },
       backgroundImage: {
+        'gemini-gradient': 'linear-gradient(135deg, #4285f4 0%, #8b5cf6 50%, #06b6d4 100%)',
+        'gemini-gradient-text': 'linear-gradient(90deg, #4285f4, #8b5cf6, #4285f4)',
+        'gemini-radial': 'radial-gradient(circle at center, rgba(66, 133, 244, 0.15), transparent 70%)',
+        'glass': 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
+        'glass-dark': 'linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%)',
         'grid-dots': 'radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px)',
-        'radial-light': 'radial-gradient(circle at top, rgba(34,197,94,0.25), transparent 55%)',
+        'radial-light': 'radial-gradient(circle at top, rgba(66, 133, 244, 0.25), transparent 55%)',
       },
       animation: {
-        'fade-in': 'fadeIn 0.6s ease-in-out',
+        'fade-in': 'fadeIn 0.6s ease-out',
         'slide-up': 'slideUp 0.6s ease-out',
         'slide-down': 'slideDown 0.6s ease-out',
         'scale-in': 'scaleIn 0.5s ease-out',
-        'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+        'float': 'float 6s ease-in-out infinite',
         'float-slow': 'float 8s ease-in-out infinite',
+        'float-delayed': 'float 6s ease-in-out 2s infinite',
+        'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
         'spin-slow': 'spin 12s linear infinite',
+        'gradient-x': 'gradientX 15s ease infinite',
+        'gradient-shimmer': 'gradientShimmer 3s ease-in-out infinite',
+        'tilt': 'tilt 10s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -90,15 +119,33 @@ const config: Config = {
           '0%': { transform: 'scale(0.9)', opacity: '0' },
           '100%': { transform: 'scale(1)', opacity: '1' },
         },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-20px)' },
+        },
         pulseGlow: {
           '0%, 100%': { opacity: '0.4', transform: 'scale(0.95)' },
           '50%': { opacity: '1', transform: 'scale(1.05)' },
         },
-        float: {
-          '0%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-15px)' },
-          '100%': { transform: 'translateY(0px)' },
+        gradientX: {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
         },
+        gradientShimmer: {
+          '0%': { backgroundPosition: '200% center' },
+          '100%': { backgroundPosition: '-200% center' },
+        },
+        tilt: {
+          '0%, 100%': { transform: 'rotate(-1deg)' },
+          '50%': { transform: 'rotate(1deg)' },
+        },
+      },
+      backdropBlur: {
+        xs: '2px',
+      },
+      borderRadius: {
+        '4xl': '2rem',
+        '5xl': '2.5rem',
       },
     },
   },

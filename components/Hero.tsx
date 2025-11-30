@@ -5,20 +5,11 @@ import {
   FiGithub,
   FiLinkedin,
   FiMail,
-  FiArrowUpRight,
-  FiCompass,
-  FiWind,
-  FiCheck,
+  FiArrowDown,
 } from 'react-icons/fi'
 import Image from 'next/image'
 import { useState, type Dispatch, type SetStateAction } from 'react'
 import { HoverButton } from '@/components/ui/hover-button'
-
-const heroMetrics = [
-  { value: '30+', label: 'Client projects' },
-  { value: '4x', label: 'Faster delivery' },
-  { value: '2', label: 'Teams led' },
-]
 
 export default function Hero() {
   const [imageError, setImageError] = useState(false)
@@ -26,70 +17,87 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden pt-28 pb-20"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16"
     >
-      <div className="pointer-events-none absolute inset-0">
-        <motion.div
-          className="absolute -top-24 -left-16 w-72 h-72 rounded-full bg-primary-500/15 blur-[120px]"
-          animate={{ opacity: [0.4, 0.8, 0.4], scale: [0.9, 1.1, 0.95] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div
-          className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-accent-500/10 blur-[140px]"
-          animate={{ opacity: [0.2, 0.6, 0.2], scale: [1, 1.1, 0.95] }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-        />
-      </div>
-
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col gap-10 lg:grid lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-          <div className="lg:hidden">
-            <IntroSection />
-          </div>
-
-          <div className="order-3 lg:order-1 space-y-6">
-            <div className="hidden lg:block">
-              <IntroSection />
-            </div>
-
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left column - Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+            className="order-2 lg:order-1 text-center lg:text-left"
+          >
+            {/* Status badge */}
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.25 }}
-              className="flex flex-col sm:flex-row gap-4"
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="inline-flex items-center gap-3 px-4 py-2 rounded-full glass-card mb-8"
+            >
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
+              </span>
+              <span className="text-xs uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400 font-medium">
+                Available for projects
+              </span>
+            </motion.div>
+
+            {/* Main heading with Gemini gradient */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.1] tracking-tight mb-6"
+            >
+              <span className="block text-slate-900 dark:text-white">Hi, I&apos;m</span>
+              <span className="text-gradient-animated block mt-2">
+                Rami Kronbi
+              </span>
+            </motion.h1>
+
+            {/* Subtitle */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="text-lg sm:text-xl text-slate-500 dark:text-slate-400 max-w-lg mx-auto lg:mx-0 mb-8"
+            >
+              AI & Computer Vision Engineer crafting intelligent systems 
+              that see, understand, and transform the world.
+            </motion.p>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10"
             >
               <HoverButton
                 href="#contact"
-                variant="outline"
-                className="inline-flex items-center justify-center"
+                variant="gradient"
+                className="px-8 py-4 text-base font-semibold"
               >
-                Book a call
+                Get in touch
               </HoverButton>
               <HoverButton
                 href="#projects"
                 variant="outline"
-                className="inline-flex items-center justify-center"
+                className="px-8 py-4 text-base font-semibold"
               >
-                View portfolio
+                View my work
               </HoverButton>
             </motion.div>
 
-            <div className="grid grid-cols-3 gap-3 sm:max-w-md">
-              {heroMetrics.map((metric) => (
-                <motion.div
-                  key={metric.label}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-center"
-                >
-                  <p className="text-2xl sm:text-3xl font-semibold text-gradient">{metric.value}</p>
-                  <p className="text-xs uppercase tracking-wide text-dark-text2">{metric.label}</p>
-                </motion.div>
-              ))}
-            </div>
-
-              <div className="flex flex-wrap items-center gap-6 pt-2">
+            {/* Social links - PRESERVED EXACTLY AS ORIGINAL */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="flex items-center gap-4 justify-center lg:justify-start"
+            >
               <div className="flex space-x-4 text-lg">
                 {[
                   { icon: <FiGithub />, href: 'https://github.com/Kronbii', title: 'GitHub' },
@@ -101,7 +109,7 @@ export default function Hero() {
                     href={item.href}
                     target={item.title === 'Email' ? undefined : '_blank'}
                     rel={item.title === 'Email' ? undefined : 'noopener noreferrer'}
-                    className="flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/5 text-dark-text hover:border-primary-500/60 hover:text-primary-300 transition-colors"
+                    className="flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/5 text-slate-900 dark:text-white hover:border-gemini-500/60 hover:text-gemini-400 transition-colors"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     title={item.title}
@@ -110,53 +118,37 @@ export default function Hero() {
                   </motion.a>
                 ))}
               </div>
-            </div>
+            </motion.div>
+          </motion.div>
 
-          </div>
-
-          <div className="order-2 lg:order-2">
+          {/* Right column - Photo card */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
+            className="order-1 lg:order-2 flex justify-center"
+          >
             <HeroPortrait imageError={imageError} setImageError={setImageError} />
-          </div>
+          </motion.div>
         </div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2"
+        >
+          <span className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400">Scroll to explore</span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <FiArrowDown className="w-5 h-5 text-gemini-500" />
+          </motion.div>
+        </motion.div>
       </div>
     </section>
-  )
-}
-
-function IntroSection() {
-  return (
-    <div className="space-y-6">
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="inline-flex items-center space-x-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.3em] text-dark-text2"
-      >
-        <span className="relative flex h-2.5 w-2.5">
-          <span className="absolute inline-flex h-full w-full rounded-full bg-primary-500 opacity-75 animate-ping"></span>
-          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary-400"></span>
-        </span>
-        <span>portfolio ahead!</span>
-      </motion.div>
-
-      <motion.h1
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight"
-      >
-        Hi, I&apos;m <span className="text-gradient">Rami Kronbi</span> — building AI so you don&apos;t have to.
-      </motion.h1>
-
-      <motion.p
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.05 }}
-        className="text-sm uppercase tracking-[0.3em] text-dark-text2"
-      >
-        Rami Kronbi · AI & Computer Vision Engineer · Founder, EVOID
-      </motion.p>
-    </div>
   )
 }
 
@@ -168,65 +160,88 @@ function HeroPortrait({
   setImageError: Dispatch<SetStateAction<boolean>>
 }) {
   return (
-    <div className="relative w-full max-w-md mx-auto">
+    <div className="relative w-full max-w-md">
+      {/* Glow effect behind the card */}
+      <div className="absolute -inset-4 bg-gradient-to-r from-gemini-500/20 via-purple-500/20 to-cyan-500/20 rounded-[40px] blur-3xl opacity-60" />
+      
+      {/* Main floating card */}
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8 }}
-        className="relative rounded-[32px] border border-white/10 bg-gradient-to-b from-white/10 to-white/0 p-4 backdrop-blur-xl"
+        className="relative"
       >
-        <div className="relative h-[420px] rounded-[28px] bg-dark-surface2/80 overflow-hidden flex items-center justify-center">
-          {!imageError ? (
-            <Image
-              src="/profile.jpg"
-              alt="Rami Kronbi"
-              fill
-              className="object-cover"
-              priority
-              onError={() => setImageError(true)}
-            />
-          ) : (
-            <div className="flex flex-col items-center justify-center text-primary-500 space-y-2">
-              <span className="text-6xl font-semibold">RK</span>
-              <p className="text-sm text-dark-text2">Add a portrait</p>
+        {/* Glass container */}
+        <motion.div
+          animate={{ y: [0, -10, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+          className="relative glass-card p-3 rounded-[32px] shadow-glass-lg"
+        >
+          {/* Inner image container */}
+          <div className="relative h-[380px] sm:h-[420px] rounded-[24px] overflow-hidden bg-slate-100 dark:bg-slate-800">
+            {!imageError ? (
+              <Image
+                src="/profile.jpg"
+                alt="Rami Kronbi - AI & Computer Vision Engineer"
+                fill
+                className="object-cover"
+                priority
+                onError={() => setImageError(true)}
+              />
+            ) : (
+              <div className="flex flex-col items-center justify-center h-full text-gemini-500">
+                <span className="text-6xl font-bold">RK</span>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">Portrait</p>
+              </div>
+            )}
+            
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-[#050508]/80 via-transparent to-transparent" />
+          </div>
+        </motion.div>
+
+        {/* Floating info cards */}
+        <motion.div
+          initial={{ opacity: 0, y: 20, x: -20 }}
+          animate={{ opacity: 1, y: 0, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="absolute -left-6 top-8 sm:-left-8"
+        >
+          <motion.div
+            animate={{ y: [0, -5, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+            className="glass-card px-4 py-3 rounded-2xl shadow-glass max-w-[180px]"
+          >
+            <div className="flex items-center gap-2 mb-1">
+              <span className="w-2 h-2 rounded-full bg-emerald-400" />
+              <span className="text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-400">Fun Fact</span>
             </div>
-          )}
-          <div className="absolute inset-0 bg-gradient-to-t from-dark-surface2 via-transparent" />
-        </div>
-      </motion.div>
+            <p className="text-sm font-medium text-slate-900 dark:text-white leading-snug">
+              Born to explore space, forced to C++
+            </p>
+          </motion.div>
+        </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="absolute -left-2 top-4 sm:-left-5 sm:top-6 lg:-left-6 lg:top-8 w-36 sm:w-44 lg:w-48 rounded-2xl border border-white/25 bg-white/10 p-3 shadow-[0_6px_18px_rgba(0,0,0,0.35)] backdrop-blur-2xl"
-      >
-        <div className="flex items-center gap-2 text-primary-200">
-          <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-primary-500/25 text-primary-100">
-            <FiCompass size={16} />
-          </span>
-          <span className="text-[9px] uppercase tracking-[0.35em] text-white/80">Fun fact</span>
-        </div>
-        <p className="mt-2 text-sm font-semibold leading-snug text-white/90">
-          Born to explore space, forced to C++
-        </p>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
-        className="absolute -right-2 bottom-4 sm:-right-4 sm:bottom-6 lg:-right-6 lg:bottom-6 w-36 sm:w-48 rounded-2xl border border-white/25 bg-gradient-to-br from-white/10 to-white/5 p-3 shadow-[0_8px_22px_rgba(3,105,161,0.35)] backdrop-blur-2xl"
-      >
-        <div className="flex items-center gap-2 text-secondary-200">
-          <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-secondary-500/30 text-secondary-50">
-            <FiWind size={16} />
-          </span>
-          <span className="text-[9px] uppercase tracking-[0.35em] text-white/80">Alter ego</span>
-        </div>
-        <p className="mt-2 text-sm font-semibold leading-snug text-white/90">
-          An engineer? a pilot? idk
-        </p>
+        <motion.div
+          initial={{ opacity: 0, y: 20, x: 20 }}
+          animate={{ opacity: 1, y: 0, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="absolute -right-6 bottom-16 sm:-right-8"
+        >
+          <motion.div
+            animate={{ y: [0, -5, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+            className="glass-card px-4 py-3 rounded-2xl shadow-glass max-w-[180px]"
+          >
+            <div className="flex items-center gap-2 mb-1">
+              <span className="w-2 h-2 rounded-full bg-gemini-400" />
+              <span className="text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-400">Founder</span>
+            </div>
+            <p className="text-sm font-medium text-slate-900 dark:text-white leading-snug">
+              EVOID Tech Solutions
+            </p>
+          </motion.div>
+        </motion.div>
       </motion.div>
     </div>
   )

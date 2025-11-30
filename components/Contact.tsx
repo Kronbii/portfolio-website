@@ -3,23 +3,8 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
-import { FiGithub, FiLinkedin, FiMail, FiSend, FiClock, FiCheckCircle } from 'react-icons/fi'
+import { FiGithub, FiLinkedin, FiMail, FiSend, FiClock } from 'react-icons/fi'
 import { HoverButton } from '@/components/ui/hover-button'
-
-const contactSteps = [
-  {
-    title: 'Discovery call',
-    description: '30 minutes to frame goals, constraints, and success signals.',
-  },
-  {
-    title: 'Solution blueprint',
-    description: 'Within 72 hours you get scope, budget, and timeline options.',
-  },
-  {
-    title: 'Build + reporting',
-    description: 'Weekly iterations with demos and lightweight documentation.',
-  },
-]
 
 export default function Contact() {
   const ref = useRef(null)
@@ -68,166 +53,205 @@ export default function Contact() {
     <section
       id="contact"
       ref={ref}
-      className="py-24 px-4 sm:px-6 lg:px-8"
+      className="py-24 sm:py-32 relative"
     >
-      <div className="max-w-6xl mx-auto">
-        <motion.h2
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-surface/50 to-transparent pointer-events-none" />
+      
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section header */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-semibold mb-4 text-center"
+          className="text-center mb-16"
         >
-          Let&apos;s build your next intelligent product
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center text-dark-text2 mb-12 text-lg"
-        >
-          Tell me what you&apos;re building, the outcome you want, and I&apos;ll reply within 24 hours.
-        </motion.p>
+          <span className="inline-block text-xs uppercase tracking-[0.3em] text-gemini-500 font-medium mb-4">
+            Contact
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-6">
+            Let&apos;s build your next <span className="text-gradient">intelligent product</span>
+          </h2>
+          <p className="text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">
+            Tell me what you&apos;re building, the outcome you want, and I&apos;ll reply within 24 hours.
+          </p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Contact Form - PRESERVED ALL ORIGINAL FIELDS AND LOGIC */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="rounded-3xl border border-white/10 bg-dark-surface2/80 p-8 backdrop-blur"
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-2 text-dark-text2">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  required
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-3 bg-dark-surface2 border border-dark-surface2 rounded-lg focus:outline-none focus:border-primary-500 text-dark-text transition-colors"
-                  placeholder="Your name"
-                />
+            <div className="glass-card p-8">
+              {/* Helper text */}
+              <div className="mb-8">
+                <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-2">
+                  Let&apos;s talk.
+                </h3>
+                <p className="text-slate-500 dark:text-slate-400">
+                  Fill out the form and I&apos;ll get back to you as soon as possible.
+                </p>
               </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2 text-dark-text2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-3 bg-dark-surface2 border border-dark-surface2 rounded-lg focus:outline-none focus:border-primary-500 text-dark-text transition-colors"
-                  placeholder="your.email@example.com"
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2 text-dark-text2">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  required
-                  rows={6}
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-3 bg-dark-surface2 border border-dark-surface2 rounded-lg focus:outline-none focus:border-primary-500 text-dark-text transition-colors resize-none"
-                  placeholder="Your message..."
-                />
-              </div>
-              <HoverButton
-                type="submit"
-                disabled={isSubmitting}
-                variant="gradient"
-                className="w-full flex items-center justify-center space-x-2 disabled:opacity-60 disabled:cursor-not-allowed"
-              >
-                <FiSend />
-                <span>{isSubmitting ? 'Sending...' : submitStatus === 'success' ? 'Sent!' : 'Send Message'}</span>
-              </HoverButton>
-              {submitStatus === 'success' && (
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="text-primary-500 text-center"
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium mb-2 text-slate-900 dark:text-white">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl glass border border-slate-200 dark:border-white/10 bg-white/50 dark:bg-slate-900/50 focus:outline-none focus:border-gemini-500/50 focus:ring-2 focus:ring-gemini-500/20 text-slate-900 dark:text-white placeholder:text-slate-500 dark:text-slate-400 transition-all"
+                    placeholder="Your name"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium mb-2 text-slate-900 dark:text-white">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl glass border border-slate-200 dark:border-white/10 bg-white/50 dark:bg-slate-900/50 focus:outline-none focus:border-gemini-500/50 focus:ring-2 focus:ring-gemini-500/20 text-slate-900 dark:text-white placeholder:text-slate-500 dark:text-slate-400 transition-all"
+                    placeholder="your.email@example.com"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium mb-2 text-slate-900 dark:text-white">
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    required
+                    rows={6}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl glass border border-slate-200 dark:border-white/10 bg-white/50 dark:bg-slate-900/50 focus:outline-none focus:border-gemini-500/50 focus:ring-2 focus:ring-gemini-500/20 text-slate-900 dark:text-white placeholder:text-slate-500 dark:text-slate-400 transition-all resize-none"
+                    placeholder="Tell me about your project..."
+                  />
+                </div>
+                <HoverButton
+                  type="submit"
+                  disabled={isSubmitting}
+                  variant="gradient"
+                  className="w-full flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Thank you! I&apos;ll get back to you soon.
-                </motion.p>
-              )}
-              {submitStatus === 'error' && (
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="text-red-500 text-center"
-                >
-                  Something went wrong. Please try again or email me directly.
-                </motion.p>
-              )}
-            </form>
+                  <FiSend className={isSubmitting ? 'animate-pulse' : ''} />
+                  <span>{isSubmitting ? 'Sending...' : submitStatus === 'success' ? 'Sent!' : 'Send Message'}</span>
+                </HoverButton>
+                {submitStatus === 'success' && (
+                  <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-emerald-500 text-center text-sm"
+                  >
+                    Thank you! I&apos;ll get back to you soon.
+                  </motion.p>
+                )}
+                {submitStatus === 'error' && (
+                  <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-red-500 text-center text-sm"
+                  >
+                    Something went wrong. Please try again or email me directly.
+                  </motion.p>
+                )}
+              </form>
+            </div>
           </motion.div>
 
           {/* Social Links & Info */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="space-y-8"
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="space-y-6"
           >
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
+            {/* Availability card */}
+            <div className="glass-card p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm uppercase tracking-[0.4em] text-dark-text2">Availability</p>
-                  <p className="mt-2 text-2xl font-semibold text-dark-text">2 client openings</p>
+                  <p className="text-xs uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400 font-medium">
+                    Availability
+                  </p>
+                  <p className="mt-2 text-2xl font-semibold text-slate-900 dark:text-white">
+                    2 client openings
+                  </p>
                 </div>
-                <div className="text-primary-400">
-                  <FiClock size={32} />
+                <div className="w-14 h-14 rounded-2xl bg-gemini-gradient flex items-center justify-center text-white">
+                  <FiClock size={24} />
                 </div>
               </div>
-              <p className="mt-4 text-dark-text2">Next kickoff: Dec 2025 · Replies within 24 hours.</p>
+              <p className="mt-4 text-slate-500 dark:text-slate-400">
+                Next kickoff: Dec 2025 · Replies within 24 hours.
+              </p>
             </div>
 
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-              <h3 className="text-xl font-semibold text-dark-text mb-4">Preferred channels</h3>
-              <div className="space-y-4">
+            {/* Preferred channels */}
+            <div className="glass-card p-6">
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                Preferred channels
+              </h3>
+              <div className="space-y-3">
                 <motion.a
                   href="https://github.com/Kronbii"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-2xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-dark-text"
+                  className="flex items-center justify-between rounded-xl glass p-4 hover:bg-white/5 dark:hover:bg-white/5 transition-colors group"
                   whileHover={{ x: 4 }}
                 >
-                  <div className="flex items-center space-x-3">
-                    <FiGithub size={22} />
-                    <span>GitHub</span>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+                      <FiGithub size={20} className="text-slate-900 dark:text-white" />
+                    </div>
+                    <span className="font-medium text-slate-900 dark:text-white">GitHub</span>
                   </div>
-                  <span className="text-sm text-dark-text2">Case studies</span>
+                  <span className="text-sm text-slate-500 dark:text-slate-400 group-hover:text-gemini-500 transition-colors">
+                    Case studies →
+                  </span>
                 </motion.a>
+
                 <motion.a
                   href="https://www.linkedin.com/in/rami-kronbi/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-2xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-dark-text"
+                  className="flex items-center justify-between rounded-xl glass p-4 hover:bg-white/5 dark:hover:bg-white/5 transition-colors group"
                   whileHover={{ x: 4 }}
                 >
-                  <div className="flex items-center space-x-3">
-                    <FiLinkedin size={22} />
-                    <span>LinkedIn</span>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+                      <FiLinkedin size={20} className="text-slate-900 dark:text-white" />
+                    </div>
+                    <span className="font-medium text-slate-900 dark:text-white">LinkedIn</span>
                   </div>
-                  <span className="text-sm text-dark-text2">Professional updates</span>
+                  <span className="text-sm text-slate-500 dark:text-slate-400 group-hover:text-gemini-500 transition-colors">
+                    Connect →
+                  </span>
                 </motion.a>
+
                 <motion.a
                   href="mailto:ramykronby@gmail.com"
-                  className="flex items-center justify-between rounded-2xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-dark-text"
+                  className="flex items-center justify-between rounded-xl glass p-4 hover:bg-white/5 dark:hover:bg-white/5 transition-colors group"
                   whileHover={{ x: 4 }}
                 >
-                  <div className="flex items-center space-x-3">
-                    <FiMail size={22} />
-                    <span>ramykronby@gmail.com</span>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+                      <FiMail size={20} className="text-slate-900 dark:text-white" />
+                    </div>
+                    <span className="font-medium text-slate-900 dark:text-white">Email</span>
                   </div>
-                  <span className="text-sm text-dark-text2">Best for briefs</span>
+                  <span className="text-sm text-slate-500 dark:text-slate-400 group-hover:text-gemini-500 transition-colors">
+                    ramykronby@gmail.com
+                  </span>
                 </motion.a>
               </div>
             </div>

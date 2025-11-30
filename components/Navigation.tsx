@@ -1,23 +1,28 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion, useScroll, useSpring } from 'framer-motion'
-import { FiMenu, FiX, FiArrowUpRight } from 'react-icons/fi'
+import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion'
+import { FiMenu, FiX, FiSun, FiMoon } from 'react-icons/fi'
+import { useTheme } from 'next-themes'
 import { HoverButton } from '@/components/ui/hover-button'
 
 const navItems = [
-  { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
+  { name: 'Experience', href: '#experience' },
   { name: 'Projects', href: '#projects' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Services', href: '#services' },
+  { name: 'Community', href: '#community' },
   { name: 'Certifications', href: '#certifications' },
   { name: 'Contact', href: '#contact' },
 ]
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isHidden, setIsHidden] = useState(false)
+  const [lastScrollY, setLastScrollY] = useState(0)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+  const { theme, setTheme } = useTheme()
+  
   const { scrollYProgress } = useScroll()
   const scrollScale = useSpring(scrollYProgress, {
     stiffness: 120,
@@ -26,107 +31,194 @@ export default function Navigation() {
   })
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    setMounted(true)
   }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      
+      setIsScrolled(currentScrollY > 20)
+      
+      // Hide on scroll down, show on scroll up
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsHidden(true)
+      } else {
+        setIsHidden(false)
+      }
+      
+      setLastScrollY(currentScrollY)
+    }
+    
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [lastScrollY])
+
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark')
+  }
 
   return (
     <>
+      {/* Scroll progress indicator */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 origin-left bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 z-50"
-        style={{ scaleX: scrollScale }}
+        className="fixed top-0 left-0 right-0 h-[2px] origin-left z-50"
+        style={{ 
+          scaleX: scrollScale,
+          background: 'linear-gradient(90deg, #4285f4, #8b5cf6, #06b6d4)',
+        }}
       />
+      
+      {/* Navigation */}
       <motion.nav
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="fixed top-3 left-0 right-0 z-40"
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ 
+          y: isHidden ? -100 : 0, 
+          opacity: isHidden ? 0 : 1 
+        }}
+        transition={{ duration: 0.3, ease: 'easeInOut' }}
+        className="fixed top-4 left-0 right-0 z-40"
       >
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div
-            className={`flex items-center justify-between rounded-full border transition-all duration-300 ${
+            className={`flex items-center justify-between rounded-2xl transition-all duration-300 ${
               isScrolled || isMobileMenuOpen
-                ? 'border-white/15 bg-dark-surface/80 shadow-lg backdrop-blur-xl'
-                : 'border-white/5 bg-transparent'
-            } px-4 py-2`}
+                ? 'glass-card shadow-glass-lg'
+                : 'bg-transparent border-transparent'
+            } px-4 py-3`}
           >
+            {/* Logo */}
             <motion.a
               href="#home"
-              className="flex items-center space-x-2 text-lg font-semibold text-dark-text"
+              className="flex items-center gap-3 group"
               whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 text-white font-bold">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gemini-gradient text-white font-bold text-sm shadow-glow">
                 RK
               </span>
               <div className="hidden sm:block">
-                <p className="text-sm uppercase tracking-widest text-dark-text2">AI & CV Engineer</p>
-                <p className="-mt-1 text-base text-dark-text">Rami Kronbi</p>
+                <p className="text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 font-medium">
+                  AI & CV Engineer
+                </p>
+                <p className="text-sm font-semibold text-slate-900 dark:text-white -mt-0.5">
+                  Rami Kronbi
+                </p>
               </div>
             </motion.a>
 
-            <div className="hidden lg:flex items-center space-x-6">
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center gap-1">
               {navItems.map((item) => (
                 <motion.a
                   key={item.name}
                   href={item.href}
-                  className="text-sm font-semibold uppercase tracking-wide text-dark-text2 transition-colors hover:text-primary-400"
+                  className="relative px-4 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
                   whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   {item.name}
+                  <motion.span
+                    className="absolute bottom-0 left-1/2 h-0.5 bg-gemini-gradient rounded-full"
+                    initial={{ width: 0, x: '-50%' }}
+                    whileHover={{ width: '60%' }}
+                    transition={{ duration: 0.2 }}
+                  />
                 </motion.a>
               ))}
-              <span className="h-6 w-px bg-white/10" />
-              <HoverButton
-                href="#contact"
-                variant="outline"
-                className="group inline-flex items-center space-x-1 px-4 py-2 text-sm"
-              >
-                <span>Quick Call</span>
-                <FiArrowUpRight className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-              </HoverButton>
             </div>
 
-            <HoverButton
-              className="lg:hidden inline-flex h-12 w-12 items-center justify-center p-0"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle navigation"
-            >
-              {isMobileMenuOpen ? <FiX size={22} /> : <FiMenu size={22} />}
-            </HoverButton>
+            {/* Right side: Theme toggle + CTA */}
+            <div className="flex items-center gap-3">
+              {/* Theme toggle */}
+              {mounted && (
+                <motion.button
+                  onClick={toggleTheme}
+                  className="p-2.5 rounded-xl glass hover:bg-white/10 dark:hover:bg-white/5 transition-colors"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  aria-label="Toggle theme"
+                >
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={theme}
+                      initial={{ rotate: -90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: 90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {theme === 'dark' ? (
+                        <FiSun className="w-5 h-5 text-amber-400" />
+                      ) : (
+                        <FiMoon className="w-5 h-5 text-slate-600" />
+                      )}
+                    </motion.div>
+                  </AnimatePresence>
+                </motion.button>
+              )}
+
+              {/* Desktop CTA */}
+              <div className="hidden lg:block">
+                <HoverButton
+                  href="#contact"
+                  variant="gradient"
+                  className="px-5 py-2.5 text-sm font-medium"
+                >
+                  Let&apos;s Talk
+                </HoverButton>
+              </div>
+
+              {/* Mobile menu button */}
+              <motion.button
+                className="lg:hidden p-2.5 rounded-xl glass"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label="Toggle navigation"
+              >
+                {isMobileMenuOpen ? <FiX size={22} /> : <FiMenu size={22} />}
+              </motion.button>
+            </div>
           </div>
 
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="mt-3 rounded-3xl border border-white/10 bg-dark-surface/95 p-6 shadow-2xl backdrop-blur-xl lg:hidden"
-            >
-              <div className="space-y-4">
-                {navItems.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="block text-lg font-medium text-dark-text hover:text-primary-400"
+          {/* Mobile menu */}
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, height: 0, y: -20 }}
+                animate={{ opacity: 1, height: 'auto', y: 0 }}
+                exit={{ opacity: 0, height: 0, y: -20 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className="mt-3 rounded-2xl glass-card shadow-glass-lg overflow-hidden lg:hidden"
+              >
+                <div className="p-6 space-y-1">
+                  {navItems.map((item, index) => (
+                    <motion.a
+                      key={item.name}
+                      href={item.href}
+                      className="block px-4 py-3 text-lg font-medium text-slate-900 dark:text-white hover:text-gemini-500 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                    >
+                      {item.name}
+                    </motion.a>
+                  ))}
+                </div>
+                <div className="px-6 pb-6">
+                  <HoverButton
+                    href="#contact"
+                    variant="gradient"
+                    className="w-full justify-center"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    {item.name}
-                  </a>
-                ))}
-              </div>
-              <HoverButton
-                href="#contact"
-                variant="gradient"
-                className="mt-6 w-full"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Book Rami
-              </HoverButton>
-            </motion.div>
-          )}
+                    Let&apos;s Talk
+                  </HoverButton>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </motion.nav>
     </>
