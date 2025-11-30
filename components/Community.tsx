@@ -6,11 +6,9 @@ import { useRef, useState, useEffect } from 'react'
 import Image from 'next/image'
 import { FiMic, FiUsers, FiHeart, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 
-type CommunityType = 'all' | 'speaking' | 'leadership' | 'volunteering'
-
 interface CommunityItem {
   id: string
-  type: 'speaking' | 'leadership' | 'volunteering'
+  type: 'speaking' | 'leadership'
   title: string
   tagline: string
   image: string
@@ -20,26 +18,18 @@ interface CommunityItem {
 }
 
 const communityItems: CommunityItem[] = [
-  {
-    id: '1',
-    type: 'leadership',
-    title: 'NASA Space Apps Beirut',
-    tagline: 'Leading hackathons & innovation',
-    image: '/projects/project1.jpg', // Replace with actual images
-    imagePosition: 'center bottom',
-    date: '2023 - Present',
-  },
-  {
+    {
     id: '2',
     type: 'leadership',
-    title: 'National Physics Day',
-    tagline: 'Organized national STEM event',
-    image: '/projects/project2.jpg',
-    date: '2024',
+    title: 'NASA Space Apps Beirut',
+    tagline: 'Organizing the largest global hackathon - in Beirut',
+    image: '/projects/nasa-space-apps.jpeg',
+    imagePosition: '50% 50%',
+    date: '2022 - 2025',
   },
   {
     id: '3',
-    type: 'speaking',
+    type: 'leadership',
     title: 'Nasna',
     tagline: 'non-profit NGO that leverages data to help people during war crisis in Lebanon',
     image: '/projects/nasna.jpeg',
@@ -47,30 +37,14 @@ const communityItems: CommunityItem[] = [
     date: '2024',
     link: '#',
   },
-  {
+    {
     id: '4',
-    type: 'speaking',
-    title: 'Tech Meetup',
-    tagline: 'Building ML Systems at Scale',
-    image: '/projects/project1.jpg',
-    date: '2023',
-  },
-  {
-    id: '5',
-    type: 'volunteering',
-    title: 'Mentoring Program',
-    tagline: 'Guiding aspiring engineers',
-    image: '/projects/project2.jpg',
-    date: '2023 - Present',
-  },
-  {
-    id: '6',
-    type: 'volunteering',
-    title: 'Open Source',
-    tagline: 'Contributing to CV & ML tools',
-    image: '/projects/project3.jpg',
-    date: '2022 - Present',
-    link: '#',
+    type: 'leadership',
+    title: 'National Physics Day',
+    tagline: 'Organized national STEM event',
+    image: '/projects/physics-day-1.jpg',
+    imagePosition: '50% 35%',
+    date: '2024',
   },
 ]
 
@@ -88,13 +62,6 @@ const typeConfig = {
     color: 'text-secondary-400',
     bgColor: 'bg-secondary-500/10',
     borderColor: 'border-secondary-500/20',
-  },
-  volunteering: {
-    icon: <FiHeart size={20} />,
-    label: 'Volunteering',
-    color: 'text-accent-400',
-    bgColor: 'bg-accent-500/10',
-    borderColor: 'border-accent-500/20',
   },
 }
 
