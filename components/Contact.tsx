@@ -68,7 +68,7 @@ export default function Contact() {
     <section
       id="contact"
       ref={ref}
-      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8"
+      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 "
     >
       <div className="max-w-6xl mx-auto">
         <motion.h2
@@ -94,7 +94,7 @@ export default function Contact() {
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface2/80 p-8 backdrop-blur shadow-sm dark:shadow-none"
+            className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface2/80 p-8 backdrop-blur shadow-sm dark:shadow-none bg-light-surface/70"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
@@ -189,14 +189,14 @@ export default function Contact() {
               <p className="mt-4 text-light-text2 dark:text-dark-text2">Next kickoff: Dec 2025 · Replies within 24 hours.</p>
             </div>
 
-            <div className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-6">
+            <div className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-6 bg-light-surface/70">
               <h3 className="text-xl font-semibold text-light-text dark:text-dark-text mb-4">Preferred channels</h3>
               <div className="space-y-4">
                 <motion.a
                   href="https://github.com/Kronbii"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface/70 px-4 py-3 text-light-text dark:text-dark-text"
+                  className="flex items-center justify-between rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface/70 px-4 py-3 text-light-text dark:text-dark-text bg-light-surface/70"
                   whileHover={{ x: 4 }}
                 >
                   <div className="flex items-center space-x-3">
@@ -209,7 +209,7 @@ export default function Contact() {
                   href="https://www.linkedin.com/in/rami-kronbi/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface/70 px-4 py-3 text-light-text dark:text-dark-text"
+                  className="flex items-center justify-between rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface/70 px-4 py-3 text-light-text dark:text-dark-text bg-light-surface/70"
                   whileHover={{ x: 4 }}
                 >
                   <div className="flex items-center space-x-3">
@@ -220,14 +220,14 @@ export default function Contact() {
                 </motion.a>
                 <motion.a
                   href="mailto:ramykronby@gmail.com"
-                  className="flex items-center justify-between rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface/70 px-4 py-3 text-light-text dark:text-dark-text"
+                  className="flex items-center justify-between rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface/70 px-4 py-3 text-light-text dark:text-dark-text bg-light-surface/70"
                   whileHover={{ x: 4 }}
                 >
-                  <div className="flex items-center space-x-3">
+                  <div className="flex items-center space-x-3 ">
                     <FiMail size={22} />
                     <span>ramykronby@gmail.com</span>
                   </div>
-                  <span className="text-sm text-light-text2 dark:text-dark-text2">Best for briefs</span>
+                  <span className="text-sm text-light-text2 dark:text-dark-text2 ">Best for briefs</span>
                 </motion.a>
               </div>
             </div>
