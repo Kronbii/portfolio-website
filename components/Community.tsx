@@ -70,86 +70,141 @@ export default function Community() {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
   const isInView = useInView(ref, { once: true, amount: 0.1 })
-  const [currentIndex, setCurrentIndex] = useState(1)
-  const [canScrollLeft, setCanScrollLeft] = useState(true)
-  const [canScrollRight, setCanScrollRight] = useState(true)
+  const [currentIndex, setCurrentIndex] = useState(0)
 
-  const filteredItems = communityItems
+  // Create infinite loop by tripling the items
+  const extendedItems = [...communityItems, ...communityItems, ...communityItems]
+  const itemCount = communityItems.length
 
-  // Initialize scroll to middle card
+  // Initialize scroll to middle set (start at first card of middle set)
   useEffect(() => {
     if (!scrollContainerRef.current || cardsRef.current.length === 0) return
     
     const timer = setTimeout(() => {
       const container = scrollContainerRef.current
-      const firstCard = cardsRef.current[0]
-      if (!container || !firstCard) return
+      const startIndex = itemCount // First card of middle set
+      const startCard = cardsRef.current[startIndex]
+      if (!container || !startCard) return
       
-      const cardWidth = firstCard.offsetWidth
-      const gap = 24
-      const scrollPosition = (cardWidth + gap) * 1
-      
-      container.scrollLeft = scrollPosition
+      // Scroll to the middle set without animation
+      const cardCenter = startCard.offsetLeft + startCard.offsetWidth / 2
+      const containerCenter = container.offsetWidth / 2
+      container.scrollLeft = cardCenter - containerCenter
+      setCurrentIndex(startIndex)
     }, 150)
 
     return () => clearTimeout(timer)
-  }, [])
+  }, [itemCount])
 
-  const updateScrollButtons = () => {
+  const updateCurrentIndex = () => {
     if (!scrollContainerRef.current) return
     
-    const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current
-    setCanScrollLeft(scrollLeft > 10)
-    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10)
+    const container = scrollContainerRef.current
     
-    const firstCard = cardsRef.current[0]
-    if (firstCard) {
-      const cardWidth = firstCard.offsetWidth
-      const gap = 24
-      const newIndex = Math.round(scrollLeft / (cardWidth + gap))
-      setCurrentIndex(newIndex)
-    }
+    // Find which card is closest to the center of the viewport
+    const containerRect = container.getBoundingClientRect()
+    const containerCenter = containerRect.left + containerRect.width / 2
+    
+    let closestIndex = 0
+    let closestDistance = Infinity
+    
+    cardsRef.current.forEach((card, index) => {
+      if (!card) return
+      const cardRect = card.getBoundingClientRect()
+      const cardCenter = cardRect.left + cardRect.width / 2
+      const distance = Math.abs(containerCenter - cardCenter)
+      
+      if (distance < closestDistance) {
+        closestDistance = distance
+        closestIndex = index
+      }
+    })
+    
+    setCurrentIndex(closestIndex)
+  }
+
+  // Handle scroll events
+  const handleScroll = () => {
+    updateCurrentIndex()
   }
 
   useEffect(() => {
     const container = scrollContainerRef.current
     if (!container) return
 
-    updateScrollButtons()
-    container.addEventListener('scroll', updateScrollButtons)
-    window.addEventListener('resize', updateScrollButtons)
+    updateCurrentIndex()
+    container.addEventListener('scroll', handleScroll)
+    window.addEventListener('resize', updateCurrentIndex)
 
     return () => {
-      container.removeEventListener('scroll', updateScrollButtons)
-      window.removeEventListener('resize', updateScrollButtons)
+      container.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', updateCurrentIndex)
     }
-  }, [])
+  }, [itemCount])
 
-  const scrollToIndex = (index: number) => {
-    if (!scrollContainerRef.current) return
+  const scrollToIndex = (index: number, instant = false) => {
+    const container = scrollContainerRef.current
+    const targetCard = cardsRef.current[index]
+    if (!container || !targetCard) return
     
-    const firstCard = cardsRef.current[0]
-    if (!firstCard) return
+    const containerRect = container.getBoundingClientRect()
+    const cardRect = targetCard.getBoundingClientRect()
     
-    const cardWidth = firstCard.offsetWidth
-    const gap = 24
-    scrollContainerRef.current.scrollTo({
-      left: index * (cardWidth + gap),
-      behavior: 'smooth',
+    // Calculate scroll position to center the card
+    const cardCenter = targetCard.offsetLeft + cardRect.width / 2
+    const containerCenter = containerRect.width / 2
+    const scrollPosition = cardCenter - containerCenter
+    
+    container.scrollTo({
+      left: scrollPosition,
+      behavior: instant ? 'instant' : 'smooth',
     })
+    
+    setCurrentIndex(index)
   }
 
-  const scrollLeft = () => {
-    if (currentIndex > 0) {
+  const handleScrollLeft = () => {
+    const container = scrollContainerRef.current
+    if (!container) return
+    
+    // If we're at or near the start of middle set, instantly jump to end of middle set first
+    if (currentIndex <= itemCount) {
+      // Jump to equivalent position in the LAST set (instantly, no animation)
+      const jumpToIndex = currentIndex + itemCount
+      scrollToIndex(jumpToIndex, true)
+      
+      // Then smoothly scroll left to the previous card
+      requestAnimationFrame(() => {
+        scrollToIndex(jumpToIndex - 1)
+      })
+    } else {
+      // Normal scroll left
       scrollToIndex(currentIndex - 1)
     }
   }
 
-  const scrollRight = () => {
-    if (currentIndex < filteredItems.length - 1) {
+  const handleScrollRight = () => {
+    const container = scrollContainerRef.current
+    if (!container) return
+    
+    // If we're at or near the end of middle set, instantly jump to start of middle set first
+    if (currentIndex >= itemCount * 2 - 1) {
+      // Jump to equivalent position in the FIRST set (instantly, no animation)
+      const jumpToIndex = currentIndex - itemCount
+      scrollToIndex(jumpToIndex, true)
+      
+      // Then smoothly scroll right to the next card
+      requestAnimationFrame(() => {
+        scrollToIndex(jumpToIndex + 1)
+      })
+    } else {
+      // Normal scroll right
       scrollToIndex(currentIndex + 1)
     }
   }
+
+  // Get the actual index in the original array for pagination dots
+  const actualIndex = ((currentIndex % itemCount) + itemCount) % itemCount
 
   return (
     <section
@@ -181,22 +236,27 @@ export default function Community() {
         {/* Scrollable Cards */}
         <div
           ref={scrollContainerRef}
-          className="overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8"
+          className="overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-8"
         >
-          <div className="flex gap-6">
-            {filteredItems.map((item, index) => {
+          <div className="flex gap-6 items-center">
+            {extendedItems.map((item, index) => {
               const config = typeConfig[item.type]
+              const isCentered = index === currentIndex
               return (
                 <motion.div
-                  key={item.id}
+                  key={`${item.id}-${index}`}
                   ref={(el) => {
                     cardsRef.current[index] = el
                   }}
                   initial={{ opacity: 0, y: 30 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="group relative overflow-hidden rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-white/[0.03] backdrop-blur flex-shrink-0 w-[75%] sm:w-[55%] lg:w-[38%] xl:w-[32%] snap-center shadow-sm dark:shadow-none"
-                  whileHover={{ y: -4 }}
+                  animate={isInView ? { opacity: 1, y: isCentered ? -16 : 0, scale: isCentered ? 1.03 : 1 } : {}}
+                  transition={{ duration: 0.15 }}
+                  className={`group relative overflow-hidden rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-white/[0.03] backdrop-blur flex-shrink-0 w-[75%] sm:w-[55%] lg:w-[38%] xl:w-[32%] snap-center transition-all duration-75 ${
+                    isCentered 
+                      ? 'shadow-xl dark:shadow-2xl shadow-primary-500/10 dark:shadow-primary-500/20 -translate-y-4 scale-[1.03] z-10' 
+                      : 'shadow-sm dark:shadow-none'
+                  }`}
+                  whileHover={{ y: isCentered ? -20 : -4 }}
                 >
                   {/* Image */}
                   <div className="relative h-64 sm:h-72 overflow-hidden">
@@ -241,20 +301,19 @@ export default function Community() {
         {/* Navigation Buttons */}
         <div className="flex justify-center items-center gap-4 mt-8">
           <button
-            onClick={scrollLeft}
-            disabled={!canScrollLeft}
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-light-text dark:text-dark-text hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-light-border/50 dark:disabled:hover:border-white/15 disabled:hover:text-light-text dark:disabled:hover:text-dark-text disabled:hover:bg-light-surface2/50 dark:disabled:hover:bg-white/10"
+            onClick={handleScrollLeft}
+            className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-light-text dark:text-dark-text hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
             aria-label="Previous"
           >
             <FiChevronLeft size={20} />
           </button>
           <div className="flex gap-1.5">
-            {filteredItems.map((_, index) => (
+            {communityItems.map((_, index) => (
               <button
                 key={index}
-                onClick={() => scrollToIndex(index)}
+                onClick={() => scrollToIndex(itemCount + index)}
                 className={`h-2 rounded-full transition-all ${
-                  index === currentIndex
+                  index === actualIndex
                     ? 'w-8 bg-primary-500'
                     : 'w-2 bg-light-border dark:bg-white/20 hover:bg-light-text2/30 dark:hover:bg-white/30'
                 }`}
@@ -263,9 +322,8 @@ export default function Community() {
             ))}
           </div>
           <button
-            onClick={scrollRight}
-            disabled={!canScrollRight}
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-light-text dark:text-dark-text hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-light-border/50 dark:disabled:hover:border-white/15 disabled:hover:text-light-text dark:disabled:hover:text-dark-text disabled:hover:bg-light-surface2/50 dark:disabled:hover:bg-white/10"
+            onClick={handleScrollRight}
+            className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-light-text dark:text-dark-text hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
             aria-label="Next"
           >
             <FiChevronRight size={20} />
