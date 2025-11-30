@@ -38,8 +38,8 @@ const communityItems: CommunityItem[] = [
   {
     id: '3',
     type: 'speaking',
-    title: 'DevFest Talk',
-    tagline: 'AI & Computer Vision in Production',
+    title: 'Nasna',
+    tagline: '',
     image: '/projects/project3.jpg',
     date: '2024',
     link: '#',
@@ -100,15 +100,11 @@ export default function Community() {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
   const isInView = useInView(ref, { once: true, amount: 0.1 })
-  const [activeFilter, setActiveFilter] = useState<CommunityType>('all')
   const [currentIndex, setCurrentIndex] = useState(1)
   const [canScrollLeft, setCanScrollLeft] = useState(true)
   const [canScrollRight, setCanScrollRight] = useState(true)
 
-  const filteredItems =
-    activeFilter === 'all'
-      ? communityItems
-      : communityItems.filter((item) => item.type === activeFilter)
+  const filteredItems = communityItems
 
   // Initialize scroll to middle card
   useEffect(() => {
@@ -127,7 +123,7 @@ export default function Community() {
     }, 150)
 
     return () => clearTimeout(timer)
-  }, [activeFilter])
+  }, [])
 
   const updateScrollButtons = () => {
     if (!scrollContainerRef.current) return
@@ -157,7 +153,7 @@ export default function Community() {
       container.removeEventListener('scroll', updateScrollButtons)
       window.removeEventListener('resize', updateScrollButtons)
     }
-  }, [activeFilter])
+  }, [])
 
   const scrollToIndex = (index: number) => {
     if (!scrollContainerRef.current) return
@@ -211,36 +207,6 @@ export default function Community() {
             Building Beyond <span className="text-gradient">Code</span>
           </motion.h2>
         </div>
-
-        {/* Filter Tabs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-3 mb-8"
-        >
-          {(['all', 'speaking', 'leadership', 'volunteering'] as CommunityType[]).map((type) => {
-            const config = type === 'all' ? null : typeConfig[type]
-            return (
-              <button
-                key={type}
-                onClick={() => setActiveFilter(type)}
-                className={`px-6 py-2.5 rounded-full border backdrop-blur-lg transition-all ${
-                  activeFilter === type
-                    ? 'border-white/20 bg-white/10 text-dark-text'
-                    : 'border-white/10 bg-white/5 text-dark-text2 hover:border-white/15 hover:bg-white/8'
-                }`}
-              >
-                <div className="flex items-center gap-2">
-                  {config && config.icon}
-                  <span className="text-sm font-medium capitalize">
-                    {type === 'all' ? 'All' : config?.label}
-                  </span>
-                </div>
-              </button>
-            )
-          })}
-        </motion.div>
 
         {/* Scrollable Cards */}
         <div
