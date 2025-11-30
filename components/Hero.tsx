@@ -192,24 +192,7 @@ function HeroPortrait({
           <span className="text-[9px] uppercase tracking-[0.35em] text-white/80">Fun fact</span>
         </div>
         <p className="mt-2 text-sm font-semibold leading-snug text-white/90">
-          Born to explore space, forced to C++
-        </p>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
-        className="absolute -right-2 bottom-4 sm:-right-4 sm:bottom-6 lg:-right-6 lg:bottom-6 w-36 sm:w-48 rounded-2xl border border-white/25 bg-gradient-to-br from-white/10 to-white/5 p-3 shadow-[0_8px_22px_rgba(3,105,161,0.35)] backdrop-blur-2xl"
-      >
-        <div className="flex items-center gap-2 text-secondary-200">
-          <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-secondary-500/30 text-secondary-50">
-            <FiWind size={16} />
-          </span>
-          <span className="text-[9px] uppercase tracking-[0.35em] text-white/80">Alter ego</span>
-        </div>
-        <p className="mt-2 text-sm font-semibold leading-snug text-white/90">
-          An engineer? a pilot? idk
+          Born to C space, forced to C++
         </p>
       </motion.div>
     </div>

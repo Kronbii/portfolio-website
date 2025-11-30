@@ -9,8 +9,8 @@ const navItems = [
   { name: 'About', href: '#about' },
   { name: 'Experience', href: '#projects' },
   { name: 'Community', href: '#community' },
-  { name: 'Services', href: '#services' },
   { name: 'Certifications', href: '#certifications' },
+  { name: 'Services', href: '#services' },
 ]
 
 export default function Navigation() {
@@ -56,11 +56,7 @@ export default function Navigation() {
               className="flex items-center space-x-2 text-lg font-semibold text-dark-text"
               whileHover={{ scale: 1.02 }}
             >
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 text-white font-bold">
-                RK
-              </span>
               <div className="hidden sm:block">
-                <p className="text-sm uppercase tracking-widest text-dark-text2">AI & CV Engineer</p>
                 <p className="-mt-1 text-base text-dark-text">Rami Kronbi</p>
               </div>
             </motion.a>
