@@ -10,11 +10,11 @@ interface BaseHoverButtonProps {
   variant?: "default" | "gradient" | "outline"
 }
 
-interface ButtonProps extends BaseHoverButtonProps, React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends BaseHoverButtonProps, Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   href?: never
 }
 
-interface LinkProps extends BaseHoverButtonProps, React.AnchorHTMLAttributes<HTMLAnchorElement> {
+interface LinkProps extends BaseHoverButtonProps, Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'children'> {
   href: string
 }
 
@@ -22,7 +22,7 @@ type HoverButtonProps = ButtonProps | LinkProps
 
 const HoverButton = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, HoverButtonProps>(
   ({ className, children, variant = "default", ...props }, ref) => {
-    const buttonRef = React.useRef<HTMLButtonElement | HTMLAnchorElement>(null)
+    const buttonRef = React.useRef<HTMLButtonElement | HTMLAnchorElement | null>(null) as React.MutableRefObject<HTMLButtonElement | HTMLAnchorElement | null>
     const isLink = 'href' in props
     const [isListening, setIsListening] = React.useState(false)
     

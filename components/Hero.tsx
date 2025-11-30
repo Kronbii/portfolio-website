@@ -14,8 +14,6 @@ import Image from 'next/image'
 import { useState, type Dispatch, type SetStateAction } from 'react'
 import { HoverButton } from '@/components/ui/hover-button'
 
-const heroMetrics = [
-]
 
 export default function Hero() {
   const [imageError, setImageError] = useState(false)
@@ -71,21 +69,6 @@ export default function Hero() {
                   View portfolio
                 </HoverButton>
               </motion.div>
-
-              <div className="grid grid-cols-3 gap-3 sm:max-w-md">
-                {heroMetrics.map((metric) => (
-                  <motion.div
-                    key={metric.label}
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                    className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-center"
-                  >
-                    <p className="text-2xl sm:text-3xl font-semibold text-gradient">{metric.value}</p>
-                    <p className="text-xs uppercase tracking-wide text-dark-text2">{metric.label}</p>
-                  </motion.div>
-                ))}
-              </div>
 
               <div className="flex flex-wrap items-center gap-6 pt-2">
                 <div className="flex space-x-4 text-lg">
