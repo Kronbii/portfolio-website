@@ -6,13 +6,11 @@ import { FiMenu, FiX, FiArrowUpRight } from 'react-icons/fi'
 import { HoverButton } from '@/components/ui/hover-button'
 
 const navItems = [
-  { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Skills', href: '#skills' },
+  { name: 'Experience', href: '#projects' },
+  { name: 'Community', href: '#community' },
   { name: 'Services', href: '#services' },
   { name: 'Certifications', href: '#certifications' },
-  { name: 'Contact', href: '#contact' },
 ]
 
 export default function Navigation() {

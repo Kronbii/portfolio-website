@@ -31,16 +31,10 @@ const skillCategories: SkillCategory[] = [
     confidence: 90,
   },
   {
-    category: 'Product & Delivery Leadership',
+    category: 'Product Leadership & Collaboration Tools',
     tagline: 'Google PM-certified planning, stakeholder alignment, agile execution.',
-    skills: ['Agile & Scrum', 'Roadmapping', 'Risk modeling', 'Team coaching', 'Executive comms'],
-    confidence: 93,
-  },
-  {
-    category: 'Tools & Collaboration Stack',
-    tagline: 'Infra that keeps work transparent, versioned, and observable.',
-    skills: ['Git / GitHub', 'Docker', 'Linux', 'Notion & Miro', 'JIRA / Linear'],
-    confidence: 88,
+    skills: ['Agile & Scrum', 'Roadmapping', 'Git / GitHub', 'Docker', 'Linux'],
+    confidence: 91,
   },
 ]
 
