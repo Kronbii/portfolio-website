@@ -21,7 +21,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden pt-28 pb-20"
+      className="relative overflow-hidden min-h-screen flex flex-col justify-center pt-20 pb-12"
     >
       <div className="pointer-events-none absolute inset-0">
         <motion.div
@@ -101,6 +101,42 @@ export default function Hero() {
           </div>
         </div>
       </div>
+
+      {/* Scroll to explore indicator */}
+      <motion.a
+        href="#about"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1 }}
+        className="absolute bottom-6 left-0 right-0 flex flex-col items-center gap-3 cursor-pointer group"
+      >
+        <span className="text-[10px] uppercase tracking-[0.25em] ml-[0.25em] text-light-text2/70 dark:text-dark-text2/70 group-hover:text-primary-500 transition-colors">
+          Scroll
+        </span>
+        <motion.div
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <svg
+            width="20"
+            height="28"
+            viewBox="0 0 20 28"
+            fill="none"
+            className="text-light-text2/50 dark:text-dark-text2/50 group-hover:text-primary-500 transition-colors"
+          >
+            <rect x="1" y="1" width="18" height="26" rx="9" stroke="currentColor" strokeWidth="1.5" />
+            <motion.circle
+              cx="10"
+              cy="8"
+              r="2.5"
+              fill="currentColor"
+              animate={{ cy: [8, 14, 8] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="fill-primary-500"
+            />
+          </svg>
+        </motion.div>
+      </motion.a>
     </section>
   )
 }

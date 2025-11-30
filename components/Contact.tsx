@@ -68,7 +68,7 @@ export default function Contact() {
     <section
       id="contact"
       ref={ref}
-      className="py-24 px-4 sm:px-6 lg:px-8"
+      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8"
     >
       <div className="max-w-6xl mx-auto">
         <motion.h2

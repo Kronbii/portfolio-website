@@ -19,7 +19,7 @@ export default function About() {
     <section
       id="about"
       ref={ref}
-      className="py-20 px-4 sm:px-6 lg:px-12 bg-light-surface/70 dark:bg-dark-surface/70"
+      className="relative min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-12 bg-light-surface/70 dark:bg-dark-surface/70"
     >
       <div className="max-w-6xl mx-auto grid gap-12 lg:grid-cols-[1fr_1fr] items-start">
         {/* Left side - Text content */}
@@ -64,6 +64,42 @@ export default function About() {
           ))}
         </motion.div>
       </div>
+
+      {/* Scroll to explore indicator */}
+      <motion.a
+        href="#experience"
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 1, delay: 0.8 }}
+        className="absolute bottom-6 left-0 right-0 flex flex-col items-center gap-3 cursor-pointer group"
+      >
+        <span className="text-[10px] uppercase tracking-[0.25em] ml-[0.25em] text-light-text2/70 dark:text-dark-text2/70 group-hover:text-primary-500 transition-colors">
+          Scroll
+        </span>
+        <motion.div
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <svg
+            width="20"
+            height="28"
+            viewBox="0 0 20 28"
+            fill="none"
+            className="text-light-text2/50 dark:text-dark-text2/50 group-hover:text-primary-500 transition-colors"
+          >
+            <rect x="1" y="1" width="18" height="26" rx="9" stroke="currentColor" strokeWidth="1.5" />
+            <motion.circle
+              cx="10"
+              cy="8"
+              r="2.5"
+              fill="currentColor"
+              animate={{ cy: [8, 14, 8] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="fill-primary-500"
+            />
+          </svg>
+        </motion.div>
+      </motion.a>
     </section>
   )
 }
