@@ -6,7 +6,6 @@ import Skills from '@/components/Skills'
 import Services from '@/components/Services'
 import Community from '@/components/Community'
 import Certifications from '@/components/Certifications'
-import Standout from '@/components/Standout'
 import Contact from '@/components/Contact'
 
 export default function Home() {
