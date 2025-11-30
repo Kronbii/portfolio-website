@@ -71,6 +71,9 @@ export default function Community() {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
   const isInView = useInView(ref, { once: true, amount: 0.1 })
   const [currentIndex, setCurrentIndex] = useState(0)
+  const touchStartRef = useRef<number>(0)
+  const touchEndRef = useRef<number>(0)
+  const isAnimatingRef = useRef(false)
 
   // Create infinite loop by tripling the items
   const extendedItems = [...communityItems, ...communityItems, ...communityItems]
@@ -123,9 +126,80 @@ export default function Community() {
     setCurrentIndex(closestIndex)
   }
 
-  // Handle scroll events
-  const handleScroll = () => {
-    updateCurrentIndex()
+  // Handle touch events for swipe detection
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartRef.current = e.touches[0].clientX
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndRef.current = e.touches[0].clientX
+  }
+
+  const handleTouchEnd = () => {
+    if (isAnimatingRef.current) return
+    
+    const swipeDistance = touchStartRef.current - touchEndRef.current
+    const minSwipeDistance = 50 // Minimum swipe distance to trigger navigation
+    
+    if (Math.abs(swipeDistance) > minSwipeDistance) {
+      if (swipeDistance > 0) {
+        // Swiped left = go right (next)
+        navigateRight()
+      } else {
+        // Swiped right = go left (previous)
+        navigateLeft()
+      }
+    }
+  }
+
+  const navigateLeft = () => {
+    if (isAnimatingRef.current) return
+    isAnimatingRef.current = true
+    
+    const container = scrollContainerRef.current
+    if (!container) {
+      isAnimatingRef.current = false
+      return
+    }
+    
+    // If we're at or near the start of middle set, instantly jump to end of middle set first
+    if (currentIndex <= itemCount) {
+      const jumpToIndex = currentIndex + itemCount
+      scrollToIndex(jumpToIndex, true)
+      
+      requestAnimationFrame(() => {
+        scrollToIndex(jumpToIndex - 1)
+        setTimeout(() => { isAnimatingRef.current = false }, 400)
+      })
+    } else {
+      scrollToIndex(currentIndex - 1)
+      setTimeout(() => { isAnimatingRef.current = false }, 400)
+    }
+  }
+
+  const navigateRight = () => {
+    if (isAnimatingRef.current) return
+    isAnimatingRef.current = true
+    
+    const container = scrollContainerRef.current
+    if (!container) {
+      isAnimatingRef.current = false
+      return
+    }
+    
+    // If we're at or near the end of middle set, instantly jump to start of middle set first
+    if (currentIndex >= itemCount * 2 - 1) {
+      const jumpToIndex = currentIndex - itemCount
+      scrollToIndex(jumpToIndex, true)
+      
+      requestAnimationFrame(() => {
+        scrollToIndex(jumpToIndex + 1)
+        setTimeout(() => { isAnimatingRef.current = false }, 400)
+      })
+    } else {
+      scrollToIndex(currentIndex + 1)
+      setTimeout(() => { isAnimatingRef.current = false }, 400)
+    }
   }
 
   useEffect(() => {
@@ -133,11 +207,9 @@ export default function Community() {
     if (!container) return
 
     updateCurrentIndex()
-    container.addEventListener('scroll', handleScroll)
     window.addEventListener('resize', updateCurrentIndex)
 
     return () => {
-      container.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', updateCurrentIndex)
     }
   }, [itemCount])
@@ -164,43 +236,11 @@ export default function Community() {
   }
 
   const handleScrollLeft = () => {
-    const container = scrollContainerRef.current
-    if (!container) return
-    
-    // If we're at or near the start of middle set, instantly jump to end of middle set first
-    if (currentIndex <= itemCount) {
-      // Jump to equivalent position in the LAST set (instantly, no animation)
-      const jumpToIndex = currentIndex + itemCount
-      scrollToIndex(jumpToIndex, true)
-      
-      // Then smoothly scroll left to the previous card
-      requestAnimationFrame(() => {
-        scrollToIndex(jumpToIndex - 1)
-      })
-    } else {
-      // Normal scroll left
-      scrollToIndex(currentIndex - 1)
-    }
+    navigateLeft()
   }
 
   const handleScrollRight = () => {
-    const container = scrollContainerRef.current
-    if (!container) return
-    
-    // If we're at or near the end of middle set, instantly jump to start of middle set first
-    if (currentIndex >= itemCount * 2 - 1) {
-      // Jump to equivalent position in the FIRST set (instantly, no animation)
-      const jumpToIndex = currentIndex - itemCount
-      scrollToIndex(jumpToIndex, true)
-      
-      // Then smoothly scroll right to the next card
-      requestAnimationFrame(() => {
-        scrollToIndex(jumpToIndex + 1)
-      })
-    } else {
-      // Normal scroll right
-      scrollToIndex(currentIndex + 1)
-    }
+    navigateRight()
   }
 
   // Get the actual index in the original array for pagination dots
@@ -236,9 +276,13 @@ export default function Community() {
         {/* Scrollable Cards */}
         <div
           ref={scrollContainerRef}
-          className="overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-8"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-x-scroll scrollbar-hide py-8 touch-none"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          <div className="flex gap-6 items-center">
+          <div className="flex gap-4 sm:gap-6 px-4 sm:px-6 lg:px-[calc((100vw-72rem)/2+1.5rem)] items-center w-max">
             {extendedItems.map((item, index) => {
               const config = typeConfig[item.type]
               const isCentered = index === currentIndex
@@ -251,7 +295,7 @@ export default function Community() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: isCentered ? -16 : 0, scale: isCentered ? 1.03 : 1 } : {}}
                   transition={{ duration: 0.15 }}
-                  className={`group relative overflow-hidden rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-white/[0.03] backdrop-blur flex-shrink-0 w-[75%] sm:w-[55%] lg:w-[38%] xl:w-[32%] snap-center transition-all duration-75 ${
+                  className={`group relative overflow-hidden rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-white/[0.03] backdrop-blur flex-shrink-0 w-[280px] sm:w-[320px] lg:w-[380px] transition-all duration-75 ${
                     isCentered 
                       ? 'shadow-xl dark:shadow-2xl shadow-primary-500/10 dark:shadow-primary-500/20 -translate-y-4 scale-[1.03] z-10' 
                       : 'shadow-sm dark:shadow-none'
