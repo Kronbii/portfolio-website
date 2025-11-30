@@ -82,7 +82,7 @@ export default function Hero() {
                       href={item.href}
                       target={item.title === 'Email' ? undefined : '_blank'}
                       rel={item.title === 'Email' ? undefined : 'noopener noreferrer'}
-                      className="flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/5 text-dark-text hover:border-primary-500/60 hover:text-primary-300 transition-colors"
+                      className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/5 text-light-text dark:text-dark-text hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 transition-colors"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       title={item.title}
@@ -112,7 +112,7 @@ function IntroSection() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="inline-flex items-center space-x-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.3em] text-dark-text2"
+        className="inline-flex items-center space-x-3 rounded-full border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.3em] text-light-text2 dark:text-dark-text2"
       >
         <span className="relative flex h-2.5 w-2.5">
           <span className="absolute inline-flex h-full w-full rounded-full bg-primary-500 opacity-75 animate-ping"></span>
@@ -135,7 +135,7 @@ function IntroSection() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.05 }}
-          className="text-sm uppercase tracking-[0.3em] text-dark-text2"
+          className="text-sm uppercase tracking-[0.3em] text-light-text2 dark:text-dark-text2"
         >
           AI & Computer Vision Engineer · Founder, EVOID
         </motion.p>
@@ -157,9 +157,9 @@ function HeroPortrait({
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8 }}
-        className="relative rounded-[32px] border border-white/10 bg-gradient-to-b from-white/10 to-white/0 p-4 backdrop-blur-xl"
+        className="relative rounded-[32px] border border-light-border/50 dark:border-white/10 bg-gradient-to-b from-light-surface2/50 dark:from-white/10 to-transparent p-4 backdrop-blur-xl"
       >
-        <div className="relative h-[420px] rounded-[28px] bg-dark-surface2/80 overflow-hidden flex items-center justify-center">
+        <div className="relative h-[420px] rounded-[28px] bg-light-surface2/80 dark:bg-dark-surface2/80 overflow-hidden flex items-center justify-center">
           {!imageError ? (
             <Image
               src="/profile.jpg"
@@ -172,10 +172,10 @@ function HeroPortrait({
           ) : (
             <div className="flex flex-col items-center justify-center text-primary-500 space-y-2">
               <span className="text-6xl font-semibold">RK</span>
-              <p className="text-sm text-dark-text2">Add a portrait</p>
+              <p className="text-sm text-light-text2 dark:text-dark-text2">Add a portrait</p>
             </div>
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-dark-surface2 via-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-light-surface2 dark:from-dark-surface2 via-transparent" />
         </div>
       </motion.div>
 
@@ -183,15 +183,15 @@ function HeroPortrait({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="absolute -left-2 top-4 sm:-left-5 sm:top-6 lg:-left-6 lg:top-8 w-36 sm:w-44 lg:w-48 rounded-2xl border border-white/25 bg-white/10 p-3 shadow-[0_6px_18px_rgba(0,0,0,0.35)] backdrop-blur-2xl"
+        className="absolute -left-2 top-4 sm:-left-5 sm:top-6 lg:-left-6 lg:top-8 w-36 sm:w-44 lg:w-48 rounded-2xl border border-light-border/50 dark:border-white/25 bg-light-surface/90 dark:bg-white/10 p-3 shadow-[0_6px_18px_rgba(0,0,0,0.15)] dark:shadow-[0_6px_18px_rgba(0,0,0,0.35)] backdrop-blur-2xl"
       >
-        <div className="flex items-center gap-2 text-primary-200">
-          <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-primary-500/25 text-primary-100">
+        <div className="flex items-center gap-2 text-primary-600 dark:text-primary-200">
+          <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-primary-500/20 dark:bg-primary-500/25 text-primary-600 dark:text-primary-100">
             <FiCompass size={16} />
           </span>
-          <span className="text-[9px] uppercase tracking-[0.35em] text-white/80">Fun fact</span>
+          <span className="text-[9px] uppercase tracking-[0.35em] text-light-text2 dark:text-white/80">Fun fact</span>
         </div>
-        <p className="mt-2 text-sm font-semibold leading-snug text-white/90">
+        <p className="mt-2 text-sm font-semibold leading-snug text-light-text dark:text-white/90">
           Born to C space, forced to C++
         </p>
       </motion.div>

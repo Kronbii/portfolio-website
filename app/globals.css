@@ -4,41 +4,32 @@
 
 @layer base {
   :root {
-    color-scheme: dark;
+    color-scheme: light dark;
   }
 
-  body {
+  /* Dark theme (default) */
+  .dark body {
     @apply text-dark-text antialiased;
     font-family: var(--font-sans), 'Space Grotesk', 'Inter', sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
 
-    /* Darker deep-blue base */
     background-color: #08090c;
 
     background-image:
-      /* Darker brand blue glow (top-left) */
       radial-gradient(circle at 20% 20%, rgba(49,134,255,0.13), transparent 55%),
-
-      /* Darker cool blue transition (top-right) */
       radial-gradient(circle at 80% 0%, rgba(52,107,241,0.12), transparent 60%),
-
-      /* Darker soft blue (bottom center) */
       radial-gradient(circle at 50% 85%, rgba(79,160,255,0.10), transparent 55%),
-
-      /* Deeper vertical gradient for atmosphere */
       linear-gradient(180deg, #07080b 0%, #0b0d11 50%, #07080b 100%);
 
     background-attachment: fixed;
   }
 
-  body::before {
+  .dark body::before {
     content: '';
     position: fixed;
     inset: 0;
-
-    /* Softer grid so it doesn’t overpower the darker base */
     background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
     background-size: 60px 60px;
     opacity: 0.22;
@@ -46,21 +37,64 @@
     z-index: -1;
   }
 
-  body::after {
+  .dark body::after {
     content: '';
     position: fixed;
     inset: 0;
-
-    /* Softened the diagonal line color */
     background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" fill="none"%3E%3Cpath d="M0 160L160 0" stroke="rgba(79,160,255,0.035)"/%3E%3C/svg%3E');
     opacity: 0.18;
     pointer-events: none;
     z-index: -1;
   }
 
-  ::selection {
+  .dark ::selection {
     background: rgba(49,134,255,0.3);
     color: #f8fafc;
+  }
+
+  /* Light theme */
+  .light body {
+    @apply text-light-text antialiased;
+    font-family: var(--font-sans), 'Space Grotesk', 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+
+    background-color: #f8fafc;
+
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(49,134,255,0.08), transparent 55%),
+      radial-gradient(circle at 80% 0%, rgba(52,107,241,0.06), transparent 60%),
+      radial-gradient(circle at 50% 85%, rgba(79,160,255,0.05), transparent 55%),
+      linear-gradient(180deg, #ffffff 0%, #f1f5f9 50%, #ffffff 100%);
+
+    background-attachment: fixed;
+  }
+
+  .light body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .light body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" fill="none"%3E%3Cpath d="M0 160L160 0" stroke="rgba(49,134,255,0.06)"/%3E%3C/svg%3E');
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .light ::selection {
+    background: rgba(49,134,255,0.2);
+    color: #1e293b;
   }
 }
 
@@ -69,6 +103,7 @@
   .text-balance {
     text-wrap: balance;
   }
+  
   .text-gradient {
     background-image: linear-gradient(
       90deg,
@@ -108,22 +143,57 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  /* Theme-aware text colors */
+  .theme-text {
+    @apply text-light-text dark:text-dark-text;
+  }
+  .theme-text2 {
+    @apply text-light-text2 dark:text-dark-text2;
+  }
+  .theme-bg {
+    @apply bg-light-bg dark:bg-dark-bg;
+  }
+  .theme-surface {
+    @apply bg-light-surface dark:bg-dark-surface;
+  }
+  .theme-surface2 {
+    @apply bg-light-surface2 dark:bg-dark-surface2;
+  }
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
+/* Custom scrollbar - Dark */
+.dark ::-webkit-scrollbar {
   width: 10px;
 }
 
-::-webkit-scrollbar-track {
+.dark ::-webkit-scrollbar-track {
   background: #0a0a0a;
 }
 
-::-webkit-scrollbar-thumb {
+.dark ::-webkit-scrollbar-thumb {
   background: #3186ff;
   border-radius: 5px;
 }
 
-::-webkit-scrollbar-thumb:hover {
+.dark ::-webkit-scrollbar-thumb:hover {
   background: #346bf1;
+}
+
+/* Custom scrollbar - Light */
+.light ::-webkit-scrollbar {
+  width: 10px;
+}
+
+.light ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.light ::-webkit-scrollbar-thumb {
+  background: #3186ff;
+  border-radius: 5px;
+}
+
+.light ::-webkit-scrollbar-thumb:hover {
+  background: #2a6fd6;
 }

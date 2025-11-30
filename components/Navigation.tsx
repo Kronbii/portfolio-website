@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import { motion, useScroll, useSpring } from 'framer-motion'
-import { FiMenu, FiX, FiArrowUpRight } from 'react-icons/fi'
+import { FiMenu, FiX, FiArrowUpRight, FiSun, FiMoon } from 'react-icons/fi'
 import { HoverButton } from '@/components/ui/hover-button'
+import { useTheme } from 'next-themes'
 
 const navItems = [
   { name: 'About', href: '#about' },
@@ -16,6 +17,8 @@ const navItems = [
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+  const { theme, setTheme, resolvedTheme } = useTheme()
   const { scrollYProgress } = useScroll()
   const scrollScale = useSpring(scrollYProgress, {
     stiffness: 120,
@@ -24,12 +27,20 @@ export default function Navigation() {
   })
 
   useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  const toggleTheme = () => {
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
+  }
 
   return (
     <>
@@ -47,17 +58,17 @@ export default function Navigation() {
           <div
             className={`flex items-center justify-between rounded-full border transition-all duration-300 ${
               isScrolled || isMobileMenuOpen
-                ? 'border-white/15 bg-dark-surface/80 shadow-lg backdrop-blur-xl'
-                : 'border-white/5 bg-transparent'
+                ? 'border-light-border/50 dark:border-white/15 bg-light-surface/80 dark:bg-dark-surface/80 shadow-lg backdrop-blur-xl'
+                : 'border-light-border/20 dark:border-white/5 bg-transparent'
             } px-4 py-2`}
           >
             <motion.a
               href="#home"
-              className="flex items-center space-x-2 text-lg font-semibold text-dark-text"
+              className="flex items-center space-x-2 text-lg font-semibold text-light-text dark:text-dark-text"
               whileHover={{ scale: 1.02 }}
             >
               <div className="hidden sm:block">
-                <p className="-mt-1 text-base text-dark-text">Rami Kronbi</p>
+                <p className="-mt-1 text-base text-light-text dark:text-dark-text">Rami Kronbi</p>
               </div>
             </motion.a>
 
@@ -66,13 +77,27 @@ export default function Navigation() {
                 <motion.a
                   key={item.name}
                   href={item.href}
-                  className="text-sm font-semibold uppercase tracking-wide text-dark-text2 transition-colors hover:text-primary-400"
+                  className="text-sm font-semibold uppercase tracking-wide text-light-text2 dark:text-dark-text2 transition-colors hover:text-primary-600 dark:hover:text-primary-400"
                   whileHover={{ y: -2 }}
                 >
                   {item.name}
                 </motion.a>
               ))}
-              <span className="h-6 w-px bg-white/10" />
+              <span className="h-6 w-px bg-light-border dark:bg-white/10" />
+              
+              {/* Theme Toggle */}
+              <motion.button
+                onClick={toggleTheme}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/5 text-light-text dark:text-dark-text hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label="Toggle theme"
+              >
+                {mounted && (
+                  resolvedTheme === 'dark' ? <FiSun size={18} /> : <FiMoon size={18} />
+                )}
+              </motion.button>
+
               <HoverButton
                 href="#contact"
                 variant="outline"
@@ -83,13 +108,27 @@ export default function Navigation() {
               </HoverButton>
             </div>
 
-            <HoverButton
-              className="lg:hidden inline-flex h-12 w-12 items-center justify-center p-0"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle navigation"
-            >
-              {isMobileMenuOpen ? <FiX size={22} /> : <FiMenu size={22} />}
-            </HoverButton>
+            <div className="flex items-center gap-2 lg:hidden">
+              {/* Mobile Theme Toggle */}
+              <motion.button
+                onClick={toggleTheme}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/5 text-light-text dark:text-dark-text"
+                whileTap={{ scale: 0.95 }}
+                aria-label="Toggle theme"
+              >
+                {mounted && (
+                  resolvedTheme === 'dark' ? <FiSun size={18} /> : <FiMoon size={18} />
+                )}
+              </motion.button>
+
+              <HoverButton
+                className="inline-flex h-12 w-12 items-center justify-center p-0"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Toggle navigation"
+              >
+                {isMobileMenuOpen ? <FiX size={22} /> : <FiMenu size={22} />}
+              </HoverButton>
+            </div>
           </div>
 
           {isMobileMenuOpen && (
@@ -97,14 +136,14 @@ export default function Navigation() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="mt-3 rounded-3xl border border-white/10 bg-dark-surface/95 p-6 shadow-2xl backdrop-blur-xl lg:hidden"
+              className="mt-3 rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface/95 dark:bg-dark-surface/95 p-6 shadow-2xl backdrop-blur-xl lg:hidden"
             >
               <div className="space-y-4">
                 {navItems.map((item) => (
                   <a
                     key={item.name}
                     href={item.href}
-                    className="block text-lg font-medium text-dark-text hover:text-primary-400"
+                    className="block text-lg font-medium text-light-text dark:text-dark-text hover:text-primary-600 dark:hover:text-primary-400"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.name}

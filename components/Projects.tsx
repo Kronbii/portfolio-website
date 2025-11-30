@@ -102,7 +102,7 @@ export default function Projects() {
             initial={{ opacity: 0, y: 10 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="text-center text-sm uppercase tracking-[0.4em] text-dark-text2"
+            className="text-center text-sm uppercase tracking-[0.4em] text-light-text2 dark:text-dark-text2"
           >
             Portfolio Projects
           </motion.p>
@@ -122,11 +122,11 @@ export default function Projects() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group relative overflow-hidden rounded-3xl border border-white/10 bg-dark-surface2/80 hover:border-primary-500/50 transition-all duration-300 cursor-pointer"
+                className="group relative overflow-hidden rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface2/80 hover:border-primary-500/50 transition-all duration-300 cursor-pointer shadow-sm dark:shadow-none"
                 whileHover={{ y: -8, scale: 1.02 }}
                 onClick={() => openProject(index)}
               >
-                <div className="relative w-full h-52 overflow-hidden bg-dark-surface">
+                <div className="relative w-full h-52 overflow-hidden bg-light-surface2 dark:bg-dark-surface">
                   {project.image && !imageErrors[index] ? (
                     <>
                       <Image
@@ -136,7 +136,7 @@ export default function Projects() {
                         className="object-cover group-hover:scale-110 transition-transform duration-500"
                         onError={() => handleImageError(index)}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-dark-surface2 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-light-surface dark:from-dark-surface2 to-transparent" />
                     </>
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-primary-500/30">
@@ -145,20 +145,20 @@ export default function Projects() {
                   )}
                 </div>
                 <div className="p-6">
-                  <h3 className="text-2xl font-semibold mb-2 text-dark-text group-hover:text-primary-400 transition-colors">
+                  <h3 className="text-2xl font-semibold mb-2 text-light-text dark:text-dark-text group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-sm uppercase tracking-wide text-dark-text2 mb-3">
+                  <p className="text-sm uppercase tracking-wide text-light-text2 dark:text-dark-text2 mb-3">
                     Featured build
                   </p>
-                  <p className="text-dark-text2 mb-5 leading-relaxed line-clamp-3">
+                  <p className="text-light-text2 dark:text-dark-text2 mb-5 leading-relaxed line-clamp-3">
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-2 mb-5">
                     {project.technologies.slice(0, 3).map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="px-3 py-1 bg-primary-500/20 text-primary-400 rounded-full text-sm"
+                        className="px-3 py-1 bg-primary-500/15 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full text-sm"
                       >
                         {tech}
                       </span>
@@ -169,7 +169,7 @@ export default function Projects() {
                       </span>
                     )}
                   </div>
-                  <div className="text-primary-400 text-sm font-semibold group-hover:text-primary-300 transition-colors">
+                  <div className="text-primary-600 dark:text-primary-400 text-sm font-semibold group-hover:text-primary-500 dark:group-hover:text-primary-300 transition-colors">
                     Tap for outcomes →
                   </div>
                 </div>
@@ -180,10 +180,10 @@ export default function Projects() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-12 rounded-3xl border border-white/10 bg-white/5 p-6 text-center"
+            className="mt-12 rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-6 text-center"
           >
-            <p className="text-dark-text text-lg">
-              Want a similar transformation? <a href="#contact" className="text-primary-400 underline-offset-4 hover:underline">Let&apos;s design your roadmap</a> and launch faster.
+            <p className="text-light-text dark:text-dark-text text-lg">
+              Want a similar transformation? <a href="#contact" className="text-primary-600 dark:text-primary-400 underline-offset-4 hover:underline">Let&apos;s design your roadmap</a> and launch faster.
             </p>
           </motion.div>
         </div>
@@ -207,12 +207,12 @@ export default function Projects() {
               className="fixed inset-4 md:inset-8 lg:inset-16 z-50 overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="bg-dark-surface rounded-3xl border border-white/10 shadow-2xl max-w-5xl mx-auto overflow-hidden">
+              <div className="bg-light-surface dark:bg-dark-surface rounded-3xl border border-light-border/50 dark:border-white/10 shadow-2xl max-w-5xl mx-auto overflow-hidden">
                 {projects[selectedProject] && (
                   <>
                     {/* Modal Header */}
                     <div className="relative">
-                      <div className="relative w-full h-64 md:h-96 overflow-hidden bg-dark-surface2">
+                      <div className="relative w-full h-64 md:h-96 overflow-hidden bg-light-surface2 dark:bg-dark-surface2">
                         {projects[selectedProject].image && !imageErrors[selectedProject] ? (
                           <>
                             <Image
@@ -222,7 +222,7 @@ export default function Projects() {
                               className="object-cover"
                               onError={() => handleImageError(selectedProject)}
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-dark-surface to-transparent" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-light-surface dark:from-dark-surface to-transparent" />
                           </>
                         ) : (
                           <div className="w-full h-full flex items-center justify-center text-primary-500/30">
@@ -233,7 +233,7 @@ export default function Projects() {
                       <HoverButton
                         onClick={closeProject}
                         variant="outline"
-                        className="absolute top-4 right-4 bg-dark-surface/90 hover:bg-dark-surface text-dark-text2 hover:text-primary-500 rounded-full p-2 z-10"
+                        className="absolute top-4 right-4 bg-light-surface/90 dark:bg-dark-surface/90 hover:bg-light-surface dark:hover:bg-dark-surface text-light-text2 dark:text-dark-text2 hover:text-primary-500 rounded-full p-2 z-10"
                         aria-label="Close project"
                       >
                         <FiX size={24} />
@@ -246,16 +246,16 @@ export default function Projects() {
                         {projects[selectedProject].title}
                       </h2>
                       
-                      <p className="text-lg text-dark-text2 mb-6 leading-relaxed">
+                      <p className="text-lg text-light-text2 dark:text-dark-text2 mb-6 leading-relaxed">
                         {projects[selectedProject].longDescription || projects[selectedProject].description}
                       </p>
 
                       {projects[selectedProject].features && (
                         <div className="mb-6">
-                          <h3 className="text-xl font-bold mb-3 text-dark-text">Key Features</h3>
+                          <h3 className="text-xl font-bold mb-3 text-light-text dark:text-dark-text">Key Features</h3>
                           <ul className="space-y-2">
                             {projects[selectedProject].features!.map((feature, idx) => (
-                              <li key={idx} className="flex items-start space-x-2 text-dark-text2">
+                              <li key={idx} className="flex items-start space-x-2 text-light-text2 dark:text-dark-text2">
                                 <span className="text-primary-500 mt-1">•</span>
                                 <span>{feature}</span>
                               </li>
@@ -265,12 +265,12 @@ export default function Projects() {
                       )}
 
                       <div className="mb-6">
-                        <h3 className="text-xl font-bold mb-3 text-dark-text">Technologies</h3>
+                        <h3 className="text-xl font-bold mb-3 text-light-text dark:text-dark-text">Technologies</h3>
                         <div className="flex flex-wrap gap-2">
                           {projects[selectedProject].technologies.map((tech, techIndex) => (
                             <span
                               key={techIndex}
-                              className="px-4 py-2 bg-primary-500/20 text-primary-400 rounded-full text-sm font-medium"
+                              className="px-4 py-2 bg-primary-500/15 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full text-sm font-medium"
                             >
                               {tech}
                             </span>

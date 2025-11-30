@@ -83,7 +83,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center text-dark-text2 mb-12 text-lg"
+          className="text-center text-light-text2 dark:text-dark-text2 mb-12 text-lg"
         >
           Tell me what you&apos;re building, the outcome you want, and I&apos;ll reply within 24 hours.
         </motion.p>
@@ -94,11 +94,11 @@ export default function Contact() {
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="rounded-3xl border border-white/10 bg-dark-surface2/80 p-8 backdrop-blur"
+            className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface2/80 p-8 backdrop-blur shadow-sm dark:shadow-none"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-2 text-dark-text2">
+                <label htmlFor="name" className="block text-sm font-medium mb-2 text-light-text2 dark:text-dark-text2">
                   Name
                 </label>
                 <input
@@ -107,12 +107,12 @@ export default function Contact() {
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-3 bg-dark-surface2 border border-dark-surface2 rounded-lg focus:outline-none focus:border-primary-500 text-dark-text transition-colors"
+                  className="w-full px-4 py-3 bg-light-surface2 dark:bg-dark-surface2 border border-light-border/50 dark:border-dark-surface2 rounded-lg focus:outline-none focus:border-primary-500 text-light-text dark:text-dark-text transition-colors"
                   placeholder="Your name"
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2 text-dark-text2">
+                <label htmlFor="email" className="block text-sm font-medium mb-2 text-light-text2 dark:text-dark-text2">
                   Email
                 </label>
                 <input
@@ -121,12 +121,12 @@ export default function Contact() {
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-3 bg-dark-surface2 border border-dark-surface2 rounded-lg focus:outline-none focus:border-primary-500 text-dark-text transition-colors"
+                  className="w-full px-4 py-3 bg-light-surface2 dark:bg-dark-surface2 border border-light-border/50 dark:border-dark-surface2 rounded-lg focus:outline-none focus:border-primary-500 text-light-text dark:text-dark-text transition-colors"
                   placeholder="your.email@example.com"
                 />
               </div>
               <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2 text-dark-text2">
+                <label htmlFor="message" className="block text-sm font-medium mb-2 text-light-text2 dark:text-dark-text2">
                   Message
                 </label>
                 <textarea
@@ -135,7 +135,7 @@ export default function Contact() {
                   rows={6}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-3 bg-dark-surface2 border border-dark-surface2 rounded-lg focus:outline-none focus:border-primary-500 text-dark-text transition-colors resize-none"
+                  className="w-full px-4 py-3 bg-light-surface2 dark:bg-dark-surface2 border border-light-border/50 dark:border-dark-surface2 rounded-lg focus:outline-none focus:border-primary-500 text-light-text dark:text-dark-text transition-colors resize-none"
                   placeholder="Your message..."
                 />
               </div>
@@ -176,58 +176,58 @@ export default function Contact() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="space-y-8"
           >
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
+            <div className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm uppercase tracking-[0.4em] text-dark-text2">Availability</p>
-                  <p className="mt-2 text-2xl font-semibold text-dark-text">2 client openings</p>
+                  <p className="text-sm uppercase tracking-[0.4em] text-light-text2 dark:text-dark-text2">Availability</p>
+                  <p className="mt-2 text-2xl font-semibold text-light-text dark:text-dark-text">2 client openings</p>
                 </div>
-                <div className="text-primary-400">
+                <div className="text-primary-600 dark:text-primary-400">
                   <FiClock size={32} />
                 </div>
               </div>
-              <p className="mt-4 text-dark-text2">Next kickoff: Dec 2025 · Replies within 24 hours.</p>
+              <p className="mt-4 text-light-text2 dark:text-dark-text2">Next kickoff: Dec 2025 · Replies within 24 hours.</p>
             </div>
 
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-              <h3 className="text-xl font-semibold text-dark-text mb-4">Preferred channels</h3>
+            <div className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-6">
+              <h3 className="text-xl font-semibold text-light-text dark:text-dark-text mb-4">Preferred channels</h3>
               <div className="space-y-4">
                 <motion.a
                   href="https://github.com/Kronbii"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-2xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-dark-text"
+                  className="flex items-center justify-between rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface/70 px-4 py-3 text-light-text dark:text-dark-text"
                   whileHover={{ x: 4 }}
                 >
                   <div className="flex items-center space-x-3">
                     <FiGithub size={22} />
                     <span>GitHub</span>
                   </div>
-                  <span className="text-sm text-dark-text2">Case studies</span>
+                  <span className="text-sm text-light-text2 dark:text-dark-text2">Case studies</span>
                 </motion.a>
                 <motion.a
                   href="https://www.linkedin.com/in/rami-kronbi/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-2xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-dark-text"
+                  className="flex items-center justify-between rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface/70 px-4 py-3 text-light-text dark:text-dark-text"
                   whileHover={{ x: 4 }}
                 >
                   <div className="flex items-center space-x-3">
                     <FiLinkedin size={22} />
                     <span>LinkedIn</span>
                   </div>
-                  <span className="text-sm text-dark-text2">Professional updates</span>
+                  <span className="text-sm text-light-text2 dark:text-dark-text2">Professional updates</span>
                 </motion.a>
                 <motion.a
                   href="mailto:ramykronby@gmail.com"
-                  className="flex items-center justify-between rounded-2xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-dark-text"
+                  className="flex items-center justify-between rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface/70 px-4 py-3 text-light-text dark:text-dark-text"
                   whileHover={{ x: 4 }}
                 >
                   <div className="flex items-center space-x-3">
                     <FiMail size={22} />
                     <span>ramykronby@gmail.com</span>
                   </div>
-                  <span className="text-sm text-dark-text2">Best for briefs</span>
+                  <span className="text-sm text-light-text2 dark:text-dark-text2">Best for briefs</span>
                 </motion.a>
               </div>
             </div>

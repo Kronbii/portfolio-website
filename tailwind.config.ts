@@ -6,6 +6,7 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -54,12 +55,23 @@ const config: Config = {
           900: '#1c3b75',
         },
 
+        /* DARK THEME */
         dark: {
           bg: '#08090c',
           surface: '#111214',
           surface2: '#16181b',
           text: '#e5e5e5',
           text2: '#9ca3af',
+        },
+
+        /* LIGHT THEME - Brand-aligned, high contrast */
+        light: {
+          bg: '#f8fafc',           // Warm slate background
+          surface: '#ffffff',      // White cards for contrast
+          surface2: '#f1f5f9',     // Subtle slate for secondary surfaces
+          text: '#0f172a',         // Slate-900 for strong contrast
+          text2: '#475569',        // Slate-600 for readable secondary
+          border: '#cbd5e1',       // Slate-300 for visible borders
         },
       },
 

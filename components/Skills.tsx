@@ -46,7 +46,7 @@ export default function Skills() {
     <section
       id="skills"
       ref={ref}
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-dark-surface"
+      className="py-20 px-4 sm:px-6 lg:px-8 bg-light-surface dark:bg-dark-surface"
     >
       <div className="max-w-5xl mx-auto">
         <motion.h2
@@ -65,16 +65,16 @@ export default function Skills() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="rounded-2xl border border-white/10 bg-dark-surface2/80 p-5 backdrop-blur"
+              className="rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface2/80 p-5 backdrop-blur shadow-sm dark:shadow-none"
             >
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-dark-text">
+                <h3 className="text-lg font-semibold text-light-text dark:text-dark-text">
                   {category.category}
                 </h3>
-                <span className="text-sm text-dark-text2">{category.confidence}%</span>
+                <span className="text-sm text-light-text2 dark:text-dark-text2">{category.confidence}%</span>
               </div>
-              <p className="mt-1 text-sm text-dark-text2">{category.tagline}</p>
-              <div className="mt-3 h-1.5 rounded-full bg-white/10 overflow-hidden">
+              <p className="mt-1 text-sm text-light-text2 dark:text-dark-text2">{category.tagline}</p>
+              <div className="mt-3 h-1.5 rounded-full bg-light-border/50 dark:bg-white/10 overflow-hidden">
                 <motion.div
                   initial={{ width: 0 }}
                   animate={isInView ? { width: `${category.confidence}%` } : {}}
@@ -89,7 +89,7 @@ export default function Skills() {
                     initial={{ opacity: 0, y: 6 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.1 * index + skillIndex * 0.04 }}
-                    className="px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs text-dark-text"
+                    className="px-3 py-1 rounded-full border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 text-xs text-light-text dark:text-dark-text"
                   >
                     {skill}
                   </motion.span>

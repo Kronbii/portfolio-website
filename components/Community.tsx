@@ -164,7 +164,7 @@ export default function Community() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="text-sm uppercase tracking-[0.4em] text-dark-text2 mb-4"
+            className="text-sm uppercase tracking-[0.4em] text-light-text2 dark:text-dark-text2 mb-4"
           >
             Community First
           </motion.p>
@@ -195,7 +195,7 @@ export default function Community() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur flex-shrink-0 w-[75%] sm:w-[55%] lg:w-[38%] xl:w-[32%] snap-center"
+                  className="group relative overflow-hidden rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-white/[0.03] backdrop-blur flex-shrink-0 w-[75%] sm:w-[55%] lg:w-[38%] xl:w-[32%] snap-center shadow-sm dark:shadow-none"
                   whileHover={{ y: -4 }}
                 >
                   {/* Image */}
@@ -208,7 +208,7 @@ export default function Community() {
                       style={{ objectPosition: item.imagePosition || 'center top' }}
                       unoptimized
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-dark-surface2 via-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-light-surface dark:from-dark-surface2 via-transparent" />
                     {/* Badge */}
                     <div className="absolute top-4 left-4">
                       <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full border ${config.borderColor} ${config.bgColor} ${config.color} backdrop-blur-sm`}>
@@ -220,14 +220,14 @@ export default function Community() {
                   
                   {/* Content */}
                   <div className="p-6">
-                    <h3 className="text-xl sm:text-2xl font-semibold text-dark-text mb-2">
+                    <h3 className="text-xl sm:text-2xl font-semibold text-light-text dark:text-dark-text mb-2">
                       {item.title}
                     </h3>
-                    <p className="text-sm text-dark-text2 mb-3">
+                    <p className="text-sm text-light-text2 dark:text-dark-text2 mb-3">
                       {item.tagline}
                     </p>
                     {item.date && (
-                      <p className="text-xs text-dark-text2/70">
+                      <p className="text-xs text-light-text2/70 dark:text-dark-text2/70">
                         {item.date}
                       </p>
                     )}
@@ -243,7 +243,7 @@ export default function Community() {
           <button
             onClick={scrollLeft}
             disabled={!canScrollLeft}
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/10 backdrop-blur-lg text-dark-text hover:border-primary-500/60 hover:text-primary-300 hover:bg-white/15 transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-white/15 disabled:hover:text-dark-text disabled:hover:bg-white/10"
+            className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-light-text dark:text-dark-text hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-light-border/50 dark:disabled:hover:border-white/15 disabled:hover:text-light-text dark:disabled:hover:text-dark-text disabled:hover:bg-light-surface2/50 dark:disabled:hover:bg-white/10"
             aria-label="Previous"
           >
             <FiChevronLeft size={20} />
@@ -256,7 +256,7 @@ export default function Community() {
                 className={`h-2 rounded-full transition-all ${
                   index === currentIndex
                     ? 'w-8 bg-primary-500'
-                    : 'w-2 bg-white/20 hover:bg-white/30'
+                    : 'w-2 bg-light-border dark:bg-white/20 hover:bg-light-text2/30 dark:hover:bg-white/30'
                 }`}
                 aria-label={`Go to item ${index + 1}`}
               />
@@ -265,7 +265,7 @@ export default function Community() {
           <button
             onClick={scrollRight}
             disabled={!canScrollRight}
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/10 backdrop-blur-lg text-dark-text hover:border-primary-500/60 hover:text-primary-300 hover:bg-white/15 transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-white/15 disabled:hover:text-dark-text disabled:hover:bg-white/10"
+            className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-light-text dark:text-dark-text hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-light-border/50 dark:disabled:hover:border-white/15 disabled:hover:text-light-text dark:disabled:hover:text-dark-text disabled:hover:bg-light-surface2/50 dark:disabled:hover:bg-white/10"
             aria-label="Next"
           >
             <FiChevronRight size={20} />

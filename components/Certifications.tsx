@@ -31,7 +31,7 @@ export default function Certifications() {
     <section
       id="certifications"
       ref={ref}
-      className="py-24 px-4 sm:px-6 lg:px-8 bg-dark-surface"
+      className="py-24 px-4 sm:px-6 lg:px-8 bg-light-surface dark:bg-dark-surface"
     >
       <div className="max-w-4xl mx-auto">
         <motion.div
@@ -40,9 +40,9 @@ export default function Certifications() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <p className="text-sm uppercase tracking-[0.4em] text-dark-text2">Proof of execution</p>
+          <p className="text-sm uppercase tracking-[0.4em] text-light-text2 dark:text-dark-text2">Proof of execution</p>
           <h2 className="text-4xl md:text-5xl font-semibold mt-3">Certifications & recognition</h2>
-          <p className="mt-4 text-lg text-dark-text2">
+          <p className="mt-4 text-lg text-light-text2 dark:text-dark-text2">
             The same rigor I bring to your project is backed by accredited training and global wins.
           </p>
         </motion.div>
@@ -54,19 +54,19 @@ export default function Certifications() {
               initial={{ opacity: 0, x: -30 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="rounded-3xl border border-white/10 bg-dark-surface2/80 p-6 flex items-start space-x-4"
+              className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface2/80 p-6 flex items-start space-x-4 shadow-sm dark:shadow-none"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-500/10 text-primary-400">
                 <FiAward size={24} />
               </div>
               <div className="flex-1">
-                <h3 className="text-xl font-semibold text-dark-text">
+                <h3 className="text-xl font-semibold text-light-text dark:text-dark-text">
                   {cert.name}
                 </h3>
-                <p className="text-dark-text2 mb-2">
+                <p className="text-light-text2 dark:text-dark-text2 mb-2">
                   {cert.issuer}
                 </p>
-                <div className="flex flex-wrap gap-4 text-sm text-dark-text2">
+                <div className="flex flex-wrap gap-4 text-sm text-light-text2 dark:text-dark-text2">
                   <span>Issued: {cert.date}</span>
                   {cert.credentialId && <span>ID: {cert.credentialId}</span>}
                 </div>
@@ -75,7 +75,7 @@ export default function Certifications() {
                     href={cert.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-primary-400 hover:text-primary-300 transition-colors text-sm mt-3 inline-flex items-center"
+                    className="text-primary-600 dark:text-primary-400 hover:text-primary-500 dark:hover:text-primary-300 transition-colors text-sm mt-3 inline-flex items-center"
                   >
                     Verify certificate
                   </a>
