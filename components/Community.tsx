@@ -14,6 +14,7 @@ interface CommunityItem {
   title: string
   tagline: string
   image: string
+  imagePosition?: string
   date?: string
   link?: string
 }
@@ -25,6 +26,7 @@ const communityItems: CommunityItem[] = [
     title: 'NASA Space Apps Beirut',
     tagline: 'Leading hackathons & innovation',
     image: '/projects/project1.jpg', // Replace with actual images
+    imagePosition: 'center bottom',
     date: '2023 - Present',
   },
   {
@@ -39,8 +41,9 @@ const communityItems: CommunityItem[] = [
     id: '3',
     type: 'speaking',
     title: 'Nasna',
-    tagline: '',
-    image: '/projects/project3.jpg',
+    tagline: 'non-profit NGO that leverages data to help people during war crisis in Lebanon',
+    image: '/projects/nasna.jpeg',
+    imagePosition: '50% 35%',
     date: '2024',
     link: '#',
   },
@@ -225,16 +228,18 @@ export default function Community() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur flex-shrink-0 w-[85%] sm:w-[70%] lg:w-[50%] xl:w-[45%] snap-center"
+                  className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur flex-shrink-0 w-[75%] sm:w-[55%] lg:w-[38%] xl:w-[32%] snap-center"
                   whileHover={{ y: -4 }}
                 >
                   {/* Image */}
-                  <div className="relative h-48 sm:h-56 overflow-hidden">
+                  <div className="relative h-64 sm:h-72 overflow-hidden">
                     <Image
                       src={item.image}
                       alt={item.title}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      className={`object-cover group-hover:scale-105 transition-transform duration-300`}
+                      style={{ objectPosition: item.imagePosition || 'center top' }}
+                      unoptimized
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-dark-surface2 via-transparent" />
                     {/* Badge */}
