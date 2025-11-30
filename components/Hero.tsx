@@ -15,9 +15,6 @@ import { useState, type Dispatch, type SetStateAction } from 'react'
 import { HoverButton } from '@/components/ui/hover-button'
 
 const heroMetrics = [
-  { value: '30+', label: 'Client projects' },
-  { value: '4x', label: 'Faster delivery' },
-  { value: '2', label: 'Teams led' },
 ]
 
 export default function Hero() {
@@ -47,68 +44,70 @@ export default function Hero() {
             <IntroSection />
           </div>
 
-          <div className="order-3 lg:order-1 space-y-6">
+          <div className="order-3 lg:order-1 space-y-8">
             <div className="hidden lg:block">
               <IntroSection />
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.25 }}
-              className="flex flex-col sm:flex-row gap-4"
-            >
-              <HoverButton
-                href="#contact"
-                variant="outline"
-                className="inline-flex items-center justify-center"
+            <div className="space-y-4">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.25 }}
+                className="flex flex-col sm:flex-row gap-4"
               >
-                Book a call
-              </HoverButton>
-              <HoverButton
-                href="#projects"
-                variant="outline"
-                className="inline-flex items-center justify-center"
-              >
-                View portfolio
-              </HoverButton>
-            </motion.div>
-
-            <div className="grid grid-cols-3 gap-3 sm:max-w-md">
-              {heroMetrics.map((metric) => (
-                <motion.div
-                  key={metric.label}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-center"
+                <HoverButton
+                  href="#contact"
+                  variant="outline"
+                  className="inline-flex items-center justify-center"
                 >
-                  <p className="text-2xl sm:text-3xl font-semibold text-gradient">{metric.value}</p>
-                  <p className="text-xs uppercase tracking-wide text-dark-text2">{metric.label}</p>
-                </motion.div>
-              ))}
-            </div>
+                  Book a call
+                </HoverButton>
+                <HoverButton
+                  href="#projects"
+                  variant="outline"
+                  className="inline-flex items-center justify-center"
+                >
+                  View portfolio
+                </HoverButton>
+              </motion.div>
+
+              <div className="grid grid-cols-3 gap-3 sm:max-w-md">
+                {heroMetrics.map((metric) => (
+                  <motion.div
+                    key={metric.label}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                    className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-center"
+                  >
+                    <p className="text-2xl sm:text-3xl font-semibold text-gradient">{metric.value}</p>
+                    <p className="text-xs uppercase tracking-wide text-dark-text2">{metric.label}</p>
+                  </motion.div>
+                ))}
+              </div>
 
               <div className="flex flex-wrap items-center gap-6 pt-2">
-              <div className="flex space-x-4 text-lg">
-                {[
-                  { icon: <FiGithub />, href: 'https://github.com/Kronbii', title: 'GitHub' },
-                  { icon: <FiLinkedin />, href: 'https://www.linkedin.com/in/rami-kronbi/', title: 'LinkedIn' },
-                  { icon: <FiMail />, href: 'mailto:ramykronby@gmail.com', title: 'Email' },
-                ].map((item) => (
-                  <motion.a
-                    key={item.title}
-                    href={item.href}
-                    target={item.title === 'Email' ? undefined : '_blank'}
-                    rel={item.title === 'Email' ? undefined : 'noopener noreferrer'}
-                    className="flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/5 text-dark-text hover:border-primary-500/60 hover:text-primary-300 transition-colors"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    title={item.title}
-                  >
-                    {item.icon}
-                  </motion.a>
-                ))}
+                <div className="flex space-x-4 text-lg">
+                  {[
+                    { icon: <FiGithub />, href: 'https://github.com/Kronbii', title: 'GitHub' },
+                    { icon: <FiLinkedin />, href: 'https://www.linkedin.com/in/rami-kronbi/', title: 'LinkedIn' },
+                    { icon: <FiMail />, href: 'mailto:ramykronby@gmail.com', title: 'Email' },
+                  ].map((item) => (
+                    <motion.a
+                      key={item.title}
+                      href={item.href}
+                      target={item.title === 'Email' ? undefined : '_blank'}
+                      rel={item.title === 'Email' ? undefined : 'noopener noreferrer'}
+                      className="flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/5 text-dark-text hover:border-primary-500/60 hover:text-primary-300 transition-colors"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      title={item.title}
+                    >
+                      {item.icon}
+                    </motion.a>
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -125,7 +124,7 @@ export default function Hero() {
 
 function IntroSection() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-12">
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -139,23 +138,25 @@ function IntroSection() {
         <span>portfolio ahead!</span>
       </motion.div>
 
-      <motion.h1
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight"
-      >
-        Hi, I&apos;m <span className="text-gradient">Rami Kronbi</span> — building AI so you don&apos;t have to.
-      </motion.h1>
+      <div className="space-y-3">
+        <motion.h1
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight"
+        >
+          Hi, I&apos;m <span className="text-gradient">Rami Kronbi</span>
+        </motion.h1>
 
-      <motion.p
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.05 }}
-        className="text-sm uppercase tracking-[0.3em] text-dark-text2"
-      >
-        Rami Kronbi · AI & Computer Vision Engineer · Founder, EVOID
-      </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.05 }}
+          className="text-sm uppercase tracking-[0.3em] text-dark-text2"
+        >
+          AI & Computer Vision Engineer · Founder, EVOID
+        </motion.p>
+      </div>
     </div>
   )
 }

@@ -9,61 +9,76 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Shadcn/ui standard colors
         foreground: '#e5e5e5',
         background: '#0a0a0a',
+
+        /* BRAND PRIMARY BLUE — based on your colors */
         primary: {
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#22c55e',
-          600: '#16a34a',
-          700: '#15803d',
-          800: '#166534',
-          900: '#14532d',
+          50:  '#e8f1ff',
+          100: '#d0e3ff',
+          200: '#a3c6ff',
+          300: '#76aaff',
+          400: '#4f92ff',
+          500: '#3186ff',  // brand blue
+          600: '#2a6fd6',
+          700: '#2358ad',
+          800: '#1b4285',
+          900: '#142c5c',
         },
+
+        /* SECONDARY BLUE (transition-blue-1 & 2) */
         secondary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
+          50:  '#eef3ff',
+          100: '#dfe7ff',
+          200: '#b9caff',
+          300: '#93adff',
+          400: '#6c97ff',
+          500: '#4fa0ff',   // transition blue 2
+          600: '#346bf1',   // transition blue 1
+          700: '#2a56c4',
+          800: '#203f96',
+          900: '#172868',
         },
+
+        /* ACCENT — lighter / glowing blue */
         accent: {
-          50: '#f8f5ff',
-          100: '#f0e9ff',
-          200: '#d7c7ff',
-          300: '#b697f8',
-          400: '#a277f2',
-          500: '#8b5cf6',
-          600: '#6d28d9',
-          700: '#5b21b6',
-          800: '#4c1d95',
-          900: '#3b0764',
+          50:  '#f2f8ff',
+          100: '#e5f1ff',
+          200: '#c7e3ff',
+          300: '#a9d5ff',
+          400: '#8bc7ff',
+          500: '#4fa0ff',   // reused for consistency
+          600: '#3186ff',
+          700: '#2b6dd1',
+          800: '#2454a3',
+          900: '#1c3b75',
         },
+
         dark: {
-          bg: '#0a0a0a',
-          surface: '#111111',
-          surface2: '#1a1a1a',
+          bg: '#08090c',
+          surface: '#111214',
+          surface2: '#16181b',
           text: '#e5e5e5',
-          text2: '#a3a3a3',
+          text2: '#9ca3af',
         },
       },
+
+      /* BRAND GLOW EFFECTS */
       boxShadow: {
-        glow: '0 0 40px rgba(34, 197, 94, 0.35)',
-        'accent-glow': '0 0 50px rgba(142, 92, 246, 0.25)',
+        glow: '0 0 40px rgba(49, 134, 255, 0.25)',           // #3186ff
+        'accent-glow': '0 0 50px rgba(79, 160, 255, 0.20)',  // #4fa0ff
       },
+
+      /* BRAND RADIANT BACKGROUND LIGHTING */
       backgroundImage: {
-        'grid-dots': 'radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px)',
-        'radial-light': 'radial-gradient(circle at top, rgba(34,197,94,0.25), transparent 55%)',
+        "grid-dots":
+          "radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px)",
+
+        /* Blue-themed radial light */
+        "radial-light":
+          "radial-gradient(circle at top, rgba(49,134,255,0.20), transparent 55%)",
       },
+
       animation: {
         'fade-in': 'fadeIn 0.6s ease-in-out',
         'slide-up': 'slideUp 0.6s ease-out',
@@ -73,6 +88,7 @@ const config: Config = {
         'float-slow': 'float 8s ease-in-out infinite',
         'spin-slow': 'spin 12s linear infinite',
       },
+
       keyframes: {
         fadeIn: {
           '0%': { opacity: '0' },
@@ -104,4 +120,5 @@ const config: Config = {
   },
   plugins: [],
 }
+
 export default config

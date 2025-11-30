@@ -6,59 +6,85 @@
   :root {
     color-scheme: dark;
   }
+
   body {
-    @apply bg-dark-bg text-dark-text antialiased;
-    font-family: var(--font-sans), 'Space Grotesk', 'Inter', -apple-system,
-      BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
-      'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    @apply text-dark-text antialiased;
+    font-family: var(--font-sans), 'Space Grotesk', 'Inter', sans-serif;
     min-height: 100vh;
-    background-image:
-      radial-gradient(circle at 20% 20%, rgba(34, 197, 94, 0.18), transparent 55%),
-      radial-gradient(circle at 80% 0%, rgba(14, 165, 233, 0.15), transparent 60%),
-      radial-gradient(circle at 50% 80%, rgba(139, 92, 246, 0.12), transparent 50%),
-      linear-gradient(180deg, #050505 0%, #090909 50%, #050505 100%);
-    background-attachment: fixed;
     overflow-x: hidden;
     position: relative;
+
+    /* Darker deep-blue base */
+    background-color: #08090c;
+
+    background-image:
+      /* Darker brand blue glow (top-left) */
+      radial-gradient(circle at 20% 20%, rgba(49,134,255,0.13), transparent 55%),
+
+      /* Darker cool blue transition (top-right) */
+      radial-gradient(circle at 80% 0%, rgba(52,107,241,0.12), transparent 60%),
+
+      /* Darker soft blue (bottom center) */
+      radial-gradient(circle at 50% 85%, rgba(79,160,255,0.10), transparent 55%),
+
+      /* Deeper vertical gradient for atmosphere */
+      linear-gradient(180deg, #07080b 0%, #0b0d11 50%, #07080b 100%);
+
+    background-attachment: fixed;
   }
-  html {
-    scroll-behavior: smooth;
-  }
+
   body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+
+    /* Softer grid so it doesn’t overpower the darker base */
+    background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
     background-size: 60px 60px;
-    opacity: 0.3;
+    opacity: 0.22;
     pointer-events: none;
     z-index: -1;
   }
+
   body::after {
     content: '';
     position: fixed;
     inset: 0;
-    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" fill="none"%3E%3Cpath d="M0 160L160 0" stroke="rgba(255,255,255,0.04)"/%3E%3C/svg%3E');
-    opacity: 0.2;
+
+    /* Softened the diagonal line color */
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" fill="none"%3E%3Cpath d="M0 160L160 0" stroke="rgba(79,160,255,0.035)"/%3E%3C/svg%3E');
+    opacity: 0.18;
     pointer-events: none;
     z-index: -1;
   }
+
   ::selection {
-    background: rgba(34, 197, 94, 0.35);
+    background: rgba(49,134,255,0.3);
     color: #f8fafc;
   }
 }
+
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
   .text-gradient {
-    background: linear-gradient(120deg, #22c55e, #0ea5e9 45%, #8b5cf6);
+    background-image: linear-gradient(
+      90deg,
+      #3186ff 0%,
+      #346bf1 50%,
+      #4fa0ff 100%
+    );
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
+    background-size: 100% 100%;
+    background-repeat: repeat-y;
   }
+  
+  
   .card-border {
     position: relative;
   }
@@ -68,7 +94,7 @@
     inset: 0;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(120deg, rgba(34, 197, 94, 0.5), rgba(14, 165, 233, 0.5));
+    background: linear-gradient(120deg, rgba(49, 134, 255, 0.5), rgba(52, 67, 241, 0.5), rgba(79, 160, 255, 0.5));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -86,10 +112,10 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #22c55e;
+  background: #3186ff;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #16a34a;
+  background: #346bf1;
 }
