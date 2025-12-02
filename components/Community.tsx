@@ -71,9 +71,11 @@ export default function Community() {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
   const isInView = useInView(ref, { once: true, amount: 0.1 })
   const [currentIndex, setCurrentIndex] = useState(0)
+  const currentIndexRef = useRef<number>(0)
   const touchStartRef = useRef<number>(0)
   const touchEndRef = useRef<number>(0)
   const isAnimatingRef = useRef(false)
+  const lastScrollLeftRef = useRef<number>(0)
 
   // Create infinite loop by tripling the items
   const extendedItems = [...communityItems, ...communityItems, ...communityItems]
@@ -94,6 +96,7 @@ export default function Community() {
       const containerCenter = container.offsetWidth / 2
       container.scrollLeft = cardCenter - containerCenter
       setCurrentIndex(startIndex)
+      currentIndexRef.current = startIndex
     }, 150)
 
     return () => clearTimeout(timer)
@@ -124,6 +127,7 @@ export default function Community() {
     })
     
     setCurrentIndex(closestIndex)
+    currentIndexRef.current = closestIndex
   }
 
   // Handle touch events for swipe detection
@@ -163,9 +167,10 @@ export default function Community() {
       return
     }
     
+    const idx = currentIndexRef.current
     // If we're at or near the start of middle set, instantly jump to end of middle set first
-    if (currentIndex <= itemCount) {
-      const jumpToIndex = currentIndex + itemCount
+    if (idx <= itemCount) {
+      const jumpToIndex = idx + itemCount
       scrollToIndex(jumpToIndex, true)
       
       requestAnimationFrame(() => {
@@ -173,7 +178,7 @@ export default function Community() {
         setTimeout(() => { isAnimatingRef.current = false }, 400)
       })
     } else {
-      scrollToIndex(currentIndex - 1)
+      scrollToIndex(idx - 1)
       setTimeout(() => { isAnimatingRef.current = false }, 400)
     }
   }
@@ -188,9 +193,10 @@ export default function Community() {
       return
     }
     
+    const idx = currentIndexRef.current
     // If we're at or near the end of middle set, instantly jump to start of middle set first
-    if (currentIndex >= itemCount * 2 - 1) {
-      const jumpToIndex = currentIndex - itemCount
+    if (idx >= itemCount * 2 - 1) {
+      const jumpToIndex = idx - itemCount
       scrollToIndex(jumpToIndex, true)
       
       requestAnimationFrame(() => {
@@ -198,19 +204,74 @@ export default function Community() {
         setTimeout(() => { isAnimatingRef.current = false }, 400)
       })
     } else {
-      scrollToIndex(currentIndex + 1)
+      scrollToIndex(idx + 1)
       setTimeout(() => { isAnimatingRef.current = false }, 400)
     }
   }
 
+  // Handle horizontal wheel scrolling to trigger navigation
   useEffect(() => {
     const container = scrollContainerRef.current
     if (!container) return
 
+    let wheelTimeout: NodeJS.Timeout | null = null
+    let accumulatedDelta = 0
+    const threshold = 50 // Minimum scroll delta to trigger navigation
+
+    const handleWheel = (e: WheelEvent) => {
+      // Only handle horizontal scrolling (deltaX)
+      // Ignore vertical scrolling (deltaY) - let it scroll the page normally
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+        e.preventDefault()
+        e.stopPropagation()
+        
+        accumulatedDelta += e.deltaX
+        
+        // Clear any pending timeout
+        if (wheelTimeout) {
+          clearTimeout(wheelTimeout)
+        }
+        
+        // Debounce and trigger navigation after scroll stops
+        wheelTimeout = setTimeout(() => {
+          if (isAnimatingRef.current) {
+            accumulatedDelta = 0
+            return
+          }
+          
+          if (Math.abs(accumulatedDelta) > threshold) {
+            if (accumulatedDelta > 0) {
+              // Scrolled right = go to next card
+              navigateRight()
+            } else {
+              // Scrolled left = go to previous card
+              navigateLeft()
+            }
+          }
+          
+          accumulatedDelta = 0
+        }, 150)
+      }
+      // If it's vertical scrolling, don't prevent default - let page scroll normally
+    }
+
+    // Update current index on scroll (for button/touch navigation)
+    const handleScroll = () => {
+      if (isAnimatingRef.current) return
+      updateCurrentIndex()
+    }
+
+    container.addEventListener('wheel', handleWheel, { passive: false })
+    container.addEventListener('scroll', handleScroll, { passive: true })
     updateCurrentIndex()
     window.addEventListener('resize', updateCurrentIndex)
 
     return () => {
+      if (wheelTimeout) {
+        clearTimeout(wheelTimeout)
+      }
+      container.removeEventListener('wheel', handleWheel)
+      container.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', updateCurrentIndex)
     }
   }, [itemCount])
@@ -234,6 +295,7 @@ export default function Community() {
     })
     
     setCurrentIndex(index)
+    currentIndexRef.current = index
   }
 
   const handleScrollLeft = () => {
