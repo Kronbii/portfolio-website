@@ -5,6 +5,7 @@ import { useInView } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
 import Image from 'next/image'
 import { FiMic, FiUsers, FiHeart, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { getFallbackImage } from '@/lib/utils'
 
 interface CommunityItem {
   id: string
@@ -23,7 +24,7 @@ const communityItems: CommunityItem[] = [
     type: 'leadership',
     title: 'NASA Space Apps Beirut',
     tagline: 'Organizing the Beirut chapter of NASA’s Space Apps—the world’s largest global hackathon',
-    image: '/projects/nasa-space-apps.jpeg',
+    image: '/projects/nasa-space-apps.webp',
     imagePosition: '50% 50%',
     date: '2022 - 2025',
   },
@@ -32,7 +33,7 @@ const communityItems: CommunityItem[] = [
     type: 'leadership',
     title: '"Nasna" - crisis support',
     tagline: 'Founder of a nonprofit NGO that applies data to deliver aid and crisis support to communities impacted by the war in Lebanon.',
-    image: '/projects/nasna.jpeg',
+    image: '/projects/nasna.webp',
     imagePosition: '50% 35%',
     date: '2024',
     link: '#',
@@ -42,7 +43,7 @@ const communityItems: CommunityItem[] = [
     type: 'leadership',
     title: 'National Physics Day',
     tagline: 'Leading and organizing Lebanon’s biggest annual event for the physics and astronomy community.',
-    image: '/projects/physics-day-1.jpg',
+    image: '/projects/physics-day-1.webp',
     imagePosition: '50% 35%',
     date: '2021 - 2025',
   },
@@ -76,6 +77,7 @@ export default function Community() {
   const touchEndRef = useRef<number>(0)
   const isAnimatingRef = useRef(false)
   const lastScrollLeftRef = useRef<number>(0)
+  const [imageSources, setImageSources] = useState<{ [key: number]: string }>({})
 
   // Create infinite loop by tripling the items
   const extendedItems = [...communityItems, ...communityItems, ...communityItems]
@@ -274,6 +276,7 @@ export default function Community() {
       container.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', updateCurrentIndex)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemCount])
 
   const scrollToIndex = (index: number, instant = false) => {
@@ -368,12 +371,18 @@ export default function Community() {
                   {/* Image */}
                   <div className="relative h-64 sm:h-72 overflow-hidden">
                     <Image
-                      src={item.image}
+                      src={imageSources[index] || item.image}
                       alt={item.title}
                       fill
                       className={`object-cover group-hover:scale-105 transition-transform duration-300`}
                       style={{ objectPosition: item.imagePosition || 'center top' }}
                       unoptimized
+                      onError={() => {
+                        const fallback = getFallbackImage(item.image)
+                        if (imageSources[index] !== fallback) {
+                          setImageSources(prev => ({ ...prev, [index]: fallback }))
+                        }
+                      }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-light-surface dark:from-dark-surface2 via-transparent" />
                     {/* Badge */}

@@ -13,6 +13,9 @@ const spaceGrotesk = Space_Grotesk({
   weight: ['400', '500', '600', '700'],
   display: 'swap',
   variable: '--font-sans',
+  fallback: ['system-ui', 'arial'],
+  adjustFontFallback: true,
+  preload: true,
 })
 
 export const viewport: Viewport = {
@@ -129,7 +132,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
 
-        {/* Preconnect */}
+        {/* Preconnect - Next.js handles font loading automatically, but keeping for other resources */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
