@@ -13,6 +13,7 @@ import {
 import Image from 'next/image'
 import { useState, type Dispatch, type SetStateAction } from 'react'
 import { HoverButton } from '@/components/ui/hover-button'
+import { getFallbackImage } from '@/lib/utils'
 
 
 export default function Hero() {
@@ -187,6 +188,17 @@ function HeroPortrait({
   imageError: boolean
   setImageError: Dispatch<SetStateAction<boolean>>
 }) {
+  const [imageSrc, setImageSrc] = useState('/profile.webp')
+
+  const handleImageError = () => {
+    const fallback = getFallbackImage('/profile.webp')
+    if (imageSrc === '/profile.webp') {
+      setImageSrc(fallback)
+    } else {
+      setImageError(true)
+    }
+  }
+
   return (
     <div className="relative w-full max-w-md mx-auto">
       <motion.div
@@ -198,12 +210,12 @@ function HeroPortrait({
         <div className="relative h-[420px] rounded-[28px] bg-light-surface2/80 dark:bg-dark-surface2/80 overflow-hidden flex items-center justify-center">
           {!imageError ? (
             <Image
-              src="/profile.jpg"
+              src={imageSrc}
               alt="Rami Kronbi"
               fill
               className="object-cover"
               priority
-              onError={() => setImageError(true)}
+              onError={handleImageError}
             />
           ) : (
             <div className="flex flex-col items-center justify-center text-primary-500 space-y-2">

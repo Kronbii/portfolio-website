@@ -252,6 +252,7 @@ export default function Services() {
       container.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', updateCurrentIndex)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemCount])
 
   const scrollToIndex = (index: number, instant = false) => {

@@ -6,6 +6,7 @@ import { useRef, useState, useEffect } from 'react'
 import { FiGithub, FiExternalLink, FiX, FiImage, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import Image from 'next/image'
 import { HoverButton } from '@/components/ui/hover-button'
+import { getFallbackImage } from '@/lib/utils'
 
 interface Project {
   title: string
@@ -27,7 +28,7 @@ const projects: Project[] = [
       'This project introduces the first real-time thermal super-resolution framework built on the Information Multi-Distillation Network (IMDN). It delivers 34.2 dB PSNR and 229+ FPS, outperforming existing methods while remaining lightweight (0.69M parameters). The system integrates a thermal-aware loss function and a cross-domain transfer approach to adapt RGB-pretrained models to thermal data, resulting in superior detail preservation and speed. Applications span autonomous driving, industrial monitoring, thermal surveillance, and medical diagnostics. Developed with PyTorch, TensorRT, and OpenCV, this solution establishes a new state-of-the-art benchmark for real-time thermal enhancement.',
     githubUrl: 'https://github.com/Kronbii/thermal-super-resolution',
     technologies: ['Python', 'PyTorch', 'TensorRT', 'OpenCV'],
-    image: '/projects/thermal-sr.png',
+    image: '/projects/thermal-sr.webp',
     features: [
       '34.2 dB PSNR at 229+ FPS real-time inference',
       'Thermal-aware multi-component loss function',
@@ -44,7 +45,7 @@ const projects: Project[] = [
       'This project showcases a fully integrated autonomous vehicle developed from scratch in only 20 days for the World Robot Olympiad Future Engineers 2023 competition. The system combines a Jetson Nano for high-level computer vision and an Arduino Mega for deterministic real-time control using PID steering stabilization and sensor fusion from IMU and color sensors. Designed as a dual-MCU platform, it achieves smooth autonomous cornering, traffic sign detection, and dynamic pathing. Built with OpenCV, C++, and Python, the project demonstrates robust teamwork, rapid prototyping, and reliable embedded AI performance on a tight schedule.',
     githubUrl: 'https://github.com/Kronbii/autonomous-race-car',
     technologies: ['Python', 'C++', 'OpenCV', 'Arduino', 'Jetson Nano'],
-    image: '/projects/race-car.png',
+    image: '/projects/race-car.webp',
     features: [
       'End-to-end autonomous vehicle built in 20 days',
       'Jetson-based traffic sign and lane detection',
@@ -61,7 +62,7 @@ const projects: Project[] = [
       'The Smart Learning Table is an interactive, sensor-driven workstation designed to improve engagement, comfort, and learning outcomes in classrooms and offices. Built with ESP32 microcontrollers, motorized actuators, and OpenCV-based vision tracking, the desk automatically adjusts height and tilt, monitors user posture, and provides real-time visual feedback. It supports multiple control interfaces, including a web dashboard and Bluetooth controllers, and integrates posture analytics for ergonomic insights. Developed as a collaborative university project, it demonstrates a seamless fusion of IoT, embedded systems, and AI for human-centered design.',
     githubUrl: 'https://github.com/Kronbii/smart-interactive-desk',
     technologies: ['Python', 'OpenCV', 'ESP32', 'React', 'MQTT'],
-    image: '/projects/smart-desk.png',
+    image: '/projects/smart-desk.webp',
     features: [
       'Motorized height and tilt adjustment via actuators',
       'Posture tracking using computer vision and sensors',
@@ -79,6 +80,7 @@ export default function Projects() {
   const isInView = useInView(ref, { once: true, amount: 0.2 })
   const [selectedProject, setSelectedProject] = useState<number | null>(null)
   const [imageErrors, setImageErrors] = useState<{ [key: number]: boolean }>({})
+  const [imageSources, setImageSources] = useState<{ [key: number]: string }>({})
   const [currentIndex, setCurrentIndex] = useState(0)
   const currentIndexRef = useRef<number>(0)
   const touchStartRef = useRef<number>(0)
@@ -282,6 +284,7 @@ export default function Projects() {
       container.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', updateCurrentIndex)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemCount])
 
   const scrollToIndex = (index: number, instant = false) => {
@@ -328,8 +331,17 @@ export default function Projects() {
     setSelectedProject(null)
   }
 
-  const handleImageError = (index: number) => {
-    setImageErrors((prev) => ({ ...prev, [index]: true }))
+  const handleImageError = (index: number, originalSrc: string) => {
+    const fallback = getFallbackImage(originalSrc)
+    const currentSrc = imageSources[index] || originalSrc
+    
+    // If we haven't tried the fallback yet, use it
+    if (currentSrc === originalSrc && fallback !== originalSrc) {
+      setImageSources((prev) => ({ ...prev, [index]: fallback }))
+    } else {
+      // If fallback also failed, show error placeholder
+      setImageErrors((prev) => ({ ...prev, [index]: true }))
+    }
   }
 
   // Get the actual index in the original array for pagination dots
@@ -374,12 +386,12 @@ export default function Projects() {
                 const isCentered = index === currentIndex
                 const actualIdx = getActualIndex(index)
                 return (
-                  <motion.div
+              <motion.div
                     key={`${project.title}-${index}`}
                     ref={(el) => {
                       cardsRef.current[index] = el
                     }}
-                    initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: isCentered ? -8 : 0, scale: isCentered ? 1.02 : 1 } : {}}
                     transition={{ duration: 0.15 }}
                     className={`group relative overflow-hidden rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface2/80 hover:border-primary-500/50 transition-all duration-300 cursor-pointer shadow-sm dark:shadow-none flex-shrink-0 w-[320px] sm:w-[360px] lg:w-[400px] ${
@@ -388,56 +400,56 @@ export default function Projects() {
                         : ''
                     }`}
                     whileHover={{ y: isCentered ? -12 : -8, scale: isCentered ? 1.04 : 1.02 }}
-                    onClick={() => openProject(index)}
-                  >
-                    <div className="relative w-full h-52 overflow-hidden bg-light-surface2 dark:bg-dark-surface">
+                onClick={() => openProject(index)}
+              >
+                <div className="relative w-full h-52 overflow-hidden bg-light-surface2 dark:bg-dark-surface">
                       {project.image && !imageErrors[actualIdx] ? (
-                        <>
-                          <Image
-                            src={project.image}
-                            alt={project.title}
-                            fill
-                            className="object-cover group-hover:scale-110 transition-transform duration-500"
-                            onError={() => handleImageError(actualIdx)}
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-light-surface dark:from-dark-surface2 to-transparent" />
-                        </>
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-primary-500/30">
-                          <FiImage size={48} />
-                        </div>
-                      )}
+                    <>
+                      <Image
+                        src={imageSources[actualIdx] || project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                            onError={() => project.image && handleImageError(actualIdx, project.image)}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-light-surface dark:from-dark-surface2 to-transparent" />
+                    </>
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-primary-500/30">
+                      <FiImage size={48} />
                     </div>
-                    <div className="p-6">
-                      <h3 className="text-2xl font-semibold mb-2 text-light-text dark:text-dark-text group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
-                        {project.title}
-                      </h3>
-                      <p className="text-sm uppercase tracking-wide text-light-text2 dark:text-dark-text2 mb-3">
-                        Featured build
-                      </p>
-                      <p className="text-light-text2 dark:text-dark-text2 mb-5 leading-relaxed line-clamp-3">
-                        {project.description}
-                      </p>
-                      <div className="flex flex-wrap gap-2 mb-5">
-                        {project.technologies.slice(0, 3).map((tech, techIndex) => (
-                          <span
-                            key={techIndex}
-                            className="px-3 py-1 bg-primary-500/15 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full text-sm"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                        {project.technologies.length > 3 && (
-                          <span className="px-3 py-1 bg-primary-500/10 text-primary-500 rounded-full text-sm">
-                            +{project.technologies.length - 3}
-                          </span>
-                        )}
-                      </div>
-                      <div className="text-primary-600 dark:text-primary-400 text-sm font-semibold group-hover:text-primary-500 dark:group-hover:text-primary-300 transition-colors">
-                        Tap for outcomes →
-                      </div>
-                    </div>
-                  </motion.div>
+                  )}
+                </div>
+                <div className="p-6">
+                  <h3 className="text-2xl font-semibold mb-2 text-light-text dark:text-dark-text group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-sm uppercase tracking-wide text-light-text2 dark:text-dark-text2 mb-3">
+                    Featured build
+                  </p>
+                  <p className="text-light-text2 dark:text-dark-text2 mb-5 leading-relaxed line-clamp-3">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-5">
+                    {project.technologies.slice(0, 3).map((tech, techIndex) => (
+                      <span
+                        key={techIndex}
+                        className="px-3 py-1 bg-primary-500/15 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full text-sm"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                    {project.technologies.length > 3 && (
+                      <span className="px-3 py-1 bg-primary-500/10 text-primary-500 rounded-full text-sm">
+                        +{project.technologies.length - 3}
+                      </span>
+                    )}
+                  </div>
+                  <div className="text-primary-600 dark:text-primary-400 text-sm font-semibold group-hover:text-primary-500 dark:group-hover:text-primary-300 transition-colors">
+                    Tap for outcomes →
+                  </div>
+                </div>
+              </motion.div>
                 )
               })}
             </div>
@@ -515,11 +527,11 @@ export default function Projects() {
                         {projects[selectedProject].image && !imageErrors[selectedProject] ? (
                           <>
                             <Image
-                              src={projects[selectedProject].image}
+                              src={imageSources[selectedProject] || projects[selectedProject].image}
                               alt={projects[selectedProject].title}
                               fill
                               className="object-cover"
-                              onError={() => handleImageError(selectedProject)}
+                              onError={() => projects[selectedProject].image && handleImageError(selectedProject, projects[selectedProject].image)}
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-light-surface dark:from-dark-surface to-transparent" />
                           </>

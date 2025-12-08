@@ -1,9 +1,9 @@
 export default function StructuredData() {
   const baseUrl = 'https://ramikronbi.com'
   const siteName = 'Rami Kronbi'
-  const profileImage = `${baseUrl}/profile.jpg`
+  const profileImage = `${baseUrl}/profile.webp`
   const logoImage = `${baseUrl}/icon-512.png`
-  const ogImage = `${baseUrl}/og-image.jpg`
+  const ogImage = `${baseUrl}/og-image.webp`
 
   const personSchema = {
     '@context': 'https://schema.org',
