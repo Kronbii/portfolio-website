@@ -1,7 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { FiBook, FiBriefcase, FiUsers, FiAward, FiCode, FiCpu, FiPower } from 'react-icons/fi'
 
@@ -24,7 +23,7 @@ const infoCards = [
   },
   { 
     value: 'Leader', 
-    label: 'Nasa Space Apps, Astronomyclub',
+    label: 'Driving impact in communities',
     icon: FiUsers,
     color: 'text-green-500',
     bgColor: 'bg-green-500/10',

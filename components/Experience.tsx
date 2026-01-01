@@ -1,7 +1,6 @@
 'use client'
 
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
-import { useInView } from 'framer-motion'
+import { motion, useScroll, useTransform, useSpring, useInView, type MotionValue } from 'framer-motion'
 import { useRef } from 'react'
 
 const milestones = [
@@ -34,7 +33,7 @@ function TimelineItem({
 }: { 
   item: typeof milestones[0]
   index: number
-  progress: any
+  progress: MotionValue<number>
 }) {
   const isLeft = index % 2 === 0
   const itemRef = useRef(null)

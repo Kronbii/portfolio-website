@@ -1,27 +1,9 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { FiAward } from 'react-icons/fi'
-
-interface Certification {
-  name: string
-  issuer: string
-  date: string
-  credentialId?: string
-  link?: string
-}
-
-const certifications: Certification[] = [
-  {
-    name: 'Google Project Management: Professional Certificate',
-    issuer: 'Google / Coursera',
-    date: 'Ongoing',
-    credentialId: 'JDQM5WZLUW27',
-    link: 'https://www.coursera.org/account/accomplishments/records/JDQM5WZLUW27',
-  },  
-]
+import { certifications } from '@/data/certifications'
 
 export default function Certifications() {
   const ref = useRef(null)
