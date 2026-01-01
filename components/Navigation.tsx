@@ -5,6 +5,7 @@ import { motion, useScroll, useSpring } from 'framer-motion'
 import { FiMenu, FiX, FiArrowUpRight, FiSun, FiMoon } from 'react-icons/fi'
 import { HoverButton } from '@/components/ui/hover-button'
 import { useTheme } from 'next-themes'
+import Image from 'next/image'
 
 const navItems = [
   { name: 'About', href: '#about' },
@@ -65,11 +66,20 @@ export default function Navigation() {
           >
             <motion.a
               href="#home"
-              className="flex items-center space-x-2 text-lg font-semibold text-light-text dark:text-dark-text"
-              whileHover={{ scale: 1.02 }}
+              className="flex items-center space-x-2"
+              whileHover={{ scale: 1.05 }}
             >
-              <div className="hidden sm:block">
-                <p className="-mt-1 text-base text-light-text dark:text-dark-text">Rami Kronbi</p>
+              <div className="relative h-8 w-8 sm:h-10 sm:w-10 group">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary-500 via-secondary-600 to-accent-500 opacity-0 group-hover:opacity-20 blur-md transition-opacity duration-300" />
+                <div className="relative h-full w-full">
+                  <Image
+                    src="/black-hole.png"
+                    alt="Rami Kronbi"
+                    fill
+                    className="object-contain drop-shadow-[0_0_8px_rgba(49,134,255,0.3)] group-hover:drop-shadow-[0_0_12px_rgba(49,134,255,0.5)] transition-all duration-300"
+                    priority
+                  />
+                </div>
               </div>
             </motion.a>
 

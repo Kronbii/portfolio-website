@@ -340,7 +340,7 @@ export default function Projects() {
       setImageSources((prev) => ({ ...prev, [index]: fallback }))
     } else {
       // If fallback also failed, show error placeholder
-      setImageErrors((prev) => ({ ...prev, [index]: true }))
+    setImageErrors((prev) => ({ ...prev, [index]: true }))
     }
   }
 
