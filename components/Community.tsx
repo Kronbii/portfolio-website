@@ -6,48 +6,7 @@ import { useRef, useState, useEffect } from 'react'
 import Image from 'next/image'
 import { FiMic, FiUsers, FiHeart, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { getFallbackImage } from '@/lib/utils'
-
-interface CommunityItem {
-  id: string
-  type: 'speaking' | 'leadership'
-  title: string
-  tagline: string
-  image: string
-  imagePosition?: string
-  date?: string
-  link?: string
-}
-
-const communityItems: CommunityItem[] = [
-    {
-    id: '2',
-    type: 'leadership',
-    title: 'NASA Space Apps Beirut',
-    tagline: 'Organizing the Beirut chapter of NASA’s Space Apps—the world’s largest global hackathon',
-    image: '/projects/nasa-space-apps.webp',
-    imagePosition: '50% 50%',
-    date: '2022 - 2025',
-  },
-  {
-    id: '3',
-    type: 'leadership',
-    title: '"Nasna" - crisis support',
-    tagline: 'Founder of a nonprofit NGO that applies data to deliver aid and crisis support to communities impacted by the war in Lebanon.',
-    image: '/projects/nasna.webp',
-    imagePosition: '50% 35%',
-    date: '2024',
-    link: '#',
-  },
-    {
-    id: '4',
-    type: 'leadership',
-    title: 'National Physics Day',
-    tagline: 'Leading and organizing Lebanon’s biggest annual event for the physics and astronomy community.',
-    image: '/projects/physics-day-1.webp',
-    imagePosition: '50% 35%',
-    date: '2021 - 2025',
-  },
-]
+import { communityItems, CommunityItem } from '@/data/community'
 
 const typeConfig = {
   speaking: {

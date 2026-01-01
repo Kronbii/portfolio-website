@@ -40,12 +40,6 @@ const infoCards = [
   },
 ]
 
-const skills = [
-  { icon: FiCode, label: 'Full-Stack Development' },
-  { icon: FiCpu, label: 'AI/ML Engineering' },
-  { icon: FiPower, label: 'Firmware & Hardware' },
-]
-
 export default function About() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
@@ -102,38 +96,7 @@ export default function About() {
           >
             About <span className="text-gradient">Rami Kronbi</span>
           </motion.h2>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg md:text-xl text-light-text2 dark:text-dark-text2 leading-relaxed max-w-3xl mx-auto"
-          >
-            Mechatronics engineer turned AI/CV builder. I stay hands-on across strategy, firmware, and ML so you work with <span className="text-primary-500 font-medium">one partner instead of five</span>.
-          </motion.p>
         </div>
-
-        {/* Skills Pills */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex flex-wrap justify-center gap-3 mb-16"
-        >
-          {skills.map((skill, index) => (
-            <motion.div
-              key={skill.label}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
-              whileHover={{ scale: 1.05, y: -2 }}
-              className="flex items-center gap-2 px-4 py-2 rounded-full border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-white/5 backdrop-blur-sm hover:border-primary-500/50 hover:bg-primary-500/5 transition-all duration-300"
-            >
-              <skill.icon className="text-primary-500" size={18} />
-              <span className="text-sm font-medium text-light-text dark:text-dark-text">{skill.label}</span>
-            </motion.div>
-          ))}
-        </motion.div>
 
         {/* Info Cards Grid */}
         <motion.div
