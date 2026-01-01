@@ -19,15 +19,6 @@ interface CommunityItem {
 }
 
 const communityItems: CommunityItem[] = [
-    {
-    id: '2',
-    type: 'leadership',
-    title: 'NASA Space Apps Beirut',
-    tagline: 'Organizing the Beirut chapter of NASA’s Space Apps—the world’s largest global hackathon',
-    image: '/projects/nasa-space-apps.webp',
-    imagePosition: '50% 50%',
-    date: '2022 - 2025',
-  },
   {
     id: '3',
     type: 'leadership',
@@ -38,11 +29,29 @@ const communityItems: CommunityItem[] = [
     date: '2024',
     link: '#',
   },
+  {
+    id: '5',
+    type: 'leadership',
+    title: 'DevFest Beirut',
+    tagline: 'Delivered a lecture on embedded AI at Lebanon\'s premier developer conference.',
+    image: '/projects/devfest-2025.webp',
+    imagePosition: '50% 35%',
+    date: '2025',
+  },
     {
+    id: '2',
+    type: 'leadership',
+    title: 'NASA Space Apps Beirut',
+    tagline: 'Organizing the Beirut chapter of NASA’s Space Apps—the world’s largest global hackathon',
+    image: '/projects/nasa-space-apps.webp',
+    imagePosition: '50% 50%',
+    date: '2022 - 2025',
+  },
+  {
     id: '4',
     type: 'leadership',
     title: 'National Physics Day',
-    tagline: 'Leading and organizing Lebanon’s biggest annual event for the physics and astronomy community.',
+    tagline: 'Leading and organizing Lebanon\s biggest annual event for the physics and astronomy community.',
     image: '/projects/physics-day-1.webp',
     imagePosition: '50% 35%',
     date: '2021 - 2025',

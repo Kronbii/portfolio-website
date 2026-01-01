@@ -1,14 +1,15 @@
 'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
-import { FiGithub, FiExternalLink, FiX, FiImage, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { FiImage, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import Image from 'next/image'
-import { HoverButton } from '@/components/ui/hover-button'
+import { useRouter } from 'next/navigation'
 import { getFallbackImage } from '@/lib/utils'
 
-interface Project {
+export interface Project {
+  slug: string
   title: string
   description: string
   longDescription?: string
@@ -19,9 +20,28 @@ interface Project {
   features?: string[]
 }
 
-const projects: Project[] = [
+export const projects: Project[] = [
   {
-    title: 'Thermal Super-Resolution with IMDN',
+    slug: 'omnisign',
+    title: 'Lebanese Sign Language AI Translator',
+    description:
+      'An AI-powered sign language translation system focused on real-time interpretation and translation of Lebanese Sign Language (LSL), designed to bridge communication barriers between deaf and hearing communities using computer vision and NLP.',
+    longDescription:
+      'Omnisign is an AI-driven sign language interpreter and translator developed as a final-year project, leveraging computer vision, machine learning, and natural language processing to recognize and translate Lebanese Sign Language (LSL) into spoken/written languages in real time. The system was created to enhance inclusivity and accessibility for the deaf and hard-of-hearing community by enabling seamless two-way communication. Omnisign’s innovative approach combines state-of-the-art AI models for gesture recognition with language translation capabilities to output accurate translations across multiple languages. The project gained recognition by winning the Public Choice Award at the National FYP Demo Day 2025, reflecting its societal impact and technical excellence. It’s an open, research-oriented initiative demonstrating how AI can break down communication barriers and foster greater social integration for under-served groups.',  
+    githubUrl: 'https://laythayache.com/projects/omnisign',
+    technologies: ['Python', 'TensorFlow/PyTorch', 'OpenCV', 'Computer Vision', 'NLP'],
+    image: '/projects/omnisign.webp',
+    features: [
+      'Real-time Lebanese Sign Language recognition using AI',
+      'Multilingual translation output',
+      'Computer vision-driven gesture interpretation',
+      'NLP-based translation module',
+      'Award-winning accessibility innovation presented at National FYP Demo Day 2025',
+    ],
+  },
+  {
+    slug: 'thermal-super-resolution',
+    title: 'Thermal Imagery Super-Resolution',
     description:
       'A high-performance thermal super-resolution system achieving 34.2 dB PSNR at 229+ FPS using a novel IMDN-based architecture optimized for real-time thermal imaging.',
     longDescription:
@@ -38,6 +58,7 @@ const projects: Project[] = [
     ],
   },
   {
+    slug: 'autonomous-race-car',
     title: 'Autonomous Race Car (WRO 2023 Winner)',
     description:
       'An open-source autonomous race vehicle built in just 20 days for the WRO Future Engineers challenge. Combines embedded control, sensor fusion, and Jetson-powered computer vision for real-time navigation and decision-making.',
@@ -55,6 +76,7 @@ const projects: Project[] = [
     ],
   },  
   {
+    slug: 'smart-learning-table',
     title: 'Smart Learning Table for Classrooms',
     description:
       'An IoT-powered, AI-assisted smart desk that combines hardware control, computer vision, and ergonomic intelligence to enhance classroom learning and posture health.',
@@ -74,11 +96,11 @@ const projects: Project[] = [
 ]
 
 export default function Projects() {
+  const router = useRouter()
   const ref = useRef(null)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
   const isInView = useInView(ref, { once: true, amount: 0.2 })
-  const [selectedProject, setSelectedProject] = useState<number | null>(null)
   const [imageErrors, setImageErrors] = useState<{ [key: number]: boolean }>({})
   const [imageSources, setImageSources] = useState<{ [key: number]: string }>({})
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -317,18 +339,15 @@ export default function Projects() {
     navigateRight()
   }
 
-  // Get the actual index in the original array for modal
+  // Get the actual index in the original array
   const getActualIndex = (index: number) => {
     return ((index % itemCount) + itemCount) % itemCount
   }
 
   const openProject = (index: number) => {
     const actualIdx = getActualIndex(index)
-    setSelectedProject(actualIdx)
-  }
-
-  const closeProject = () => {
-    setSelectedProject(null)
+    const project = projects[actualIdx]
+    router.push(`/projects/${project.slug}`)
   }
 
   const handleImageError = (index: number, originalSrc: string) => {
@@ -499,124 +518,6 @@ export default function Projects() {
           </motion.div>
         </div>
       </section>
-
-      {/* Project Modal */}
-      <AnimatePresence>
-        {selectedProject !== null && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
-              onClick={closeProject}
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="fixed inset-4 md:inset-8 lg:inset-16 z-50 overflow-y-auto"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="bg-light-surface dark:bg-dark-surface rounded-3xl border border-light-border/50 dark:border-white/10 shadow-2xl max-w-5xl mx-auto overflow-hidden">
-                {projects[selectedProject] && (
-                  <>
-                    {/* Modal Header */}
-                    <div className="relative">
-                      <div className="relative w-full h-64 md:h-96 overflow-hidden bg-light-surface2 dark:bg-dark-surface2">
-                        {projects[selectedProject].image && !imageErrors[selectedProject] ? (
-                          <>
-                            <Image
-                              src={imageSources[selectedProject] || projects[selectedProject].image}
-                              alt={projects[selectedProject].title}
-                              fill
-                              className="object-cover"
-                              onError={() => projects[selectedProject].image && handleImageError(selectedProject, projects[selectedProject].image)}
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-light-surface dark:from-dark-surface to-transparent" />
-                          </>
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center text-primary-500/30">
-                            <FiImage size={64} />
-                          </div>
-                        )}
-                      </div>
-                      <HoverButton
-                        onClick={closeProject}
-                        variant="outline"
-                        className="absolute top-4 right-4 bg-light-surface/90 dark:bg-dark-surface/90 hover:bg-light-surface dark:hover:bg-dark-surface text-light-text2 dark:text-dark-text2 hover:text-primary-500 rounded-full p-2 z-10"
-                        aria-label="Close project"
-                      >
-                        <FiX size={24} />
-                      </HoverButton>
-                    </div>
-
-                    {/* Modal Content */}
-                    <div className="p-6 md:p-8">
-                      <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary-500">
-                        {projects[selectedProject].title}
-                      </h2>
-                      
-                      <p className="text-lg text-light-text2 dark:text-dark-text2 mb-6 leading-relaxed">
-                        {projects[selectedProject].longDescription || projects[selectedProject].description}
-                      </p>
-
-                      {projects[selectedProject].features && (
-                        <div className="mb-6">
-                          <h3 className="text-xl font-bold mb-3 text-light-text dark:text-dark-text">Key Features</h3>
-                          <ul className="space-y-2">
-                            {projects[selectedProject].features!.map((feature, idx) => (
-                              <li key={idx} className="flex items-start space-x-2 text-light-text2 dark:text-dark-text2">
-                                <span className="text-primary-500 mt-1">•</span>
-                                <span>{feature}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-
-                      <div className="mb-6">
-                        <h3 className="text-xl font-bold mb-3 text-light-text dark:text-dark-text">Technologies</h3>
-                        <div className="flex flex-wrap gap-2">
-                          {projects[selectedProject].technologies.map((tech, techIndex) => (
-                            <span
-                              key={techIndex}
-                              className="px-4 py-2 bg-primary-500/15 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full text-sm font-medium"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="flex flex-wrap gap-4">
-                        <HoverButton
-                          href={projects[selectedProject].githubUrl}
-                          variant="gradient"
-                          className="flex items-center space-x-2"
-                        >
-                          <FiGithub size={20} />
-                          <span>View on GitHub</span>
-                        </HoverButton>
-                        {projects[selectedProject].demoUrl && (
-                          <HoverButton
-                            href={projects[selectedProject].demoUrl}
-                            variant="outline"
-                            className="flex items-center space-x-2"
-                          >
-                            <FiExternalLink size={20} />
-                            <span>Live Demo</span>
-                          </HoverButton>
-                        )}
-                      </div>
-                    </div>
-                  </>
-                )}
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
     </>
   )
 }
