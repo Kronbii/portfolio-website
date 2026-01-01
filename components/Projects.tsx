@@ -15,7 +15,7 @@ export interface Project {
   longDescription?: string
   githubUrl: string
   demoUrl?: string
-  technologies: string[]
+  externalUrl?: string // If provided, opens this URL instead of internal page
   image?: string
   features?: string[]
 }
@@ -27,9 +27,9 @@ export const projects: Project[] = [
     description:
       'An AI-powered sign language translation system focused on real-time interpretation and translation of Lebanese Sign Language (LSL), designed to bridge communication barriers between deaf and hearing communities using computer vision and NLP.',
     longDescription:
-      'Omnisign is an AI-driven sign language interpreter and translator developed as a final-year project, leveraging computer vision, machine learning, and natural language processing to recognize and translate Lebanese Sign Language (LSL) into spoken/written languages in real time. The system was created to enhance inclusivity and accessibility for the deaf and hard-of-hearing community by enabling seamless two-way communication. Omnisign’s innovative approach combines state-of-the-art AI models for gesture recognition with language translation capabilities to output accurate translations across multiple languages. The project gained recognition by winning the Public Choice Award at the National FYP Demo Day 2025, reflecting its societal impact and technical excellence. It’s an open, research-oriented initiative demonstrating how AI can break down communication barriers and foster greater social integration for under-served groups.',  
+      'Omnisign is an AI-driven sign language interpreter and translator developed as a final-year project, leveraging computer vision, machine learning, and natural language processing to recognize and translate Lebanese Sign Language (LSL) into spoken/written languages in real time. The system was created to enhance inclusivity and accessibility for the deaf and hard-of-hearing community by enabling seamless two-way communication. Omnisign\'s innovative approach combines state-of-the-art AI models for gesture recognition with language translation capabilities to output accurate translations across multiple languages. The project gained recognition by winning the Public Choice Award at the National FYP Demo Day 2025, reflecting its societal impact and technical excellence. It\'s an open, research-oriented initiative demonstrating how AI can break down communication barriers and foster greater social integration for under-served groups.',  
     githubUrl: 'https://laythayache.com/projects/omnisign',
-    technologies: ['Python', 'TensorFlow/PyTorch', 'OpenCV', 'Computer Vision', 'NLP'],
+    externalUrl: 'https://laythayache.com/projects/omnisign',
     image: '/projects/omnisign.webp',
     features: [
       'Real-time Lebanese Sign Language recognition using AI',
@@ -47,7 +47,6 @@ export const projects: Project[] = [
     longDescription:
       'This project introduces the first real-time thermal super-resolution framework built on the Information Multi-Distillation Network (IMDN). It delivers 34.2 dB PSNR and 229+ FPS, outperforming existing methods while remaining lightweight (0.69M parameters). The system integrates a thermal-aware loss function and a cross-domain transfer approach to adapt RGB-pretrained models to thermal data, resulting in superior detail preservation and speed. Applications span autonomous driving, industrial monitoring, thermal surveillance, and medical diagnostics. Developed with PyTorch, TensorRT, and OpenCV, this solution establishes a new state-of-the-art benchmark for real-time thermal enhancement.',
     githubUrl: 'https://github.com/Kronbii/thermal-super-resolution',
-    technologies: ['Python', 'PyTorch', 'TensorRT', 'OpenCV'],
     image: '/projects/thermal-sr.webp',
     features: [
       '34.2 dB PSNR at 229+ FPS real-time inference',
@@ -65,7 +64,6 @@ export const projects: Project[] = [
     longDescription:
       'This project showcases a fully integrated autonomous vehicle developed from scratch in only 20 days for the World Robot Olympiad Future Engineers 2023 competition. The system combines a Jetson Nano for high-level computer vision and an Arduino Mega for deterministic real-time control using PID steering stabilization and sensor fusion from IMU and color sensors. Designed as a dual-MCU platform, it achieves smooth autonomous cornering, traffic sign detection, and dynamic pathing. Built with OpenCV, C++, and Python, the project demonstrates robust teamwork, rapid prototyping, and reliable embedded AI performance on a tight schedule.',
     githubUrl: 'https://github.com/Kronbii/autonomous-race-car',
-    technologies: ['Python', 'C++', 'OpenCV', 'Arduino', 'Jetson Nano'],
     image: '/projects/race-car.webp',
     features: [
       'End-to-end autonomous vehicle built in 20 days',
@@ -83,7 +81,6 @@ export const projects: Project[] = [
     longDescription:
       'The Smart Learning Table is an interactive, sensor-driven workstation designed to improve engagement, comfort, and learning outcomes in classrooms and offices. Built with ESP32 microcontrollers, motorized actuators, and OpenCV-based vision tracking, the desk automatically adjusts height and tilt, monitors user posture, and provides real-time visual feedback. It supports multiple control interfaces, including a web dashboard and Bluetooth controllers, and integrates posture analytics for ergonomic insights. Developed as a collaborative university project, it demonstrates a seamless fusion of IoT, embedded systems, and AI for human-centered design.',
     githubUrl: 'https://github.com/Kronbii/smart-interactive-desk',
-    technologies: ['Python', 'OpenCV', 'ESP32', 'React', 'MQTT'],
     image: '/projects/smart-desk.webp',
     features: [
       'Motorized height and tilt adjustment via actuators',
@@ -347,7 +344,14 @@ export default function Projects() {
   const openProject = (index: number) => {
     const actualIdx = getActualIndex(index)
     const project = projects[actualIdx]
-    router.push(`/projects/${project.slug}`)
+    
+    // If project has an external URL, open it in a new tab
+    if (project.externalUrl) {
+      window.open(project.externalUrl, '_blank', 'noopener,noreferrer')
+    } else {
+      // Otherwise, navigate to internal project page
+      router.push(`/projects/${project.slug}`)
+    }
   }
 
   const handleImageError = (index: number, originalSrc: string) => {
@@ -449,21 +453,6 @@ export default function Projects() {
                   <p className="text-light-text2 dark:text-dark-text2 mb-5 leading-relaxed line-clamp-3">
                     {project.description}
                   </p>
-                  <div className="flex flex-wrap gap-2 mb-5">
-                    {project.technologies.slice(0, 3).map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-3 py-1 bg-primary-500/15 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full text-sm"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                    {project.technologies.length > 3 && (
-                      <span className="px-3 py-1 bg-primary-500/10 text-primary-500 rounded-full text-sm">
-                        +{project.technologies.length - 3}
-                      </span>
-                    )}
-                  </div>
                   <div className="text-primary-600 dark:text-primary-400 text-sm font-semibold group-hover:text-primary-500 dark:group-hover:text-primary-300 transition-colors">
                     Tap for outcomes →
                   </div>

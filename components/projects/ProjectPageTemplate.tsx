@@ -100,17 +100,6 @@ export default function ProjectPageTemplate({ project, children }: ProjectPageTe
                 </HoverButton>
               )}
             </div>
-
-            <div className="flex flex-wrap gap-2">
-              {project.technologies.map((tech, techIndex) => (
-                <span
-                  key={techIndex}
-                  className="px-4 py-2 bg-primary-500/15 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full text-sm font-medium"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
           </motion.div>
         </div>
       </section>
@@ -158,19 +147,6 @@ export default function ProjectPageTemplate({ project, children }: ProjectPageTe
                 Project Details
               </h3>
               <div className="space-y-4">
-                <div>
-                  <p className="text-sm text-light-text2 dark:text-dark-text2 mb-1">Technologies</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech, idx) => (
-                      <span
-                        key={idx}
-                        className="px-3 py-1 bg-primary-500/10 text-primary-600 dark:text-primary-400 rounded-full text-xs"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
                 <div>
                   <p className="text-sm text-light-text2 dark:text-dark-text2 mb-1">Links</p>
                   <div className="space-y-2">
