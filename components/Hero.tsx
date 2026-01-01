@@ -223,7 +223,7 @@ function HeroPortrait({
               <p className="text-sm text-light-text2 dark:text-dark-text2">Add a portrait</p>
             </div>
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-light-surface2 dark:from-dark-surface2 via-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-light-surface2/0 dark:from-dark-surface2/90 via-transparent" />
         </div>
       </motion.div>
 

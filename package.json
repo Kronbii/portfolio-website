@@ -7,7 +7,12 @@
     "build": "next build",
     "postbuild": "next-sitemap",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "convert-favicon": "node convert-favicon.js",
+    "convert-favicons-only": "node convert-favicons-only.js",
+    "convert-blackhole-favicon": "node convert-blackhole-favicon.js",
+    "convert-og": "node convert-og-image.js",
+    "change-favicon-color": "node change-favicon-color.js"
   },
   "dependencies": {
     "clsx": "^2.1.1",

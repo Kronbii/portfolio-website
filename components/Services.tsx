@@ -327,12 +327,12 @@ export default function Services() {
             {extendedServices.map((service, index) => {
               const isCentered = index === currentIndex
               return (
-                <motion.div
+              <motion.div
                   key={`${service.title}-${index}`}
-                  ref={(el) => {
-                    cardsRef.current[index] = el
-                  }}
-                  initial={{ opacity: 0, y: 30 }}
+                ref={(el) => {
+                  cardsRef.current[index] = el
+                }}
+                initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: isCentered ? -16 : 0, scale: isCentered ? 1.03 : 1 } : {}}
                   transition={{ duration: 0.15 }}
                   className={`group relative overflow-hidden rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-white/[0.03] backdrop-blur flex-shrink-0 w-[280px] sm:w-[320px] lg:w-[400px] transition-all duration-75 ${
@@ -341,32 +341,32 @@ export default function Services() {
                       : 'shadow-sm dark:shadow-none'
                   }`}
                   whileHover={{ y: isCentered ? -20 : -4 }}
-                >
+              >
                   <div className="p-5 sm:p-8">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3 text-primary-400">
-                        {service.icon}
-                        <span className="text-xs uppercase tracking-wide text-light-text2 dark:text-dark-text2">{service.timeline}</span>
-                      </div>
-                    </div>
-                    <h3 className="mt-4 text-2xl sm:text-3xl font-semibold text-light-text dark:text-dark-text">
-                      {service.title}
-                    </h3>
-                    <p className="mt-2 text-light-text2 dark:text-dark-text2 text-sm sm:text-base leading-relaxed">
-                      {service.punchline}
-                    </p>
-                    <div className="mt-4 space-y-2">
-                      {service.highlights.map((item) => (
-                        <div key={item} className="flex items-center space-x-2 text-sm sm:text-base text-light-text dark:text-dark-text">
-                          <span className="text-primary-400">
-                            <FiCheck />
-                          </span>
-                          <span>{item}</span>
-                        </div>
-                      ))}
-                    </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3 text-primary-400">
+                    {service.icon}
+                    <span className="text-xs uppercase tracking-wide text-light-text2 dark:text-dark-text2">{service.timeline}</span>
                   </div>
-                </motion.div>
+                </div>
+                <h3 className="mt-4 text-2xl sm:text-3xl font-semibold text-light-text dark:text-dark-text">
+                  {service.title}
+                </h3>
+                <p className="mt-2 text-light-text2 dark:text-dark-text2 text-sm sm:text-base leading-relaxed">
+                  {service.punchline}
+                </p>
+                <div className="mt-4 space-y-2">
+                  {service.highlights.map((item) => (
+                    <div key={item} className="flex items-center space-x-2 text-sm sm:text-base text-light-text dark:text-dark-text">
+                      <span className="text-primary-400">
+                        <FiCheck />
+                      </span>
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                    </div>
+                </div>
+              </motion.div>
               )
             })}
           </div>
