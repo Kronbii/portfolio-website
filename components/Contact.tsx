@@ -1,9 +1,8 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
-import { FiGithub, FiLinkedin, FiMail, FiSend, FiClock, FiCheckCircle } from 'react-icons/fi'
+import { FiGithub, FiLinkedin, FiMail, FiSend, FiClock } from 'react-icons/fi'
 import { HoverButton } from '@/components/ui/hover-button'
 
 const contactSteps = [

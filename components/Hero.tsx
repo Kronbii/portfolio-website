@@ -5,10 +5,7 @@ import {
   FiGithub,
   FiLinkedin,
   FiMail,
-  FiArrowUpRight,
   FiCompass,
-  FiWind,
-  FiCheck,
 } from 'react-icons/fi'
 import Image from 'next/image'
 import { useState, type Dispatch, type SetStateAction } from 'react'

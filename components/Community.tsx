@@ -1,12 +1,12 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
-import { useRef, useState, useEffect } from 'react'
+import { motion, useInView } from 'framer-motion'
+import { useRef, useState } from 'react'
 import Image from 'next/image'
 import { FiMic, FiUsers, FiHeart, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { getFallbackImage } from '@/lib/utils'
 import { communityItems, CommunityItem } from '@/data/community'
+import { useInfiniteCarousel } from '@/hooks/useInfiniteCarousel'
 
 const typeConfig = {
   speaking: {
@@ -27,249 +27,23 @@ const typeConfig = {
 
 export default function Community() {
   const ref = useRef(null)
-  const scrollContainerRef = useRef<HTMLDivElement>(null)
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([])
   const isInView = useInView(ref, { once: true, amount: 0.1 })
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const currentIndexRef = useRef<number>(0)
-  const touchStartRef = useRef<number>(0)
-  const touchEndRef = useRef<number>(0)
-  const isAnimatingRef = useRef(false)
-  const lastScrollLeftRef = useRef<number>(0)
   const [imageSources, setImageSources] = useState<{ [key: number]: string }>({})
 
-  // Create infinite loop by tripling the items
-  const extendedItems = [...communityItems, ...communityItems, ...communityItems]
   const itemCount = communityItems.length
-
-  // Initialize scroll to middle set (start at first card of middle set)
-  useEffect(() => {
-    if (!scrollContainerRef.current || cardsRef.current.length === 0) return
-    
-    const timer = setTimeout(() => {
-      const container = scrollContainerRef.current
-      const startIndex = itemCount // First card of middle set
-      const startCard = cardsRef.current[startIndex]
-      if (!container || !startCard) return
-      
-      // Scroll to the middle set without animation
-      const cardCenter = startCard.offsetLeft + startCard.offsetWidth / 2
-      const containerCenter = container.offsetWidth / 2
-      container.scrollLeft = cardCenter - containerCenter
-      setCurrentIndex(startIndex)
-      currentIndexRef.current = startIndex
-    }, 150)
-
-    return () => clearTimeout(timer)
-  }, [itemCount])
-
-  const updateCurrentIndex = () => {
-    if (!scrollContainerRef.current) return
-    
-    const container = scrollContainerRef.current
-    
-    // Find which card is closest to the center of the viewport
-    const containerRect = container.getBoundingClientRect()
-    const containerCenter = containerRect.left + containerRect.width / 2
-    
-    let closestIndex = 0
-    let closestDistance = Infinity
-    
-    cardsRef.current.forEach((card, index) => {
-      if (!card) return
-      const cardRect = card.getBoundingClientRect()
-      const cardCenter = cardRect.left + cardRect.width / 2
-      const distance = Math.abs(containerCenter - cardCenter)
-      
-      if (distance < closestDistance) {
-        closestDistance = distance
-        closestIndex = index
-      }
-    })
-    
-    setCurrentIndex(closestIndex)
-    currentIndexRef.current = closestIndex
-  }
-
-  // Handle touch events for swipe detection
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartRef.current = e.touches[0].clientX
-    touchEndRef.current = e.touches[0].clientX
-  }
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    touchEndRef.current = e.touches[0].clientX
-  }
-
-  const handleTouchEnd = () => {
-    if (isAnimatingRef.current) return
-    
-    const swipeDistance = touchStartRef.current - touchEndRef.current
-    const minSwipeDistance = 50 // Minimum swipe distance to trigger navigation
-    
-    if (Math.abs(swipeDistance) > minSwipeDistance) {
-      if (swipeDistance > 0) {
-        // Swiped left = go right (next)
-        navigateRight()
-      } else {
-        // Swiped right = go left (previous)
-        navigateLeft()
-      }
-    }
-  }
-
-  const navigateLeft = () => {
-    if (isAnimatingRef.current) return
-    isAnimatingRef.current = true
-    
-    const container = scrollContainerRef.current
-    if (!container) {
-      isAnimatingRef.current = false
-      return
-    }
-    
-    const idx = currentIndexRef.current
-    // If we're at or near the start of middle set, instantly jump to end of middle set first
-    if (idx <= itemCount) {
-      const jumpToIndex = idx + itemCount
-      scrollToIndex(jumpToIndex, true)
-      
-      requestAnimationFrame(() => {
-        scrollToIndex(jumpToIndex - 1)
-        setTimeout(() => { isAnimatingRef.current = false }, 400)
-      })
-    } else {
-      scrollToIndex(idx - 1)
-      setTimeout(() => { isAnimatingRef.current = false }, 400)
-    }
-  }
-
-  const navigateRight = () => {
-    if (isAnimatingRef.current) return
-    isAnimatingRef.current = true
-    
-    const container = scrollContainerRef.current
-    if (!container) {
-      isAnimatingRef.current = false
-      return
-    }
-    
-    const idx = currentIndexRef.current
-    // If we're at or near the end of middle set, instantly jump to start of middle set first
-    if (idx >= itemCount * 2 - 1) {
-      const jumpToIndex = idx - itemCount
-      scrollToIndex(jumpToIndex, true)
-      
-      requestAnimationFrame(() => {
-        scrollToIndex(jumpToIndex + 1)
-        setTimeout(() => { isAnimatingRef.current = false }, 400)
-      })
-    } else {
-      scrollToIndex(idx + 1)
-      setTimeout(() => { isAnimatingRef.current = false }, 400)
-    }
-  }
-
-  // Handle horizontal wheel scrolling to trigger navigation
-  useEffect(() => {
-    const container = scrollContainerRef.current
-    if (!container) return
-
-    let wheelTimeout: NodeJS.Timeout | null = null
-    let accumulatedDelta = 0
-    const threshold = 50 // Minimum scroll delta to trigger navigation
-
-    const handleWheel = (e: WheelEvent) => {
-      // Only handle horizontal scrolling (deltaX)
-      // Ignore vertical scrolling (deltaY) - let it scroll the page normally
-      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-        e.preventDefault()
-        e.stopPropagation()
-        
-        accumulatedDelta += e.deltaX
-        
-        // Clear any pending timeout
-        if (wheelTimeout) {
-          clearTimeout(wheelTimeout)
-        }
-        
-        // Debounce and trigger navigation after scroll stops
-        wheelTimeout = setTimeout(() => {
-          if (isAnimatingRef.current) {
-            accumulatedDelta = 0
-            return
-          }
-          
-          if (Math.abs(accumulatedDelta) > threshold) {
-            if (accumulatedDelta > 0) {
-              // Scrolled right = go to next card
-              navigateRight()
-            } else {
-              // Scrolled left = go to previous card
-              navigateLeft()
-            }
-          }
-          
-          accumulatedDelta = 0
-        }, 150)
-      }
-      // If it's vertical scrolling, don't prevent default - let page scroll normally
-    }
-
-    // Update current index on scroll (for button/touch navigation)
-    const handleScroll = () => {
-      if (isAnimatingRef.current) return
-      updateCurrentIndex()
-    }
-
-    container.addEventListener('wheel', handleWheel, { passive: false })
-    container.addEventListener('scroll', handleScroll, { passive: true })
-    updateCurrentIndex()
-    window.addEventListener('resize', updateCurrentIndex)
-
-    return () => {
-      if (wheelTimeout) {
-        clearTimeout(wheelTimeout)
-      }
-      container.removeEventListener('wheel', handleWheel)
-      container.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('resize', updateCurrentIndex)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [itemCount])
-
-  const scrollToIndex = (index: number, instant = false) => {
-    const container = scrollContainerRef.current
-    const targetCard = cardsRef.current[index]
-    if (!container || !targetCard) return
-    
-    const containerRect = container.getBoundingClientRect()
-    const cardRect = targetCard.getBoundingClientRect()
-    
-    // Calculate scroll position to center the card
-    const cardCenter = targetCard.offsetLeft + cardRect.width / 2
-    const containerCenter = containerRect.width / 2
-    const scrollPosition = cardCenter - containerCenter
-    
-    container.scrollTo({
-      left: scrollPosition,
-      behavior: instant ? 'instant' : 'smooth',
-    })
-    
-    setCurrentIndex(index)
-    currentIndexRef.current = index
-  }
-
-  const handleScrollLeft = () => {
-    navigateLeft()
-  }
-
-  const handleScrollRight = () => {
-    navigateRight()
-  }
-
-  // Get the actual index in the original array for pagination dots
-  const actualIndex = ((currentIndex % itemCount) + itemCount) % itemCount
+  const {
+    scrollContainerRef,
+    cardsRef,
+    currentIndex,
+    actualIndex,
+    extendedItems,
+    handleTouchStart,
+    handleTouchMove,
+    handleTouchEnd,
+    handleScrollLeft,
+    handleScrollRight,
+    scrollToIndex,
+  } = useInfiniteCarousel(communityItems, { itemCount })
 
   return (
     <section
