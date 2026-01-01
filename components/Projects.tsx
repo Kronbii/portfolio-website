@@ -7,90 +7,11 @@ import { FiImage, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { getFallbackImage } from '@/lib/utils'
+import { projects, Project } from '@/data/projects'
 
-export interface Project {
-  slug: string
-  title: string
-  description: string
-  longDescription?: string
-  githubUrl: string
-  demoUrl?: string
-  externalUrl?: string // If provided, opens this URL instead of internal page
-  image?: string
-  features?: string[]
-}
-
-export const projects: Project[] = [
-  {
-    slug: 'omnisign',
-    title: 'Lebanese Sign Language AI Translator',
-    description:
-      'An AI-powered sign language translation system focused on real-time interpretation and translation of Lebanese Sign Language (LSL), designed to bridge communication barriers between deaf and hearing communities using computer vision and NLP.',
-    longDescription:
-      'Omnisign is an AI-driven sign language interpreter and translator developed as a final-year project, leveraging computer vision, machine learning, and natural language processing to recognize and translate Lebanese Sign Language (LSL) into spoken/written languages in real time. The system was created to enhance inclusivity and accessibility for the deaf and hard-of-hearing community by enabling seamless two-way communication. Omnisign\'s innovative approach combines state-of-the-art AI models for gesture recognition with language translation capabilities to output accurate translations across multiple languages. The project gained recognition by winning the Public Choice Award at the National FYP Demo Day 2025, reflecting its societal impact and technical excellence. It\'s an open, research-oriented initiative demonstrating how AI can break down communication barriers and foster greater social integration for under-served groups.',  
-    githubUrl: 'https://laythayache.com/projects/omnisign',
-    externalUrl: 'https://laythayache.com/projects/omnisign',
-    image: '/projects/omnisign.webp',
-    features: [
-      'Real-time Lebanese Sign Language recognition using AI',
-      'Multilingual translation output',
-      'Computer vision-driven gesture interpretation',
-      'NLP-based translation module',
-      'Award-winning accessibility innovation presented at National FYP Demo Day 2025',
-    ],
-  },
-  {
-    slug: 'thermal-super-resolution',
-    title: 'Thermal Imagery Super-Resolution',
-    description:
-      'A high-performance thermal super-resolution system achieving 34.2 dB PSNR at 229+ FPS using a novel IMDN-based architecture optimized for real-time thermal imaging.',
-    longDescription:
-      'This project introduces the first real-time thermal super-resolution framework built on the Information Multi-Distillation Network (IMDN). It delivers 34.2 dB PSNR and 229+ FPS, outperforming existing methods while remaining lightweight (0.69M parameters). The system integrates a thermal-aware loss function and a cross-domain transfer approach to adapt RGB-pretrained models to thermal data, resulting in superior detail preservation and speed. Applications span autonomous driving, industrial monitoring, thermal surveillance, and medical diagnostics. Developed with PyTorch, TensorRT, and OpenCV, this solution establishes a new state-of-the-art benchmark for real-time thermal enhancement.',
-    githubUrl: 'https://github.com/Kronbii/thermal-super-resolution',
-    image: '/projects/thermal-sr.webp',
-    features: [
-      '34.2 dB PSNR at 229+ FPS real-time inference',
-      'Thermal-aware multi-component loss function',
-      'Cross-domain RGB-to-thermal transfer learning',
-      'Lightweight IMDN architecture (0.69M parameters)',
-      'Applications in robotics, security, and autonomous systems',
-    ],
-  },
-  {
-    slug: 'autonomous-race-car',
-    title: 'Autonomous Race Car (WRO 2023 Winner)',
-    description:
-      'An open-source autonomous race vehicle built in just 20 days for the WRO Future Engineers challenge. Combines embedded control, sensor fusion, and Jetson-powered computer vision for real-time navigation and decision-making.',
-    longDescription:
-      'This project showcases a fully integrated autonomous vehicle developed from scratch in only 20 days for the World Robot Olympiad Future Engineers 2023 competition. The system combines a Jetson Nano for high-level computer vision and an Arduino Mega for deterministic real-time control using PID steering stabilization and sensor fusion from IMU and color sensors. Designed as a dual-MCU platform, it achieves smooth autonomous cornering, traffic sign detection, and dynamic pathing. Built with OpenCV, C++, and Python, the project demonstrates robust teamwork, rapid prototyping, and reliable embedded AI performance on a tight schedule.',
-    githubUrl: 'https://github.com/Kronbii/autonomous-race-car',
-    image: '/projects/race-car.webp',
-    features: [
-      'End-to-end autonomous vehicle built in 20 days',
-      'Jetson-based traffic sign and lane detection',
-      'Arduino PID control with IMU and color sensors',
-      'Dual-MCU architecture for modular expandability',
-      'Designed and deployed for WRO Future Engineers 2023',
-    ],
-  },  
-  {
-    slug: 'smart-learning-table',
-    title: 'Smart Learning Table for Classrooms',
-    description:
-      'An IoT-powered, AI-assisted smart desk that combines hardware control, computer vision, and ergonomic intelligence to enhance classroom learning and posture health.',
-    longDescription:
-      'The Smart Learning Table is an interactive, sensor-driven workstation designed to improve engagement, comfort, and learning outcomes in classrooms and offices. Built with ESP32 microcontrollers, motorized actuators, and OpenCV-based vision tracking, the desk automatically adjusts height and tilt, monitors user posture, and provides real-time visual feedback. It supports multiple control interfaces, including a web dashboard and Bluetooth controllers, and integrates posture analytics for ergonomic insights. Developed as a collaborative university project, it demonstrates a seamless fusion of IoT, embedded systems, and AI for human-centered design.',
-    githubUrl: 'https://github.com/Kronbii/smart-interactive-desk',
-    image: '/projects/smart-desk.webp',
-    features: [
-      'Motorized height and tilt adjustment via actuators',
-      'Posture tracking using computer vision and sensors',
-      'Web dashboard and Bluetooth controller interfaces',
-      'Real-time visual feedback through LEDs and displays',
-      'IoT connectivity with data logging and analytics',
-    ],
-  },
-]
+// Re-export for backward compatibility
+export type { Project }
+export { projects }
 
 export default function Projects() {
   const router = useRouter()

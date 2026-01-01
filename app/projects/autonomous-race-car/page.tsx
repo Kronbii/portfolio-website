@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { FiServer, FiPlay } from 'react-icons/fi'
-import { projects } from '@/components/Projects'
+import { projects } from '@/data/projects'
 import ProjectPageTemplate from '@/components/projects/ProjectPageTemplate'
 
 export default function AutonomousRaceCarPage() {
