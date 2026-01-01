@@ -24,7 +24,7 @@ const infoCards = [
   },
   { 
     value: 'Leader', 
-    label: 'Nasa Space Apps, Astronomyclub',
+    label: 'Driving impact in communities',
     icon: FiUsers,
     color: 'text-green-500',
     bgColor: 'bg-green-500/10',
