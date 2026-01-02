@@ -3,27 +3,10 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import Image from 'next/image'
-import { FiMic, FiUsers, FiHeart, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { getFallbackImage } from '@/lib/utils'
 import { communityItems, CommunityItem } from '@/data/community'
 import { useInfiniteCarousel } from '@/hooks/useInfiniteCarousel'
-
-const typeConfig = {
-  speaking: {
-    icon: <FiMic size={20} />,
-    label: 'Speaking',
-    color: 'text-primary-400',
-    bgColor: 'bg-primary-500/10',
-    borderColor: 'border-primary-500/20',
-  },
-  leadership: {
-    icon: <FiUsers size={20} />,
-    label: 'Leadership',
-    color: 'text-secondary-400',
-    bgColor: 'bg-secondary-500/10',
-    borderColor: 'border-secondary-500/20',
-  },
-}
 
 export default function Community() {
   const ref = useRef(null)
@@ -83,7 +66,6 @@ export default function Community() {
         >
           <div className="flex gap-4 sm:gap-6 px-4 sm:px-6 lg:px-[calc((100vw-72rem)/2+1.5rem)] items-center w-max">
             {extendedItems.map((item, index) => {
-              const config = typeConfig[item.type]
               const isCentered = index === currentIndex
               return (
                 <motion.div
@@ -118,13 +100,6 @@ export default function Community() {
                       }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-light-surface dark:from-dark-surface2 via-transparent" />
-                    {/* Badge */}
-                    <div className="absolute top-4 left-4">
-                      <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full border ${config.borderColor} ${config.bgColor} ${config.color} backdrop-blur-sm`}>
-                        {config.icon}
-                        <span className="text-xs font-medium">{config.label}</span>
-                      </div>
-                    </div>
                   </div>
                   
                   {/* Content */}
