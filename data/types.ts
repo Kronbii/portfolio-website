@@ -29,3 +29,14 @@ export interface Certification {
   link?: string
 }
 
+export interface BlogArticle {
+  slug: string
+  title: string
+  description: string
+  content: string // Full article content (HTML or markdown)
+  bannerImage?: string
+  publishedDate: string
+  mediumUrl?: string
+  devToUrl?: string
+  tags?: string[]
+}
