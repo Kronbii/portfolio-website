@@ -70,20 +70,35 @@ export function UniversalCard({
       onClick={onClick}
     >
       {/* Image */}
-      <div className="relative flex-shrink-0 overflow-hidden" style={{
+      <div className="relative flex-shrink-0" style={{
         backgroundColor: 'var(--color-primary)',
         height: `${(cardHeight * 297) / 600}px`, // Maintain proportional height
+        padding: `${(cardWidth * 12) / 450}px`, // Add padding around image (inset)
       }}>
         {hasImage ? (
-          <Image
-            src={image}
-            alt={imageAlt}
-            fill
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
-            style={{ objectPosition: imagePosition }}
-            unoptimized
-            onError={handleImageError}
-          />
+          <div className="relative w-full h-full overflow-hidden rounded-sm" style={{ border: 'none', outline: 'none' }}>
+            <Image
+              src={image}
+              alt={imageAlt}
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-300"
+              style={{ 
+                objectPosition: imagePosition,
+                border: 'none',
+                outline: 'none',
+              }}
+              unoptimized
+              onError={handleImageError}
+            />
+            {/* Bottom fade gradient */}
+            <div 
+              className="absolute bottom-0 left-0 right-0 pointer-events-none z-10"
+              style={{
+                height: '50%',
+                background: 'linear-gradient(to bottom, transparent 0%, rgba(234, 234, 234, 0.3) 50%, var(--color-primary) 100%)',
+              }}
+            />
+          </div>
         ) : showImagePlaceholder ? (
           <div className="w-full h-full flex items-center justify-center" style={{ color: 'rgba(37, 37, 37, 0.3)' }}>
             <FiImage size={48} />
