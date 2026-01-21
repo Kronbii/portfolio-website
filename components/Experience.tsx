@@ -146,7 +146,7 @@ function TimelineCard({
                 >
                   {item.period}
                 </motion.p>
-                <p className={`text-sm font-semibold ${item.color}`}>{item.company}</p>
+                <p className="text-sm font-semibold text-blue-500">{item.company}</p>
               </div>
             </div>
 
