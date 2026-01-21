@@ -15,10 +15,10 @@ export default function Home() {
     <main className="min-h-screen" style={{ backgroundColor: 'var(--color-primary)' }}>
       <Navigation />
       <Hero />
+      <Community />
       <Blog />
       <About />
       <Experience />
-      <Community />
       <Projects />
       <Certifications />
       <Services />

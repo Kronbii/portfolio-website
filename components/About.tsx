@@ -188,7 +188,8 @@ export default function About() {
             height="28"
             viewBox="0 0 20 28"
             fill="none"
-            className="group-hover:text-primary-500 transition-colors" style={{ color: 'rgba(37, 37, 37, 0.5)' }}>
+            className="group-hover:text-primary-500 transition-colors" 
+            style={{ color: 'rgba(37, 37, 37, 0.5)' }}
           >
             <rect x="1" y="1" width="18" height="26" rx="9" stroke="currentColor" strokeWidth="1.5" />
             <motion.circle

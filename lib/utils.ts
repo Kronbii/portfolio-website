@@ -145,9 +145,6 @@ export function getSectionSubheadingStyle(): {
       color: 'var(--color-secondary)',
       fontSize: 'clamp(18px, 3vw, 26px)',
     },
-    style: {
-      fontSize: 'clamp(18px, 3vw, 26px)',
-    },
   }
 }
 

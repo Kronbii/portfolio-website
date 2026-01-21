@@ -69,8 +69,8 @@ export default function Navigation() {
                 key={item.name}
                 href={item.href}
                 className="font-normal uppercase tracking-wide transition-colors hover:opacity-70 whitespace-nowrap"
-                style={{ color: 'var(--color-secondary)' }}
-                style={{
+                style={{ 
+                  color: 'var(--color-secondary)',
                   fontSize: 'clamp(10px, 1.2vw, 14px)',
                 }}
                 whileHover={{ y: -2 }}
