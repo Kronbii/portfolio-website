@@ -6,7 +6,6 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -27,18 +26,18 @@ const config: Config = {
           900: '#142c5c',
         },
 
-        /* SECONDARY BLUE (transition-blue-1 & 2) */
+        /* SECONDARY COLOR */
         secondary: {
-          50:  '#eef3ff',
-          100: '#dfe7ff',
-          200: '#b9caff',
-          300: '#93adff',
-          400: '#6c97ff',
-          500: '#4fa0ff',   // transition blue 2
-          600: '#346bf1',   // transition blue 1
-          700: '#2a56c4',
-          800: '#203f96',
-          900: '#172868',
+          50:  '#f5f5f5',
+          100: '#e5e5e5',
+          200: '#d4d4d4',
+          300: '#a3a3a3',
+          400: '#737373',
+          500: '#252525',   // Main secondary color
+          600: '#1f1f1f',
+          700: '#1a1a1a',
+          800: '#141414',
+          900: '#0f0f0f',
         },
 
         /* ACCENT — lighter / glowing blue */
@@ -66,11 +65,11 @@ const config: Config = {
 
         /* LIGHT THEME - Brand-aligned, high contrast */
         light: {
-          bg: '#f8fafc',           // Warm slate background
+          bg: '#EAEAEA',           // Background color
           surface: '#ffffff',      // White cards for contrast
           surface2: '#f1f5f9',     // Subtle slate for secondary surfaces
-          text: '#0f172a',         // Slate-900 for strong contrast
-          text2: '#475569',        // Slate-600 for readable secondary
+          text: '#252525',         // Primary text color
+          text2: '#252525',        // Secondary text color
           border: '#cbd5e1',       // Slate-300 for visible borders
         },
       },
@@ -130,6 +129,12 @@ const config: Config = {
       },
     },
   },
+  safelist: [
+    // Safelist for dynamic section widths
+    {
+      pattern: /w-\[(50|55|60|65|70|75|80|85|90|95)%\]/,
+    },
+  ],
   plugins: [],
 }
 

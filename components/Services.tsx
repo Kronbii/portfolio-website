@@ -4,6 +4,7 @@ import { motion, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { FiCode, FiCpu, FiEye, FiUsers, FiCheck, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { useInfiniteCarousel } from '@/hooks/useInfiniteCarousel'
+import { getSectionWidthStyle, getSectionHeaderStyle } from '@/lib/utils'
 
 interface Service {
   icon: React.ReactNode
@@ -67,15 +68,16 @@ export default function Services() {
     <section
       id="services"
       ref={ref}
-      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8"
+      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 bg-[#EAEAEA] border border-[#212121]/30 mx-auto"
+      style={{ backgroundColor: '#EAEAEA', ...getSectionWidthStyle() }}
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="w-full">
         <div className="text-center max-w-3xl mx-auto mb-14">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="text-sm uppercase tracking-[0.4em] text-light-text2 dark:text-dark-text2"
+            className="text-sm uppercase tracking-[0.4em] text-[#252525]"
           >
             Signature engagements
           </motion.p>
@@ -83,7 +85,8 @@ export default function Services() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-semibold tracking-tight"
+            className={`${getSectionHeaderStyle().className} tracking-tight`}
+            style={getSectionHeaderStyle().style}
           >
             Services with <span className="text-gradient">clear outcomes</span>
           </motion.h2>
@@ -121,18 +124,18 @@ export default function Services() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3 text-primary-400">
                     {service.icon}
-                    <span className="text-xs uppercase tracking-wide text-light-text2 dark:text-dark-text2">{service.timeline}</span>
+                    <span className="text-xs uppercase tracking-wide text-[#252525]">{service.timeline}</span>
                   </div>
                 </div>
-                <h3 className="mt-4 text-2xl sm:text-3xl font-semibold text-light-text dark:text-dark-text">
+                <h3 className="mt-4 text-2xl sm:text-3xl font-semibold text-[#252525]">
                   {service.title}
                 </h3>
-                <p className="mt-2 text-light-text2 dark:text-dark-text2 text-sm sm:text-base leading-relaxed">
+                <p className="mt-2 text-[#252525] text-sm sm:text-base leading-relaxed">
                   {service.punchline}
                 </p>
                 <div className="mt-4 space-y-2">
                   {service.highlights.map((item) => (
-                    <div key={item} className="flex items-center space-x-2 text-sm sm:text-base text-light-text dark:text-dark-text">
+                    <div key={item} className="flex items-center space-x-2 text-sm sm:text-base text-[#252525]">
                       <span className="text-primary-400">
                         <FiCheck />
                       </span>
@@ -151,7 +154,7 @@ export default function Services() {
         <div className="flex justify-center items-center gap-4 mt-8">
           <button
             onClick={handleScrollLeft}
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-light-text dark:text-dark-text hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
+            className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-[#252525] hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
             aria-label="Previous service"
           >
             <FiChevronLeft size={20} />
@@ -172,7 +175,7 @@ export default function Services() {
           </div>
           <button
             onClick={handleScrollRight}
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-light-text dark:text-dark-text hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
+            className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-[#252525] hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
             aria-label="Next service"
           >
             <FiChevronRight size={20} />

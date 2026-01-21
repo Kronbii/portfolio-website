@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform, useSpring, useInView, type MotionValue } from 'framer-motion'
 import { useRef } from 'react'
+import { getSectionWidthStyle, getSectionHeaderStyle } from '@/lib/utils'
 
 const milestones = [
   {
@@ -61,9 +62,9 @@ function TimelineItem({
         <>
           {/* Content on left */}
           <div className="pr-8 text-right">
-            <p className="text-xs uppercase tracking-wide text-light-text2 dark:text-dark-text2 mb-1">{item.period}</p>
-            <h3 className="text-lg font-semibold text-light-text dark:text-dark-text mb-2">{item.title}</h3>
-            <p className="text-sm text-light-text2 dark:text-dark-text2 leading-relaxed">{item.description}</p>
+            <p className="text-xs uppercase tracking-wide text-[#252525] mb-1">{item.period}</p>
+            <h3 className="text-lg font-semibold text-[#252525] mb-2">{item.title}</h3>
+            <p className="text-sm text-[#252525] leading-relaxed">{item.description}</p>
           </div>
           {/* Dot in center */}
           <div className="absolute left-1/2 top-2 -translate-x-1/2">
@@ -88,9 +89,9 @@ function TimelineItem({
           </div>
           {/* Content on right */}
           <div className="pl-8 text-left">
-            <p className="text-xs uppercase tracking-wide text-light-text2 dark:text-dark-text2 mb-1">{item.period}</p>
-            <h3 className="text-lg font-semibold text-light-text dark:text-dark-text mb-2">{item.title}</h3>
-            <p className="text-sm text-light-text2 dark:text-dark-text2 leading-relaxed">{item.description}</p>
+            <p className="text-xs uppercase tracking-wide text-[#252525] mb-1">{item.period}</p>
+            <h3 className="text-lg font-semibold text-[#252525] mb-2">{item.title}</h3>
+            <p className="text-sm text-[#252525] leading-relaxed">{item.description}</p>
           </div>
         </>
       )}
@@ -123,14 +124,15 @@ export default function Experience() {
     <section
       id="experience"
       ref={ref}
-      className="min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-12"
+      className="min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8 bg-[#EAEAEA] border border-[#212121]/30 mx-auto"
+      style={{ backgroundColor: '#EAEAEA', ...getSectionWidthStyle() }}
     >
-      <div className="max-w-4xl mx-auto">
+      <div className="w-full">
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="text-center text-sm uppercase tracking-[0.4em] text-light-text2 dark:text-dark-text2"
+          className="text-center text-sm uppercase tracking-[0.4em] text-[#252525]"
         >
           Journey & Milestones
         </motion.p>
@@ -138,7 +140,8 @@ export default function Experience() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-3xl md:text-4xl font-semibold mb-12 text-center"
+          className={`${getSectionHeaderStyle().className} mb-12 text-center`}
+          style={getSectionHeaderStyle().style}
         >
           Professional <span className="text-gradient">Experience</span>
         </motion.h2>

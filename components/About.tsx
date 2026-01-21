@@ -3,6 +3,8 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { FiBook, FiBriefcase, FiUsers, FiAward, FiCode, FiCpu, FiPower } from 'react-icons/fi'
+import { CornerButton } from '@/components/ui/corner-button'
+import { getSectionWidthStyle, getSectionHeaderStyle } from '@/lib/utils'
 
 const infoCards = [
   { 
@@ -47,38 +49,18 @@ export default function About() {
     <section
       id="about"
       ref={ref}
-      className="relative min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-12 overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#EAEAEA] border border-[#212121]/30 mx-auto"
+      style={{ backgroundColor: '#EAEAEA', ...getSectionWidthStyle() }}
     >
-      {/* Background decorative elements */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <motion.div
-          className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-primary-500/5 blur-[120px]"
-          animate={{ 
-            opacity: [0.3, 0.6, 0.3],
-            scale: [0.9, 1.1, 0.9],
-            x: [0, 50, 0],
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 -right-32 w-96 h-96 rounded-full bg-accent-500/5 blur-[120px]"
-          animate={{ 
-            opacity: [0.2, 0.5, 0.2],
-            scale: [1, 1.1, 0.95],
-            x: [0, -30, 0],
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-        />
-      </div>
 
-      <div className="max-w-6xl mx-auto relative z-10 pb-24 md:pb-32">
+      <div className="w-full relative z-10 pb-24 md:pb-32">
         {/* Header Section */}
         <div className="text-center mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center space-x-3 rounded-full border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.3em] text-light-text2 dark:text-dark-text2 mb-6"
+            className="inline-flex items-center space-x-3 rounded-full border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.3em] text-[#252525] mb-6"
           >
             <span className="relative flex h-2.5 w-2.5">
               <span className="absolute inline-flex h-full w-full rounded-full bg-primary-500 opacity-75 animate-ping"></span>
@@ -91,9 +73,10 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-semibold mb-6"
+            className={`${getSectionHeaderStyle().className} mb-6`}
+            style={getSectionHeaderStyle().style}
           >
-            About <span className="text-gradient">Rami Kronbi</span>
+            ABOUT <span className="text-gradient">RAMI</span>
           </motion.h2>
         </div>
 
@@ -143,7 +126,7 @@ export default function About() {
                   >
                     {card.value}
                   </motion.p>
-                  <p className="text-sm text-light-text2 dark:text-dark-text2 leading-relaxed">
+                  <p className="text-sm text-[#252525] leading-relaxed">
                     {card.label}
                   </p>
                 </div>
@@ -163,25 +146,19 @@ export default function About() {
           className="mt-16 md:mt-20 text-center space-y-6"
         >
           <motion.p
-            className="text-lg md:text-xl text-light-text2 dark:text-dark-text2"
+            className="text-lg md:text-xl text-[#252525]"
             whileHover={{ scale: 1.02 }}
           >
             Ready to build something amazing together?
           </motion.p>
-          <motion.a
-            href="#contact"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-primary-500/50 bg-primary-500/10 hover:bg-primary-500/20 text-primary-600 dark:text-primary-400 font-medium transition-all duration-300"
+          <motion.div
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            Let&apos;s Connect
-            <motion.span
-              animate={{ x: [0, 4, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            >
-              →
-            </motion.span>
-          </motion.a>
+            <CornerButton href="#contact" className="inline-flex items-center gap-2">
+              LET&apos;S CONNECT
+            </CornerButton>
+          </motion.div>
         </motion.div>
       </div>
 
@@ -193,7 +170,7 @@ export default function About() {
         transition={{ duration: 1, delay: 1.2 }}
         className="absolute bottom-6 left-0 right-0 flex flex-col items-center gap-3 cursor-pointer group z-10"
       >
-        <span className="text-[10px] uppercase tracking-[0.25em] ml-[0.25em] text-light-text2/70 dark:text-dark-text2/70 group-hover:text-primary-500 transition-colors">
+        <span className="text-[10px] uppercase tracking-[0.25em] ml-[0.25em] text-[#252525]/70 group-hover:text-primary-500 transition-colors">
           Scroll
         </span>
         <motion.div
@@ -205,7 +182,7 @@ export default function About() {
             height="28"
             viewBox="0 0 20 28"
             fill="none"
-            className="text-light-text2/50 dark:text-dark-text2/50 group-hover:text-primary-500 transition-colors"
+            className="text-[#252525]/50 group-hover:text-primary-500 transition-colors"
           >
             <rect x="1" y="1" width="18" height="26" rx="9" stroke="currentColor" strokeWidth="1.5" />
             <motion.circle

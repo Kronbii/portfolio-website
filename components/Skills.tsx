@@ -2,6 +2,7 @@
 
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
+import { getSectionWidthStyle, getSectionHeaderStyle } from '@/lib/utils'
 
 interface SkillCategory {
   category: string
@@ -45,14 +46,16 @@ export default function Skills() {
     <section
       id="skills"
       ref={ref}
-      className="min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8 bg-light-surface dark:bg-dark-surface"
+      className="min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8 bg-light-surface dark:bg-dark-surface border border-[#212121]/30 dark:border-white/20 mx-auto"
+      style={getSectionWidthStyle()}
     >
-      <div className="max-w-5xl mx-auto">
+      <div className="w-full">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-3xl md:text-4xl font-semibold mb-8 text-center"
+          className={`${getSectionHeaderStyle().className} mb-8 text-center`}
+          style={getSectionHeaderStyle().style}
         >
           Toolset on speed dial
         </motion.h2>
@@ -67,12 +70,12 @@ export default function Skills() {
               className="rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface2/80 p-5 backdrop-blur shadow-sm dark:shadow-none"
             >
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-light-text dark:text-dark-text">
+                <h3 className="text-lg font-semibold text-[#252525]">
                   {category.category}
                 </h3>
-                <span className="text-sm text-light-text2 dark:text-dark-text2">{category.confidence}%</span>
+                <span className="text-sm text-[#252525]">{category.confidence}%</span>
               </div>
-              <p className="mt-1 text-sm text-light-text2 dark:text-dark-text2">{category.tagline}</p>
+              <p className="mt-1 text-sm text-[#252525]">{category.tagline}</p>
               <div className="mt-3 h-1.5 rounded-full bg-light-border/50 dark:bg-white/10 overflow-hidden">
                 <motion.div
                   initial={{ width: 0 }}
@@ -88,7 +91,7 @@ export default function Skills() {
                     initial={{ opacity: 0, y: 6 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.1 * index + skillIndex * 0.04 }}
-                    className="px-3 py-1 rounded-full border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 text-xs text-light-text dark:text-dark-text"
+                    className="px-3 py-1 rounded-full border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 text-xs text-[#252525]"
                   >
                     {skill}
                   </motion.span>

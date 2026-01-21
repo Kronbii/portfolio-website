@@ -3,7 +3,8 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { FiGithub, FiLinkedin, FiMail, FiSend, FiClock } from 'react-icons/fi'
-import { HoverButton } from '@/components/ui/hover-button'
+import { CornerButton } from '@/components/ui/corner-button'
+import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubheadingStyle } from '@/lib/utils'
 
 const contactSteps = [
   {
@@ -67,14 +68,16 @@ export default function Contact() {
     <section
       id="contact"
       ref={ref}
-      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 "
+      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 bg-[#EAEAEA] border border-[#212121]/30 mx-auto"
+      style={{ backgroundColor: '#EAEAEA', ...getSectionWidthStyle() }}
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="w-full">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-semibold mb-4 text-center"
+          className={`${getSectionHeaderStyle().className} mb-4 text-center`}
+          style={getSectionHeaderStyle().style}
         >
           Let&apos;s build your next intelligent product
         </motion.h2>
@@ -82,7 +85,8 @@ export default function Contact() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center text-light-text2 dark:text-dark-text2 mb-12 text-lg"
+          className={`${getSectionSubheadingStyle().className} text-center mb-12`}
+          style={getSectionSubheadingStyle().style}
         >
           Tell me what you&apos;re building, the outcome you want, and I&apos;ll reply within 24 hours.
         </motion.p>
@@ -97,7 +101,7 @@ export default function Contact() {
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-2 text-light-text2 dark:text-dark-text2">
+                <label htmlFor="name" className="block text-sm font-medium mb-2 text-[#252525]">
                   Name
                 </label>
                 <input
@@ -106,12 +110,12 @@ export default function Contact() {
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-3 bg-light-surface2 dark:bg-dark-surface2 border border-light-border/50 dark:border-dark-surface2 rounded-lg focus:outline-none focus:border-primary-500 text-light-text dark:text-dark-text transition-colors"
+                  className="w-full px-4 py-3 bg-light-surface2 dark:bg-dark-surface2 border border-light-border/50 dark:border-dark-surface2 rounded-lg focus:outline-none focus:border-primary-500 text-[#252525] transition-colors"
                   placeholder="Your name"
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2 text-light-text2 dark:text-dark-text2">
+                <label htmlFor="email" className="block text-sm font-medium mb-2 text-[#252525]">
                   Email
                 </label>
                 <input
@@ -120,12 +124,12 @@ export default function Contact() {
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-3 bg-light-surface2 dark:bg-dark-surface2 border border-light-border/50 dark:border-dark-surface2 rounded-lg focus:outline-none focus:border-primary-500 text-light-text dark:text-dark-text transition-colors"
+                  className="w-full px-4 py-3 bg-light-surface2 dark:bg-dark-surface2 border border-light-border/50 dark:border-dark-surface2 rounded-lg focus:outline-none focus:border-primary-500 text-[#252525] transition-colors"
                   placeholder="your.email@example.com"
                 />
               </div>
               <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2 text-light-text2 dark:text-dark-text2">
+                <label htmlFor="message" className="block text-sm font-medium mb-2 text-[#252525]">
                   Message
                 </label>
                 <textarea
@@ -134,19 +138,18 @@ export default function Contact() {
                   rows={6}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-3 bg-light-surface2 dark:bg-dark-surface2 border border-light-border/50 dark:border-dark-surface2 rounded-lg focus:outline-none focus:border-primary-500 text-light-text dark:text-dark-text transition-colors resize-none"
+                  className="w-full px-4 py-3 bg-light-surface2 dark:bg-dark-surface2 border border-light-border/50 dark:border-dark-surface2 rounded-lg focus:outline-none focus:border-primary-500 text-[#252525] transition-colors resize-none"
                   placeholder="Your message..."
                 />
               </div>
-              <HoverButton
+              <CornerButton
                 type="submit"
                 disabled={isSubmitting}
-                variant="gradient"
                 className="w-full flex items-center justify-center space-x-2 disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 <FiSend />
                 <span>{isSubmitting ? 'Sending...' : submitStatus === 'success' ? 'Sent!' : 'Send Message'}</span>
-              </HoverButton>
+              </CornerButton>
               {submitStatus === 'success' && (
                 <motion.p
                   initial={{ opacity: 0 }}
@@ -178,55 +181,55 @@ export default function Contact() {
             <div className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm uppercase tracking-[0.4em] text-light-text2 dark:text-dark-text2">Availability</p>
-                  <p className="mt-2 text-2xl font-semibold text-light-text dark:text-dark-text">2 client openings</p>
+                  <p className="text-sm uppercase tracking-[0.4em] text-[#252525]">Availability</p>
+                  <p className="mt-2 text-2xl font-semibold text-[#252525]">2 client openings</p>
                 </div>
                 <div className="text-primary-600 dark:text-primary-400">
                   <FiClock size={32} />
                 </div>
               </div>
-              <p className="mt-4 text-light-text2 dark:text-dark-text2">Next kickoff: Dec 2025 · Replies within 24 hours.</p>
+              <p className="mt-4 text-[#252525]">Next kickoff: Dec 2025 · Replies within 24 hours.</p>
             </div>
 
             <div className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-6 bg-light-surface/70">
-              <h3 className="text-xl font-semibold text-light-text dark:text-dark-text mb-4">Preferred channels</h3>
+              <h3 className="text-xl font-semibold text-[#252525] mb-4">Preferred channels</h3>
               <div className="space-y-4">
                 <motion.a
                   href="https://github.com/Kronbii"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface/70 px-4 py-3 text-light-text dark:text-dark-text bg-light-surface/70"
+                  className="flex items-center justify-between rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface/70 px-4 py-3 text-[#252525] bg-light-surface/70"
                   whileHover={{ x: 4 }}
                 >
                   <div className="flex items-center space-x-3">
                     <FiGithub size={22} />
                     <span>GitHub</span>
                   </div>
-                  <span className="text-sm text-light-text2 dark:text-dark-text2">Case studies</span>
+                  <span className="text-sm text-[#252525]">Case studies</span>
                 </motion.a>
                 <motion.a
                   href="https://www.linkedin.com/in/rami-kronbi/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface/70 px-4 py-3 text-light-text dark:text-dark-text bg-light-surface/70"
+                  className="flex items-center justify-between rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface/70 px-4 py-3 text-[#252525] bg-light-surface/70"
                   whileHover={{ x: 4 }}
                 >
                   <div className="flex items-center space-x-3">
                     <FiLinkedin size={22} />
                     <span>LinkedIn</span>
                   </div>
-                  <span className="text-sm text-light-text2 dark:text-dark-text2">Professional updates</span>
+                  <span className="text-sm text-[#252525]">Professional updates</span>
                 </motion.a>
                 <motion.a
                   href="mailto:ramykronby@gmail.com"
-                  className="flex items-center justify-between rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface/70 px-4 py-3 text-light-text dark:text-dark-text bg-light-surface/70"
+                  className="flex items-center justify-between rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface/70 px-4 py-3 text-[#252525] bg-light-surface/70"
                   whileHover={{ x: 4 }}
                 >
                   <div className="flex items-center space-x-3 ">
                     <FiMail size={22} />
                     <span>ramykronby@gmail.com</span>
                   </div>
-                  <span className="text-sm text-light-text2 dark:text-dark-text2 ">Best for briefs</span>
+                  <span className="text-sm text-[#252525] ">Best for briefs</span>
                 </motion.a>
               </div>
             </div>

@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 import { getFallbackImage } from '@/lib/utils'
 import { projects, Project } from '@/data/projects'
 import { useInfiniteCarousel } from '@/hooks/useInfiniteCarousel'
+import { getSectionWidthStyle, getSectionHeaderStyle } from '@/lib/utils'
 
 // Re-export for backward compatibility
 export type { Project }
@@ -67,14 +68,15 @@ export default function Projects() {
       <section
         id="projects"
         ref={ref}
-        className="min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8"
+        className="min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8 bg-[#EAEAEA] border border-[#212121]/30 mx-auto"
+        style={{ backgroundColor: '#EAEAEA', ...getSectionWidthStyle() }}
       >
-        <div className="max-w-6xl mx-auto">
+        <div className="w-full">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="text-center text-sm uppercase tracking-[0.4em] text-light-text2 dark:text-dark-text2"
+            className="text-center text-sm uppercase tracking-[0.4em] text-[#252525]"
           >
             Portfolio Projects
           </motion.p>
@@ -82,7 +84,8 @@ export default function Projects() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-3xl md:text-4xl font-semibold mb-3 pb-8 text-center"
+            className={`${getSectionHeaderStyle().className} mb-3 pb-8 text-center`}
+            style={getSectionHeaderStyle().style}
           >
             Real work,<span className="text-gradient"> delivered with impact</span>
           </motion.h2>
@@ -136,13 +139,13 @@ export default function Projects() {
                   )}
                 </div>
                 <div className="p-6">
-                  <h3 className="text-2xl font-semibold mb-2 text-light-text dark:text-dark-text group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                  <h3 className="text-2xl font-semibold mb-2 text-[#252525] group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-sm uppercase tracking-wide text-light-text2 dark:text-dark-text2 mb-3">
+                  <p className="text-sm uppercase tracking-wide text-[#252525] mb-3">
                     Featured build
                   </p>
-                  <p className="text-light-text2 dark:text-dark-text2 mb-5 leading-relaxed line-clamp-3">
+                  <p className="text-[#252525] mb-5 leading-relaxed line-clamp-3">
                     {project.description}
                   </p>
                   <div className="text-primary-600 dark:text-primary-400 text-sm font-semibold group-hover:text-primary-500 dark:group-hover:text-primary-300 transition-colors">
@@ -159,7 +162,7 @@ export default function Projects() {
           <div className="flex justify-center items-center gap-4 mt-8">
             <button
               onClick={handleScrollLeft}
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-light-text dark:text-dark-text hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-[#252525] hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
               aria-label="Previous project"
             >
               <FiChevronLeft size={20} />
@@ -180,7 +183,7 @@ export default function Projects() {
             </div>
             <button
               onClick={handleScrollRight}
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-light-text dark:text-dark-text hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-[#252525] hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
               aria-label="Next project"
             >
               <FiChevronRight size={20} />
@@ -193,7 +196,7 @@ export default function Projects() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mt-12 rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-6 text-center"
           >
-            <p className="text-light-text dark:text-dark-text text-lg">
+            <p className="text-[#252525] text-lg">
               Want a similar transformation? <a href="#contact" className="text-primary-600 dark:text-primary-400 underline-offset-4 hover:underline">Let&apos;s design your roadmap</a> and launch faster.
             </p>
           </motion.div>

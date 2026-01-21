@@ -4,6 +4,7 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { FiAward } from 'react-icons/fi'
 import { certifications } from '@/data/certifications'
+import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubheadingStyle } from '@/lib/utils'
 
 export default function Certifications() {
   const ref = useRef(null)
@@ -13,18 +14,19 @@ export default function Certifications() {
     <section
       id="certifications"
       ref={ref}
-      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 bg-light-surface/70 dark:bg-dark-surface"
+      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 bg-[#EAEAEA] border border-[#212121]/30 mx-auto"
+      style={{ backgroundColor: '#EAEAEA', ...getSectionWidthStyle() }}
     >
-      <div className="max-w-4xl mx-auto">
+      <div className="w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <p className="text-sm uppercase tracking-[0.4em] text-light-text2 dark:text-dark-text2">Proof of execution</p>
-          <h2 className="text-4xl md:text-5xl font-semibold mt-3">Certifications & recognition</h2>
-          <p className="mt-4 text-lg text-light-text2 dark:text-dark-text2">
+          <p className="text-sm uppercase tracking-[0.4em] text-[#252525]">Proof of execution</p>
+          <h2 className={`${getSectionHeaderStyle().className} mt-3`} style={getSectionHeaderStyle().style}>Certifications & recognition</h2>
+          <p className={`${getSectionSubheadingStyle().className} mt-4`} style={getSectionSubheadingStyle().style}>
             The same rigor I bring to your project is backed by accredited training and global wins.
           </p>
         </motion.div>
@@ -42,13 +44,13 @@ export default function Certifications() {
                 <FiAward size={24} />
               </div>
               <div className="flex-1">
-                <h3 className="text-xl font-semibold text-light-text dark:text-dark-text">
+                <h3 className="text-xl font-semibold text-[#252525]">
                   {cert.name}
                 </h3>
-                <p className="text-light-text2 dark:text-dark-text2 mb-2">
+                <p className="text-[#252525] mb-2">
                   {cert.issuer}
                 </p>
-                <div className="flex flex-wrap gap-4 text-sm text-light-text2 dark:text-dark-text2">
+                <div className="flex flex-wrap gap-4 text-sm text-[#252525]">
                   <span>Issued: {cert.date}</span>
                   {cert.credentialId && <span>ID: {cert.credentialId}</span>}
                 </div>

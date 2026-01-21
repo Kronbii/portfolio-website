@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import { Space_Grotesk } from 'next/font/google'
 import StructuredData from '@/components/StructuredData'
-import { ThemeProvider } from '@/components/ThemeProvider'
 
 const siteUrl = 'https://ramikronbi.com'
 const siteName = 'Rami Kronbi'
@@ -10,7 +9,7 @@ const siteDescription = 'Rami Kronbi - AI and Computer Vision Engineer.'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
   variable: '--font-sans',
   fallback: ['system-ui', 'arial'],
@@ -22,10 +21,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#0a0a0a' },
-    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
-  ],
+  themeColor: '#EAEAEA',
 }
 
 export const metadata: Metadata = {
@@ -116,7 +112,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <html lang="en" className={`scroll-smooth ${spaceGrotesk.variable}`} suppressHydrationWarning>
       <head>
         {/* REQUIRED FIX: Correct Website Identity Schema */}
         <script
@@ -146,17 +142,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
 
       <body
-        className={`${spaceGrotesk.className} bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text antialiased`}
+        className={`${spaceGrotesk.className} bg-light-bg text-light-text antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <StructuredData />
-          <div className="relative z-10">{children}</div>
-        </ThemeProvider>
+        <StructuredData />
+        <div className="relative z-10">{children}</div>
       </body>
     </html>
   )

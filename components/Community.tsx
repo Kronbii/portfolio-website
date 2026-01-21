@@ -7,6 +7,7 @@ import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { getFallbackImage } from '@/lib/utils'
 import { communityItems, CommunityItem } from '@/data/community'
 import { useInfiniteCarousel } from '@/hooks/useInfiniteCarousel'
+import { getSectionWidthStyle, getSectionHeaderStyle } from '@/lib/utils'
 
 export default function Community() {
   const ref = useRef(null)
@@ -32,16 +33,17 @@ export default function Community() {
     <section
       id="community"
       ref={ref}
-      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8"
+      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 bg-[#EAEAEA] border border-[#212121]/30 mx-auto"
+      style={{ backgroundColor: '#EAEAEA', ...getSectionWidthStyle() }}
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="w-full">
         {/* Hero Section */}
         <div className="text-center max-w-3xl mx-auto mb-14">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="text-sm uppercase tracking-[0.4em] text-light-text2 dark:text-dark-text2 mb-4"
+            className="text-sm uppercase tracking-[0.4em] text-[#252525] mb-4"
           >
             Community First
           </motion.p>
@@ -49,7 +51,8 @@ export default function Community() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-semibold tracking-tight"
+            className={`${getSectionHeaderStyle().className} tracking-tight`}
+            style={getSectionHeaderStyle().style}
           >
             Building Beyond <span className="text-gradient">Code</span>
           </motion.h2>
@@ -104,14 +107,14 @@ export default function Community() {
                   
                   {/* Content */}
                   <div className="p-6">
-                    <h3 className="text-xl sm:text-2xl font-semibold text-light-text dark:text-dark-text mb-2">
+                    <h3 className="text-xl sm:text-2xl font-semibold text-[#252525] mb-2">
                       {item.title}
                     </h3>
-                    <p className="text-sm text-light-text2 dark:text-dark-text2 mb-3">
+                    <p className="text-sm text-[#252525] mb-3">
                       {item.tagline}
                     </p>
                     {item.date && (
-                      <p className="text-xs text-light-text2/70 dark:text-dark-text2/70">
+                      <p className="text-xs text-[#252525]/70">
                         {item.date}
                       </p>
                     )}
@@ -126,7 +129,7 @@ export default function Community() {
         <div className="flex justify-center items-center gap-4 mt-8">
           <button
             onClick={handleScrollLeft}
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-light-text dark:text-dark-text hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
+            className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-[#252525] hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
             aria-label="Previous"
           >
             <FiChevronLeft size={20} />
@@ -147,7 +150,7 @@ export default function Community() {
           </div>
           <button
             onClick={handleScrollRight}
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-light-text dark:text-dark-text hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
+            className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-[#252525] hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
             aria-label="Next"
           >
             <FiChevronRight size={20} />
