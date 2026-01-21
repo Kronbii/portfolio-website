@@ -11,6 +11,17 @@
     --color-secondary: #252525;
     --color-border: #212121;
     --color-accent: #D8D8D8;
+    
+    /* Blog article gradient colors - you can control these */
+    --blog-gradient-start: var(--color-accent);
+    --blog-gradient-end: var(--color-primary);
+    
+    /* Gradient stop positions (0-100%) */
+    --blog-gradient-start-stop: 0%;
+    --blog-gradient-end-stop: 100%;
+    
+    /* Gradient intensity/opacity (0-1) */
+    --blog-gradient-intensity: 0.5;
 
   }
 
@@ -190,6 +201,31 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #1a1a1a;
+}
+
+/* Blog article gradient with intensity control */
+.blog-article-gradient {
+  position: relative;
+}
+
+.blog-article-gradient::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, 
+    var(--blog-gradient-start) var(--blog-gradient-start-stop), 
+    var(--blog-gradient-end) var(--blog-gradient-end-stop));
+  opacity: var(--blog-gradient-intensity);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.blog-article-gradient > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* Firefox scrollbar */

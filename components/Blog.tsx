@@ -16,8 +16,12 @@ export default function Blog() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
   const latestArticles = getLatestArticles(3)
+  // Duplicate the first article 3 times, but limit to maximum 3 articles total
+  const articlesToDisplay = latestArticles.length > 0 
+    ? [latestArticles[0], latestArticles[0], latestArticles[0]].slice(0, 3)
+    : []
 
-  if (latestArticles.length === 0) {
+  if (articlesToDisplay.length === 0) {
     return null // Don't render if no articles
   }
 
@@ -75,7 +79,7 @@ export default function Blog() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="space-y-4"
         >
-          {latestArticles.map((article, index) => {
+          {articlesToDisplay.map((article, index) => {
             // Calculate time ago
             const publishedDate = new Date(article.publishedDate)
             const now = new Date()
@@ -85,7 +89,7 @@ export default function Blog() {
 
             return (
               <motion.article
-                key={article.slug}
+                key={`${article.slug}-${index}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ 
@@ -96,12 +100,17 @@ export default function Blog() {
                   e.preventDefault()
                   router.push(`/blog/${article.slug}`)
                 }}
-                className="group relative flex flex-col sm:flex-row gap-4 p-4 sm:p-6 rounded-xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-white/[0.03] hover:border-primary-500/30 hover:bg-light-surface2/50 dark:hover:bg-white/5 transition-all duration-300 cursor-pointer"
+                className="group relative flex flex-col sm:flex-row gap-4 p-4 sm:p-6 border transition-all duration-300 cursor-pointer blog-article-gradient"
+                style={{
+                  borderRadius: 0, // Sharp corners
+                  borderColor: 'rgba(33, 33, 33, 0.3)', // var(--color-border) with 30% opacity
+                  position: 'relative',
+                }}
               >
                 {/* Content Section - Left */}
                 <div className="flex-1 flex flex-col min-w-0">
-                  {/* Pinned indicator (show for first/latest article) */}
-                  {index === 0 && (
+                  {/* Pinned indicator (show for first 3 duplicated articles) */}
+                  {index < 3 && (
                     <div className="flex items-center gap-2 mb-2 text-xs" style={{ color: 'var(--color-secondary)' }}>
                       <span className="text-primary-500">📍</span>
                       <span>Pinned</span>
@@ -169,6 +178,7 @@ export default function Blog() {
                   </div>
                 )}
               </motion.article>
+              
             )
           })}
         </motion.div>
