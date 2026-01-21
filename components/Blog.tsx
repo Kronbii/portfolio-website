@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 import { getLatestArticles, BlogArticle } from '@/data/blog'
 import Link from 'next/link'
 import { CornerButton } from '@/components/ui/corner-button'
-import { getSectionHeaderStyle, getSectionSubheadingStyle } from '@/lib/utils'
+import { getSectionHeaderStyle, getSectionSubtitleStyle } from '@/lib/utils'
 import { getSectionWidthStyle } from '@/lib/utils'
 
 export default function Blog() {
@@ -51,21 +51,21 @@ export default function Blog() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className={`${getSectionHeaderStyle().className} mb-6`}
+            className={getSectionHeaderStyle().className}
             style={getSectionHeaderStyle().style}
           >
             <span className="text-gradient">BLOG ARTICLES</span>
           </motion.h2>
           
-          <motion.p
+          <motion.h3
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className={getSectionSubheadingStyle().className}
-            style={getSectionSubheadingStyle().style}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className={getSectionSubtitleStyle().className}
+            style={getSectionSubtitleStyle().style}
           >
             Exploring AI, Computer Vision, and Technology through writing
-          </motion.p>
+          </motion.h3>
         </div>
 
         {/* Articles List */}

@@ -2,7 +2,7 @@
 
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { getSectionWidthStyle, getSectionHeaderStyle } from '@/lib/utils'
+import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle } from '@/lib/utils'
 
 interface SkillCategory {
   category: string
@@ -53,12 +53,21 @@ export default function Skills() {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className={`${getSectionHeaderStyle().className} mb-8 text-center`}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className={`${getSectionHeaderStyle().className} text-center`}
           style={getSectionHeaderStyle().style}
         >
           Toolset on speed dial
         </motion.h2>
+        <motion.h3
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className={`${getSectionSubtitleStyle().className} text-center`}
+          style={getSectionSubtitleStyle().style}
+        >
+          Skills & Expertise
+        </motion.h3>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {skillCategories.map((category, index) => (

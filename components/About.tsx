@@ -4,7 +4,7 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { FiBook, FiBriefcase, FiUsers, FiAward, FiCode, FiCpu, FiPower } from 'react-icons/fi'
 import { CornerButton } from '@/components/ui/corner-button'
-import { getSectionWidthStyle, getSectionHeaderStyle } from '@/lib/utils'
+import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle } from '@/lib/utils'
 
 const infoCards = [
   { 
@@ -78,11 +78,20 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className={`${getSectionHeaderStyle().className} mb-6`}
+            className={getSectionHeaderStyle().className}
             style={getSectionHeaderStyle().style}
           >
             ABOUT <span className="text-gradient">RAMI</span>
           </motion.h2>
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className={getSectionSubtitleStyle().className}
+            style={getSectionSubtitleStyle().style}
+          >
+            About Me
+          </motion.h3>
         </div>
 
         {/* Info Cards Grid */}

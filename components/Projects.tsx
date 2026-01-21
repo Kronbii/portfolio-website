@@ -8,7 +8,7 @@ import { getFallbackImage } from '@/lib/utils'
 import { projects, Project } from '@/data/projects'
 import { useInfiniteCarousel } from '@/hooks/useInfiniteCarousel'
 import { useCardCarousel } from '@/hooks/useCardCarousel'
-import { getSectionWidthStyle, getSectionHeaderStyle } from '@/lib/utils'
+import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle } from '@/lib/utils'
 import { UniversalCard } from '@/components/ui/universal-card'
 
 // Re-export for backward compatibility
@@ -89,24 +89,24 @@ export default function Projects() {
         }}
       >
         <div className="w-full">
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="text-center text-sm uppercase tracking-[0.4em]"
-            style={{ color: 'var(--color-secondary)' }}
-          >
-            Portfolio Projects
-          </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className={`${getSectionHeaderStyle().className} mb-3 pb-8 text-center`}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className={`${getSectionHeaderStyle().className} text-center`}
             style={getSectionHeaderStyle().style}
           >
             Real work,<span className="text-gradient"> delivered with impact</span>
           </motion.h2>
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className={`${getSectionSubtitleStyle().className} text-center`}
+            style={getSectionSubtitleStyle().style}
+          >
+            Portfolio Projects
+          </motion.h3>
 
           {/* Scrollable Projects Container */}
           <div

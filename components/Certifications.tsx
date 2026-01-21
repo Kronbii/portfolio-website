@@ -4,7 +4,7 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { FiAward } from 'react-icons/fi'
 import { certifications } from '@/data/certifications'
-import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubheadingStyle } from '@/lib/utils'
+import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle } from '@/lib/utils'
 
 export default function Certifications() {
   const ref = useRef(null)
@@ -28,11 +28,24 @@ export default function Certifications() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <p className="text-sm uppercase tracking-[0.4em]" style={{ color: 'var(--color-secondary)' }}>Proof of execution</p>
-          <h2 className={`${getSectionHeaderStyle().className} mt-3`} style={getSectionHeaderStyle().style}>Certifications & recognition</h2>
-          <p className={`${getSectionSubheadingStyle().className} mt-4`} style={getSectionSubheadingStyle().style}>
-            The same rigor I bring to your project is backed by accredited training and global wins.
-          </p>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className={getSectionHeaderStyle().className}
+            style={getSectionHeaderStyle().style}
+          >
+            Certifications & recognition
+          </motion.h2>
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className={getSectionSubtitleStyle().className}
+            style={getSectionSubtitleStyle().style}
+          >
+            Proof of execution
+          </motion.h3>
         </motion.div>
 
         <div className="space-y-6">

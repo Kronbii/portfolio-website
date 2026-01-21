@@ -7,7 +7,7 @@ import { getFallbackImage } from '@/lib/utils'
 import { communityItems, CommunityItem } from '@/data/community'
 import { useInfiniteCarousel } from '@/hooks/useInfiniteCarousel'
 import { useCardCarousel } from '@/hooks/useCardCarousel'
-import { getSectionWidthStyle, getSectionHeaderStyle } from '@/lib/utils'
+import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle } from '@/lib/utils'
 import { UniversalCard } from '@/components/ui/universal-card'
 
 export default function Community() {
@@ -56,24 +56,25 @@ export default function Community() {
       <div className="w-full">
         {/* Hero Section */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="text-sm uppercase tracking-[0.4em] mb-4"
-            style={{ color: 'var(--color-secondary)' }}
-          >
-            Community First
-          </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className={`${getSectionHeaderStyle().className} tracking-tight`}
+            className={getSectionHeaderStyle().className}
             style={getSectionHeaderStyle().style}
           >
-            BUILDING BEYOND <span className="text-gradient">CODE</span>
+            MISSION & <span className="text-gradient">VISION</span>
           </motion.h2>
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className={getSectionSubtitleStyle().className}
+            style={getSectionSubtitleStyle().style}
+          >
+            Building Communities Beyond Code
+          </motion.h3>
+
         </div>
 
         {/* Scrollable Cards */}

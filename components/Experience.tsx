@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform, useSpring, useInView, type MotionValue } from 'framer-motion'
 import { useRef } from 'react'
-import { getSectionWidthStyle, getSectionHeaderStyle } from '@/lib/utils'
+import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle } from '@/lib/utils'
 
 const milestones = [
   {
@@ -132,24 +132,24 @@ export default function Experience() {
       }}
     >
       <div className="w-full">
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="text-center text-sm uppercase tracking-[0.4em]"
-          style={{ color: 'var(--color-secondary)' }}
-        >
-          Journey & Milestones
-        </motion.p>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className={`${getSectionHeaderStyle().className} mb-12 text-center`}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className={`${getSectionHeaderStyle().className} text-center`}
           style={getSectionHeaderStyle().style}
         >
           Professional <span className="text-gradient">Experience</span>
         </motion.h2>
+        <motion.h3
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className={`${getSectionSubtitleStyle().className} text-center`}
+          style={getSectionSubtitleStyle().style}
+        >
+          Journey & Milestones
+        </motion.h3>
 
         <div ref={containerRef} className="relative">
           {/* Background line (subtle) */}

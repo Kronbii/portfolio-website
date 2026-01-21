@@ -4,7 +4,7 @@ import { motion, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { FiGithub, FiLinkedin, FiMail, FiSend, FiClock } from 'react-icons/fi'
 import { CornerButton } from '@/components/ui/corner-button'
-import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubheadingStyle } from '@/lib/utils'
+import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle } from '@/lib/utils'
 
 const contactSteps = [
   {
@@ -79,21 +79,21 @@ export default function Contact() {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className={`${getSectionHeaderStyle().className} mb-4 text-center`}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className={`${getSectionHeaderStyle().className} text-center`}
           style={getSectionHeaderStyle().style}
         >
           Let&apos;s build your next intelligent product
         </motion.h2>
-        <motion.p
+        <motion.h3
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className={`${getSectionSubheadingStyle().className} text-center mb-12`}
-          style={getSectionSubheadingStyle().style}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className={`${getSectionSubtitleStyle().className} text-center mb-12`}
+          style={getSectionSubtitleStyle().style}
         >
           Tell me what you&apos;re building, the outcome you want, and I&apos;ll reply within 24 hours.
-        </motion.p>
+        </motion.h3>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}

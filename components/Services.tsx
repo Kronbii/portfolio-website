@@ -4,7 +4,7 @@ import { motion, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { FiCode, FiCpu, FiEye, FiUsers, FiCheck, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { useInfiniteCarousel } from '@/hooks/useInfiniteCarousel'
-import { getSectionWidthStyle, getSectionHeaderStyle } from '@/lib/utils'
+import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle } from '@/lib/utils'
 
 interface Service {
   icon: React.ReactNode
@@ -77,24 +77,24 @@ export default function Services() {
     >
       <div className="w-full">
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="text-sm uppercase tracking-[0.4em]"
-            style={{ color: 'var(--color-secondary)' }}
-          >
-            Signature engagements
-          </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className={`${getSectionHeaderStyle().className} tracking-tight`}
+            className={getSectionHeaderStyle().className}
             style={getSectionHeaderStyle().style}
           >
             Services with <span className="text-gradient">clear outcomes</span>
           </motion.h2>
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className={getSectionSubtitleStyle().className}
+            style={getSectionSubtitleStyle().style}
+          >
+            Signature engagements
+          </motion.h3>
         </div>
 
         {/* Scrollable Cards */}

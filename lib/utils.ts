@@ -122,10 +122,29 @@ export function getSectionHeaderStyle(): {
   style: React.CSSProperties
 } {
   return {
-    className: 'font-medium',
+    className: 'font-medium tracking-tight',
     style: {
       color: 'var(--color-secondary)',
       fontSize: 'clamp(28px, 4vw, 46px)',
+    },
+  }
+}
+
+/**
+ * Section subtitle style configuration (h3)
+ * Returns className and style for consistent section subtitles
+ * Space Grotesk, 26px, light weight
+ */
+export function getSectionSubtitleStyle(): {
+  className: string
+  style: React.CSSProperties
+} {
+  return {
+    className: 'font-light mb-4 mt-1',
+    style: {
+      color: 'var(--color-secondary)',
+      fontFamily: 'var(--font-sans)',
+      fontSize: '26px',
     },
   }
 }
