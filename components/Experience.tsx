@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform, useSpring, useInView, type MotionValue } from 'framer-motion'
 import { useRef } from 'react'
+import Image from 'next/image'
 import { FiSend, FiCrosshair, FiAward, FiGlobe, FiZap, FiTrendingUp } from 'react-icons/fi'
 import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle } from '@/lib/utils'
 
@@ -24,7 +25,7 @@ const milestones = [
     title: 'Applied AI & CV Engineer',
     company: 'Oreyeon LDA',
     description: 'Improving runway safety through advanced computer vision solutions.',
-    icon: FiCrosshair,
+    icon: 'oreyeon',
     color: 'text-blue-500',
     bgColor: 'bg-blue-500/10',
     borderColor: 'border-blue-500/20',
@@ -48,7 +49,7 @@ const milestones = [
     title: 'NASA Space Apps',
     company: 'Tech Lead & Volunteer',
     description: 'Took part in leading the largest global hackathon in Lebanon.',
-    icon: FiGlobe,
+    icon: 'nasa',
     color: 'text-green-500',
     bgColor: 'bg-green-500/10',
     borderColor: 'border-green-500/20',
@@ -78,7 +79,8 @@ function TimelineCard({
   const dotScale = useTransform(progress, [itemStart, itemStart + 0.15], [0, 1])
   const dotOpacity = useTransform(progress, [itemStart, itemStart + 0.1], [0, 1])
 
-  const IconComponent = item.icon
+  const IconComponent = typeof item.icon === 'string' ? null : item.icon
+  const iconSrc = typeof item.icon === 'string' ? item.icon : null
   const isLeft = index % 2 === 0
 
   return (
@@ -119,12 +121,24 @@ function TimelineCard({
 
             {/* Icon */}
             <div className={`relative z-10 flex items-center gap-4 mb-4 ${isLeft ? 'lg:flex-row-reverse lg:justify-start' : ''}`}>
-              <motion.div
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                className={`flex items-center justify-center w-12 h-12 rounded-xl border border-light-border/30 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 group-hover:scale-110 transition-transform duration-300`}
+              <div
+                className={`flex items-center justify-center w-12 h-12 rounded-xl border border-light-border/30 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 overflow-visible`}
               >
-                <IconComponent className={`${item.color} transition-colors duration-300`} size={24} />
-              </motion.div>
+                {iconSrc ? (
+                  <div className={`${item.color} transition-colors duration-300`}>
+                    <Image
+                      src={`/${iconSrc}.svg`}
+                      alt={item.company}
+                      width={40}
+                      height={40}
+                      className="w-10 h-10"
+                      style={{ objectFit: 'contain' }}
+                    />
+                  </div>
+                ) : IconComponent ? (
+                  <IconComponent className={`${item.color} transition-colors duration-300`} size={32} />
+                ) : null}
+              </div>
               <div className={`${isLeft ? 'lg:text-right' : ''}`}>
                 <motion.p
                   className="text-xs uppercase tracking-wider font-medium"
@@ -139,7 +153,8 @@ function TimelineCard({
             {/* Content */}
             <div className={`relative z-10 ${isLeft ? 'lg:text-right' : ''}`}>
               <motion.h3
-                className="text-xl lg:text-2xl font-semibold text-gradient mb-3"
+                className="text-xl lg:text-2xl font-semibold mb-3"
+                style={{ color: 'var(--color-secondary)' }}
                 whileHover={{ scale: 1.02 }}
               >
                 {item.title}
