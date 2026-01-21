@@ -4,10 +4,9 @@ import { motion } from 'framer-motion'
 import { FiGithub, FiExternalLink, FiArrowLeft, FiCode, FiServer, FiPlay } from 'react-icons/fi'
 import Image from 'next/image'
 import Link from 'next/link'
-import { getSectionHeaderStyle } from '@/lib/utils'
+import { getFallbackImage, getSectionHeaderStyle } from '@/lib/utils'
 import { Project } from '@/data/types'
 import { CornerButton } from '@/components/ui/corner-button'
-import { getFallbackImage, getSectionHeaderStyle } from '@/lib/utils'
 import { useState } from 'react'
 
 interface ProjectPageTemplateProps {
