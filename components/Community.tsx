@@ -2,7 +2,7 @@
 
 import { motion, useInView } from 'framer-motion'
 import { useState } from 'react'
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
 import { getFallbackImage } from '@/lib/utils'
 import { communityItems, CommunityItem } from '@/data/community'
 import { useInfiniteCarousel } from '@/hooks/useInfiniteCarousel'
@@ -128,37 +128,70 @@ export default function Community() {
           </div>
         </div>
 
-        {/* Navigation Buttons */}
-        <div className="flex justify-center items-center gap-4 mt-8">
+        {/* Navigation - Explore Style */}
+        <div className="flex justify-center items-center gap-12 mt-8">
+          {/* Left Arrow Button */}
           <button
             onClick={handleScrollLeft}
-                  className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
-                  style={{ color: 'var(--color-secondary)' }}
+            className="relative flex items-center justify-center w-10 h-10 group"
             aria-label="Previous"
+            style={{ color: 'var(--color-secondary)' }}
           >
-            <FiChevronLeft size={20} />
+            {/* Corner brackets */}
+            <div className="absolute top-0 left-0 w-3 h-3 transition-all duration-300 group-hover:-translate-x-1 group-hover:-translate-y-1">
+              <div className="absolute top-0 left-0 w-3 h-[1px]" style={{ backgroundColor: 'var(--color-secondary)' }} />
+              <div className="absolute top-0 left-0 w-[1px] h-3" style={{ backgroundColor: 'var(--color-secondary)' }} />
+            </div>
+            <div className="absolute top-0 right-0 w-3 h-3 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
+              <div className="absolute top-0 right-0 w-3 h-[1px]" style={{ backgroundColor: 'var(--color-secondary)' }} />
+              <div className="absolute top-0 right-0 w-[1px] h-3" style={{ backgroundColor: 'var(--color-secondary)' }} />
+            </div>
+            <div className="absolute bottom-0 left-0 w-3 h-3 transition-all duration-300 group-hover:-translate-x-1 group-hover:translate-y-1">
+              <div className="absolute bottom-0 left-0 w-3 h-[1px]" style={{ backgroundColor: 'var(--color-secondary)' }} />
+              <div className="absolute bottom-0 left-0 w-[1px] h-3" style={{ backgroundColor: 'var(--color-secondary)' }} />
+            </div>
+            <div className="absolute bottom-0 right-0 w-3 h-3 transition-all duration-300 group-hover:translate-x-1 group-hover:translate-y-1">
+              <div className="absolute bottom-0 right-0 w-3 h-[1px]" style={{ backgroundColor: 'var(--color-secondary)' }} />
+              <div className="absolute bottom-0 right-0 w-[1px] h-3" style={{ backgroundColor: 'var(--color-secondary)' }} />
+            </div>
+            {/* Arrow icon */}
+            <FiArrowLeft size={18} className="relative z-10" />
           </button>
-          <div className="flex gap-1.5">
-            {communityItems.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => scrollToIndex(itemCount + index)}
-                className={`h-2 rounded-full transition-all ${
-                  index === actualIndex
-                    ? 'w-8 bg-primary-500'
-                    : 'w-2 bg-light-border dark:bg-white/20 hover:bg-light-text2/30 dark:hover:bg-white/30'
-                }`}
-                aria-label={`Go to item ${index + 1}`}
-              />
-            ))}
-          </div>
+
+          {/* EXPLORE Text */}
+          <span 
+            className="text-xl uppercase tracking-wider font-light"
+            style={{ color: 'var(--color-secondary)' }}
+          >
+            EXPLORE
+          </span>
+
+          {/* Right Arrow Button */}
           <button
             onClick={handleScrollRight}
-                  className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
-                  style={{ color: 'var(--color-secondary)' }}
+            className="relative flex items-center justify-center w-10 h-10 group"
             aria-label="Next"
+            style={{ color: 'var(--color-secondary)' }}
           >
-            <FiChevronRight size={20} />
+            {/* Corner brackets */}
+            <div className="absolute top-0 left-0 w-3 h-3 transition-all duration-300 group-hover:-translate-x-1 group-hover:-translate-y-1">
+              <div className="absolute top-0 left-0 w-3 h-[1px]" style={{ backgroundColor: 'var(--color-secondary)' }} />
+              <div className="absolute top-0 left-0 w-[1px] h-3" style={{ backgroundColor: 'var(--color-secondary)' }} />
+            </div>
+            <div className="absolute top-0 right-0 w-3 h-3 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
+              <div className="absolute top-0 right-0 w-3 h-[1px]" style={{ backgroundColor: 'var(--color-secondary)' }} />
+              <div className="absolute top-0 right-0 w-[1px] h-3" style={{ backgroundColor: 'var(--color-secondary)' }} />
+            </div>
+            <div className="absolute bottom-0 left-0 w-3 h-3 transition-all duration-300 group-hover:-translate-x-1 group-hover:translate-y-1">
+              <div className="absolute bottom-0 left-0 w-3 h-[1px]" style={{ backgroundColor: 'var(--color-secondary)' }} />
+              <div className="absolute bottom-0 left-0 w-[1px] h-3" style={{ backgroundColor: 'var(--color-secondary)' }} />
+            </div>
+            <div className="absolute bottom-0 right-0 w-3 h-3 transition-all duration-300 group-hover:translate-x-1 group-hover:translate-y-1">
+              <div className="absolute bottom-0 right-0 w-3 h-[1px]" style={{ backgroundColor: 'var(--color-secondary)' }} />
+              <div className="absolute bottom-0 right-0 w-[1px] h-3" style={{ backgroundColor: 'var(--color-secondary)' }} />
+            </div>
+            {/* Arrow icon */}
+            <FiArrowRight size={18} className="relative z-10" />
           </button>
         </div>
       </div>
