@@ -3,12 +3,12 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { FiImage, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
-import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { getFallbackImage } from '@/lib/utils'
 import { projects, Project } from '@/data/projects'
 import { useInfiniteCarousel } from '@/hooks/useInfiniteCarousel'
 import { getSectionWidthStyle, getSectionHeaderStyle } from '@/lib/utils'
+import { UniversalCard } from '@/components/ui/universal-card'
 
 // Re-export for backward compatibility
 export type { Project }
@@ -103,56 +103,36 @@ export default function Projects() {
               {(extendedProjects as Project[]).map((project, index) => {
                 const isCentered = index === currentIndex
                 const actualIdx = getActualIndex(index)
+                const projectImage = project.image && !imageErrors[actualIdx] 
+                  ? (imageSources[actualIdx] || project.image)
+                  : null
                 return (
-              <motion.div
+                  <div
                     key={`${project.title}-${index}`}
                     ref={(el) => {
                       cardsRef.current[index] = el
                     }}
-                initial={{ opacity: 0, y: 30 }}
-                    animate={isInView ? { opacity: 1, y: isCentered ? -8 : 0, scale: isCentered ? 1.02 : 1 } : {}}
-                    transition={{ duration: 0.15 }}
-                    className={`group relative overflow-hidden rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface2/80 hover:border-primary-500/50 transition-all duration-300 cursor-pointer shadow-sm dark:shadow-none flex-shrink-0 w-[320px] sm:w-[360px] lg:w-[400px] ${
-                      isCentered 
-                        ? 'shadow-xl dark:shadow-2xl shadow-primary-500/10 dark:shadow-primary-500/20 -translate-y-4 scale-[1.02] z-10' 
-                        : ''
-                    }`}
-                    whileHover={{ y: isCentered ? -12 : -8, scale: isCentered ? 1.04 : 1.02 }}
-                onClick={() => openProject(index)}
-              >
-                <div className="relative w-full h-52 overflow-hidden bg-light-surface2 dark:bg-dark-surface">
-                      {project.image && !imageErrors[actualIdx] ? (
-                    <>
-                      <Image
-                        src={imageSources[actualIdx] || project.image}
-                        alt={project.title}
-                        fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-500"
-                            onError={() => project.image && handleImageError(actualIdx, project.image)}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-light-surface dark:from-dark-surface2 to-transparent" />
-                    </>
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-primary-500/30">
-                      <FiImage size={48} />
-                    </div>
-                  )}
-                </div>
-                <div className="p-6">
-                  <h3 className="text-2xl font-semibold mb-2 text-[#252525] group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm uppercase tracking-wide text-[#252525] mb-3">
-                    Featured build
-                  </p>
-                  <p className="text-[#252525] mb-5 leading-relaxed line-clamp-3">
-                    {project.description}
-                  </p>
-                  <div className="text-primary-600 dark:text-primary-400 text-sm font-semibold group-hover:text-primary-500 dark:group-hover:text-primary-300 transition-colors">
-                    Tap for outcomes →
+                  >
+                    <UniversalCard
+                      image={projectImage}
+                      imageAlt={project.title}
+                      title={project.title}
+                      description={project.description}
+                      isCentered={isCentered}
+                      isInView={isInView}
+                      onClick={() => openProject(index)}
+                      onImageError={() => project.image && handleImageError(actualIdx, project.image)}
+                    >
+                      <div className="mt-auto pt-4">
+                        <p className="text-sm uppercase tracking-wide text-[#252525] mb-3">
+                          Featured build
+                        </p>
+                        <div className="text-[#252525] text-sm font-semibold">
+                          Tap for outcomes →
+                        </div>
+                      </div>
+                    </UniversalCard>
                   </div>
-                </div>
-              </motion.div>
                 )
               })}
             </div>

@@ -32,15 +32,22 @@ export default function Navigation() {
       }}
     >
       <div className="w-full bg-[#EAEAEA]">
-        <div className="mx-auto px-4 sm:px-6 lg:px-8" style={getSectionMaxWidthStyle()}>
-          <div className="relative flex items-center justify-between h-16 lg:h-20 bg-[#EAEAEA]">
+        <div className="mx-auto" style={{ 
+          ...getSectionMaxWidthStyle(),
+          paddingLeft: 'clamp(1rem, 2vw, 2rem)',
+          paddingRight: 'clamp(1rem, 2vw, 2rem)',
+        }}>
+          <div className="relative flex items-center justify-between bg-[#EAEAEA]" style={{ height: 'clamp(4rem, 5vw, 5rem)' }}>
           {/* Logo/Icon */}
           <motion.a
             href="#home"
-            className="flex items-center z-10"
+            className="flex items-center z-10 flex-shrink-0"
             whileHover={{ scale: 1.05 }}
           >
-            <div className="relative h-10 w-10 sm:h-12 sm:w-12">
+            <div className="relative" style={{ 
+              height: 'clamp(2.5rem, 3vw, 3rem)', 
+              width: 'clamp(2.5rem, 3vw, 3rem)' 
+            }}>
               <Image
                 src="/figma-assets/logo.svg"
                 alt="Rami Kronbi"
@@ -52,12 +59,15 @@ export default function Navigation() {
           </motion.a>
 
           {/* Desktop Navigation - Absolutely centered */}
-          <div className="hidden lg:flex items-center gap-8 absolute left-1/2 transform -translate-x-1/2">
+          <div className="hidden lg:flex items-center absolute left-1/2 transform -translate-x-1/2" style={{ gap: 'clamp(0.5rem, 2vw, 2rem)' }}>
             {navItems.map((item) => (
               <motion.a
                 key={item.name}
                 href={item.href}
-                className="text-sm font-normal uppercase tracking-wide text-[#252525] transition-colors hover:opacity-70"
+                className="font-normal uppercase tracking-wide text-[#252525] transition-colors hover:opacity-70 whitespace-nowrap"
+                style={{
+                  fontSize: 'clamp(10px, 1.2vw, 14px)',
+                }}
                 whileHover={{ y: -2 }}
               >
                 {item.name}
@@ -70,11 +80,11 @@ export default function Navigation() {
             <CornerButton 
               href="#contact"
               style={{
-                minWidth: 'clamp(100px, 15vw, 173px)',
-                height: 'clamp(36px, 5vw, 40px)',
-                fontSize: 'clamp(10px, 1.5vw, 14px)',
-                paddingLeft: 'clamp(12px, 2vw, 24px)',
-                paddingRight: 'clamp(12px, 2vw, 24px)',
+                minWidth: 'clamp(90px, 12vw, 173px)',
+                height: 'clamp(32px, 4vw, 40px)',
+                fontSize: 'clamp(9px, 1.2vw, 14px)',
+                paddingLeft: 'clamp(10px, 1.5vw, 24px)',
+                paddingRight: 'clamp(10px, 1.5vw, 24px)',
               }}
             >
               CONTACT ME

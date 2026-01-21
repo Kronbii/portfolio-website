@@ -13,14 +13,15 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden min-h-screen flex flex-col pt-12 sm:pt-16 lg:pt-20 bg-[#EAEAEA] border border-[#212121]/30 mx-auto"
-      style={{ 
-        backgroundColor: '#EAEAEA', 
+      className="relative overflow-hidden min-h-screen flex flex-col bg-[#EAEAEA] border border-[#212121]/30 mx-auto"
+      style={{
+        backgroundColor: '#EAEAEA',
+        paddingTop: 'clamp(1rem, 3vw, 5rem)',
         ...getSectionWidthStyle(),
       }}
     >
       {/* Grid texture overlay with low opacity */}
-      <div 
+      <div
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: 'url(/figma-assets/grid.png)',
@@ -30,39 +31,54 @@ export default function Hero() {
           zIndex: 0,
         }}
       />
-      <div className="relative z-10 flex-1 flex flex-col justify-center">
-        <div className="w-full px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16 items-center">
-            {/* Left side - Text and buttons */}
-            <div className="flex justify-center items-center order-2 lg:order-1">
-              <div className="space-y-4 sm:space-y-6 lg:space-y-8 w-full">
+      <div className="relative z-10 flex-1 flex flex-col" style={{
+        justifyContent: 'center',
+        paddingTop: 'clamp(0.5rem, 2vw, 2rem)',
+        paddingBottom: 'clamp(0.5rem, 2vw, 2rem)',
+      }}>
+        <div className="w-full px-4 sm:px-6 xl:px-8">
+          <div className="flex flex-col xl:grid xl:grid-cols-2 items-center" style={{
+            gap: 'clamp(1.5rem, 4vw, 4rem)',
+          }}>
+            {/* Text and buttons - centered, stacked on top in medium viewport */}
+            <div className="flex flex-col items-center justify-center w-full xl:items-start order-1 xl:order-1">
+              <div className="flex flex-col items-center xl:items-start w-full" style={{
+                gap: 'clamp(1.5rem, 3vw, 2.5rem)',
+              }}>
                 <IntroSection />
 
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.25 }}
-                  className="flex flex-row flex-wrap justify-center sm:justify-start gap-4 sm:gap-6 lg:gap-10 w-full"
+                  className="flex flex-row justify-center xl:justify-start w-full"
+                  style={{
+                    gap: 'clamp(1rem, 3vw, 2.5rem)',
+                  }}
                 >
                   <CornerButton
                     href="#contact"
                     variant="primary"
-                    className="inline-flex items-center justify-center flex-1 sm:flex-initial"
-                    style={{ 
-                      minWidth: 'clamp(120px, 25vw, 166px)', 
-                      height: 'clamp(40px, 8vw, 46px)',
-                      fontSize: 'clamp(12px, 2.5vw, 16px)'
+                    className="inline-flex items-center justify-center"
+                    style={{
+                      minWidth: 'clamp(140px, 25vw, 166px)',
+                      height: 'clamp(44px, 8vw, 46px)',
+                      fontSize: 'clamp(13px, 2.5vw, 16px)',
+                      paddingLeft: 'clamp(12px, 2vw, 24px)',
+                      paddingRight: 'clamp(12px, 2vw, 24px)',
                     }}
                   >
                     MISSION
                   </CornerButton>
                   <CornerButton
                     href="#projects"
-                    className="inline-flex items-center justify-center flex-1 sm:flex-initial"
-                    style={{ 
-                      minWidth: 'clamp(120px, 25vw, 166px)', 
-                      height: 'clamp(40px, 8vw, 46px)',
-                      fontSize: 'clamp(12px, 2.5vw, 16px)'
+                    className="inline-flex items-center justify-center"
+                    style={{
+                      minWidth: 'clamp(140px, 25vw, 166px)',
+                      height: 'clamp(44px, 8vw, 46px)',
+                      fontSize: 'clamp(13px, 2.5vw, 16px)',
+                      paddingLeft: 'clamp(12px, 2vw, 24px)',
+                      paddingRight: 'clamp(12px, 2vw, 24px)',
                     }}
                   >
                     PORTFOLIO
@@ -71,8 +87,8 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Right side - Image */}
-            <div className="flex justify-center lg:justify-end order-1 lg:order-2">
+            {/* Image - below text/buttons in medium viewport, right side on desktop */}
+            <div className="flex justify-center xl:justify-end w-full order-2 xl:order-2">
               <HeroPortrait imageError={imageError} setImageError={setImageError} />
             </div>
           </div>
@@ -83,21 +99,36 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="w-full border border-[#212121]/30 bg-transparent py-3 sm:py-4 lg:py-6 mt-0"
+          className="w-full border border-[#212121]/30 bg-transparent mt-0"
+          style={{
+            paddingTop: 'clamp(0.75rem, 1.5vw, 1.5rem)',
+            paddingBottom: 'clamp(0.75rem, 1.5vw, 1.5rem)',
+          }}
         >
-          <div className="w-full px-2 sm:px-4 lg:px-8">
-            <div className="flex flex-nowrap justify-center items-center gap-2 sm:gap-4 lg:gap-16">
+          <div className="w-full" style={{
+            paddingLeft: 'clamp(0.5rem, 2vw, 2rem)',
+            paddingRight: 'clamp(0.5rem, 2vw, 2rem)',
+          }}>
+            <div
+              className="flex flex-nowrap justify-center items-center overflow-x-auto no-scrollbar"
+              style={{
+                gap: 'clamp(0.5rem, 2vw, 4rem)',
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+              }}
+            >
               {['Machine Learning', 'Computer Vision', 'Artificial Intelligence', 'Robotics', 'Engineering'].map((item, index) => (
                 <motion.span
                   key={item}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
-                  className="text-[#252525] font-normal text-center whitespace-nowrap"
-                    style={{ 
-                      fontSize: 'clamp(10px, 2vw, 26px)',
-                      textShadow: '0 2px 4px rgba(0, 0, 0, 0.25)'
-                    }}
+                  className="text-[#252525] font-normal text-center whitespace-nowrap flex-shrink-0"
+                  style={{
+                    fontSize: 'clamp(11px, 1.8vw, 26px)',
+                    textShadow: '0 2px 4px rgba(0, 0, 0, 0.25)',
+                    lineHeight: '1.2',
+                  }}
                 >
                   {item}
                 </motion.span>
@@ -125,33 +156,35 @@ export default function Hero() {
 
 function IntroSection() {
   return (
-    <div className="space-y-4 sm:space-y-6 lg:space-y-12">
-      <div className="flex flex-row items-baseline gap-1 sm:gap-2 lg:flex-col lg:gap-0">
-        <motion.h1
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="leading-none"
-          style={{ 
-            fontWeight: 300,
-            fontSize: 'clamp(2rem, 10vw, 9rem)'
-          }}
-        >
-          RAMI
-        </motion.h1>
-        <motion.h1
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="leading-none"
-          style={{ 
-            fontWeight: 300,
-            fontSize: 'clamp(2rem, 10vw, 9rem)'
-          }}
-        >
-          KRONBI
-        </motion.h1>
-      </div>
+    <div className="flex flex-row xl:flex-col items-baseline xl:items-start justify-center xl:justify-start" style={{
+      gap: 'clamp(0.5rem, 1.5vw, 1rem)',
+    }}>
+      <motion.h1
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="leading-none"
+        style={{
+          fontWeight: 300,
+          fontSize: 'clamp(2.5rem, 8vw, 9rem)',
+          lineHeight: '1',
+        }}
+      >
+        RAMI
+      </motion.h1>
+      <motion.h1
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.1 }}
+        className="leading-none"
+        style={{
+          fontWeight: 300,
+          fontSize: 'clamp(2.5rem, 8vw, 9rem)',
+          lineHeight: '1',
+        }}
+      >
+        KRONBI
+      </motion.h1>
     </div>
   )
 }
@@ -179,7 +212,10 @@ function HeroPortrait({
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8 }}
-      className="relative w-full max-w-[280px] sm:max-w-[400px] lg:max-w-[600px]"
+      className="relative w-full"
+      style={{
+        maxWidth: 'clamp(600px, 70vw, 600px)',
+      }}
     >
       {!imageError ? (
         <Image

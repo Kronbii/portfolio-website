@@ -2,12 +2,12 @@
 
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
-import Image from 'next/image'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { getFallbackImage } from '@/lib/utils'
 import { communityItems, CommunityItem } from '@/data/community'
 import { useInfiniteCarousel } from '@/hooks/useInfiniteCarousel'
 import { getSectionWidthStyle, getSectionHeaderStyle } from '@/lib/utils'
+import { UniversalCard } from '@/components/ui/universal-card'
 
 export default function Community() {
   const ref = useRef(null)
@@ -54,7 +54,7 @@ export default function Community() {
             className={`${getSectionHeaderStyle().className} tracking-tight`}
             style={getSectionHeaderStyle().style}
           >
-            Building Beyond <span className="text-gradient">Code</span>
+            BUILDING BEYOND <span className="text-gradient">CODE</span>
           </motion.h2>
         </div>
 
@@ -71,55 +71,29 @@ export default function Community() {
             {extendedItems.map((item, index) => {
               const isCentered = index === currentIndex
               return (
-                <motion.div
+                <div
                   key={`${item.id}-${index}`}
                   ref={(el) => {
                     cardsRef.current[index] = el
                   }}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={isInView ? { opacity: 1, y: isCentered ? -16 : 0, scale: isCentered ? 1.03 : 1 } : {}}
-                  transition={{ duration: 0.15 }}
-                  className={`group relative overflow-hidden rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-white/[0.03] backdrop-blur flex-shrink-0 w-[280px] sm:w-[320px] lg:w-[380px] transition-all duration-75 ${
-                    isCentered 
-                      ? 'shadow-xl dark:shadow-2xl shadow-primary-500/10 dark:shadow-primary-500/20 -translate-y-4 scale-[1.03] z-10' 
-                      : 'shadow-sm dark:shadow-none'
-                  }`}
-                  whileHover={{ y: isCentered ? -20 : -4 }}
                 >
-                  {/* Image */}
-                  <div className="relative h-64 sm:h-72 overflow-hidden">
-                    <Image
-                      src={imageSources[index] || item.image}
-                      alt={item.title}
-                      fill
-                      className={`object-cover group-hover:scale-105 transition-transform duration-300`}
-                      style={{ objectPosition: item.imagePosition || 'center top' }}
-                      unoptimized
-                      onError={() => {
-                        const fallback = getFallbackImage(item.image)
-                        if (imageSources[index] !== fallback) {
-                          setImageSources(prev => ({ ...prev, [index]: fallback }))
-                        }
-                      }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-light-surface dark:from-dark-surface2 via-transparent" />
-                  </div>
-                  
-                  {/* Content */}
-                  <div className="p-6">
-                    <h3 className="text-xl sm:text-2xl font-semibold text-[#252525] mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-sm text-[#252525] mb-3">
-                      {item.tagline}
-                    </p>
-                    {item.date && (
-                      <p className="text-xs text-[#252525]/70">
-                        {item.date}
-                      </p>
-                    )}
-                  </div>
-                </motion.div>
+                  <UniversalCard
+                    image={imageSources[index] || item.image}
+                    imageAlt={item.title}
+                    title={item.title}
+                    description={item.tagline}
+                    date={item.date}
+                    isCentered={isCentered}
+                    isInView={isInView}
+                    imagePosition={item.imagePosition || 'center top'}
+                    onImageError={() => {
+                      const fallback = getFallbackImage(item.image)
+                      if (imageSources[index] !== fallback) {
+                        setImageSources(prev => ({ ...prev, [index]: fallback }))
+                      }
+                    }}
+                  />
+                </div>
               )
             })}
           </div>

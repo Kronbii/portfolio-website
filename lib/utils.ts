@@ -31,19 +31,59 @@ export function getFallbackImage(webpPath: string): string {
 
 /**
  * Section width configuration
- * Change this value to update the width of all sections across the website
- * Value should be a percentage (e.g., '70%', '80%', '90%')
+ * Base width for large screens (desktop)
+ * On smaller screens, width increases dynamically
  */
 export const SECTION_WIDTH = '76%'
 
 /**
+ * Responsive section width configuration
+ * Adjust these values to control how aggressively sections scale with screen size
+ */
+const SECTION_WIDTH_CONFIG = {
+  // Base width on large screens (desktop)
+  desktopWidth: 76, // percentage
+  
+  // Maximum width on small screens (mobile)
+  mobileWidth: 100, // percentage
+  
+  // Viewport breakpoints where scaling happens
+  startScalingAt: 1400, // pixels - width starts increasing below this
+  stopScalingAt: 900,   // pixels - width stops increasing below this (reduced from 768 for more aggressive scaling)
+  
+  // Scaling aggressiveness (optional override)
+  // Higher = more aggressive scaling, Lower = gentler scaling
+  // If not set, calculated automatically from the above values
+  // Setting a higher value here makes scaling more aggressive
+  scalingFactor: 0.05, // More aggressive: changes ~5% per 100px of viewport
+}
+
+/**
  * Get the section width style object
  * Returns inline styles for section width with centering
+ * Width is responsive: wider on small screens, narrower on large screens
  * This approach works reliably regardless of Tailwind's JIT detection
  */
 export function getSectionWidthStyle(): React.CSSProperties {
+  const { desktopWidth, mobileWidth, startScalingAt, stopScalingAt, scalingFactor } = SECTION_WIDTH_CONFIG
+  
+  // Calculate the width difference and viewport range
+  const widthDifference = mobileWidth - desktopWidth // e.g., 95 - 76 = 19
+  const viewportRange = startScalingAt - stopScalingAt // e.g., 1200 - 768 = 432
+  
+  // Use provided scaling factor or calculate from width difference
+  // The scaling factor controls how much width changes per pixel of viewport change
+  const factor = scalingFactor ?? (widthDifference / viewportRange) // e.g., 19 / 432 = 0.044
+  
+  // Responsive width calculation:
+  // - On screens >= startScalingAt: desktopWidth% (base)
+  // - Between stopScalingAt and startScalingAt: smoothly increases from desktopWidth% to mobileWidth%
+  // - On screens < stopScalingAt: mobileWidth% (maximum)
+  // Formula: start at desktopWidth%, add more as screen gets smaller
+  const width = `clamp(${desktopWidth}%, calc(${desktopWidth}% + (${startScalingAt}px - 100vw) * ${factor}), ${mobileWidth}%)`
+  
   return {
-    width: SECTION_WIDTH,
+    width,
     marginLeft: 'auto',
     marginRight: 'auto',
   }
