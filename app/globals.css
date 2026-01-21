@@ -228,6 +228,31 @@
   z-index: 1;
 }
 
+/* Experience card gradient with intensity control */
+.experience-card-gradient {
+  position: relative;
+}
+
+.experience-card-gradient::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, 
+    var(--blog-gradient-start) var(--blog-gradient-start-stop), 
+    var(--blog-gradient-end) var(--blog-gradient-end-stop));
+  opacity: var(--blog-gradient-intensity);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.experience-card-gradient > * {
+  position: relative;
+  z-index: 1;
+}
+
 /* Firefox scrollbar */
 * {
   scrollbar-width: thin;
