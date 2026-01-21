@@ -2,13 +2,13 @@
 
 import { motion, useInView } from 'framer-motion'
 import { useState } from 'react'
-import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
 import { getFallbackImage } from '@/lib/utils'
 import { communityItems, CommunityItem } from '@/data/community'
 import { useInfiniteCarousel } from '@/hooks/useInfiniteCarousel'
 import { useCardCarousel } from '@/hooks/useCardCarousel'
 import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle } from '@/lib/utils'
 import { UniversalCard } from '@/components/ui/universal-card'
+import { ExploreNavigation } from '@/components/ui/explore-navigation'
 
 export default function Community() {
   const [imageSources, setImageSources] = useState<{ [key: number]: string }>({})
@@ -128,72 +128,14 @@ export default function Community() {
           </div>
         </div>
 
-        {/* Navigation - Explore Style */}
-        <div className="flex justify-center items-center gap-12 mt-8">
-          {/* Left Arrow Button */}
-          <button
-            onClick={handleScrollLeft}
-            className="relative flex items-center justify-center w-10 h-10 group"
-            aria-label="Previous"
-            style={{ color: 'var(--color-secondary)' }}
-          >
-            {/* Corner brackets */}
-            <div className="absolute top-0 left-0 w-3 h-3 transition-all duration-300 group-hover:-translate-x-1 group-hover:-translate-y-1">
-              <div className="absolute top-0 left-0 w-3 h-[1px]" style={{ backgroundColor: 'var(--color-secondary)' }} />
-              <div className="absolute top-0 left-0 w-[1px] h-3" style={{ backgroundColor: 'var(--color-secondary)' }} />
-            </div>
-            <div className="absolute top-0 right-0 w-3 h-3 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
-              <div className="absolute top-0 right-0 w-3 h-[1px]" style={{ backgroundColor: 'var(--color-secondary)' }} />
-              <div className="absolute top-0 right-0 w-[1px] h-3" style={{ backgroundColor: 'var(--color-secondary)' }} />
-            </div>
-            <div className="absolute bottom-0 left-0 w-3 h-3 transition-all duration-300 group-hover:-translate-x-1 group-hover:translate-y-1">
-              <div className="absolute bottom-0 left-0 w-3 h-[1px]" style={{ backgroundColor: 'var(--color-secondary)' }} />
-              <div className="absolute bottom-0 left-0 w-[1px] h-3" style={{ backgroundColor: 'var(--color-secondary)' }} />
-            </div>
-            <div className="absolute bottom-0 right-0 w-3 h-3 transition-all duration-300 group-hover:translate-x-1 group-hover:translate-y-1">
-              <div className="absolute bottom-0 right-0 w-3 h-[1px]" style={{ backgroundColor: 'var(--color-secondary)' }} />
-              <div className="absolute bottom-0 right-0 w-[1px] h-3" style={{ backgroundColor: 'var(--color-secondary)' }} />
-            </div>
-            {/* Arrow icon */}
-            <FiArrowLeft size={18} className="relative z-10" />
-          </button>
-
-          {/* EXPLORE Text */}
-          <span 
-            className="text-xl uppercase tracking-wider font-light"
-            style={{ color: 'var(--color-secondary)' }}
-          >
-            EXPLORE
-          </span>
-
-          {/* Right Arrow Button */}
-          <button
-            onClick={handleScrollRight}
-            className="relative flex items-center justify-center w-10 h-10 group"
-            aria-label="Next"
-            style={{ color: 'var(--color-secondary)' }}
-          >
-            {/* Corner brackets */}
-            <div className="absolute top-0 left-0 w-3 h-3 transition-all duration-300 group-hover:-translate-x-1 group-hover:-translate-y-1">
-              <div className="absolute top-0 left-0 w-3 h-[1px]" style={{ backgroundColor: 'var(--color-secondary)' }} />
-              <div className="absolute top-0 left-0 w-[1px] h-3" style={{ backgroundColor: 'var(--color-secondary)' }} />
-            </div>
-            <div className="absolute top-0 right-0 w-3 h-3 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
-              <div className="absolute top-0 right-0 w-3 h-[1px]" style={{ backgroundColor: 'var(--color-secondary)' }} />
-              <div className="absolute top-0 right-0 w-[1px] h-3" style={{ backgroundColor: 'var(--color-secondary)' }} />
-            </div>
-            <div className="absolute bottom-0 left-0 w-3 h-3 transition-all duration-300 group-hover:-translate-x-1 group-hover:translate-y-1">
-              <div className="absolute bottom-0 left-0 w-3 h-[1px]" style={{ backgroundColor: 'var(--color-secondary)' }} />
-              <div className="absolute bottom-0 left-0 w-[1px] h-3" style={{ backgroundColor: 'var(--color-secondary)' }} />
-            </div>
-            <div className="absolute bottom-0 right-0 w-3 h-3 transition-all duration-300 group-hover:translate-x-1 group-hover:translate-y-1">
-              <div className="absolute bottom-0 right-0 w-3 h-[1px]" style={{ backgroundColor: 'var(--color-secondary)' }} />
-              <div className="absolute bottom-0 right-0 w-[1px] h-3" style={{ backgroundColor: 'var(--color-secondary)' }} />
-            </div>
-            {/* Arrow icon */}
-            <FiArrowRight size={18} className="relative z-10" />
-          </button>
-        </div>
+        {/* Navigation */}
+        <ExploreNavigation
+          onPrevious={handleScrollLeft}
+          onNext={handleScrollRight}
+          previousLabel="Previous"
+          nextLabel="Next"
+          label="EXPLORE"
+        />
       </div>
     </section>
   )

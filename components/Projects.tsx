@@ -2,7 +2,7 @@
 
 import { motion, useInView } from 'framer-motion'
 import { useState } from 'react'
-import { FiImage, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { FiImage } from 'react-icons/fi'
 import { useRouter } from 'next/navigation'
 import { getFallbackImage } from '@/lib/utils'
 import { projects, Project } from '@/data/projects'
@@ -10,6 +10,7 @@ import { useInfiniteCarousel } from '@/hooks/useInfiniteCarousel'
 import { useCardCarousel } from '@/hooks/useCardCarousel'
 import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle } from '@/lib/utils'
 import { UniversalCard } from '@/components/ui/universal-card'
+import { ExploreNavigation } from '@/components/ui/explore-navigation'
 
 // Re-export for backward compatibility
 export type { Project }
@@ -165,39 +166,14 @@ export default function Projects() {
             </div>
           </div>
 
-          {/* Navigation Buttons */}
-          <div className="flex justify-center items-center gap-4 mt-8">
-            <button
-              onClick={handleScrollLeft}
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
-              style={{ color: 'var(--color-secondary)' }}
-              aria-label="Previous project"
-            >
-              <FiChevronLeft size={20} />
-            </button>
-            <div className="flex gap-1.5">
-              {projects.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => scrollToIndex(itemCount + index)}
-                  className={`h-2 rounded-full transition-all ${
-                    index === actualIndex
-                      ? 'w-8 bg-primary-500'
-                      : 'w-2 bg-light-border dark:bg-white/20 hover:bg-light-text2/30 dark:hover:bg-white/30'
-                  }`}
-                  aria-label={`Go to project ${index + 1}`}
-                />
-              ))}
-            </div>
-            <button
-              onClick={handleScrollRight}
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
-              style={{ color: 'var(--color-secondary)' }}
-              aria-label="Next project"
-            >
-              <FiChevronRight size={20} />
-            </button>
-          </div>
+          {/* Navigation */}
+          <ExploreNavigation
+            onPrevious={handleScrollLeft}
+            onNext={handleScrollRight}
+            previousLabel="Previous project"
+            nextLabel="Next project"
+            label="EXPLORE"
+          />
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}

@@ -2,9 +2,10 @@
 
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
-import { FiCode, FiCpu, FiEye, FiUsers, FiCheck, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { FiCode, FiCpu, FiEye, FiUsers, FiCheck } from 'react-icons/fi'
 import { useInfiniteCarousel } from '@/hooks/useInfiniteCarousel'
 import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle } from '@/lib/utils'
+import { ExploreNavigation } from '@/components/ui/explore-navigation'
 
 interface Service {
   icon: React.ReactNode
@@ -155,39 +156,14 @@ export default function Services() {
           </div>
         </div>
 
-        {/* Navigation Buttons */}
-        <div className="flex justify-center items-center gap-4 mt-8">
-          <button
-            onClick={handleScrollLeft}
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
-            style={{ color: 'var(--color-secondary)' }}
-            aria-label="Previous service"
-          >
-            <FiChevronLeft size={20} />
-          </button>
-          <div className="flex gap-1.5">
-            {services.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => scrollToIndex(itemCount + index)}
-                className={`h-2 rounded-full transition-all ${
-                  index === actualIndex
-                    ? 'w-8 bg-primary-500'
-                    : 'w-2 bg-light-border dark:bg-white/20 hover:bg-light-text2/30 dark:hover:bg-white/30'
-                }`}
-                aria-label={`Go to service ${index + 1}`}
-              />
-            ))}
-          </div>
-          <button
-            onClick={handleScrollRight}
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
-            style={{ color: 'var(--color-secondary)' }}
-            aria-label="Next service"
-          >
-            <FiChevronRight size={20} />
-          </button>
-        </div>
+        {/* Navigation */}
+        <ExploreNavigation
+          onPrevious={handleScrollLeft}
+          onNext={handleScrollRight}
+          previousLabel="Previous service"
+          nextLabel="Next service"
+          label="EXPLORE"
+        />
       </div>
     </section>
   )
