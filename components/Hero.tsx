@@ -24,9 +24,10 @@ export default function Hero() {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: 'url(/figma-assets/grid.png)',
+          backgroundImage: 'url(/figma-assets/grid.svg)',
           backgroundPosition: 'center',
-          backgroundSize: '1500px 1100px',
+          backgroundSize: '100px 100px',
+          backgroundRepeat: 'repeat',
           opacity: 0.02,
           zIndex: 0,
         }}
