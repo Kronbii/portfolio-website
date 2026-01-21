@@ -67,15 +67,16 @@ function TimelineCard({
   progress: MotionValue<number>
   isInView: boolean
 }) {
-  const itemStart = index / milestones.length
-  const itemEnd = (index + 0.7) / milestones.length
+  // Make cards appear sooner by starting earlier in scroll progress
+  const itemStart = (index * 0.6) / milestones.length
+  const itemEnd = (index * 0.6 + 0.8) / milestones.length
 
   const opacity = useTransform(progress, [itemStart, itemEnd], [0, 1])
   const x = useTransform(progress, [itemStart, itemEnd], [index % 2 === 0 ? -50 : 50, 0])
   const scale = useTransform(progress, [itemStart, itemEnd], [0.9, 1])
 
-  const dotScale = useTransform(progress, [itemStart, itemStart + 0.1], [0, 1])
-  const dotOpacity = useTransform(progress, [itemStart, itemStart + 0.05], [0, 1])
+  const dotScale = useTransform(progress, [itemStart, itemStart + 0.15], [0, 1])
+  const dotOpacity = useTransform(progress, [itemStart, itemStart + 0.1], [0, 1])
 
   const IconComponent = item.icon
   const isLeft = index % 2 === 0
@@ -108,28 +109,13 @@ function TimelineCard({
               scale: 1.02,
               transition: { duration: 0.2 },
             }}
-            className={`group relative rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-white/[0.03] p-6 lg:p-8 backdrop-blur-xl hover:border-primary-500/30 transition-all duration-300 shadow-sm dark:shadow-none overflow-hidden ${item.highlight ? 'ring-2 ring-purple-500/20' : ''
-              }`}
+            className="group relative border p-6 lg:p-8 transition-all duration-300 overflow-hidden experience-card-gradient"
+            style={{
+              borderRadius: 0, // Sharp corners
+              borderColor: 'rgba(33, 33, 33, 0.3)', // 30% opacity
+              position: 'relative',
+            }}
           >
-            {/* Gradient overlay on hover */}
-            <div
-              className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br ${item.bgColor}`}
-            />
-
-            {/* Highlight badge for current position */}
-            {item.highlight && (
-              <div className="absolute top-4 right-4 z-20">
-                <motion.span
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 0.5, type: 'spring' }}
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] uppercase tracking-wider font-medium bg-purple-500/20 text-purple-600 dark:text-purple-400"
-                >
-                  <FiZap size={10} />
-                  Current
-                </motion.span>
-              </div>
-            )}
 
             {/* Icon */}
             <div className={`relative z-10 flex items-center gap-4 mb-4 ${isLeft ? 'lg:flex-row-reverse lg:justify-start' : ''}`}>
@@ -165,11 +151,6 @@ function TimelineCard({
                 {item.description}
               </p>
             </div>
-
-            {/* Decorative corner element */}
-            <div
-              className={`absolute top-0 ${isLeft ? 'left-0 rounded-br-full' : 'right-0 rounded-bl-full'} w-24 h-24 ${item.bgColor} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-            />
 
             {/* Bottom accent line */}
             <motion.div
@@ -217,7 +198,7 @@ export default function Experience() {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start 0.8', 'end 0.5'],
+    offset: ['start 0.9', 'end 0.3'],
   })
 
   const smoothProgress = useSpring(scrollYProgress, {
