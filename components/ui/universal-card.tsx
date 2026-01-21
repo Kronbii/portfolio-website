@@ -19,6 +19,8 @@ interface UniversalCardProps {
   children?: ReactNode
   className?: string
   showImagePlaceholder?: boolean
+  cardWidth?: number
+  cardHeight?: number
 }
 
 export function UniversalCard({
@@ -35,6 +37,8 @@ export function UniversalCard({
   children,
   className = '',
   showImagePlaceholder = true,
+  cardWidth = 450,
+  cardHeight = 600,
 }: UniversalCardProps) {
   const [imageError, setImageError] = useState(false)
   const hasImage = image && !imageError
@@ -55,8 +59,8 @@ export function UniversalCard({
           : ''
       } ${onClick ? 'cursor-pointer' : ''} ${className}`}
       style={{
-        width: '450px',
-        height: '600px',
+        width: `${cardWidth}px`,
+        height: `${cardHeight}px`,
         borderColor: 'rgba(33, 33, 33, 0.3)', // var(--color-border) with 30% opacity
         boxShadow: isCentered 
           ? '0 20px 25px -5px rgba(37, 37, 37, 0.1), 0 10px 10px -5px rgba(37, 37, 37, 0.04)' 
@@ -68,7 +72,7 @@ export function UniversalCard({
       {/* Image */}
       <div className="relative flex-shrink-0 overflow-hidden" style={{
         backgroundColor: 'var(--color-primary)',
-        height: '297px',
+        height: `${(cardHeight * 297) / 600}px`, // Maintain proportional height
       }}>
         {hasImage ? (
           <Image
@@ -88,10 +92,10 @@ export function UniversalCard({
       </div>
       
       {/* Content */}
-      <div className="p-6 flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col" style={{ padding: `${(cardWidth * 24) / 450}px` }}>
         <h3 className="font-medium mb-3 flex-shrink-0" style={{
           color: 'var(--color-secondary)',
-          fontSize: '30px',
+          fontSize: `${(cardWidth * 30) / 450}px`, // Scale font size proportionally
         }}>
           {title}
         </h3>
@@ -99,7 +103,7 @@ export function UniversalCard({
         {description && (
           <p className="font-light flex-1" style={{
             color: 'var(--color-secondary)',
-            fontSize: '20px',
+            fontSize: `${(cardWidth * 20) / 450}px`, // Scale font size proportionally
           }}>
             {description}
           </p>
