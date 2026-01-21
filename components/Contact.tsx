@@ -101,7 +101,8 @@ export default function Contact() {
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface2/80 p-8 backdrop-blur shadow-sm dark:shadow-none bg-light-surface/70"
+            className="rounded-3xl border border-light-border/50 dark:border-white/10 dark:bg-dark-surface2/80 p-8 backdrop-blur shadow-sm dark:shadow-none"
+            style={{ backgroundColor: 'var(--color-accent)' }}
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
@@ -153,7 +154,6 @@ export default function Contact() {
                 disabled={isSubmitting}
                 className="w-full flex items-center justify-center space-x-2 disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                <FiSend />
                 <span>{isSubmitting ? 'Sending...' : submitStatus === 'success' ? 'Sent!' : 'Send Message'}</span>
               </CornerButton>
               {submitStatus === 'success' && (
@@ -197,15 +197,20 @@ export default function Contact() {
               <p className="mt-4" style={{ color: 'var(--color-secondary)' }}>Next kickoff: Dec 2025 · Replies within 24 hours.</p>
             </div>
 
-            <div className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-6 bg-light-surface/70">
+            <div className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-6"
+            style={{ backgroundColor: 'var(--color-accent)' }}>
               <h3 className="text-xl font-semibold mb-4" style={{ color: 'var(--color-secondary)' }}>Preferred channels</h3>
               <div className="space-y-4">
                 <motion.a
                   href="https://github.com/Kronbii"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface/70 px-4 py-3 bg-light-surface/70"
-                  style={{ color: 'var(--color-secondary)' }}
+                  className="flex items-center justify-between rounded-2xl border dark:bg-dark-surface/70 px-4 py-3"
+                  style={{ 
+                    backgroundColor: 'var(--color-primary)', 
+                    color: 'var(--color-secondary)',
+                    borderColor: 'var(--color-secondary)',
+                  }}
                   whileHover={{ x: 4 }}
                 >
                   <div className="flex items-center space-x-3">
@@ -218,8 +223,12 @@ export default function Contact() {
                   href="https://www.linkedin.com/in/rami-kronbi/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface/70 px-4 py-3 bg-light-surface/70"
-                  style={{ color: 'var(--color-secondary)' }}
+                  className="flex items-center justify-between rounded-2xl border dark:bg-dark-surface/70 px-4 py-3"
+                  style={{ 
+                    backgroundColor: 'var(--color-primary)', 
+                    color: 'var(--color-secondary)',
+                    borderColor: 'var(--color-secondary)',
+                  }}
                   whileHover={{ x: 4 }}
                 >
                   <div className="flex items-center space-x-3">
@@ -230,8 +239,12 @@ export default function Contact() {
                 </motion.a>
                 <motion.a
                   href="mailto:ramykronby@gmail.com"
-                  className="flex items-center justify-between rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface/70 px-4 py-3 bg-light-surface/70"
-                  style={{ color: 'var(--color-secondary)' }}
+                  className="flex items-center justify-between rounded-2xl border dark:bg-dark-surface/70 px-4 py-3"
+                  style={{ 
+                    backgroundColor: 'var(--color-primary)', 
+                    color: 'var(--color-secondary)',
+                    borderColor: 'var(--color-secondary)',
+                  }}
                   whileHover={{ x: 4 }}
                 >
                   <div className="flex items-center space-x-3 ">

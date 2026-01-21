@@ -42,7 +42,8 @@ export default function Certifications() {
               initial={{ opacity: 0, x: -30 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface2/80 p-6 flex items-start space-x-4 shadow-sm dark:shadow-none"
+              className="rounded-3xl border border-light-border/50 dark:border-white/10 dark:bg-dark-surface2/80 p-6 flex items-start space-x-4 shadow-sm dark:shadow-none"
+              style={{ backgroundColor: 'var(--color-accent)' }}
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-500/10 text-primary-400">
                 <FiAward size={24} />

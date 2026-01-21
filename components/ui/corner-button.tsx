@@ -96,7 +96,7 @@ export function CornerButton({
 
   const currentVariant = variantStyles[variant]
   
-  const baseClasses = `relative inline-flex items-center justify-center h-8 sm:h-10 px-3 sm:px-6 uppercase font-normal tracking-wide transition-opacity hover:opacity-80 outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus:ring-offset-0 ${disabled ? 'opacity-60 cursor-not-allowed' : ''}`
+  const baseClasses = `relative inline-flex items-center justify-center h-8 sm:h-10 px-3 sm:px-6 uppercase font-normal tracking-wide transition-opacity hover:opacity-80 outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus:ring-offset-0 overflow-visible ${disabled ? 'opacity-60 cursor-not-allowed' : ''}`
   
   const baseStyles = {
     outline: 'none',
@@ -105,6 +105,7 @@ export function CornerButton({
     fontSize: 'clamp(12px, 2.5vw, 20px)',
     backgroundColor: currentVariant.bg,
     color: currentVariant.text,
+    overflow: 'visible',
     ...style
   } as React.CSSProperties
 
@@ -124,7 +125,7 @@ export function CornerButton({
       <CornerDecoration position="topRight" isHovered={isHovered} lineColor={currentVariant.lineColor} />
       <CornerDecoration position="bottomLeft" isHovered={isHovered} lineColor={currentVariant.lineColor} />
       <CornerDecoration position="bottomRight" isHovered={isHovered} lineColor={currentVariant.lineColor} />
-      <span style={{ color: currentVariant.text, zIndex: 1, position: 'relative' }}>{children}</span>
+      <span style={{ color: currentVariant.text, zIndex: 1, position: 'relative' }} className="relative z-10">{children}</span>
     </>
   )
 
