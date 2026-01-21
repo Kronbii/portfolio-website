@@ -22,9 +22,9 @@ export function ExploreNavigation({
       {/* Left Arrow Button */}
       <button
         onClick={onPrevious}
-        className="relative flex items-center justify-center w-10 h-10 group"
+        className="relative flex items-center justify-center w-10 h-10 group cursor-pointer"
         aria-label={previousLabel}
-        style={{ color: 'var(--color-secondary)' }}
+        style={{ color: 'var(--color-secondary)', cursor: 'pointer' }}
       >
         {/* Corner brackets */}
         <div className="absolute top-0 left-0 w-3 h-3 transition-all duration-300 group-hover:-translate-x-1 group-hover:-translate-y-1">
@@ -58,9 +58,9 @@ export function ExploreNavigation({
       {/* Right Arrow Button */}
       <button
         onClick={onNext}
-        className="relative flex items-center justify-center w-10 h-10 group"
+        className="relative flex items-center justify-center w-10 h-10 group cursor-pointer"
         aria-label={nextLabel}
-        style={{ color: 'var(--color-secondary)' }}
+        style={{ color: 'var(--color-secondary)', cursor: 'pointer' }}
       >
         {/* Corner brackets */}
         <div className="absolute top-0 left-0 w-3 h-3 transition-all duration-300 group-hover:-translate-x-1 group-hover:-translate-y-1">

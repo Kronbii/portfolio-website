@@ -57,11 +57,12 @@ export function UniversalCard({
         isCentered 
           ? '-translate-y-4 scale-[1.03] z-10' 
           : ''
-      } ${onClick ? 'cursor-pointer' : ''} ${className}`}
+      } ${onClick ? 'cursor-pointer clickable-card' : ''} ${className}`}
       style={{
         width: `${cardWidth}px`,
         height: `${cardHeight}px`,
         borderColor: 'rgba(33, 33, 33, 0.3)', // var(--color-border) with 30% opacity
+        cursor: onClick ? 'pointer' : 'default',
         boxShadow: isCentered 
           ? '0 20px 25px -5px rgba(37, 37, 37, 0.1), 0 10px 10px -5px rgba(37, 37, 37, 0.04)' 
           : '0 1px 2px 0 rgba(37, 37, 37, 0.05)',

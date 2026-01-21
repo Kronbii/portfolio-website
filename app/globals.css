@@ -75,8 +75,20 @@
   }
   
   /* Interactive elements - you can customize these separately */
-  a, button, [role="button"], [onclick] {
-    cursor: pointer;
+  a, button, [role="button"], [onclick], .cursor-pointer {
+    cursor: pointer !important;
+  }
+  
+  /* Make all children of clickable elements also show pointer cursor */
+  a *, 
+  button *, 
+  [role="button"] *, 
+  [onclick] *, 
+  .cursor-pointer *,
+  .clickable-card,
+  .clickable-card *,
+  .clickable-card * * {
+    cursor: pointer !important;
   }
   
   input[type="text"], 

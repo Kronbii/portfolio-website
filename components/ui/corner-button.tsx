@@ -96,7 +96,7 @@ export function CornerButton({
 
   const currentVariant = variantStyles[variant]
   
-  const baseClasses = `relative inline-flex items-center justify-center h-8 sm:h-10 px-3 sm:px-6 uppercase font-normal tracking-wide transition-opacity hover:opacity-80 outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus:ring-offset-0 ${disabled ? 'opacity-60 cursor-not-allowed' : ''}`
+  const baseClasses = `relative inline-flex items-center justify-center h-8 sm:h-10 px-3 sm:px-6 uppercase font-normal tracking-wide transition-opacity hover:opacity-80 outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus:ring-offset-0 ${disabled ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'}`
   
   const baseStyles = {
     outline: 'none',
@@ -107,6 +107,7 @@ export function CornerButton({
     color: currentVariant.text,
     overflow: 'visible',
     position: 'relative',
+    cursor: disabled ? 'not-allowed' : 'pointer',
     ...style
   } as React.CSSProperties
 
