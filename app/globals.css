@@ -8,7 +8,7 @@
     
     /* Color Variables */
     --color-primary: #EAEAEA;
-    --color-secondary: #851010;
+    --color-secondary: #252525;
     --color-border: #212121;
     --color-accent: #D8D8D8;
 
@@ -19,8 +19,8 @@
     color: var(--color-secondary);
   }
   
-  /* Allow buttons and links to override text color */
-  button, a, [style*="color"] {
+  /* Allow buttons and links to override text color, but not if they have inline color styles */
+  button:not([style*="color"]), a:not([style*="color"]) {
     color: inherit;
   }
 
@@ -32,6 +32,9 @@
     position: relative;
     color: var(--color-secondary);
     background-color: var(--color-primary);
+    /* Custom cursor - change this to your preferred cursor */
+    cursor: default;
+    /* For custom image cursor, use: cursor: url('/path-to-cursor.png'), auto; */
   }
 
   body::before {
@@ -43,8 +46,13 @@
   }
 
   ::selection {
-    background: rgba(49,134,255,0.2);
-    color: #1e293b;
+    background: var(--color-secondary);
+    color: var(--color-primary);
+  }
+
+  ::-moz-selection {
+    background: var(--color-secondary);
+    color: var(--color-primary);
   }
 
   a:focus,
@@ -59,6 +67,34 @@
   a[href="#contact"] {
     outline: none !important;
     box-shadow: none !important;
+  }
+  
+  /* Global cursor styles */
+  * {
+    cursor: crosshair;        /* Crosshair cursor */
+  }
+  
+  /* Interactive elements - you can customize these separately */
+  a, button, [role="button"], [onclick] {
+    cursor: pointer;
+  }
+  
+  input[type="text"], 
+  input[type="email"], 
+  input[type="password"], 
+  input[type="search"],
+  textarea {
+    cursor: text;
+  }
+  
+  input[type="range"],
+  input[type="number"] {
+    cursor: grab;
+  }
+  
+  input[type="range"]:active,
+  input[type="number"]:active {
+    cursor: grabbing;
   }
 }
 

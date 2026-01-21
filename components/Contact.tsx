@@ -115,8 +115,12 @@ export default function Contact() {
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-3 bg-light-surface2 dark:bg-dark-surface2 border border-light-border/50 dark:border-dark-surface2 rounded-lg focus:outline-none focus:border-primary-500 transition-colors"
-                  style={{ color: 'var(--color-secondary)' }}
+                  className="w-full px-4 py-3 dark:bg-dark-surface2 border dark:border-dark-surface2 rounded-lg focus:outline-none transition-colors"
+                  style={{ 
+                    color: 'var(--color-secondary)',
+                    backgroundColor: 'var(--color-primary)',
+                    borderColor: 'var(--color-secondary)',
+                  }}
                   placeholder="Your name"
                 />
               </div>
@@ -130,8 +134,12 @@ export default function Contact() {
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-3 bg-light-surface2 dark:bg-dark-surface2 border border-light-border/50 dark:border-dark-surface2 rounded-lg focus:outline-none focus:border-primary-500 transition-colors"
-                  style={{ color: 'var(--color-secondary)' }}
+                  className="w-full px-4 py-3 dark:bg-dark-surface2 border dark:border-dark-surface2 rounded-lg focus:outline-none transition-colors"
+                  style={{ 
+                    color: 'var(--color-secondary)',
+                    backgroundColor: 'var(--color-primary)',
+                    borderColor: 'var(--color-secondary)',
+                  }}
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -145,14 +153,28 @@ export default function Contact() {
                   rows={6}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-3 bg-light-surface2 dark:bg-dark-surface2 border border-light-border/50 dark:border-dark-surface2 rounded-lg focus:outline-none focus:border-primary-500 text-[#252525] transition-colors resize-none"
+                  className="w-full px-4 py-3 dark:bg-dark-surface2 border dark:border-dark-surface2 rounded-lg focus:outline-none transition-colors resize-none"
+                  style={{ 
+                    color: 'var(--color-secondary)',
+                    backgroundColor: 'var(--color-primary)',
+                    borderColor: 'var(--color-secondary)',
+                  }}
                   placeholder="Your message..."
                 />
               </div>
               <CornerButton
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full flex items-center justify-center space-x-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                variant = "primary"
+                className="w-full disabled:opacity-60 disabled:cursor-not-allowed"
+                style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  gap: '0.5rem',
+                  position: 'relative',
+                  overflow: 'visible',
+                }}
               >
                 <span>{isSubmitting ? 'Sending...' : submitStatus === 'success' ? 'Sent!' : 'Send Message'}</span>
               </CornerButton>
