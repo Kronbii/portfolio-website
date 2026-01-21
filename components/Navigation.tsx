@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { FiMenu, FiX } from 'react-icons/fi'
 import Image from 'next/image'
@@ -17,22 +17,42 @@ const navItems = [
 
 export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [hasScrolled, setHasScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY || document.documentElement.scrollTop
+      setHasScrolled(scrollPosition > 0)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    // Check initial scroll position
+    handleScroll()
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   return (
     <motion.nav
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 right-0 z-40 border-b"
+      className={`fixed top-0 left-0 right-0 z-40 ${hasScrolled ? 'border-b' : ''}`}
       style={{
-        backgroundColor: 'var(--color-primary)',
-        borderColor: 'rgba(33, 33, 33, 0.3)',
+        backgroundColor: hasScrolled ? 'var(--color-primary)' : 'transparent',
+        borderColor: hasScrolled ? 'rgba(33, 33, 33, 0.3)' : 'transparent',
         boxShadow: 'none',
         backdropFilter: 'none',
-        WebkitBackdropFilter: 'none'
+        WebkitBackdropFilter: 'none',
+        transition: 'background-color 0.5s ease, border-color 0.5s ease',
       }}
     >
-      <div className="w-full" style={{ backgroundColor: 'var(--color-primary)' }}>
+      <div className="w-full" style={{ 
+        backgroundColor: hasScrolled ? 'var(--color-primary)' : 'transparent',
+        transition: 'background-color 0.5s ease',
+      }}>
         <div className="mx-auto" style={{ 
           ...getSectionMaxWidthStyle(),
           paddingLeft: 'clamp(1rem, 2vw, 2rem)',
@@ -40,7 +60,8 @@ export default function Navigation() {
         }}>
           <div className="relative flex items-center justify-between" style={{ 
             height: 'clamp(4rem, 5vw, 5rem)',
-            backgroundColor: 'var(--color-primary)',
+            backgroundColor: hasScrolled ? 'var(--color-primary)' : 'transparent',
+            transition: 'background-color 0.5s ease',
           }}>
           {/* Logo/Icon */}
           <motion.a
