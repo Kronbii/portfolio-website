@@ -33,7 +33,7 @@ export default function Community() {
     <section
       id="community"
       ref={ref}
-      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 border mx-auto"
+      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 border-l border-r border-b mx-auto"
       style={{ 
         backgroundColor: 'var(--color-primary)', 
         borderColor: 'rgba(33, 33, 33, 0.3)',

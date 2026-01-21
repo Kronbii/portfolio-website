@@ -46,7 +46,7 @@ export default function Skills() {
     <section
       id="skills"
       ref={ref}
-      className="min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8 bg-light-surface dark:bg-dark-surface border border-[#212121]/30 dark:border-white/20 mx-auto"
+      className="min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8 bg-light-surface dark:bg-dark-surface border-l border-r border-b border-[#212121]/30 dark:border-white/20 mx-auto"
       style={getSectionWidthStyle()}
     >
       <div className="w-full">

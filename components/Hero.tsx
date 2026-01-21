@@ -13,10 +13,9 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden min-h-screen flex flex-col mx-auto"
+      className="relative overflow-hidden min-h-screen flex flex-col mx-auto border-l border-r border-b"
       style={{
         backgroundColor: 'var(--color-primary)',
-        border: '1px solid',
         borderColor: 'rgba(33, 33, 33, 0.3)', // var(--color-border) with 30% opacity
         paddingTop: 'clamp(1rem, 3vw, 5rem)',
         ...getSectionWidthStyle(),
