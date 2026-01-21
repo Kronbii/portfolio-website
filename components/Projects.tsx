@@ -1,12 +1,13 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { FiImage, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { useRouter } from 'next/navigation'
 import { getFallbackImage } from '@/lib/utils'
 import { projects, Project } from '@/data/projects'
 import { useInfiniteCarousel } from '@/hooks/useInfiniteCarousel'
+import { useCardCarousel } from '@/hooks/useCardCarousel'
 import { getSectionWidthStyle, getSectionHeaderStyle } from '@/lib/utils'
 import { UniversalCard } from '@/components/ui/universal-card'
 
@@ -16,8 +17,6 @@ export { projects }
 
 export default function Projects() {
   const router = useRouter()
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
   const [imageErrors, setImageErrors] = useState<{ [key: number]: boolean }>({})
   const [imageSources, setImageSources] = useState<{ [key: number]: string }>({})
 
@@ -36,6 +35,20 @@ export default function Projects() {
     scrollToIndex,
     getActualIndex,
   } = useInfiniteCarousel(projects, { itemCount })
+
+  const {
+    sectionRef,
+    cardWidth,
+    cardHeight,
+    visibleCards,
+  } = useCardCarousel({
+    itemCount,
+    scrollContainerRef,
+    cardsRef,
+    extendedItemsLength: extendedProjects.length,
+  })
+
+  const isInView = useInView(sectionRef, { once: true, amount: 0.2 })
 
   const openProject = (index: number) => {
     const actualIdx = getActualIndex(index)
@@ -67,7 +80,7 @@ export default function Projects() {
     <>
       <section
         id="projects"
-        ref={ref}
+        ref={sectionRef}
         className="min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8 border-l border-r border-b mx-auto"
         style={{ 
           backgroundColor: 'var(--color-primary)', 
@@ -107,6 +120,7 @@ export default function Projects() {
             <div className="flex gap-6 px-4 sm:px-6 lg:px-[calc((100vw-72rem)/2+1.5rem)] items-center w-max">
               {(extendedProjects as Project[]).map((project, index) => {
                 const isCentered = index === currentIndex
+                const isVisible = visibleCards.has(index)
                 const actualIdx = getActualIndex(index)
                 const projectImage = project.image && !imageErrors[actualIdx] 
                   ? (imageSources[actualIdx] || project.image)
@@ -114,8 +128,14 @@ export default function Projects() {
                 return (
                   <div
                     key={`${project.title}-${index}`}
+                    data-card-index={index}
                     ref={(el) => {
                       cardsRef.current[index] = el
+                    }}
+                    style={{
+                      filter: isVisible ? 'blur(0px)' : 'blur(2px)',
+                      opacity: isVisible ? 1 : 0.25,
+                      transition: 'filter 0.5s ease, opacity 0.5s ease',
                     }}
                   >
                     <UniversalCard
@@ -127,6 +147,8 @@ export default function Projects() {
                       isInView={isInView}
                       onClick={() => openProject(index)}
                       onImageError={() => project.image && handleImageError(actualIdx, project.image)}
+                      cardWidth={cardWidth}
+                      cardHeight={cardHeight}
                     >
                       <div className="mt-auto pt-4">
                         <p className="text-sm uppercase tracking-wide mb-3" style={{ color: 'var(--color-secondary)' }}>

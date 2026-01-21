@@ -1,21 +1,17 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { useRef, useState, useEffect } from 'react'
+import { useState } from 'react'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { getFallbackImage } from '@/lib/utils'
 import { communityItems, CommunityItem } from '@/data/community'
 import { useInfiniteCarousel } from '@/hooks/useInfiniteCarousel'
+import { useCardCarousel } from '@/hooks/useCardCarousel'
 import { getSectionWidthStyle, getSectionHeaderStyle } from '@/lib/utils'
 import { UniversalCard } from '@/components/ui/universal-card'
 
 export default function Community() {
-  const ref = useRef<HTMLElement>(null)
-  const isInView = useInView(ref, { once: true, amount: 0.1 })
   const [imageSources, setImageSources] = useState<{ [key: number]: string }>({})
-  const [cardWidth, setCardWidth] = useState(450)
-  const [cardHeight, setCardHeight] = useState(600)
-  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set())
 
   const itemCount = communityItems.length
   const {
@@ -32,126 +28,24 @@ export default function Community() {
     scrollToIndex,
   } = useInfiniteCarousel(communityItems, { itemCount })
 
-  // Calculate card size to fit 3 cards in the section
-  useEffect(() => {
-    const updateCardSize = () => {
-      if (!ref.current) return
-      
-      const section = ref.current
-      const sectionWidth = section.offsetWidth
-      const padding = 32 // px-4 sm:px-6 lg:px-8, roughly 32px on average
-      const gap = 24 // gap-6 = 24px
-      const availableWidth = sectionWidth - (padding * 2)
-      const calculatedCardWidth = (availableWidth - (gap * 2)) / 3 // 3 cards with 2 gaps
-      
-      // Maintain aspect ratio (450:600 = 3:4)
-      const calculatedCardHeight = (calculatedCardWidth * 4) / 3
-      
-      setCardWidth(Math.max(300, calculatedCardWidth)) // Minimum 300px
-      setCardHeight(Math.max(400, calculatedCardHeight)) // Minimum 400px
-    }
+  const {
+    sectionRef,
+    cardWidth,
+    cardHeight,
+    visibleCards,
+  } = useCardCarousel({
+    itemCount,
+    scrollContainerRef,
+    cardsRef,
+    extendedItemsLength: extendedItems.length,
+  })
 
-    updateCardSize()
-    window.addEventListener('resize', updateCardSize)
-    return () => window.removeEventListener('resize', updateCardSize)
-  }, [])
-
-  // Center the first 3 cards on initial load
-  useEffect(() => {
-    const container = scrollContainerRef.current
-    const section = ref.current
-    if (!container || !section || extendedItems.length === 0) return
-
-    let hasCentered = false
-
-    const centerInitialCards = () => {
-      if (hasCentered) return
-      
-      // Wait for cards to be rendered and measured
-      const timeoutId = setTimeout(() => {
-        if (!container || !section || hasCentered) return
-
-        // Find the first card of the middle set (itemCount)
-        const firstCardIndex = itemCount
-        const secondCard = cardsRef.current[firstCardIndex + 1]
-        
-        if (!secondCard) return
-
-        // Get section boundaries
-        const sectionRect = section.getBoundingClientRect()
-        const sectionCenter = sectionRect.left + sectionRect.width / 2
-        
-        // Get container position relative to viewport
-        const containerRect = container.getBoundingClientRect()
-        const containerLeft = containerRect.left
-        
-        // Position of second card relative to container
-        const secondCardLeft = secondCard.offsetLeft
-        
-        // Calculate scroll position so that the second card is centered in the section
-        // Section center relative to viewport
-        // Where we want the card center to be relative to container
-        const targetCardCenterInContainer = sectionCenter - containerLeft
-        // Scroll position needed
-        const scrollPosition = secondCardLeft + (cardWidth / 2) - targetCardCenterInContainer
-        
-        container.scrollLeft = Math.max(0, scrollPosition)
-        hasCentered = true
-      }, 400)
-
-      return () => clearTimeout(timeoutId)
-    }
-
-    return centerInitialCards()
-  }, [extendedItems.length, cardWidth, itemCount])
-
-  // Track which cards are visible within the section boundaries
-  useEffect(() => {
-    const section = ref.current
-    if (!section) return
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        setVisibleCards((prev) => {
-          const updated = new Set(prev)
-          entries.forEach((entry) => {
-            const index = parseInt(entry.target.getAttribute('data-card-index') || '-1')
-            if (index >= 0) {
-              if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
-                updated.add(index)
-              } else {
-                updated.delete(index)
-              }
-            }
-          })
-          return updated
-        })
-      },
-      {
-        root: section,
-        rootMargin: '0px',
-        threshold: [0, 0.5, 1],
-      }
-    )
-
-    // Observe all card containers after a delay to ensure they're rendered
-    const timeoutId = setTimeout(() => {
-      const cardElements = section.querySelectorAll('[data-card-index]')
-      cardElements.forEach((el) => observer.observe(el))
-    }, 100)
-
-    return () => {
-      clearTimeout(timeoutId)
-      const cardElements = section.querySelectorAll('[data-card-index]')
-      cardElements.forEach((el) => observer.unobserve(el))
-      observer.disconnect()
-    }
-  }, [extendedItems.length, cardWidth])
+  const isInView = useInView(sectionRef, { once: true, amount: 0.1 })
 
   return (
     <section
       id="community"
-      ref={ref}
+      ref={sectionRef}
       className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 border-l border-r border-b mx-auto"
       style={{ 
         backgroundColor: 'var(--color-primary)', 
@@ -204,8 +98,8 @@ export default function Community() {
                     cardsRef.current[index] = el
                   }}
                   style={{
-                    filter: isVisible ? 'blur(0px)' : 'blur(8px)',
-                    opacity: isVisible ? 1 : 0.4,
+                    filter: isVisible ? 'blur(0px)' : 'blur(2px)',
+                    opacity: isVisible ? 1 : 0.25,
                     transition: 'filter 0.5s ease, opacity 0.5s ease',
                   }}
                 >
