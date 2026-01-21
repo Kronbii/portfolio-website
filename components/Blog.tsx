@@ -25,8 +25,12 @@ export default function Blog() {
     <section
       id="blog"
       ref={ref}
-      className="relative min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#EAEAEA] border border-[#212121]/30 mx-auto"
-      style={{ backgroundColor: '#EAEAEA', ...getSectionWidthStyle() }}
+      className="relative min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8 overflow-hidden border mx-auto"
+      style={{ 
+        backgroundColor: 'transparent', 
+        borderColor: 'rgba(33, 33, 33, 0.3)',
+        ...getSectionWidthStyle() 
+      }}
     >
 
       <div className="w-full relative z-10">
@@ -36,7 +40,8 @@ export default function Blog() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center space-x-3 rounded-full border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.3em] text-[#252525] mb-6"
+            className="inline-flex items-center space-x-3 rounded-full border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.3em] mb-6"
+            style={{ color: 'var(--color-secondary)' }}
           >
             <FiBookOpen className="text-primary-500" size={14} />
             <span>Latest Articles</span>
@@ -97,25 +102,25 @@ export default function Blog() {
                 <div className="flex-1 flex flex-col min-w-0">
                   {/* Pinned indicator (show for first/latest article) */}
                   {index === 0 && (
-                    <div className="flex items-center gap-2 mb-2 text-xs text-[#252525]">
+                    <div className="flex items-center gap-2 mb-2 text-xs" style={{ color: 'var(--color-secondary)' }}>
                       <span className="text-primary-500">📍</span>
                       <span>Pinned</span>
                     </div>
                   )}
 
                   {/* Title */}
-                  <h3 className="text-xl sm:text-2xl font-bold mb-2 text-[#252525] group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-2 leading-tight">
+                  <h3 className="text-xl sm:text-2xl font-bold mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-2 leading-tight" style={{ color: 'var(--color-secondary)' }}>
                     {article.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-sm sm:text-base text-[#252525] mb-4 leading-relaxed line-clamp-2">
+                  <p className="text-sm sm:text-base mb-4 leading-relaxed line-clamp-2" style={{ color: 'var(--color-secondary)' }}>
                     {article.description}
                   </p>
 
                   {/* Footer with metadata */}
                   <div className="flex items-center justify-between mt-auto pt-2">
-                    <div className="flex items-center gap-3 text-xs sm:text-sm text-[#252525]">
+                    <div className="flex items-center gap-3 text-xs sm:text-sm" style={{ color: 'var(--color-secondary)' }}>
                       <span>{timeAgo}</span>
                       <span>•</span>
                       {/* Tags */}
@@ -136,7 +141,7 @@ export default function Blog() {
                         className="p-2 hover:bg-light-surface2 dark:hover:bg-white/10 rounded-lg transition-colors"
                         aria-label="Bookmark"
                       >
-                        <FiBookmark size={18} className="text-[#252525]" />
+                        <FiBookmark size={18} style={{ color: 'var(--color-secondary)' }} />
                       </button>
                       <button
                         onClick={(e) => {
@@ -146,7 +151,7 @@ export default function Blog() {
                         className="p-2 hover:bg-light-surface2 dark:hover:bg-white/10 rounded-lg transition-colors"
                         aria-label="More options"
                       >
-                        <FiMoreHorizontal size={18} className="text-[#252525]" />
+                        <FiMoreHorizontal size={18} style={{ color: 'var(--color-secondary)' }} />
                       </button>
                     </div>
                   </div>

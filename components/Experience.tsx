@@ -62,9 +62,9 @@ function TimelineItem({
         <>
           {/* Content on left */}
           <div className="pr-8 text-right">
-            <p className="text-xs uppercase tracking-wide text-[#252525] mb-1">{item.period}</p>
-            <h3 className="text-lg font-semibold text-[#252525] mb-2">{item.title}</h3>
-            <p className="text-sm text-[#252525] leading-relaxed">{item.description}</p>
+            <p className="text-xs uppercase tracking-wide mb-1" style={{ color: 'var(--color-secondary)' }}>{item.period}</p>
+            <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--color-secondary)' }}>{item.title}</h3>
+            <p className="text-sm leading-relaxed" style={{ color: 'var(--color-secondary)' }}>{item.description}</p>
           </div>
           {/* Dot in center */}
           <div className="absolute left-1/2 top-2 -translate-x-1/2">
@@ -89,9 +89,9 @@ function TimelineItem({
           </div>
           {/* Content on right */}
           <div className="pl-8 text-left">
-            <p className="text-xs uppercase tracking-wide text-[#252525] mb-1">{item.period}</p>
-            <h3 className="text-lg font-semibold text-[#252525] mb-2">{item.title}</h3>
-            <p className="text-sm text-[#252525] leading-relaxed">{item.description}</p>
+            <p className="text-xs uppercase tracking-wide mb-1" style={{ color: 'var(--color-secondary)' }}>{item.period}</p>
+            <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--color-secondary)' }}>{item.title}</h3>
+            <p className="text-sm leading-relaxed" style={{ color: 'var(--color-secondary)' }}>{item.description}</p>
           </div>
         </>
       )}
@@ -124,15 +124,20 @@ export default function Experience() {
     <section
       id="experience"
       ref={ref}
-      className="min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8 bg-[#EAEAEA] border border-[#212121]/30 mx-auto"
-      style={{ backgroundColor: '#EAEAEA', ...getSectionWidthStyle() }}
+      className="min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8 border mx-auto"
+      style={{ 
+        backgroundColor: 'transparent', 
+        borderColor: 'rgba(33, 33, 33, 0.3)',
+        ...getSectionWidthStyle() 
+      }}
     >
       <div className="w-full">
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="text-center text-sm uppercase tracking-[0.4em] text-[#252525]"
+          className="text-center text-sm uppercase tracking-[0.4em]"
+          style={{ color: 'var(--color-secondary)' }}
         >
           Journey & Milestones
         </motion.p>

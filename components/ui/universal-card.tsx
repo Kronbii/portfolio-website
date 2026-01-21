@@ -49,7 +49,7 @@ export function UniversalCard({
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: isCentered ? -16 : 0, scale: isCentered ? 1.03 : 1 } : {}}
       transition={{ duration: 0.15 }}
-      className={`group relative overflow-hidden border border-[#212121]/30 bg-transparent flex-shrink-0 transition-all duration-75 flex flex-col ${
+      className={`group relative overflow-hidden border bg-transparent flex-shrink-0 transition-all duration-75 flex flex-col ${
         isCentered 
           ? '-translate-y-4 scale-[1.03] z-10' 
           : ''
@@ -57,6 +57,7 @@ export function UniversalCard({
       style={{
         width: '450px',
         height: '600px',
+        borderColor: 'rgba(33, 33, 33, 0.3)', // var(--color-border) with 30% opacity
         boxShadow: isCentered 
           ? '0 20px 25px -5px rgba(37, 37, 37, 0.1), 0 10px 10px -5px rgba(37, 37, 37, 0.04)' 
           : '0 1px 2px 0 rgba(37, 37, 37, 0.05)',
@@ -65,7 +66,8 @@ export function UniversalCard({
       onClick={onClick}
     >
       {/* Image */}
-      <div className="relative flex-shrink-0 overflow-hidden bg-[#EAEAEA]" style={{
+      <div className="relative flex-shrink-0 overflow-hidden" style={{
+        backgroundColor: 'var(--color-primary)',
         height: '297px',
       }}>
         {hasImage ? (
@@ -79,7 +81,7 @@ export function UniversalCard({
             onError={handleImageError}
           />
         ) : showImagePlaceholder ? (
-          <div className="w-full h-full flex items-center justify-center text-[#252525]/30">
+          <div className="w-full h-full flex items-center justify-center" style={{ color: 'rgba(37, 37, 37, 0.3)' }}>
             <FiImage size={48} />
           </div>
         ) : null}
@@ -87,14 +89,16 @@ export function UniversalCard({
       
       {/* Content */}
       <div className="p-6 flex-1 flex flex-col">
-        <h3 className="text-[#252525] font-medium mb-3 flex-shrink-0" style={{
+        <h3 className="font-medium mb-3 flex-shrink-0" style={{
+          color: 'var(--color-secondary)',
           fontSize: '30px',
         }}>
           {title}
         </h3>
-        <div className="border-t border-[#212121]/30 mb-3 flex-shrink-0" />
+        <div className="border-t mb-3 flex-shrink-0" style={{ borderColor: 'rgba(33, 33, 33, 0.3)' }} />
         {description && (
-          <p className="text-[#252525] font-light flex-1" style={{
+          <p className="font-light flex-1" style={{
+            color: 'var(--color-secondary)',
             fontSize: '20px',
           }}>
             {description}
@@ -102,7 +106,7 @@ export function UniversalCard({
         )}
         {children}
         {date && (
-          <p className="text-xs text-[#252525]/70 mt-2 flex-shrink-0">
+          <p className="text-xs mt-2 flex-shrink-0" style={{ color: 'rgba(37, 37, 37, 0.7)' }}>
             {date}
           </p>
         )}

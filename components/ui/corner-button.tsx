@@ -40,12 +40,18 @@ const CornerDecoration = ({
       style={{ transform: config.transform }}
     >
       <div 
-        className={`absolute top-0 left-0 w-[1px] transition-all duration-300 ${lineColor}`}
-        style={{ height: isHovered ? '12px' : '8px' }}
+        className="absolute top-0 left-0 w-[1px] transition-all duration-300"
+        style={{ 
+          height: isHovered ? '12px' : '8px',
+          backgroundColor: lineColor,
+        }}
       />
       <div 
-        className={`absolute top-0 left-0 h-[1px] transition-all duration-300 ${lineColor}`}
-        style={{ width: isHovered ? '12px' : '8px' }}
+        className="absolute top-0 left-0 h-[1px] transition-all duration-300"
+        style={{ 
+          width: isHovered ? '12px' : '8px',
+          backgroundColor: lineColor,
+        }}
       />
     </div>
   )
@@ -77,28 +83,30 @@ export function CornerButton({
   // Variant styles - only background and text colors differ
   const variantStyles = {
     default: {
-      bg: 'bg-[#D4D4D4]',
-      text: 'text-[#252525]',
-      lineColor: 'bg-[#252525]',
+      bg: 'var(--color-accent)',
+      text: 'var(--color-secondary)',
+      lineColor: 'var(--color-secondary)',
     },
     primary: {
-      bg: 'bg-[#252525]',
-      text: 'text-[#EAEAEA]',
-      lineColor: 'bg-[#252525]',
+      bg: 'var(--color-secondary)',
+      text: 'var(--color-accent)',
+      lineColor: 'var(--color-secondary)',
     }
   }
 
   const currentVariant = variantStyles[variant]
   
-  const baseClasses = `relative inline-flex items-center justify-center h-8 sm:h-10 px-3 sm:px-6 ${currentVariant.bg} ${currentVariant.text} uppercase font-normal tracking-wide transition-opacity hover:opacity-80 outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus:ring-offset-0 ${disabled ? 'opacity-60 cursor-not-allowed' : ''}`
+  const baseClasses = `relative inline-flex items-center justify-center h-8 sm:h-10 px-3 sm:px-6 uppercase font-normal tracking-wide transition-opacity hover:opacity-80 outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus:ring-offset-0 ${disabled ? 'opacity-60 cursor-not-allowed' : ''}`
   
   const baseStyles = {
     outline: 'none',
     boxShadow: 'none',
     WebkitTapHighlightColor: 'transparent',
     fontSize: 'clamp(12px, 2.5vw, 20px)',
+    backgroundColor: currentVariant.bg,
+    color: currentVariant.text,
     ...style
-  }
+  } as React.CSSProperties
 
   const handleFocus = (e: React.FocusEvent<HTMLAnchorElement | HTMLButtonElement>) => {
     e.currentTarget.style.outline = 'none'
@@ -116,7 +124,7 @@ export function CornerButton({
       <CornerDecoration position="topRight" isHovered={isHovered} lineColor={currentVariant.lineColor} />
       <CornerDecoration position="bottomLeft" isHovered={isHovered} lineColor={currentVariant.lineColor} />
       <CornerDecoration position="bottomRight" isHovered={isHovered} lineColor={currentVariant.lineColor} />
-      <span style={{ color: variant === 'primary' ? '#EAEAEA !important' : undefined }}>{children}</span>
+      <span style={{ color: currentVariant.text, zIndex: 1, position: 'relative' }}>{children}</span>
     </>
   )
 

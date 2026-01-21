@@ -13,9 +13,11 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden min-h-screen flex flex-col bg-[#EAEAEA] border border-[#212121]/30 mx-auto"
+      className="relative overflow-hidden min-h-screen flex flex-col mx-auto"
       style={{
-        backgroundColor: '#EAEAEA',
+        backgroundColor: 'var(--color-primary)',
+        border: '1px solid',
+        borderColor: 'rgba(33, 33, 33, 0.3)', // var(--color-border) with 30% opacity
         paddingTop: 'clamp(1rem, 3vw, 5rem)',
         ...getSectionWidthStyle(),
       }}
@@ -26,9 +28,9 @@ export default function Hero() {
         style={{
           backgroundImage: 'url(/figma-assets/grid.svg)',
           backgroundPosition: 'center',
-          backgroundSize: '100px 100px',
+          backgroundSize: '50px 50px',
           backgroundRepeat: 'repeat',
-          opacity: 0.02,
+          opacity: 0.06,
           zIndex: 0,
         }}
       />
@@ -100,8 +102,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="w-full border border-[#212121]/30 bg-transparent mt-0"
+          className="w-full border-t border-b bg-transparent mt-0"
           style={{
+            borderColor: 'rgba(33, 33, 33, 0.3)', // var(--color-border) with 30% opacity
             paddingTop: 'clamp(0.75rem, 1.5vw, 1.5rem)',
             paddingBottom: 'clamp(0.75rem, 1.5vw, 1.5rem)',
           }}
@@ -124,8 +127,9 @@ export default function Hero() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
-                  className="text-[#252525] font-normal text-center whitespace-nowrap flex-shrink-0"
+                  className="font-normal text-center whitespace-nowrap flex-shrink-0"
                   style={{
+                    color: 'var(--color-secondary)',
                     fontSize: 'clamp(11px, 1.8vw, 26px)',
                     textShadow: '0 2px 4px rgba(0, 0, 0, 0.25)',
                     lineHeight: '1.2',
@@ -145,8 +149,8 @@ export default function Hero() {
           transition={{ duration: 1, delay: 1 }}
           className="flex flex-col items-center gap-2 pt-3 sm:pt-4 lg:pt-6"
         >
-          <div className="w-[3px] h-[3px] rounded-full bg-[#252525]" />
-          <span className="text-xs text-[#252525]">
+          <div className="w-[3px] h-[3px] rounded-full" style={{ backgroundColor: 'var(--color-secondary)' }} />
+          <span className="text-xs" style={{ color: 'var(--color-secondary)' }}>
             Scroll Below
           </span>
         </motion.div>
@@ -167,7 +171,7 @@ function IntroSection() {
         className="leading-none"
         style={{
           fontWeight: 300,
-          fontSize: 'clamp(2.5rem, 8vw, 9rem)',
+          fontSize: 'clamp(2.5rem, 8vw, 7rem)',
           lineHeight: '1',
         }}
       >
@@ -180,7 +184,7 @@ function IntroSection() {
         className="leading-none"
         style={{
           fontWeight: 300,
-          fontSize: 'clamp(2.5rem, 8vw, 9rem)',
+          fontSize: 'clamp(2.5rem, 8vw, 7rem)',
           lineHeight: '1',
         }}
       >
@@ -231,7 +235,7 @@ function HeroPortrait({
       ) : (
         <div className="flex flex-col items-center justify-center text-primary-500 space-y-2 h-[600px]">
           <span className="text-6xl font-semibold">RK</span>
-          <p className="text-sm text-[#252525]">Add a portrait</p>
+          <p className="text-sm" style={{ color: 'var(--color-secondary)' }}>Add a portrait</p>
         </div>
       )}
     </motion.div>

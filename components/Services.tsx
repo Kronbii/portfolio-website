@@ -68,8 +68,12 @@ export default function Services() {
     <section
       id="services"
       ref={ref}
-      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 bg-[#EAEAEA] border border-[#212121]/30 mx-auto"
-      style={{ backgroundColor: '#EAEAEA', ...getSectionWidthStyle() }}
+      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 border mx-auto"
+      style={{ 
+        backgroundColor: 'transparent', 
+        borderColor: 'rgba(33, 33, 33, 0.3)',
+        ...getSectionWidthStyle() 
+      }}
     >
       <div className="w-full">
         <div className="text-center max-w-3xl mx-auto mb-14">
@@ -77,7 +81,8 @@ export default function Services() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="text-sm uppercase tracking-[0.4em] text-[#252525]"
+            className="text-sm uppercase tracking-[0.4em]"
+            style={{ color: 'var(--color-secondary)' }}
           >
             Signature engagements
           </motion.p>
@@ -124,18 +129,18 @@ export default function Services() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3 text-primary-400">
                     {service.icon}
-                    <span className="text-xs uppercase tracking-wide text-[#252525]">{service.timeline}</span>
+                    <span className="text-xs uppercase tracking-wide" style={{ color: 'var(--color-secondary)' }}>{service.timeline}</span>
                   </div>
                 </div>
-                <h3 className="mt-4 text-2xl sm:text-3xl font-semibold text-[#252525]">
+                <h3 className="mt-4 text-2xl sm:text-3xl font-semibold" style={{ color: 'var(--color-secondary)' }}>
                   {service.title}
                 </h3>
-                <p className="mt-2 text-[#252525] text-sm sm:text-base leading-relaxed">
+                <p className="mt-2 text-sm sm:text-base leading-relaxed" style={{ color: 'var(--color-secondary)' }}>
                   {service.punchline}
                 </p>
                 <div className="mt-4 space-y-2">
                   {service.highlights.map((item) => (
-                    <div key={item} className="flex items-center space-x-2 text-sm sm:text-base text-[#252525]">
+                    <div key={item} className="flex items-center space-x-2 text-sm sm:text-base" style={{ color: 'var(--color-secondary)' }}>
                       <span className="text-primary-400">
                         <FiCheck />
                       </span>
@@ -154,7 +159,8 @@ export default function Services() {
         <div className="flex justify-center items-center gap-4 mt-8">
           <button
             onClick={handleScrollLeft}
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-[#252525] hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
+            className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
+            style={{ color: 'var(--color-secondary)' }}
             aria-label="Previous service"
           >
             <FiChevronLeft size={20} />
@@ -175,7 +181,8 @@ export default function Services() {
           </div>
           <button
             onClick={handleScrollRight}
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-[#252525] hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
+            className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
+            style={{ color: 'var(--color-secondary)' }}
             aria-label="Next service"
           >
             <FiChevronRight size={20} />

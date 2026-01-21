@@ -64,6 +64,16 @@ const SECTION_WIDTH_CONFIG = {
  * Width is responsive: wider on small screens, narrower on large screens
  * This approach works reliably regardless of Tailwind's JIT detection
  */
+/**
+ * Get standard section background and border styles using CSS variables
+ */
+export function getSectionStyle(): React.CSSProperties {
+  return {
+    backgroundColor: 'var(--color-primary)',
+    borderColor: 'rgba(33, 33, 33, 0.3)', // var(--color-border) with 30% opacity
+  }
+}
+
 export function getSectionWidthStyle(): React.CSSProperties {
   const { desktopWidth, mobileWidth, startScalingAt, stopScalingAt, scalingFactor } = SECTION_WIDTH_CONFIG
   
@@ -112,8 +122,9 @@ export function getSectionHeaderStyle(): {
   style: React.CSSProperties
 } {
   return {
-    className: 'text-[#252525] font-medium',
+    className: 'font-medium',
     style: {
+      color: 'var(--color-secondary)',
       fontSize: 'clamp(28px, 4vw, 46px)',
     },
   }
@@ -129,7 +140,11 @@ export function getSectionSubheadingStyle(): {
   style: React.CSSProperties
 } {
   return {
-    className: 'text-[#252525] font-light max-w-2xl mx-auto',
+    className: 'font-light max-w-2xl mx-auto',
+    style: {
+      color: 'var(--color-secondary)',
+      fontSize: 'clamp(18px, 3vw, 26px)',
+    },
     style: {
       fontSize: 'clamp(18px, 3vw, 26px)',
     },

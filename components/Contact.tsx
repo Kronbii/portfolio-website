@@ -68,8 +68,12 @@ export default function Contact() {
     <section
       id="contact"
       ref={ref}
-      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 bg-[#EAEAEA] border border-[#212121]/30 mx-auto"
-      style={{ backgroundColor: '#EAEAEA', ...getSectionWidthStyle() }}
+      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 border mx-auto"
+      style={{ 
+        backgroundColor: 'transparent', 
+        borderColor: 'rgba(33, 33, 33, 0.3)',
+        ...getSectionWidthStyle() 
+      }}
     >
       <div className="w-full">
         <motion.h2
@@ -101,7 +105,7 @@ export default function Contact() {
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-2 text-[#252525]">
+                <label htmlFor="name" className="block text-sm font-medium mb-2" style={{ color: 'var(--color-secondary)' }}>
                   Name
                 </label>
                 <input
@@ -110,12 +114,13 @@ export default function Contact() {
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-3 bg-light-surface2 dark:bg-dark-surface2 border border-light-border/50 dark:border-dark-surface2 rounded-lg focus:outline-none focus:border-primary-500 text-[#252525] transition-colors"
+                  className="w-full px-4 py-3 bg-light-surface2 dark:bg-dark-surface2 border border-light-border/50 dark:border-dark-surface2 rounded-lg focus:outline-none focus:border-primary-500 transition-colors"
+                  style={{ color: 'var(--color-secondary)' }}
                   placeholder="Your name"
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2 text-[#252525]">
+                <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: 'var(--color-secondary)' }}>
                   Email
                 </label>
                 <input
@@ -124,12 +129,13 @@ export default function Contact() {
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-3 bg-light-surface2 dark:bg-dark-surface2 border border-light-border/50 dark:border-dark-surface2 rounded-lg focus:outline-none focus:border-primary-500 text-[#252525] transition-colors"
+                  className="w-full px-4 py-3 bg-light-surface2 dark:bg-dark-surface2 border border-light-border/50 dark:border-dark-surface2 rounded-lg focus:outline-none focus:border-primary-500 transition-colors"
+                  style={{ color: 'var(--color-secondary)' }}
                   placeholder="your.email@example.com"
                 />
               </div>
               <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2 text-[#252525]">
+                <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ color: 'var(--color-secondary)' }}>
                   Message
                 </label>
                 <textarea
@@ -181,55 +187,58 @@ export default function Contact() {
             <div className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm uppercase tracking-[0.4em] text-[#252525]">Availability</p>
-                  <p className="mt-2 text-2xl font-semibold text-[#252525]">2 client openings</p>
+                  <p className="text-sm uppercase tracking-[0.4em]" style={{ color: 'var(--color-secondary)' }}>Availability</p>
+                  <p className="mt-2 text-2xl font-semibold" style={{ color: 'var(--color-secondary)' }}>2 client openings</p>
                 </div>
                 <div className="text-primary-600 dark:text-primary-400">
                   <FiClock size={32} />
                 </div>
               </div>
-              <p className="mt-4 text-[#252525]">Next kickoff: Dec 2025 · Replies within 24 hours.</p>
+              <p className="mt-4" style={{ color: 'var(--color-secondary)' }}>Next kickoff: Dec 2025 · Replies within 24 hours.</p>
             </div>
 
             <div className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-6 bg-light-surface/70">
-              <h3 className="text-xl font-semibold text-[#252525] mb-4">Preferred channels</h3>
+              <h3 className="text-xl font-semibold mb-4" style={{ color: 'var(--color-secondary)' }}>Preferred channels</h3>
               <div className="space-y-4">
                 <motion.a
                   href="https://github.com/Kronbii"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface/70 px-4 py-3 text-[#252525] bg-light-surface/70"
+                  className="flex items-center justify-between rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface/70 px-4 py-3 bg-light-surface/70"
+                  style={{ color: 'var(--color-secondary)' }}
                   whileHover={{ x: 4 }}
                 >
                   <div className="flex items-center space-x-3">
                     <FiGithub size={22} />
                     <span>GitHub</span>
                   </div>
-                  <span className="text-sm text-[#252525]">Case studies</span>
+                  <span className="text-sm" style={{ color: 'var(--color-secondary)' }}>Case studies</span>
                 </motion.a>
                 <motion.a
                   href="https://www.linkedin.com/in/rami-kronbi/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface/70 px-4 py-3 text-[#252525] bg-light-surface/70"
+                  className="flex items-center justify-between rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface/70 px-4 py-3 bg-light-surface/70"
+                  style={{ color: 'var(--color-secondary)' }}
                   whileHover={{ x: 4 }}
                 >
                   <div className="flex items-center space-x-3">
                     <FiLinkedin size={22} />
                     <span>LinkedIn</span>
                   </div>
-                  <span className="text-sm text-[#252525]">Professional updates</span>
+                  <span className="text-sm" style={{ color: 'var(--color-secondary)' }}>Professional updates</span>
                 </motion.a>
                 <motion.a
                   href="mailto:ramykronby@gmail.com"
-                  className="flex items-center justify-between rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface/70 px-4 py-3 text-[#252525] bg-light-surface/70"
+                  className="flex items-center justify-between rounded-2xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-dark-surface/70 px-4 py-3 bg-light-surface/70"
+                  style={{ color: 'var(--color-secondary)' }}
                   whileHover={{ x: 4 }}
                 >
                   <div className="flex items-center space-x-3 ">
                     <FiMail size={22} />
                     <span>ramykronby@gmail.com</span>
                   </div>
-                  <span className="text-sm text-[#252525] ">Best for briefs</span>
+                  <span className="text-sm" style={{ color: 'var(--color-secondary)' }}>Best for briefs</span>
                 </motion.a>
               </div>
             </div>

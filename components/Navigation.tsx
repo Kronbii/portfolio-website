@@ -23,21 +23,25 @@ export default function Navigation() {
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 right-0 z-40 border-b border-[#212121]/30"
-      style={{ 
-        backgroundColor: '#EAEAEA', 
+      className="fixed top-0 left-0 right-0 z-40 border-b"
+      style={{
+        backgroundColor: 'var(--color-primary)',
+        borderColor: 'rgba(33, 33, 33, 0.3)',
         boxShadow: 'none',
         backdropFilter: 'none',
         WebkitBackdropFilter: 'none'
       }}
     >
-      <div className="w-full bg-[#EAEAEA]">
+      <div className="w-full" style={{ backgroundColor: 'var(--color-primary)' }}>
         <div className="mx-auto" style={{ 
           ...getSectionMaxWidthStyle(),
           paddingLeft: 'clamp(1rem, 2vw, 2rem)',
           paddingRight: 'clamp(1rem, 2vw, 2rem)',
         }}>
-          <div className="relative flex items-center justify-between bg-[#EAEAEA]" style={{ height: 'clamp(4rem, 5vw, 5rem)' }}>
+          <div className="relative flex items-center justify-between" style={{ 
+            height: 'clamp(4rem, 5vw, 5rem)',
+            backgroundColor: 'var(--color-primary)',
+          }}>
           {/* Logo/Icon */}
           <motion.a
             href="#home"
@@ -64,7 +68,8 @@ export default function Navigation() {
               <motion.a
                 key={item.name}
                 href={item.href}
-                className="font-normal uppercase tracking-wide text-[#252525] transition-colors hover:opacity-70 whitespace-nowrap"
+                className="font-normal uppercase tracking-wide transition-colors hover:opacity-70 whitespace-nowrap"
+                style={{ color: 'var(--color-secondary)' }}
                 style={{
                   fontSize: 'clamp(10px, 1.2vw, 14px)',
                 }}
@@ -93,7 +98,8 @@ export default function Navigation() {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden flex items-center justify-center w-10 h-10 text-[#252525]"
+            className="lg:hidden flex items-center justify-center w-10 h-10"
+            style={{ color: 'var(--color-secondary)' }}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle navigation"
           >
@@ -107,14 +113,16 @@ export default function Navigation() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden pb-4 border-t border-[#212121]/30"
+              className="lg:hidden pb-4 border-t"
+              style={{ borderColor: 'rgba(33, 33, 33, 0.3)' }}
             >
               <div className="space-y-4 pt-4">
                 {navItems.map((item) => (
                   <a
                     key={item.name}
                     href={item.href}
-                    className="block text-base font-normal uppercase tracking-wide text-[#252525] hover:opacity-70"
+                    className="block text-base font-normal uppercase tracking-wide hover:opacity-70"
+                    style={{ color: 'var(--color-secondary)' }}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.name}

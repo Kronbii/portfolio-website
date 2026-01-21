@@ -12,7 +12,7 @@ import Contact from '@/components/Contact'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#EAEAEA]" style={{ backgroundColor: '#EAEAEA' }}>
+    <main className="min-h-screen" style={{ backgroundColor: 'var(--color-primary)' }}>
       <Navigation />
       <Hero />
       <Blog />

@@ -68,15 +68,20 @@ export default function Projects() {
       <section
         id="projects"
         ref={ref}
-        className="min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8 bg-[#EAEAEA] border border-[#212121]/30 mx-auto"
-        style={{ backgroundColor: '#EAEAEA', ...getSectionWidthStyle() }}
+        className="min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8 border mx-auto"
+        style={{ 
+          backgroundColor: 'var(--color-primary)', 
+          borderColor: 'rgba(33, 33, 33, 0.3)',
+          ...getSectionWidthStyle() 
+        }}
       >
         <div className="w-full">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="text-center text-sm uppercase tracking-[0.4em] text-[#252525]"
+            className="text-center text-sm uppercase tracking-[0.4em]"
+            style={{ color: 'var(--color-secondary)' }}
           >
             Portfolio Projects
           </motion.p>
@@ -124,10 +129,10 @@ export default function Projects() {
                       onImageError={() => project.image && handleImageError(actualIdx, project.image)}
                     >
                       <div className="mt-auto pt-4">
-                        <p className="text-sm uppercase tracking-wide text-[#252525] mb-3">
+                        <p className="text-sm uppercase tracking-wide mb-3" style={{ color: 'var(--color-secondary)' }}>
                           Featured build
                         </p>
-                        <div className="text-[#252525] text-sm font-semibold">
+                        <div className="text-sm font-semibold" style={{ color: 'var(--color-secondary)' }}>
                           Tap for outcomes →
                         </div>
                       </div>
@@ -142,7 +147,8 @@ export default function Projects() {
           <div className="flex justify-center items-center gap-4 mt-8">
             <button
               onClick={handleScrollLeft}
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-[#252525] hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
+              style={{ color: 'var(--color-secondary)' }}
               aria-label="Previous project"
             >
               <FiChevronLeft size={20} />
@@ -163,7 +169,8 @@ export default function Projects() {
             </div>
             <button
               onClick={handleScrollRight}
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-[#252525] hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
+              style={{ color: 'var(--color-secondary)' }}
               aria-label="Next project"
             >
               <FiChevronRight size={20} />
@@ -176,7 +183,7 @@ export default function Projects() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mt-12 rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-6 text-center"
           >
-            <p className="text-[#252525] text-lg">
+            <p className="text-lg" style={{ color: 'var(--color-secondary)' }}>
               Want a similar transformation? <a href="#contact" className="text-primary-600 dark:text-primary-400 underline-offset-4 hover:underline">Let&apos;s design your roadmap</a> and launch faster.
             </p>
           </motion.div>

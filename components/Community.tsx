@@ -33,8 +33,12 @@ export default function Community() {
     <section
       id="community"
       ref={ref}
-      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 bg-[#EAEAEA] border border-[#212121]/30 mx-auto"
-      style={{ backgroundColor: '#EAEAEA', ...getSectionWidthStyle() }}
+      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 border mx-auto"
+      style={{ 
+        backgroundColor: 'var(--color-primary)', 
+        borderColor: 'rgba(33, 33, 33, 0.3)',
+        ...getSectionWidthStyle() 
+      }}
     >
       <div className="w-full">
         {/* Hero Section */}
@@ -43,7 +47,8 @@ export default function Community() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="text-sm uppercase tracking-[0.4em] text-[#252525] mb-4"
+            className="text-sm uppercase tracking-[0.4em] mb-4"
+            style={{ color: 'var(--color-secondary)' }}
           >
             Community First
           </motion.p>
@@ -103,7 +108,8 @@ export default function Community() {
         <div className="flex justify-center items-center gap-4 mt-8">
           <button
             onClick={handleScrollLeft}
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-[#252525] hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
+                  className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
+                  style={{ color: 'var(--color-secondary)' }}
             aria-label="Previous"
           >
             <FiChevronLeft size={20} />
@@ -124,7 +130,8 @@ export default function Community() {
           </div>
           <button
             onClick={handleScrollRight}
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg text-[#252525] hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
+                  className="flex h-12 w-12 items-center justify-center rounded-full border border-light-border/50 dark:border-white/15 bg-light-surface2/50 dark:bg-white/10 backdrop-blur-lg hover:border-primary-500/60 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-light-surface dark:hover:bg-white/15 transition-colors"
+                  style={{ color: 'var(--color-secondary)' }}
             aria-label="Next"
           >
             <FiChevronRight size={20} />

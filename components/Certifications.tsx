@@ -14,8 +14,12 @@ export default function Certifications() {
     <section
       id="certifications"
       ref={ref}
-      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 bg-[#EAEAEA] border border-[#212121]/30 mx-auto"
-      style={{ backgroundColor: '#EAEAEA', ...getSectionWidthStyle() }}
+      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 border mx-auto"
+      style={{ 
+        backgroundColor: 'transparent', 
+        borderColor: 'rgba(33, 33, 33, 0.3)',
+        ...getSectionWidthStyle() 
+      }}
     >
       <div className="w-full">
         <motion.div
@@ -24,7 +28,7 @@ export default function Certifications() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <p className="text-sm uppercase tracking-[0.4em] text-[#252525]">Proof of execution</p>
+          <p className="text-sm uppercase tracking-[0.4em]" style={{ color: 'var(--color-secondary)' }}>Proof of execution</p>
           <h2 className={`${getSectionHeaderStyle().className} mt-3`} style={getSectionHeaderStyle().style}>Certifications & recognition</h2>
           <p className={`${getSectionSubheadingStyle().className} mt-4`} style={getSectionSubheadingStyle().style}>
             The same rigor I bring to your project is backed by accredited training and global wins.
@@ -44,13 +48,13 @@ export default function Certifications() {
                 <FiAward size={24} />
               </div>
               <div className="flex-1">
-                <h3 className="text-xl font-semibold text-[#252525]">
+                <h3 className="text-xl font-semibold" style={{ color: 'var(--color-secondary)' }}>
                   {cert.name}
                 </h3>
-                <p className="text-[#252525] mb-2">
+                <p className="mb-2" style={{ color: 'var(--color-secondary)' }}>
                   {cert.issuer}
                 </p>
-                <div className="flex flex-wrap gap-4 text-sm text-[#252525]">
+                <div className="flex flex-wrap gap-4 text-sm" style={{ color: 'var(--color-secondary)' }}>
                   <span>Issued: {cert.date}</span>
                   {cert.credentialId && <span>ID: {cert.credentialId}</span>}
                 </div>
