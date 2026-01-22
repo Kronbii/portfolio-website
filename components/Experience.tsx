@@ -230,7 +230,7 @@ export default function Experience() {
       ref={ref}
       className="relative min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8 border-l border-r border-b mx-auto overflow-hidden"
       style={{
-        backgroundColor: 'var(--color-primary)',
+        backgroundColor: 'transparent',
         borderColor: 'rgba(33, 33, 33, 0.3)',
         ...getSectionWidthStyle(),
       }}

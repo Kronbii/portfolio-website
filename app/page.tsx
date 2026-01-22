@@ -9,11 +9,14 @@ import Services from '@/components/Services'
 import Community from '@/components/Community'
 import Certifications from '@/components/Certifications'
 import Contact from '@/components/Contact'
+import PaperTexture from '@/components/PaperTexture'
 
 export default function Home() {
   return (
-    <main className="min-h-screen" style={{ backgroundColor: 'var(--color-primary)' }}>
-      <Navigation />
+    <main className="min-h-screen relative" style={{ backgroundColor: 'var(--color-primary)' }}>
+      <PaperTexture />
+      <div className="relative z-10">
+        <Navigation />
       <Hero />
       <Community />
       <Blog />
@@ -22,6 +25,7 @@ export default function Home() {
       <Certifications />
       <Services />
       <Contact />
+      </div>
     </main>
   )
 }

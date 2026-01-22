@@ -22,6 +22,15 @@
     
     /* Gradient intensity/opacity (0-1) */
     --blog-gradient-intensity: 0.5;
+    
+    /* Paper texture controls */
+    --paper-texture-opacity: 0.2;
+    --paper-texture-color: var(--color-secondary); /* Fallback for single color */
+    --paper-texture-color-start: var(--color-border); /* Gradient start color */
+    --paper-texture-color-end: var(--color-primary); /* Gradient end color */
+    --paper-texture-blend-mode: multiply;
+    --paper-texture-width: 100%; /* Adjust this to make it smaller (e.g., 50%, 200px, etc.) */
+    --paper-texture-height-scale: 0.5; /* Adjust this to control vertical size (0.5 = half height, 0.3 = 30% height, etc.) */
 
   }
 
@@ -258,3 +267,8 @@
   scrollbar-width: thin;
   scrollbar-color: var(--color-secondary) var(--color-primary);
 }
+
+/* Paper texture color control */
+/* To change the color, you can use CSS filters or set a background color with mask */
+/* Example filter for black: filter: brightness(0) saturate(100%);
+/* Example filter for a specific color: Use online filter generators or set --paper-texture-filter */

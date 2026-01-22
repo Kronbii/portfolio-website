@@ -46,8 +46,12 @@ export default function Skills() {
     <section
       id="skills"
       ref={ref}
-      className="min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8 bg-light-surface dark:bg-dark-surface border-l border-r border-b border-[#212121]/30 dark:border-white/20 mx-auto"
-      style={getSectionWidthStyle()}
+      className="min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8 border-l border-r border-b mx-auto"
+      style={{ 
+        backgroundColor: 'transparent',
+        borderColor: 'rgba(33, 33, 33, 0.3)',
+        ...getSectionWidthStyle() 
+      }}
     >
       <div className="w-full">
         <motion.h2
