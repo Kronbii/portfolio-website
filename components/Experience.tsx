@@ -346,23 +346,14 @@ export default function Experience() {
         </div>
 
         {/* CTA Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-16 lg:mt-20 text-center"
-        >
-          <motion.div
-            className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5"
-            whileHover={{ scale: 1.05, y: -2 }}
-            transition={{ duration: 0.2 }}
-          >
+        <div className="mt-16 lg:mt-20 text-center">
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5">
             <FiTrendingUp className="text-primary-500" size={18} />
             <span className="text-sm" style={{ color: 'var(--color-secondary)' }}>
               Continuously growing and learning
             </span>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
 
       {/* Scroll to explore indicator */}

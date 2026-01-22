@@ -100,10 +100,10 @@ export default function Blog() {
                   e.preventDefault()
                   router.push(`/blog/${article.slug}`)
                 }}
-                className="group relative flex flex-col sm:flex-row gap-4 p-4 sm:p-6 border transition-all duration-300 cursor-pointer blog-article-gradient"
+                className="group relative flex flex-col sm:flex-row gap-4 p-4 sm:p-6 transition-all duration-300 cursor-pointer blog-article-gradient"
                 style={{
                   borderRadius: 0, // Sharp corners
-                  borderColor: 'rgba(33, 33, 33, 0.3)', // var(--color-border) with 30% opacity
+                  border: 'none',
                   position: 'relative',
                 }}
               >
