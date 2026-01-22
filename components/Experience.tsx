@@ -251,20 +251,6 @@ export default function Experience() {
       <div className="w-full relative z-10">
         {/* Header Section */}
         <div className="text-center mb-8 lg:mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center space-x-3 rounded-full border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.3em] mb-6"
-            style={{ color: 'var(--color-secondary)' }}
-          >
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-primary-500 opacity-75 animate-ping"></span>
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary-400"></span>
-            </span>
-            <span>Journey</span>
-          </motion.div>
-
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -355,43 +341,6 @@ export default function Experience() {
           </div>
         </div>
       </div>
-
-      {/* Scroll to explore indicator */}
-      <motion.a
-        href="#services"
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 1, delay: 1.2 }}
-        className="absolute bottom-6 left-0 right-0 flex flex-col items-center gap-3 cursor-pointer group z-10"
-      >
-        <span
-          className="text-[10px] uppercase tracking-[0.25em] ml-[0.25em] group-hover:text-primary-500 transition-colors"
-          style={{ color: 'rgba(37, 37, 37, 0.7)' }}
-        >
-          Scroll
-        </span>
-        <motion.div animate={{ y: [0, 6, 0] }} transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}>
-          <svg
-            width="20"
-            height="28"
-            viewBox="0 0 20 28"
-            fill="none"
-            className="group-hover:text-primary-500 transition-colors"
-            style={{ color: 'rgba(37, 37, 37, 0.5)' }}
-          >
-            <rect x="1" y="1" width="18" height="26" rx="9" stroke="currentColor" strokeWidth="1.5" />
-            <motion.circle
-              cx="10"
-              cy="8"
-              r="2.5"
-              fill="currentColor"
-              animate={{ cy: [8, 14, 8] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-              className="fill-primary-500"
-            />
-          </svg>
-        </motion.div>
-      </motion.a>
     </section>
   )
 }

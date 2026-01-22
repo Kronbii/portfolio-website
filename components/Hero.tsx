@@ -148,10 +148,71 @@ export default function Hero() {
           transition={{ duration: 1, delay: 1 }}
           className="flex flex-col items-center gap-2 pt-3 sm:pt-4 lg:pt-6"
         >
-          <div className="w-[3px] h-[3px] rounded-full" style={{ backgroundColor: 'var(--color-secondary)' }} />
-          <span className="text-xs" style={{ color: 'var(--color-secondary)' }}>
-            Scroll Below
-          </span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+            className="flex flex-col items-center"
+          >
+            <svg
+              width="32"
+              height="40"
+              viewBox="0 0 32 40"
+              fill="none"
+              style={{ color: 'var(--color-secondary)', transform: 'rotate(180deg)' }}
+            >
+              {/* Jet fighter - sharp angular design */}
+              <motion.g
+                animate={{ y: [0, 4, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                {/* Main body - sharp triangle */}
+                <path
+                  d="M16 2L24 16L16 20L8 16L16 2Z"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  fill="currentColor"
+                  fillOpacity="0.1"
+                />
+                {/* Cockpit */}
+                <path
+                  d="M16 8L20 14L16 16L12 14L16 8Z"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                  fill="currentColor"
+                  fillOpacity="0.2"
+                />
+                {/* Wings - sharp angular */}
+                <path
+                  d="M8 16L4 20L8 18L16 20L24 18L28 20L24 16L16 20L8 16Z"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  fill="none"
+                />
+                {/* Tail fins */}
+                <line x1="12" y1="20" x2="10" y2="24" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" />
+                <line x1="20" y1="20" x2="22" y2="24" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" />
+                {/* Engine exhaust */}
+                <motion.path
+                  d="M14 20L12 24M18 20L20 24"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                  strokeLinecap="square"
+                  animate={{ opacity: [0.3, 0.8, 0.3] }}
+                  transition={{ duration: 1, repeat: Infinity, ease: 'easeInOut' }}
+                />
+              </motion.g>
+              {/* Sharp downward arrow indicator */}
+              <motion.path
+                d="M16 28L12 32L16 36L20 32L16 28Z"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                fill="currentColor"
+                fillOpacity="0.3"
+                animate={{ y: [0, 4, 0], opacity: [0.4, 0.8, 0.4] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+              />
+            </svg>
+          </motion.div>
         </motion.div>
       </div>
     </section>

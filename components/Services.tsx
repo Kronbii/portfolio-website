@@ -4,6 +4,7 @@ import { motion, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { FiCode, FiCpu, FiEye, FiUsers, FiCheck } from 'react-icons/fi'
 import { useInfiniteCarousel } from '@/hooks/useInfiniteCarousel'
+import { useCardCarousel } from '@/hooks/useCardCarousel'
 import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle } from '@/lib/utils'
 import { ExploreNavigation } from '@/components/ui/explore-navigation'
 
@@ -47,9 +48,6 @@ const services: Service[] = [
 ]
 
 export default function Services() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
-
   const itemCount = services.length
   const {
     scrollContainerRef,
@@ -63,12 +61,27 @@ export default function Services() {
     handleScrollLeft,
     handleScrollRight,
     scrollToIndex,
+    getActualIndex,
   } = useInfiniteCarousel(services, { itemCount })
+
+  const {
+    sectionRef,
+    cardWidth,
+    cardHeight,
+    visibleCards,
+  } = useCardCarousel({
+    itemCount,
+    scrollContainerRef,
+    cardsRef,
+    extendedItemsLength: extendedServices.length,
+  })
+
+  const isInView = useInView(sectionRef, { once: true, amount: 0.2 })
 
   return (
     <section
       id="services"
-      ref={ref}
+      ref={sectionRef}
       className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 border-l border-r border-b mx-auto"
       style={{ 
         backgroundColor: 'transparent', 
@@ -107,26 +120,44 @@ export default function Services() {
           className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-x-scroll scrollbar-hide py-8 touch-pan-y"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          <div className="flex gap-4 sm:gap-6 px-4 sm:px-6 lg:px-[calc((100vw-72rem)/2+1.5rem)] items-center w-max">
+          <div className="flex gap-6 px-4 sm:px-6 lg:px-[calc((100vw-72rem)/2+1.5rem)] items-center w-max">
             {extendedServices.map((service, index) => {
               const isCentered = index === currentIndex
+              const isVisible = visibleCards.has(index)
               return (
-              <motion.div
+                <div
                   key={`${service.title}-${index}`}
-                ref={(el) => {
-                  cardsRef.current[index] = el
-                }}
-                initial={{ opacity: 0, y: 30 }}
-                  animate={isInView ? { opacity: 1, y: isCentered ? -16 : 0, scale: isCentered ? 1.03 : 1 } : {}}
-                  transition={{ duration: 0.15 }}
-                  className={`group relative overflow-hidden rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface dark:bg-white/[0.03] backdrop-blur flex-shrink-0 w-[280px] sm:w-[320px] lg:w-[400px] transition-all duration-75 ${
-                    isCentered 
-                      ? 'shadow-xl dark:shadow-2xl shadow-primary-500/10 dark:shadow-primary-500/20 -translate-y-4 scale-[1.03] z-10' 
-                      : 'shadow-sm dark:shadow-none'
-                  }`}
-                  whileHover={{ y: isCentered ? -20 : -4 }}
-              >
-                  <div className="p-5 sm:p-8">
+                  data-card-index={index}
+                  ref={(el) => {
+                    cardsRef.current[index] = el
+                  }}
+                  style={{
+                    filter: isVisible ? 'blur(0px)' : 'blur(2px)',
+                    opacity: isVisible ? 1 : 0.25,
+                    transition: 'filter 0.5s ease, opacity 0.5s ease',
+                  }}
+                >
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={isInView ? { opacity: 1, y: isCentered ? -16 : 0, scale: isCentered ? 1.03 : 1 } : {}}
+                    transition={{ duration: 0.15 }}
+                    className={`group relative overflow-hidden border bg-transparent flex-shrink-0 transition-all duration-75 flex flex-col cursor-pointer clickable-card ${
+                      isCentered 
+                        ? '-translate-y-4 scale-[1.03] z-10' 
+                        : ''
+                    }`}
+                    style={{
+                      width: `${cardWidth}px`,
+                      height: `${cardHeight}px`,
+                      borderColor: 'rgba(33, 33, 33, 0.3)',
+                      cursor: 'pointer',
+                      boxShadow: isCentered 
+                        ? '0 20px 25px -5px rgba(37, 37, 37, 0.1), 0 10px 10px -5px rgba(37, 37, 37, 0.04)' 
+                        : '0 1px 2px 0 rgba(37, 37, 37, 0.05)',
+                    }}
+                    whileHover={{ y: isCentered ? -20 : -4 }}
+                  >
+                  <div className="p-4 sm:p-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3 text-primary-400">
                     {service.icon}
@@ -149,8 +180,9 @@ export default function Services() {
                     </div>
                   ))}
                     </div>
+                  </div>
+                </motion.div>
                 </div>
-              </motion.div>
               )
             })}
           </div>

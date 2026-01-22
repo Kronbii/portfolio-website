@@ -18,12 +18,12 @@ export default function PaintTexture() {
       className="absolute pointer-events-none"
       style={{
         width: 'var(--paint-texture-width, 100%)',
-        mixBlendMode: 'var(--paint-texture-blend-mode, normal)',
+        mixBlendMode: 'var(--paint-texture-blend-mode, normal)' as React.CSSProperties['mixBlendMode'],
         zIndex: 0,
         top: 'var(--paint-texture-top, 100vh)', // Position near Community section (after Hero)
         left: 'var(--paint-texture-left, 50%)',
         transform: 'var(--paint-texture-transform, translateX(-50%))',
-      }}
+      } as React.CSSProperties}
     >
       <div
         style={{

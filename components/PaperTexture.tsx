@@ -18,9 +18,9 @@ export default function PaperTexture() {
       className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none"
       style={{
         width: 'var(--paper-texture-width, 100%)',
-        mixBlendMode: 'var(--paper-texture-blend-mode, normal)',
+        mixBlendMode: 'var(--paper-texture-blend-mode, normal)' as React.CSSProperties['mixBlendMode'],
         zIndex: 0,
-      }}
+      } as React.CSSProperties}
     >
       <div
         style={{
