@@ -10,11 +10,13 @@ import Community from '@/components/Community'
 import Certifications from '@/components/Certifications'
 import Contact from '@/components/Contact'
 import PaperTexture from '@/components/PaperTexture'
+import PaintTexture from '@/components/PaintTexture'
 
 export default function Home() {
   return (
     <main className="min-h-screen relative" style={{ backgroundColor: 'var(--color-primary)' }}>
       <PaperTexture />
+      <PaintTexture />
       <div className="relative z-10">
         <Navigation />
       <Hero />
