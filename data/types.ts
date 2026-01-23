@@ -30,14 +30,10 @@ export interface Certification {
 }
 
 export interface BlogArticle {
-  slug: string
   title: string
   description: string
-  content: string // Full article content (HTML or markdown)
   bannerImage?: string
   publishedDate: string
-  mediumUrl?: string
-  devToUrl?: string
-  externalUrl?: string // Custom external link - if provided, opens this URL when article is clicked
+  externalUrl: string // External link - opens this URL when article is clicked
   tags?: string[]
 }

@@ -12,20 +12,15 @@ export default function Blog() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
   const latestArticles = getLatestArticles(3)
-  // Duplicate the first article 3 times, but limit to maximum 3 articles total
-  const articlesToDisplay = latestArticles.length > 0 
-    ? [latestArticles[0], latestArticles[0], latestArticles[0]].slice(0, 3)
-    : []
+  const articlesToDisplay = latestArticles
 
   if (articlesToDisplay.length === 0) {
     return null // Don't render if no articles
   }
 
   const handleArticleClick = (article: BlogArticle) => {
-    // Use externalUrl if provided, otherwise fall back to mediumUrl or devToUrl
-    const url = article.externalUrl || article.mediumUrl || article.devToUrl
-    if (url) {
-      window.open(url, '_blank', 'noopener,noreferrer')
+    if (article.externalUrl) {
+      window.open(article.externalUrl, '_blank', 'noopener,noreferrer')
     }
   }
 
@@ -93,7 +88,7 @@ export default function Blog() {
 
             return (
               <motion.article
-                key={`${article.slug}-${index}`}
+                key={`${article.title}-${index}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ 
@@ -113,14 +108,7 @@ export default function Blog() {
               >
                 {/* Content Section - Left */}
                 <div className="flex-1 flex flex-col min-w-0">
-                  {/* Pinned indicator (show for first 3 duplicated articles) */}
-                  {index < 3 && (
-                    <div className="flex items-center gap-1 lg:gap-2 mb-1 lg:mb-2 text-[10px] lg:text-xs" style={{ color: 'var(--color-secondary)' }}>
-                      <span className="text-primary-500">📍</span>
-                      <span>Pinned</span>
-                    </div>
-                  )}
-
+                  {/* Pinned indicator (show for first article) */}
                   {/* Title */}
                   <h3 className="text-sm lg:text-2xl font-bold mb-1 lg:mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-2 leading-tight" style={{ color: 'var(--color-secondary)' }}>
                     {article.title}
@@ -135,13 +123,6 @@ export default function Blog() {
                   <div className="flex items-center justify-between mt-auto pt-1 lg:pt-2">
                     <div className="flex items-center gap-1.5 lg:gap-3 text-[10px] lg:text-sm" style={{ color: 'var(--color-secondary)' }}>
                       <span>{timeAgo}</span>
-                      <span>•</span>
-                      {/* Tags */}
-                      {article.tags && article.tags.length > 0 && (
-                        <span className="text-primary-600 dark:text-primary-400">
-                          {article.tags[0]}
-                        </span>
-                      )}
                     </div>
 
                     {/* Action Icons */}
