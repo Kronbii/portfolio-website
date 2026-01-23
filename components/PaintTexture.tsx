@@ -18,6 +18,7 @@ export default function PaintTexture() {
       className="absolute pointer-events-none"
       style={{
         width: 'var(--paint-texture-width, 100%)',
+        maxWidth: '100%', // Use 100% instead of 100vw to avoid scrollbar width issues
         mixBlendMode: 'var(--paint-texture-blend-mode, normal)' as React.CSSProperties['mixBlendMode'],
         zIndex: 0,
         top: 'var(--paint-texture-top, 100vh)', // Position near Community section (after Hero)

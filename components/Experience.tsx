@@ -20,8 +20,8 @@ const milestones = [
     highlight: true,
   },
   {
-    period: '2025',
-    year: '2025',
+    period: '2024 - Now',
+    year: '2024',
     title: 'Applied AI & CV Engineer',
     company: 'Oreyeon LDA',
     description: 'Improving runway safety through advanced computer vision solutions.',
@@ -44,8 +44,8 @@ const milestones = [
     highlight: false,
   },
   {
-    period: '2022',
-    year: '2022',
+    period: '2021 - 2024',
+    year: '2021',
     title: 'NASA Space Apps',
     company: 'Tech Lead & Volunteer',
     description: 'Took part in leading the largest global hackathon in Lebanon.',
