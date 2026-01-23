@@ -8,8 +8,8 @@ import { CornerButton } from '@/components/ui/corner-button'
 import { getSectionMaxWidthStyle } from '@/lib/utils'
 
 const navItems = [
-  { name: 'MISSION', href: '#about' },
-  { name: 'MILESTONES', href: '#about' },
+  { name: 'MISSION', href: '#community' },
+  { name: 'MILESTONES', href: '#experience' },
   { name: 'PROJECTS', href: '#projects' },
   { name: 'CERTIFICATIONS', href: '#certifications' },
   { name: 'SERVICES', href: '#services' },

@@ -59,7 +59,7 @@ export default function Hero() {
                   }}
                 >
                   <CornerButton
-                    href="#contact"
+                    href="#community"
                     variant="primary"
                     className="inline-flex items-center justify-center"
                     style={{
