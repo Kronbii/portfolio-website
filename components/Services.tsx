@@ -128,9 +128,9 @@ export default function Services() {
                 <div
                   key={`${service.title}-${index}`}
                   data-card-index={index}
-                  ref={(el) => {
-                    cardsRef.current[index] = el
-                  }}
+                ref={(el) => {
+                  cardsRef.current[index] = el
+                }}
                   style={{
                     filter: isVisible ? 'blur(0px)' : 'blur(2px)',
                     opacity: isVisible ? 1 : 0.25,
@@ -138,11 +138,11 @@ export default function Services() {
                   }}
                 >
                   <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={isInView ? { opacity: 1, y: isCentered ? -16 : 0, scale: isCentered ? 1.03 : 1 } : {}}
-                    transition={{ duration: 0.15 }}
+                initial={{ opacity: 0, y: 30 }}
+                  animate={isInView ? { opacity: 1, y: isCentered ? -16 : 0, scale: isCentered ? 1.03 : 1 } : {}}
+                  transition={{ duration: 0.15 }}
                     className={`group relative overflow-hidden border bg-transparent flex-shrink-0 transition-all duration-75 flex flex-col cursor-pointer clickable-card ${
-                      isCentered 
+                    isCentered 
                         ? '-translate-y-4 scale-[1.03] z-10' 
                         : ''
                     }`}
@@ -155,8 +155,8 @@ export default function Services() {
                         ? '0 20px 25px -5px rgba(37, 37, 37, 0.1), 0 10px 10px -5px rgba(37, 37, 37, 0.04)' 
                         : '0 1px 2px 0 rgba(37, 37, 37, 0.05)',
                     }}
-                    whileHover={{ y: isCentered ? -20 : -4 }}
-                  >
+                  whileHover={{ y: isCentered ? -20 : -4 }}
+              >
                   <div className="p-4 sm:p-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3 text-primary-400">
@@ -180,8 +180,8 @@ export default function Services() {
                     </div>
                   ))}
                     </div>
-                  </div>
-                </motion.div>
+                </div>
+              </motion.div>
                 </div>
               )
             })}

@@ -18,7 +18,7 @@ export default function Home() {
       <PaperTexture />
       <PaintTexture />
       <div className="relative z-10">
-        <Navigation />
+      <Navigation />
       <Hero />
       <Community />
       <Blog />
