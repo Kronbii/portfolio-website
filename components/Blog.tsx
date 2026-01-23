@@ -2,17 +2,13 @@
 
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { FiBookOpen, FiArrowRight, FiBookmark, FiMoreHorizontal } from 'react-icons/fi'
+import { FiBookOpen, FiBookmark, FiMoreHorizontal } from 'react-icons/fi'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
 import { getLatestArticles, BlogArticle } from '@/data/blog'
-import Link from 'next/link'
-import { CornerButton } from '@/components/ui/corner-button'
 import { getSectionHeaderStyle, getSectionSubtitleStyle } from '@/lib/utils'
 import { getSectionWidthStyle } from '@/lib/utils'
 
 export default function Blog() {
-  const router = useRouter()
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
   const latestArticles = getLatestArticles(3)
@@ -25,11 +21,19 @@ export default function Blog() {
     return null // Don't render if no articles
   }
 
+  const handleArticleClick = (article: BlogArticle) => {
+    // Use externalUrl if provided, otherwise fall back to mediumUrl or devToUrl
+    const url = article.externalUrl || article.mediumUrl || article.devToUrl
+    if (url) {
+      window.open(url, '_blank', 'noopener,noreferrer')
+    }
+  }
+
   return (
     <section
       id="blog"
       ref={ref}
-      className="relative min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8 overflow-hidden border-l border-r border-b mx-auto"
+      className="relative min-h-screen flex flex-col justify-center py-12 lg:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden border-l border-r border-b mx-auto"
       style={{ 
         backgroundColor: 'transparent', 
         borderColor: 'rgba(33, 33, 33, 0.3)',
@@ -39,7 +43,7 @@ export default function Blog() {
 
       <div className="w-full relative z-10">
         {/* Header Section */}
-        <div className="text-center mb-12 md:mb-16">
+        <div className="text-center mb-6 lg:mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -77,7 +81,7 @@ export default function Blog() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="space-y-4"
+          className="space-y-3 lg:space-y-6"
         >
           {articlesToDisplay.map((article, index) => {
             // Calculate time ago
@@ -98,9 +102,9 @@ export default function Blog() {
                 }}
                 onClick={(e) => {
                   e.preventDefault()
-                  router.push(`/blog/${article.slug}`)
+                  handleArticleClick(article)
                 }}
-                className="group relative flex flex-col sm:flex-row gap-4 p-4 sm:p-6 transition-all duration-300 cursor-pointer blog-article-gradient"
+                className="group relative flex flex-col sm:flex-row gap-2.5 lg:gap-4 p-2.5 sm:p-3 lg:p-6 transition-all duration-300 cursor-pointer blog-article-gradient"
                 style={{
                   borderRadius: 0, // Sharp corners
                   border: 'none',
@@ -111,25 +115,25 @@ export default function Blog() {
                 <div className="flex-1 flex flex-col min-w-0">
                   {/* Pinned indicator (show for first 3 duplicated articles) */}
                   {index < 3 && (
-                    <div className="flex items-center gap-2 mb-2 text-xs" style={{ color: 'var(--color-secondary)' }}>
+                    <div className="flex items-center gap-1 lg:gap-2 mb-1 lg:mb-2 text-[10px] lg:text-xs" style={{ color: 'var(--color-secondary)' }}>
                       <span className="text-primary-500">📍</span>
                       <span>Pinned</span>
                     </div>
                   )}
 
                   {/* Title */}
-                  <h3 className="text-xl sm:text-2xl font-bold mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-2 leading-tight" style={{ color: 'var(--color-secondary)' }}>
+                  <h3 className="text-sm lg:text-2xl font-bold mb-1 lg:mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-2 leading-tight" style={{ color: 'var(--color-secondary)' }}>
                     {article.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-sm sm:text-base mb-4 leading-relaxed line-clamp-2" style={{ color: 'var(--color-secondary)' }}>
+                  <p className="text-[11px] lg:text-base mb-2 lg:mb-4 leading-relaxed line-clamp-2" style={{ color: 'var(--color-secondary)' }}>
                     {article.description}
                   </p>
 
                   {/* Footer with metadata */}
-                  <div className="flex items-center justify-between mt-auto pt-2">
-                    <div className="flex items-center gap-3 text-xs sm:text-sm" style={{ color: 'var(--color-secondary)' }}>
+                  <div className="flex items-center justify-between mt-auto pt-1 lg:pt-2">
+                    <div className="flex items-center gap-1.5 lg:gap-3 text-[10px] lg:text-sm" style={{ color: 'var(--color-secondary)' }}>
                       <span>{timeAgo}</span>
                       <span>•</span>
                       {/* Tags */}
@@ -141,26 +145,26 @@ export default function Blog() {
                     </div>
 
                     {/* Action Icons */}
-                    <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex items-center gap-1.5 lg:gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                       <button
                         onClick={(e) => {
                           e.stopPropagation()
                           // Bookmark functionality can be added here
                         }}
-                        className="p-2 hover:bg-light-surface2 dark:hover:bg-white/10 rounded-lg transition-colors"
+                        className="p-1.5 lg:p-2 hover:bg-light-surface2 dark:hover:bg-white/10 rounded-lg transition-colors"
                         aria-label="Bookmark"
                       >
-                        <FiBookmark size={18} style={{ color: 'var(--color-secondary)' }} />
+                        <FiBookmark className="w-4 h-4 lg:w-[18px] lg:h-[18px]" size={18} style={{ color: 'var(--color-secondary)' }} />
                       </button>
                       <button
                         onClick={(e) => {
                           e.stopPropagation()
                           // More options can be added here
                         }}
-                        className="p-2 hover:bg-light-surface2 dark:hover:bg-white/10 rounded-lg transition-colors"
+                        className="p-1.5 lg:p-2 hover:bg-light-surface2 dark:hover:bg-white/10 rounded-lg transition-colors"
                         aria-label="More options"
                       >
-                        <FiMoreHorizontal size={18} style={{ color: 'var(--color-secondary)' }} />
+                        <FiMoreHorizontal className="w-4 h-4 lg:w-[18px] lg:h-[18px]" size={18} style={{ color: 'var(--color-secondary)' }} />
                       </button>
                     </div>
                   </div>
@@ -168,7 +172,7 @@ export default function Blog() {
 
                 {/* Image Section - Right */}
                 {article.bannerImage && (
-                  <div className="relative w-full sm:w-32 sm:h-32 h-48 sm:flex-shrink-0 rounded-lg overflow-hidden bg-light-surface2 dark:bg-dark-surface">
+                  <div className="relative w-full sm:w-28 sm:h-28 lg:w-32 lg:h-32 h-40 sm:h-28 sm:flex-shrink-0 rounded-lg overflow-hidden bg-light-surface2 dark:bg-dark-surface">
                     <Image
                       src={article.bannerImage}
                       alt={article.title}
@@ -183,20 +187,6 @@ export default function Blog() {
           })}
         </motion.div>
 
-        {/* View All Link */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.7 }}
-          className="mt-12 text-center"
-        >
-          <CornerButton
-            href="/blog"
-            className="inline-flex items-center gap-2"
-          >
-            <span>VIEW ALL ARTICLES</span>
-          </CornerButton>
-        </motion.div>
       </div>
     </section>
   )

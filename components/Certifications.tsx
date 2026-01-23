@@ -14,7 +14,7 @@ export default function Certifications() {
     <section
       id="certifications"
       ref={ref}
-      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 border-l border-r border-b mx-auto"
+      className="min-h-screen flex flex-col justify-center py-12 lg:py-24 px-4 sm:px-6 lg:px-8 border-l border-r border-b mx-auto"
       style={{ 
         backgroundColor: 'transparent', 
         borderColor: 'rgba(33, 33, 33, 0.3)',
@@ -26,7 +26,7 @@ export default function Certifications() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-6 lg:mb-12"
         >
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -48,31 +48,31 @@ export default function Certifications() {
           </motion.h3>
         </motion.div>
 
-        <div className="space-y-6">
+        <div className="space-y-4 lg:space-y-6">
           {certifications.map((cert, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, x: -30 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group relative flex items-start gap-4 p-4 sm:p-6 transition-all duration-300 cursor-pointer blog-article-gradient"
+              className="group relative flex items-start gap-3 lg:gap-4 p-3 sm:p-4 lg:p-6 transition-all duration-300 cursor-pointer blog-article-gradient"
               style={{
                 borderRadius: 0,
                 border: 'none',
                 position: 'relative',
               }}
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-500/10 text-primary-400">
-                <FiAward size={24} />
+              <div className="flex h-10 w-10 lg:h-12 lg:w-12 items-center justify-center rounded-2xl bg-primary-500/10 text-primary-400">
+                <FiAward className="w-5 h-5 lg:w-6 lg:h-6" size={24} />
               </div>
               <div className="flex-1">
-                <h3 className="text-xl font-semibold" style={{ color: 'var(--color-secondary)' }}>
+                <h3 className="text-base lg:text-xl font-semibold" style={{ color: 'var(--color-secondary)' }}>
                   {cert.name}
                 </h3>
-                <p className="mb-2" style={{ color: 'var(--color-secondary)' }}>
+                <p className="mb-1 lg:mb-2 text-xs lg:text-base" style={{ color: 'var(--color-secondary)' }}>
                   {cert.issuer}
                 </p>
-                <div className="flex flex-wrap gap-4 text-sm" style={{ color: 'var(--color-secondary)' }}>
+                <div className="flex flex-wrap gap-2 lg:gap-4 text-[11px] lg:text-sm" style={{ color: 'var(--color-secondary)' }}>
                   <span>Issued: {cert.date}</span>
                   {cert.credentialId && <span>ID: {cert.credentialId}</span>}
                 </div>
@@ -81,7 +81,7 @@ export default function Certifications() {
                     href={cert.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-primary-600 dark:text-primary-400 hover:text-primary-500 dark:hover:text-primary-300 transition-colors text-sm mt-3 inline-flex items-center"
+                    className="text-primary-600 dark:text-primary-400 hover:text-primary-500 dark:hover:text-primary-300 transition-colors text-[11px] lg:text-sm mt-1.5 lg:mt-3 inline-flex items-center"
                   >
                     Verify certificate
                   </a>

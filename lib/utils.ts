@@ -133,7 +133,7 @@ export function getSectionHeaderStyle(): {
 /**
  * Section subtitle style configuration (h3)
  * Returns className and style for consistent section subtitles
- * Space Grotesk, 26px, light weight
+ * Space Grotesk, 26px on desktop/iPad, smaller on mobile, light weight
  */
 export function getSectionSubtitleStyle(): {
   className: string
@@ -144,7 +144,7 @@ export function getSectionSubtitleStyle(): {
     style: {
       color: 'var(--color-secondary)',
       fontFamily: 'var(--font-sans)',
-      fontSize: '26px',
+      fontSize: 'clamp(18px, 3.5vw, 26px)',
     },
   }
 }

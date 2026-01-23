@@ -38,5 +38,6 @@ export interface BlogArticle {
   publishedDate: string
   mediumUrl?: string
   devToUrl?: string
+  externalUrl?: string // Custom external link - if provided, opens this URL when article is clicked
   tags?: string[]
 }

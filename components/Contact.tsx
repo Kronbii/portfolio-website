@@ -85,149 +85,36 @@ export default function Contact() {
         >
           Let&apos;s build your next intelligent product
         </motion.h2>
-        <motion.h3
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className={`${getSectionSubtitleStyle().className} text-center mb-12`}
-          style={getSectionSubtitleStyle().style}
-        >
-          Tell me what you&apos;re building, the outcome you want, and I&apos;ll reply within 24 hours.
-        </motion.h3>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="rounded-3xl border border-light-border/50 dark:border-white/10 dark:bg-dark-surface2/80 p-8 backdrop-blur shadow-sm dark:shadow-none"
-            style={{ backgroundColor: 'var(--color-accent)' }}
-          >
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-2" style={{ color: 'var(--color-secondary)' }}>
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  required
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-3 dark:bg-dark-surface2 border dark:border-dark-surface2 rounded-lg focus:outline-none transition-colors"
-                  style={{ 
-                    color: 'var(--color-secondary)',
-                    backgroundColor: 'var(--color-primary)',
-                    borderColor: 'var(--color-secondary)',
-                  }}
-                  placeholder="Your name"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: 'var(--color-secondary)' }}>
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-3 dark:bg-dark-surface2 border dark:border-dark-surface2 rounded-lg focus:outline-none transition-colors"
-                  style={{ 
-                    color: 'var(--color-secondary)',
-                    backgroundColor: 'var(--color-primary)',
-                    borderColor: 'var(--color-secondary)',
-                  }}
-                  placeholder="your.email@example.com"
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ color: 'var(--color-secondary)' }}>
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  required
-                  rows={6}
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-3 dark:bg-dark-surface2 border dark:border-dark-surface2 rounded-lg focus:outline-none transition-colors resize-none"
-                  style={{ 
-                    color: 'var(--color-secondary)',
-                    backgroundColor: 'var(--color-primary)',
-                    borderColor: 'var(--color-secondary)',
-                  }}
-                  placeholder="Your message..."
-                />
-              </div>
-              <CornerButton
-                type="submit"
-                disabled={isSubmitting}
-                variant = "primary"
-                className="w-full disabled:opacity-60 disabled:cursor-not-allowed"
-                style={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center', 
-                  gap: '0.5rem',
-                  position: 'relative',
-                  overflow: 'visible',
-                }}
-              >
-                <span>{isSubmitting ? 'Sending...' : submitStatus === 'success' ? 'Sent!' : 'Send Message'}</span>
-              </CornerButton>
-              {submitStatus === 'success' && (
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="text-primary-500 text-center"
-                >
-                  Thank you! I&apos;ll get back to you soon.
-                </motion.p>
-              )}
-              {submitStatus === 'error' && (
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="text-red-500 text-center"
-                >
-                  Something went wrong. Please try again or email me directly.
-                </motion.p>
-              )}
-            </form>
-          </motion.div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
 
           {/* Social Links & Info */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="space-y-8"
+            className="space-y-4 sm:space-y-6 lg:space-y-8"
           >
-            <div className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-6">
+            <div className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-4 sm:p-6">
               <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm uppercase tracking-[0.4em]" style={{ color: 'var(--color-secondary)' }}>Availability</p>
-                  <p className="mt-2 text-2xl font-semibold" style={{ color: 'var(--color-secondary)' }}>2 client openings</p>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs sm:text-sm uppercase tracking-[0.4em]" style={{ color: 'var(--color-secondary)' }}>Availability</p>
                 </div>
-                <div className="text-primary-600 dark:text-primary-400">
-                  <FiClock size={32} />
+                <div className="text-primary-600 dark:text-primary-400 flex-shrink-0 ml-2">
+                  <FiClock size={24} className="sm:w-8 sm:h-8" />
                 </div>
               </div>
-              <p className="mt-4" style={{ color: 'var(--color-secondary)' }}>Next kickoff: Dec 2025 · Replies within 24 hours.</p>
             </div>
 
-            <div className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-6"
+            <div className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-4 sm:p-6"
             style={{ backgroundColor: 'var(--color-accent)' }}>
-              <h3 className="text-xl font-semibold mb-4" style={{ color: 'var(--color-secondary)' }}>Preferred channels</h3>
-              <div className="space-y-4">
+              <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4" style={{ color: 'var(--color-secondary)' }}>Preferred channels</h3>
+              <div className="space-y-3 sm:space-y-4">
                 <motion.a
                   href="https://github.com/Kronbii"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-2xl border dark:bg-dark-surface/70 px-4 py-3"
+                  className="flex items-center justify-between rounded-2xl border dark:bg-dark-surface/70 px-3 sm:px-4 py-2.5 sm:py-3"
                   style={{ 
                     backgroundColor: 'var(--color-primary)', 
                     color: 'var(--color-secondary)',
@@ -235,17 +122,17 @@ export default function Contact() {
                   }}
                   whileHover={{ x: 4 }}
                 >
-                  <div className="flex items-center space-x-3">
-                    <FiGithub size={22} />
-                    <span>GitHub</span>
+                  <div className="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
+                    <FiGithub size={20} className="flex-shrink-0" />
+                    <span className="text-sm sm:text-base truncate">GitHub</span>
                   </div>
-                  <span className="text-sm" style={{ color: 'var(--color-secondary)' }}>Case studies</span>
+                  <span className="text-xs sm:text-sm ml-2 flex-shrink-0" style={{ color: 'var(--color-secondary)' }}>Case studies</span>
                 </motion.a>
                 <motion.a
                   href="https://www.linkedin.com/in/rami-kronbi/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-2xl border dark:bg-dark-surface/70 px-4 py-3"
+                  className="flex items-center justify-between rounded-2xl border dark:bg-dark-surface/70 px-3 sm:px-4 py-2.5 sm:py-3"
                   style={{ 
                     backgroundColor: 'var(--color-primary)', 
                     color: 'var(--color-secondary)',
@@ -253,15 +140,15 @@ export default function Contact() {
                   }}
                   whileHover={{ x: 4 }}
                 >
-                  <div className="flex items-center space-x-3">
-                    <FiLinkedin size={22} />
-                    <span>LinkedIn</span>
+                  <div className="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
+                    <FiLinkedin size={20} className="flex-shrink-0" />
+                    <span className="text-sm sm:text-base truncate">LinkedIn</span>
                   </div>
-                  <span className="text-sm" style={{ color: 'var(--color-secondary)' }}>Professional updates</span>
+                  <span className="text-xs sm:text-sm ml-2 flex-shrink-0 whitespace-nowrap" style={{ color: 'var(--color-secondary)' }}>Professional updates</span>
                 </motion.a>
                 <motion.a
                   href="mailto:ramykronby@gmail.com"
-                  className="flex items-center justify-between rounded-2xl border dark:bg-dark-surface/70 px-4 py-3"
+                  className="flex items-center justify-between rounded-2xl border dark:bg-dark-surface/70 px-3 sm:px-4 py-2.5 sm:py-3"
                   style={{ 
                     backgroundColor: 'var(--color-primary)', 
                     color: 'var(--color-secondary)',
@@ -269,11 +156,11 @@ export default function Contact() {
                   }}
                   whileHover={{ x: 4 }}
                 >
-                  <div className="flex items-center space-x-3 ">
-                    <FiMail size={22} />
-                    <span>ramykronby@gmail.com</span>
+                  <div className="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
+                    <FiMail size={20} className="flex-shrink-0" />
+                    <span className="text-xs sm:text-sm truncate">ramykronby@gmail.com</span>
                   </div>
-                  <span className="text-sm" style={{ color: 'var(--color-secondary)' }}>Best for briefs</span>
+                  <span className="text-xs sm:text-sm ml-2 flex-shrink-0 whitespace-nowrap" style={{ color: 'var(--color-secondary)' }}>Best for briefs</span>
                 </motion.a>
               </div>
             </div>

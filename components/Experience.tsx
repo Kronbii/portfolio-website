@@ -111,7 +111,7 @@ function TimelineCard({
               scale: 1.02,
               transition: { duration: 0.2 },
             }}
-            className="group relative border p-6 lg:p-8 transition-all duration-300 overflow-hidden experience-card-gradient"
+            className="group relative border p-4 lg:p-8 transition-all duration-300 overflow-hidden experience-card-gradient"
             style={{
               borderRadius: 0, // Sharp corners
               borderColor: 'rgba(33, 33, 33, 0.3)', // 30% opacity
@@ -120,9 +120,9 @@ function TimelineCard({
           >
 
             {/* Icon */}
-            <div className={`relative z-10 flex items-center gap-4 mb-4 ${isLeft ? 'lg:flex-row-reverse lg:justify-start' : ''}`}>
+            <div className={`relative z-10 flex items-center gap-3 lg:gap-4 mb-3 lg:mb-4 ${isLeft ? 'lg:flex-row-reverse lg:justify-start' : ''}`}>
               <div
-                className={`flex items-center justify-center w-12 h-12 rounded-xl border border-light-border/30 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 overflow-visible`}
+                className={`flex items-center justify-center w-10 h-10 lg:w-12 lg:h-12 rounded-xl border border-light-border/30 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 overflow-visible`}
               >
                 {iconSrc ? (
                   <div className={`${item.color} transition-colors duration-300`}>
@@ -131,36 +131,36 @@ function TimelineCard({
                       alt={item.company}
                       width={40}
                       height={40}
-                      className="w-10 h-10"
+                      className="w-8 h-8 lg:w-10 lg:h-10"
                       style={{ objectFit: 'contain' }}
                     />
                   </div>
                 ) : IconComponent ? (
-                  <IconComponent className={`${item.color} transition-colors duration-300`} size={32} />
+                  <IconComponent className={`${item.color} transition-colors duration-300 w-6 h-6 lg:w-8 lg:h-8`} size={32} />
                 ) : null}
               </div>
               <div className={`${isLeft ? 'lg:text-right' : ''}`}>
                 <motion.p
-                  className="text-xs uppercase tracking-wider font-medium"
+                  className="text-[10px] lg:text-xs uppercase tracking-wider font-medium"
                   style={{ color: 'var(--color-secondary)', opacity: 0.6 }}
                 >
                   {item.period}
                 </motion.p>
-                <p className="text-sm font-semibold text-blue-500">{item.company}</p>
+                <p className="text-xs lg:text-sm font-semibold text-blue-500">{item.company}</p>
               </div>
             </div>
 
             {/* Content */}
             <div className={`relative z-10 ${isLeft ? 'lg:text-right' : ''}`}>
               <motion.h3
-                className="text-xl lg:text-2xl font-semibold mb-3"
+                className="text-lg lg:text-2xl font-semibold mb-2 lg:mb-3"
                 style={{ color: 'var(--color-secondary)' }}
                 whileHover={{ scale: 1.02 }}
               >
                 {item.title}
               </motion.h3>
               <p
-                className="text-sm lg:text-base leading-relaxed"
+                className="text-xs lg:text-base leading-relaxed"
                 style={{ color: 'var(--color-secondary)', opacity: 0.8 }}
               >
                 {item.description}
@@ -228,7 +228,7 @@ export default function Experience() {
     <section
       id="experience"
       ref={ref}
-      className="relative min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8 border-l border-r border-b mx-auto overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center py-12 lg:py-20 px-4 sm:px-6 lg:px-8 border-l border-r border-b mx-auto overflow-hidden"
       style={{
         backgroundColor: 'transparent',
         borderColor: 'rgba(33, 33, 33, 0.3)',
@@ -250,7 +250,7 @@ export default function Experience() {
 
       <div className="w-full relative z-10">
         {/* Header Section */}
-        <div className="text-center mb-8 lg:mb-16">
+        <div className="text-center mb-6 lg:mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -307,7 +307,7 @@ export default function Experience() {
         </div>
 
         {/* Timeline */}
-        <div ref={containerRef} className="relative mt-8 lg:mt-12">
+        <div ref={containerRef} className="relative mt-6 lg:mt-12">
           {/* Main vertical timeline line - desktop only */}
           <div
             className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 hidden lg:block"
@@ -324,7 +324,7 @@ export default function Experience() {
           />
 
           {/* Timeline items */}
-          <div className="space-y-6 lg:space-y-12">
+          <div className="space-y-4 lg:space-y-12">
             {milestones.map((item, index) => (
               <TimelineCard key={item.title} item={item} index={index} progress={smoothProgress} isInView={isInView} />
             ))}
@@ -332,7 +332,7 @@ export default function Experience() {
         </div>
 
         {/* CTA Section */}
-        <div className="mt-16 lg:mt-20 text-center">
+        <div className="mt-12 lg:mt-20 text-center">
           <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5">
             <FiTrendingUp className="text-primary-500" size={18} />
             <span className="text-sm" style={{ color: 'var(--color-secondary)' }}>
