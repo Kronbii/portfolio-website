@@ -1,74 +1,19 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { useRef, useState } from 'react'
-import { FiGithub, FiLinkedin, FiMail, FiSend, FiClock } from 'react-icons/fi'
-import { CornerButton } from '@/components/ui/corner-button'
-import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle } from '@/lib/utils'
-
-const contactSteps = [
-  {
-    title: 'Discovery call',
-    description: '30 minutes to frame goals, constraints, and success signals.',
-  },
-  {
-    title: 'Solution blueprint',
-    description: 'Within 72 hours you get scope, budget, and timeline options.',
-  },
-  {
-    title: 'Build + reporting',
-    description: 'Weekly iterations with demos and lightweight documentation.',
-  },
-]
+import { useRef } from 'react'
+import { FiGithub, FiLinkedin, FiMail, FiClock } from 'react-icons/fi'
+import { getSectionWidthStyle, getSectionHeaderStyle } from '@/lib/utils'
 
 export default function Contact() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitStatus('idle')
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to send message')
-      }
-
-      setSubmitStatus('success')
-      setFormData({ name: '', email: '', message: '' })
-      setTimeout(() => setSubmitStatus('idle'), 5000)
-    } catch (error) {
-      console.error('Error submitting form:', error)
-      setSubmitStatus('error')
-      setTimeout(() => setSubmitStatus('idle'), 5000)
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
 
   return (
     <section
       id="contact"
       ref={ref}
-      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 border-l border-r border-b mx-auto"
+      className="min-h-screen flex flex-col justify-center py-12 lg:py-24 px-4 sm:px-6 lg:px-8 border-l border-r border-b mx-auto"
       style={{ 
         backgroundColor: 'transparent', 
         borderColor: 'rgba(33, 33, 33, 0.3)',
@@ -80,41 +25,40 @@ export default function Contact() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className={`${getSectionHeaderStyle().className} text-center`}
+          className={`${getSectionHeaderStyle().className} text-center mb-8 sm:mb-10 lg:mb-12`}
           style={getSectionHeaderStyle().style}
         >
           Let&apos;s build your next intelligent product
         </motion.h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
-
+        <div className="max-w-2xl mx-auto">
           {/* Social Links & Info */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="space-y-4 sm:space-y-6 lg:space-y-8"
+            className="space-y-4 sm:space-y-5 lg:space-y-6"
           >
-            <div className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-4 sm:p-6">
+            <div className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-4 sm:p-5 lg:p-6">
               <div className="flex items-center justify-between">
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs sm:text-sm uppercase tracking-[0.4em]" style={{ color: 'var(--color-secondary)' }}>Availability</p>
+                  <p className="text-xs sm:text-sm uppercase tracking-[0.3em] sm:tracking-[0.4em]" style={{ color: 'var(--color-secondary)' }}>Availability</p>
                 </div>
-                <div className="text-primary-600 dark:text-primary-400 flex-shrink-0 ml-2">
-                  <FiClock size={24} className="sm:w-8 sm:h-8" />
+                <div className="text-primary-600 dark:text-primary-400 flex-shrink-0 ml-3">
+                  <FiClock className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8" size={24} />
                 </div>
               </div>
             </div>
 
-            <div className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-4 sm:p-6"
+            <div className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-4 sm:p-5 lg:p-6"
             style={{ backgroundColor: 'var(--color-accent)' }}>
-              <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4" style={{ color: 'var(--color-secondary)' }}>Preferred channels</h3>
+              <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold mb-4 sm:mb-5 lg:mb-6" style={{ color: 'var(--color-secondary)' }}>Preferred channels</h3>
               <div className="space-y-3 sm:space-y-4">
                 <motion.a
                   href="https://github.com/Kronbii"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-2xl border dark:bg-dark-surface/70 px-3 sm:px-4 py-2.5 sm:py-3"
+                  className="flex items-center justify-between rounded-2xl border dark:bg-dark-surface/70 px-4 sm:px-5 lg:px-6 py-3 sm:py-3.5 lg:py-4"
                   style={{ 
                     backgroundColor: 'var(--color-primary)', 
                     color: 'var(--color-secondary)',
@@ -122,17 +66,17 @@ export default function Contact() {
                   }}
                   whileHover={{ x: 4 }}
                 >
-                  <div className="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
-                    <FiGithub size={20} className="flex-shrink-0" />
-                    <span className="text-sm sm:text-base truncate">GitHub</span>
+                  <div className="flex items-center space-x-3 sm:space-x-4 flex-1 min-w-0">
+                    <FiGithub className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" size={20} />
+                    <span className="text-sm sm:text-base lg:text-lg truncate">GitHub</span>
                   </div>
-                  <span className="text-xs sm:text-sm ml-2 flex-shrink-0" style={{ color: 'var(--color-secondary)' }}>Case studies</span>
+                  <span className="text-xs sm:text-sm lg:text-base ml-3 flex-shrink-0" style={{ color: 'var(--color-secondary)' }}>Case studies</span>
                 </motion.a>
                 <motion.a
                   href="https://www.linkedin.com/in/rami-kronbi/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-2xl border dark:bg-dark-surface/70 px-3 sm:px-4 py-2.5 sm:py-3"
+                  className="flex items-center justify-between rounded-2xl border dark:bg-dark-surface/70 px-4 sm:px-5 lg:px-6 py-3 sm:py-3.5 lg:py-4"
                   style={{ 
                     backgroundColor: 'var(--color-primary)', 
                     color: 'var(--color-secondary)',
@@ -140,15 +84,15 @@ export default function Contact() {
                   }}
                   whileHover={{ x: 4 }}
                 >
-                  <div className="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
-                    <FiLinkedin size={20} className="flex-shrink-0" />
-                    <span className="text-sm sm:text-base truncate">LinkedIn</span>
+                  <div className="flex items-center space-x-3 sm:space-x-4 flex-1 min-w-0">
+                    <FiLinkedin className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" size={20} />
+                    <span className="text-sm sm:text-base lg:text-lg truncate">LinkedIn</span>
                   </div>
-                  <span className="text-xs sm:text-sm ml-2 flex-shrink-0 whitespace-nowrap" style={{ color: 'var(--color-secondary)' }}>Professional updates</span>
+                  <span className="text-xs sm:text-sm lg:text-base ml-3 flex-shrink-0 whitespace-nowrap" style={{ color: 'var(--color-secondary)' }}>Professional updates</span>
                 </motion.a>
                 <motion.a
                   href="mailto:ramykronby@gmail.com"
-                  className="flex items-center justify-between rounded-2xl border dark:bg-dark-surface/70 px-3 sm:px-4 py-2.5 sm:py-3"
+                  className="flex items-center justify-between rounded-2xl border dark:bg-dark-surface/70 px-4 sm:px-5 lg:px-6 py-3 sm:py-3.5 lg:py-4"
                   style={{ 
                     backgroundColor: 'var(--color-primary)', 
                     color: 'var(--color-secondary)',
@@ -156,11 +100,11 @@ export default function Contact() {
                   }}
                   whileHover={{ x: 4 }}
                 >
-                  <div className="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
-                    <FiMail size={20} className="flex-shrink-0" />
-                    <span className="text-xs sm:text-sm truncate">ramykronby@gmail.com</span>
+                  <div className="flex items-center space-x-3 sm:space-x-4 flex-1 min-w-0">
+                    <FiMail className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" size={20} />
+                    <span className="text-xs sm:text-sm lg:text-base truncate">ramykronby@gmail.com</span>
                   </div>
-                  <span className="text-xs sm:text-sm ml-2 flex-shrink-0 whitespace-nowrap" style={{ color: 'var(--color-secondary)' }}>Best for briefs</span>
+                  <span className="text-xs sm:text-sm lg:text-base ml-3 flex-shrink-0 whitespace-nowrap" style={{ color: 'var(--color-secondary)' }}>Best for briefs</span>
                 </motion.a>
               </div>
             </div>
