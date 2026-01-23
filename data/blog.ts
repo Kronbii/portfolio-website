@@ -10,8 +10,3 @@ export const getLatestArticles = (count: number = 3): BlogArticle[] => {
     .sort((a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime())
     .slice(0, count)
 }
-
-// Get article by slug
-export const getArticleBySlug = (slug: string): BlogArticle | undefined => {
-  return blogArticles.find(article => article.slug === slug)
-}
