@@ -7,7 +7,7 @@ import { getFallbackImage } from '@/lib/utils'
 import { projects, Project } from '@/data/projects'
 import { useInfiniteCarousel } from '@/hooks/useInfiniteCarousel'
 import { useCardCarousel } from '@/hooks/useCardCarousel'
-import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle, getSectionStyle } from '@/lib/utils'
+import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle, getSectionStyle, CARD_CAROUSEL_OPACITY } from '@/lib/utils'
 import { UniversalCard } from '@/components/ui/universal-card'
 import { ExploreNavigation } from '@/components/ui/explore-navigation'
 
@@ -130,7 +130,7 @@ export default function Projects() {
                     }}
                     style={{
                       filter: isVisible ? 'blur(0px)' : 'blur(2px)',
-                      opacity: isVisible ? 1 : 0.25,
+                      opacity: isVisible ? CARD_CAROUSEL_OPACITY.visible : CARD_CAROUSEL_OPACITY.hidden,
                       transition: 'filter 0.5s ease, opacity 0.5s ease',
                     }}
                   >

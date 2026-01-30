@@ -74,6 +74,15 @@ export function getSectionStyle(): React.CSSProperties {
   }
 }
 
+/**
+ * Card carousel opacity configuration
+ * Controls the opacity of non-visible cards in carousels
+ */
+export const CARD_CAROUSEL_OPACITY = {
+  visible: 1,      // Opacity for visible/centered cards
+  hidden: 0.1,   // Opacity for non-visible cards (change this value to adjust)
+}
+
 export function getSectionWidthStyle(): React.CSSProperties {
   const { desktopWidth, mobileWidth, startScalingAt, stopScalingAt, scalingFactor } = SECTION_WIDTH_CONFIG
   
