@@ -52,7 +52,7 @@ export default function Hero() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.25 }}
-                  className="flex flex-row justify-center xl:justify-start w-full"
+                  className="hidden md:flex flex-row justify-center xl:justify-start w-full"
                   style={{
                     gap: 'clamp(1rem, 3vw, 2.5rem)',
                   }}
@@ -190,8 +190,8 @@ export default function Hero() {
 
 function IntroSection() {
   return (
-    <div className="flex flex-row xl:flex-col items-baseline xl:items-start justify-center xl:justify-start" style={{
-      gap: 'clamp(0.5rem, 1.5vw, 1rem)',
+    <div className="flex flex-col xl:flex-col items-center xl:items-start justify-center xl:justify-start" style={{
+      gap: 'clamp(0rem, 1.5vw, 1rem)',
     }}>
       <motion.h1
         initial={{ opacity: 0, y: 10 }}
@@ -199,8 +199,8 @@ function IntroSection() {
         transition={{ duration: 0.8 }}
         className="leading-none"
         style={{
-          fontWeight: 300,
-          fontSize: 'clamp(2.2rem, 8vw, 7rem)',
+          fontWeight: 400,
+          fontSize: 'clamp(3.5rem, 15vw, 7rem)',
           lineHeight: '1',
         }}
       >
@@ -212,8 +212,8 @@ function IntroSection() {
         transition={{ duration: 0.8, delay: 0.1 }}
         className="leading-none"
         style={{
-          fontWeight: 300,
-          fontSize: 'clamp(2.2rem, 8vw, 7rem)',
+          fontWeight: 400,
+          fontSize: 'clamp(3.5rem, 15vw, 7rem)',
           lineHeight: '1',
         }}
       >
