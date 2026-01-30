@@ -52,7 +52,7 @@ export default function Projects() {
   const openProject = (index: number) => {
     const actualIdx = getActualIndex(index)
     const project = projects[actualIdx]
-    
+
     // Open external URL or GitHub URL in a new tab
     const url = project.externalUrl || project.githubUrl
     if (url) {
@@ -63,13 +63,13 @@ export default function Projects() {
   const handleImageError = (index: number, originalSrc: string) => {
     const fallback = getFallbackImage(originalSrc)
     const currentSrc = imageSources[index] || originalSrc
-    
+
     // If we haven't tried the fallback yet, use it
     if (currentSrc === originalSrc && fallback !== originalSrc) {
       setImageSources((prev) => ({ ...prev, [index]: fallback }))
     } else {
       // If fallback also failed, show error placeholder
-    setImageErrors((prev) => ({ ...prev, [index]: true }))
+      setImageErrors((prev) => ({ ...prev, [index]: true }))
     }
   }
 
@@ -78,13 +78,26 @@ export default function Projects() {
       <section
         id="projects"
         ref={sectionRef}
-        className="min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8 border-l border-r border-b mx-auto"
-        style={{ 
+        className="relative min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8 border-l border-r border-b mx-auto overflow-hidden"
+        style={{
           ...getSectionStyle(),
-          ...getSectionWidthStyle() 
+          ...getSectionWidthStyle()
         }}
       >
-        <div className="w-full">
+        {/* Grid texture overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: 'url(/figma-assets/grid.svg)',
+            backgroundPosition: 'center',
+            backgroundSize: '50px 50px',
+            backgroundRepeat: 'repeat',
+            opacity: 0.03,
+            zIndex: 0,
+          }}
+        />
+
+        <div className="w-full relative z-10">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -118,7 +131,7 @@ export default function Projects() {
                 const isCentered = index === currentIndex
                 const isVisible = visibleCards.has(index)
                 const actualIdx = getActualIndex(index)
-                const projectImage = project.image && !imageErrors[actualIdx] 
+                const projectImage = project.image && !imageErrors[actualIdx]
                   ? (imageSources[actualIdx] || project.image)
                   : null
                 return (
@@ -166,10 +179,15 @@ export default function Projects() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-12 rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-6 text-center"
+            className="mt-12 border-2 p-6 text-center"
+            style={{
+              borderColor: 'rgba(33, 33, 33, 0.2)',
+              borderRadius: 0,
+              backgroundColor: 'rgba(216, 216, 216, 0.05)',
+            }}
           >
             <p className="text-lg" style={{ color: 'var(--color-secondary)' }}>
-              Want a similar transformation? <a href="#contact" className="text-primary-600 dark:text-primary-400 underline-offset-4 hover:underline">Let&apos;s design your roadmap</a> and launch faster.
+              Want a similar transformation? <a href="#contact" className="underline-offset-4 hover:underline" style={{ color: 'var(--color-secondary)', opacity: 0.8 }}>Let&apos;s design your roadmap</a> and launch faster.
             </p>
           </motion.div>
         </div>

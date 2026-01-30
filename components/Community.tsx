@@ -46,13 +46,26 @@ export default function Community() {
     <section
       id="community"
       ref={sectionRef}
-      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 border-l border-r border-b mx-auto"
-      style={{ 
+      className="relative min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 border-l border-r border-b mx-auto overflow-hidden"
+      style={{
         ...getSectionStyle(),
-        ...getSectionWidthStyle() 
+        ...getSectionWidthStyle()
       }}
     >
-      <div className="w-full">
+      {/* Grid texture overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: 'url(/figma-assets/grid.svg)',
+          backgroundPosition: 'center',
+          backgroundSize: '50px 50px',
+          backgroundRepeat: 'repeat',
+          opacity: 0.03,
+          zIndex: 0,
+        }}
+      />
+
+      <div className="w-full relative z-10">
         {/* Hero Section */}
         <div className="text-center max-w-3xl mx-auto mb-14">
           <motion.h2
@@ -89,7 +102,7 @@ export default function Community() {
             {extendedItems.map((item, index) => {
               const isCentered = index === currentIndex
               const isVisible = visibleCards.has(index)
-              
+
               return (
                 <div
                   key={`${item.id}-${index}`}
