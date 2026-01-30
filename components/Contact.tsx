@@ -38,30 +38,20 @@ export default function Contact() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="space-y-4 sm:space-y-5 lg:space-y-6"
           >
-            <div className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-4 sm:p-5 lg:p-6">
-              <div className="flex items-center justify-between">
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs sm:text-sm uppercase tracking-[0.3em] sm:tracking-[0.4em]" style={{ color: 'var(--color-secondary)' }}>Availability</p>
-                </div>
-                <div className="text-primary-600 dark:text-primary-400 flex-shrink-0 ml-3">
-                  <FiClock className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8" size={24} />
-                </div>
-              </div>
-            </div>
-
-            <div className="rounded-3xl border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-4 sm:p-5 lg:p-6"
-            style={{ backgroundColor: 'var(--color-accent)' }}>
+            <div className="border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-4 sm:p-5 lg:p-6"
+            style={{ backgroundColor: 'var(--color-accent)', borderRadius: 0 }}>
               <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold mb-4 sm:mb-5 lg:mb-6" style={{ color: 'var(--color-secondary)' }}>Preferred channels</h3>
               <div className="space-y-3 sm:space-y-4">
                 <motion.a
                   href="https://github.com/Kronbii"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-2xl border dark:bg-dark-surface/70 px-4 sm:px-5 lg:px-6 py-3 sm:py-3.5 lg:py-4"
+                  className="flex items-center justify-between border dark:bg-dark-surface/70 px-4 sm:px-5 lg:px-6 py-3 sm:py-3.5 lg:py-4"
                   style={{ 
                     backgroundColor: 'var(--color-primary)', 
                     color: 'var(--color-secondary)',
                     borderColor: 'var(--color-secondary)',
+                    borderRadius: 0,
                   }}
                   whileHover={{ x: 4 }}
                 >
@@ -75,11 +65,12 @@ export default function Contact() {
                   href="https://www.linkedin.com/in/rami-kronbi/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-2xl border dark:bg-dark-surface/70 px-4 sm:px-5 lg:px-6 py-3 sm:py-3.5 lg:py-4"
+                  className="flex items-center justify-between border dark:bg-dark-surface/70 px-4 sm:px-5 lg:px-6 py-3 sm:py-3.5 lg:py-4"
                   style={{ 
                     backgroundColor: 'var(--color-primary)', 
                     color: 'var(--color-secondary)',
                     borderColor: 'var(--color-secondary)',
+                    borderRadius: 0,
                   }}
                   whileHover={{ x: 4 }}
                 >
@@ -91,11 +82,12 @@ export default function Contact() {
                 </motion.a>
                 <motion.a
                   href="mailto:ramykronby@gmail.com"
-                  className="flex items-center justify-between rounded-2xl border dark:bg-dark-surface/70 px-4 sm:px-5 lg:px-6 py-3 sm:py-3.5 lg:py-4"
+                  className="flex items-center justify-between border dark:bg-dark-surface/70 px-4 sm:px-5 lg:px-6 py-3 sm:py-3.5 lg:py-4"
                   style={{ 
                     backgroundColor: 'var(--color-primary)', 
                     color: 'var(--color-secondary)',
                     borderColor: 'var(--color-secondary)',
+                    borderRadius: 0,
                   }}
                   whileHover={{ x: 4 }}
                 >

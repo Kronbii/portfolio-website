@@ -7,7 +7,8 @@
     color-scheme: light;
 
     /* Color Variables */
-    --color-primary: #F8F8F8;
+    /* --color-primary: #F8F8F8; */
+    --color-primary: #FFFFFF;
     --color-secondary: #252525;
     --color-border: #212121;
     --color-accent: #D8D8D8;
@@ -32,14 +33,14 @@
     /* Gradient start color */
     --paper-texture-color-end: var(--color-primary);
     /* Gradient end color */
-    --paper-texture-blend-mode: multiply;
+    --paper-texture-blend-mode: normal;
     --paper-texture-width: 100%;
     /* Adjust this to make it smaller (e.g., 50%, 200px, etc.) */
     --paper-texture-height-scale: 0.5;
     /* Adjust this to control vertical size (0.5 = half height, 0.3 = 30% height, etc.) */
 
     /* Paint texture controls */
-    --paint-texture-opacity: 0.013;
+    --paint-texture-opacity: 0.01;
     --paint-texture-color: var(--color-secondary);
     /* Fallback for single color */
     --paint-texture-color-start: var(--color-border);
@@ -47,7 +48,7 @@
     --paint-texture-color-end: var(--color-border);
     ;
     /* Gradient end color */
-    --paint-texture-blend-mode: multiply;
+    --paint-texture-blend-mode: normal;
     --paint-texture-width: 200%;
     /* Adjust this to make it smaller (e.g., 50%, 200px, etc.) */
     --paint-texture-height-scale: 0.4;

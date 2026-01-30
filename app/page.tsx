@@ -15,7 +15,6 @@ export default function Home() {
   return (
     <main className="min-h-screen relative" style={{ backgroundColor: 'var(--color-primary)' }}>
       <PaperTexture />
-      <PaintTexture />
       <div className="relative z-10">
       <Navigation />
       <Hero />
