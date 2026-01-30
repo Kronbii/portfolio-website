@@ -153,62 +153,32 @@ export default function Hero() {
             className="flex flex-col items-center"
           >
             <svg
-              width="32"
-              height="40"
-              viewBox="0 0 32 40"
+              width="24"
+              height="32"
+              viewBox="0 0 24 32"
               fill="none"
-              style={{ color: 'var(--color-secondary)', transform: 'rotate(180deg)' }}
+              style={{ color: 'var(--color-secondary)' }}
             >
-              {/* Jet fighter - sharp angular design */}
-              <motion.g
-                animate={{ y: [0, 4, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                {/* Main body - sharp triangle */}
-                <path
-                  d="M16 2L24 16L16 20L8 16L16 2Z"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  fill="currentColor"
-                  fillOpacity="0.1"
-                />
-                {/* Cockpit */}
-                <path
-                  d="M16 8L20 14L16 16L12 14L16 8Z"
-                  stroke="currentColor"
-                  strokeWidth="1"
-                  fill="currentColor"
-                  fillOpacity="0.2"
-                />
-                {/* Wings - sharp angular */}
-                <path
-                  d="M8 16L4 20L8 18L16 20L24 18L28 20L24 16L16 20L8 16Z"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  fill="none"
-                />
-                {/* Tail fins */}
-                <line x1="12" y1="20" x2="10" y2="24" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" />
-                <line x1="20" y1="20" x2="22" y2="24" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" />
-                {/* Engine exhaust */}
-                <motion.path
-                  d="M14 20L12 24M18 20L20 24"
-                  stroke="currentColor"
-                  strokeWidth="1"
-                  strokeLinecap="square"
-                  animate={{ opacity: [0.3, 0.8, 0.3] }}
-                  transition={{ duration: 1, repeat: Infinity, ease: 'easeInOut' }}
-                />
-              </motion.g>
-              {/* Sharp downward arrow indicator */}
+              {/* Sharp downward chevron - minimalist design */}
               <motion.path
-                d="M16 28L12 32L16 36L20 32L16 28Z"
+                d="M12 4L4 12L12 20L20 12L12 4Z"
                 stroke="currentColor"
                 strokeWidth="1.5"
-                fill="currentColor"
-                fillOpacity="0.3"
-                animate={{ y: [0, 4, 0], opacity: [0.4, 0.8, 0.4] }}
+                fill="none"
+                strokeLinecap="square"
+                strokeLinejoin="miter"
+                animate={{ opacity: [0.4, 0.8, 0.4] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+              />
+              <motion.path
+                d="M12 12L4 20L12 28L20 20L12 12Z"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                fill="none"
+                strokeLinecap="square"
+                strokeLinejoin="miter"
+                animate={{ opacity: [0.3, 0.6, 0.3] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut', delay: 0.2 }}
               />
             </svg>
           </motion.div>
