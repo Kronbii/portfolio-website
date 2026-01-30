@@ -2,7 +2,7 @@
   {
     "slug": "omnisign",
     "title": "Lebanese Sign Language AI Translator",
-    "description": "An AI-powered sign language translation system focused on real-time interpretation and translation of Lebanese Sign Language (LSL), designed to bridge communication barriers between deaf and hearing communities using computer vision and NLP.",
+    "description": "An AI-powered system for real-time translation of Lebanese Sign Language (LSL), using computer vision and NLP to bridge communication between deaf and hearing communities.",
     "longDescription": "Omnisign is an AI-driven sign language interpreter and translator developed as a final-year project, leveraging computer vision, machine learning, and natural language processing to recognize and translate Lebanese Sign Language (LSL) into spoken/written languages in real time. The system was created to enhance inclusivity and accessibility for the deaf and hard-of-hearing community by enabling seamless two-way communication. Omnisign's innovative approach combines state-of-the-art AI models for gesture recognition with language translation capabilities to output accurate translations across multiple languages. The project gained recognition by winning the Public Choice Award at the National FYP Demo Day 2025, reflecting its societal impact and technical excellence. It's an open, research-oriented initiative demonstrating how AI can break down communication barriers and foster greater social integration for under-served groups.",
     "githubUrl": "https://laythayache.com/projects/omnisign",
     "externalUrl": "https://laythayache.com/projects/omnisign",
@@ -33,7 +33,7 @@
   {
     "slug": "autonomous-race-car",
     "title": "Autonomous Race Car (WRO 2023 Winner)",
-    "description": "An open-source autonomous race vehicle built in just 20 days for the WRO Future Engineers challenge. Combines embedded control, sensor fusion, and Jetson-powered computer vision for real-time navigation and decision-making.",
+    "description": "An open-source autonomous race car built in 20 days for WRO Future Engineers, using sensor fusion and Jetson-powered computer vision.",
     "longDescription": "This project showcases a fully integrated autonomous vehicle developed from scratch in only 20 days for the World Robot Olympiad Future Engineers 2023 competition. The system combines a Jetson Nano for high-level computer vision and an Arduino Mega for deterministic real-time control using PID steering stabilization and sensor fusion from IMU and color sensors. Designed as a dual-MCU platform, it achieves smooth autonomous cornering, traffic sign detection, and dynamic pathing. Built with OpenCV, C++, and Python, the project demonstrates robust teamwork, rapid prototyping, and reliable embedded AI performance on a tight schedule.",
     "githubUrl": "https://github.com/Kronbii/autonomous-race-car",
     "image": "/projects/race-car.webp",

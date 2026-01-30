@@ -8,7 +8,7 @@ import { getFallbackImage } from '@/lib/utils'
 import { projects, Project } from '@/data/projects'
 import { useInfiniteCarousel } from '@/hooks/useInfiniteCarousel'
 import { useCardCarousel } from '@/hooks/useCardCarousel'
-import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle } from '@/lib/utils'
+import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle, getSectionStyle } from '@/lib/utils'
 import { UniversalCard } from '@/components/ui/universal-card'
 import { ExploreNavigation } from '@/components/ui/explore-navigation'
 
@@ -84,8 +84,7 @@ export default function Projects() {
         ref={sectionRef}
         className="min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8 border-l border-r border-b mx-auto"
         style={{ 
-          backgroundColor: 'transparent', 
-          borderColor: 'rgba(33, 33, 33, 0.3)',
+          ...getSectionStyle(),
           ...getSectionWidthStyle() 
         }}
       >
@@ -151,14 +150,6 @@ export default function Projects() {
                       cardWidth={cardWidth}
                       cardHeight={cardHeight}
                     >
-                      <div className="mt-auto pt-4">
-                        <p className="text-sm uppercase tracking-wide mb-3" style={{ color: 'var(--color-secondary)' }}>
-                          Featured build
-                        </p>
-                        <div className="text-sm font-semibold" style={{ color: 'var(--color-secondary)' }}>
-                          Tap for outcomes →
-                        </div>
-                      </div>
                     </UniversalCard>
                   </div>
                 )

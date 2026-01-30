@@ -5,8 +5,7 @@ import { useRef } from 'react'
 import { FiBookOpen, FiBookmark, FiMoreHorizontal } from 'react-icons/fi'
 import Image from 'next/image'
 import { getLatestArticles, BlogArticle } from '@/data/blog'
-import { getSectionHeaderStyle, getSectionSubtitleStyle } from '@/lib/utils'
-import { getSectionWidthStyle } from '@/lib/utils'
+import { getSectionHeaderStyle, getSectionSubtitleStyle, getSectionWidthStyle, getSectionStyle } from '@/lib/utils'
 
 export default function Blog() {
   const ref = useRef(null)
@@ -30,8 +29,7 @@ export default function Blog() {
       ref={ref}
       className="relative min-h-screen flex flex-col justify-center py-12 lg:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden border-l border-r border-b mx-auto"
       style={{ 
-        backgroundColor: 'transparent', 
-        borderColor: 'rgba(33, 33, 33, 0.3)',
+        ...getSectionStyle(),
         ...getSectionWidthStyle() 
       }}
     >

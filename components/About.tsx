@@ -4,7 +4,7 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { FiBook, FiBriefcase, FiUsers, FiAward, FiCode, FiCpu, FiPower } from 'react-icons/fi'
 import { CornerButton } from '@/components/ui/corner-button'
-import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle } from '@/lib/utils'
+import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle, getSectionStyle } from '@/lib/utils'
 
 const infoCards = [
   { 
@@ -51,8 +51,7 @@ export default function About() {
       ref={ref}
       className="relative min-h-screen flex flex-col justify-center py-20 px-4 sm:px-6 lg:px-8 overflow-hidden border-l border-r border-b mx-auto"
       style={{ 
-        backgroundColor: 'transparent', 
-        borderColor: 'rgba(33, 33, 33, 0.3)',
+        ...getSectionStyle(),
         ...getSectionWidthStyle() 
       }}
     >

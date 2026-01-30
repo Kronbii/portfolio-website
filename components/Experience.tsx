@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform, useSpring, useInView, type MotionValue
 import { useRef } from 'react'
 import Image from 'next/image'
 import { FiSend, FiCrosshair, FiAward, FiGlobe, FiZap, FiTrendingUp } from 'react-icons/fi'
-import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle } from '@/lib/utils'
+import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle, getSectionStyle } from '@/lib/utils'
 
 const milestones = [
   {
@@ -114,8 +114,8 @@ function TimelineCard({
             className="group relative border p-4 lg:p-8 transition-all duration-300 overflow-hidden experience-card-gradient"
             style={{
               borderRadius: 0, // Sharp corners
-              borderColor: 'rgba(33, 33, 33, 0.3)', // 30% opacity
               position: 'relative',
+              ...getSectionStyle(),
             }}
           >
 
@@ -230,8 +230,7 @@ export default function Experience() {
       ref={ref}
       className="relative min-h-screen flex flex-col justify-center py-12 lg:py-20 px-4 sm:px-6 lg:px-8 border-l border-r border-b mx-auto overflow-hidden"
       style={{
-        backgroundColor: 'transparent',
-        borderColor: 'rgba(33, 33, 33, 0.3)',
+        ...getSectionStyle(),
         ...getSectionWidthStyle(),
       }}
     >

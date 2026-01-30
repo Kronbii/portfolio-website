@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { ReactNode, useState } from 'react'
 import { FiImage } from 'react-icons/fi'
+import { getSectionStyle } from '@/lib/utils'
 
 interface UniversalCardProps {
   image?: string | null
@@ -61,11 +62,11 @@ export function UniversalCard({
       style={{
         width: `${cardWidth}px`,
         height: `${cardHeight}px`,
-        borderColor: 'rgba(33, 33, 33, 0.3)', // var(--color-border) with 30% opacity
         cursor: onClick ? 'pointer' : 'default',
         boxShadow: isCentered 
           ? '0 20px 25px -5px rgba(37, 37, 37, 0.1), 0 10px 10px -5px rgba(37, 37, 37, 0.04)' 
           : '0 1px 2px 0 rgba(37, 37, 37, 0.05)',
+        ...getSectionStyle(),
       }}
       whileHover={{ y: isCentered ? -20 : -4 }}
       onClick={onClick}
@@ -115,7 +116,7 @@ export function UniversalCard({
         }}>
           {title}
         </h3>
-        <div className="border-t mb-3 flex-shrink-0" style={{ borderColor: 'rgba(33, 33, 33, 0.3)' }} />
+        <div className="border-t mb-3 flex-shrink-0" style={{ borderColor: getSectionStyle().borderColor }} />
         {description && (
           <p className="font-light flex-1" style={{
             color: 'var(--color-secondary)',

@@ -3,7 +3,7 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { FiGithub, FiLinkedin, FiMail, FiClock } from 'react-icons/fi'
-import { getSectionWidthStyle, getSectionHeaderStyle } from '@/lib/utils'
+import { getSectionWidthStyle, getSectionHeaderStyle, getSectionStyle } from '@/lib/utils'
 
 export default function Contact() {
   const ref = useRef(null)
@@ -15,8 +15,7 @@ export default function Contact() {
       ref={ref}
       className="min-h-screen flex flex-col justify-center py-12 lg:py-24 px-4 sm:px-6 lg:px-8 border-l border-r border-b mx-auto"
       style={{ 
-        backgroundColor: 'transparent', 
-        borderColor: 'rgba(33, 33, 33, 0.3)',
+        ...getSectionStyle(),
         ...getSectionWidthStyle() 
       }}
     >

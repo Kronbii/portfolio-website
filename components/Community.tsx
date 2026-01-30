@@ -6,7 +6,7 @@ import { getFallbackImage } from '@/lib/utils'
 import { communityItems, CommunityItem } from '@/data/community'
 import { useInfiniteCarousel } from '@/hooks/useInfiniteCarousel'
 import { useCardCarousel } from '@/hooks/useCardCarousel'
-import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle } from '@/lib/utils'
+import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle, getSectionStyle } from '@/lib/utils'
 import { UniversalCard } from '@/components/ui/universal-card'
 import { ExploreNavigation } from '@/components/ui/explore-navigation'
 
@@ -48,8 +48,7 @@ export default function Community() {
       ref={sectionRef}
       className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 border-l border-r border-b mx-auto"
       style={{ 
-        backgroundColor: 'transparent', 
-        borderColor: 'rgba(33, 33, 33, 0.3)',
+        ...getSectionStyle(),
         ...getSectionWidthStyle() 
       }}
     >

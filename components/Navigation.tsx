@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { FiMenu, FiX } from 'react-icons/fi'
 import Image from 'next/image'
 import { CornerButton } from '@/components/ui/corner-button'
-import { getSectionWidthStyle } from '@/lib/utils'
+import { getSectionWidthStyle, getSectionStyle } from '@/lib/utils'
 
 const navItems = [
   { name: 'MISSION', href: '#community' },
@@ -43,7 +43,7 @@ export default function Navigation() {
       className={`fixed top-0 left-0 right-0 z-40 ${hasScrolled ? 'border-b' : ''}`}
       style={{
         backgroundColor: hasScrolled ? 'var(--color-primary)' : 'transparent',
-        borderColor: hasScrolled ? 'rgba(33, 33, 33, 0.3)' : 'transparent',
+        borderColor: hasScrolled ? getSectionStyle().borderColor : 'transparent',
         boxShadow: 'none',
         backdropFilter: 'none',
         WebkitBackdropFilter: 'none',
@@ -136,7 +136,7 @@ export default function Navigation() {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               className="lg:hidden pb-4 border-t"
-              style={{ borderColor: 'rgba(33, 33, 33, 0.3)' }}
+              style={{ borderColor: getSectionStyle().borderColor }}
             >
               <div className="space-y-4 pt-4">
                 {navItems.map((item) => (

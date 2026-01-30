@@ -5,7 +5,7 @@ import { useRef, useState } from 'react'
 import { FiCode, FiCpu, FiEye, FiUsers, FiCheck } from 'react-icons/fi'
 import { useInfiniteCarousel } from '@/hooks/useInfiniteCarousel'
 import { useCardCarousel } from '@/hooks/useCardCarousel'
-import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle } from '@/lib/utils'
+import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle, getSectionStyle } from '@/lib/utils'
 import { ExploreNavigation } from '@/components/ui/explore-navigation'
 
 interface Service {
@@ -84,8 +84,7 @@ export default function Services() {
       ref={sectionRef}
       className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 border-l border-r border-b mx-auto"
       style={{ 
-        backgroundColor: 'transparent', 
-        borderColor: 'rgba(33, 33, 33, 0.3)',
+        ...getSectionStyle(),
         ...getSectionWidthStyle() 
       }}
     >
@@ -149,11 +148,11 @@ export default function Services() {
                     style={{
                       width: `${cardWidth}px`,
                       height: `${cardHeight}px`,
-                      borderColor: 'rgba(33, 33, 33, 0.3)',
                       cursor: 'pointer',
                       boxShadow: isCentered 
                         ? '0 20px 25px -5px rgba(37, 37, 37, 0.1), 0 10px 10px -5px rgba(37, 37, 37, 0.04)' 
                         : '0 1px 2px 0 rgba(37, 37, 37, 0.05)',
+                      ...getSectionStyle(),
                     }}
                   whileHover={{ y: isCentered ? -20 : -4 }}
               >

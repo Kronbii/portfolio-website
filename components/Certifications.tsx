@@ -4,7 +4,7 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { FiAward } from 'react-icons/fi'
 import { certifications } from '@/data/certifications'
-import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle } from '@/lib/utils'
+import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle, getSectionStyle } from '@/lib/utils'
 
 export default function Certifications() {
   const ref = useRef(null)
@@ -16,8 +16,7 @@ export default function Certifications() {
       ref={ref}
       className="min-h-screen flex flex-col justify-center py-12 lg:py-24 px-4 sm:px-6 lg:px-8 border-l border-r border-b mx-auto"
       style={{ 
-        backgroundColor: 'transparent', 
-        borderColor: 'rgba(33, 33, 33, 0.3)',
+        ...getSectionStyle(),
         ...getSectionWidthStyle() 
       }}
     >

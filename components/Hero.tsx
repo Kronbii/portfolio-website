@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { useState, type Dispatch, type SetStateAction } from 'react'
 import { CornerButton } from '@/components/ui/corner-button'
-import { getFallbackImage, getSectionWidthStyle } from '@/lib/utils'
+import { getFallbackImage, getSectionWidthStyle, getSectionStyle } from '@/lib/utils'
 
 
 export default function Hero() {
@@ -15,9 +15,8 @@ export default function Hero() {
       id="home"
       className="relative overflow-hidden min-h-screen flex flex-col mx-auto border-l border-r border-b"
       style={{
-        backgroundColor: 'transparent',
-        borderColor: 'rgba(33, 33, 33, 0.3)', // var(--color-border) with 30% opacity
         paddingTop: 'clamp(1rem, 3vw, 5rem)',
+        ...getSectionStyle(),
         ...getSectionWidthStyle(),
       }}
     >
@@ -103,7 +102,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="w-full border-t border-b bg-transparent mt-0"
           style={{
-            borderColor: 'rgba(33, 33, 33, 0.3)', // var(--color-border) with 30% opacity
+            ...getSectionStyle(),
             paddingTop: 'clamp(0.75rem, 1.5vw, 1.5rem)',
             paddingBottom: 'clamp(0.75rem, 1.5vw, 1.5rem)',
           }}
