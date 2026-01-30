@@ -39,18 +39,26 @@ export default function Contact() {
             className="space-y-4 sm:space-y-5 lg:space-y-6"
           >
             <div className="border border-light-border/50 dark:border-white/10 bg-light-surface2/50 dark:bg-white/5 p-4 sm:p-5 lg:p-6"
-            style={{ backgroundColor: 'var(--color-accent)', borderRadius: 0 }}>
+            style={{ 
+              backgroundColor: 'var(--color-primary)', 
+              borderRadius: 0,
+              color: 'var(--paint-texture-color-start)',
+              backgroundClip: 'unset',
+              WebkitBackgroundClip: 'unset'
+            }}>
               <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold mb-4 sm:mb-5 lg:mb-6" style={{ color: 'var(--color-secondary)' }}>Preferred channels</h3>
               <div className="space-y-3 sm:space-y-4">
                 <motion.a
                   href="https://github.com/Kronbii"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between border dark:bg-dark-surface/70 px-4 sm:px-5 lg:px-6 py-3 sm:py-3.5 lg:py-4"
+                  className="flex items-center justify-between dark:bg-dark-surface/70 px-4 sm:px-5 lg:px-6 py-3 sm:py-3.5 lg:py-4"
                   style={{ 
-                    backgroundColor: 'var(--color-primary)', 
+                    backgroundColor: 'var(--color-accent)', 
                     color: 'var(--color-secondary)',
-                    borderColor: 'var(--color-secondary)',
+                    borderWidth: 0,
+                    borderColor: 'rgba(0, 0, 0, 0)',
+                    borderImage: 'none',
                     borderRadius: 0,
                   }}
                   whileHover={{ x: 4 }}
@@ -65,11 +73,13 @@ export default function Contact() {
                   href="https://www.linkedin.com/in/rami-kronbi/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between border dark:bg-dark-surface/70 px-4 sm:px-5 lg:px-6 py-3 sm:py-3.5 lg:py-4"
+                  className="flex items-center justify-between dark:bg-dark-surface/70 px-4 sm:px-5 lg:px-6 py-3 sm:py-3.5 lg:py-4"
                   style={{ 
-                    backgroundColor: 'var(--color-primary)', 
+                    backgroundColor: 'var(--color-accent)', 
                     color: 'var(--color-secondary)',
-                    borderColor: 'var(--color-secondary)',
+                    borderWidth: 0,
+                    borderColor: 'rgba(0, 0, 0, 0)',
+                    borderImage: 'none',
                     borderRadius: 0,
                   }}
                   whileHover={{ x: 4 }}
@@ -82,11 +92,14 @@ export default function Contact() {
                 </motion.a>
                 <motion.a
                   href="mailto:ramykronby@gmail.com"
-                  className="flex items-center justify-between border dark:bg-dark-surface/70 px-4 sm:px-5 lg:px-6 py-3 sm:py-3.5 lg:py-4"
+                  className="flex items-center justify-between dark:bg-dark-surface/70 px-4 sm:px-5 lg:px-6 py-3 sm:py-3.5 lg:py-4"
                   style={{ 
-                    backgroundColor: 'var(--color-primary)', 
+                    backgroundColor: 'var(--color-accent)', 
                     color: 'var(--color-secondary)',
-                    borderColor: 'var(--color-secondary)',
+                    borderWidth: 0,
+                    borderColor: 'rgba(0, 0, 0, 0)',
+                    borderStyle: 'none',
+                    borderImage: 'none',
                     borderRadius: 0,
                   }}
                   whileHover={{ x: 4 }}
