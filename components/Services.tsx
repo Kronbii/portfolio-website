@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import { FiCode, FiCpu, FiEye, FiUsers, FiCheck } from 'react-icons/fi'
 import { useInfiniteCarousel } from '@/hooks/useInfiniteCarousel'
 import { useCardCarousel } from '@/hooks/useCardCarousel'
@@ -82,13 +82,26 @@ export default function Services() {
     <section
       id="services"
       ref={sectionRef}
-      className="min-h-screen flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8 border-l border-r border-b mx-auto"
-      style={{ 
+      className="min-h-screen flex flex-col justify-center py-20 lg:py-24 px-4 sm:px-6 lg:px-8 border-l border-r border-b mx-auto relative overflow-hidden"
+      style={{
         ...getSectionStyle(),
-        ...getSectionWidthStyle() 
+        ...getSectionWidthStyle()
       }}
     >
-      <div className="w-full">
+      {/* Grid texture overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: 'url(/figma-assets/grid.svg)',
+          backgroundPosition: 'center',
+          backgroundSize: '50px 50px',
+          backgroundRepeat: 'repeat',
+          opacity: 0.03,
+          zIndex: 0,
+        }}
+      />
+
+      <div className="w-full relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-14">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -127,9 +140,9 @@ export default function Services() {
                 <div
                   key={`${service.title}-${index}`}
                   data-card-index={index}
-                ref={(el) => {
-                  cardsRef.current[index] = el
-                }}
+                  ref={(el) => {
+                    cardsRef.current[index] = el
+                  }}
                   style={{
                     filter: isVisible ? 'blur(0px)' : 'blur(2px)',
                     opacity: isVisible ? CARD_CAROUSEL_OPACITY.visible : CARD_CAROUSEL_OPACITY.hidden,
@@ -137,50 +150,142 @@ export default function Services() {
                   }}
                 >
                   <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                  animate={isInView ? { opacity: 1, y: isCentered ? -16 : 0, scale: isCentered ? 1.03 : 1 } : {}}
-                  transition={{ duration: 0.15 }}
-                    className={`group relative overflow-hidden border bg-transparent flex-shrink-0 transition-all duration-75 flex flex-col cursor-pointer clickable-card ${
-                    isCentered 
-                        ? '-translate-y-4 scale-[1.03] z-10' 
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={isInView ? { opacity: 1, y: isCentered ? -16 : 0, scale: isCentered ? 1.03 : 1 } : {}}
+                    transition={{ duration: 0.15 }}
+                    className={`group relative overflow-hidden border-2 bg-transparent flex-shrink-0 transition-all duration-100 flex flex-col cursor-pointer clickable-card ${isCentered
+                        ? '-translate-y-4 scale-[1.03] z-10'
                         : ''
-                    }`}
+                      }`}
                     style={{
                       width: `${cardWidth}px`,
                       height: `${cardHeight}px`,
                       cursor: 'pointer',
-                      boxShadow: isCentered 
-                        ? '0 20px 25px -5px rgba(37, 37, 37, 0.1), 0 10px 10px -5px rgba(37, 37, 37, 0.04)' 
+                      boxShadow: isCentered
+                        ? '0 20px 25px -5px rgba(37, 37, 37, 0.1), 0 10px 10px -5px rgba(37, 37, 37, 0.04)'
                         : '0 1px 2px 0 rgba(37, 37, 37, 0.05)',
-                      ...getSectionStyle(),
+                      borderColor: 'rgba(33, 33, 33, 0.2)',
+                      borderRadius: 0,
+                      backgroundColor: 'var(--color-primary)',
                     }}
-                  whileHover={{ y: isCentered ? -20 : -4 }}
-              >
-                  <div className="p-4 sm:p-6">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3 text-primary-400">
-                    {service.icon}
-                    <span className="text-xs uppercase tracking-wide" style={{ color: 'var(--color-secondary)' }}>{service.timeline}</span>
-                  </div>
-                </div>
-                <h3 className="mt-4 text-2xl sm:text-3xl font-semibold" style={{ color: 'var(--color-secondary)' }}>
-                  {service.title}
-                </h3>
-                <p className="mt-2 text-sm sm:text-base leading-relaxed" style={{ color: 'var(--color-secondary)' }}>
-                  {service.punchline}
-                </p>
-                <div className="mt-4 space-y-2">
-                  {service.highlights.map((item) => (
-                    <div key={item} className="flex items-center space-x-2 text-sm sm:text-base" style={{ color: 'var(--color-secondary)' }}>
-                      <span className="text-primary-400">
-                        <FiCheck />
-                      </span>
-                      <span>{item}</span>
+                    whileHover={{ y: isCentered ? -20 : -4 }}
+                  >
+                    {/* Hover border effect */}
+                    <div
+                      className="absolute inset-0 border-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                      style={{
+                        borderColor: 'rgba(33, 33, 33, 0.4)',
+                        borderRadius: 0,
+                      }}
+                    />
+
+                    {/* Subtle gradient overlay */}
+                    <div
+                      className="absolute inset-0 opacity-30 pointer-events-none"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(216, 216, 216, 0.2) 0%, rgba(255, 255, 255, 0.05) 100%)',
+                      }}
+                    />
+
+                    <div className="p-6 sm:p-8 relative z-10 flex flex-col h-full">
+                      {/* Icon and Timeline */}
+                      <div className="flex items-start justify-between mb-6">
+                        <div
+                          className="flex items-center justify-center border-2 transition-transform duration-300 group-hover:scale-110"
+                          style={{
+                            width: '56px',
+                            height: '56px',
+                            borderColor: 'rgba(33, 33, 33, 0.2)',
+                            borderRadius: 0,
+                            backgroundColor: 'rgba(216, 216, 216, 0.1)',
+                          }}
+                        >
+                          <div style={{ color: 'var(--color-secondary)' }}>
+                            {service.icon}
+                          </div>
+                        </div>
+
+                        {/* Timeline badge */}
+                        <div
+                          className="border px-3 py-1.5"
+                          style={{
+                            borderColor: 'rgba(33, 33, 33, 0.2)',
+                            borderRadius: 0,
+                            backgroundColor: 'rgba(216, 216, 216, 0.05)',
+                          }}
+                        >
+                          <span
+                            className="uppercase tracking-wider font-medium"
+                            style={{
+                              color: 'var(--color-secondary)',
+                              opacity: 0.6,
+                              fontSize: '11px',
+                              letterSpacing: '0.1em',
+                            }}
+                          >
+                            {service.timeline}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Title */}
+                      <h3
+                        className="font-semibold mb-3 transition-transform duration-300 group-hover:translate-x-1"
+                        style={{
+                          color: 'var(--color-secondary)',
+                          fontSize: 'clamp(22px, 3vw, 28px)',
+                        }}
+                      >
+                        {service.title}
+                      </h3>
+
+                      {/* Punchline */}
+                      <p
+                        className="leading-relaxed mb-6 flex-grow"
+                        style={{
+                          color: 'var(--color-secondary)',
+                          opacity: 0.7,
+                          fontSize: 'clamp(14px, 1.8vw, 16px)',
+                          lineHeight: 1.6,
+                        }}
+                      >
+                        {service.punchline}
+                      </p>
+
+                      {/* Highlights */}
+                      <div className="space-y-3 mt-auto">
+                        {service.highlights.map((item) => (
+                          <div
+                            key={item}
+                            className="flex items-center gap-3"
+                          >
+                            <div
+                              className="flex items-center justify-center border flex-shrink-0"
+                              style={{
+                                width: '18px',
+                                height: '18px',
+                                borderColor: 'rgba(33, 33, 33, 0.3)',
+                                borderRadius: 0,
+                              }}
+                            >
+                              <FiCheck
+                                size={12}
+                                style={{ color: 'var(--color-secondary)' }}
+                              />
+                            </div>
+                            <span
+                              style={{
+                                color: 'var(--color-secondary)',
+                                fontSize: 'clamp(13px, 1.6vw, 15px)',
+                              }}
+                            >
+                              {item}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  ))}
-                    </div>
-                </div>
-              </motion.div>
+                  </motion.div>
                 </div>
               )
             })}
