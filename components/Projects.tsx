@@ -3,7 +3,6 @@
 import { motion, useInView } from 'framer-motion'
 import { useState } from 'react'
 import { FiImage } from 'react-icons/fi'
-import { useRouter } from 'next/navigation'
 import { getFallbackImage } from '@/lib/utils'
 import { projects, Project } from '@/data/projects'
 import { useInfiniteCarousel } from '@/hooks/useInfiniteCarousel'
@@ -17,7 +16,6 @@ export type { Project }
 export { projects }
 
 export default function Projects() {
-  const router = useRouter()
   const [imageErrors, setImageErrors] = useState<{ [key: number]: boolean }>({})
   const [imageSources, setImageSources] = useState<{ [key: number]: string }>({})
 
@@ -55,12 +53,10 @@ export default function Projects() {
     const actualIdx = getActualIndex(index)
     const project = projects[actualIdx]
     
-    // If project has an external URL, open it in a new tab
-    if (project.externalUrl) {
-      window.open(project.externalUrl, '_blank', 'noopener,noreferrer')
-    } else {
-      // Otherwise, navigate to internal project page
-      router.push(`/projects/${project.slug}`)
+    // Open external URL or GitHub URL in a new tab
+    const url = project.externalUrl || project.githubUrl
+    if (url) {
+      window.open(url, '_blank', 'noopener,noreferrer')
     }
   }
 
