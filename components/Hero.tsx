@@ -15,7 +15,7 @@ export default function Hero() {
       id="home"
       className="relative overflow-hidden min-h-screen flex flex-col mx-auto border-l border-r border-b"
       style={{
-        paddingTop: 'clamp(1rem, 3vw, 5rem)',
+        paddingTop: 'clamp(4rem, 5vh, 5rem)',
         ...getSectionStyle(),
         ...getSectionWidthStyle(),
       }}
@@ -34,17 +34,17 @@ export default function Hero() {
       />
       <div className="relative z-10 flex-1 flex flex-col" style={{
         justifyContent: 'center',
-        paddingTop: 'clamp(0.5rem, 2vw, 2rem)',
-        paddingBottom: 'clamp(0.5rem, 2vw, 2rem)',
+        paddingTop: 'clamp(1rem, 3vh, 2rem)',
+        paddingBottom: 'clamp(1rem, 3vh, 2rem)',
       }}>
         <div className="w-full px-4 sm:px-6 xl:px-8">
           <div className="flex flex-col xl:grid xl:grid-cols-2 items-center" style={{
-            gap: 'clamp(1.5rem, 4vw, 4rem)',
+            gap: 'clamp(2rem, 5vw, 4rem)',
           }}>
             {/* Text and buttons - centered, stacked on top in medium viewport */}
             <div className="flex flex-col items-center justify-center w-full xl:items-start order-1 xl:order-1">
               <div className="flex flex-col items-center xl:items-start w-full" style={{
-                gap: 'clamp(1.5rem, 3vw, 2.5rem)',
+                gap: 'clamp(1.2rem, 3vw, 2.5rem)',
               }}>
                 <IntroSection />
 
@@ -200,7 +200,7 @@ function IntroSection() {
         className="leading-none"
         style={{
           fontWeight: 300,
-          fontSize: 'clamp(2.5rem, 8vw, 7rem)',
+          fontSize: 'clamp(2.2rem, 8vw, 7rem)',
           lineHeight: '1',
         }}
       >
@@ -213,7 +213,7 @@ function IntroSection() {
         className="leading-none"
         style={{
           fontWeight: 300,
-          fontSize: 'clamp(2.5rem, 8vw, 7rem)',
+          fontSize: 'clamp(2.2rem, 8vw, 7rem)',
           lineHeight: '1',
         }}
       >
@@ -248,7 +248,8 @@ function HeroPortrait({
       transition={{ duration: 0.8 }}
       className="relative w-full"
       style={{
-        maxWidth: 'clamp(600px, 70vw, 600px)',
+        maxWidth: 'clamp(280px, 85vw, 600px)',
+        height: 'auto',
       }}
     >
       {!imageError ? (
