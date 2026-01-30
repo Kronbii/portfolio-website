@@ -70,7 +70,7 @@ const SECTION_WIDTH_CONFIG = {
 export function getSectionStyle(): React.CSSProperties {
   return {
     backgroundColor: 'transparent',
-    borderColor: 'rgba(33, 33, 33, 1)', // var(--color-border) with 30% opacity
+    borderColor: 'rgba(33, 33, 33, 0.2)', // var(--color-border) with 30% opacity
   }
 }
 

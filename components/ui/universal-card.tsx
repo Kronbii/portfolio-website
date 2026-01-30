@@ -109,19 +109,37 @@ export function UniversalCard({
       </div>
       
       {/* Content */}
-      <div className="flex-1 flex flex-col" style={{ padding: `${(cardWidth * 24) / 450}px` }}>
-        <h3 className="font-medium mb-3 flex-shrink-0" style={{
-          color: 'var(--color-secondary)',
-          fontSize: `${(cardWidth * 30) / 450}px`, // Scale font size proportionally
-        }}>
+      <div className="flex-1 flex flex-col min-h-0 overflow-hidden" style={{ padding: `${(cardWidth * 24) / 450}px` }}>
+        <h3 
+          className="font-medium mb-3 flex-shrink-0" 
+          style={{
+            color: 'var(--color-secondary)',
+            fontSize: `${(cardWidth * 30) / 450}px`,
+            display: '-webkit-box',
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            wordBreak: 'break-word',
+          }}
+        >
           {title}
         </h3>
         <div className="border-t mb-3 flex-shrink-0" style={{ borderColor: getSectionStyle().borderColor }} />
         {description && (
-          <p className="font-light flex-1" style={{
-            color: 'var(--color-secondary)',
-            fontSize: `${(cardWidth * 20) / 450}px`, // Scale font size proportionally
-          }}>
+          <p 
+            className="font-light flex-1 overflow-hidden" 
+            style={{
+              color: 'var(--color-secondary)',
+              fontSize: `${(cardWidth * 20) / 450}px`,
+              display: '-webkit-box',
+              WebkitLineClamp: cardWidth < 300 ? 3 : cardWidth < 350 ? 4 : 5,
+              WebkitBoxOrient: 'vertical',
+              wordBreak: 'break-word',
+              overflowWrap: 'break-word',
+              textOverflow: 'ellipsis',
+            }}
+          >
             {description}
           </p>
         )}
