@@ -9,11 +9,12 @@ import { getSectionWidthStyle, getSectionStyle } from '@/lib/utils'
 
 const navItems = [
   { name: 'MISSION', href: '#community' },
-  { name: 'MILESTONES', href: '#experience' },
+  { name: 'EXPERIENCE', href: '#experience' },
   { name: 'PROJECTS', href: '#projects' },
+  { name: 'TESTIMONIALS', href: '#testimonials' },
+  { name: 'BLOG', href: '#blog' },
   { name: 'CERTIFICATIONS', href: '#certifications' },
   { name: 'SERVICES', href: '#services' },
-  { name: 'BLOG', href: '#blog' },
 ]
 
 export default function Navigation() {
