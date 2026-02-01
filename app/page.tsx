@@ -8,6 +8,7 @@ import Community from '@/components/Community'
 import Certifications from '@/components/Certifications'
 import FAQ from '@/components/FAQ'
 import Contact from '@/components/Contact'
+import Testimonials from '@/components/Testimonials'
 import PaperTexture from '@/components/PaperTexture'
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
         <Community />
         <Experience />
         <Projects />
+        <Testimonials />
         <Blog />
         <Certifications />
         <Services />
