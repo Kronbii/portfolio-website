@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { useState, type Dispatch, type SetStateAction } from 'react'
+import { FiGithub, FiLinkedin } from 'react-icons/fi'
 import { CornerButton } from '@/components/ui/corner-button'
 import { getFallbackImage, getSectionWidthStyle, getSectionStyle } from '@/lib/utils'
 
@@ -52,7 +53,7 @@ export default function Hero() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.25 }}
-                  className="hidden md:flex flex-row justify-center xl:justify-start w-full"
+                  className="flex flex-row justify-center xl:justify-start w-full flex-wrap"
                   style={{
                     gap: 'clamp(1rem, 3vw, 2.5rem)',
                   }}
@@ -60,7 +61,7 @@ export default function Hero() {
                   <CornerButton
                     href="#community"
                     variant="primary"
-                    className="inline-flex items-center justify-center"
+                    className="hidden md:inline-flex items-center justify-center"
                     style={{
                       minWidth: 'clamp(140px, 25vw, 166px)',
                       height: 'clamp(44px, 8vw, 46px)',
@@ -71,19 +72,36 @@ export default function Hero() {
                   >
                     MISSION
                   </CornerButton>
-                  <CornerButton
-                    href="#projects"
-                    className="inline-flex items-center justify-center"
-                    style={{
-                      minWidth: 'clamp(140px, 25vw, 166px)',
-                      height: 'clamp(44px, 8vw, 46px)',
-                      fontSize: 'clamp(13px, 2.5vw, 16px)',
-                      paddingLeft: 'clamp(12px, 2vw, 24px)',
-                      paddingRight: 'clamp(12px, 2vw, 24px)',
-                    }}
-                  >
-                    PORTFOLIO
-                  </CornerButton>
+                  <div className="flex" style={{ gap: 'clamp(2rem, 1.5vw, 1rem)' }}>
+                    <CornerButton
+                      href="https://github.com/Kronbii"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center"
+                      style={{
+                        minWidth: 'clamp(44px, 8vw, 46px)',
+                        width: 'clamp(44px, 8vw, 46px)',
+                        height: 'clamp(44px, 8vw, 46px)',
+                        padding: 0,
+                      }}
+                    >
+                      <FiGithub size={20} />
+                    </CornerButton>
+                    <CornerButton
+                      href="https://www.linkedin.com/in/rami-kronbi/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center"
+                      style={{
+                        minWidth: 'clamp(44px, 8vw, 46px)',
+                        width: 'clamp(44px, 8vw, 46px)',
+                        height: 'clamp(44px, 8vw, 46px)',
+                        padding: 0,
+                      }}
+                    >
+                      <FiLinkedin size={20} />
+                    </CornerButton>
+                  </div>
                 </motion.div>
               </div>
             </div>
@@ -119,7 +137,7 @@ export default function Hero() {
                 msOverflowStyle: 'none',
               }}
             >
-              {['Computer Vision', 'Real-Time AI', 'Autonomous Robotics', 'Edge ML Deployment', 'Custom ML Solutions'].map((item, index) => (
+              {['Computer Vision', 'Real-Time AI', 'Autonomous Robotics', 'Edge ML', 'Machine Learning'].map((item, index) => (
                 <motion.span
                   key={item}
                   initial={{ opacity: 0, y: 10 }}
@@ -183,8 +201,8 @@ export default function Hero() {
             </svg>
           </motion.div>
         </motion.div>
-      </div>
-    </section>
+      </div >
+    </section >
   )
 }
 
@@ -239,7 +257,7 @@ function IntroSection() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="text-center xl:text-left max-w-2xl"
+        className="show-above-430 text-center xl:text-left max-w-2xl"
         style={{
           color: 'var(--color-secondary)',
           opacity: 0.7,

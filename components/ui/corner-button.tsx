@@ -3,11 +3,11 @@
 import React, { useState } from 'react'
 
 // Corner decoration component with hover animation
-const CornerDecoration = ({ 
-  position, 
+const CornerDecoration = ({
+  position,
   isHovered,
-  lineColor 
-}: { 
+  lineColor
+}: {
   position: 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight'
   isHovered: boolean
   lineColor: string
@@ -35,20 +35,20 @@ const CornerDecoration = ({
   const config = cornerConfig[position]
 
   return (
-    <div 
+    <div
       className={`absolute ${config.basePos} w-2 h-2 transition-all duration-300`}
       style={{ transform: config.transform }}
     >
-      <div 
+      <div
         className="absolute top-0 left-0 w-[1px] transition-all duration-300"
-        style={{ 
+        style={{
           height: isHovered ? '12px' : '8px',
           backgroundColor: lineColor,
         }}
       />
-      <div 
+      <div
         className="absolute top-0 left-0 h-[1px] transition-all duration-300"
-        style={{ 
+        style={{
           width: isHovered ? '12px' : '8px',
           backgroundColor: lineColor,
         }}
@@ -66,17 +66,21 @@ interface CornerButtonProps {
   variant?: 'default' | 'primary'
   disabled?: boolean
   style?: React.CSSProperties
+  target?: string
+  rel?: string
 }
 
-export function CornerButton({ 
-  href, 
-  onClick, 
-  children, 
+export function CornerButton({
+  href,
+  onClick,
+  children,
   className = '',
   type = 'button',
   variant = 'default',
   disabled = false,
-  style
+  style,
+  target,
+  rel
 }: CornerButtonProps) {
   const [isHovered, setIsHovered] = useState(false)
 
@@ -95,9 +99,9 @@ export function CornerButton({
   }
 
   const currentVariant = variantStyles[variant]
-  
+
   const baseClasses = `relative inline-flex items-center justify-center h-8 sm:h-10 px-3 sm:px-6 uppercase font-normal tracking-wide transition-opacity hover:opacity-80 outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus:ring-offset-0 ${disabled ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'}`
-  
+
   const baseStyles = {
     outline: 'none',
     boxShadow: 'none',
@@ -142,6 +146,8 @@ export function CornerButton({
         onClick={onClick}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        target={target}
+        rel={rel}
       >
         {content}
       </a>

@@ -233,6 +233,17 @@
   .theme-surface2 {
     @apply bg-light-surface2;
   }
+
+  /* Show element only on screens above 430px */
+  .show-above-430 {
+    display: none;
+  }
+
+  @media (min-width: 431px) {
+    .show-above-430 {
+      display: block;
+    }
+  }
 }
 
 /* Custom scrollbar */
