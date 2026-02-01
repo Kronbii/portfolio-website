@@ -5,7 +5,7 @@ import StructuredData from '@/components/StructuredData'
 
 const siteUrl = 'https://ramikronbi.com'
 const siteName = 'Rami Kronbi'
-const siteDescription = 'Rami Kronbi - AI and Computer Vision Engineer.'
+const siteDescription = 'Rami Kronbi is an AI and Computer Vision Engineer who builds multidisciplinary intelligent systems—from autonomous robotics to enterprise computer vision and real-time ML applications.'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -45,6 +45,15 @@ export const metadata: Metadata = {
     'Neural Networks',
     'Image Processing',
     'Object Detection',
+    'Real-Time AI',
+    'Edge ML Deployment',
+    'Autonomous Robotics',
+    'Thermal Imaging',
+    'Production-Ready AI',
+    'Multidisciplinary AI Systems',
+    'TensorRT',
+    'Computer Vision Systems',
+    'Edge AI',
   ],
   authors: [{ name: siteName, url: siteUrl }],
   creator: siteName,
@@ -112,9 +121,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-      <html lang="en" className={`scroll-smooth ${spaceGrotesk.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`scroll-smooth ${spaceGrotesk.variable}`} suppressHydrationWarning>
       <head>
-        {/* REQUIRED FIX: Correct Website Identity Schema */}
+        {/* Website Identity Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -124,6 +133,65 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               name: 'Rami Kronbi',
               alternateName: 'RamiKronbi',
               url: 'https://ramikronbi.com/',
+            }),
+          }}
+        />
+
+        {/* Person Schema for AI/SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Person',
+              name: 'Rami Kronbi',
+              alternateName: 'Rami Kronby',
+              jobTitle: 'AI and Computer Vision Engineer',
+              description: 'AI and Computer Vision Engineer who builds multidisciplinary intelligent systems—from autonomous robotics to enterprise computer vision and real-time ML applications',
+              url: 'https://ramikronbi.com',
+              email: 'ramykronby@gmail.com',
+              sameAs: [
+                'https://github.com/Kronbii',
+                'https://www.linkedin.com/in/rami-kronbi/',
+                'https://twitter.com/kronbii',
+              ],
+              knowsAbout: [
+                'Computer Vision',
+                'Machine Learning',
+                'Artificial Intelligence',
+                'Autonomous Robotics',
+                'Real-Time AI',
+                'Edge ML Deployment',
+                'PyTorch',
+                'TensorFlow',
+                'OpenCV',
+                'TensorRT',
+                'Deep Learning',
+                'Thermal Imaging',
+                'Object Detection',
+                'Neural Networks',
+              ],
+              hasOccupation: {
+                '@type': 'Occupation',
+                name: 'AI and Computer Vision Engineer',
+                skills: 'Computer Vision, Machine Learning, Autonomous Robotics, Real-Time AI Systems, Edge Deployment, Production-Ready AI Solutions',
+              },
+              memberOf: [
+                {
+                  '@type': 'Organization',
+                  name: 'EVOID',
+                  description: 'Founder & Tech Lead',
+                },
+                {
+                  '@type': 'Organization',
+                  name: 'Oreyeon LDA',
+                  description: 'Applied AI & CV Engineer',
+                },
+              ],
+              award: [
+                'WRO Future Engineers 2023 Champion',
+                'Public Choice Award - National FYP Demo Day 2025',
+              ],
             }),
           }}
         />

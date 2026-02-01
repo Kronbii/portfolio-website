@@ -119,7 +119,7 @@ export default function Hero() {
                 msOverflowStyle: 'none',
               }}
             >
-              {['Machine Learning', 'Computer Vision', 'Artificial Intelligence', 'Robotics', 'Engineering'].map((item, index) => (
+              {['Computer Vision', 'Real-Time AI', 'Autonomous Robotics', 'Edge ML Deployment', 'Custom ML Solutions'].map((item, index) => (
                 <motion.span
                   key={item}
                   initial={{ opacity: 0, y: 10 }}
@@ -191,7 +191,7 @@ export default function Hero() {
 function IntroSection() {
   return (
     <div className="flex flex-col xl:flex-col items-center xl:items-start justify-center xl:justify-start" style={{
-      gap: 'clamp(0rem, 1.5vw, 1rem)',
+      gap: 'clamp(0.5rem, 1.5vw, 1rem)',
     }}>
       <motion.h1
         initial={{ opacity: 0, y: 10 }}
@@ -219,6 +219,37 @@ function IntroSection() {
       >
         KRONBI
       </motion.h1>
+      <motion.p
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.15 }}
+        className="text-center xl:text-left"
+        style={{
+          color: 'var(--color-secondary)',
+          opacity: 0.8,
+          fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)',
+          fontWeight: 500,
+          letterSpacing: '0.02em',
+          marginTop: 'clamp(0.5rem, 1vw, 1rem)',
+        }}
+      >
+        AI & Computer Vision Engineer
+      </motion.p>
+      <motion.p
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        className="text-center xl:text-left max-w-2xl"
+        style={{
+          color: 'var(--color-secondary)',
+          opacity: 0.7,
+          fontSize: 'clamp(0.9rem, 1.8vw, 1.1rem)',
+          lineHeight: 1.6,
+          marginTop: 'clamp(0.75rem, 1.5vw, 1.25rem)',
+        }}
+      >
+        Building multidisciplinary intelligent systems—from autonomous robotics to enterprise computer vision and real-time ML applications.
+      </motion.p>
     </div>
   )
 }

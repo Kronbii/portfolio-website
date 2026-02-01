@@ -6,6 +6,7 @@ import Projects from '@/components/Projects'
 import Services from '@/components/Services'
 import Community from '@/components/Community'
 import Certifications from '@/components/Certifications'
+import FAQ from '@/components/FAQ'
 import Contact from '@/components/Contact'
 import PaperTexture from '@/components/PaperTexture'
 
@@ -14,15 +15,16 @@ export default function Home() {
     <main className="min-h-screen relative" style={{ backgroundColor: 'var(--color-primary)' }}>
       <PaperTexture />
       <div className="relative z-10">
-      <Navigation />
-      <Hero />
-      <Community />
-      <Experience />
-      <Projects />
-      <Blog />
-      <Certifications />
-      <Services />
-      <Contact />
+        <Navigation />
+        <Hero />
+        <Community />
+        <Experience />
+        <Projects />
+        <Blog />
+        <Certifications />
+        <Services />
+        <Contact />
+        <FAQ />
       </div>
     </main>
   )

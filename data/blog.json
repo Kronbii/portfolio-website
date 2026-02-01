@@ -5,15 +5,40 @@
     "bannerImage": "/projects/omnisign.webp",
     "publishedDate": "2026-01-09",
     "externalUrl": "https://medium.com/@ramikronbi/ai-should-serve-society-not-just-industry-and-billionaires-52d6b685e35d",
-    "tags": ["AI", "Society", "Ethics", "Technology"]
+    "tags": [
+      "AI",
+      "Society",
+      "Ethics",
+      "Technology"
+    ]
   },
   {
-    "title": "AI Should Serve Society - Not Just Industry and Billionaires",
-    "description": "Build with purpose. Others will follow. When AI serves only industry titans and billionaires, we miss out on its most profound potential: the ability to uplift society at large.",
-    "bannerImage": "/projects/billionaires.webp",
-    "publishedDate": "2026-01-09",
-    "externalUrl": "https://dev.to/ramikronbi/ai-should-serve-society-not-just-industry-and-billionaires-37c9",
-    "tags": ["AI", "Society", "Ethics", "Technology"]
-
+    "title": "How to Choose the Right Computer Vision Solution for Your Startup",
+    "description": "A practical guide for startups on selecting the right computer vision approach based on accuracy requirements, deployment constraints, and business goals. Learn when to use cloud vs edge deployment, how to balance cost and performance, and common pitfalls to avoid.",
+    "bannerImage": "/projects/thermal-sr.webp",
+    "publishedDate": "2026-02-01",
+    "externalUrl": "#",
+    "summary": "Computer vision is a powerful technology, but choosing the right solution for your startup requires understanding accuracy-speed tradeoffs, deployment constraints, and cost considerations. This guide helps you navigate these decisions to build a CV system that actually serves your business needs.",
+    "tags": [
+      "Computer Vision",
+      "Startups",
+      "Technical Guide",
+      "AI"
+    ]
+  },
+  {
+    "title": "Real-Time AI on Edge Devices: A Practical Guide",
+    "description": "Learn how to deploy machine learning models on edge devices for real-time performance. Covers hardware options, model optimization techniques like quantization and pruning, performance benchmarks, and common deployment pitfalls with real-world examples.",
+    "bannerImage": "/projects/race-car.webp",
+    "publishedDate": "2026-02-01",
+    "externalUrl": "#",
+    "summary": "Edge deployment is crucial for applications requiring low latency, privacy, and offline operation. This comprehensive guide covers hardware platforms, optimization techniques, and real-world performance data to help you successfully deploy AI at the edge.",
+    "tags": [
+      "Edge AI",
+      "Machine Learning",
+      "Edge ML Deployment",
+      "TensorRT",
+      "Embedded Systems"
+    ]
   }
 ]

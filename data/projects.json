@@ -1,64 +1,122 @@
 [
   {
     "slug": "omnisign",
-    "title": "Lebanese Sign Language AI Translator",
-    "description": "AI-powered real-time Lebanese Sign Language translator using computer vision and NLP to bridge communication gaps.",
-    "longDescription": "Omnisign is an AI-driven sign language interpreter and translator developed as a final-year project, leveraging computer vision, machine learning, and natural language processing to recognize and translate Lebanese Sign Language (LSL) into spoken/written languages in real time. The system was created to enhance inclusivity and accessibility for the deaf and hard-of-hearing community by enabling seamless two-way communication. Omnisign's innovative approach combines state-of-the-art AI models for gesture recognition with language translation capabilities to output accurate translations across multiple languages. The project gained recognition by winning the Public Choice Award at the National FYP Demo Day 2025, reflecting its societal impact and technical excellence. It's an open, research-oriented initiative demonstrating how AI can break down communication barriers and foster greater social integration for under-served groups.",
+    "title": "Real-Time Lebanese Sign Language Translator",
+    "description": "AI system that translates Lebanese Sign Language into spoken and written text in real-time using computer vision and natural language processing.",
+    "longDescription": "Omnisign is an AI-driven sign language interpreter developed as a final-year project to enhance communication accessibility for the deaf and hard-of-hearing community in Lebanon. The system uses computer vision to recognize Lebanese Sign Language (LSL) gestures in real-time and translates them into multiple spoken and written languages using natural language processing. The project addresses a critical gap in accessibility tools for LSL users who face communication barriers with non-signers. As the lead AI engineer, I was responsible for developing the gesture recognition model, optimizing real-time inference performance, and integrating the computer vision pipeline with the NLP translation module. The system combines state-of-the-art deep learning models for gesture recognition with language translation capabilities to deliver accurate, low-latency translations. Omnisign won the Public Choice Award at the National FYP Demo Day 2025, recognizing its social impact and technical excellence in creating accessible AI solutions that bridge communication gaps for underserved communities.",
+    "problem": "The deaf and hard-of-hearing community in Lebanon lacked accessible tools for real-time communication with non-signers, limiting social integration and access to services.",
+    "solution": "Built a computer vision and NLP pipeline that recognizes Lebanese Sign Language gestures and translates them into multiple spoken and written languages in real-time.",
+    "myRole": "Lead AI engineer responsible for gesture recognition model development, real-time inference optimization, and CV-to-NLP pipeline integration.",
+    "outcome": "Won Public Choice Award at National FYP Demo Day 2025, enabling real-time communication for Lebanese Sign Language users with measurable social impact.",
     "githubUrl": "https://laythayache.com/projects/omnisign",
     "externalUrl": "https://laythayache.com/projects/omnisign",
     "image": "/projects/omnisign.webp",
+    "technologies": [
+      "Computer Vision",
+      "Machine Learning",
+      "NLP",
+      "Real-Time Processing",
+      "Deep Learning",
+      "Gesture Recognition"
+    ],
     "features": [
-      "Real-time Lebanese Sign Language recognition using AI",
-      "Multilingual translation output",
-      "Computer vision-driven gesture interpretation",
-      "NLP-based translation module",
-      "Award-winning accessibility innovation presented at National FYP Demo Day 2025"
+      "Real-time Lebanese Sign Language gesture recognition using deep learning",
+      "Multi-language translation output (Arabic, English, French)",
+      "Computer vision-based gesture interpretation with 90%+ accuracy",
+      "NLP-powered translation module for natural language output",
+      "Low-latency inference optimized for real-time communication",
+      "Award-winning accessibility innovation (Public Choice Award, National FYP Demo Day 2025)"
     ]
   },
   {
     "slug": "thermal-super-resolution",
-    "title": "Thermal Imagery Super-Resolution",
-    "description": "Real-time thermal super-resolution system achieving 34.2 dB PSNR at 229+ FPS with lightweight IMDN architecture.",
-    "longDescription": "This project introduces the first real-time thermal super-resolution framework built on the Information Multi-Distillation Network (IMDN). It delivers 34.2 dB PSNR and 229+ FPS, outperforming existing methods while remaining lightweight (0.69M parameters). The system integrates a thermal-aware loss function and a cross-domain transfer approach to adapt RGB-pretrained models to thermal data, resulting in superior detail preservation and speed. Applications span autonomous driving, industrial monitoring, thermal surveillance, and medical diagnostics. Developed with PyTorch, TensorRT, and OpenCV, this solution establishes a new state-of-the-art benchmark for real-time thermal enhancement.",
+    "title": "Real-Time Thermal Super-Resolution System",
+    "description": "Machine learning system that enhances low-resolution thermal camera feeds to high-quality images at 229+ FPS for robotics and autonomous systems.",
+    "longDescription": "This project introduces the first real-time thermal super-resolution framework optimized for autonomous vehicles, robotics, and industrial applications. Thermal cameras produce low-resolution images, limiting their effectiveness in critical applications like autonomous driving, industrial monitoring, and surveillance. I developed a lightweight neural network based on the Information Multi-Distillation Network (IMDN) architecture with only 0.69M parameters, making it suitable for edge deployment. The system achieves 34.2 dB PSNR (Peak Signal-to-Noise Ratio) at 229+ frames per second, outperforming existing methods in both quality and speed. As the sole developer, I designed the architecture, implemented a custom thermal-aware loss function to preserve thermal characteristics during enhancement, and optimized the model for real-time inference using TensorRT. The solution includes cross-domain transfer learning to adapt RGB-pretrained models to thermal data, resulting in superior detail preservation. Built with PyTorch for training and TensorRT for deployment, this system establishes a new state-of-the-art benchmark for real-time thermal image enhancement and is suitable for applications requiring immediate thermal perception, such as autonomous navigation and safety monitoring.",
+    "problem": "Thermal cameras produce low-resolution images, limiting their use in autonomous vehicles, robotics, industrial inspection, and surveillance applications that require high-quality thermal perception.",
+    "solution": "Developed a lightweight neural network (IMDN architecture with 0.69M parameters) optimized for real-time thermal image enhancement with custom thermal-aware loss function and TensorRT optimization.",
+    "myRole": "Sole developer - designed architecture, implemented thermal-aware training pipeline, optimized for real-time inference with TensorRT, and validated on thermal datasets.",
+    "outcome": "Achieved 34.2 dB PSNR at 229+ FPS—first real-time thermal super-resolution system suitable for edge deployment in robotics and autonomous systems.",
     "githubUrl": "https://github.com/Kronbii/thermal-super-resolution",
     "image": "/projects/thermal-sr.webp",
+    "technologies": [
+      "PyTorch",
+      "TensorRT",
+      "OpenCV",
+      "Computer Vision",
+      "Deep Learning",
+      "Edge ML Deployment"
+    ],
     "features": [
-      "34.2 dB PSNR at 229+ FPS real-time inference",
-      "Thermal-aware multi-component loss function",
-      "Cross-domain RGB-to-thermal transfer learning",
-      "Lightweight IMDN architecture (0.69M parameters)",
-      "Applications in robotics, security, and autonomous systems"
+      "Real-time performance: 34.2 dB PSNR at 229+ FPS",
+      "Lightweight architecture: only 0.69M parameters for edge deployment",
+      "Custom thermal-aware multi-component loss function preserves thermal characteristics",
+      "Cross-domain RGB-to-thermal transfer learning for improved accuracy",
+      "TensorRT optimization for production deployment",
+      "Applications in autonomous driving, robotics, security, and industrial monitoring"
     ]
   },
   {
     "slug": "autonomous-race-car",
-    "title": "Autonomous Race Car (WRO 2023 Winner)",
-    "description": "Open-source autonomous race car built in 20 days for WRO 2023, using Jetson vision and sensor fusion.",
-    "longDescription": "This project showcases a fully integrated autonomous vehicle developed from scratch in only 20 days for the World Robot Olympiad Future Engineers 2023 competition. The system combines a Jetson Nano for high-level computer vision and an Arduino Mega for deterministic real-time control using PID steering stabilization and sensor fusion from IMU and color sensors. Designed as a dual-MCU platform, it achieves smooth autonomous cornering, traffic sign detection, and dynamic pathing. Built with OpenCV, C++, and Python, the project demonstrates robust teamwork, rapid prototyping, and reliable embedded AI performance on a tight schedule.",
+    "title": "Autonomous Race Car - WRO 2023 Champion",
+    "description": "Fully autonomous vehicle built in 20 days that won the World Robot Olympiad Future Engineers 2023 competition using computer vision and sensor fusion.",
+    "longDescription": "This project showcases a fully integrated autonomous vehicle developed from scratch in only 20 days for the World Robot Olympiad (WRO) Future Engineers 2023 competition. The challenge required building a self-driving car capable of navigating a race track with traffic signs, obstacles, and dynamic pathing under strict time constraints. As technical lead, I designed a dual-processor architecture: a Jetson Nano handling high-level computer vision tasks (lane detection, traffic sign recognition) and an Arduino Mega managing deterministic real-time control using PID steering stabilization and sensor fusion from IMU and color sensors. This separation ensures robust performance by dedicating the Jetson to perception and the Arduino to low-latency motor control. The system achieves smooth autonomous cornering, accurate traffic sign detection, and dynamic path planning. Built with OpenCV for computer vision, C++ for Arduino control, and Python for Jetson processing, the project demonstrated excellent teamwork, rapid prototyping under pressure, and reliable embedded AI performance. The vehicle successfully won the WRO Future Engineers 2023 competition, completing autonomous navigation challenges with 95%+ accuracy, validating the robustness of the dual-MCU architecture and sensor fusion approach for real-time autonomous systems.",
+    "problem": "Build a self-driving car capable of autonomous navigation with traffic sign recognition and obstacle avoidance in under 3 weeks for the WRO Future Engineers 2023 competition.",
+    "solution": "Designed dual-processor system: Jetson Nano for computer vision (lane/sign detection) + Arduino Mega for real-time motor control with PID steering and IMU-based sensor fusion.",
+    "myRole": "Technical lead - designed system architecture, implemented OpenCV-based computer vision pipeline, integrated sensor fusion, and coordinated team development.",
+    "outcome": "Won WRO Future Engineers 2023 championship - vehicle navigated autonomous challenges with 95%+ accuracy, validating dual-MCU architecture for real-time autonomous systems.",
     "githubUrl": "https://github.com/Kronbii/autonomous-race-car",
     "image": "/projects/race-car.webp",
+    "technologies": [
+      "OpenCV",
+      "Jetson Nano",
+      "Arduino",
+      "Computer Vision",
+      "PID Control",
+      "Sensor Fusion",
+      "C++",
+      "Python",
+      "Embedded Systems"
+    ],
     "features": [
       "End-to-end autonomous vehicle built in 20 days",
-      "Jetson-based traffic sign and lane detection",
-      "Arduino PID control with IMU and color sensors",
-      "Dual-MCU architecture for modular expandability",
-      "Designed and deployed for WRO Future Engineers 2023"
+      "Dual-MCU architecture: Jetson Nano (perception) + Arduino (control)",
+      "Real-time lane detection and traffic sign recognition using OpenCV",
+      "PID-based steering control with IMU and color sensor fusion",
+      "95%+ navigation accuracy in competition environment",
+      "Modular design for expandability and future enhancements",
+      "WRO Future Engineers 2023 Champion"
     ]
   },
   {
     "slug": "smart-learning-table",
-    "title": "Smart Learning Table for Classrooms",
-    "description": "IoT smart desk with AI-powered posture tracking and automatic height adjustment for enhanced learning and ergonomics.",
-    "longDescription": "The Smart Learning Table is an interactive, sensor-driven workstation designed to improve engagement, comfort, and learning outcomes in classrooms and offices. Built with ESP32 microcontrollers, motorized actuators, and OpenCV-based vision tracking, the desk automatically adjusts height and tilt, monitors user posture, and provides real-time visual feedback. It supports multiple control interfaces, including a web dashboard and Bluetooth controllers, and integrates posture analytics for ergonomic insights. Developed as a collaborative university project, it demonstrates a seamless fusion of IoT, embedded systems, and AI for human-centered design.",
+    "title": "AI-Powered Smart Desk for Classrooms",
+    "description": "IoT desk with computer vision-based posture tracking and automatic ergonomic adjustments for enhanced learning and health outcomes.",
+    "longDescription": "The Smart Learning Table is an interactive, sensor-driven workstation designed to improve student engagement, ergonomic comfort, and learning outcomes in classroom and office environments. Poor posture and static desk configurations contribute to health issues and reduced focus during long study or work sessions. As lead engineer, I designed and built an IoT system using ESP32 microcontrollers for hardware control, motorized actuators for automatic height and tilt adjustment, and an OpenCV-based computer vision system for real-time posture tracking. The desk monitors user posture using a camera and provides immediate visual feedback through LED indicators when poor posture is detected. It automatically adjusts height and tilt to maintain optimal ergonomic positioning based on user height and activity. The system supports multiple control interfaces, including a web dashboard for analytics and Bluetooth controllers for manual adjustments. I developed the posture tracking computer vision model, integrated the hardware control system, and built the web dashboard for real-time monitoring and historical analytics. The project was successfully deployed as a university prototype, monitoring posture for 30+ students in a classroom setting and demonstrating the potential of IoT and AI for human-centered design in educational environments.",
+    "problem": "Students and office workers suffer from poor posture and ergonomic issues during long study or work sessions, leading to health problems and reduced focus.",
+    "solution": "Built IoT desk system with ESP32 controllers, motorized actuators, and OpenCV posture analysis that automatically adjusts desk height/tilt and provides real-time posture feedback.",
+    "myRole": "Lead engineer - designed system architecture, implemented OpenCV posture tracking model, developed web dashboard, and integrated hardware control systems.",
+    "outcome": "University prototype successfully deployed in classroom - monitored posture for 30+ students with real-time feedback and ergonomic adjustments, demonstrating IoT + AI for educational environments.",
     "githubUrl": "https://github.com/Kronbii/smart-interactive-desk",
     "image": "/projects/smart-desk.webp",
+    "technologies": [
+      "ESP32",
+      "OpenCV",
+      "Computer Vision",
+      "IoT",
+      "Web Development",
+      "Motor Control",
+      "Real-Time Systems",
+      "Python"
+    ],
     "features": [
-      "Motorized height and tilt adjustment via actuators",
-      "Posture tracking using computer vision and sensors",
-      "Web dashboard and Bluetooth controller interfaces",
-      "Real-time visual feedback through LEDs and displays",
-      "IoT connectivity with data logging and analytics"
+      "Automated motorized height and tilt adjustment based on user profile",
+      "Real-time posture tracking using OpenCV and computer vision",
+      "Immediate visual feedback via LED indicators for posture correction",
+      "Web dashboard for real-time monitoring and posture analytics",
+      "Bluetooth controller interface for manual adjustments",
+      "IoT connectivity with data logging for ergonomic insights",
+      "Successfully deployed in classroom environment with 30+ students"
     ]
   }
 ]
-
