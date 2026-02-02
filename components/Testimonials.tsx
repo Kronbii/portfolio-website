@@ -41,10 +41,10 @@ export default function Testimonials() {
   // Desktop: 1:1 (compact layout)
   const cardHeight = typeof window !== 'undefined'
     ? window.innerWidth < 640
-      ? cardWidth * 1.5 // Mobile: More height for content
+      ? cardWidth * 1.65 // Mobile: More height for content
       : window.innerWidth < 1024
-        ? cardWidth * 1.25 // Tablet: Slightly more height
-        : cardWidth // Desktop: Square ratio
+        ? cardWidth * 1.5 // Tablet: Slightly more height
+        : cardWidth * 1.1 // Desktop: Square ratio
     : cardWidth
 
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 })

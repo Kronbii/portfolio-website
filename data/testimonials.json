@@ -8,7 +8,16 @@
     "quote": "Working together has been a genuinely great experience. Rami consistently showed professionalism, clear communication, and a strong sense of ownership over your work. What stood out most was his ability to translate ideas into practical results while staying open to feedback.",
     "profileImage": "/testimonials/techtalks.ico"
   },
-    {
+  {
+    "name": "Dr. Ahmad Audi",
+    "role": "Senior CV Engineer, Professor",
+    "company": "LAU",
+    "location": "Beirut, Lebanon",
+    "countryCode": "LB",
+    "quote": "Ramy is exceptionally smart, quick to grasp concepts, and highly adaptable. I have worked with him on several projects. Rami delivered high-quality work with impressive efficiency and professionalism. Rami stands out for his technical strength, problem-solving skills, and reliability. He is an outstanding engineer and a great person to work with",
+    "profileImage": "/testimonials/ahmad.jpeg"
+  },
+  {
     "name": "Sara Rashidi",
     "role": "Founder & CEO",
     "company": "CodeWithSerah",
@@ -16,14 +25,5 @@
     "countryCode": "Global",
     "quote": "It was a pleasure working with Ramy, who demonstrated outstanding professionalism, solid technical expertise, and excellent public speaking and interpersonal skills throughout our collaboration.",
     "profileImage": "/testimonials/serah.jpg"
-  },
-    {
-    "name": "Khaled Frayji",
-    "role": "Founder & CEO",
-    "company": "TechTalks",
-    "location": "Beirut, Lebanon",
-    "countryCode": "LB",
-    "quote": "Working together has been a genuinely great experience. Rami consistently showed professionalism, clear communication, and a strong sense of ownership over your work. What stood out most was his ability to translate ideas into practical results while staying open to feedback.",
-    "profileImage": "/testimonials/techtalks.ico"
   }
 ]
