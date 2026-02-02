@@ -127,6 +127,7 @@ export default function Community() {
                     imagePosition={item.imagePosition || 'center top'}
                     cardWidth={cardWidth}
                     cardHeight={cardHeight}
+                    onClick={item.link && item.link !== '#' ? () => window.open(item.link, '_blank') : undefined}
                     onImageError={() => {
                       const fallback = getFallbackImage(item.image)
                       if (imageSources[index] !== fallback) {

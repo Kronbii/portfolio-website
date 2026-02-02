@@ -1,5 +1,33 @@
 [
   {
+    "slug": "thermal-super-resolution",
+    "title": "Real-Time Thermal Super-Resolution System",
+    "description": "Machine learning system that enhances low-resolution thermal camera feeds to high-quality images at 229+ FPS for robotics and autonomous systems.",
+    "longDescription": "This project introduces the first real-time thermal super-resolution framework optimized for autonomous vehicles, robotics, and industrial applications. Thermal cameras produce low-resolution images, limiting their effectiveness in critical applications like autonomous driving, industrial monitoring, and surveillance. I developed a lightweight neural network based on the Information Multi-Distillation Network (IMDN) architecture with only 0.69M parameters, making it suitable for edge deployment. The system achieves 34.2 dB PSNR (Peak Signal-to-Noise Ratio) at 229+ frames per second, outperforming existing methods in both quality and speed. As the sole developer, I designed the architecture, implemented a custom thermal-aware loss function to preserve thermal characteristics during enhancement, and optimized the model for real-time inference using TensorRT. The solution includes cross-domain transfer learning to adapt RGB-pretrained models to thermal data, resulting in superior detail preservation. Built with PyTorch for training and TensorRT for deployment, this system establishes a new state-of-the-art benchmark for real-time thermal image enhancement and is suitable for applications requiring immediate thermal perception, such as autonomous navigation and safety monitoring.",
+    "problem": "Thermal cameras produce low-resolution images, limiting their use in autonomous vehicles, robotics, industrial inspection, and surveillance applications that require high-quality thermal perception.",
+    "solution": "Developed a lightweight neural network (IMDN architecture with 0.69M parameters) optimized for real-time thermal image enhancement with custom thermal-aware loss function and TensorRT optimization.",
+    "myRole": "Sole developer - designed architecture, implemented thermal-aware training pipeline, optimized for real-time inference with TensorRT, and validated on thermal datasets.",
+    "outcome": "Achieved 34.2 dB PSNR at 229+ FPS—first real-time thermal super-resolution system suitable for edge deployment in robotics and autonomous systems.",
+    "githubUrl": "https://github.com/Kronbii/thermal-super-resolution",
+    "image": "/projects/thermal-sr.webp",
+    "technologies": [
+      "PyTorch",
+      "TensorRT",
+      "OpenCV",
+      "Computer Vision",
+      "Deep Learning",
+      "Edge ML Deployment"
+    ],
+    "features": [
+      "Real-time performance: 34.2 dB PSNR at 229+ FPS",
+      "Lightweight architecture: only 0.69M parameters for edge deployment",
+      "Custom thermal-aware multi-component loss function preserves thermal characteristics",
+      "Cross-domain RGB-to-thermal transfer learning for improved accuracy",
+      "TensorRT optimization for production deployment",
+      "Applications in autonomous driving, robotics, security, and industrial monitoring"
+    ]
+  },
+  {
     "slug": "omnisign",
     "title": "Real-Time Lebanese Sign Language Translator",
     "description": "AI system that translates Lebanese Sign Language into spoken and written text in real-time using computer vision and natural language processing.",
@@ -26,34 +54,6 @@
       "NLP-powered translation module for natural language output",
       "Low-latency inference optimized for real-time communication",
       "Award-winning accessibility innovation (Public Choice Award, National FYP Demo Day 2025)"
-    ]
-  },
-  {
-    "slug": "thermal-super-resolution",
-    "title": "Real-Time Thermal Super-Resolution System",
-    "description": "Machine learning system that enhances low-resolution thermal camera feeds to high-quality images at 229+ FPS for robotics and autonomous systems.",
-    "longDescription": "This project introduces the first real-time thermal super-resolution framework optimized for autonomous vehicles, robotics, and industrial applications. Thermal cameras produce low-resolution images, limiting their effectiveness in critical applications like autonomous driving, industrial monitoring, and surveillance. I developed a lightweight neural network based on the Information Multi-Distillation Network (IMDN) architecture with only 0.69M parameters, making it suitable for edge deployment. The system achieves 34.2 dB PSNR (Peak Signal-to-Noise Ratio) at 229+ frames per second, outperforming existing methods in both quality and speed. As the sole developer, I designed the architecture, implemented a custom thermal-aware loss function to preserve thermal characteristics during enhancement, and optimized the model for real-time inference using TensorRT. The solution includes cross-domain transfer learning to adapt RGB-pretrained models to thermal data, resulting in superior detail preservation. Built with PyTorch for training and TensorRT for deployment, this system establishes a new state-of-the-art benchmark for real-time thermal image enhancement and is suitable for applications requiring immediate thermal perception, such as autonomous navigation and safety monitoring.",
-    "problem": "Thermal cameras produce low-resolution images, limiting their use in autonomous vehicles, robotics, industrial inspection, and surveillance applications that require high-quality thermal perception.",
-    "solution": "Developed a lightweight neural network (IMDN architecture with 0.69M parameters) optimized for real-time thermal image enhancement with custom thermal-aware loss function and TensorRT optimization.",
-    "myRole": "Sole developer - designed architecture, implemented thermal-aware training pipeline, optimized for real-time inference with TensorRT, and validated on thermal datasets.",
-    "outcome": "Achieved 34.2 dB PSNR at 229+ FPS—first real-time thermal super-resolution system suitable for edge deployment in robotics and autonomous systems.",
-    "githubUrl": "https://github.com/Kronbii/thermal-super-resolution",
-    "image": "/projects/thermal-sr.webp",
-    "technologies": [
-      "PyTorch",
-      "TensorRT",
-      "OpenCV",
-      "Computer Vision",
-      "Deep Learning",
-      "Edge ML Deployment"
-    ],
-    "features": [
-      "Real-time performance: 34.2 dB PSNR at 229+ FPS",
-      "Lightweight architecture: only 0.69M parameters for edge deployment",
-      "Custom thermal-aware multi-component loss function preserves thermal characteristics",
-      "Cross-domain RGB-to-thermal transfer learning for improved accuracy",
-      "TensorRT optimization for production deployment",
-      "Applications in autonomous driving, robotics, security, and industrial monitoring"
     ]
   },
   {
@@ -117,6 +117,43 @@
       "Bluetooth controller interface for manual adjustments",
       "IoT connectivity with data logging for ergonomic insights",
       "Successfully deployed in classroom environment with 30+ students"
+    ]
+  },
+  {
+    "slug": "spherical-panorama",
+    "title": "360° Spherical Mobile Panorama",
+    "description": "A professional computer vision pipeline for creating seamless 360° spherical panoramas from phone footage.",
+    "longDescription": "A robust computer vision tool that reconstructs seamless 360° spherical panoramas from standard phone photos or videos. It utilizes advanced algorithms like ORB feature matching and RANSAC for precise alignment, handles geometric modeling for pure rotation, and automatically generates an interactive web-based 360° viewer using Three.js.",
+    "problem": "Creating high-quality 360° panoramas from handheld devices is challenging due to alignment errors, parallax issues, and the need for complex stitching of multiple frames.",
+    "solution": "Built a Python pipeline that uses feature detection, robust matching, and spherical projection to seamlessly stitch images. Integrated temporal smoothing for video inputs and created a Three.js viewer for immediate immersive playback.",
+    "myRole": "Sole Developer & Researcher",
+    "outcome": "Developed a professional-grade tool capable of generating 8K+ panoramas suitable for VR and real estate, with optimized video processing and memory management.",
+    "githubUrl": "https://github.com/Kronbii/360-spherical-stitching",
+    "image": "/projects/GOAT.gif",
+    "technologies": [
+      "Python",
+      "OpenCV",
+      "NumPy",
+      "Three.js",
+      "Computer Vision",
+      "HTML5",
+      "RANSAC",
+      "ORB",
+      "Video Processing",
+      "Memory Management",
+      "Image Stitching",
+      "Homography Estimation",
+      "JavaScript",
+      "WebGL"
+    ],
+    "features": [
+      "Automatic Video/Photo Stitching",
+      "Robust Feature Matching (ORB)",
+      "Spherical Projection Mapping",
+      "Interactive Web Viewer",
+      "Video Keyframe Extraction",
+      "8K+ Resolution Support",
+      "Memory Optimized Processing"
     ]
   }
 ]
