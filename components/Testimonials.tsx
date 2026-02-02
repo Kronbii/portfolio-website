@@ -89,7 +89,7 @@ export default function Testimonials() {
             className={getSectionSubtitleStyle().className}
             style={getSectionSubtitleStyle().style}
           >
-            Trusted by teams worldwide
+            People I have worked with
           </motion.h3>
         </div>
 
