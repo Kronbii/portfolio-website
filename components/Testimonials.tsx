@@ -7,72 +7,7 @@ import { getSectionWidthStyle, getSectionHeaderStyle, getSectionSubtitleStyle, g
 import { ExploreNavigation } from '@/components/ui/explore-navigation'
 import { TestimonialCard } from '@/components/ui/testimonial-card'
 
-interface Testimonial {
-  name: string
-  role: string
-  company: string
-  location: string
-  countryCode: string
-  quote: string
-  profileImage: string
-}
-
-const testimonials: Testimonial[] = [
-  {
-    name: 'Sarah Chen',
-    role: 'CTO',
-    company: 'Nexus AI',
-    location: 'San Francisco, USA',
-    countryCode: 'US',
-    quote: "The attention to detail in the UI architecture was outstanding. Not only did it look premium, but the performance metrics improved by 40%.",
-    profileImage: '/testimonials/sarah-chen.png',
-  },
-  {
-    name: 'Marcus Thorne',
-    role: 'Product Lead',
-    company: 'Global Fintech',
-    location: 'London, UK',
-    countryCode: 'GB',
-    quote: "Transformed our legacy dashboard into a high-performance, responsive experience. The 'GEO friendly' approach to data visualization was a game changer.",
-    profileImage: '/testimonials/marcus-thorne.png',
-  },
-  {
-    name: 'Elena Rodriguez',
-    role: 'Founder',
-    company: 'EcoStream',
-    location: 'Berlin, Germany',
-    countryCode: 'DE',
-    quote: "A true partner in development. The ability to translate complex requirements into a clean, minimalist design is rare.",
-    profileImage: '/testimonials/elena-rodriguez.png',
-  },
-  {
-    name: 'Kenji Tanaka',
-    role: 'Engineering Manager',
-    company: 'RoboTech',
-    location: 'Tokyo, Japan',
-    countryCode: 'JP',
-    quote: "Exceptional code quality and documentation. The delivered modules were robust and seamlessly integrated with our existing robotics systems.",
-    profileImage: '/testimonials/kenji-tanaka.png',
-  },
-  {
-    name: 'Amara Okafor',
-    role: 'VP Engineering',
-    company: 'DataFlow Inc',
-    location: 'Lagos, Nigeria',
-    countryCode: 'NG',
-    quote: "Delivered a complex AI pipeline ahead of schedule. The technical depth combined with clear communication made all the difference.",
-    profileImage: '/testimonials/amara-okafor.png',
-  },
-  {
-    name: 'Lucas Silva',
-    role: 'Tech Director',
-    company: 'Innovate Labs',
-    location: 'São Paulo, Brazil',
-    countryCode: 'BR',
-    quote: "Brought our computer vision project from concept to production in record time. The expertise in edge deployment was invaluable.",
-    profileImage: '/testimonials/lucas-silva.png',
-  },
-]
+import { testimonials } from '@/data/testimonials'
 
 export default function Testimonials() {
   const itemCount = testimonials.length

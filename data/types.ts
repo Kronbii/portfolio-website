@@ -37,3 +37,13 @@ export interface BlogArticle {
   externalUrl: string // External link - opens this URL when article is clicked
   tags?: string[]
 }
+
+export interface Testimonial {
+  name: string
+  role: string
+  company: string
+  location: string
+  countryCode: string
+  quote: string
+  profileImage: string
+}
