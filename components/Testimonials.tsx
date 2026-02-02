@@ -39,8 +39,12 @@ export default function Testimonials() {
   // Override card height for testimonials with responsive aspect ratio
   // Mobile/tablet: 1.2:1 (more vertical space to prevent clamping)
   // Desktop: 1:1 (compact layout)
-  const cardHeight = typeof window !== 'undefined' && window.innerWidth < 1024
-    ? cardWidth * 1.2
+  const cardHeight = typeof window !== 'undefined'
+    ? window.innerWidth < 640
+      ? cardWidth * 1.5 // Mobile: More height for content
+      : window.innerWidth < 1024
+        ? cardWidth * 1.25 // Tablet: Slightly more height
+        : cardWidth // Desktop: Square ratio
     : cardWidth
 
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 })

@@ -15,7 +15,7 @@
   {
     "title": "Seeing in the Dark: Real-Time Thermal Super-Resolution",
     "description": "Real-time thermal super-resolution system that enhances low-resolution thermal camera feeds to high-quality images at 229+ FPS for robotics and autonomous systems.",
-    "bannerImage": "/blog/thermal-sr-blog.webp",
+    "bannerImage": "/blog/thermal-sr.webp",
     "publishedDate": "2026-02-02",
     "externalUrl": "https://medium.com/@ramikronbi/seeing-in-the-dark-real-time-thermal-super-resolution-that-actually-runs-on-edge-devices-5d95b4bab7b2?source=friends_link&sk=c67c50b418912d238df9835d84b6163b",
     "summary": "Thermal cameras produce low-resolution images, limiting their use in autonomous vehicles, robotics, industrial inspection, and surveillance applications that require high-quality thermal perception. This project introduces the first real-time thermal super-resolution framework optimized for autonomous vehicles, robotics, and industrial applications. Thermal cameras produce low-resolution images, limiting their use in autonomous vehicles, robotics, industrial inspection, and surveillance applications that require high-quality thermal perception. This project introduces the first real-time thermal super-resolution framework optimized for autonomous vehicles, robotics, and industrial applications.",
