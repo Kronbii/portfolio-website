@@ -251,7 +251,7 @@ function IntroSection() {
           marginTop: 'clamp(0.5rem, 1vw, 1rem)',
         }}
       >
-        AI & Computer Vision Engineer
+        AI Systems & Computer Vision Engineer
       </motion.p>
       <motion.p
         initial={{ opacity: 0, y: 10 }}
