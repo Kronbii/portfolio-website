@@ -23,6 +23,8 @@ The active app uses:
 - strict TypeScript
 - shadcn-style local UI primitives
 - content-driven homepage sections
+- GSAP for motion
+- Lenis for cinematic scrolling
 
 Important folders:
 - `src/app` for routes, layout, metadata routes, and API routes
@@ -64,6 +66,12 @@ Do not reintroduce root-level `app/`, `components/`, `data/`, `hooks/`, or `lib/
 - Keep content models typed.
 - Keep route and component contracts explicit.
 
+7. Motion stack default:
+- Prefer GSAP for motion and sequencing.
+- Prefer Lenis for cinematic scrolling behavior.
+- Do not default to Framer Motion for new work unless the user explicitly asks for it.
+- Keep motion orchestration centralized rather than scattering one-off effects through sections.
+
 ## Design Direction
 
 The intended UI direction is:
@@ -79,7 +87,8 @@ The intended UI direction is:
 Design guidance:
 - Avoid default-looking layouts and safe filler designs.
 - Prefer a clear art direction per page or section.
-- Motion should come from reusable patterns in `src/lib/motion.ts`, not one-off animation objects everywhere.
+- Motion should be built with GSAP timelines and reusable local patterns, not scattered one-off effects.
+- Cinematic scrolling should use Lenis when scroll treatment is part of the experience.
 - The site should feel authored and premium, not template-generated.
 
 ### Design Defaults
@@ -98,6 +107,7 @@ Unless the user explicitly overrides them, future agents should assume:
 - Layouts should feel airy and intentional, not crowded.
 - UI geometry should be mixed but lean sharp, with only slight roundness where it improves polish.
 - Future chats should infer missing decisions from this file, the existing repo, and any references the user provides.
+- When motion is needed, default to GSAP + Lenis before considering other animation libraries.
 
 ### Homepage Defaults
 
@@ -165,6 +175,7 @@ When asked to redesign the homepage:
 - update `src/content/home.ts`
 - update the relevant components in `src/components/sections`
 - keep `src/app/page.tsx` as a clean composition layer
+- if motion/scrolling is involved, use GSAP and Lenis as the default stack
 
 When asked to add project pages:
 - use `src/content/projects.ts`
@@ -178,6 +189,7 @@ Before considering work complete:
 - run `npm run lint`
 - keep vendor imports out of route files and sections
 - keep the diff focused; do not introduce unrelated churn
+- keep motion implementations coherent and centralized instead of mixing animation paradigms
 
 ## Immediate Priority
 
@@ -191,3 +203,4 @@ The next meaningful product work is:
 - If the IDE shows deleted files from the old architecture, ignore them. The active codebase is under `src/`.
 - If the user references old components, map the intent into the new structure rather than reviving the old tree.
 - If a future chat wants a library component from shadcn or elsewhere, keep the wrapper rule intact.
+- For motion and scrolling, GSAP + Lenis is the intended default stack.
