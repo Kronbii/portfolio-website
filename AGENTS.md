@@ -60,6 +60,7 @@ Do not reintroduce root-level `app/`, `components/`, `data/`, `hooks/`, or `lib/
 
 5. Do not import random vendor components directly into sections or pages.
 - If a library is adopted, wrap it locally under `src/components/ui` first.
+- If the user provides a specific third-party component and its code, preserve that implementation closely instead of prematurely abstracting it away.
 
 6. Do not weaken TypeScript to move faster.
 - Avoid `any`.
@@ -128,6 +129,14 @@ If the user provides a reference:
 - Match its composition, tone, hierarchy, and feel before improvising.
 - Adapt the reference into this brand system only where necessary.
 
+If the user provides component code from a library or external source:
+- Implement it as closely as possible to the provided code.
+- Install the required packages and dependencies needed for it to work.
+- Keep the structure, behavior, and visual treatment intact unless the user explicitly asks for changes.
+- Only make the minimum compatibility edits needed for this repo, TypeScript, Next.js, GSAP/Lenis usage, or styling-token integration.
+- Apply only the requested edits; do not redesign or reinterpret the component unless asked.
+- If adapting is necessary, preserve the original feel and behavior first, then make repo-specific adjustments second.
+
 ### Banned Defaults
 
 Treat these as banned unless the user explicitly asks for them:
@@ -170,6 +179,9 @@ When asked to add a new component:
 - decide whether it belongs in `ui`, `blocks`, or `sections`
 - if it uses an external UI library, wrap it in `src/components/ui`
 - if it introduces reusable content, add it to `src/content`
+- if the user provides exact component code, implement it faithfully first and only then layer the requested edits on top
+- install any required packages for the provided component instead of replacing it with a different local approximation
+- do not swap in a “similar” component when the user asked for a specific one from React Bits, Lightswind, shadcn, or another library
 
 When asked to redesign the homepage:
 - update `src/content/home.ts`
@@ -204,3 +216,4 @@ The next meaningful product work is:
 - If the user references old components, map the intent into the new structure rather than reviving the old tree.
 - If a future chat wants a library component from shadcn or elsewhere, keep the wrapper rule intact.
 - For motion and scrolling, GSAP + Lenis is the intended default stack.
+- If the user gives a component name plus its code from an external library, the expected behavior is: install what it needs, implement it exactly, and only modify what the user explicitly requested.
