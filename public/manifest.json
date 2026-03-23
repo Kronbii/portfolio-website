@@ -1,21 +1,21 @@
 {
   "name": "Rami Kronbi",
   "short_name": "Rami Kronbi",
-  "description": "Rami Kronbi - AI and Computer Vision Engineer",
+  "description": "Rami Kronbi portfolio reset baseline",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a0a0a",
-  "theme_color": "#22c55e",
+  "background_color": "#f3efe8",
+  "theme_color": "#f3efe8",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/icon-192.png",
+      "src": "/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/icon-512.png",
+      "src": "/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -25,4 +25,3 @@
   "lang": "en-US",
   "dir": "ltr"
 }
-

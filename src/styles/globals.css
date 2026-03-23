@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --font-sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    --font-display:
+      'Space Grotesk', 'Arial Narrow', 'Segoe UI', system-ui, sans-serif;
+
+    --background: 30 29% 95%;
+    --foreground: 222 47% 11%;
+    --surface: 0 0% 100%;
+    --surface-2: 30 33% 98%;
+    --muted-foreground: 215 16% 47%;
+    --brand: 18 94% 56%;
+    --brand-foreground: 30 33% 98%;
+    --border: 220 18% 90%;
+    --ring: 18 94% 56%;
+
+    --radius-sm: 0.75rem;
+    --radius-md: 1.25rem;
+    --radius-lg: 2rem;
+
+    --shadow-soft: 0 20px 60px rgba(15, 23, 42, 0.06);
+    --shadow-elevated: 0 32px 96px rgba(15, 23, 42, 0.12);
+
+    --motion-fast: 180ms;
+    --motion-base: 300ms;
+    --motion-slow: 500ms;
+  }
+
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans), system-ui, sans-serif;
+    min-height: 100vh;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ::selection {
+    background: hsl(var(--brand));
+    color: hsl(var(--brand-foreground));
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
