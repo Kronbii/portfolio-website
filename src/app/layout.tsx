@@ -1,8 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 
 import { StructuredData } from '@/components/structured-data'
-import { SiteHeader } from '@/components/blocks/site-header'
-import { homeContent } from '@/content/home'
 import { siteConfig } from '@/lib/site'
 import '@/styles/globals.css'
 
@@ -74,10 +72,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body>
         <StructuredData />
-        <div className="min-h-screen bg-background text-foreground">
-          <SiteHeader items={homeContent.navigation} />
-          {children}
-        </div>
+        <div className="min-h-screen bg-background text-foreground">{children}</div>
       </body>
     </html>
   )
