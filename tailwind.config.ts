@@ -36,7 +36,8 @@ const config: Config = {
       },
     },
   },
-  plugins: [tailwindcssAnimate],
+  plugins: [
+    require('lightswind/plugin'),tailwindcssAnimate],
 }
 
 export default config

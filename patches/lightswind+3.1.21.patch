@@ -1,0 +1,13 @@
+diff --git a/node_modules/lightswind/plugin.js b/node_modules/lightswind/plugin.js
+index 0e493e8..5ed89a6 100644
+--- a/node_modules/lightswind/plugin.js
++++ b/node_modules/lightswind/plugin.js
+@@ -547,7 +547,7 @@ module.exports = plugin(
+         animationPlayState: "paused",
+       },
+       "@property --border-angle": {
+-        syntax: "<angle>",
++        syntax: '"<angle>"',
+         inherits: true,
+         "initial-value": "0turn",
+       },

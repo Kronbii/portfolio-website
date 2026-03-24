@@ -12,21 +12,25 @@
     "convert-favicons-only": "node convert-favicons-only.js",
     "convert-blackhole-favicon": "node convert-blackhole-favicon.js",
     "convert-og": "node convert-og-image.js",
-    "change-favicon-color": "node change-favicon-color.js"
+    "change-favicon-color": "node change-favicon-color.js",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
     "@studio-freight/lenis": "^1.0.42",
+    "@types/three": "^0.183.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^10.16.16",
     "gsap": "^3.14.2",
+    "lightswind": "^3.1.21",
     "lucide-react": "^0.553.0",
     "next": "^16.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "resend": "^6.4.2",
-    "tailwind-merge": "^3.4.0"
+    "tailwind-merge": "^3.4.0",
+    "three": "^0.183.2"
   },
   "devDependencies": {
     "@types/node": "^20.10.6",
@@ -36,6 +40,7 @@
     "baseline-browser-mapping": "^2.9.14",
     "eslint": "^8.56.0",
     "eslint-config-next": "^14.0.4",
+    "patch-package": "^8.0.1",
     "postcss": "^8.4.32",
     "prettier": "^3.6.2",
     "sharp": "^0.34.5",
