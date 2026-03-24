@@ -38,6 +38,7 @@
   * {
     @apply border-border;
     box-sizing: border-box;
+    cursor: crosshair;
   }
 
   html {
@@ -47,6 +48,7 @@
 
   body {
     @apply bg-background text-foreground antialiased;
+    cursor: default;
     font-family: var(--font-sans), system-ui, sans-serif;
     min-height: 100vh;
     text-rendering: optimizeLegibility;
@@ -62,6 +64,37 @@
   a {
     color: inherit;
     text-decoration: none;
+  }
+
+  a,
+  button,
+  [role='button'],
+  [onclick],
+  .cursor-pointer,
+  a *,
+  button *,
+  [role='button'] *,
+  [onclick] *,
+  .cursor-pointer * {
+    cursor: pointer !important;
+  }
+
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
+  input[type='search'],
+  textarea {
+    cursor: text;
+  }
+
+  input[type='range'],
+  input[type='number'] {
+    cursor: grab;
+  }
+
+  input[type='range']:active,
+  input[type='number']:active {
+    cursor: grabbing;
   }
 
   ::selection {
