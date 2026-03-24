@@ -65,8 +65,8 @@
   }
 
   ::selection {
-    background: var(--brand);
-    color: var(--brand-foreground);
+    background: var(--foreground);
+    color: var(--background);
   }
 
   html::-webkit-scrollbar,
