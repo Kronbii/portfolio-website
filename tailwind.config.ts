@@ -6,19 +6,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        border: 'hsl(var(--border))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
-        surface: 'hsl(var(--surface))',
-        'surface-2': 'hsl(var(--surface-2))',
+        border: 'var(--border)',
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+        surface: 'var(--surface)',
+        'surface-2': 'var(--surface-2)',
         brand: {
-          DEFAULT: 'hsl(var(--brand))',
-          foreground: 'hsl(var(--brand-foreground))',
+          DEFAULT: 'var(--brand)',
+          foreground: 'var(--brand-foreground)',
         },
         muted: {
-          foreground: 'hsl(var(--muted-foreground))',
+          foreground: 'var(--muted-foreground)',
         },
-        ring: 'hsl(var(--ring))',
+        ring: 'var(--ring)',
       },
       boxShadow: {
         soft: 'var(--shadow-soft)',

@@ -97,6 +97,7 @@ Design guidance:
 Unless the user explicitly overrides them, future agents should assume:
 - Primary/base color: `#0c0c0c`
 - Secondary/accent color: `#9d201a`
+- When primary or secondary colors are needed in code, use global CSS variables/tokens rather than hardcoded hex literals in components.
 - Use only those two colors plus neutral values derived from them when absolutely necessary.
 - Do not use the secondary color as a large page background.
 - Use the secondary color for emphasis, active states, accents, interactive components, and controlled highlights.

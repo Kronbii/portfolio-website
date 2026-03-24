@@ -1,8 +1,15 @@
 import type { Metadata, Viewport } from 'next'
+import { Zalando_Sans } from 'next/font/google'
 
 import { StructuredData } from '@/components/structured-data'
 import { siteConfig } from '@/lib/site'
 import '@/styles/globals.css'
+
+const zalandoSans = Zalando_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-zalando',
+})
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -69,7 +76,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      className={zalandoSans.variable}
+      suppressHydrationWarning
+    >
       <body>
         <StructuredData />
         <div className="min-h-screen bg-background text-foreground">{children}</div>

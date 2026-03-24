@@ -1,0 +1,195 @@
+/**
+ * Hero layout — each token controls one concern.
+ * Breakpoints: 640px (sm), 1024px (lg).
+ */
+
+.section {
+  /* Portrait */
+  --portrait-h: 92vh;
+  --portrait-w: min(86vw, 42rem);
+  --portrait-nudge-x: clamp(-3.5rem, -6vw, -2rem);
+  --portrait-nudge-y: clamp(-3.5rem, -8vh, -2rem);
+
+  /* Text placement — distance from bottom edge */
+  --text-position-bottom: 10vh;
+
+  /* Role text */
+  --role-font-size: clamp(0.875rem, 2vw, 1.125rem);
+  --role-font-weight: 100;
+  --role-letter-spacing: 0.15em;
+  --role-line-height: 1.3;
+  --role-margin-bottom: 1vh;
+  --role-margin-top: 0;
+
+  /* Name text */
+  --name-font-size: clamp(2.5rem, 12vw, 8rem);
+  --name-font-weight: 300;
+  --name-letter-spacing: 0.02em;
+  --name-line-height: 1.1;
+  --name-margin-top: 0;
+  --name-margin-bottom: 0;
+
+  /* Bottom fade */
+  --fade-h: 14rem;
+}
+
+@media (min-width: 640px) {
+  .section {
+    --portrait-h: 94vh;
+    --portrait-w: min(74vw, 46rem);
+    --text-position-bottom: 12vh;
+    
+    /* Role text (tablet) */
+    --role-font-size: clamp(1rem, 2.2vw, 1.25rem);
+    --role-font-weight: 300;
+    --role-letter-spacing: 0.15em;
+    --role-line-height: 1.3;
+    --role-margin-bottom: 1.5vh;
+    --role-margin-top: 0;
+    
+    /* Name text (tablet) */
+    --name-font-size: clamp(3.5rem, 13vw, 9rem);
+    --name-font-weight: 100;
+    --name-letter-spacing: 0.02em;
+    --name-line-height: 1.1;
+    --name-margin-top: 0;
+    --name-margin-bottom: 0;
+    
+    --fade-h: 18rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    --portrait-h: 100vh;
+    --portrait-w: min(52vw, 52rem);
+    --text-position-bottom: 23vh;
+    
+    /* Role text (desktop) */
+    --role-font-size: clamp(1.125rem, 1.7vw, 10rem);
+    --role-font-weight: 100;
+    --role-letter-spacing: 0.15em;
+    --role-line-height: 1;
+    --role-margin-bottom: 0vh;
+    --role-margin-top: 0;
+    --role-offset-x: 0.95rem;
+    
+    /* Name text (desktop) */
+    --name-font-size: clamp(4rem, 14vw, 10rem);
+    --name-font-weight: 700;
+    --name-letter-spacing: 0.06em;
+    --name-line-height: 1;
+    --name-margin-top: 0;
+    --name-margin-bottom: 0;
+    
+    --fade-h: 24rem;
+  }
+}
+
+/* ─── Portrait ─────────────────────────────────────────── */
+
+.portraitLayer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.portraitFrame {
+  position: relative;
+  height: var(--portrait-h);
+  width: var(--portrait-w);
+  transform: translate(var(--portrait-nudge-x), var(--portrait-nudge-y));
+}
+
+/* ─── Portrait backglow ─────────────────────────────────── */
+
+.portraitGlow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(
+    ellipse 80% 90% at 55% 70%,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.08) 35%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  filter: blur(32px);
+  pointer-events: none;
+}
+
+/* ─── Text overlay ──────────────────────────────────────── */
+
+.textOverlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: var(--text-position-bottom);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* ─── Role text (SYSTEMS ENGINEER) ──────────────────────── */
+
+.roleText {
+  pointer-events: auto;
+  cursor: text;
+  user-select: text;
+  font-size: var(--role-font-size);
+  font-weight: var(--role-font-weight);
+  letter-spacing: var(--role-letter-spacing);
+  line-height: var(--role-line-height);
+  text-transform: uppercase;
+  color: var(--foreground);
+  margin-top: var(--role-margin-top);
+  margin-bottom: var(--role-margin-bottom);
+  margin-right: var(--role-offset-x, 0px);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* ─── Name block — wraps role + name, role sits top-right ─ */
+
+.nameBlock {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  pointer-events: auto;
+}
+
+/* ─── Name heading (RAMI KRONBI) ──────────────────────── */
+
+.nameHeading {
+  margin-top: var(--name-margin-top);
+  margin-bottom: var(--name-margin-bottom);
+  padding: 0;
+  font-size: var(--name-font-size);
+  font-weight: var(--name-font-weight);
+  letter-spacing: var(--name-letter-spacing);
+  line-height: var(--name-line-height);
+  text-transform: uppercase;
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  cursor: text;
+  user-select: text;
+}
+
+/* ─── Bottom fade ───────────────────────────────────────── */
+
+.fade {
+  pointer-events: none;
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 20;
+  height: var(--fade-h);
+  background: linear-gradient(
+    to top,
+    rgba(var(--color-primary-rgb), 1) 0%,
+    rgba(var(--color-primary-rgb), 1) 10%,
+    rgba(var(--color-primary-rgb), 0.75) 60%,
+    rgba(var(--color-primary-rgb), 0) 100%
+  );
+}
