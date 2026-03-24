@@ -13,7 +13,9 @@ export function HomeHeroSection() {
       <div className={styles.topBar}>
         <span>Based in Lebanon</span>
         <span>Specializing in AI, Robotics, &amp; Web</span>
-        <span>For all humanity</span>
+        <a href="#contact" className={styles.contactCta}>
+          Contact
+        </a>
       </div>
 
       {/* Portrait — background layer, bottom-centered */}
@@ -37,6 +39,7 @@ export function HomeHeroSection() {
         <div className={styles.nameBlock}>
           <span className={styles.roleText}>Systems Engineer</span>
           <h1 className={styles.nameHeading}>Rami Kronbi</h1>
+          <p className={styles.missionText}>For all humanity</p>
         </div>
       </div>
 
