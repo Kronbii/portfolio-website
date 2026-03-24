@@ -23,7 +23,7 @@ The active app uses:
 - strict TypeScript
 - shadcn-style local UI primitives
 - content-driven homepage sections
-- GSAP for motion
+- local motion utilities and CSS-driven animation patterns
 - Lenis for cinematic scrolling
 
 Important folders:
@@ -68,9 +68,9 @@ Do not reintroduce root-level `app/`, `components/`, `data/`, `hooks/`, or `lib/
 - Keep route and component contracts explicit.
 
 7. Motion stack default:
-- Prefer GSAP for motion and sequencing.
+- Prefer local motion utilities and CSS-driven sequencing patterns.
 - Prefer Lenis for cinematic scrolling behavior.
-- Do not default to Framer Motion for new work unless the user explicitly asks for it.
+- Do not add heavy animation libraries by default unless the user explicitly asks for one.
 - Keep motion orchestration centralized rather than scattering one-off effects through sections.
 
 ## Design Direction
@@ -88,7 +88,7 @@ The intended UI direction is:
 Design guidance:
 - Avoid default-looking layouts and safe filler designs.
 - Prefer a clear art direction per page or section.
-- Motion should be built with GSAP timelines and reusable local patterns, not scattered one-off effects.
+- Motion should be built with reusable local patterns, not scattered one-off effects.
 - Cinematic scrolling should use Lenis when scroll treatment is part of the experience.
 - The site should feel authored and premium, not template-generated.
 
@@ -109,7 +109,7 @@ Unless the user explicitly overrides them, future agents should assume:
 - Layouts should feel airy and intentional, not crowded.
 - UI geometry should be mixed but lean sharp, with only slight roundness where it improves polish.
 - Future chats should infer missing decisions from this file, the existing repo, and any references the user provides.
-- When motion is needed, default to GSAP + Lenis before considering other animation libraries.
+- When motion is needed, default to local motion utilities plus Lenis before considering other animation libraries.
 
 ### Homepage Defaults
 
@@ -134,7 +134,7 @@ If the user provides component code from a library or external source:
 - Implement it as closely as possible to the provided code.
 - Install the required packages and dependencies needed for it to work.
 - Keep the structure, behavior, and visual treatment intact unless the user explicitly asks for changes.
-- Only make the minimum compatibility edits needed for this repo, TypeScript, Next.js, GSAP/Lenis usage, or styling-token integration.
+- Only make the minimum compatibility edits needed for this repo, TypeScript, Next.js, Lenis usage, or styling-token integration.
 - Apply only the requested edits; do not redesign or reinterpret the component unless asked.
 - If adapting is necessary, preserve the original feel and behavior first, then make repo-specific adjustments second.
 
@@ -188,7 +188,7 @@ When asked to redesign the homepage:
 - update `src/content/home.ts`
 - update the relevant components in `src/components/sections`
 - keep `src/app/page.tsx` as a clean composition layer
-- if motion/scrolling is involved, use GSAP and Lenis as the default stack
+- if motion/scrolling is involved, use local motion utilities and Lenis as the default stack
 
 When asked to add project pages:
 - use `src/content/projects.ts`
@@ -216,5 +216,5 @@ The next meaningful product work is:
 - If the IDE shows deleted files from the old architecture, ignore them. The active codebase is under `src/`.
 - If the user references old components, map the intent into the new structure rather than reviving the old tree.
 - If a future chat wants a library component from shadcn or elsewhere, keep the wrapper rule intact.
-- For motion and scrolling, GSAP + Lenis is the intended default stack.
+- For motion and scrolling, Lenis plus local motion utilities is the intended default stack.
 - If the user gives a component name plus its code from an external library, the expected behavior is: install what it needs, implement it exactly, and only modify what the user explicitly requested.
