@@ -5,6 +5,8 @@ import * as THREE from 'three';
 
 export interface WoofyHoverImageProps {
   src: string;
+  revealSrc?: string;
+  mode?: 'reveal' | 'effect';
   alt?: string;
   width?: number | string;
   height?: number | string;
@@ -18,6 +20,9 @@ export interface WoofyHoverImageProps {
   disappearDuration?: number;
   effectIntensity?: number;
   invertMask?: boolean;
+  // Effect-specific parameters
+  pixelateIntensity?: number;
+  blurIntensity?: number;
   duotoneColor1?: string;
   duotoneColor2?: string;
   onHover?: () => void;
@@ -26,20 +31,25 @@ export interface WoofyHoverImageProps {
 
 const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
   src,
+  revealSrc,
+  mode = revealSrc ? 'reveal' : 'effect',
   alt = '',
   width = 'auto',
   height = 400,
   className,
-  effectType = 'inversion',
-  maskRadius = 0.35,
-  turbulenceIntensity = 0.225,
-  animationSpeed = 1.0,
-  appearDuration = 0.4,
-  disappearDuration = 0.3,
-  effectIntensity = 0.5,
-  invertMask = false,
-  duotoneColor1 = '#3366cc',
-  duotoneColor2 = '#e63333',
+  effectType = 'inversion', // duotone, sepia, pixelate, blur, blackwhite, inversion
+  maskRadius = 0.25, // general: mask size
+  turbulenceIntensity = 0.225, // general: edge jaggedness
+  animationSpeed = 0.7, // general: animation speed
+  appearDuration = 0.2, // general: appear animation
+  disappearDuration = 0.3, // general: disappear animation
+  effectIntensity = 0.6, // all effects: general strength
+  invertMask = false, // all effects: flip which side shows effect
+  // Effect-specific parameters
+  pixelateIntensity = 20, // pixelate effect: block size
+  blurIntensity = 5, // blur effect: blur radius
+  duotoneColor1 = '#3366cc', // duotone effect: first color
+  duotoneColor2 = '#e63333', // duotone effect: second color
   onHover,
   onLeave,
 }) => {
@@ -77,6 +87,11 @@ const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
     uniform vec3 u_effectColor2;
     uniform float u_effectIntensity;
     uniform bool u_invertMask;
+    uniform float u_pixelateIntensity;
+    uniform float u_blurIntensity;
+    uniform bool u_hasReveal;
+    uniform sampler2D u_texture2;
+    uniform float u_imageAspect2;
 
     varying vec2 v_uv;
 
@@ -218,10 +233,10 @@ const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
         effectColor = applyDuotone(originalColor, u_effectColor1, u_effectColor2);
       }
       else if (u_effectType == 4) {
-        effectColor = applyPixelate(u_texture, texCoord, u_effectIntensity * 20.0);
+        effectColor = applyPixelate(u_texture, texCoord, u_pixelateIntensity);
       }
       else if (u_effectType == 5) {
-        effectColor = applyBlur(u_texture, texCoord, u_effectIntensity * 5.0);
+        effectColor = applyBlur(u_texture, texCoord, u_blurIntensity);
       }
       
       vec2 correctedUV = uv;
@@ -250,8 +265,18 @@ const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
       } else {
         finalColor = mix(effectColor, invertedColor, mask);
       }
+
+      if (u_hasReveal) {
+        float ratio2 = u_imageAspect2 / screenAspect;
+        vec2 texCoord2 = vec2(
+          mix(0.5 - 0.5 / ratio2, 0.5 + 0.5 / ratio2, uv.x),
+          uv.y
+        );
+        vec4 tex2 = texture2D(u_texture2, texCoord2);
+        finalColor = mix(originalColor, tex2.rgb, mask);
+      }
       
-      gl_FragColor = vec4(finalColor, 1.0);
+      gl_FragColor = vec4(finalColor, tex.a);
     }
   `;
 
@@ -276,9 +301,20 @@ const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
     const container = containerRef.current;
     const loader = new THREE.TextureLoader();
 
-    loader.load(src, (texture) => {
-      const imageAspect = texture.image.width / texture.image.height;
-      
+    const loadTex = (s: string): Promise<THREE.Texture> =>
+      new Promise((resolve, reject) => loader.load(s, resolve, undefined, reject));
+    const blankTex = new THREE.DataTexture(new Uint8Array([0, 0, 0, 0]), 1, 1, THREE.RGBAFormat);
+    blankTex.needsUpdate = true;
+
+    Promise.all([
+      loadTex(src),
+      revealSrc ? loadTex(revealSrc) : Promise.resolve(blankTex as THREE.Texture),
+    ]).then(([texture, texture2]) => {
+      const img1 = texture.image as HTMLImageElement;
+      const img2 = texture2.image as { width: number; height: number };
+      const imageAspect = img1.width / img1.height;
+      const imageAspect2 = img2.width / img2.height;
+
       texture.minFilter = THREE.LinearFilter;
       texture.magFilter = THREE.LinearFilter;
       texture.anisotropy = 8;
@@ -304,8 +340,13 @@ const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
         u_effectType: { value: getEffectTypeValue(effectType) },
         u_effectIntensity: { value: effectIntensity },
         u_invertMask: { value: invertMask },
+        u_pixelateIntensity: { value: pixelateIntensity },
+        u_blurIntensity: { value: blurIntensity },
         u_effectColor1: { value: hexToRgb(duotoneColor1) },
         u_effectColor2: { value: hexToRgb(duotoneColor2) },
+        u_hasReveal: { value: (mode ?? (revealSrc ? 'reveal' : 'effect')) === 'reveal' && !!revealSrc },
+        u_texture2: { value: texture2 },
+        u_imageAspect2: { value: imageAspect2 },
       };
 
       uniformsRef.current = uniforms;
@@ -317,6 +358,7 @@ const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
         fragmentShader,
         depthTest: false,
         depthWrite: false,
+        transparent: true,
       });
 
       const mesh = new THREE.Mesh(geometry, material);
@@ -326,6 +368,7 @@ const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
         antialias: false,
         powerPreference: "high-performance",
         alpha: true,
+        premultipliedAlpha: false,
       });
 
       renderer.setPixelRatio(1);
@@ -363,7 +406,7 @@ const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
 
       animate();
     });
-  }, [src, effectType, maskRadius, turbulenceIntensity, animationSpeed, effectIntensity, invertMask, duotoneColor1, duotoneColor2]);
+  }, [src, revealSrc, mode, effectType, maskRadius, turbulenceIntensity, animationSpeed, effectIntensity, invertMask, pixelateIntensity, blurIntensity, duotoneColor1, duotoneColor2]);
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     if (!containerRef.current || !uniformsRef.current) return;
@@ -451,8 +494,7 @@ const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
       <img
         src={src}
         alt={alt}
-        className="w-full h-full object-cover"
-        style={{ position: 'relative', zIndex: 0 }}
+        style={{ position: 'absolute', opacity: 0, pointerEvents: 'none' }}
       />
     </div>
   );

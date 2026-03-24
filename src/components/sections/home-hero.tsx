@@ -1,6 +1,5 @@
-import Image from 'next/image'
-
 import { cn } from '@/lib/utils'
+import WoofyHoverImage from '@/components/lightswind/woofy-hover-image'
 
 import styles from './home-hero.module.css'
 
@@ -21,13 +20,14 @@ export function HomeHeroSection() {
       <div className={styles.portraitLayer}>
         <div className={styles.portraitFrame}>
           <div className={styles.portraitGlow} aria-hidden />
-          <Image
+          <WoofyHoverImage
             src="/images/home/portrait.png"
+            revealSrc="/images/home/test-2.png"
             alt="Portrait of Rami Kronbi"
-            fill
-            priority
-            sizes="(max-width: 639px) 86vw, (max-width: 1023px) 74vw, 52vw"
-            className="object-contain object-bottom relative z-10"
+            width="100%"
+            height="100%"
+            mode="effect"
+            className="absolute inset-0 z-10"
           />
         </div>
       </div>
