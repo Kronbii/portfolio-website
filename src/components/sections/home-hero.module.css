@@ -8,7 +8,7 @@
   --portrait-h: 92vh;
   --portrait-w: min(86vw, 42rem);
   --portrait-nudge-x: clamp(-3.5rem, -6vw, -2rem);
-  --portrait-nudge-y: clamp(-3.5rem, -8vh, -2rem);
+  --portrait-nudge-y: clamp(-5rem, -2.5vh, 10rem);
 
   /* Text placement — distance from bottom edge */
   --text-position-bottom: 10vh;
@@ -63,7 +63,7 @@
   .section {
     --portrait-h: 100vh;
     --portrait-w: min(52vw, 52rem);
-    --text-position-bottom: 23vh;
+    --text-position-bottom: 21vh;
     
     /* Role text (desktop) */
     --role-font-size: clamp(1.125rem, 1.7vw, 10rem);
@@ -85,7 +85,26 @@
     --fade-h: 24rem;
   }
 }
+/* ─── Top bar ────────────────────────────────────────── */
 
+.topBar {
+  position: absolute;
+  top: clamp(1.25rem, 3vh, 2rem);
+  left: clamp(1.5rem, 4vw, 3rem);
+  right: clamp(1.5rem, 4vw, 3rem);
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  pointer-events: none;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(0.6rem, 1vw, 0.75rem);
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--foreground);
+  opacity: 0.5;
+}
 /* ─── Portrait ─────────────────────────────────────────── */
 
 .portraitLayer {

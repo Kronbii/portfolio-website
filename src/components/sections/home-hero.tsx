@@ -10,6 +10,13 @@ export function HomeHeroSection() {
       id="home"
       className={cn('relative min-h-screen overflow-hidden bg-background', styles.section)}
     >
+      {/* Top bar — three captions */}
+      <div className={styles.topBar}>
+        <span>Based in Lebanon</span>
+        <span>Specializing in AI, Robotics, &amp; Web</span>
+        <span>For all humanity</span>
+      </div>
+
       {/* Portrait — background layer, bottom-centered */}
       <div className={styles.portraitLayer}>
         <div className={styles.portraitFrame}>
