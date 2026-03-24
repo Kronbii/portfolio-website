@@ -1,3 +1,11 @@
+import { HomeAboutSection } from '@/components/sections/home-about'
+import { HomeHeroSection } from '@/components/sections/home-hero'
+
 export default function HomePage() {
-  return <main className="min-h-screen" />
+  return (
+    <main>
+      <HomeHeroSection />
+      <HomeAboutSection />
+    </main>
+  )
 }
