@@ -130,7 +130,7 @@ export function SiteDock() {
         panelHeight={50}
         baseItemSize={50}
         magnification={60}
-        distance={20}
+        distance={5}
         className="pointer-events-auto bottom-3 sm:bottom-4 lg:bottom-5 border-white/20 bg-black/65"
       />
     </motion.div>
