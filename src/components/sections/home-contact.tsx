@@ -15,7 +15,7 @@ export function HomeContactSection() {
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-brand">
               {contact.eyebrow}
             </p>
-            <h2 className="mt-8 text-5xl md:text-7xl lg:text-[8rem] font-bold tracking-tighter text-foreground leading-[0.9] uppercase text-balance">
+            <h2 className="mt-8 text-4xl md:text-6xl lg:text-[6.4rem] font-bold tracking-tighter text-foreground leading-[0.92] uppercase text-balance">
               {contact.title}
             </h2>
           </MotionDiv>
