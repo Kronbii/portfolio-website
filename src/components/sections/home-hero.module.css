@@ -120,6 +120,35 @@
   opacity: 0.5;
 }
 
+.signatureMark {
+  display: block;
+  width: clamp(4.25rem, 9vw, 6.5rem);
+  height: auto;
+  object-fit: contain;
+}
+
+.signatureLink {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  opacity: 0.92;
+  transition:
+    opacity var(--motion-fast),
+    transform var(--motion-fast);
+}
+
+.signatureLink:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.signatureLink:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
 .contactCta {
   pointer-events: auto;
   display: inline-flex;
