@@ -20,6 +20,7 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
       wheelMultiplier: 0.9,
       touchMultiplier: 1,
       syncTouch: false,
+      anchors: true,
     })
 
     let rafId = 0

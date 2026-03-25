@@ -14,13 +14,7 @@ export function HomeHeroSection() {
     >
       {/* Top bar — three captions */}
       <div className={styles.topBar}>
-        <a
-          href="#contact"
-          className={styles.signatureLink}
-          aria-label="Go to contact section"
-        >
-          <img src="/images/home/sig.png" alt="Rami Kronbi signature" className={styles.signatureMark} />
-        </a>
+        <img src="/images/home/sig.png" alt="Signature" className={styles.signatureMark} />
         <span>{hero.specialty}</span>
         <a href={hero.secondaryCta.href} className={styles.contactCta}>
           {hero.secondaryCta.label}
