@@ -5,17 +5,17 @@ export const projects: Project[] = [
     slug: 'thermal-super-resolution',
     title: 'Real-Time Thermal Super-Resolution System',
     summary:
-      'Machine learning system that enhances low-resolution thermal camera feeds into high-quality images at 229+ FPS.',
+      'Machine learning system that enhances low-resolution thermal camera feeds to high-quality images at 229+ FPS for robotics and autonomous systems.',
     description:
-      'First real-time thermal super-resolution framework optimized for autonomous systems, robotics, and industrial monitoring.',
+      'First real-time thermal super-resolution framework optimized for autonomous vehicles, robotics, and industrial applications.',
     problem:
-      'Thermal cameras produce low-resolution images, which limits their reliability in edge robotics and autonomous applications.',
+      'Thermal cameras produce low-resolution images, limiting their use in autonomous vehicles, robotics, industrial inspection, and surveillance applications that require high-quality thermal perception.',
     solution:
-      'Designed a lightweight IMDN-based neural network with a custom thermal-aware loss and TensorRT optimization for real-time deployment.',
+      'Developed a lightweight neural network (IMDN architecture with 0.69M parameters) optimized for real-time thermal image enhancement with custom thermal-aware loss function and TensorRT optimization.',
     myRole:
-      'Sole developer responsible for architecture, training pipeline, transfer learning strategy, and inference optimization.',
+      'Sole developer - designed architecture, implemented thermal-aware training pipeline, optimized for real-time inference with TensorRT, and validated on thermal datasets.',
     outcome:
-      'Reached 34.2 dB PSNR at 229+ FPS, establishing a production-ready benchmark for real-time thermal enhancement.',
+      'Achieved 34.2 dB PSNR at 229+ FPS, the first real-time thermal super-resolution system suitable for edge deployment in robotics and autonomous systems.',
     githubUrl: 'https://github.com/Kronbii/thermal-super-resolution',
     media: {
       src: '/images/projects/thermal-sr.webp',
@@ -30,28 +30,28 @@ export const projects: Project[] = [
       'Edge ML Deployment',
     ],
     features: [
-      '229+ FPS inference speed',
-      '0.69M parameter edge-friendly architecture',
-      'Custom thermal-aware loss function',
-      'RGB-to-thermal transfer learning',
-      'TensorRT production optimization',
+      'Real-time performance: 34.2 dB PSNR at 229+ FPS',
+      'Lightweight architecture with only 0.69M parameters',
+      'Custom thermal-aware multi-component loss function',
+      'Cross-domain RGB-to-thermal transfer learning',
+      'TensorRT optimization for production deployment',
     ],
   },
   {
     slug: 'omnisign',
     title: 'Real-Time Lebanese Sign Language Translator',
     summary:
-      'AI system translating Lebanese Sign Language into spoken and written language in real time.',
+      'AI system that translates Lebanese Sign Language into spoken and written text in real-time using computer vision and natural language processing.',
     description:
-      'Accessibility-focused AI pipeline combining gesture recognition, computer vision, and NLP translation.',
+      'AI-driven sign language interpreter developed to improve communication accessibility for the deaf and hard-of-hearing community in Lebanon.',
     problem:
-      'The Lebanese deaf and hard-of-hearing community lacked practical real-time tools for everyday communication with non-signers.',
+      'The deaf and hard-of-hearing community in Lebanon lacked accessible tools for real-time communication with non-signers, limiting social integration and access to services.',
     solution:
-      'Built a computer vision plus NLP pipeline that detects Lebanese Sign Language gestures and translates them into multiple languages.',
+      'Built a computer vision and NLP pipeline that recognizes Lebanese Sign Language gestures and translates them into multiple spoken and written languages in real-time.',
     myRole:
-      'Lead AI engineer for gesture recognition, inference optimization, and CV-to-language-system integration.',
+      'Lead AI engineer responsible for gesture recognition model development, real-time inference optimization, and CV-to-NLP pipeline integration.',
     outcome:
-      'Won the Public Choice Award at National FYP Demo Day 2025 while delivering a meaningful accessibility prototype.',
+      'Won Public Choice Award at National FYP Demo Day 2025, enabling real-time communication for Lebanese Sign Language users with measurable social impact.',
     githubUrl: 'https://laythayache.com/projects/omnisign',
     externalUrl: 'https://laythayache.com/projects/omnisign',
     media: {
@@ -67,28 +67,29 @@ export const projects: Project[] = [
       'Gesture Recognition',
     ],
     features: [
-      'Real-time LSL gesture recognition',
+      'Real-time Lebanese Sign Language gesture recognition',
       'Arabic, English, and French output',
-      'Low-latency translation pipeline',
-      'Accessibility-focused product direction',
-      'Award-winning social impact project',
+      'Computer vision interpretation with 90%+ accuracy',
+      'NLP-powered translation module',
+      'Low-latency inference for communication use cases',
+      'Public Choice Award at National FYP Demo Day 2025',
     ],
   },
   {
     slug: 'autonomous-race-car',
-    title: 'Autonomous Race Car',
+    title: 'Autonomous Race Car - WRO 2023 Champion',
     summary:
-      'Self-driving vehicle built in 20 days that won WRO Future Engineers 2023 with computer vision and sensor fusion.',
+      'Fully autonomous vehicle built in 20 days that won the World Robot Olympiad Future Engineers 2023 competition using computer vision and sensor fusion.',
     description:
-      'Competition robot architecture combining embedded control, OpenCV perception, and robust real-time handling.',
+      'Fully integrated autonomous vehicle built from scratch in 20 days with a dual-processor architecture for robust perception and control.',
     problem:
-      'Needed to build a reliable autonomous race car with perception and control under severe competition time constraints.',
+      'Build a self-driving car capable of autonomous navigation with traffic sign recognition and obstacle avoidance in under 3 weeks for the WRO Future Engineers 2023 competition.',
     solution:
-      'Split perception and control across Jetson Nano and Arduino, combining lane detection, sign recognition, PID steering, and sensor fusion.',
+      'Designed dual-processor system: Jetson Nano for computer vision (lane and sign detection) and Arduino Mega for real-time motor control with PID steering and IMU-based sensor fusion.',
     myRole:
-      'Technical lead across system architecture, computer vision pipeline, sensor integration, and team coordination.',
+      'Technical lead for system architecture, OpenCV computer vision pipeline, sensor fusion integration, and team development coordination.',
     outcome:
-      'Won WRO Future Engineers 2023 with 95%+ autonomous navigation accuracy.',
+      'Won WRO Future Engineers 2023 championship with 95%+ navigation accuracy in autonomous challenges.',
     githubUrl: 'https://github.com/Kronbii/autonomous-race-car',
     media: {
       src: '/images/projects/race-car.webp',
@@ -101,6 +102,8 @@ export const projects: Project[] = [
       'Computer Vision',
       'PID Control',
       'Sensor Fusion',
+      'C++',
+      'Python',
       'Embedded Systems',
     ],
     features: [
@@ -115,17 +118,17 @@ export const projects: Project[] = [
     slug: 'smart-learning-table',
     title: 'AI-Powered Smart Desk for Classrooms',
     summary:
-      'IoT desk with posture tracking and ergonomic adjustment for learning and comfort.',
+      'IoT desk with computer vision-based posture tracking and automatic ergonomic adjustments for enhanced learning and health outcomes.',
     description:
-      'An intelligent workstation that monitors posture and adjusts height or tilt using computer vision and embedded control.',
+      'Interactive sensor-driven workstation built to improve student engagement, ergonomic comfort, and learning outcomes in classroom and office environments.',
     problem:
-      'Students and workers often maintain poor posture during long sessions, reducing comfort and focus.',
+      'Students and office workers suffer from poor posture and ergonomic issues during long study or work sessions, leading to health problems and reduced focus.',
     solution:
-      'Combined ESP32 control, motorized adjustment, and OpenCV-based posture analysis with dashboard feedback.',
+      'Built an IoT desk with ESP32 controllers, motorized actuators, and OpenCV posture analysis that automatically adjusts desk height and tilt while providing real-time posture feedback.',
     myRole:
-      'Lead engineer for system architecture, posture model development, dashboard design, and hardware integration.',
+      'Lead engineer for system architecture, OpenCV posture tracking model, dashboard development, and hardware control integration.',
     outcome:
-      'Validated as a classroom prototype with real-time feedback for more than 30 students.',
+      'University prototype deployed in classroom conditions, monitoring posture for 30+ students with real-time feedback and ergonomic adjustments.',
     githubUrl: 'https://github.com/Kronbii/smart-interactive-desk',
     media: {
       src: '/images/projects/smart-desk.webp',
@@ -138,6 +141,8 @@ export const projects: Project[] = [
       'IoT',
       'Web Development',
       'Motor Control',
+      'Real-Time Systems',
+      'Python',
     ],
     features: [
       'Motorized ergonomic adjustment',
@@ -151,17 +156,17 @@ export const projects: Project[] = [
     slug: 'spherical-panorama',
     title: '360° Spherical Mobile Panorama',
     summary:
-      'Computer vision pipeline for stitching seamless spherical panoramas from mobile video and image inputs.',
+      'Professional computer vision pipeline for creating seamless 360° spherical panoramas from phone footage.',
     description:
-      'A stitching and projection system for turning regular handheld captures into immersive 360° experiences.',
+      'Robust computer vision tool that reconstructs seamless 360° panoramas from phone photos or videos using ORB matching, RANSAC, and spherical projection.',
     problem:
       'High-quality panoramic capture from handheld devices is difficult because of alignment issues, stitching artifacts, and viewer complexity.',
     solution:
-      'Built a Python pipeline using ORB, RANSAC, and spherical projection, then generated an interactive Three.js viewer.',
+      'Built a Python pipeline with feature detection, robust matching, and spherical projection, then generated an interactive Three.js web viewer.',
     myRole:
-      'Sole developer and researcher from algorithm design through viewer delivery.',
+      'Sole developer and researcher.',
     outcome:
-      'Produced professional-grade 8K+ panoramas suitable for immersive viewing and presentation use cases.',
+      'Developed a professional-grade tool capable of generating 8K+ panoramas suitable for immersive viewing use cases.',
     githubUrl: 'https://github.com/Kronbii/360-spherical-stitching',
     media: {
       src: '/images/projects/goat.gif',
@@ -172,16 +177,24 @@ export const projects: Project[] = [
       'OpenCV',
       'NumPy',
       'Three.js',
+      'Computer Vision',
+      'HTML5',
       'RANSAC',
       'ORB',
+      'Video Processing',
+      'Memory Management',
       'Image Stitching',
+      'Homography Estimation',
+      'JavaScript',
       'WebGL',
     ],
     features: [
       'Automatic video and photo stitching',
+      'Robust ORB feature matching',
       'Spherical projection mapping',
       'Interactive web viewer',
-      '8K+ output support',
+      'Video keyframe extraction',
+      '8K+ resolution support',
       'Memory-optimized processing',
     ],
   },

@@ -252,13 +252,14 @@
   font-size: var(--mission-font-size);
   font-weight: 400;
   letter-spacing: var(--mission-letter-spacing);
-  line-height: 0;
+  line-height: 1.25;
   text-transform: uppercase;
   color: var(--foreground);
   opacity: 0.8;
   font-family: var(--font-sans), system-ui, sans-serif;
   pointer-events: none;
   text-align: left;
+  max-width: 24ch;
 }
 
 /* ─── Bottom fade ───────────────────────────────────────── */

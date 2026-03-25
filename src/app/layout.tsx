@@ -78,7 +78,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={zalandoSans.variable}
+      className={`${zalandoSans.variable} scroll-smooth`}
       suppressHydrationWarning
     >
       <body>

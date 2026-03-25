@@ -19,6 +19,30 @@ export interface Capability {
   description: string
 }
 
+export interface CommunityItem {
+  id: string
+  title: string
+  tagline: string
+  date: string
+  link?: string
+  image: ProjectMedia
+}
+
+export interface ContactChannel {
+  label: string
+  sublabel: string
+  href: string
+}
+
+export interface AboutContent {
+  titleLeading: string
+  titleAccent: string
+  intro: string
+  paragraphs: string[]
+  image: ProjectMedia
+  stats: HeroMetric[]
+}
+
 export interface ProjectMedia {
   src: string
   alt: string
@@ -58,11 +82,25 @@ export interface HomeContent {
     }
     image: ProjectMedia
     metrics: HeroMetric[]
+    location: string
+    specialty: string
+    role: string
+    name: string
+    mission: string
   }
+  about: AboutContent
   capabilities: SectionIntro & {
     items: Capability[]
   }
   projects: SectionIntro & {
     spotlightSlugs: string[]
+  }
+  community: SectionIntro & {
+    items: CommunityItem[]
+  }
+  contact: SectionIntro & {
+    channels: ContactChannel[]
+    note: string
+    responseTime: string
   }
 }

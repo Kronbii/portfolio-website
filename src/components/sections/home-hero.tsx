@@ -1,9 +1,12 @@
 import { cn } from '@/lib/utils'
+import { homeContent } from '@/content/home'
 import WoofyHoverImage from '@/components/lightswind/woofy-hover-image'
 
 import styles from './home-hero.module.css'
 
 export function HomeHeroSection() {
+  const { hero } = homeContent
+
   return (
     <section
       id="home"
@@ -11,10 +14,10 @@ export function HomeHeroSection() {
     >
       {/* Top bar — three captions */}
       <div className={styles.topBar}>
-        <span>Based in Lebanon</span>
-        <span>Specializing in AI, Robotics, &amp; Web</span>
-        <a href="#contact" className={styles.contactCta}>
-          Contact
+        <span>{hero.location}</span>
+        <span>{hero.specialty}</span>
+        <a href={hero.secondaryCta.href} className={styles.contactCta}>
+          {hero.secondaryCta.label}
         </a>
       </div>
 
@@ -23,9 +26,9 @@ export function HomeHeroSection() {
         <div className={styles.portraitFrame}>
           <div className={styles.portraitGlow} aria-hidden />
           <WoofyHoverImage
-            src="/images/home/portrait.png"
+            src={hero.image.src}
             revealSrc="/images/home/test-2.png"
-            alt="Portrait of Rami Kronbi"
+            alt={hero.image.alt}
             width="100%"
             height="100%"
             mode="effect"
@@ -37,9 +40,9 @@ export function HomeHeroSection() {
       {/* Text overlay — centered, above fade */}
       <div className={styles.textOverlay}>
         <div className={styles.nameBlock}>
-          <span className={styles.roleText}>Systems Engineer</span>
-          <h1 className={styles.nameHeading}>Rami Kronbi</h1>
-          <p className={styles.missionText}>For all humanity</p>
+          <span className={styles.roleText}>{hero.role}</span>
+          <h1 className={styles.nameHeading}>{hero.name}</h1>
+          <p className={styles.missionText}>{hero.mission}</p>
         </div>
       </div>
 

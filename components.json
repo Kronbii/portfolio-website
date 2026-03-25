@@ -9,11 +9,15 @@
     "baseColor": "slate",
     "cssVariables": true
   },
+  "iconLibrary": "lucide",
   "aliases": {
     "components": "@/components",
     "utils": "@/lib/utils",
     "ui": "@/components/ui",
     "lib": "@/lib",
     "hooks": "@/hooks"
+  },
+  "registries": {
+    "@scrollxui": "https://www.scrollxui.dev/registry/{name}.json"
   }
 }
