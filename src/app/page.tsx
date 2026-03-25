@@ -4,6 +4,7 @@ import { HomeProjectsSection } from '@/components/sections/home-projects'
 import { HomeCommunitySection } from '@/components/sections/home-community'
 import { HomeContactSection } from '@/components/sections/home-contact'
 import { HomeHeroSection } from '@/components/sections/home-hero'
+import { SiteFooterSection } from '@/components/sections/site-footer'
 
 export default function HomePage() {
   return (
@@ -14,6 +15,7 @@ export default function HomePage() {
       <HomeProjectsSection />
       <HomeCommunitySection />
       <HomeContactSection />
+      <SiteFooterSection />
     </main>
   )
 }

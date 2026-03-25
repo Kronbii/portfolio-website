@@ -1,7 +1,7 @@
-import { ArrowUpRight } from 'lucide-react'
 import { homeContent } from '@/content/home'
 import { Container } from '@/components/ui/container'
 import { MotionDiv, MotionSection } from '@/components/ui/motion'
+import StaggerChars from '@/components/ui/stagger-chars'
 import { revealUp, staggerContainer } from '@/lib/motion'
 
 export function HomeContactSection() {
@@ -20,20 +20,26 @@ export function HomeContactSection() {
             </h2>
           </MotionDiv>
           
-          <MotionDiv className="mt-20 w-full flex flex-col sm:flex-row justify-center gap-6 lg:gap-8" {...revealUp}>
+          <MotionDiv
+            className="mt-20 grid w-full max-w-3xl grid-cols-2 gap-x-4 gap-y-6 md:gap-x-8 md:gap-y-8"
+            {...revealUp}
+          >
             {contact.channels.map((channel) => (
               <a
                 key={channel.href}
                 href={channel.href}
                 target={channel.href.startsWith('http') ? '_blank' : undefined}
                 rel={channel.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                className="group relative flex items-center justify-between sm:justify-center gap-4 py-5 px-10 border border-border rounded-full transition-colors hover:bg-foreground hover:text-background text-lg font-medium"
+                className="inline-flex items-center justify-center text-foreground"
               >
-                <span>{channel.label}</span>
-                <ArrowUpRight
-                  size={20}
-                  className="transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
-                  aria-hidden
+                <StaggerChars
+                  text={channel.label}
+                  hoverText={channel.label}
+                  direction="up"
+                  delay={0.02}
+                  duration={0.5}
+                  className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-foreground"
+                  hoverClassName="text-brand"
                 />
               </a>
             ))}

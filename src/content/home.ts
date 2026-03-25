@@ -177,19 +177,24 @@ export const homeContent: HomeContent = {
     description: 'Open to new opportunities and collaborations.',
     channels: [
       {
-        label: 'GitHub',
-        sublabel: 'Case studies',
+        label: 'github',
+        sublabel: 'github',
         href: 'https://github.com/Kronbii',
       },
       {
-        label: 'LinkedIn',
-        sublabel: 'Professional updates',
+        label: 'linkedin',
+        sublabel: 'linkedin',
         href: 'https://www.linkedin.com/in/rami-kronbi/',
       },
       {
-        label: 'ramykronby@gmail.com',
-        sublabel: 'Best for briefs',
+        label: 'email',
+        sublabel: 'email',
         href: 'mailto:ramykronby@gmail.com',
+      },
+      {
+        label: '+96171170226',
+        sublabel: '+96171170226',
+        href: 'tel:+96171170226',
       },
     ],
     note: 'Open to new opportunities and collaborations.',
