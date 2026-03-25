@@ -13,8 +13,9 @@ export function HomeAboutSection() {
           duration={0.9}
           staggerDelay={0.08}
           enableBlur
+          size="2xl"
           containerClassName="mx-auto max-w-6xl"
-          textClassName="text-balance font-black uppercase leading-[0.9] tracking-tight text-5xl sm:text-6xl md:text-7xl lg:text-[8rem] text-foreground"
+          textClassName="text-balance !font-black uppercase !leading-[0.9] tracking-tight !text-6xl sm:!text-7xl md:!text-[6rem] lg:!text-[8rem] text-foreground"
         >
           {'GLORP NEXUS VELTRON AXIOM QWENAR ZYTHER MONIX PRAEVOR UMBRAL KINETIX'}
         </ScrollReveal>
