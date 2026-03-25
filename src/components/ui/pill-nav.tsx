@@ -21,9 +21,10 @@ export interface PillNavItem {
 }
 
 interface PillNavProps {
-  logo: string
+  logo?: string
   logoAlt?: string
   logoHref?: string
+  showLogo?: boolean
   items: PillNavItem[]
   activeHref?: string
   className?: string
@@ -102,6 +103,7 @@ export default function PillNav({
   logo,
   logoAlt = 'Logo',
   logoHref = '#home',
+  showLogo = true,
   items,
   activeHref,
   className = '',
@@ -314,21 +316,23 @@ export default function PillNav({
   return (
     <div className={styles.pillNavContainer}>
       <nav className={cn(styles.pillNav, className)} aria-label="Primary" style={cssVars}>
-        <SmartLink
-          href={logoHref}
-          className={styles.pillLogo}
-          ariaLabel="Home"
-          onMouseEnter={handleLogoEnter}
-        >
-          <img
-            src={logo}
-            alt={logoAlt}
-            ref={(el) => {
-              logoImgRef.current = el
-              logoRef.current = el?.parentElement ?? null
-            }}
-          />
-        </SmartLink>
+        {showLogo && logo ? (
+          <SmartLink
+            href={logoHref}
+            className={styles.pillLogo}
+            ariaLabel="Home"
+            onMouseEnter={handleLogoEnter}
+          >
+            <img
+              src={logo}
+              alt={logoAlt}
+              ref={(el) => {
+                logoImgRef.current = el
+                logoRef.current = el?.parentElement ?? null
+              }}
+            />
+          </SmartLink>
+        ) : null}
 
         <div className={cn(styles.pillNavItems, styles.desktopOnly)} ref={navItemsRef}>
           <ul className={styles.pillList} role="menubar">

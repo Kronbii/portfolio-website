@@ -6,8 +6,6 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { homeContent } from '@/content/home'
 import PillNav, { type PillNavItem } from '@/components/ui/pill-nav'
 
-const SHOW_OFFSET_PX = 12
-
 export function SitePillNav() {
   const [isVisible, setIsVisible] = useState(false)
   const visibleRef = useRef(false)
@@ -32,14 +30,7 @@ export function SitePillNav() {
 
     const updateVisibility = () => {
       const currentY = Math.max(0, window.scrollY)
-      const heroSection = document.getElementById('home')
-      const heroBottom = heroSection
-        ? heroSection.offsetTop + heroSection.offsetHeight - SHOW_OFFSET_PX
-        : 120
-
-      const isPastHero = currentY > heroBottom
-
-      if (!isPastHero) {
+      if (currentY <= 0) {
         setVisibility(false)
         lastScrollYRef.current = currentY
         rafRef.current = null
@@ -93,6 +84,7 @@ export function SitePillNav() {
           logo="/icons/icon-192.png"
           logoAlt="Rami Kronbi"
           logoHref="#home"
+          showLogo={false}
           items={items}
           baseColor="#0c0c0c"
           pillColor="#f5f5f5"
