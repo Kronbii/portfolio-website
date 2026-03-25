@@ -30,17 +30,20 @@ export function HomeAboutSection() {
 
         <div className="mx-auto mt-20 grid max-w-5xl grid-cols-2 gap-x-10 gap-y-10 md:grid-cols-4 md:gap-x-12">
           {aboutStats.map((stat) => (
-            <div key={stat.label} className="flex flex-col items-center text-center">
+            <div
+              key={stat.label}
+              className="flex flex-col items-center text-center text-[var(--color-primary)]"
+            >
               <div className="flex items-start">
                 <NumberTicker
                   value={stat.value}
-                  className="text-6xl md:text-7xl font-black leading-none text-[var(--foreground)]"
+                  className="text-6xl md:text-7xl font-black leading-none"
                 />
-                <span className="ml-1 text-2xl md:text-3xl font-black leading-none text-[var(--foreground)]">
+                <span className="ml-1 text-2xl md:text-3xl font-black leading-none">
                   +
                 </span>
               </div>
-              <p className="mt-3 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              <p className="mt-3 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]/80">
                 {stat.label}
               </p>
             </div>
