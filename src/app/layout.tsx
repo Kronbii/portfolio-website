@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Zalando_Sans } from 'next/font/google'
 
+import { SmoothScrollProvider } from '@/components/providers/smooth-scroll-provider'
 import { SitePillNav } from '@/components/sections/site-pill-nav'
 import { StructuredData } from '@/components/structured-data'
 import { siteConfig } from '@/lib/site'
@@ -79,13 +80,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${zalandoSans.variable} scroll-smooth`}
+      className={zalandoSans.variable}
       suppressHydrationWarning
     >
       <body>
-        <StructuredData />
-        <SitePillNav />
-        <div className="min-h-screen bg-background text-foreground">{children}</div>
+        <SmoothScrollProvider>
+          <StructuredData />
+          <SitePillNav />
+          <div className="min-h-screen bg-background text-foreground">
+            {children}
+          </div>
+        </SmoothScrollProvider>
       </body>
     </html>
   )
