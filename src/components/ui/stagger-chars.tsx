@@ -167,7 +167,7 @@ const StaggerChars = React.memo<StaggerCharsProps>(
       <AnimatePresence mode='wait'>
         <motion.div
           className={cn(
-            'relative h-fit uppercase text-black dark:text-white leading-none',
+            'relative h-fit uppercase text-current leading-none',
             'select-none transform-gpu will-change-transform',
             !disabled && 'cursor-pointer',
             className,

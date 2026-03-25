@@ -35,11 +35,11 @@ export function HomeContactSection() {
                 <StaggerChars
                   text={channel.label}
                   hoverText={channel.label}
-                  direction="up"
+                  direction="alternate"
                   delay={0.02}
                   duration={0.5}
-                  className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-foreground"
-                  hoverClassName="text-brand"
+                  className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-[var(--color-primary)]"
+                  hoverClassName="text-[#9d201a]"
                 />
               </a>
             ))}
