@@ -1,7 +1,8 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { BriefcaseBusiness, Github, Linkedin, Mail } from 'lucide-react'
+import { motion } from 'motion/react'
 
 import MagicDock, { type DockItemData } from '@/components/ui/magicdock'
 import { homeContent } from '@/content/home'
@@ -51,6 +52,31 @@ function runAction(href: string) {
 }
 
 export function SiteDock() {
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    const updateVisibility = () => {
+      const heroSection = document.getElementById('home')
+      if (!heroSection) {
+        setIsVisible(true)
+        return
+      }
+
+      const heroStart = heroSection.offsetTop
+      const revealOffset = Math.max(80, heroSection.offsetHeight * 0.12)
+      setIsVisible(window.scrollY > heroStart + revealOffset)
+    }
+
+    updateVisibility()
+    window.addEventListener('scroll', updateVisibility, { passive: true })
+    window.addEventListener('resize', updateVisibility)
+
+    return () => {
+      window.removeEventListener('scroll', updateVisibility)
+      window.removeEventListener('resize', updateVisibility)
+    }
+  }, [])
+
   const items = useMemo<DockItemData[]>(
     () => [
       {
@@ -89,16 +115,24 @@ export function SiteDock() {
   )
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-[60]">
+    <motion.div
+      className="pointer-events-none fixed inset-x-0 bottom-0 z-[60]"
+      initial={false}
+      animate={{
+        opacity: isVisible ? 1 : 0,
+        y: isVisible ? 0 : 16,
+      }}
+      transition={{ duration: 0.25, ease: 'easeOut' }}
+    >
       <MagicDock
         items={items}
         variant="default" //default, gradient, tooltip
         panelHeight={50}
         baseItemSize={50}
         magnification={60}
-        distance={70}
+        distance={20}
         className="pointer-events-auto bottom-3 sm:bottom-4 lg:bottom-5 border-white/20 bg-black/65"
       />
-    </div>
+    </motion.div>
   )
 }
