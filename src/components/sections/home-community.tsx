@@ -32,6 +32,7 @@ export function HomeCommunitySection() {
                   src={item.image.src}
                   alt={item.image.alt}
                   fill
+                  sizes="(min-width: 1024px) 40vw, (min-width: 768px) 45vw, 100vw"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
                 />
               </div>
