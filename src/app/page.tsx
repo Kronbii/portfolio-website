@@ -8,26 +8,26 @@ import { SiteFooterSection } from '@/components/sections/site-footer'
 
 export default function HomePage() {
   return (
-    <main>
-      <div className="section-theme-dark">
+    <main className="snap-y snap-mandatory">
+      <div className="section-theme-dark snap-start snap-always">
         <HomeHeroSection />
       </div>
-      <div className="section-theme-light">
+      <div className="section-theme-light snap-start snap-always">
         <HomeAboutSection />
       </div>
-      <div className="section-theme-dark">
+      <div className="section-theme-dark snap-start snap-always">
         <HomeCapabilitiesSection />
       </div>
-      <div className="section-theme-light">
+      <div className="section-theme-light snap-start snap-always">
         <HomeProjectsSection />
       </div>
-      <div className="section-theme-dark">
+      <div className="section-theme-dark snap-start snap-always">
         <HomeCommunitySection />
       </div>
-      <div className="section-theme-light">
+      <div className="section-theme-light snap-start snap-always">
         <HomeContactSection />
       </div>
-      <div className="section-theme-dark">
+      <div className="section-theme-dark snap-start snap-always">
         <SiteFooterSection />
       </div>
     </main>

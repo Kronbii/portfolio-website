@@ -14,7 +14,7 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     ).matches
 
     const lenis = new Lenis({
-      duration: reduceMotion ? 0 : 3,
+      duration: reduceMotion ? 0 : 2,
       lerp: reduceMotion ? 1 : 0.03,
       smoothWheel: !reduceMotion,
       wheelMultiplier: 0.9,
