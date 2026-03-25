@@ -5,8 +5,6 @@ import * as THREE from 'three';
 
 export interface WoofyHoverImageProps {
   src: string;
-  revealSrc?: string;
-  mode?: 'reveal' | 'effect';
   alt?: string;
   width?: number | string;
   height?: number | string;
@@ -31,8 +29,6 @@ export interface WoofyHoverImageProps {
 
 const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
   src,
-  revealSrc,
-  mode = revealSrc ? 'reveal' : 'effect',
   alt = '',
   width = 'auto',
   height = 400,
@@ -89,9 +85,6 @@ const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
     uniform bool u_invertMask;
     uniform float u_pixelateIntensity;
     uniform float u_blurIntensity;
-    uniform bool u_hasReveal;
-    uniform sampler2D u_texture2;
-    uniform float u_imageAspect2;
 
     varying vec2 v_uv;
 
@@ -266,16 +259,6 @@ const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
         finalColor = mix(effectColor, invertedColor, mask);
       }
 
-      if (u_hasReveal) {
-        float ratio2 = u_imageAspect2 / screenAspect;
-        vec2 texCoord2 = vec2(
-          mix(0.5 - 0.5 / ratio2, 0.5 + 0.5 / ratio2, uv.x),
-          uv.y
-        );
-        vec4 tex2 = texture2D(u_texture2, texCoord2);
-        finalColor = mix(originalColor, tex2.rgb, mask);
-      }
-      
       gl_FragColor = vec4(finalColor, tex.a);
     }
   `;
@@ -303,17 +286,10 @@ const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
 
     const loadTex = (s: string): Promise<THREE.Texture> =>
       new Promise((resolve, reject) => loader.load(s, resolve, undefined, reject));
-    const blankTex = new THREE.DataTexture(new Uint8Array([0, 0, 0, 0]), 1, 1, THREE.RGBAFormat);
-    blankTex.needsUpdate = true;
 
-    Promise.all([
-      loadTex(src),
-      revealSrc ? loadTex(revealSrc) : Promise.resolve(blankTex as THREE.Texture),
-    ]).then(([texture, texture2]) => {
+    loadTex(src).then((texture) => {
       const img1 = texture.image as HTMLImageElement;
-      const img2 = texture2.image as { width: number; height: number };
       const imageAspect = img1.width / img1.height;
-      const imageAspect2 = img2.width / img2.height;
 
       texture.minFilter = THREE.LinearFilter;
       texture.magFilter = THREE.LinearFilter;
@@ -344,9 +320,6 @@ const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
         u_blurIntensity: { value: blurIntensity },
         u_effectColor1: { value: hexToRgb(duotoneColor1) },
         u_effectColor2: { value: hexToRgb(duotoneColor2) },
-        u_hasReveal: { value: (mode ?? (revealSrc ? 'reveal' : 'effect')) === 'reveal' && !!revealSrc },
-        u_texture2: { value: texture2 },
-        u_imageAspect2: { value: imageAspect2 },
       };
 
       uniformsRef.current = uniforms;
@@ -406,7 +379,7 @@ const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
 
       animate();
     });
-  }, [src, revealSrc, mode, effectType, maskRadius, turbulenceIntensity, animationSpeed, effectIntensity, invertMask, pixelateIntensity, blurIntensity, duotoneColor1, duotoneColor2]);
+  }, [src, effectType, maskRadius, turbulenceIntensity, animationSpeed, effectIntensity, invertMask, pixelateIntensity, blurIntensity, duotoneColor1, duotoneColor2]);
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     if (!containerRef.current || !uniformsRef.current) return;
