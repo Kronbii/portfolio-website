@@ -1,5 +1,5 @@
 import { Container } from '@/components/ui/container'
-import ScrollReveal from '@/components/ui/scroll-reveal'
+import { ScrollReveal } from '@/components/lightswind/scroll-reveal'
 
 export function HomeAboutSection() {
   return (
@@ -9,11 +9,10 @@ export function HomeAboutSection() {
           baseOpacity={0.12}
           baseRotation={2}
           blurStrength={5}
-          rotationStart="top 88%"
-          rotationEnd="bottom bottom"
-          wordAnimationStart="top 84%"
-          wordAnimationEnd="bottom bottom"
-          wordStagger={0.12}
+          threshold={0.35}
+          duration={0.9}
+          staggerDelay={0.08}
+          enableBlur
           containerClassName="mx-auto max-w-6xl"
           textClassName="text-balance font-black uppercase leading-[0.9] tracking-tight text-5xl sm:text-6xl md:text-7xl lg:text-[8rem] text-foreground"
         >
