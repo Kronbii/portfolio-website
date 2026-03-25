@@ -18,8 +18,11 @@ interface ScrollRevealProps {
   blurStrength?: number
   containerClassName?: string
   textClassName?: string
+  rotationStart?: string
   rotationEnd?: string
+  wordAnimationStart?: string
   wordAnimationEnd?: string
+  wordStagger?: number
 }
 
 export default function ScrollReveal({
@@ -31,8 +34,11 @@ export default function ScrollReveal({
   blurStrength = 4,
   containerClassName = '',
   textClassName = '',
+  rotationStart = 'top bottom',
   rotationEnd = 'bottom bottom',
+  wordAnimationStart = 'top bottom-=20%',
   wordAnimationEnd = 'bottom bottom',
+  wordStagger = 0.05,
 }: ScrollRevealProps) {
   const containerRef = useRef<HTMLHeadingElement | null>(null)
 
@@ -64,7 +70,7 @@ export default function ScrollReveal({
         scrollTrigger: {
           trigger: element,
           scroller,
-          start: 'top bottom',
+          start: rotationStart,
           end: rotationEnd,
           scrub: true,
         },
@@ -77,11 +83,11 @@ export default function ScrollReveal({
       {
         ease: 'none',
         opacity: 1,
-        stagger: 0.05,
+        stagger: wordStagger,
         scrollTrigger: {
           trigger: element,
           scroller,
-          start: 'top bottom-=20%',
+          start: wordAnimationStart,
           end: wordAnimationEnd,
           scrub: true,
         },
@@ -95,11 +101,11 @@ export default function ScrollReveal({
           {
             ease: 'none',
             filter: 'blur(0px)',
-            stagger: 0.05,
+            stagger: wordStagger,
             scrollTrigger: {
               trigger: element,
               scroller,
-              start: 'top bottom-=20%',
+              start: wordAnimationStart,
               end: wordAnimationEnd,
               scrub: true,
             },
@@ -120,8 +126,11 @@ export default function ScrollReveal({
     enableBlur,
     baseRotation,
     baseOpacity,
+    rotationStart,
     rotationEnd,
+    wordAnimationStart,
     wordAnimationEnd,
+    wordStagger,
     blurStrength,
   ])
 

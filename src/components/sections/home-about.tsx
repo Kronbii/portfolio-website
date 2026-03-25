@@ -9,8 +9,11 @@ export function HomeAboutSection() {
           baseOpacity={0.12}
           baseRotation={2}
           blurStrength={5}
-          rotationEnd="bottom 80%"
-          wordAnimationEnd="bottom 78%"
+          rotationStart="top 88%"
+          rotationEnd="bottom 36%"
+          wordAnimationStart="top 84%"
+          wordAnimationEnd="bottom 20%"
+          wordStagger={0.12}
           containerClassName="mx-auto max-w-6xl"
           textClassName="text-balance font-black uppercase leading-[0.9] tracking-tight text-5xl sm:text-6xl md:text-7xl lg:text-[8rem] text-foreground"
         >
