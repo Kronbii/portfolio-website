@@ -73,7 +73,7 @@
   .section {
     --portrait-h: 100vh;
     --portrait-w: min(52vw, 52rem);
-    --text-position-bottom: 21vh;
+    --text-position-bottom: 18vh;
     
     /* Role text (desktop) */
     --role-font-size: clamp(1.125rem, 1.7vw, 10rem);

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Zalando_Sans } from 'next/font/google'
 
+import { SitePillNav } from '@/components/sections/site-pill-nav'
 import { StructuredData } from '@/components/structured-data'
 import { siteConfig } from '@/lib/site'
 import '@/styles/globals.css'
@@ -83,6 +84,7 @@ export default function RootLayout({
     >
       <body>
         <StructuredData />
+        <SitePillNav />
         <div className="min-h-screen bg-background text-foreground">{children}</div>
       </body>
     </html>
