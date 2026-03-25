@@ -10,12 +10,12 @@ export function HomeContactSection() {
   return (
     <MotionSection id="contact" className="py-32 lg:py-48 bg-background">
       <Container>
-        <MotionDiv className="flex flex-col items-center text-center max-w-6xl mx-auto" {...staggerContainer}>
+        <MotionDiv className="flex flex-col items-center text-center max-w-7xl mx-auto" {...staggerContainer}>
           <MotionDiv {...revealUp}>
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-brand">
               {contact.eyebrow}
             </p>
-            <h2 className="mt-8 text-4xl md:text-6xl lg:text-[6.4rem] font-bold tracking-tighter text-foreground leading-[0.92] uppercase text-balance">
+            <h2 className="mt-8 mx-auto max-w-[72rem] text-5xl md:text-7xl lg:text-[7.2rem] font-bold tracking-tighter text-foreground leading-[0.9] uppercase">
               {contact.title}
             </h2>
           </MotionDiv>
