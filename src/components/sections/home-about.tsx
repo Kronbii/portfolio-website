@@ -34,9 +34,9 @@ export function HomeAboutSection() {
               <div className="flex items-start">
                 <NumberTicker
                   value={stat.value}
-                  className="text-6xl md:text-7xl font-black leading-none text-foreground"
+                  className="text-6xl md:text-7xl font-black leading-none text-[var(--foreground)]"
                 />
-                <span className="ml-1 text-2xl md:text-3xl font-black leading-none text-foreground">
+                <span className="ml-1 text-2xl md:text-3xl font-black leading-none text-[var(--foreground)]">
                   +
                 </span>
               </div>

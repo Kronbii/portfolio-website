@@ -9,13 +9,27 @@ import { SiteFooterSection } from '@/components/sections/site-footer'
 export default function HomePage() {
   return (
     <main>
-      <HomeHeroSection />
-      <HomeAboutSection />
-      <HomeCapabilitiesSection />
-      <HomeProjectsSection />
-      <HomeCommunitySection />
-      <HomeContactSection />
-      <SiteFooterSection />
+      <div className="section-theme-dark">
+        <HomeHeroSection />
+      </div>
+      <div className="section-theme-light">
+        <HomeAboutSection />
+      </div>
+      <div className="section-theme-dark">
+        <HomeCapabilitiesSection />
+      </div>
+      <div className="section-theme-light">
+        <HomeProjectsSection />
+      </div>
+      <div className="section-theme-dark">
+        <HomeCommunitySection />
+      </div>
+      <div className="section-theme-light">
+        <HomeContactSection />
+      </div>
+      <div className="section-theme-dark">
+        <SiteFooterSection />
+      </div>
     </main>
   )
 }
