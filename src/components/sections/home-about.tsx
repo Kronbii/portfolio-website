@@ -29,7 +29,7 @@ export function HomeAboutSection() {
           {about.intro}
         </ScrollReveal>
 
-        <div className="mx-auto mt-10 max-w-4xl space-y-5 text-balance text-center text-base leading-relaxed text-foreground/80 md:text-lg">
+        <div className="mx-auto mt-10 max-w-4xl space-y-5 text-balance text-center text-base leading-relaxed text-[var(--color-primary)] md:text-lg">
           {about.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
