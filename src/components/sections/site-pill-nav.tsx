@@ -92,7 +92,7 @@ export function SitePillNav() {
     onClick?: () => void
   }) => {
     const sharedClassName = cn(
-      'inline-flex items-center justify-center rounded-full px-3 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#f5f5f5] transition-colors hover:bg-[#f5f5f5] hover:text-[#0c0c0c]',
+      'inline-flex items-center justify-center rounded-md px-3 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#f5f5f5] transition-colors hover:bg-[#f5f5f5] hover:text-[#0c0c0c]',
       className
     )
 
@@ -128,11 +128,11 @@ export function SitePillNav() {
       transition={{ duration: 0.25, ease: 'easeOut' }}
     >
       <Container>
-        <div className='rounded-full border border-white/15 bg-[#0c0c0c]/90 px-4 py-2 text-[#f5f5f5] shadow-[0_12px_40px_rgba(0,0,0,0.35)] backdrop-blur'>
+        <div className='rounded-xl border border-white/15 bg-[#0c0c0c]/90 px-4 py-2 text-[#f5f5f5] shadow-[0_12px_40px_rgba(0,0,0,0.35)] backdrop-blur'>
           <div className='flex items-center justify-between gap-3'>
             <Link
               href='/#home'
-              className='rounded-full px-2 py-1 text-xs font-semibold uppercase tracking-[0.32em] text-[#f5f5f5] transition-opacity hover:opacity-75'
+              className='rounded-md px-2 py-1 text-xs font-semibold uppercase tracking-[0.32em] text-[#f5f5f5] transition-opacity hover:opacity-75'
             >
               KRONBI
             </Link>
@@ -145,7 +145,7 @@ export function SitePillNav() {
 
             <button
               type='button'
-              className='inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-[#f5f5f5] transition-colors hover:bg-[#f5f5f5] hover:text-[#0c0c0c] md:hidden'
+              className='inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/20 text-[#f5f5f5] transition-colors hover:bg-[#f5f5f5] hover:text-[#0c0c0c] md:hidden'
               aria-label='Toggle navigation menu'
               aria-expanded={isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
