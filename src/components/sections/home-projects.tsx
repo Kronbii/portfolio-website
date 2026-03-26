@@ -1,8 +1,10 @@
 'use client'
 
+import Image from 'next/image'
+import { ArrowUpRight } from 'lucide-react'
+
 import { homeContent } from '@/content/home'
 import { projectMap } from '@/content/projects'
-
 import { SectionHeading } from '@/components/blocks/section-heading'
 import { Container } from '@/components/ui/container'
 import { MotionDiv, MotionSection } from '@/components/ui/motion'
@@ -16,47 +18,94 @@ export function HomeProjectsSection() {
   return (
     <MotionSection
       id="selected-work"
-      className="border-b border-border py-20 sm:py-24"
+      className="section-theme-dark border-b border-border bg-background py-24 sm:py-28"
       {...revealUp}
     >
-      <Container className="space-y-12">
-        <SectionHeading {...homeContent.projects} />
-        <MotionDiv className="flex flex-col border-t border-border mt-8" {...staggerContainer}>
-          {spotlightProjects.map((project, index) => (
-            <MotionDiv 
-              key={project.slug} 
-              className="group relative border-b border-border"
-              {...revealUp}
-            >
-              <a 
-                href={project.externalUrl || project.githubUrl} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="relative z-10 block w-full py-12 lg:py-16 flex flex-col lg:flex-row lg:items-center justify-between gap-6"
+      <Container className="space-y-14">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
+          <SectionHeading {...homeContent.projects} />
+          <MotionDiv
+            className="border border-border bg-surface/35 px-6 py-7"
+            {...revealUp}
+          >
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+              Portfolio Snapshot
+            </p>
+            <p className="mt-4 text-5xl font-black leading-none text-foreground sm:text-6xl">
+              {spotlightProjects.length}
+            </p>
+            <p className="mt-2 text-sm uppercase tracking-[0.2em] text-muted-foreground">
+              Selected Builds
+            </p>
+          </MotionDiv>
+        </div>
+
+        <MotionDiv className="grid gap-6 md:gap-8" {...staggerContainer}>
+          {spotlightProjects.map((project, index) => {
+            const href = project.externalUrl || project.githubUrl
+            const isExternal = href.startsWith('http')
+
+            return (
+              <MotionDiv
+                key={project.slug}
+                className="group border border-border bg-surface/20 transition-colors duration-300 hover:bg-surface/40"
+                {...revealUp}
               >
-                <div className="flex items-baseline gap-6 lg:w-1/2">
-                  <span className="text-xl font-light text-muted-foreground/30 transition-colors group-hover:text-foreground/50">
-                    {(index + 1).toString().padStart(2, '0')}
-                  </span>
-                  <h3 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-foreground transition-transform duration-500 ease-out group-hover:translate-x-4">
-                    {project.title}
-                  </h3>
-                </div>
-                <div className="lg:w-1/3 flex flex-col lg:items-end">
-                  <p className="text-sm opacity-0 group-hover:opacity-100 lg:text-right transition-opacity duration-500 text-muted-foreground lg:-translate-y-2 group-hover:translate-y-0 absolute lg:relative top-4 right-4 lg:top-auto lg:right-auto bg-background/80 lg:bg-transparent p-2 lg:p-0 backdrop-blur-sm lg:backdrop-blur-none rounded md:max-w-xs">
-                    {project.summary}
-                  </p>
-                  <p className="text-xs font-semibold uppercase tracking-widest text-brand mt-4 lg:mt-6 group-hover:text-primarylw transition-colors">
-                    Explore
-                  </p>
-                </div>
-              </a>
-              {/* Hover Image Reveal */}
-              <div className="absolute top-1/2 left-[60%] lg:left-[70%] -translate-x-1/2 -translate-y-1/2 w-[280px] h-[190px] lg:w-[480px] lg:h-[320px] opacity-0 pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:opacity-100 group-hover:scale-105 group-hover:rotate-2 z-0 overflow-hidden rounded-md shadow-[0_20px_50px_rgba(0,0,0,0.5)] bg-surface-2">
-                <img src={project.media.src} alt={project.media.alt} className="w-full h-full object-cover" />
-              </div>
-            </MotionDiv>
-          ))}
+                <article className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-center lg:gap-10">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+                      {(index + 1).toString().padStart(2, '0')} / {project.technologies[0]}
+                    </p>
+
+                    <h3 className="mt-4 text-3xl font-black uppercase leading-[0.95] tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+                      {project.title}
+                    </h3>
+
+                    <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                      {project.summary}
+                    </p>
+
+                    <ul className="mt-6 flex flex-wrap gap-2">
+                      {project.technologies.slice(0, 4).map((tech) => (
+                        <li
+                          key={`${project.slug}-${tech}`}
+                          className="border border-border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground"
+                        >
+                          {tech}
+                        </li>
+                      ))}
+                    </ul>
+
+                    <a
+                      href={href}
+                      target={isExternal ? '_blank' : undefined}
+                      rel={isExternal ? 'noopener noreferrer' : undefined}
+                      className="mt-8 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.22em] text-foreground transition-transform duration-300 group-hover:translate-x-1"
+                    >
+                      View Project
+                      <ArrowUpRight size={16} aria-hidden strokeWidth={2.5} />
+                    </a>
+                  </div>
+
+                  <a
+                    href={href}
+                    target={isExternal ? '_blank' : undefined}
+                    rel={isExternal ? 'noopener noreferrer' : undefined}
+                    aria-label={`Open project: ${project.title}`}
+                    className="relative block aspect-[16/10] overflow-hidden border border-border bg-surface"
+                  >
+                    <Image
+                      src={project.media.src}
+                      alt={project.media.alt}
+                      fill
+                      sizes="(min-width: 1024px) 36vw, (min-width: 640px) 80vw, 100vw"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    />
+                  </a>
+                </article>
+              </MotionDiv>
+            )
+          })}
         </MotionDiv>
       </Container>
     </MotionSection>
