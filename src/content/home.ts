@@ -41,11 +41,9 @@ export const homeContent: HomeContent = {
   about: {
     titleLeading: 'About',
     titleAccent: 'Me',
-    intro:
-      'AI systems and computer vision engineer building multidisciplinary intelligent systems across robotics and real-time machine learning.',
+    intro: 'I build fast, reliable AI and computer vision products.',
     paragraphs: [
-      'Founder and tech lead at EVOID, building bespoke AI, computer vision, and robotics products for startups and industry teams.',
-      'Applied AI and computer vision engineer at Oreyeon LDA, improving runway safety through advanced computer vision solutions.',
+      'From robotics to safety systems, I ship production-ready solutions.',
     ],
     image: {
       src: '/images/home/portrait.png',

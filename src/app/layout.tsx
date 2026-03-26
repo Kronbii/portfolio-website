@@ -68,8 +68,12 @@ export const metadata: Metadata = {
       { rel: 'icon', url: '/icons/icon-192.png', sizes: '192x192' },
       { rel: 'icon', url: '/icons/icon-512.png', sizes: '512x512' },
     ],
+    shortcut: '/favicon.ico',
   },
   manifest: '/manifest.json',
+  verification: {
+    google: 'NYZnC5C68zUWoECvjepE8pdOfwlGSfp6V1siItS1Ss4',
+  },
 }
 
 export default function RootLayout({

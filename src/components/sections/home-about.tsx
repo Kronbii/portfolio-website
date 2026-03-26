@@ -1,13 +1,14 @@
 import { Container } from '@/components/ui/container'
 import { ScrollReveal } from '@/components/lightswind/scroll-reveal'
 import { NumberTicker } from '@/components/ui/number-ticker'
+import { homeContent } from '@/content/home'
 
-const aboutStats = [
-  { value: 4, label: 'Years Experience' },
-  { value: 10, label: 'Projects Delivered' },
-  { value: 5, label: 'Awards Won' },
-  { value: 5, label: 'Community Initiatives' },
-]
+const { about } = homeContent
+
+const aboutStats = about.stats.map((stat) => ({
+  value: Number(stat.value) || 0,
+  label: stat.label,
+}))
 
 export function HomeAboutSection() {
   return (
@@ -25,8 +26,14 @@ export function HomeAboutSection() {
           containerClassName="mx-auto max-w-6xl"
           textClassName="text-balance !font-black uppercase !leading-[0.9] tracking-tight !text-5xl sm:!text-6xl md:!text-[5.2rem] lg:!text-[7rem] text-foreground"
         >
-          {'GLORP NEXUS VELTRON AXIOM QWENAR ZYTHER MONIX PRAEVOR UMBRAL KINETIX'}
+          {about.intro}
         </ScrollReveal>
+
+        <div className="mx-auto mt-10 max-w-4xl space-y-5 text-balance text-center text-base leading-relaxed text-foreground/80 md:text-lg">
+          {about.paragraphs.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+        </div>
 
         <div className="mx-auto mt-20 grid max-w-5xl grid-cols-2 gap-x-10 gap-y-10 md:grid-cols-4 md:gap-x-12">
           {aboutStats.map((stat) => (
