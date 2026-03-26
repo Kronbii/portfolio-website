@@ -1,7 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { useMemo, useState } from 'react'
+import { motion } from 'motion/react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 import { homeContent } from '@/content/home'
 import { Container } from '@/components/ui/container'
@@ -17,12 +18,67 @@ const isHttpLink = (href: string) =>
   href.startsWith('http://') || href.startsWith('https://') || href.startsWith('//')
 
 export function SitePillNav() {
+  const [isVisible, setIsVisible] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const visibleRef = useRef(false)
+  const lastScrollYRef = useRef(0)
+  const rafRef = useRef<number | null>(null)
 
   const items = useMemo(
     () => homeContent.navigation.map((item) => ({ label: item.label, href: item.href })),
     []
   )
+
+  useEffect(() => {
+    const setVisibility = (next: boolean) => {
+      if (visibleRef.current === next) return
+      visibleRef.current = next
+      setIsVisible(next)
+      if (!next) {
+        setIsMobileMenuOpen(false)
+      }
+    }
+
+    const updateVisibility = () => {
+      const currentY = Math.max(0, window.scrollY)
+      if (currentY <= 0) {
+        setVisibility(false)
+        lastScrollYRef.current = currentY
+        rafRef.current = null
+        return
+      }
+
+      const delta = currentY - lastScrollYRef.current
+
+      if (delta > 0) {
+        setVisibility(false)
+      } else if (delta < 0) {
+        setVisibility(true)
+      }
+
+      lastScrollYRef.current = currentY
+      rafRef.current = null
+    }
+
+    const requestUpdate = () => {
+      if (rafRef.current !== null) return
+      rafRef.current = window.requestAnimationFrame(updateVisibility)
+    }
+
+    lastScrollYRef.current = window.scrollY
+    updateVisibility()
+
+    window.addEventListener('scroll', requestUpdate, { passive: true })
+    window.addEventListener('resize', requestUpdate)
+
+    return () => {
+      window.removeEventListener('scroll', requestUpdate)
+      window.removeEventListener('resize', requestUpdate)
+      if (rafRef.current !== null) {
+        window.cancelAnimationFrame(rafRef.current)
+      }
+    }
+  }, [])
 
   const NavLink = ({
     href,
@@ -62,7 +118,15 @@ export function SitePillNav() {
   }
 
   return (
-    <header className='fixed inset-x-0 top-0 z-[80] py-4'>
+    <motion.header
+      className={cn('fixed inset-x-0 top-0 z-[80] py-4', isVisible ? 'pointer-events-auto' : 'pointer-events-none')}
+      initial={false}
+      animate={{
+        opacity: isVisible ? 1 : 0,
+        y: isVisible ? 0 : -16,
+      }}
+      transition={{ duration: 0.25, ease: 'easeOut' }}
+    >
       <Container>
         <div className='rounded-full border border-white/15 bg-[#0c0c0c]/90 px-4 py-2 text-[#f5f5f5] shadow-[0_12px_40px_rgba(0,0,0,0.35)] backdrop-blur'>
           <div className='flex items-center justify-between gap-3'>
@@ -111,6 +175,6 @@ export function SitePillNav() {
           </div>
         </div>
       </Container>
-    </header>
+    </motion.header>
   )
 }
