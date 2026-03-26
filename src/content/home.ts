@@ -24,7 +24,7 @@ export const homeContent: HomeContent = {
       href: '#contact',
     },
     image: {
-      src: '/images/home/portrait.png',
+      src: '/images/home/portrait.avif',
       alt: 'Portrait of Rami Kronbi',
     },
     metrics: [
@@ -46,7 +46,7 @@ export const homeContent: HomeContent = {
       'From robotics to safety systems, I ship production-ready solutions.',
     ],
     image: {
-      src: '/images/home/portrait.png',
+      src: '/images/home/portrait.avif',
       alt: 'Portrait of Rami Kronbi',
     },
     stats: [

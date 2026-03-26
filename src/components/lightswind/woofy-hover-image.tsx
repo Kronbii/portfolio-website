@@ -287,98 +287,129 @@ const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
     const loadTex = (s: string): Promise<THREE.Texture> =>
       new Promise((resolve, reject) => loader.load(s, resolve, undefined, reject));
 
-    loadTex(src).then((texture) => {
-      const img1 = texture.image as HTMLImageElement;
-      const imageAspect = img1.width / img1.height;
+    const sourceCandidates = src.match(/\.avif(?=([?#].*)?$)/i)
+      ? Array.from(
+          new Set([
+            src,
+            src.replace(/\.avif(?=([?#].*)?$)/i, '.webp'),
+            src.replace(/\.avif(?=([?#].*)?$)/i, '.png'),
+          ])
+        )
+      : [src];
 
-      texture.minFilter = THREE.LinearFilter;
-      texture.magFilter = THREE.LinearFilter;
-      texture.anisotropy = 8;
-      texture.generateMipmaps = false;
+    const loadFirstAvailableTexture = async (
+      candidates: string[]
+    ): Promise<THREE.Texture> => {
+      let lastError: unknown;
 
-      const scene = new THREE.Scene();
-      sceneRef.current = scene;
-
-      const containerWidth = container.clientWidth;
-      const containerHeight = container.clientHeight;
-
-      const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-
-      const uniforms = {
-        u_texture: { value: texture },
-        u_mouse: { value: new THREE.Vector2(0.5, 0.5) },
-        u_time: { value: 0.0 },
-        u_resolution: { value: new THREE.Vector2(containerWidth, containerHeight) },
-        u_radius: { value: 0.0 },
-        u_speed: { value: 0.75 },
-        u_imageAspect: { value: imageAspect },
-        u_turbulenceIntensity: { value: turbulenceIntensity },
-        u_effectType: { value: getEffectTypeValue(effectType) },
-        u_effectIntensity: { value: effectIntensity },
-        u_invertMask: { value: invertMask },
-        u_pixelateIntensity: { value: pixelateIntensity },
-        u_blurIntensity: { value: blurIntensity },
-        u_effectColor1: { value: hexToRgb(duotoneColor1) },
-        u_effectColor2: { value: hexToRgb(duotoneColor2) },
-      };
-
-      uniformsRef.current = uniforms;
-
-      const geometry = new THREE.PlaneGeometry(2, 2);
-      const material = new THREE.ShaderMaterial({
-        uniforms,
-        vertexShader,
-        fragmentShader,
-        depthTest: false,
-        depthWrite: false,
-        transparent: true,
-      });
-
-      const mesh = new THREE.Mesh(geometry, material);
-      scene.add(mesh);
-
-      const renderer = new THREE.WebGLRenderer({
-        antialias: false,
-        powerPreference: "high-performance",
-        alpha: true,
-        premultipliedAlpha: false,
-      });
-
-      renderer.setPixelRatio(1);
-      renderer.setSize(containerWidth, containerHeight);
-      rendererRef.current = renderer;
-
-      // Clear any existing canvas
-      const existingCanvas = container.querySelector('canvas');
-      if (existingCanvas) {
-        existingCanvas.remove();
+      for (const candidate of candidates) {
+        try {
+          return await loadTex(candidate);
+        } catch (error) {
+          lastError = error;
+        }
       }
 
-      container.appendChild(renderer.domElement);
-      renderer.domElement.style.position = 'absolute';
-      renderer.domElement.style.top = '0';
-      renderer.domElement.style.left = '0';
-      renderer.domElement.style.width = '100%';
-      renderer.domElement.style.height = '100%';
-      renderer.domElement.style.zIndex = '1';
+      throw lastError ?? new Error('Failed to load texture.');
+    };
 
-      // Animation loop
-      const animate = () => {
-        if (!uniformsRef.current || !rendererRef.current || !sceneRef.current) return;
+    loadFirstAvailableTexture(sourceCandidates)
+      .then((texture) => {
+        const img1 = texture.image as HTMLImageElement;
+        const imageAspect = img1.width / img1.height;
 
-        lerpedMouseRef.current.lerp(targetMouseRef.current, 0.1);
-        uniformsRef.current.u_mouse.value.copy(lerpedMouseRef.current);
+        texture.minFilter = THREE.LinearFilter;
+        texture.magFilter = THREE.LinearFilter;
+        texture.anisotropy = 8;
+        texture.generateMipmaps = false;
 
-        if (isMouseInsideRef.current) {
-          uniformsRef.current.u_time.value += 0.01 * animationSpeed;
+        const scene = new THREE.Scene();
+        sceneRef.current = scene;
+
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
+
+        const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+
+        const uniforms = {
+          u_texture: { value: texture },
+          u_mouse: { value: new THREE.Vector2(0.5, 0.5) },
+          u_time: { value: 0.0 },
+          u_resolution: { value: new THREE.Vector2(containerWidth, containerHeight) },
+          u_radius: { value: 0.0 },
+          u_speed: { value: 0.75 },
+          u_imageAspect: { value: imageAspect },
+          u_turbulenceIntensity: { value: turbulenceIntensity },
+          u_effectType: { value: getEffectTypeValue(effectType) },
+          u_effectIntensity: { value: effectIntensity },
+          u_invertMask: { value: invertMask },
+          u_pixelateIntensity: { value: pixelateIntensity },
+          u_blurIntensity: { value: blurIntensity },
+          u_effectColor1: { value: hexToRgb(duotoneColor1) },
+          u_effectColor2: { value: hexToRgb(duotoneColor2) },
+        };
+
+        uniformsRef.current = uniforms;
+
+        const geometry = new THREE.PlaneGeometry(2, 2);
+        const material = new THREE.ShaderMaterial({
+          uniforms,
+          vertexShader,
+          fragmentShader,
+          depthTest: false,
+          depthWrite: false,
+          transparent: true,
+        });
+
+        const mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
+
+        const renderer = new THREE.WebGLRenderer({
+          antialias: false,
+          powerPreference: "high-performance",
+          alpha: true,
+          premultipliedAlpha: false,
+        });
+
+        renderer.setPixelRatio(1);
+        renderer.setSize(containerWidth, containerHeight);
+        rendererRef.current = renderer;
+
+        // Clear any existing canvas
+        const existingCanvas = container.querySelector('canvas');
+        if (existingCanvas) {
+          existingCanvas.remove();
         }
 
-        rendererRef.current.render(sceneRef.current, camera);
-        animationIdRef.current = requestAnimationFrame(animate);
-      };
+        container.appendChild(renderer.domElement);
+        renderer.domElement.style.position = 'absolute';
+        renderer.domElement.style.top = '0';
+        renderer.domElement.style.left = '0';
+        renderer.domElement.style.width = '100%';
+        renderer.domElement.style.height = '100%';
+        renderer.domElement.style.zIndex = '1';
 
-      animate();
-    });
+        // Animation loop
+        const animate = () => {
+          if (!uniformsRef.current || !rendererRef.current || !sceneRef.current) return;
+
+          lerpedMouseRef.current.lerp(targetMouseRef.current, 0.1);
+          uniformsRef.current.u_mouse.value.copy(lerpedMouseRef.current);
+
+          if (isMouseInsideRef.current) {
+            uniformsRef.current.u_time.value += 0.01 * animationSpeed;
+          }
+
+          rendererRef.current.render(sceneRef.current, camera);
+          animationIdRef.current = requestAnimationFrame(animate);
+        };
+
+        animate();
+      })
+      .catch((error) => {
+        // Surface loading failures in dev tools without crashing the app.
+        console.error('Failed to load hover image texture.', error);
+      });
   }, [src, effectType, maskRadius, turbulenceIntensity, animationSpeed, effectIntensity, invertMask, pixelateIntensity, blurIntensity, duotoneColor1, duotoneColor2]);
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
