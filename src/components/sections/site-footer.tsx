@@ -10,8 +10,7 @@ const footerColumns: FooterColumn[] = [
     links: [
       { text: 'Home', url: '#home' },
       { text: 'About', url: '#about' },
-      { text: 'Expertise', url: '#capabilities' },
-      { text: 'Selected Work', url: '#selected-work' },
+      { text: 'Portfolio', url: '#selected-work' },
     ],
   },
   {

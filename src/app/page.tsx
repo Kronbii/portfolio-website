@@ -1,5 +1,4 @@
 import { HomeAboutSection } from '@/components/sections/home-about'
-import { HomeCapabilitiesSection } from '@/components/sections/home-capabilities'
 import { HomeProjectsSection } from '@/components/sections/home-projects'
 import { HomeCommunitySection } from '@/components/sections/home-community'
 import { HomeContactSection } from '@/components/sections/home-contact'
@@ -14,9 +13,6 @@ export default function HomePage() {
       </div>
       <div className="section-theme-light snap-start snap-always">
         <HomeAboutSection />
-      </div>
-      <div className="section-theme-dark snap-start snap-always">
-        <HomeCapabilitiesSection />
       </div>
       <div className="section-theme-light snap-start snap-always">
         <HomeProjectsSection />
