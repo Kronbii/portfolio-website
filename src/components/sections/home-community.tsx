@@ -7,7 +7,7 @@ import { homeContent } from '@/content/home'
 import { SectionHeading } from '@/components/blocks/section-heading'
 import { Container } from '@/components/ui/container'
 import { MotionDiv, MotionSection } from '@/components/ui/motion'
-import { revealUp, staggerContainer } from '@/lib/motion'
+import { revealUpEarly, staggerContainerEarly } from '@/lib/motion'
 
 export function HomeCommunitySection() {
   const { community } = homeContent
@@ -16,14 +16,14 @@ export function HomeCommunitySection() {
     <MotionSection
       id="community"
       className="border-b border-border bg-background py-24 sm:py-28"
-      {...revealUp}
+      {...revealUpEarly}
     >
       <Container className="space-y-14">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
           <SectionHeading {...community} />
           <MotionDiv
             className="border border-border bg-surface/40 px-6 py-7"
-            {...revealUp}
+            {...revealUpEarly}
           >
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
               Mission In Action
@@ -37,7 +37,7 @@ export function HomeCommunitySection() {
           </MotionDiv>
         </div>
 
-        <MotionDiv className="grid gap-6 lg:grid-cols-2" {...staggerContainer}>
+        <MotionDiv className="grid gap-6 lg:grid-cols-2" {...staggerContainerEarly}>
           {community.items.map((item, index) => {
             const hasLink = Boolean(item.link)
             const isExternal = item.link?.startsWith('http')
@@ -89,7 +89,7 @@ export function HomeCommunitySection() {
 
             if (hasLink && item.link) {
               return (
-                <MotionDiv key={item.id} {...revealUp}>
+                <MotionDiv key={item.id} {...revealUpEarly}>
                   <a
                     href={item.link}
                     target={isExternal ? '_blank' : undefined}
@@ -103,7 +103,7 @@ export function HomeCommunitySection() {
             }
 
             return (
-              <MotionDiv key={item.id} {...revealUp}>
+              <MotionDiv key={item.id} {...revealUpEarly}>
                 <article className={cardClassName}>{cardContent}</article>
               </MotionDiv>
             )

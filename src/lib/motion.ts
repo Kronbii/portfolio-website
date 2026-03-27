@@ -35,6 +35,22 @@ export const staggerContainer = {
   },
 }
 
+const earlyViewport = {
+  once: true,
+  amount: 0.12,
+  margin: '0px 0px -12% 0px',
+}
+
+export const revealUpEarly = {
+  ...revealUp,
+  viewport: earlyViewport,
+}
+
+export const staggerContainerEarly = {
+  ...staggerContainer,
+  viewport: earlyViewport,
+}
+
 export const hoverLift = {
   whileHover: {
     y: -4,

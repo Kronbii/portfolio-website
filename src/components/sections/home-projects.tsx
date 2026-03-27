@@ -8,7 +8,7 @@ import { projectMap } from '@/content/projects'
 import { SectionHeading } from '@/components/blocks/section-heading'
 import { Container } from '@/components/ui/container'
 import { MotionDiv, MotionSection } from '@/components/ui/motion'
-import { revealUp, staggerContainer } from '@/lib/motion'
+import { revealUpEarly, staggerContainerEarly } from '@/lib/motion'
 
 const spotlightProjects = homeContent.projects.spotlightSlugs
   .map((slug) => projectMap[slug])
@@ -19,14 +19,14 @@ export function HomeProjectsSection() {
     <MotionSection
       id="selected-work"
       className="section-theme-dark border-b border-border bg-background py-24 sm:py-28"
-      {...revealUp}
+      {...revealUpEarly}
     >
       <Container className="space-y-14">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
           <SectionHeading {...homeContent.projects} />
           <MotionDiv
             className="border border-border bg-surface/35 px-6 py-7"
-            {...revealUp}
+            {...revealUpEarly}
           >
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
               Portfolio Snapshot
@@ -40,7 +40,7 @@ export function HomeProjectsSection() {
           </MotionDiv>
         </div>
 
-        <MotionDiv className="grid gap-6 md:gap-8" {...staggerContainer}>
+        <MotionDiv className="grid gap-6 md:gap-8" {...staggerContainerEarly}>
           {spotlightProjects.map((project, index) => {
             const href = project.externalUrl || project.githubUrl
             const isExternal = href.startsWith('http')
@@ -49,7 +49,7 @@ export function HomeProjectsSection() {
               <MotionDiv
                 key={project.slug}
                 className="group border border-border bg-surface/20 transition-colors duration-300 hover:bg-surface/40"
-                {...revealUp}
+                {...revealUpEarly}
               >
                 <article className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-center lg:gap-10">
                   <div>
