@@ -10,7 +10,7 @@ export function HomeHeroSection() {
   return (
     <section
       id="home"
-      className={cn('relative min-h-screen overflow-hidden bg-background', styles.section)}
+      className={cn('relative min-h-svh sm:min-h-screen overflow-hidden bg-background', styles.section)}
     >
       {/* Top bar — three captions */}
       <div className={styles.topBar}>

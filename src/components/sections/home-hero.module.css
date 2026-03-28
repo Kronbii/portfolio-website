@@ -12,10 +12,10 @@
   --portrait-h: min(82svh, 40rem);
   --portrait-w: min(90vw, 28rem);
   --portrait-nudge-x: 0rem;
-  --portrait-nudge-y: clamp(-12rem, -16vh, -9rem);
+  --portrait-nudge-y: clamp(-12rem, -16svh, -9rem);
 
   /* Text placement — sits low, inside the gradient zone */
-  --text-position-bottom: 5vh;
+  --text-position-bottom: 5svh;
 
   /* Role text */
   --role-font-size: clamp(0.6rem, 2.6vw, 0.85rem);
@@ -40,7 +40,7 @@
   --mission-offset-x: 0.1rem;
 
   /* Bottom fade — tall & heavy to cover bottom 45% */
-  --fade-h: 45vh;
+  --fade-h: 45svh;
 }
 
 @media (min-width: 640px) {
