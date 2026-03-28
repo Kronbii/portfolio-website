@@ -15,7 +15,7 @@ export function HomeHeroSection() {
       {/* Top bar — three captions */}
       <div className={styles.topBar}>
         <img src="/images/home/sig.png" alt="Signature" className={styles.signatureMark} />
-        <span>{hero.specialty}</span>
+        <span className={styles.specialtyText}>{hero.specialty}</span>
         <a href={hero.secondaryCta.href} className={styles.contactCta}>
           {hero.secondaryCta.label}
         </a>
