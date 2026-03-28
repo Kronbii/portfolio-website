@@ -87,7 +87,7 @@ export default function RootLayout({
       className={zalandoSans.variable}
       suppressHydrationWarning
     >
-      <body>
+      <body suppressHydrationWarning>
         <SmoothScrollProvider>
           <StructuredData />
           <SitePillNav />
