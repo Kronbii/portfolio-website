@@ -2,20 +2,20 @@
  * Hero layout — each token controls one concern.
  * Breakpoints: 640px (sm), 1024px (lg).
  *
- * MOBILE (< 640px) = Option B:
- *   Full-screen portrait, heavy bottom gradient (~45vh),
- *   text sits entirely within the gradient zone.
+ * MOBILE (< 640px):
+ *   Constrained portrait sizing to reduce crop,
+ *   with text anchored inside a heavier bottom gradient zone.
  */
 
 .section {
-  /* Portrait — fill the entire screen on mobile */
-  --portrait-h: 100vh;
-  --portrait-w: min(100vw, 32rem);
+  /* Portrait — constrained on mobile to avoid oversized crop */
+  --portrait-h: min(82svh, 40rem);
+  --portrait-w: min(90vw, 28rem);
   --portrait-nudge-x: 0rem;
-  --portrait-nudge-y: 0rem;
+  --portrait-nudge-y: clamp(-6rem, -8vh, -2.5rem);
 
   /* Text placement — sits low, inside the gradient zone */
-  --text-position-bottom: 3vh;
+  --text-position-bottom: 5vh;
 
   /* Role text */
   --role-font-size: clamp(0.6rem, 2.6vw, 0.85rem);
@@ -47,6 +47,8 @@
   .section {
     --portrait-h: 94vh;
     --portrait-w: min(74vw, 46rem);
+    --portrait-nudge-x: clamp(-3.5rem, -6vw, -2rem);
+    --portrait-nudge-y: clamp(-5rem, -2.5vh, 10rem);
     --text-position-bottom: 12vh;
     
     /* Role text (tablet) */
