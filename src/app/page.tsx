@@ -7,7 +7,7 @@ import { SiteFooterSection } from '@/components/sections/site-footer'
 
 export default function HomePage() {
   return (
-    <main className="snap-y snap-mandatory">
+    <main className="snap-y">
       <div className="section-theme-dark snap-start snap-always">
         <HomeHeroSection />
       </div>
