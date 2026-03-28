@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback, useState } from 'react';
 import { cn } from '../../lib/utils';
 import * as THREE from 'three';
 
@@ -23,6 +23,7 @@ export interface WoofyHoverImageProps {
   blurIntensity?: number;
   duotoneColor1?: string;
   duotoneColor2?: string;
+  disableOnTouch?: boolean;
   onHover?: () => void;
   onLeave?: () => void;
 }
@@ -46,10 +47,12 @@ const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
   blurIntensity = 5, // blur effect: blur radius
   duotoneColor1 = '#3366cc', // duotone effect: first color
   duotoneColor2 = '#e63333', // duotone effect: second color
+  disableOnTouch = true,
   onHover,
   onLeave,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [interactiveEnabled, setInteractiveEnabled] = useState(false);
   const sceneRef = useRef<THREE.Scene | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
@@ -59,6 +62,15 @@ const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
   const isMouseInsideRef = useRef(false);
   const targetMouseRef = useRef(new THREE.Vector2(0.5, 0.5));
   const lerpedMouseRef = useRef(new THREE.Vector2(0.5, 0.5));
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isTouchDevice =
+      window.matchMedia('(any-pointer: coarse), (pointer: coarse), (hover: none)').matches ||
+      navigator.maxTouchPoints > 0;
+
+    setInteractiveEnabled(!(reduceMotion || (disableOnTouch && isTouchDevice)));
+  }, [disableOnTouch]);
 
   const vertexShader = `
     varying vec2 v_uv;
@@ -502,6 +514,10 @@ const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
   }, [maskRadius, appearDuration, disappearDuration, onHover, onLeave]);
 
   useEffect(() => {
+    if (!interactiveEnabled) {
+      return;
+    }
+
     initializeEffect();
 
     document.addEventListener('mousemove', handleMouseMove, { passive: true });
@@ -515,6 +531,7 @@ const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
       
       if (rendererRef.current) {
         rendererRef.current.dispose();
+        rendererRef.current = null;
       }
 
       if (resizeObserverRef.current) {
@@ -527,8 +544,12 @@ const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
         window.visualViewport?.removeEventListener('resize', resizeHandlerRef.current);
         resizeHandlerRef.current = null;
       }
+
+      sceneRef.current = null;
+      uniformsRef.current = null;
+      isMouseInsideRef.current = false;
     };
-  }, [initializeEffect, handleMouseMove]);
+  }, [interactiveEnabled, initializeEffect, handleMouseMove]);
 
   return (
     <div
@@ -540,7 +561,8 @@ const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
       <img
         src={src}
         alt={alt}
-        style={{ position: 'absolute', opacity: 0, pointerEvents: 'none' }}
+        className="absolute inset-0 h-full w-full object-cover"
+        style={{ opacity: interactiveEnabled ? 0 : 1, pointerEvents: 'none' }}
       />
     </div>
   );
