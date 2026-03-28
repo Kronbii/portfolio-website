@@ -51,6 +51,7 @@
     cursor: default;
     font-family: var(--font-sans), system-ui, sans-serif;
     min-height: 100vh;
+    min-height: 100svh;
     text-rendering: optimizeLegibility;
   }
 

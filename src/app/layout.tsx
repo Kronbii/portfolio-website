@@ -91,7 +91,7 @@ export default function RootLayout({
         <SmoothScrollProvider>
           <StructuredData />
           <SitePillNav />
-          <div className="min-h-screen bg-background text-foreground">
+          <div className="min-h-svh bg-background text-foreground">
             {children}
           </div>
         </SmoothScrollProvider>

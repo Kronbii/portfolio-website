@@ -107,30 +107,38 @@
 }
 
 /*
- * Touch screens: keep hero sizing pinned to the small viewport so browser
- * chrome collapse/expand during scroll does not visually scale the portrait.
+ * Touch screens: avoid viewport-height units to prevent scroll-driven growth
+ * when mobile browser UI collapses/expands.
  */
 @media (hover: none) and (pointer: coarse), (any-pointer: coarse) {
   .section {
-    min-height: 100svh;
-    --portrait-h: min(82svh, 40rem);
-    --portrait-nudge-y: clamp(-12rem, -16svh, -9rem);
-    --text-position-bottom: 5svh;
+    min-height: clamp(40rem, 148vw, 68rem);
+    --portrait-h: clamp(30rem, 132vw, 46rem);
+    --portrait-nudge-y: clamp(-9rem, -14vw, -5rem);
+    --text-position-bottom: clamp(1.5rem, 5vw, 3rem);
+    --role-margin-bottom: clamp(0.35rem, 1.2vw, 0.85rem);
+    --mission-margin-top: clamp(0.5rem, 1.6vw, 0.95rem);
   }
 }
 
 @media ((hover: none) and (pointer: coarse) and (min-width: 640px)), ((any-pointer: coarse) and (min-width: 640px)) {
   .section {
-    --portrait-h: 94svh;
-    --portrait-nudge-y: clamp(-5rem, -2.5svh, 10rem);
-    --text-position-bottom: 12svh;
+    min-height: clamp(48rem, 120vw, 74rem);
+    --portrait-h: clamp(38rem, 104vw, 56rem);
+    --portrait-nudge-y: clamp(-6rem, -7vw, 4rem);
+    --text-position-bottom: clamp(2rem, 4.8vw, 4.25rem);
+    --role-margin-bottom: clamp(0.45rem, 1vw, 1.05rem);
+    --mission-margin-top: clamp(0.6rem, 1.2vw, 1.1rem);
   }
 }
 
 @media ((hover: none) and (pointer: coarse) and (min-width: 1024px)), ((any-pointer: coarse) and (min-width: 1024px)) {
   .section {
-    --portrait-h: 100svh;
-    --text-position-bottom: 18svh;
+    min-height: clamp(54rem, 90vw, 84rem);
+    --portrait-h: clamp(44rem, 74vw, 64rem);
+    --text-position-bottom: clamp(2.5rem, 4.2vw, 5.25rem);
+    --role-margin-bottom: clamp(0.25rem, 0.6vw, 0.65rem);
+    --mission-margin-top: clamp(0.65rem, 0.95vw, 1.25rem);
   }
 }
 /* ─── Top bar ────────────────────────────────────────── */
