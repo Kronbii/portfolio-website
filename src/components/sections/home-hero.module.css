@@ -11,7 +11,7 @@
   /* Portrait — constrained on mobile to avoid oversized crop */
   --portrait-h: min(82svh, 40rem);
   --portrait-w: min(90vw, 28rem);
-  --portrait-nudge-x: 0rem;
+  --portrait-nudge-x: clamp(-2rem, -5vw, -0.55rem);
   --portrait-nudge-y: clamp(-12rem, -16svh, -9rem);
 
   /* Text placement — sits low, inside the gradient zone */
