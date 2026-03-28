@@ -105,6 +105,34 @@
     --fade-h: 20rem;
   }
 }
+
+/*
+ * Touch screens: keep hero sizing pinned to the small viewport so browser
+ * chrome collapse/expand during scroll does not visually scale the portrait.
+ */
+@media (hover: none) and (pointer: coarse), (any-pointer: coarse) {
+  .section {
+    min-height: 100svh;
+    --portrait-h: min(82svh, 40rem);
+    --portrait-nudge-y: clamp(-12rem, -16svh, -9rem);
+    --text-position-bottom: 5svh;
+  }
+}
+
+@media ((hover: none) and (pointer: coarse) and (min-width: 640px)), ((any-pointer: coarse) and (min-width: 640px)) {
+  .section {
+    --portrait-h: 94svh;
+    --portrait-nudge-y: clamp(-5rem, -2.5svh, 10rem);
+    --text-position-bottom: 12svh;
+  }
+}
+
+@media ((hover: none) and (pointer: coarse) and (min-width: 1024px)), ((any-pointer: coarse) and (min-width: 1024px)) {
+  .section {
+    --portrait-h: 100svh;
+    --text-position-bottom: 18svh;
+  }
+}
 /* ─── Top bar ────────────────────────────────────────── */
 
 .topBar {
