@@ -25,12 +25,19 @@ export function HomeHeroSection() {
       <div className={styles.portraitLayer}>
         <div className={styles.portraitFrame}>
           <div className={styles.portraitGlow} aria-hidden />
+          <img
+            src={hero.image.src}
+            alt={hero.image.alt}
+            className="absolute inset-0 z-10 h-full w-full object-cover sm:hidden"
+            loading="eager"
+            decoding="async"
+          />
           <WoofyHoverImage
             src={hero.image.src}
             alt={hero.image.alt}
             width="100%"
             height="100%"
-            className="absolute inset-0 z-10"
+            className="absolute inset-0 z-10 hidden sm:block"
           />
         </div>
       </div>
