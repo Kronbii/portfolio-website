@@ -52,6 +52,8 @@ const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+  const resizeObserverRef = useRef<ResizeObserver | null>(null);
+  const resizeHandlerRef = useRef<(() => void) | null>(null);
   const uniformsRef = useRef<any>(null);
   const animationIdRef = useRef<number | null>(null);
   const isMouseInsideRef = useRef(false);
@@ -389,6 +391,35 @@ const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
         renderer.domElement.style.height = '100%';
         renderer.domElement.style.zIndex = '1';
 
+        const updateRendererSize = () => {
+          if (!containerRef.current || !rendererRef.current || !uniformsRef.current) {
+            return;
+          }
+
+          const nextWidth = containerRef.current.clientWidth;
+          const nextHeight = containerRef.current.clientHeight;
+
+          if (nextWidth <= 0 || nextHeight <= 0) {
+            return;
+          }
+
+          rendererRef.current.setSize(nextWidth, nextHeight, false);
+          uniformsRef.current.u_resolution.value.set(nextWidth, nextHeight);
+        };
+
+        updateRendererSize();
+        resizeHandlerRef.current = updateRendererSize;
+        window.addEventListener('resize', updateRendererSize, { passive: true });
+        window.visualViewport?.addEventListener('resize', updateRendererSize);
+
+        if (typeof ResizeObserver !== 'undefined') {
+          const resizeObserver = new ResizeObserver(() => {
+            updateRendererSize();
+          });
+          resizeObserver.observe(container);
+          resizeObserverRef.current = resizeObserver;
+        }
+
         // Animation loop
         const animate = () => {
           if (!uniformsRef.current || !rendererRef.current || !sceneRef.current) return;
@@ -484,6 +515,17 @@ const WoofyHoverImage: React.FC<WoofyHoverImageProps> = ({
       
       if (rendererRef.current) {
         rendererRef.current.dispose();
+      }
+
+      if (resizeObserverRef.current) {
+        resizeObserverRef.current.disconnect();
+        resizeObserverRef.current = null;
+      }
+
+      if (resizeHandlerRef.current) {
+        window.removeEventListener('resize', resizeHandlerRef.current);
+        window.visualViewport?.removeEventListener('resize', resizeHandlerRef.current);
+        resizeHandlerRef.current = null;
       }
     };
   }, [initializeEffect, handleMouseMove]);
