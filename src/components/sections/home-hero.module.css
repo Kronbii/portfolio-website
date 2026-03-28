@@ -12,7 +12,7 @@
   --portrait-h: min(82svh, 40rem);
   --portrait-w: min(90vw, 28rem);
   --portrait-nudge-x: 0rem;
-  --portrait-nudge-y: clamp(-6rem, -8vh, -2.5rem);
+  --portrait-nudge-y: clamp(-12rem, -16vh, -9rem);
 
   /* Text placement — sits low, inside the gradient zone */
   --text-position-bottom: 5vh;
