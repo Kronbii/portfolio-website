@@ -51,7 +51,7 @@ export function HomeCommunitySection() {
                     src={item.image.src}
                     alt={item.image.alt}
                     fill
-                    sizes="(min-width: 1024px) 44vw, 100vw"
+                    sizes="(min-width: 1280px) 42vw, (min-width: 1024px) 44vw, (min-width: 640px) 86vw, 92vw"
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/35 to-transparent" />

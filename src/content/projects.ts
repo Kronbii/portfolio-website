@@ -169,7 +169,7 @@ export const projects: Project[] = [
       'Developed a professional-grade tool capable of generating 8K+ panoramas suitable for immersive viewing use cases.',
     githubUrl: 'https://github.com/Kronbii/360-spherical-stitching',
     media: {
-      src: '/images/projects/goat.gif',
+      src: '/images/projects/goat.webp',
       alt: '360 spherical panorama project preview',
     },
     technologies: [
