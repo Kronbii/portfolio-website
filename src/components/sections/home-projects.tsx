@@ -67,9 +67,9 @@ export function HomeProjectsSection() {
                       className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                     />
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/10" />
 
-                    <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
+                    <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
                       <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/50">
                         {(index + 1).toString().padStart(2, '0')} / {project.technologies[0]}
                       </p>
