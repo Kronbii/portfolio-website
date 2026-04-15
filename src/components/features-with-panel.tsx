@@ -138,7 +138,7 @@ export default function FeaturesWithPanel({
                         transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
                         className='w-full overflow-hidden lg:hidden'
                       >
-                        <Card className='w-full mt-3 overflow-hidden p-0 gap-0 aspect-4/3 relative'>
+                        <Card className='w-full mt-3 overflow-hidden p-0 gap-0 aspect-[4/3] relative'>
                           <div className='absolute inset-0'>
                             <FeatureMedia content={item.content} alt={item.alt} />
                           </div>
@@ -152,7 +152,7 @@ export default function FeaturesWithPanel({
           </div>
 
           <div className='hidden lg:block sticky top-10'>
-            <Card className='relative w-full aspect-4/3 overflow-hidden p-0 gap-0'>
+            <Card className='relative w-full aspect-[4/3] overflow-hidden p-0 gap-0'>
               <AnimatePresence mode='wait'>
                 <motion.div
                   key={active}
