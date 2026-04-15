@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ArrowUpRight, X } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 
@@ -21,30 +21,29 @@ const spotlightProjects = homeContent.projects.spotlightSlugs
   .filter(Boolean)
 
 function toFeatureItems(project: Project): FeatureItem[] {
-  return [
-    { title: 'Overview', content: project.description },
-    { title: 'The Problem', content: project.problem },
-    { title: 'The Solution', content: project.solution },
-    { title: 'My Role', content: project.myRole },
-    { title: 'Outcome', content: project.outcome },
-    {
-      title: 'Key Features',
-      content: (
-        <ul className="flex flex-col gap-3 p-6 justify-center h-full">
-          {project.features.map((f, i) => (
-            <li key={i} className="flex items-start gap-2.5 text-sm text-muted-foreground">
-              <span className="mt-1.5 size-1.5 rounded-full bg-foreground shrink-0" />
-              {f}
-            </li>
-          ))}
-        </ul>
-      ),
-    },
-  ]
+  return project.features.map((feature) => ({
+    title: feature,
+    content: project.media.src,
+    alt: project.media.alt,
+  }))
 }
 
 export function HomeProjectsSection() {
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null)
+  const [cols, setCols] = useState(2)
+
+  useEffect(() => {
+    const update = () => setCols(window.innerWidth >= 1024 ? 3 : 2)
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
+
+  // Group projects into rows based on current column count
+  const rows: Project[][] = []
+  for (let i = 0; i < spotlightProjects.length; i += cols) {
+    rows.push(spotlightProjects.slice(i, i + cols))
+  }
 
   const selectedProject = selectedSlug
     ? spotlightProjects.find((p) => p.slug === selectedSlug) ?? null
@@ -83,90 +82,96 @@ export function HomeProjectsSection() {
           className="grid grid-cols-2 gap-4 lg:grid-cols-3 md:gap-6"
           {...staggerContainerEarly}
         >
-          {spotlightProjects.map((project, index) => {
-            const href = project.externalUrl || project.githubUrl
-            const isExternal = href.startsWith('http')
-            const isSelected = selectedSlug === project.slug
+          {rows.map((row, rowIndex) => (
+            <>
+              {row.map((project, cardIndex) => {
+                const href = project.externalUrl || project.githubUrl
+                const isExternal = href.startsWith('http')
+                const isSelected = selectedSlug === project.slug
+                const globalIndex = rowIndex * cols + cardIndex
 
-            return (
-              <MotionDiv key={project.slug} {...revealUpEarly}>
-                <CometCard className="w-full" rotateDepth={8} translateDepth={10} scaleOnHover={1.02} zOnHover={20}>
-                  <div
-                    role="button"
-                    onClick={() => handleCardClick(project.slug)}
-                    className={cn(
-                      'group relative block aspect-square overflow-hidden rounded-2xl cursor-pointer transition-shadow duration-300',
-                      isSelected && 'ring-2 ring-white/70'
-                    )}
-                  >
-                    <Image
-                      src={project.media.src}
-                      alt={project.media.alt}
-                      fill
-                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 50vw"
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                    />
-
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/10" />
-
-                    {isSelected && (
-                      <div className="absolute right-3 top-3 flex size-6 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
-                        <X size={12} className="text-white" strokeWidth={2.5} />
-                      </div>
-                    )}
-
-                    <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
-                      <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/50">
-                        {(index + 1).toString().padStart(2, '0')} / {project.technologies[0]}
-                      </p>
-                      <h3 className="mt-1.5 text-base font-black uppercase leading-[0.95] tracking-tight text-white sm:text-xl">
-                        {project.title}
-                      </h3>
-                      <ul className="mt-2 hidden flex-wrap gap-1.5 sm:flex">
-                        {project.technologies.slice(0, 3).map((tech) => (
-                          <li
-                            key={`${project.slug}-${tech}`}
-                            className="border border-white/25 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.14em] text-white/60"
-                          >
-                            {tech}
-                          </li>
-                        ))}
-                      </ul>
-                      <a
-                        href={href}
-                        target={isExternal ? '_blank' : undefined}
-                        rel={isExternal ? 'noopener noreferrer' : undefined}
-                        onClick={(e) => e.stopPropagation()}
-                        className="mt-3 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/80 transition-transform duration-300 group-hover:translate-x-1"
+                return (
+                  <MotionDiv key={project.slug} {...revealUpEarly}>
+                    <CometCard className="w-full" rotateDepth={8} translateDepth={10} scaleOnHover={1.02} zOnHover={20}>
+                      <div
+                        role="button"
+                        onClick={() => handleCardClick(project.slug)}
+                        className={cn(
+                          'group relative block aspect-square overflow-hidden rounded-2xl cursor-pointer transition-shadow duration-300',
+                          isSelected && 'ring-2 ring-white/70'
+                        )}
                       >
-                        View Project
-                        <ArrowUpRight size={12} aria-hidden strokeWidth={2.5} />
-                      </a>
-                    </div>
-                  </div>
-                </CometCard>
-              </MotionDiv>
-            )
-          })}
-        </MotionDiv>
+                        <Image
+                          src={project.media.src}
+                          alt={project.media.alt}
+                          fill
+                          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 50vw"
+                          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                        />
 
-        <AnimatePresence>
-          {selectedProject && (
-            <motion.div
-              key={selectedProject.slug}
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
-              className="overflow-hidden border border-border"
-            >
-              <FeaturesWithPanel
-                title={selectedProject.title}
-                items={toFeatureItems(selectedProject)}
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/10" />
+
+                        {isSelected && (
+                          <div className="absolute right-3 top-3 flex size-6 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
+                            <X size={12} className="text-white" strokeWidth={2.5} />
+                          </div>
+                        )}
+
+                        <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
+                          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/50">
+                            {(globalIndex + 1).toString().padStart(2, '0')} / {project.technologies[0]}
+                          </p>
+                          <h3 className="mt-1.5 text-base font-black uppercase leading-[0.95] tracking-tight text-white sm:text-xl">
+                            {project.title}
+                          </h3>
+                          <ul className="mt-2 hidden flex-wrap gap-1.5 sm:flex">
+                            {project.technologies.slice(0, 3).map((tech) => (
+                              <li
+                                key={`${project.slug}-${tech}`}
+                                className="border border-white/25 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.14em] text-white/60"
+                              >
+                                {tech}
+                              </li>
+                            ))}
+                          </ul>
+                          <a
+                            href={href}
+                            target={isExternal ? '_blank' : undefined}
+                            rel={isExternal ? 'noopener noreferrer' : undefined}
+                            onClick={(e) => e.stopPropagation()}
+                            className="mt-3 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/80 transition-transform duration-300 group-hover:translate-x-1"
+                          >
+                            View Project
+                            <ArrowUpRight size={12} aria-hidden strokeWidth={2.5} />
+                          </a>
+                        </div>
+                      </div>
+                    </CometCard>
+                  </MotionDiv>
+                )
+              })}
+
+              {/* Panel spans full row width, appears right after this row */}
+              <AnimatePresence key={`panel-row-${rowIndex}`}>
+                {row.some((p) => p.slug === selectedSlug) && selectedProject && (
+                  <motion.div
+                    key={selectedProject.slug}
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
+                    className="col-span-full overflow-hidden border border-border"
+                  >
+                    <FeaturesWithPanel
+                      title={selectedProject.title}
+                      items={toFeatureItems(selectedProject)}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </>
+          ))}
+        </MotionDiv>
       </Container>
     </MotionSection>
   )
