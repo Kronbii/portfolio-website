@@ -51,7 +51,7 @@ export function HomeProjectsSection() {
 
             return (
               <MotionDiv key={project.slug} {...revealUpEarly}>
-                <CometCard className="w-full">
+                <CometCard className="w-full" rotateDepth={8} translateDepth={10} scaleOnHover={1.02} zOnHover={20}>
                   <a
                     href={href}
                     target={isExternal ? '_blank' : undefined}

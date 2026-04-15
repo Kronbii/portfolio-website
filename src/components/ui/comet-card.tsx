@@ -12,11 +12,15 @@ import { cn } from "@/lib/utils";
 export const CometCard = ({
   rotateDepth = 17.5,
   translateDepth = 20,
+  scaleOnHover = 1.05,
+  zOnHover = 50,
   className,
   children,
 }: {
   rotateDepth?: number;
   translateDepth?: number;
+  scaleOnHover?: number;
+  zOnHover?: number;
   className?: string;
   children: React.ReactNode;
 }) => {
@@ -94,8 +98,8 @@ export const CometCard = ({
         }}
         initial={{ scale: 1, z: 0 }}
         whileHover={{
-          scale: 1.05,
-          z: 50,
+          scale: scaleOnHover,
+          z: zOnHover,
           transition: { duration: 0.2 },
         }}
         className="relative rounded-2xl"
