@@ -1,21 +1,59 @@
 'use client'
 
 import Image from 'next/image'
-import { ArrowUpRight } from 'lucide-react'
+import { useState } from 'react'
+import { ArrowUpRight, X } from 'lucide-react'
+import { AnimatePresence, motion } from 'motion/react'
 
 import { homeContent } from '@/content/home'
 import { projectMap } from '@/content/projects'
+import { type Project } from '@/content/schema'
 import { SectionHeading } from '@/components/blocks/section-heading'
 import { Container } from '@/components/ui/container'
 import { MotionDiv, MotionSection } from '@/components/ui/motion'
 import { CometCard } from '@/components/ui/comet-card'
+import FeaturesWithPanel, { type FeatureItem } from '@/components/features-with-panel'
 import { revealUpEarly, staggerContainerEarly } from '@/lib/motion'
+import { cn } from '@/lib/utils'
 
 const spotlightProjects = homeContent.projects.spotlightSlugs
   .map((slug) => projectMap[slug])
   .filter(Boolean)
 
+function toFeatureItems(project: Project): FeatureItem[] {
+  return [
+    { title: 'Overview', content: project.description },
+    { title: 'The Problem', content: project.problem },
+    { title: 'The Solution', content: project.solution },
+    { title: 'My Role', content: project.myRole },
+    { title: 'Outcome', content: project.outcome },
+    {
+      title: 'Key Features',
+      content: (
+        <ul className="flex flex-col gap-3 p-6 justify-center h-full">
+          {project.features.map((f, i) => (
+            <li key={i} className="flex items-start gap-2.5 text-sm text-muted-foreground">
+              <span className="mt-1.5 size-1.5 rounded-full bg-foreground shrink-0" />
+              {f}
+            </li>
+          ))}
+        </ul>
+      ),
+    },
+  ]
+}
+
 export function HomeProjectsSection() {
+  const [selectedSlug, setSelectedSlug] = useState<string | null>(null)
+
+  const selectedProject = selectedSlug
+    ? spotlightProjects.find((p) => p.slug === selectedSlug) ?? null
+    : null
+
+  const handleCardClick = (slug: string) => {
+    setSelectedSlug((prev) => (prev === slug ? null : slug))
+  }
+
   return (
     <MotionSection
       id="selected-work"
@@ -48,16 +86,18 @@ export function HomeProjectsSection() {
           {spotlightProjects.map((project, index) => {
             const href = project.externalUrl || project.githubUrl
             const isExternal = href.startsWith('http')
+            const isSelected = selectedSlug === project.slug
 
             return (
               <MotionDiv key={project.slug} {...revealUpEarly}>
                 <CometCard className="w-full" rotateDepth={8} translateDepth={10} scaleOnHover={1.02} zOnHover={20}>
-                  <a
-                    href={href}
-                    target={isExternal ? '_blank' : undefined}
-                    rel={isExternal ? 'noopener noreferrer' : undefined}
-                    aria-label={`Open project: ${project.title}`}
-                    className="group relative block aspect-square overflow-hidden rounded-2xl"
+                  <div
+                    role="button"
+                    onClick={() => handleCardClick(project.slug)}
+                    className={cn(
+                      'group relative block aspect-square overflow-hidden rounded-2xl cursor-pointer transition-shadow duration-300',
+                      isSelected && 'ring-2 ring-white/70'
+                    )}
                   >
                     <Image
                       src={project.media.src}
@@ -68,6 +108,12 @@ export function HomeProjectsSection() {
                     />
 
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/10" />
+
+                    {isSelected && (
+                      <div className="absolute right-3 top-3 flex size-6 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
+                        <X size={12} className="text-white" strokeWidth={2.5} />
+                      </div>
+                    )}
 
                     <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
                       <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/50">
@@ -86,17 +132,41 @@ export function HomeProjectsSection() {
                           </li>
                         ))}
                       </ul>
-                      <div className="mt-3 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/80 transition-transform duration-300 group-hover:translate-x-1">
+                      <a
+                        href={href}
+                        target={isExternal ? '_blank' : undefined}
+                        rel={isExternal ? 'noopener noreferrer' : undefined}
+                        onClick={(e) => e.stopPropagation()}
+                        className="mt-3 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/80 transition-transform duration-300 group-hover:translate-x-1"
+                      >
                         View Project
                         <ArrowUpRight size={12} aria-hidden strokeWidth={2.5} />
-                      </div>
+                      </a>
                     </div>
-                  </a>
+                  </div>
                 </CometCard>
               </MotionDiv>
             )
           })}
         </MotionDiv>
+
+        <AnimatePresence>
+          {selectedProject && (
+            <motion.div
+              key={selectedProject.slug}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
+              className="overflow-hidden border border-border"
+            >
+              <FeaturesWithPanel
+                title={selectedProject.title}
+                items={toFeatureItems(selectedProject)}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </Container>
     </MotionSection>
   )
