@@ -76,7 +76,7 @@ export function HomeProjectsSection() {
                       <h3 className="mt-1.5 text-base font-black uppercase leading-[0.95] tracking-tight text-white sm:text-xl">
                         {project.title}
                       </h3>
-                      <ul className="mt-2 flex flex-wrap gap-1.5">
+                      <ul className="mt-2 hidden flex-wrap gap-1.5 sm:flex">
                         {project.technologies.slice(0, 3).map((tech) => (
                           <li
                             key={`${project.slug}-${tech}`}
