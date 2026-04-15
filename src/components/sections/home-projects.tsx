@@ -42,7 +42,7 @@ export function HomeProjectsSection() {
         </div>
 
         <MotionDiv
-          className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:gap-8"
+          className="grid grid-cols-2 gap-4 lg:grid-cols-3 md:gap-6"
           {...staggerContainerEarly}
         >
           {spotlightProjects.map((project, index) => {
@@ -63,32 +63,32 @@ export function HomeProjectsSection() {
                       src={project.media.src}
                       alt={project.media.alt}
                       fill
-                      sizes="(min-width: 640px) 50vw, 92vw"
+                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 50vw"
                       className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                     />
 
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
-                    <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
-                      <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/50">
+                    <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/50">
                         {(index + 1).toString().padStart(2, '0')} / {project.technologies[0]}
                       </p>
-                      <h3 className="mt-2 text-2xl font-black uppercase leading-[0.95] tracking-tight text-white sm:text-3xl">
+                      <h3 className="mt-1.5 text-base font-black uppercase leading-[0.95] tracking-tight text-white sm:text-xl">
                         {project.title}
                       </h3>
-                      <ul className="mt-3 flex flex-wrap gap-2">
+                      <ul className="mt-2 flex flex-wrap gap-1.5">
                         {project.technologies.slice(0, 3).map((tech) => (
                           <li
                             key={`${project.slug}-${tech}`}
-                            className="border border-white/25 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/60"
+                            className="border border-white/25 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.14em] text-white/60"
                           >
                             {tech}
                           </li>
                         ))}
                       </ul>
-                      <div className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-white/80 transition-transform duration-300 group-hover:translate-x-1">
+                      <div className="mt-3 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/80 transition-transform duration-300 group-hover:translate-x-1">
                         View Project
-                        <ArrowUpRight size={14} aria-hidden strokeWidth={2.5} />
+                        <ArrowUpRight size={12} aria-hidden strokeWidth={2.5} />
                       </div>
                     </div>
                   </a>
