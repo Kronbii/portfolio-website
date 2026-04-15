@@ -102,9 +102,9 @@ export default function FeaturesWithPanel({
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.35, delay: index * 0.07, ease: 'easeOut' }}
-                  onClick={() => setActive(index)}
+                  onMouseEnter={() => setActive(index)}
                   className={cn(
-                    'flex flex-col px-4 py-3.5 rounded-xl cursor-pointer transition-all duration-200 lg:flex-row lg:items-center lg:gap-4',
+                    'flex flex-col px-4 py-3.5 rounded-xl transition-all duration-200 lg:flex-row lg:items-center lg:gap-4',
                     active === index
                       ? 'ring-1 ring-foreground'
                       : 'ring-1 ring-transparent'
@@ -153,18 +153,9 @@ export default function FeaturesWithPanel({
 
           <div className='hidden lg:block sticky top-10'>
             <Card className='relative w-full aspect-[4/3] overflow-hidden p-0 gap-0'>
-              <AnimatePresence mode='wait'>
-                <motion.div
-                  key={active}
-                  initial={{ opacity: 0, y: 12, scale: 0.98 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -8, scale: 0.98 }}
-                  transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-                  className='absolute inset-0'
-                >
-                  <FeatureMedia content={items[active].content} alt={items[active].alt} />
-                </motion.div>
-              </AnimatePresence>
+              <div className='absolute inset-0'>
+                <FeatureMedia content={items[0].content} alt={items[0].alt} />
+              </div>
             </Card>
           </div>
 
