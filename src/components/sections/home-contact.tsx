@@ -3,12 +3,14 @@ import { Container } from '@/components/ui/container'
 import { MotionDiv, MotionSection } from '@/components/ui/motion'
 import StaggerChars from '@/components/ui/stagger-chars'
 import { revealUp, staggerContainer } from '@/lib/motion'
+import { BeamsUpstream } from '@/components/ui/beams-upstream'
 
 export function HomeContactSection() {
   const { contact } = homeContent
 
   return (
-    <MotionSection id="contact" className="py-32 lg:py-48 bg-background">
+    <MotionSection id="contact" className="relative overflow-hidden py-32 lg:py-48 bg-background">
+      <BeamsUpstream />
       <Container>
         <MotionDiv className="flex flex-col items-center text-center max-w-7xl mx-auto" {...staggerContainer}>
           <MotionDiv {...revealUp}>
