@@ -94,6 +94,7 @@ export const homeContent: HomeContent = {
     description:
       'From thermal imaging and accessibility AI to embedded robotics and immersive computer vision systems.',
     spotlightSlugs: [
+      'oreyeon-rsms',
       'thermal-super-resolution',
       'omnisign',
       'autonomous-race-car',

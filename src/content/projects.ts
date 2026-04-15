@@ -198,6 +198,45 @@ export const projects: Project[] = [
       'Memory-optimized processing',
     ],
   },
+  {
+    slug: 'oreyeon-rsms',
+    title: 'Runway Surface Monitoring System',
+    summary:
+      'AI-powered computer vision platform for real-time Foreign Object Debris (FOD) detection and pavement damage analysis on airport runways, deployed across international airports in Madrid, the Middle East, and the US.',
+    description:
+      'End-to-end computer vision system that detects FOD and runway surface damage in real-time using deep learning, cutting full inspection time from 15–20 minutes to under 4 minutes while exceeding manual detection accuracy.',
+    problem:
+      'Manual runway inspections take 15–20 minutes, achieve only 50–70% detection accuracy, and rely entirely on human vigilance — leaving airports exposed to FOD incidents that cost the aviation industry over $4 billion annually.',
+    solution:
+      'Built a deep learning detection pipeline running on the Mobile Detection Unit (MDU), a vehicle-mounted sensor array that classifies debris and pavement damage by size, material, and hazard level as the vehicle traverses the runway. Paired with IDRA, an augmented-reality inspector reporting app for immediate incident documentation.',
+    myRole:
+      'Computer Vision & ML Engineer at Oreyeon — responsible for model development, real-time inference optimization, and deployment of the detection pipeline across live airport environments.',
+    outcome:
+      'System achieves 85–100% detection accuracy versus 50–70% for manual inspection, reduces inspection time by over 40%, and delivers savings of up to €3 million per operational runway annually. Certified against ICAO and FAA standards.',
+    externalUrl: 'https://www.oreyeon.com',
+    githubUrl: 'https://www.oreyeon.com',
+    media: {
+      src: '/images/projects/oreyeon.webp',
+      alt: 'Oreyeon Runway Surface Monitoring System preview',
+    },
+    technologies: [
+      'Computer Vision',
+      'Deep Learning',
+      'Object Detection',
+      'PyTorch',
+      'Edge Deployment',
+      'Real-Time Inference',
+      'Aviation Safety',
+    ],
+    features: [
+      '85–100% FOD detection accuracy vs. 50–70% for manual inspection',
+      'Full runway inspection in 3–4 minutes vs. 15–20 minutes manually',
+      'Real-time classification of debris by size, material, and hazard level',
+      'Operates 24/7 in all weather conditions including darkness',
+      'Deployed at international airports in Madrid, the Middle East, and the US',
+      'Up to €3M in annual savings per operational runway — ICAO & FAA aligned',
+    ],
+  },
 ]
 
 export const projectMap = Object.fromEntries(
