@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 
@@ -129,23 +129,6 @@ export default function FeaturesWithPanel({
                     </span>
                   </div>
 
-                  <AnimatePresence initial={false}>
-                    {active === index && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-                        className='w-full overflow-hidden lg:hidden'
-                      >
-                        <Card className='w-full mt-3 overflow-hidden p-0 gap-0 aspect-[4/3] relative'>
-                          <div className='absolute inset-0'>
-                            <FeatureMedia content={item.content} alt={item.alt} />
-                          </div>
-                        </Card>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
                 </motion.li>
               ))}
             </ul>
