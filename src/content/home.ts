@@ -99,6 +99,7 @@ export const homeContent: HomeContent = {
       'autonomous-race-car',
       'smart-learning-table',
       'spherical-panorama',
+      'oreyeon-rsms',
     ],
   },
   community: {
