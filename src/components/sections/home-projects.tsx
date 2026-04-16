@@ -35,8 +35,16 @@ export function HomeProjectsSection() {
   useEffect(() => {
     const update = () => setCols(window.innerWidth >= 1024 ? 3 : 2)
     update()
-    window.addEventListener('resize', update)
-    return () => window.removeEventListener('resize', update)
+    let raf = 0
+    const onResize = () => {
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(update)
+    }
+    window.addEventListener('resize', onResize)
+    return () => {
+      window.removeEventListener('resize', onResize)
+      cancelAnimationFrame(raf)
+    }
   }, [])
 
   // Group projects into rows based on current column count
