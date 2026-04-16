@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { homeContent } from '@/content/home'
 import { projectMap } from '@/content/projects'
 import { type Project } from '@/content/schema'
-import { SectionHeading } from '@/components/blocks/section-heading'
+import { FancyText } from '@/components/ui/fancy-text'
 import { Container } from '@/components/ui/container'
 import { MotionDiv, MotionSection } from '@/components/ui/motion'
 import { CometCard } from '@/components/ui/comet-card'
@@ -35,8 +35,16 @@ export function HomeProjectsSection() {
   useEffect(() => {
     const update = () => setCols(window.innerWidth >= 1024 ? 3 : 2)
     update()
-    window.addEventListener('resize', update)
-    return () => window.removeEventListener('resize', update)
+    let raf = 0
+    const onResize = () => {
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(update)
+    }
+    window.addEventListener('resize', onResize)
+    return () => {
+      window.removeEventListener('resize', onResize)
+      cancelAnimationFrame(raf)
+    }
   }, [])
 
   // Group projects into rows based on current column count
@@ -61,7 +69,22 @@ export function HomeProjectsSection() {
     >
       <Container className="space-y-14">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
-          <SectionHeading {...homeContent.projects} />
+          <div className="max-w-3xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+              {homeContent.projects.eyebrow}
+            </p>
+            <h2 className="mt-4">
+              <FancyText
+                className="text-balance text-4xl font-semibold tracking-tight text-foreground/5 sm:text-5xl"
+                fillClassName="text-foreground"
+              >
+                {homeContent.projects.title}
+              </FancyText>
+            </h2>
+            <p className="mt-4 max-w-2xl text-pretty text-base leading-7 text-muted-foreground sm:text-lg">
+              {homeContent.projects.description}
+            </p>
+          </div>
           <MotionDiv
             className="border border-border bg-surface/35 px-6 py-7"
             {...revealUpEarly}
