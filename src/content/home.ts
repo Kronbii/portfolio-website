@@ -92,7 +92,7 @@ export const homeContent: HomeContent = {
     eyebrow: 'Portfolio Projects',
     title: 'Real work, delivered with impact.',
     description:
-      'From thermal imaging and accessibility AI to embedded robotics and immersive computer vision systems.',
+      '',
     spotlightSlugs: [
       'oreyeon-rsms',
       'thermal-super-resolution',
