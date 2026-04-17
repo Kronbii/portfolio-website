@@ -17,7 +17,7 @@ export function HomeExperienceSection() {
       style={{ backgroundColor: '#0c0c0c' }}
       {...revealUpEarly}
     >
-      <div className="absolute inset-0 opacity-40">
+      <div className="absolute inset-0 hidden opacity-40 md:block">
         <DotWave
           bgColor="#0c0c0c"
           dotColor="#9d201a"
@@ -81,12 +81,17 @@ export function HomeExperienceSection() {
                 className="group border-b border-border py-12 transition-colors duration-500 hover:bg-muted/10 cursor-default"
                 {...revealUpEarly}
               >
-                <div className="grid grid-cols-[2rem_1fr] gap-x-6 sm:grid-cols-[3rem_1fr_9rem] sm:gap-x-10">
+                <div className="flex flex-col gap-4 sm:grid sm:grid-cols-[3rem_1fr_9rem] sm:gap-x-10">
 
-                  {/* Index */}
-                  <span className="pt-1 text-sm lg:text-base font-semibold tabular-nums text-muted-foreground/50 transition-colors group-hover:text-foreground/70">
-                    {(index + 1).toString().padStart(2, '0')}
-                  </span>
+                  {/* Index and Period (Mobile) */}
+                  <div className="flex items-baseline justify-between sm:block">
+                    <span className="pt-1 text-sm lg:text-base font-semibold tabular-nums text-muted-foreground/50 transition-colors group-hover:text-foreground/70">
+                      {(index + 1).toString().padStart(2, '0')}
+                    </span>
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground/60 sm:hidden transition-transform duration-500 ease-out group-hover:-translate-x-2">
+                      {item.period}
+                    </p>
+                  </div>
 
                   {/* Main content */}
                   <div>
@@ -110,10 +115,6 @@ export function HomeExperienceSection() {
                         </span>
                       ))}
                     </div>
-                    {/* Period – mobile only */}
-                    <p className="mt-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground/60 sm:hidden transition-transform duration-500 ease-out group-hover:translate-x-2">
-                      {item.period}
-                    </p>
                   </div>
 
                   {/* Period – desktop */}
