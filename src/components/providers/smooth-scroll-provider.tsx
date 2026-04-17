@@ -13,8 +13,7 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
       '(prefers-reduced-motion: reduce)'
     ).matches
     const isTouchDevice =
-      window.matchMedia('(pointer: coarse), (hover: none)').matches ||
-      navigator.maxTouchPoints > 0
+      window.matchMedia('(pointer: coarse) and (hover: none)').matches
 
     // Touch devices are prone to viewport-resize + smooth-scroll conflicts.
     // Keep native scrolling on mobile/tablet for stable behavior.
