@@ -26,6 +26,7 @@ export interface CommunityItem {
   date: string
   link?: string
   image: ProjectMedia
+  points?: string[]
 }
 
 export interface ContactChannel {

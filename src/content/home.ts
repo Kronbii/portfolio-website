@@ -118,6 +118,12 @@ export const homeContent: HomeContent = {
           src: '/images/community/nasna.webp',
           alt: 'Nasna crisis support initiative',
         },
+        points: [
+          'Founded a data-driven nonprofit NGO during the 2024 Lebanon war to coordinate emergency aid distribution.',
+          'Built mapping and logistics tools to identify at-risk communities and prioritize relief delivery.',
+          'Coordinated cross-sector partnerships with local organizations, donors, and aid networks.',
+          'Delivered measurable relief to hundreds of displaced families across active conflict zones.',
+        ],
       },
       {
         id: '2',
@@ -130,6 +136,12 @@ export const homeContent: HomeContent = {
           src: '/images/community/nasa-space-apps.webp',
           alt: 'NASA Space Apps Beirut',
         },
+        points: [
+          "Led the Beirut chapter of the world's largest hackathon across four consecutive years (2022-2025).",
+          'Recruited and managed multi-disciplinary teams of engineers, designers, and scientists.',
+          'Mentored 100+ participants on space-tech and AI problem-solving challenges.',
+          'Represented Lebanon on the global NASA Space Apps platform and judging pipeline.',
+        ],
       },
       {
         id: '3',
@@ -142,6 +154,12 @@ export const homeContent: HomeContent = {
           src: '/images/community/daleel.webp',
           alt: 'Daleel election transparency platform',
         },
+        points: [
+          'Engineered a tamper-proof election transparency platform with an immutable, auditable data history.',
+          'Implemented automated source archiving to preserve electoral records against takedowns or edits.',
+          'Built full Arabic/English multilingual support for broad civic accessibility.',
+          'Deployed with a security-first architecture designed to resist data manipulation and misinformation.',
+        ],
       },
       {
         id: '4',
@@ -154,6 +172,12 @@ export const homeContent: HomeContent = {
           src: '/images/community/devfest-2025.webp',
           alt: 'DevFest Beirut lecture',
         },
+        points: [
+          "Delivered a technical lecture on embedded AI at Lebanon's largest annual developer conference.",
+          'Demonstrated real-time edge inference on constrained hardware to an audience of 500+ engineers.',
+          'Covered on-device model optimization, quantization, and end-to-end deployment pipelines.',
+          'Inspired the Lebanese developer community to pursue accessible, production-ready AI deployments.',
+        ],
       },
       {
         id: '5',
@@ -166,6 +190,12 @@ export const homeContent: HomeContent = {
           src: '/images/community/physics-day-1.webp',
           alt: 'National Physics Day event',
         },
+        points: [
+          "Organized Lebanon's largest annual public physics and astronomy event across five consecutive years.",
+          'Curated interactive experiments, expert-led lectures, and live stargazing sessions each edition.',
+          'Grew attendance year-over-year, engaging thousands of students, enthusiasts, and academics.',
+          'Fostered a national culture of scientific curiosity and long-term STEM participation.',
+        ],
       },
     ],
   },
