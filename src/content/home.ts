@@ -88,6 +88,43 @@ export const homeContent: HomeContent = {
       },
     ],
   },
+  experience: {
+    eyebrow: 'Professional Experience',
+    title: 'Where work shaped expertise.',
+    description: 'Roles across applied AI, computer vision, and intelligent systems.',
+    items: [
+      {
+        id: '1',
+        role: 'AI Systems Engineer',
+        company: 'Oreyeon',
+        period: '2022 – Present',
+        location: 'Beirut, Lebanon',
+        description:
+          'Building real-time computer vision and runway safety monitoring systems deployed in production airport environments.',
+        technologies: ['Python', 'PyTorch', 'TensorRT', 'OpenCV', 'FastAPI', 'Docker'],
+      },
+      {
+        id: '2',
+        role: 'Embedded AI Developer',
+        company: 'Freelance',
+        period: '2021 – 2022',
+        location: 'Remote',
+        description:
+          'Designed and shipped edge-deployed ML models for accessibility and gesture recognition across multiple client projects.',
+        technologies: ['C++', 'TensorFlow Lite', 'ONNX', 'Raspberry Pi', 'OpenCV'],
+      },
+      {
+        id: '3',
+        role: 'Research Engineer Intern',
+        company: 'Lebanese American University',
+        period: '2020 – 2021',
+        location: 'Beirut, Lebanon',
+        description:
+          'Researched thermal image super-resolution and edge inference optimization, achieving 229+ FPS on constrained hardware.',
+        technologies: ['Python', 'Keras', 'CUDA', 'NumPy', 'OpenCV'],
+      },
+    ],
+  },
   projects: {
     eyebrow: 'Portfolio Projects',
     title: 'Real work, delivered with impact.',

@@ -13,6 +13,7 @@ interface DotWaveProps {
   lightIntensity?: number;
   fadeIntensity?: number;
   followMouse?: boolean;
+  cover?: boolean;
   className?: string;
   dotClassName?: string;
   children?: React.ReactNode;
@@ -73,6 +74,7 @@ export function DotWave({
   lightIntensity = 0.5,
   fadeIntensity = 0.15,
   followMouse = false,
+  cover = false,
   className,
   dotClassName,
   children,
@@ -138,19 +140,33 @@ export function DotWave({
     mediaQuery.addEventListener('change', handleThemeChange);
 
     const handleResize = () => {
-      state.windowSize = {
-        w: window.innerWidth,
-        h: window.innerHeight,
-      };
+      const containerW = container.offsetWidth;
+      const containerH = container.offsetHeight;
+      if (containerW === 0 || containerH === 0) return;
 
-      canvas.width = state.windowSize.w;
-      canvas.height = state.windowSize.h;
+      let w: number;
+      let h: number;
 
-      state.center = {
-        x: state.windowSize.w / 2,
-        y: state.windowSize.h / 2,
-      };
+      if (cover) {
+        w = window.innerWidth;
+        h = window.innerHeight;
+        const scale = Math.max(containerW / w, containerH / h);
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+        canvas.style.transform = `translate(-50%, -50%) scale(${scale})`;
+      } else {
+        w = containerW;
+        h = containerH;
+        canvas.style.width = '';
+        canvas.style.height = '';
+        canvas.style.transform = '';
+      }
 
+      state.windowSize = { w, h };
+      canvas.width = w;
+      canvas.height = h;
+
+      state.center = { x: w / 2, y: h / 2 };
       state.startTime = Date.now();
       state.expansionRadius = 0;
 
@@ -283,14 +299,15 @@ export function DotWave({
       }
     };
 
+    const resizeObserver = new ResizeObserver(handleResize);
+    resizeObserver.observe(container);
     handleResize();
-    window.addEventListener('resize', handleResize);
     canvas.addEventListener('mousemove', handleMouseMove);
 
     draw();
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      resizeObserver.disconnect();
       canvas.removeEventListener('mousemove', handleMouseMove);
       mediaQuery.removeEventListener('change', handleThemeChange);
       cancelAnimationFrame(state.animationId);
@@ -305,6 +322,7 @@ export function DotWave({
     lightIntensity,
     fadeIntensity,
     followMouse,
+    cover,
     bgColor,
     dotColor,
   ]);
@@ -323,7 +341,12 @@ export function DotWave({
     >
       <canvas
         ref={canvasRef}
-        className={cn('absolute inset-0 w-full h-full', dotClassName)}
+        className={cn(
+          cover
+            ? 'absolute top-1/2 left-1/2 origin-center'
+            : 'absolute inset-0 w-full h-full',
+          dotClassName,
+        )}
       />
       {children && <div className='relative z-10'>{children}</div>}
     </div>
