@@ -1,4 +1,5 @@
 import { HomeAboutSection } from '@/components/sections/home-about'
+import { HomeExperienceSection } from '@/components/sections/home-experience'
 import { HomeProjectsSection } from '@/components/sections/home-projects'
 import { HomeCommunitySection } from '@/components/sections/home-community'
 import { HomeContactSection } from '@/components/sections/home-contact'
@@ -14,6 +15,7 @@ export default function HomePage() {
       <div className="section-theme-light">
         <HomeAboutSection />
       </div>
+      <HomeExperienceSection />
       <div className="section-theme-light">
         <HomeProjectsSection />
       </div>
