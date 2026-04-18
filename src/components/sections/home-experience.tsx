@@ -71,7 +71,7 @@ export function HomeExperienceSection() {
             </div>
 
             <MotionDiv
-              className="border border-border bg-surface/35 px-6 py-7"
+              className="border border-border bg-surface/35 px-6 py-7 hidden sm:block"
               {...revealUpEarly}
             >
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
