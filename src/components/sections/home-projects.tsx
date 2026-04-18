@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { ArrowUpRight, X } from 'lucide-react'
@@ -106,7 +107,7 @@ export function HomeProjectsSection() {
           {...staggerContainerEarly}
         >
           {rows.map((row, rowIndex) => (
-            <>
+            <React.Fragment key={`row-${rowIndex}`}>
               {row.map((project, cardIndex) => {
                 const href = project.externalUrl || project.githubUrl
                 const isExternal = href.startsWith('http')
@@ -192,7 +193,7 @@ export function HomeProjectsSection() {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </>
+            </React.Fragment>
           ))}
         </MotionDiv>
       </Container>

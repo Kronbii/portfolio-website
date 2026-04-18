@@ -4,20 +4,23 @@ import { motion } from 'motion/react';
 import { cn } from '@/lib/utils';
 
 type AnimConfig = { duration: number; delay: number };
+type BeamState = {
+  paths: string[];
+  pathAnimations: AnimConfig[];
+  particleAnimations: AnimConfig[];
+  gradientAnimations: AnimConfig[];
+};
 
 export const BeamsUpstream = React.memo(
   ({ className }: { className?: string }) => {
-    const [paths, setPaths] = useState<string[]>([]);
-    const [pathAnimations, setPathAnimations] = useState<AnimConfig[]>([]);
-    const [particleAnimations, setParticleAnimations] = useState<AnimConfig[]>([]);
-    const [gradientAnimations, setGradientAnimations] = useState<AnimConfig[]>([]);
+    const [state, setState] = useState<BeamState | null>(null);
 
     useEffect(() => {
       const isMobile = window.innerWidth < 768;
       const screenSections = isMobile ? 5 : 12;
       const variations = isMobile ? 2 : 4;
 
-      const pathsList: string[] = [];
+      const paths: string[] = [];
       for (let section = 0; section < screenSections; section++) {
         const baseX = (section * 100) / (screenSections - 1);
         for (let variation = 0; variation < variations; variation++) {
@@ -26,31 +29,34 @@ export const BeamsUpstream = React.memo(
           const midX2 = startX + (Math.random() - 0.5) * 25;
           const endX = startX + (Math.random() - 0.5) * 30;
           const path = `M${startX} 100C${startX} 100 ${midX1} 75 ${midX1} 50C${midX1} 50 ${midX2} 25 ${midX2} 12C${midX2} 12 ${endX} 5 ${endX} 0`;
-          pathsList.push(path);
+          paths.push(path);
           const altPath = `M${startX} 100C${startX} 100 ${
             startX + 5
           } 80 ${midX1} 60C${midX1} 60 ${midX2} 35 ${midX2} 15C${midX2} 15 ${endX} 3 ${endX} -2`;
-          pathsList.push(altPath);
+          paths.push(altPath);
         }
       }
 
-      setPaths(pathsList);
-      setPathAnimations(pathsList.map(() => ({
-        duration: Math.random() * 3 + 2,
-        delay: Math.random() * 4,
-      })));
-      setParticleAnimations(pathsList.slice(0, 20).map(() => ({
-        duration: Math.random() * 8 + 6,
-        delay: Math.random() * 6,
-      })));
-      setGradientAnimations(Array.from({ length: 20 }).map(() => ({
-        duration: Math.random() * 4 + 3,
-        delay: Math.random() * 5,
-      })));
+      setState({
+        paths,
+        pathAnimations: paths.map(() => ({
+          duration: Math.random() * 3 + 2,
+          delay: Math.random() * 4,
+        })),
+        particleAnimations: paths.slice(0, 20).map(() => ({
+          duration: Math.random() * 8 + 6,
+          delay: Math.random() * 6,
+        })),
+        gradientAnimations: Array.from({ length: 20 }).map(() => ({
+          duration: Math.random() * 4 + 3,
+          delay: Math.random() * 5,
+        })),
+      });
     }, []);
 
-    // Nothing to render until client-side paths are generated
-    if (paths.length === 0) return null;
+    if (!state) return null;
+
+    const { paths, pathAnimations, particleAnimations, gradientAnimations } = state;
 
     return (
       <div
