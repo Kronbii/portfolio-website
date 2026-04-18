@@ -20,7 +20,7 @@ export function HomeExperienceSection() {
       style={{ backgroundColor: '#0c0c0c' }}
       {...revealUpEarly}
     >
-      <div className="absolute inset-0 hidden md:block">
+      <div className="absolute inset-0">
         <Grainient
           color1="#0c0c0c"
           color2="#4a4a4a"
@@ -52,7 +52,7 @@ export function HomeExperienceSection() {
         <Container className="space-y-4">
 
           {/* Section header */}
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
+          <div className="grid gap-6 sm:gap-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
             <div className="max-w-3xl">
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-muted-foreground">
                 {experience.eyebrow}
@@ -71,13 +71,13 @@ export function HomeExperienceSection() {
             </div>
 
             <MotionDiv
-              className="border border-border bg-surface/35 px-6 py-7 hidden sm:block"
+              className="border border-border bg-surface/35 px-6 py-7"
               {...revealUpEarly}
             >
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
                 Career Track
               </p>
-              <p className="mt-4 text-5xl font-black leading-none text-foreground sm:text-6xl">
+              <p className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-black leading-none text-foreground">
                 {experience.items.length}
               </p>
               <p className="mt-2 text-sm uppercase tracking-[0.2em] text-muted-foreground">
@@ -86,7 +86,7 @@ export function HomeExperienceSection() {
             </MotionDiv>
           </div>
 
-          <div className="grid gap-16 lg:grid-cols-[1fr_minmax(0,26rem)] lg:gap-20 items-start pt-14">
+          <div className="grid gap-8 sm:gap-16 lg:grid-cols-[1fr_minmax(0,26rem)] lg:gap-20 items-start pt-8 sm:pt-14">
             {/* Left Column: Interactive List */}
             <MotionDiv className="flex flex-col w-full border-t border-border" {...staggerContainerEarly}>
               {experience.items.map((item, index) => {
@@ -94,14 +94,14 @@ export function HomeExperienceSection() {
                 return (
                   <MotionDiv
                     key={item.id}
-                    className={`group border-b border-border py-8 sm:py-12 cursor-pointer transition-all duration-500 ease-out ${isActive ? 'bg-muted/10 opacity-100' : 'opacity-40 hover:opacity-80 hover:bg-muted/5'}`}
+                    className={`group border-b border-border py-6 sm:py-12 cursor-pointer transition-all duration-500 ease-out ${isActive ? 'bg-muted/10 opacity-100' : 'opacity-40 hover:opacity-80 hover:bg-muted/5'}`}
                     onClick={() => setActiveIndex(index)}
                     onMouseEnter={() => {
                       if (window.innerWidth >= 1024) setActiveIndex(index);
                     }}
                     {...revealUpEarly}
                   >
-                    <div className="px-2 sm:px-6">
+                    <div className="px-3 sm:px-6">
                       <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline sm:justify-between">
                         <div className="flex items-baseline gap-6">
                           <span className="text-sm font-semibold tabular-nums text-muted-foreground/40 transition-colors group-hover:text-foreground/70">
@@ -117,7 +117,7 @@ export function HomeExperienceSection() {
                             </h3>
                           </div>
                         </div>
-                        <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground/60 transition-transform duration-500 ease-out sm:group-hover:-translate-x-2 self-start sm:self-auto pl-[3.25rem] sm:pl-0">
+                        <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground/60 transition-transform duration-500 ease-out sm:group-hover:-translate-x-2 self-start sm:self-auto pl-10 sm:pl-0">
                           {item.period}
                         </p>
                       </div>
@@ -132,7 +132,7 @@ export function HomeExperienceSection() {
                             transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
                             className="overflow-hidden lg:hidden"
                           >
-                            <div className="pt-6 pl-[3.25rem]">
+                            <div className="pt-6 pl-10 sm:pl-[3.25rem]">
                               <p className="text-sm leading-relaxed text-muted-foreground">
                                 {item.description}
                               </p>
