@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { DotWave } from '@/components/ui/dot-wave';
+import Grainient from '@/components/Grainient';
 import { Container } from '@/components/ui/container';
 import { FancyText } from '@/components/ui/fancy-text';
 import { MotionDiv, MotionSection } from '@/components/ui/motion';
@@ -20,17 +20,30 @@ export function HomeExperienceSection() {
       style={{ backgroundColor: '#0c0c0c' }}
       {...revealUpEarly}
     >
-      <div className="absolute inset-0 hidden opacity-40 md:block">
-        <DotWave
-          bgColor="#0c0c0c"
-          dotColor="#9d201a"
-          dotGap={24}
-          dotRadiusMax={2}
-          lightIntensity={0.55}
-          fadeIntensity={0.12}
-          expansionSpeed={180}
-          repeatAnimation
-          cover
+      <div className="absolute inset-0 hidden md:block">
+        <Grainient
+          color1="#0c0c0c"
+          color2="#4a4a4a"
+          color3="#1e1410"
+          timeSpeed={1}
+          colorBalance={0.0}
+          warpStrength={8}
+          warpFrequency={6.0}
+          warpSpeed={1.0}
+          warpAmplitude={60.0}
+          blendAngle={0.0}
+          blendSoftness={0.05}
+          rotationAmount={700.0}
+          noiseScale={2.0}
+          grainAmount={0.15}
+          grainScale={1.0}
+          grainAnimated={true}
+          contrast={1.6}
+          gamma={1.0}
+          saturation={1.0}
+          centerX={0.0}
+          centerY={0.0}
+          zoom={0.8}
           className="w-full h-full"
         />
       </div>
