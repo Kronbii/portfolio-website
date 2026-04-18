@@ -126,7 +126,7 @@ const Grainient = ({
   color3 = '#B497CF',
   className = ''
 }) => {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
