@@ -22,6 +22,16 @@ const footerColumns: FooterColumn[] = [
       { text: 'LinkedIn', url: siteConfig.socials.linkedin },
     ],
   },
+  {
+    heading: 'Writing & Profiles',
+    links: [
+      { text: 'Medium', url: siteConfig.socials.medium },
+      { text: 'DEV.to', url: siteConfig.socials.devto },
+      { text: 'Hashnode', url: siteConfig.socials.hashnode },
+      { text: 'ResearchGate', url: siteConfig.socials.researchgate },
+      { text: 'Arduino Libraries', url: siteConfig.socials.arduinolibraries },
+    ],
+  },
 ]
 
 const footerLegalLinks: FooterLink[] = [

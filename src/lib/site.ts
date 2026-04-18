@@ -3,7 +3,7 @@ export const siteConfig = {
   shortName: 'Rami Kronbi',
   title: 'Rami Kronbi | AI Systems Engineer',
   description:
-    'AI systems engineer building computer vision products, intelligent interfaces, and high-performance digital experiences.',
+    'Rami Kronbi is an AI systems and computer vision engineer based in Beirut, Lebanon. Embedded Systems & Vision Engineer at Oreyeon, building real-time runway safety monitoring systems for production airports. Creator of thermal super-resolution pipelines at 229+ FPS, OmniSign Lebanese Sign Language AI, and Nasna NGO. NASA Space Apps Beirut organizer (2022–2025). Rafik Hariri University graduate and Nazik Rafik Hariri Award recipient (2025).',
   url: 'https://ramikronbi.com',
   email: 'ramykronby@gmail.com',
   location: 'Beirut, Lebanon',
