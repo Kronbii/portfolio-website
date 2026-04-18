@@ -158,7 +158,7 @@ export function HomeExperienceSection() {
 
             {/* Right Column: Sticky Detail Panel (Desktop only) */}
             <div className="hidden lg:block sticky top-32">
-              <div className="relative border border-border bg-surface/35 backdrop-blur-sm p-10 pb-12 overflow-hidden flex flex-col justify-between" style={{ minHeight: '420px' }}>
+              <div className="relative border border-border bg-surface/35 backdrop-blur-sm p-10 pb-12 overflow-hidden flex flex-col justify-between" style={{ height: '480px' }}>
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeIndex}
