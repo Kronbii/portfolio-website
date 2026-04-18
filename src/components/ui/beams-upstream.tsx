@@ -1,16 +1,26 @@
 'use client';
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { cn } from '@/lib/utils';
 
+type AnimConfig = { duration: number; delay: number };
+type BeamState = {
+  paths: string[];
+  pathAnimations: AnimConfig[];
+  particleAnimations: AnimConfig[];
+  gradientAnimations: AnimConfig[];
+};
+
 export const BeamsUpstream = React.memo(
   ({ className }: { className?: string }) => {
-    const [paths] = useState(() => {
-      const pathsList: string[] = [];
-      const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const [state, setState] = useState<BeamState | null>(null);
+
+    useEffect(() => {
+      const isMobile = window.innerWidth < 768;
       const screenSections = isMobile ? 5 : 12;
       const variations = isMobile ? 2 : 4;
 
+      const paths: string[] = [];
       for (let section = 0; section < screenSections; section++) {
         const baseX = (section * 100) / (screenSections - 1);
         for (let variation = 0; variation < variations; variation++) {
@@ -19,37 +29,34 @@ export const BeamsUpstream = React.memo(
           const midX2 = startX + (Math.random() - 0.5) * 25;
           const endX = startX + (Math.random() - 0.5) * 30;
           const path = `M${startX} 100C${startX} 100 ${midX1} 75 ${midX1} 50C${midX1} 50 ${midX2} 25 ${midX2} 12C${midX2} 12 ${endX} 5 ${endX} 0`;
-          pathsList.push(path);
+          paths.push(path);
           const altPath = `M${startX} 100C${startX} 100 ${
             startX + 5
           } 80 ${midX1} 60C${midX1} 60 ${midX2} 35 ${midX2} 15C${midX2} 15 ${endX} 3 ${endX} -2`;
-          pathsList.push(altPath);
+          paths.push(altPath);
         }
       }
 
-      return pathsList;
-    });
+      setState({
+        paths,
+        pathAnimations: paths.map(() => ({
+          duration: Math.random() * 3 + 2,
+          delay: Math.random() * 4,
+        })),
+        particleAnimations: paths.slice(0, 20).map(() => ({
+          duration: Math.random() * 8 + 6,
+          delay: Math.random() * 6,
+        })),
+        gradientAnimations: Array.from({ length: 20 }).map(() => ({
+          duration: Math.random() * 4 + 3,
+          delay: Math.random() * 5,
+        })),
+      });
+    }, []);
 
-    const [pathAnimations] = useState(() =>
-      paths.map(() => ({
-        duration: Math.random() * 3 + 2,
-        delay: Math.random() * 4,
-      })),
-    );
+    if (!state) return null;
 
-    const [particleAnimations] = useState(() =>
-      paths.slice(0, 20).map(() => ({
-        duration: Math.random() * 8 + 6,
-        delay: Math.random() * 6,
-      })),
-    );
-
-    const [gradientAnimations] = useState(() =>
-      Array.from({ length: 20 }).map(() => ({
-        duration: Math.random() * 4 + 3,
-        delay: Math.random() * 5,
-      })),
-    );
+    const { paths, pathAnimations, particleAnimations, gradientAnimations } = state;
 
     return (
       <div

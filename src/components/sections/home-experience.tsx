@@ -52,7 +52,7 @@ export function HomeExperienceSection() {
         <Container className="space-y-4">
 
           {/* Section header */}
-          <div className="grid gap-6 sm:gap-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
+          <div className="grid gap-6 sm:gap-10 md:grid-cols-[minmax(0,1fr)_14rem] md:items-end lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
             <div className="max-w-3xl">
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-muted-foreground">
                 {experience.eyebrow}
@@ -86,7 +86,7 @@ export function HomeExperienceSection() {
             </MotionDiv>
           </div>
 
-          <div className="grid gap-8 sm:gap-16 lg:grid-cols-[1fr_minmax(0,26rem)] lg:gap-20 items-start pt-8 sm:pt-14">
+          <div className="grid gap-8 sm:gap-16 md:grid-cols-[1fr_minmax(0,26rem)] md:gap-16 lg:gap-20 items-start pt-8 sm:pt-14">
             {/* Left Column: Interactive List */}
             <MotionDiv className="flex flex-col w-full border-t border-border" {...staggerContainerEarly}>
               {experience.items.map((item, index) => {
@@ -97,7 +97,7 @@ export function HomeExperienceSection() {
                     className={`group border-b border-border py-6 sm:py-12 cursor-pointer transition-all duration-500 ease-out ${isActive ? 'bg-muted/10 opacity-100' : 'opacity-40 hover:opacity-80 hover:bg-muted/5'}`}
                     onClick={() => setActiveIndex(index)}
                     onMouseEnter={() => {
-                      if (window.innerWidth >= 1024) setActiveIndex(index);
+                      if (window.innerWidth >= 768) setActiveIndex(index);
                     }}
                     {...revealUpEarly}
                   >
@@ -130,7 +130,7 @@ export function HomeExperienceSection() {
                             animate={{ height: 'auto', opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
                             transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-                            className="overflow-hidden lg:hidden"
+                            className="overflow-hidden md:hidden"
                           >
                             <div className="pt-6 pl-10 sm:pl-[3.25rem]">
                               <p className="text-sm leading-relaxed text-muted-foreground">
@@ -157,7 +157,7 @@ export function HomeExperienceSection() {
             </MotionDiv>
 
             {/* Right Column: Sticky Detail Panel (Desktop only) */}
-            <div className="hidden lg:block sticky top-32">
+            <div className="hidden md:block sticky top-32">
               <div className="relative border border-border bg-surface/35 backdrop-blur-sm p-10 pb-12 overflow-hidden flex flex-col justify-between" style={{ height: '480px' }}>
                 <AnimatePresence mode="wait">
                   <motion.div

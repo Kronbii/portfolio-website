@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { ArrowUpRight, X } from 'lucide-react'
@@ -68,7 +69,7 @@ export function HomeProjectsSection() {
       {...revealUpEarly}
     >
       <Container className="space-y-14">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
+        <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_14rem] md:items-end lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
           <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-muted-foreground">
               {homeContent.projects.eyebrow}
@@ -106,7 +107,7 @@ export function HomeProjectsSection() {
           {...staggerContainerEarly}
         >
           {rows.map((row, rowIndex) => (
-            <>
+            <React.Fragment key={`row-${rowIndex}`}>
               {row.map((project, cardIndex) => {
                 const href = project.externalUrl || project.githubUrl
                 const isExternal = href.startsWith('http')
@@ -192,7 +193,7 @@ export function HomeProjectsSection() {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </>
+            </React.Fragment>
           ))}
         </MotionDiv>
       </Container>
