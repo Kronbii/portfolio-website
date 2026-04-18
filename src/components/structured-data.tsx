@@ -20,7 +20,7 @@ export function StructuredData() {
       name: siteConfig.name,
       url: siteConfig.url,
       email: siteConfig.email,
-      jobTitle: 'AI Systems Engineer',
+      jobTitle: 'Embedded Systems & Vision Engineer',
       description: siteConfig.description,
       homeLocation: {
         '@type': 'Place',

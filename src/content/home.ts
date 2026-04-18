@@ -96,9 +96,9 @@ export const homeContent: HomeContent = {
     items: [
       {
         id: '1',
-        role: 'AI Systems Engineer',
+        role: 'Embedded Systems & Vision Engineer',
         company: 'Oreyeon',
-        period: '2022 – Present',
+        period: '2024 – Present',
         location: 'Beirut, Lebanon',
         description:
           'Building real-time computer vision and runway safety monitoring systems deployed in production airport environments.',
@@ -106,9 +106,9 @@ export const homeContent: HomeContent = {
       },
       {
         id: '2',
-        role: 'Embedded AI Developer',
+        role: 'Full Stack AI Developer',
         company: 'Freelance',
-        period: '2021 – 2022',
+        period: '2023 – 2026',
         location: 'Remote',
         description:
           'Designed and shipped edge-deployed ML models for accessibility and gesture recognition across multiple client projects.',
@@ -116,12 +116,12 @@ export const homeContent: HomeContent = {
       },
       {
         id: '3',
-        role: 'Research Engineer Intern',
-        company: 'Lebanese American University',
-        period: '2020 – 2021',
+        role: 'Startups Mentor',
+        company: 'INJAZ MENA',
+        period: '2026',
         location: 'Beirut, Lebanon',
         description:
-          'Researched thermal image super-resolution and edge inference optimization, achieving 229+ FPS on constrained hardware.',
+          'Mentoring early-stage startup founders on product strategy, AI integration, and go-to-market execution through the INJAZ MENA entrepreneurship program.',
         technologies: ['Python', 'Keras', 'CUDA', 'NumPy', 'OpenCV'],
       },
     ],
