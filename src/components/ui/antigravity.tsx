@@ -37,7 +37,7 @@ const AntigravityInner = ({
   particleShape = 'capsule',
   fieldStrength = 10
 }: AntigravityProps) => {
-  const meshRef = useRef(null);
+  const meshRef = useRef<THREE.InstancedMesh>(null);
   const { viewport } = useThree();
   const dummy = useMemo(() => new THREE.Object3D(), []);
 
