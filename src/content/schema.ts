@@ -26,6 +26,7 @@ export interface CommunityItem {
   date: string
   link?: string
   image: ProjectMedia
+  points?: string[]
 }
 
 export interface ContactChannel {
@@ -65,6 +66,16 @@ export interface Project {
   features: string[]
 }
 
+export interface ExperienceEntry {
+  id: string
+  role: string
+  company: string
+  period: string
+  location?: string
+  description: string
+  technologies: string[]
+}
+
 export interface HomeContent {
   navigation: NavItem[]
   hero: {
@@ -94,6 +105,9 @@ export interface HomeContent {
   }
   projects: SectionIntro & {
     spotlightSlugs: string[]
+  }
+  experience: SectionIntro & {
+    items: ExperienceEntry[]
   }
   community: SectionIntro & {
     items: CommunityItem[]

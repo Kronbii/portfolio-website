@@ -4,6 +4,7 @@ export const homeContent: HomeContent = {
   navigation: [
     { label: 'Home', href: '#home' },
     { label: 'About', href: '#about' },
+    { label: 'Experience', href: '#experience' },
     { label: 'Portfolio', href: '#selected-work' },
     { label: 'Community', href: '#community' },
     { label: 'Contact', href: '#contact' },
@@ -88,6 +89,43 @@ export const homeContent: HomeContent = {
       },
     ],
   },
+  experience: {
+    eyebrow: 'Professional Experience',
+    title: 'Where work shaped expertise.',
+    description: 'Roles across applied AI, computer vision, and intelligent systems.',
+    items: [
+      {
+        id: '1',
+        role: 'AI Systems Engineer',
+        company: 'Oreyeon',
+        period: '2022 – Present',
+        location: 'Beirut, Lebanon',
+        description:
+          'Building real-time computer vision and runway safety monitoring systems deployed in production airport environments.',
+        technologies: ['Python', 'PyTorch', 'TensorRT', 'OpenCV', 'FastAPI', 'Docker'],
+      },
+      {
+        id: '2',
+        role: 'Embedded AI Developer',
+        company: 'Freelance',
+        period: '2021 – 2022',
+        location: 'Remote',
+        description:
+          'Designed and shipped edge-deployed ML models for accessibility and gesture recognition across multiple client projects.',
+        technologies: ['C++', 'TensorFlow Lite', 'ONNX', 'Raspberry Pi', 'OpenCV'],
+      },
+      {
+        id: '3',
+        role: 'Research Engineer Intern',
+        company: 'Lebanese American University',
+        period: '2020 – 2021',
+        location: 'Beirut, Lebanon',
+        description:
+          'Researched thermal image super-resolution and edge inference optimization, achieving 229+ FPS on constrained hardware.',
+        technologies: ['Python', 'Keras', 'CUDA', 'NumPy', 'OpenCV'],
+      },
+    ],
+  },
   projects: {
     eyebrow: 'Portfolio Projects',
     title: 'Real work, delivered with impact.',
@@ -118,6 +156,12 @@ export const homeContent: HomeContent = {
           src: '/images/community/nasna.webp',
           alt: 'Nasna crisis support initiative',
         },
+        points: [
+          'Founded a data-driven nonprofit NGO during the 2024 Lebanon war to coordinate emergency aid distribution.',
+          'Built mapping and logistics tools to identify at-risk communities and prioritize relief delivery.',
+          'Coordinated cross-sector partnerships with local organizations, donors, and aid networks.',
+          'Delivered measurable relief to hundreds of displaced families across active conflict zones.',
+        ],
       },
       {
         id: '2',
@@ -130,6 +174,12 @@ export const homeContent: HomeContent = {
           src: '/images/community/nasa-space-apps.webp',
           alt: 'NASA Space Apps Beirut',
         },
+        points: [
+          "Led the Beirut chapter of the world's largest hackathon across four consecutive years (2022-2025).",
+          'Recruited and managed multi-disciplinary teams of engineers, designers, and scientists.',
+          'Mentored 100+ participants on space-tech and AI problem-solving challenges.',
+          'Represented Lebanon on the global NASA Space Apps platform and judging pipeline.',
+        ],
       },
       {
         id: '3',
@@ -142,6 +192,12 @@ export const homeContent: HomeContent = {
           src: '/images/community/daleel.webp',
           alt: 'Daleel election transparency platform',
         },
+        points: [
+          'Engineered a tamper-proof election transparency platform with an immutable, auditable data history.',
+          'Implemented automated source archiving to preserve electoral records against takedowns or edits.',
+          'Built full Arabic/English multilingual support for broad civic accessibility.',
+          'Deployed with a security-first architecture designed to resist data manipulation and misinformation.',
+        ],
       },
       {
         id: '4',
@@ -154,6 +210,12 @@ export const homeContent: HomeContent = {
           src: '/images/community/devfest-2025.webp',
           alt: 'DevFest Beirut lecture',
         },
+        points: [
+          "Delivered a technical lecture on embedded AI at Lebanon's largest annual developer conference.",
+          'Demonstrated real-time edge inference on constrained hardware to an audience of 500+ engineers.',
+          'Covered on-device model optimization, quantization, and end-to-end deployment pipelines.',
+          'Inspired the Lebanese developer community to pursue accessible, production-ready AI deployments.',
+        ],
       },
       {
         id: '5',
@@ -166,6 +228,12 @@ export const homeContent: HomeContent = {
           src: '/images/community/physics-day-1.webp',
           alt: 'National Physics Day event',
         },
+        points: [
+          "Organized Lebanon's largest annual public physics and astronomy event across five consecutive years.",
+          'Curated interactive experiments, expert-led lectures, and live stargazing sessions each edition.',
+          'Grew attendance year-over-year, engaging thousands of students, enthusiasts, and academics.',
+          'Fostered a national culture of scientific curiosity and long-term STEM participation.',
+        ],
       },
     ],
   },

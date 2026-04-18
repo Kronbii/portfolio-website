@@ -18,6 +18,13 @@ import { cn } from '@/lib/utils'
 const communityItems = homeContent.community.items
 
 function toFeatureItems(item: CommunityItem): FeatureItem[] {
+  if (item.points && item.points.length > 0) {
+    return item.points.map((point) => ({
+      title: point,
+      content: item.image.src,
+      alt: item.image.alt,
+    }))
+  }
   const features: FeatureItem[] = [
     { title: item.tagline, content: item.image.src, alt: item.image.alt },
   ]
