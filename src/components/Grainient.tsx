@@ -197,7 +197,7 @@ const Grainient = ({
 
     let raf = 0;
     const t0 = performance.now();
-    const loop = t => {
+    const loop = (t: number) => {
       program.uniforms.iTime.value = (t - t0) * 0.001;
       renderer.render({ scene: mesh });
       raf = requestAnimationFrame(loop);
