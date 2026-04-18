@@ -44,7 +44,7 @@ export const homeContent: HomeContent = {
     titleAccent: 'Me',
     intro: 'I build fast, reliable AI and computer vision products.',
     paragraphs: [
-      'From robotics to safety systems, I ship production-ready solutions.',
+      'From robotics to safety systems, I ship production-ready solutions',
     ],
     image: {
       src: '/images/home/portrait.avif',
@@ -60,7 +60,7 @@ export const homeContent: HomeContent = {
     eyebrow: 'Core Expertise',
     title: 'Computer vision, real-time AI, and autonomous systems.',
     description:
-      'The old site focused on shipping applied AI systems in production and competition environments with measurable outcomes.',
+      'Shipped across applied AI, computer vision, and intelligent systems in production and competition environments with measurable outcomes.',
     items: [
       {
         title: 'Computer Vision',
