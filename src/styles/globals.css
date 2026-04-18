@@ -42,6 +42,7 @@
   }
 
   html {
+    position: relative;
     scroll-behavior: auto;
     scrollbar-width: none;
   }

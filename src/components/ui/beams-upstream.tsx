@@ -1,16 +1,23 @@
 'use client';
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { cn } from '@/lib/utils';
 
+type AnimConfig = { duration: number; delay: number };
+
 export const BeamsUpstream = React.memo(
   ({ className }: { className?: string }) => {
-    const [paths] = useState(() => {
-      const pathsList: string[] = [];
-      const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const [paths, setPaths] = useState<string[]>([]);
+    const [pathAnimations, setPathAnimations] = useState<AnimConfig[]>([]);
+    const [particleAnimations, setParticleAnimations] = useState<AnimConfig[]>([]);
+    const [gradientAnimations, setGradientAnimations] = useState<AnimConfig[]>([]);
+
+    useEffect(() => {
+      const isMobile = window.innerWidth < 768;
       const screenSections = isMobile ? 5 : 12;
       const variations = isMobile ? 2 : 4;
 
+      const pathsList: string[] = [];
       for (let section = 0; section < screenSections; section++) {
         const baseX = (section * 100) / (screenSections - 1);
         for (let variation = 0; variation < variations; variation++) {
@@ -27,29 +34,23 @@ export const BeamsUpstream = React.memo(
         }
       }
 
-      return pathsList;
-    });
-
-    const [pathAnimations] = useState(() =>
-      paths.map(() => ({
+      setPaths(pathsList);
+      setPathAnimations(pathsList.map(() => ({
         duration: Math.random() * 3 + 2,
         delay: Math.random() * 4,
-      })),
-    );
-
-    const [particleAnimations] = useState(() =>
-      paths.slice(0, 20).map(() => ({
+      })));
+      setParticleAnimations(pathsList.slice(0, 20).map(() => ({
         duration: Math.random() * 8 + 6,
         delay: Math.random() * 6,
-      })),
-    );
-
-    const [gradientAnimations] = useState(() =>
-      Array.from({ length: 20 }).map(() => ({
+      })));
+      setGradientAnimations(Array.from({ length: 20 }).map(() => ({
         duration: Math.random() * 4 + 3,
         delay: Math.random() * 5,
-      })),
-    );
+      })));
+    }, []);
+
+    // Nothing to render until client-side paths are generated
+    if (paths.length === 0) return null;
 
     return (
       <div
