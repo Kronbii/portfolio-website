@@ -4,6 +4,7 @@ export const homeContent: HomeContent = {
   navigation: [
     { label: 'Home', href: '#home' },
     { label: 'About', href: '#about' },
+    { label: 'Experience', href: '#experience' },
     { label: 'Portfolio', href: '#selected-work' },
     { label: 'Community', href: '#community' },
     { label: 'Contact', href: '#contact' },
