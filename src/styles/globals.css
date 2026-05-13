@@ -6,7 +6,7 @@
   :root {
     color-scheme: light;
     --font-sans: var(--font-zalando), 'Segoe UI', system-ui, sans-serif;
-    --font-display: var(--font-zalando), 'Segoe UI', system-ui, sans-serif;
+    --font-display: var(--font-fraunces), 'Times New Roman', Georgia, serif;
 
     --color-primary: #0c0c0c;
     --color-primary-rgb: 12, 12, 12;

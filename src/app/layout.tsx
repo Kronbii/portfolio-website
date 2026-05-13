@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Zalando_Sans } from 'next/font/google'
+import { Fraunces, Zalando_Sans } from 'next/font/google'
 
 import { SmoothScrollProvider } from '@/components/providers/smooth-scroll-provider'
 import { SitePillNav } from '@/components/sections/site-pill-nav'
@@ -11,6 +11,13 @@ const zalandoSans = Zalando_Sans({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-zalando',
+})
+
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-fraunces',
+  axes: ['opsz', 'SOFT'],
 })
 
 export const viewport: Viewport = {
@@ -84,7 +91,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={zalandoSans.variable}
+      className={`${zalandoSans.variable} ${fraunces.variable}`}
       suppressHydrationWarning
     >
       <body suppressHydrationWarning>

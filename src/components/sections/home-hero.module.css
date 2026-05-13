@@ -331,7 +331,7 @@
   line-height: var(--name-line-height);
   text-transform: uppercase;
   color: var(--foreground);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-display), 'Times New Roman', Georgia, serif;
   cursor: text;
   user-select: text;
 }
