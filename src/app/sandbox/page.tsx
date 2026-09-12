@@ -2,6 +2,26 @@ import Link from 'next/link'
 
 const experiments = [
   {
+    href: '/sandbox/community/scroll-expand',
+    title: 'Community A — Scroll to expand',
+    note: 'React Bits ScrollExpand, chained. Each item opens to full bleed, then hands over to the next.',
+  },
+  {
+    href: '/sandbox/community/expandable-cards',
+    title: 'Community B — Expandable cards',
+    note: 'Aceternity expandable card. Compact list that opens one item into a centred panel.',
+  },
+  {
+    href: '/sandbox/community/focus-cards',
+    title: 'Community C — Focus cards',
+    note: 'Aceternity focus cards. Hovering one blurs the rest; everything visible at once.',
+  },
+  {
+    href: '/sandbox/community/bento',
+    title: 'Community D — Bento grid',
+    note: 'Magic UI bento grid. Asymmetric tiles with a hover reveal, densest of the four.',
+  },
+  {
     href: '/sandbox/stack-lineup',
     title: 'Stack lineup',
     note: 'ui-layout.com section 5 — each image scrolls up and lands in the same place, covering the last. Pure CSS.',
