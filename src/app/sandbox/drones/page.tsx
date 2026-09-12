@@ -12,9 +12,13 @@ import { type DroneVariant } from '@/components/three/drone/behaviors'
  * cap around 16 per page and a grid crashes the renderer.
  */
 
+// quadcopter.glb removed: 2,397 triangles across 65 meshes reads as faceted
+// on curved surfaces, which is what makes it look "very poly". The other two
+// survive it — fixed-wing is only 434 triangles but its shapes are naturally
+// flat, so low density does not show. A replacement needs ~30k+ triangles;
+// see the Sketchfab shortlist in the session notes.
 const MODELS = [
   { id: 'procedural', label: 'Procedural', note: 'Built in code from geometry.ts — named part handles, so behaviours can drive rotors, booms, gimbal and nav lights individually.' },
-  { id: '/models/quadcopter.glb', label: 'Quadcopter', note: 'Consumer-drone silhouette with props, landing gear and gimbal. The best of the three.' },
   { id: '/models/racing-quad.glb', label: 'Racing quad', note: 'Lighter, more aggressive frame.' },
   { id: '/models/fixed-wing-uav.glb', label: 'Fixed-wing UAV', note: 'Predator-style fixed wing — reads as surveillance rather than consumer.' },
 ] as const

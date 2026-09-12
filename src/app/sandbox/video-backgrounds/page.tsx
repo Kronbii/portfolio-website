@@ -20,14 +20,19 @@ import { homeContent } from '@/content/home'
 
 const CLIPS = [
   { id: 'none', label: 'None', note: 'Current: flat ground.' },
-  { id: 'ridge', label: 'Ridge', note: 'Terrain from altitude. Reads as survey.' },
-  { id: 'cloud', label: 'Cloud', note: 'Soft, abstract. Least literal.' },
-  { id: 'pylon', label: 'Pylon', note: 'Infrastructure — closest to the RSMS subject.' },
-  { id: 'wing', label: 'Wing', note: 'Fixed-wing in flight.' },
-  { id: 'launch', label: 'Launch', note: 'Take-off. High energy, best for a hero.' },
-  { id: 'flight', label: 'Flight', note: 'Steady cruise. Calm enough to sit under copy.' },
-  { id: 'ridge-scrub', label: 'Ridge (scrub)', note: 'Keyframe-dense — only advances as you scroll.' },
-  { id: 'cloud-scrub', label: 'Cloud (scrub)', note: 'Keyframe-dense — only advances as you scroll.' },
+  { id: 'launch', label: 'Launch', note: 'Drone pre-launch on the pad. Most literally on-subject.' },
+  { id: 'landing', label: 'Landing', note: 'Quadcopter touching down. Controlled, deliberate.' },
+  { id: 'flight', label: 'Flight', note: 'Airframe in steady cruise against sky.' },
+  { id: 'handoff', label: 'Hand-off', note: 'Operator catching a drone out of the air. The most human of the set.' },
+  { id: 'radar', label: 'Radar', note: 'Rotating radar station. Closest thing here to tactical.' },
+  { id: 'pylon', label: 'Pylon', note: 'Infrastructure inspection — nearest to the RSMS subject.' },
+  { id: 'industrial', label: 'Industrial', note: 'Plant and hardware. Reads as field engineering.' },
+  { id: 'ridge', label: 'Ridge', note: 'Terrain from altitude. Survey-like but generic.' },
+  { id: 'cloud', label: 'Cloud', note: 'Soft and abstract. Least literal.' },
+  { id: 'wing', label: 'Wing', note: 'Fixed-wing through cloud.' },
+  { id: 'launch-scrub', label: 'Launch (scrub)', note: '5-frame GOP — advances only as you scroll.' },
+  { id: 'ridge-scrub', label: 'Ridge (scrub)', note: '5-frame GOP — advances only as you scroll.' },
+  { id: 'cloud-scrub', label: 'Cloud (scrub)', note: '5-frame GOP — advances only as you scroll.' },
 ] as const
 
 const SECTIONS = [
@@ -59,8 +64,10 @@ export default function VideoBackgroundsSandboxPage() {
         </h2>
         <p className="mt-8 max-w-[60ch] text-base leading-[1.7] text-muted-foreground">
           Each section below is a real homepage section over a live clip. Set
-          one per section and scroll the result. Clips are stock footage, not
-          yours — they work as atmosphere, never as evidence of your own work.
+          one per section and scroll the result. All clips are now 1920x1080 —
+          the previous set was 1600x900 at 130-880 kbps, which was the source of
+          the blockiness. Still stock footage, not yours: atmosphere only,
+          never evidence of your own work.
         </p>
 
         <div className="mt-12 flex flex-wrap items-center gap-2 border-t border-border pt-8">

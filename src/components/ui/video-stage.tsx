@@ -18,6 +18,13 @@ import { cn } from '@/lib/utils'
  * The poster paints immediately and the video file is only fetched once the
  * section is near the viewport, so a page of these does not cost six downloads
  * up front. Honors prefers-reduced-motion by holding on the poster frame.
+ *
+ * Restored from the drone-system-v1 tag. One fix on restore: the grade was
+ * painted with `var(--ground)`, a token from that branch's design system which
+ * does not exist here. It resolved to nothing, so the veil was fully
+ * transparent and daylight footage came through at full brightness with
+ * unreadable type over it. Now uses `--background`, which this repo defines
+ * per section theme.
  */
 
 export type VideoMode = 'loop' | 'scrub'
@@ -132,7 +139,7 @@ export function VideoStage({
   }, [load, mode, rate, scrollTargetId])
 
   return (
-    <div ref={hostRef} className={cn('relative overflow-hidden bg-[var(--ground)]', className)}>
+    <div ref={hostRef} className={cn('relative overflow-hidden bg-[var(--background)]', className)}>
       {/* poster paints instantly; the clip fades in over it once decoded */}
       <div
         aria-hidden
@@ -160,7 +167,7 @@ export function VideoStage({
         aria-hidden
         className="absolute inset-0"
         style={{
-          background: `var(--ground)`,
+          background: `var(--background)`,
           opacity: veil,
           mixBlendMode: 'normal',
         }}
@@ -178,7 +185,7 @@ export function VideoStage({
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(0deg, var(--ground) 2%, rgba(14,16,20,0.82) 26%, rgba(14,16,20,0.1) 70%)',
+              'linear-gradient(0deg, var(--background) 2%, rgba(14,16,20,0.82) 26%, rgba(14,16,20,0.1) 70%)',
           }}
         />
       ) : null}
