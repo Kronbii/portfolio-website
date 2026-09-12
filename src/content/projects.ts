@@ -1,240 +1,234 @@
 import { type Project } from '@/content/schema'
 
+// NOTE: `technologies[0]` is rendered as the card's category label on the
+// homepage, and `features[]` are the bullets shown in the expanded panel.
+// Everything else is reserved for the future /projects/[slug] pages.
+
 export const projects: Project[] = [
   {
-    slug: 'thermal-super-resolution',
-    title: 'Real-Time Thermal Super-Resolution System',
+    slug: 'oreyeon-rsms',
+    title: 'Runway Surface Monitoring System',
     summary:
-      'Machine learning system that enhances low-resolution thermal camera feeds to high-quality images at 229+ FPS for robotics and autonomous systems.',
+      'Vehicle-mounted perception system that inspects an airport runway in a single pass, detecting foreign object debris and pavement damage in real time.',
     description:
-      'First real-time thermal super-resolution framework optimized for autonomous vehicles, robotics, and industrial applications.',
+      "Production computer vision for airport ground safety, built at Oreyeon and running in live airport operations. The detection pipeline rides on the company's Mobile Detection Unit — a sensor array mounted to an ordinary airport support vehicle.",
     problem:
-      'Thermal cameras produce low-resolution images, limiting their use in autonomous vehicles, robotics, industrial inspection, and surveillance applications that require high-quality thermal perception.',
+      'Runway inspection is done by eye, from a moving vehicle, on a fixed schedule. It is slow, it competes with aircraft movements for runway time, and what gets found depends on who is looking.',
     solution:
-      'Developed a lightweight neural network (IMDN architecture with 0.69M parameters) optimized for real-time thermal image enhancement with custom thermal-aware loss function and TensorRT optimization.',
+      'A deep-learning detection pipeline running on the Mobile Detection Unit (MDU), classifying debris and pavement damage by location, size, material, and hazard level as the vehicle drives the runway. Paired with IDRA, Oreyeon\'s augmented-reality reporting app for inspectors on the ground.',
     myRole:
-      'Sole developer - designed architecture, implemented thermal-aware training pipeline, optimized for real-time inference with TensorRT, and validated on thermal datasets.',
+      'Embedded Systems & Vision Engineer at Oreyeon — detection model development, real-time inference optimisation, and getting the pipeline running reliably on the vehicle. [VERIFY] Confirm the exact scope before this goes on a project page.',
     outcome:
-      'Achieved 34.2 dB PSNR at 229+ FPS, the first real-time thermal super-resolution system suitable for edge deployment in robotics and autonomous systems.',
+      'Oreyeon reports full inspection in under five minutes against 15–20 minutes manually, inspection times cut by over 40% at its Middle East and US deployments, and safety management aligned with ICAO and FAA standards. These are the company\'s figures for the product, not personal measurements.',
+    externalUrl: 'https://www.oreyeon.com',
+    githubUrl: 'https://www.oreyeon.com',
+    media: {
+      src: '/images/projects/oreyeon.webp',
+      alt: 'Yellow and black airport inspection pickup with a roof-mounted sensor pod, parked on an apron',
+    },
+    technologies: [
+      'Aviation Safety',
+      'Computer Vision',
+      'Edge Inference',
+      'PyTorch',
+      'Object Detection',
+      'Real-Time Systems',
+    ],
+    features: [
+      'Vehicle-mounted sensing that inspects a runway in a single drive-through',
+      'Detects foreign object debris and pavement damage as the vehicle moves',
+      'Classifies what it finds by location, size, material, and hazard level',
+      'Runs day or night, in poor weather, and without a network connection',
+      'In service in the Middle East and the US',
+      'My part: detection models, real-time inference, and deployment',
+    ],
+  },
+  {
+    slug: 'autonomous-race-car',
+    title: 'Autonomous Race Car — WRO 2023 Champion',
+    summary:
+      'A self-driving vehicle built from scratch in 20 days for World Robot Olympiad Future Engineers 2023 — perception, decision, and control in one loop.',
+    description:
+      'Team Brainiacs, WRO Future Engineers 2023. A dual-processor vehicle that splits perception and control across a Jetson Nano and an Arduino Mega so neither starves the other.',
+    problem:
+      'Build a car that drives itself around an unseen track, reads traffic signs, avoids obstacles, and completes timed laps — in under three weeks, on a student budget.',
+    solution:
+      'Jetson Nano running the OpenCV lane- and sign-detection pipeline; Arduino Mega closing a PID steering loop over the drivetrain; an MPU6050 IMU and TCS34725 colour sensor fused for heading and lap logic.',
+    myRole:
+      'Technical lead — system architecture, the computer vision pipeline, sensor fusion, and coordinating the build.',
+    outcome:
+      'Won World Robot Olympiad Future Engineers 2023. [VERIFY] Placement is not recorded in the repo README or any public WRO/RHU record found — confirm before this goes on a project page.',
+    githubUrl: 'https://github.com/Kronbii/autonomous-race-car',
+    media: {
+      src: '/images/projects/race-car.webp',
+      alt: 'Four-wheeled autonomous car with an aluminium chassis, single-board computer, camera, and battery pack',
+    },
+    technologies: [
+      'Autonomous Systems',
+      'Sensor Fusion',
+      'Embedded Control',
+      'Jetson Nano',
+      'OpenCV',
+      'PID Control',
+      'C++',
+      'Python',
+    ],
+    features: [
+      'The whole loop in one vehicle: perception, decision, control, actuation',
+      'Dual processor — vision on a Jetson Nano, control on an Arduino Mega',
+      'Lane and traffic-sign detection feeding a PID steering controller',
+      'IMU and colour-sensor fusion for heading and lap logic',
+      'Designed, built, and tuned in 20 days',
+      'Built for World Robot Olympiad Future Engineers 2023, team Brainiacs',
+    ],
+  },
+  {
+    slug: 'thermal-super-resolution',
+    title: 'Real-Time Thermal Super-Resolution',
+    summary:
+      'A small neural network that upscales low-resolution thermal video without leaving real time, so a cheap sensor can do the work of an expensive one.',
+    description:
+      'Thermal cameras are expensive in proportion to their resolution. This is an attempt to buy resolution with compute instead: a 0.69M-parameter IMDN variant, trained with a thermal-aware loss and rebuilt in TensorRT for edge hardware.',
+    problem:
+      'High-resolution thermal sensors cost an order of magnitude more than low-resolution ones, which puts thermal perception out of reach for most robotics and inspection work. Generic super-resolution models make it worse — trained on RGB, they hallucinate texture that does not exist in a heat map.',
+    solution:
+      'A lightweight IMDN architecture with a multi-component thermal-aware loss, cross-domain transfer from RGB data to work around the scarcity of thermal training data, and a multithreaded C++ TensorRT pipeline for deployment.',
+    myRole: 'Sole developer — architecture, training pipeline, and TensorRT deployment.',
+    outcome:
+      '34.2 dB PSNR and 0.840 SSIM; roughly 130 FPS at 2x on an RTX 3070, and 20–30 FPS on an NVIDIA Jetson Orin — fast enough to sit inline with an object detector on an edge device.',
     githubUrl: 'https://github.com/Kronbii/thermal-super-resolution',
     media: {
       src: '/images/projects/thermal-sr.webp',
-      alt: 'Thermal super-resolution project preview',
+      alt: 'A thermal street scene at 170x213 pixels beside the same frame upscaled three times to 510x639',
     },
     technologies: [
-      'PyTorch',
+      'Edge Inference',
       'TensorRT',
-      'OpenCV',
+      'PyTorch',
       'Computer Vision',
       'Deep Learning',
-      'Edge ML Deployment',
+      'Thermal Imaging',
     ],
     features: [
-      'Real-time performance: 34.2 dB PSNR at 229+ FPS',
-      'Lightweight architecture with only 0.69M parameters',
-      'Custom thermal-aware multi-component loss function',
-      'Cross-domain RGB-to-thermal transfer learning',
-      'TensorRT optimization for production deployment',
+      'Upscales low-resolution thermal video without leaving real time',
+      '0.69M parameters — small enough to run on an edge device',
+      'Thermal-aware loss instead of a borrowed RGB objective',
+      'Cross-domain transfer from RGB to work around scarce thermal data',
+      '34.2 dB PSNR, 0.840 SSIM; 20–30 FPS on a Jetson Orin',
+      'Multithreaded C++ TensorRT pipeline for deployment',
     ],
   },
   {
     slug: 'omnisign',
     title: 'Real-Time Lebanese Sign Language Translator',
     summary:
-      'AI system that translates Lebanese Sign Language into spoken and written text in real-time using computer vision and natural language processing.',
+      'OmniSign reads Lebanese Sign Language from a live camera and turns it into text and speech — built for a language with almost no training data.',
     description:
-      'AI-driven sign language interpreter developed to improve communication accessibility for the deaf and hard-of-hearing community in Lebanon.',
+      'A gesture-recognition and translation pipeline for Lebanese Sign Language, built because dozens of spoken languages have real-time translation in your pocket and this one did not.',
     problem:
-      'The deaf and hard-of-hearing community in Lebanon lacked accessible tools for real-time communication with non-signers, limiting social integration and access to services.',
+      'Deaf and hard-of-hearing people in Lebanon had no real-time way to communicate with non-signers. The technical obstacle is not the model — it is that Lebanese Sign Language has almost no usable dataset.',
     solution:
-      'Built a computer vision and NLP pipeline that recognizes Lebanese Sign Language gestures and translates them into multiple spoken and written languages in real-time.',
+      'Hand-landmark tracking feeding a gesture-recognition model and a translation layer, with the dataset treated as the actual work rather than a preprocessing step: diversity of signers over raw volume.',
     myRole:
-      'Lead AI engineer responsible for gesture recognition model development, real-time inference optimization, and CV-to-NLP pipeline integration.',
+      'Computer vision lead — gesture recognition, real-time inference, and the vision-to-language pipeline. [VERIFY] Confirm role and team credits.',
     outcome:
-      'Won Public Choice Award at National FYP Demo Day 2025, enabling real-time communication for Lebanese Sign Language users with measurable social impact.',
+      'Public Choice Award at the National FYP Demo Day 2025, and a working translator people could actually use. [VERIFY] award name and year.',
     githubUrl: 'https://laythayache.com/projects/omnisign',
     externalUrl: 'https://laythayache.com/projects/omnisign',
     media: {
       src: '/images/projects/omnisign.webp',
-      alt: 'Omnisign project preview',
+      alt: 'Chart of Arabic sign-language handshapes, each labelled with its letter',
     },
     technologies: [
+      'Accessibility',
       'Computer Vision',
-      'Machine Learning',
-      'NLP',
-      'Real-Time Processing',
-      'Deep Learning',
       'Gesture Recognition',
+      'NLP',
+      'Real-Time Systems',
+      'Deep Learning',
     ],
     features: [
-      'Real-time Lebanese Sign Language gesture recognition',
-      'Arabic, English, and French output',
-      'Computer vision interpretation with 90%+ accuracy',
-      'NLP-powered translation module',
-      'Low-latency inference for communication use cases',
-      'Public Choice Award at National FYP Demo Day 2025',
-    ],
-  },
-  {
-    slug: 'autonomous-race-car',
-    title: 'Autonomous Race Car - WRO 2023 Champion',
-    summary:
-      'Fully autonomous vehicle built in 20 days that won the World Robot Olympiad Future Engineers 2023 competition using computer vision and sensor fusion.',
-    description:
-      'Fully integrated autonomous vehicle built from scratch in 20 days with a dual-processor architecture for robust perception and control.',
-    problem:
-      'Build a self-driving car capable of autonomous navigation with traffic sign recognition and obstacle avoidance in under 3 weeks for the WRO Future Engineers 2023 competition.',
-    solution:
-      'Designed dual-processor system: Jetson Nano for computer vision (lane and sign detection) and Arduino Mega for real-time motor control with PID steering and IMU-based sensor fusion.',
-    myRole:
-      'Technical lead for system architecture, OpenCV computer vision pipeline, sensor fusion integration, and team development coordination.',
-    outcome:
-      'Won WRO Future Engineers 2023 championship with 95%+ navigation accuracy in autonomous challenges.',
-    githubUrl: 'https://github.com/Kronbii/autonomous-race-car',
-    media: {
-      src: '/images/projects/race-car.webp',
-      alt: 'Autonomous race car project preview',
-    },
-    technologies: [
-      'OpenCV',
-      'Jetson Nano',
-      'Arduino',
-      'Computer Vision',
-      'PID Control',
-      'Sensor Fusion',
-      'C++',
-      'Python',
-      'Embedded Systems',
-    ],
-    features: [
-      'Built in 20 days',
-      'Dual-processor architecture',
-      'Lane and traffic sign perception',
-      'IMU and color-sensor fusion',
-      'Competition-winning autonomous performance',
+      'Reads Lebanese Sign Language from a live camera feed',
+      'Hand-landmark tracking into gesture recognition, end to end',
+      'Outputs Arabic, English, and French',
+      'Built the dataset first — the language had almost none',
+      'Low enough latency to hold a conversation',
+      'Public Choice Award, National FYP Demo Day 2025',
     ],
   },
   {
     slug: 'smart-learning-table',
-    title: 'AI-Powered Smart Desk for Classrooms',
+    // [NEEDS INFO] The prototype in the photo is branded "BEMO" — confirm the
+    // project's real name and I will use it here.
+    title: 'Posture-Aware Classroom Desk',
     summary:
-      'IoT desk with computer vision-based posture tracking and automatic ergonomic adjustments for enhanced learning and health outcomes.',
+      'A desk that watches how you sit and moves to fit you — camera-based posture tracking driving motorised height and tilt.',
     description:
-      'Interactive sensor-driven workstation built to improve student engagement, ergonomic comfort, and learning outcomes in classroom and office environments.',
+      'An IoT workstation built as a university prototype: computer vision on the desk itself, actuators underneath it, and a dashboard behind it.',
     problem:
-      'Students and office workers suffer from poor posture and ergonomic issues during long study or work sessions, leading to health problems and reduced focus.',
+      'Students spend hours at desks that do not fit them, and nobody notices posture drifting until it has already caused a problem.',
     solution:
-      'Built an IoT desk with ESP32 controllers, motorized actuators, and OpenCV posture analysis that automatically adjusts desk height and tilt while providing real-time posture feedback.',
+      'ESP32 controllers driving motorised height and tilt, an OpenCV posture-tracking model running against a desk-mounted camera, LED feedback in the moment, and a dashboard for the longer trend.',
     myRole:
-      'Lead engineer for system architecture, OpenCV posture tracking model, dashboard development, and hardware control integration.',
+      'Lead engineer — system architecture, the posture-tracking model, hardware control, and the dashboard.',
     outcome:
-      'University prototype deployed in classroom conditions, monitoring posture for 30+ students with real-time feedback and ergonomic adjustments.',
+      'A working prototype tested in classroom conditions, adjusting to the person sitting at it in real time.',
     githubUrl: 'https://github.com/Kronbii/smart-interactive-desk',
     media: {
       src: '/images/projects/smart-desk.webp',
-      alt: 'Smart desk project preview',
+      alt: 'Wooden prototype desk with a tilting top, gooseneck camera, and a small control screen',
     },
     technologies: [
-      'ESP32',
-      'OpenCV',
+      'Embedded Systems',
       'Computer Vision',
-      'IoT',
-      'Web Development',
+      'ESP32',
       'Motor Control',
+      'IoT',
       'Real-Time Systems',
-      'Python',
     ],
     features: [
-      'Motorized ergonomic adjustment',
-      'Real-time posture tracking',
-      'LED posture feedback',
-      'Monitoring dashboard',
+      'Camera-based posture tracking running on the desk itself',
+      'Motorised height and tilt that adjust to the person sitting there',
+      'ESP32 controllers driving the actuators',
+      'LED feedback in the moment, dashboard for the trend',
       'Bluetooth control interface',
+      'Built and tested as a university prototype in classroom conditions',
     ],
   },
   {
     slug: 'spherical-panorama',
-    title: '360° Spherical Mobile Panorama',
+    title: '360° Panorama Reconstruction',
     summary:
-      'Professional computer vision pipeline for creating seamless 360° spherical panoramas from phone footage.',
+      'A stitching pipeline that reconstructs a full spherical panorama from handheld phone photos or video — the multi-view geometry underneath visual mapping.',
     description:
-      'Robust computer vision tool that reconstructs seamless 360° panoramas from phone photos or videos using ORB matching, RANSAC, and spherical projection.',
+      'Feature matching, outlier rejection, homography estimation, and spherical projection, ending in an interactive Three.js viewer.',
     problem:
-      'High-quality panoramic capture from handheld devices is difficult because of alignment issues, stitching artifacts, and viewer complexity.',
+      'Handheld capture drifts. Frames overlap unevenly, exposure shifts, and naive stitching leaves seams and ghosting across the result.',
     solution:
-      'Built a Python pipeline with feature detection, robust matching, and spherical projection, then generated an interactive Three.js web viewer.',
-    myRole:
-      'Sole developer and researcher.',
+      'ORB feature detection with RANSAC to reject bad correspondences, homography estimation between frames, and projection onto a sphere — with keyframe extraction so video can be used as input and memory management so 8K output does not blow up.',
+    myRole: 'Sole developer.',
     outcome:
-      'Developed a professional-grade tool capable of generating 8K+ panoramas suitable for immersive viewing use cases.',
+      'A pipeline that produces 8K+ spherical panoramas from a phone, viewable interactively in the browser.',
     githubUrl: 'https://github.com/Kronbii/360-spherical-stitching',
     media: {
       src: '/images/projects/goat.webp',
-      alt: '360 spherical panorama project preview',
+      alt: 'Stitched 360-degree panorama of an interior, shown in the interactive web viewer',
     },
     technologies: [
-      'Python',
+      'Computer Vision',
+      'Multi-View Geometry',
       'OpenCV',
-      'NumPy',
+      'Python',
       'Three.js',
-      'Computer Vision',
-      'HTML5',
-      'RANSAC',
-      'ORB',
-      'Video Processing',
-      'Memory Management',
       'Image Stitching',
-      'Homography Estimation',
-      'JavaScript',
-      'WebGL',
     ],
     features: [
-      'Automatic video and photo stitching',
-      'Robust ORB feature matching',
-      'Spherical projection mapping',
-      'Interactive web viewer',
-      'Video keyframe extraction',
-      '8K+ resolution support',
-      'Memory-optimized processing',
-    ],
-  },
-  {
-    slug: 'oreyeon-rsms',
-    title: 'Runway Surface Monitoring System',
-    summary:
-      'AI-powered computer vision platform for real-time Foreign Object Debris (FOD) detection and pavement damage analysis on airport runways, deployed across international airports in Madrid, the Middle East, and the US.',
-    description:
-      'End-to-end computer vision system that detects FOD and runway surface damage in real-time using deep learning, cutting full inspection time from 15–20 minutes to under 4 minutes while exceeding manual detection accuracy.',
-    problem:
-      'Manual runway inspections take 15–20 minutes, achieve only 50–70% detection accuracy, and rely entirely on human vigilance — leaving airports exposed to FOD incidents that cost the aviation industry over $4 billion annually.',
-    solution:
-      'Built a deep learning detection pipeline running on the Mobile Detection Unit (MDU), a vehicle-mounted sensor array that classifies debris and pavement damage by size, material, and hazard level as the vehicle traverses the runway. Paired with IDRA, an augmented-reality inspector reporting app for immediate incident documentation.',
-    myRole:
-      'Computer Vision & ML Engineer at Oreyeon — responsible for model development, real-time inference optimization, and deployment of the detection pipeline across live airport environments.',
-    outcome:
-      'System achieves 85–100% detection accuracy versus 50–70% for manual inspection, reduces inspection time by over 40%, and delivers savings of up to €3 million per operational runway annually. Certified against ICAO and FAA standards.',
-    externalUrl: 'https://www.oreyeon.com',
-    githubUrl: 'https://www.oreyeon.com',
-    media: {
-      src: '/images/projects/oreyeon.webp',
-      alt: 'Oreyeon Runway Surface Monitoring System preview',
-    },
-    technologies: [
-      'Computer Vision',
-      'Deep Learning',
-      'Object Detection',
-      'PyTorch',
-      'Edge Deployment',
-      'Real-Time Inference',
-      'Aviation Safety',
-    ],
-    features: [
-      '85–100% FOD detection accuracy vs. 50–70% for manual inspection',
-      'Full runway inspection in 3–4 minutes vs. 15–20 minutes manually',
-      'Real-time classification of debris by size, material, and hazard level',
-      'Operates 24/7 in all weather conditions including darkness',
-      'Deployed at international airports in Madrid, the Middle East, and the US',
-      'Up to €3M in annual savings per operational runway — ICAO & FAA aligned',
+      'Builds a full spherical panorama from handheld phone photos or video',
+      'ORB feature matching with RANSAC to throw out bad correspondences',
+      'Homography estimation and spherical projection — the geometry behind visual mapping',
+      'Keyframe extraction so video works as an input',
+      'Memory-managed up to 8K+ output',
+      'Interactive Three.js viewer',
     ],
   },
 ]

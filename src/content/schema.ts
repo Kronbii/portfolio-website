@@ -9,6 +9,11 @@ export interface SectionIntro {
   description: string
 }
 
+export interface ChainStage {
+  label: string
+  note: string
+}
+
 export interface HeroMetric {
   label: string
   value: string
@@ -93,6 +98,8 @@ export interface HomeContent {
     }
     image: ProjectMedia
     metrics: HeroMetric[]
+    /** The three stages that drive the plant, read left to right. */
+    chain: ChainStage[]
     location: string
     specialty: string
     role: string

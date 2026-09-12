@@ -22,7 +22,7 @@ export function StructuredData() {
       email: siteConfig.email,
       jobTitle: 'Embedded Systems & Vision Engineer',
       description:
-        'Rami Kronbi is an AI systems and computer vision engineer based in Beirut, Lebanon. He works as Embedded Systems & Vision Engineer at Oreyeon, building real-time runway safety monitoring systems deployed in production airport environments. He has engineered edge-deployed ML pipelines achieving 229+ FPS on constrained hardware, designed autonomous race vehicles, and built OmniSign, an AI-powered Lebanese Sign Language translator. He founded Nasna, a data-driven NGO providing crisis relief during the 2024 Lebanon war, and organized the NASA Space Apps Beirut hackathon for four consecutive years (2022–2025). He is a Rafik Hariri University graduate and recipient of the Nazik Rafik Hariri Graduate Studies Award (2025).',
+        'Rami Kronbi is a Lebanese engineer building intelligent systems for the physical world. He works as Embedded Systems & Vision Engineer at Oreyeon, where he develops real-time perception for runway safety systems running in live airport operations. He studied mechatronics engineering at Rafik Hariri University, graduating in 2025 as recipient of the Nazik Rafik Hariri Graduate Studies Award. His work spans embedded systems, computer vision, and control: a real-time thermal super-resolution pipeline for edge hardware, an autonomous vehicle built for World Robot Olympiad Future Engineers 2023, OmniSign (a Lebanese Sign Language translator), and easyPID, an open-source embedded PID controller library published in the Arduino Library Manager. He is moving deeper into robotics, autonomous and aerial systems, and is open to research collaboration. Alongside engineering he helps organise NASA Space Apps Beirut and public science events in Lebanon.',
       image: `${siteConfig.url}/images/home/portrait.avif`,
       homeLocation: {
         '@type': 'Place',
@@ -41,12 +41,17 @@ export function StructuredData() {
       },
       award: 'Nazik Rafik Hariri Graduate Studies Award, 2025',
       knowsAbout: [
-        'Computer Vision',
+        'Robotics',
+        'Autonomous Systems',
         'Embedded Systems',
-        'Machine Learning',
-        'Autonomous Robotics',
-        'Edge AI',
+        'Embedded Perception',
+        'Computer Vision',
+        'Sensor Fusion',
+        'Control Systems',
         'Real-Time Systems',
+        'Edge Computing',
+        'Machine Learning',
+        'Mechatronics',
         'TensorRT',
         'PyTorch',
         'OpenCV',
@@ -94,6 +99,22 @@ export function StructuredData() {
         '@type': 'Organization',
         name: 'Medium',
         url: 'https://medium.com',
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      '@id':
+        'https://dev.to/ramikronbi/we-built-sign-language-ai-for-a-language-with-almost-no-dataset-heres-what-that-actually-looks-kem',
+      headline:
+        "We Built Sign Language AI for a Language With Almost No Dataset. Here's What That Actually Looks Like.",
+      author: { '@id': personId },
+      url: 'https://dev.to/ramikronbi/we-built-sign-language-ai-for-a-language-with-almost-no-dataset-heres-what-that-actually-looks-kem',
+      datePublished: '2026-05-05',
+      publisher: {
+        '@type': 'Organization',
+        name: 'DEV Community',
+        url: 'https://dev.to',
       },
     },
     {

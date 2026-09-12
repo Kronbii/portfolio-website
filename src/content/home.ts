@@ -5,19 +5,21 @@ export const homeContent: HomeContent = {
     { label: 'Home', href: '#home' },
     { label: 'About', href: '#about' },
     { label: 'Experience', href: '#experience' },
-    { label: 'Portfolio', href: '#selected-work' },
+    { label: 'Work', href: '#selected-work' },
     { label: 'Community', href: '#community' },
     { label: 'Contact', href: '#contact' },
   ],
   hero: {
-    eyebrow: 'Home',
-    title: 'Rami Kronbi',
+    // Fields below marked "not rendered" are kept for schema completeness.
+    // home-hero.tsx renders: specialty, secondaryCta, image, role, name, mission.
+    eyebrow: 'Home', // not rendered
+    title: 'Rami Kronbi', // not rendered
     subtitle:
-      'AI systems and computer vision engineer focused on real-time products.',
+      'Robotics and embedded systems engineer working on intelligent physical systems.', // not rendered
     description:
-      'Building ultidisciplinary intelligent systems from autonomous robotics to enterprise computer vision and real-time ML applications.',
+      'Embedded perception and real-time vision in production today; robotics, aerial systems, and autonomy next.', // not rendered
     primaryCta: {
-      label: 'View projects',
+      label: 'View work', // not rendered
       href: '#selected-work',
     },
     secondaryCta: {
@@ -26,73 +28,91 @@ export const homeContent: HomeContent = {
     },
     image: {
       src: '/images/home/portrait.avif',
-      alt: 'Portrait of Rami Kronbi',
+      alt: 'Rami Kronbi, robotics and embedded systems engineer',
     },
+    // not rendered — see about.stats for the visible counters
     metrics: [
       { value: '4', label: 'Years Experience' },
       { value: '10', label: 'Projects Delivered' },
       { value: '5', label: 'Awards Won' },
     ],
-    location: 'Based in Lebanon',
-    specialty: 'AI Systems, Computer Vision, and Autonomous Robotics',
-    role: 'Systems Engineer',
+    chain: [
+      {
+        label: 'Sense',
+        note: 'Cameras, thermal, LiDAR and inertial data off real hardware.',
+      },
+      {
+        label: 'Perceive',
+        note: 'Real-time inference on edge compute, not a workstation.',
+      },
+      {
+        label: 'Act',
+        note: 'Control loops that move something in the physical world.',
+      },
+    ],
+    location: 'Based in Lebanon', // not rendered
+    specialty: 'Lebanon · Robotics, Perception, Autonomy',
+    role: 'Robotics & Embedded Systems Engineer',
     name: 'Rami Kronbi',
-    mission: 'Multidisciplinary intelligent systems.',
+    mission: 'Intelligent systems for the physical world.',
   },
   about: {
     titleLeading: 'About',
     titleAccent: 'Me',
-    intro: 'I build fast, reliable AI and computer vision products.',
-    paragraphs: [
-      'From robotics to safety systems, I ship production-ready solutions',
-    ],
+    intro: 'I build systems that sense the world and act on it.',
+    paragraphs: [],
     image: {
       src: '/images/home/portrait.avif',
-      alt: 'Portrait of Rami Kronbi',
+      alt: 'Rami Kronbi, robotics and embedded systems engineer',
     },
+    // [VERIFY] All three counters are unconfirmed. Values preserved from the
+    // previous copy — replace with real numbers or remove the block.
     stats: [
       { value: '4', label: 'Years Experience' },
-      { value: '10', label: 'Projects Delivered' },
+      { value: '10', label: 'Systems Shipped' },
       { value: '5', label: 'Awards Won' },
     ],
   },
+  // Not rendered — HomeCapabilitiesSection is not mounted in src/app/page.tsx.
+  // Kept in sync with the current positioning in case the section returns.
   capabilities: {
-    eyebrow: 'Core Expertise',
-    title: 'Computer vision, real-time AI, and autonomous systems.',
+    eyebrow: 'What I Work On',
+    title: 'Systems that perceive, decide, and act.',
     description:
-      'Shipped across applied AI, computer vision, and intelligent systems in production and competition environments with measurable outcomes.',
+      'Perception and embedded software taken all the way to hardware running in the field.',
     items: [
       {
-        title: 'Computer Vision',
+        title: 'Embedded Perception',
         description:
-          'Built perception systems for lane detection, sign-language recognition, posture tracking, and runway safety.',
+          'Vision systems that run on the device: runway inspection, lane and sign detection, gesture recognition, posture tracking.',
       },
       {
-        title: 'Real-Time AI',
+        title: 'Real-Time & Edge Inference',
         description:
-          'Delivered low-latency machine learning pipelines, including thermal super-resolution at 229+ FPS.',
+          'Models compressed and rebuilt with TensorRT until they hold frame rate on constrained hardware.',
       },
       {
-        title: 'Autonomous Robotics',
+        title: 'Autonomous Systems',
         description:
-          'Designed and built autonomous vehicle systems using sensor fusion, embedded control, and real-time decision loops.',
+          'Full loops from sensor to actuator — sensor fusion, PID control, and the embedded software between them.',
       },
       {
-        title: 'Edge ML Deployment',
+        title: 'Systems Integration',
         description:
-          'Optimized lightweight models for deployment with TensorRT and edge-first constraints on performance and memory.',
+          'Cameras, microcontrollers, compute modules, and services wired into one system that stays up.',
       },
       {
         title: 'Applied Machine Learning',
         description:
-          'Shipped practical ML products for accessibility, education, safety, and industrial workflows.',
+          'Models built for a specific job — accessibility, safety, education — and judged on whether they work in use.',
       },
     ],
   },
   experience: {
-    eyebrow: 'Professional Experience',
-    title: 'Where work shaped expertise.',
-    description: 'Roles across applied AI, computer vision, and intelligent systems.',
+    eyebrow: 'Experience & Roles',
+    title: 'Engineering under real constraints.',
+    description:
+      'Production vision and embedded work, plus the people and spaces around it.',
     items: [
       {
         id: '1',
@@ -101,73 +121,114 @@ export const homeContent: HomeContent = {
         period: '2024 – Present',
         location: 'Beirut, Lebanon',
         description:
-          'Building real-time computer vision and runway safety monitoring systems deployed in production airport environments.',
-        technologies: ['Python', 'PyTorch', 'TensorRT', 'OpenCV', 'FastAPI', 'Docker'],
+          'Perception and embedded software for runway safety systems: real-time detection on edge hardware, running in live airport operations.',
+        technologies: [
+          'Python',
+          'OpenCV',
+          'PyTorch',
+          'TensorRT',
+          'Edge Inference',
+          'Docker',
+          'FastAPI',
+        ],
       },
       {
         id: '2',
-        role: 'Full Stack AI Developer',
-        company: 'Freelance',
-        period: '2023 – 2026',
-        location: 'Remote',
+        // [VERIFY] Start year and whether this is still active.
+        role: 'Co-organizer',
+        company: 'space²',
+        period: '2025 – Present',
+        location: 'Lebanon',
         description:
-          'Designed and shipped edge-deployed ML models for accessibility and gesture recognition across multiple client projects.',
-        technologies: ['C++', 'TensorFlow Lite', 'ONNX', 'Raspberry Pi', 'OpenCV'],
+          'Helping build an engineering space where students and small teams in Lebanon turn ideas into working prototypes, aimed at problems the region actually has.',
+        technologies: [
+          'Electronics',
+          'Embedded Systems',
+          'Prototyping',
+          '3D Printing',
+          'Mentorship',
+        ],
       },
       {
         id: '3',
+        // [VERIFY] Period "2023 – 2026" overlaps the Oreyeon role.
+        role: 'Embedded Vision Engineer',
+        company: 'Independent',
+        period: '2023 – 2026',
+        location: 'Remote',
+        description:
+          'Edge-deployed vision and control work for client projects, plus easyPID — an open-source PID controller library published in the Arduino Library Manager.',
+        technologies: [
+          'C++',
+          'TensorFlow Lite',
+          'ONNX',
+          'Raspberry Pi',
+          'OpenCV',
+          'Arduino',
+        ],
+      },
+      {
+        id: '4',
         role: 'Startups Mentor',
         company: 'INJAZ MENA',
         period: '2026',
         location: 'Beirut, Lebanon',
         description:
-          'Mentoring early-stage startup founders on product strategy, AI integration, and go-to-market execution through the INJAZ MENA entrepreneurship program.',
-        technologies: ['Python', 'Keras', 'CUDA', 'NumPy', 'OpenCV'],
+          'Mentoring early-stage founders on scoping and prototyping technical products — what to build first, and what the engineering will actually cost.',
+        technologies: [
+          'Mentorship',
+          'Technical Scoping',
+          'Prototyping',
+          'Product Strategy',
+        ],
       },
     ],
   },
   projects: {
-    eyebrow: 'Portfolio Projects',
-    title: 'Real work, delivered with impact.',
+    eyebrow: 'Selected Work',
+    title: 'From perception to autonomy.',
     description:
-      '',
+      'One line runs through these — making machines perceive their surroundings, run in real time on limited hardware, and act on what they find.',
     spotlightSlugs: [
       'oreyeon-rsms',
+      'autonomous-race-car',
       'thermal-super-resolution',
       'omnisign',
-      'autonomous-race-car',
       'smart-learning-table',
       'spherical-panorama',
     ],
   },
   community: {
-    eyebrow: 'Mission & Vision',
-    title: 'Building communities beyond code.',
+    eyebrow: 'Community & Impact',
+    title: 'Engineering with, and for, other people.',
     description:
-      'Leadership, volunteering, and civic-tech initiatives built alongside technical work.',
+      'Hackathons, public science, civic tools, and crisis work — built with others, alongside the technical work.',
     items: [
       {
         id: '1',
-        title: '"Nasna" - crisis support',
+        // [VERIFY] Founder / co-founder role is unconfirmed — phrasing kept neutral.
+        title: 'Nasna — Crisis Support',
         tagline:
-          'Founder of a nonprofit NGO that applies data to deliver aid and crisis support to communities impacted by the war in Lebanon.',
+          'A volunteer crisis-response effort built during the 2024 war in Lebanon, using data to decide where aid should go.',
         date: '2024',
         image: {
           src: '/images/community/nasna.webp',
           alt: 'Nasna crisis support initiative',
         },
         points: [
-          'Founded a data-driven nonprofit NGO during the 2024 Lebanon war to coordinate emergency aid distribution.',
-          'Built mapping and logistics tools to identify at-risk communities and prioritize relief delivery.',
-          'Coordinated cross-sector partnerships with local organizations, donors, and aid networks.',
-          'Delivered measurable relief to hundreds of displaced families across active conflict zones.',
+          'Started during the 2024 war in Lebanon to help route aid to the people who needed it first.',
+          'Mapping and logistics tooling to identify at-risk areas and prioritise deliveries.',
+          'Coordinated with local organisations, donors, and volunteer networks.',
+          'Data used to make relief decisions, not to produce reports.',
         ],
       },
       {
         id: '2',
+        // [VERIFY] Public sources describe a volunteer/participant role in 2022,
+        // not a chapter lead. Wording softened to "organizing team".
         title: 'NASA Space Apps Beirut',
         tagline:
-          "Organizing the Beirut chapter of NASA's Space Apps, the world's largest global hackathon.",
+          "On the organizing team for the Beirut edition of NASA's Space Apps Challenge, the largest global hackathon.",
         date: '2022 - 2025',
         link: 'https://www.spaceappschallenge.org/',
         image: {
@@ -175,17 +236,17 @@ export const homeContent: HomeContent = {
           alt: 'NASA Space Apps Beirut',
         },
         points: [
-          "Led the Beirut chapter of the world's largest hackathon across four consecutive years (2022-2025).",
-          'Recruited and managed multi-disciplinary teams of engineers, designers, and scientists.',
-          'Mentored 100+ participants on space-tech and AI problem-solving challenges.',
-          'Represented Lebanon on the global NASA Space Apps platform and judging pipeline.',
+          'On the organizing team for the Beirut edition across four years, 2022 to 2025.',
+          'Logistics, judging, and mentoring for a multi-day hackathon.',
+          'Worked alongside engineers, designers, and scientists from across the Lebanese tech community.',
+          'Connected Lebanese teams into the global Space Apps programme.',
         ],
       },
       {
         id: '3',
         title: 'Daleel (دليل)',
         tagline:
-          'Security-first platform for Lebanese election transparency with immutable history, source archiving, and multilingual support.',
+          'Election-transparency platform for Lebanon with an append-only record, source archiving, and full Arabic/English support.',
         date: '2026',
         link: 'https://daleel-lb.vercel.app',
         image: {
@@ -193,54 +254,59 @@ export const homeContent: HomeContent = {
           alt: 'Daleel election transparency platform',
         },
         points: [
-          'Engineered a tamper-proof election transparency platform with an immutable, auditable data history.',
-          'Implemented automated source archiving to preserve electoral records against takedowns or edits.',
-          'Built full Arabic/English multilingual support for broad civic accessibility.',
-          'Deployed with a security-first architecture designed to resist data manipulation and misinformation.',
+          'Election-transparency platform with an append-only, auditable record of every change.',
+          'Automatic source archiving so records survive edits and takedowns.',
+          'Arabic and English throughout, not as an afterthought.',
+          'Built security-first: the threat model is manipulation, not traffic.',
         ],
       },
       {
         id: '4',
-        title: 'DevFest Beirut',
+        // [VERIFY] The 2025 DevFest talk was GDG North Lebanon, BAU Tripoli campus
+        // — not Beirut. Title generalised to "DevFest Lebanon".
+        title: 'DevFest Lebanon',
         tagline:
-          "Delivered a lecture on embedded AI at Lebanon's premier developer conference.",
+          'Talk on running multimodal vision and language models on small hardware, at GDG DevFest Lebanon 2025.',
         date: '2025',
         link: 'https://devfest.gdglebanon.com/',
         image: {
           src: '/images/community/devfest-2025.webp',
-          alt: 'DevFest Beirut lecture',
+          alt: 'DevFest Lebanon talk on on-device AI',
         },
         points: [
-          "Delivered a technical lecture on embedded AI at Lebanon's largest annual developer conference.",
-          'Demonstrated real-time edge inference on constrained hardware to an audience of 500+ engineers.',
-          'Covered on-device model optimization, quantization, and end-to-end deployment pipelines.',
-          'Inspired the Lebanese developer community to pursue accessible, production-ready AI deployments.',
+          '"On-Device Multimodal Assistants: Can We Fit GPT-Vision on Small Hardware?"',
+          'Quantisation, memory budgets, and hardware acceleration for on-device inference.',
+          'Ended with a live demo running on consumer hardware.',
+          'GDG DevFest Lebanon, December 2025.',
         ],
       },
       {
         id: '5',
-        title: 'National Physics Day',
+        // [VERIFY] Linked source is RHU Physics Day — confirm whether the event
+        // is national or university-run before restoring a broader claim.
+        title: 'Physics & Astronomy Day',
         tagline:
-          "Leading and organizing Lebanon's biggest annual event for the physics and astronomy community.",
+          'Organizing an annual public physics and astronomy day — experiments, lectures, and stargazing.',
         date: '2021 - 2025',
         link: 'https://www.rhu.edu.lb/media-room/news/rhu-physics-day-2025-celebrates-the-wonders-of-the-universe-with-inspiring-lectures-experiments-and-stargazing',
         image: {
           src: '/images/community/physics-day-1.webp',
-          alt: 'National Physics Day event',
+          alt: 'Physics and astronomy day event',
         },
         points: [
-          "Organized Lebanon's largest annual public physics and astronomy event across five consecutive years.",
-          'Curated interactive experiments, expert-led lectures, and live stargazing sessions each edition.',
-          'Grew attendance year-over-year, engaging thousands of students, enthusiasts, and academics.',
-          'Fostered a national culture of scientific curiosity and long-term STEM participation.',
+          'On the organizing team for five consecutive editions, 2021 to 2025.',
+          'Hands-on experiments, public lectures, and live stargazing sessions.',
+          'Built for school and university students, not for specialists.',
+          'The clearest version of why I got into engineering in the first place.',
         ],
       },
     ],
   },
   contact: {
-    eyebrow: 'Preferred Channels',
-    title: "Let's build your next intelligent product.",
-    description: 'Open to new opportunities and collaborations.',
+    eyebrow: 'Research, Roles & Collaboration',
+    title: "Let's build something that has to work.",
+    description:
+      'Open to research collaborations, engineering roles, and work on autonomous and aerial systems.', // not rendered
     channels: [
       {
         label: 'github',
@@ -263,7 +329,7 @@ export const homeContent: HomeContent = {
         href: 'tel:+96171170226',
       },
     ],
-    note: 'Open to new opportunities and collaborations.',
-    responseTime: 'Typical response time: 24-48 hours.',
+    note: 'Open to research collaborations and engineering roles.', // not rendered
+    responseTime: 'Typical response time: 24-48 hours.', // not rendered
   },
 }
