@@ -1,202 +1,184 @@
-'use client'
-
-import React from 'react'
+import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
-import { ArrowUpRight, X } from 'lucide-react'
-import { AnimatePresence, motion } from 'motion/react'
 
+import { Container } from '@/components/ui/container'
 import { homeContent } from '@/content/home'
 import { projectMap } from '@/content/projects'
-import { type Project } from '@/content/schema'
-import { FancyText } from '@/components/ui/fancy-text'
-import { Container } from '@/components/ui/container'
-import { MotionDiv, MotionSection } from '@/components/ui/motion'
-import { CometCard } from '@/components/ui/comet-card'
-import FeaturesWithPanel, { type FeatureItem } from '@/components/features-with-panel'
-import { revealUpEarly, staggerContainerEarly } from '@/lib/motion'
-import { cn } from '@/lib/utils'
+
+/**
+ * Selected work — stacked sticky lineup.
+ *
+ * Each figure is one viewport tall and pinned at `top-0` with its image
+ * centred, so every image arrives by scrolling and lands in the identical
+ * rectangle, covering the one before it. The text column is deliberately NOT
+ * sticky: it scrolls past at page speed, which is what makes the two columns
+ * read as independent rather than as one moving surface.
+ *
+ * There is no JavaScript here, and no height measurement — the pairing holds
+ * because both columns are grids of equal-height rows.
+ *
+ * Geometry is matched to vatn.com, measured live: a 660x600 image (11/10 at
+ * `max-width: 41.25rem`) inside a 90rem container. That container is wider
+ * than the site default of `max-w-7xl`, which caps each column at 592px and
+ * cannot fit a 660px image. `44vw` keeps it inside the column below ~1500px.
+ *
+ * Every image must resolve to identical pixel dimensions or they stop
+ * covering each other — so both values are single expressions with no
+ * percentages.
+ */
+
+const FRAME_W = 'min(41.25rem, 44vw)'
+const FRAME_H = `min(calc(${FRAME_W} / 1.1), 76svh)`
 
 const spotlightProjects = homeContent.projects.spotlightSlugs
   .map((slug) => projectMap[slug])
   .filter(Boolean)
 
-function toFeatureItems(project: Project): FeatureItem[] {
-  return project.features.map((feature) => ({
-    title: feature,
-    content: project.media.src,
-    alt: project.media.alt,
-  }))
-}
-
 export function HomeProjectsSection() {
-  const [selectedSlug, setSelectedSlug] = useState<string | null>(null)
-  const [cols, setCols] = useState(2)
-
-  useEffect(() => {
-    const update = () => setCols(window.innerWidth >= 1024 ? 3 : 2)
-    update()
-    let raf = 0
-    const onResize = () => {
-      cancelAnimationFrame(raf)
-      raf = requestAnimationFrame(update)
-    }
-    window.addEventListener('resize', onResize)
-    return () => {
-      window.removeEventListener('resize', onResize)
-      cancelAnimationFrame(raf)
-    }
-  }, [])
-
-  // Group projects into rows based on current column count
-  const rows: Project[][] = []
-  for (let i = 0; i < spotlightProjects.length; i += cols) {
-    rows.push(spotlightProjects.slice(i, i + cols))
-  }
-
-  const selectedProject = selectedSlug
-    ? spotlightProjects.find((p) => p.slug === selectedSlug) ?? null
-    : null
-
-  const handleCardClick = (slug: string) => {
-    setSelectedSlug((prev) => (prev === slug ? null : slug))
-  }
+  const total = spotlightProjects.length.toString().padStart(2, '0')
 
   return (
-    <MotionSection
+    <section
       id="selected-work"
-      className="section-theme-dark border-b border-border bg-background py-24 sm:py-28"
-      {...revealUpEarly}
+      className="section-theme-dark border-b border-border bg-background"
     >
-      <Container className="space-y-14">
-        <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_14rem] md:items-end lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-muted-foreground">
-              {homeContent.projects.eyebrow}
-            </p>
-            <h2 className="mt-4">
-              <FancyText
-                className="text-balance text-4xl font-semibold tracking-tight text-foreground/5 sm:text-5xl"
-                fillClassName="text-foreground"
-              >
-                {homeContent.projects.title}
-              </FancyText>
-            </h2>
-            <p className="mt-4 max-w-2xl text-pretty text-base leading-7 text-muted-foreground sm:text-lg">
-              {homeContent.projects.description}
-            </p>
-          </div>
-          <MotionDiv
-            className="border border-border bg-surface/35 px-6 py-7"
-            {...revealUpEarly}
-          >
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
-              Portfolio Snapshot
-            </p>
-            <p className="mt-4 text-5xl font-black leading-none text-foreground sm:text-6xl">
-              {spotlightProjects.length}
-            </p>
-            <p className="mt-2 text-sm uppercase tracking-[0.2em] text-muted-foreground">
-              Selected Builds
-            </p>
-          </MotionDiv>
-        </div>
-
-        <MotionDiv
-          className="grid grid-cols-2 gap-4 lg:grid-cols-3 md:gap-6"
-          {...staggerContainerEarly}
-        >
-          {rows.map((row, rowIndex) => (
-            <React.Fragment key={`row-${rowIndex}`}>
-              {row.map((project, cardIndex) => {
-                const href = project.externalUrl || project.githubUrl
-                const isExternal = href.startsWith('http')
-                const isSelected = selectedSlug === project.slug
-                const globalIndex = rowIndex * cols + cardIndex
-
-                return (
-                  <MotionDiv key={project.slug} {...revealUpEarly}>
-                    <CometCard className="w-full" rotateDepth={8} translateDepth={10} scaleOnHover={1.02} zOnHover={20}>
-                      <div
-                        role="button"
-                        onClick={() => handleCardClick(project.slug)}
-                        className={cn(
-                          'group relative block aspect-square overflow-hidden rounded-2xl cursor-pointer transition-shadow duration-300',
-                          isSelected && 'ring-2 ring-white/70'
-                        )}
-                      >
-                        <Image
-                          src={project.media.src}
-                          alt={project.media.alt}
-                          fill
-                          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 50vw"
-                          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                        />
-
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/10" />
-
-                        {isSelected && (
-                          <div className="absolute right-3 top-3 flex size-6 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
-                            <X size={12} className="text-white" strokeWidth={2.5} />
-                          </div>
-                        )}
-
-                        <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
-                          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/50">
-                            {(globalIndex + 1).toString().padStart(2, '0')} / {project.technologies[0]}
-                          </p>
-                          <h3 className="mt-1.5 text-base font-black uppercase leading-[0.95] tracking-tight text-white sm:text-xl">
-                            {project.title}
-                          </h3>
-                          <ul className="mt-2 hidden flex-wrap gap-1.5 sm:flex">
-                            {project.technologies.slice(0, 3).map((tech) => (
-                              <li
-                                key={`${project.slug}-${tech}`}
-                                className="border border-white/25 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.14em] text-white/60"
-                              >
-                                {tech}
-                              </li>
-                            ))}
-                          </ul>
-                          <a
-                            href={href}
-                            target={isExternal ? '_blank' : undefined}
-                            rel={isExternal ? 'noopener noreferrer' : undefined}
-                            onClick={(e) => e.stopPropagation()}
-                            className="mt-3 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/80 transition-transform duration-300 group-hover:translate-x-1"
-                          >
-                            View Project
-                            <ArrowUpRight size={12} aria-hidden strokeWidth={2.5} />
-                          </a>
-                        </div>
-                      </div>
-                    </CometCard>
-                  </MotionDiv>
-                )
-              })}
-
-              {/* Panel spans full row width, appears right after this row */}
-              <AnimatePresence key={`panel-row-${rowIndex}`}>
-                {row.some((p) => p.slug === selectedSlug) && selectedProject && (
-                  <motion.div
-                    key={selectedProject.slug}
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
-                    className="col-span-full overflow-hidden border border-border"
-                  >
-                    <FeaturesWithPanel
-                      title={selectedProject.title}
-                      items={toFeatureItems(selectedProject)}
-                    />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </React.Fragment>
-          ))}
-        </MotionDiv>
+      {/* No bottom padding here, and the grid below is pulled up by
+          `--lineup-pull`. See that variable for why. */}
+      <Container className="max-w-[90rem] pt-24 sm:pt-28">
+        <p className="font-mono text-[0.625rem] uppercase tracking-[0.3em] text-muted-foreground">
+          {homeContent.projects.eyebrow}
+        </p>
+        {/* Sized to hold one line at every width rather than wrapped by a
+            max-width — `max-w-[16ch]` was what broke it across two lines. */}
+        <h2 className="mt-6 whitespace-nowrap text-[clamp(1.25rem,5vw,4.5rem)] leading-[1.1] tracking-tight">
+          {homeContent.projects.title}
+        </h2>
       </Container>
-    </MotionSection>
+
+      <Container className="max-w-[90rem]">
+        <div
+          className="grid grid-cols-1 lg:mt-[var(--lineup-pull)] lg:grid-cols-2"
+          style={
+            {
+              '--frame-w': FRAME_W,
+              '--frame-h': FRAME_H,
+              // Each row is viewport-tall with the image centred, so there is
+              // (100svh - frame) / 2 of dead space above the first image —
+              // 150px at 900px tall, 240px at 1080px. Pulling the grid up by
+              // that surplus leaves a fixed 4rem under the title at any
+              // viewport height. Both columns shift together, so the pairing
+              // is untouched, and pinned images still centre in the viewport
+              // because that depends on the row, not the grid offset.
+              '--lineup-pull': `calc(4rem - (100svh - ${FRAME_H}) / 2)`,
+            } as React.CSSProperties
+          }
+        >
+          {/* Pinned media. Hidden below lg, where each text block carries its
+              own inline image instead. */}
+          <div className="hidden lg:grid">
+            {spotlightProjects.map((project, index) => (
+              <figure
+                key={project.slug}
+                className="sticky top-0 grid h-svh place-content-center"
+              >
+                <div className="relative h-[var(--frame-h)] w-[var(--frame-w)] overflow-hidden rounded-[2px] border border-border bg-surface">
+                  <Image
+                    src={project.media.src}
+                    alt={project.media.alt}
+                    fill
+                    sizes="44vw"
+                    quality={90}
+                    className="object-cover"
+                    priority={index === 0}
+                  />
+                  {/* Inside the frame, so the incoming image occludes it.
+                      Outside, every previous caption stays visible. */}
+                  <figcaption className="absolute bottom-0 left-0 bg-background px-3 py-2 font-mono text-[0.625rem] uppercase tracking-[0.2em] text-muted-foreground">
+                    {(index + 1).toString().padStart(2, '0')} / {total}
+                  </figcaption>
+                </div>
+              </figure>
+            ))}
+          </div>
+
+          {/* Flowing copy. One row per project, matched to the media rows. */}
+          <div className="grid">
+            {spotlightProjects.map((project, index) => {
+              const href = project.externalUrl || project.githubUrl
+              const isExternal = href.startsWith('http')
+
+              return (
+                <div
+                  key={project.slug}
+                  className="grid h-svh place-content-center lg:pl-16"
+                >
+                  <div className="flex w-full max-w-[34rem] flex-col justify-between lg:min-h-[var(--frame-h)]">
+                    <div className="relative mb-10 aspect-[11/10] w-full overflow-hidden rounded-[2px] border border-border bg-surface lg:hidden">
+                      <Image
+                        src={project.media.src}
+                        alt={project.media.alt}
+                        fill
+                        sizes="100vw"
+                        quality={90}
+                        className="object-cover"
+                      />
+                    </div>
+
+                    <div className="flex items-center gap-4">
+                      <span className="font-mono text-[0.625rem] uppercase tracking-[0.2em] text-foreground">
+                        {(index + 1).toString().padStart(2, '0')}
+                      </span>
+                      <span className="h-px w-10 shrink-0 bg-border" />
+                      <span className="font-mono text-[0.625rem] uppercase tracking-[0.2em] text-muted-foreground">
+                        {project.technologies[0]}
+                      </span>
+                    </div>
+
+                    <div className="py-12">
+                      <h3 className="text-4xl leading-[0.95] tracking-tight lg:text-5xl">
+                        {project.title}
+                      </h3>
+                      <p className="mt-8 max-w-[40ch] text-base leading-[1.7] text-muted-foreground">
+                        {project.summary}
+                      </p>
+                    </div>
+
+                    <div>
+                      <ul className="border-t border-border">
+                        {project.features.slice(0, 3).map((feature) => (
+                          <li
+                            key={feature}
+                            className="border-b border-border py-4 text-sm leading-relaxed text-muted-foreground"
+                          >
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+
+                      <a
+                        href={href}
+                        target={isExternal ? '_blank' : undefined}
+                        rel={isExternal ? 'noopener noreferrer' : undefined}
+                        className="group mt-6 inline-flex items-center gap-2 font-mono text-[0.625rem] uppercase tracking-[0.2em] text-foreground"
+                      >
+                        View project
+                        <ArrowUpRight
+                          size={12}
+                          strokeWidth={2}
+                          aria-hidden
+                          className="transition-transform duration-base group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                        />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </Container>
+
+      <div className="h-[20svh]" />
+    </section>
   )
 }
