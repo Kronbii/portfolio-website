@@ -5,6 +5,8 @@ import { useState } from 'react'
 import { DroneStage } from '@/components/three/drone/drone-stage'
 import { type DroneVariant } from '@/components/three/drone/behaviors'
 
+import { DRONE_MODELS } from './models'
+
 /**
  * Drone gallery — every model and every archived behaviour in one place.
  *
@@ -12,16 +14,7 @@ import { type DroneVariant } from '@/components/three/drone/behaviors'
  * cap around 16 per page and a grid crashes the renderer.
  */
 
-// quadcopter.glb removed: 2,397 triangles across 65 meshes reads as faceted
-// on curved surfaces, which is what makes it look "very poly". The other two
-// survive it — fixed-wing is only 434 triangles but its shapes are naturally
-// flat, so low density does not show. A replacement needs ~30k+ triangles;
-// see the Sketchfab shortlist in the session notes.
-const MODELS = [
-  { id: 'procedural', label: 'Procedural', note: 'Built in code from geometry.ts — named part handles, so behaviours can drive rotors, booms, gimbal and nav lights individually.' },
-  { id: '/models/racing-quad.glb', label: 'Racing quad', note: 'Lighter, more aggressive frame.' },
-  { id: '/models/fixed-wing-uav.glb', label: 'Fixed-wing UAV', note: 'Predator-style fixed wing — reads as surveillance rather than consumer.' },
-] as const
+const MODELS = DRONE_MODELS
 
 // The sourced models ship as light grey plastic and the archive's body colour
 // is near-black, which disappears on this ground. Offer the realistic options.
@@ -46,9 +39,10 @@ const VARIANTS: { id: DroneVariant; label: string; note: string }[] = [
 ]
 
 export default function DronesSandboxPage() {
-  const [model, setModel] = useState<string>(MODELS[1].id)
+  const [model, setModel] = useState<string>(MODELS[0].id)
   const [variant, setVariant] = useState<DroneVariant>('orbit')
   const [tint, setTint] = useState<number>(TINTS[0].id)
+  const [retint, setRetint] = useState(false)
   const [wireframe, setWireframe] = useState(false)
   const [draggable, setDraggable] = useState(false)
 
@@ -68,22 +62,24 @@ export default function DronesSandboxPage() {
           Everything in the archive.
         </h2>
         <p className="mt-8 max-w-[60ch] text-base leading-[1.7] text-muted-foreground">
-          Three sourced models plus the procedural airframe, against all ten
+          Four sourced models plus the procedural airframe, against all ten
           behaviours from <code className="text-foreground">behaviors.ts</code>.
-          Rendered with raw three.js — react-three-fiber cannot run on this
-          branch. Drag mode works on any model.
+          The top two carry their own PBR textures; Retint flattens them to a
+          single colour if you want the graphic look instead. Rendered with raw
+          three.js — react-three-fiber cannot run on this branch.
         </p>
       </div>
 
       <div className="mx-auto mt-16 grid w-full max-w-[90rem] gap-10 px-5 pb-32 sm:px-8 lg:grid-cols-[1fr_20rem]">
         <div className="relative h-[68svh] overflow-hidden rounded-[2px] border border-border bg-surface">
           <DroneStage
-            key={`${model}-${variant}-${wireframe}-${draggable}-${tint}`}
+            key={`${model}-${variant}-${wireframe}-${draggable}-${tint}-${retint}`}
             source={model}
             variant={variant}
             wireframe={wireframe}
             draggable={draggable}
             tint={tint}
+            keepMaterials={activeModel?.hp === true && !retint}
             className="h-full w-full"
           />
           <p className="pointer-events-none absolute bottom-0 left-0 bg-background px-3 py-2 font-mono text-[0.625rem] uppercase tracking-[0.2em] text-muted-foreground">
@@ -110,6 +106,12 @@ export default function DronesSandboxPage() {
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
               {activeModel?.note}
             </p>
+            {activeModel?.faces ? (
+              <p className="mt-3 font-mono text-[0.625rem] uppercase tracking-[0.2em] text-muted-foreground">
+                {activeModel.faces.toLocaleString()} faces
+                {activeModel.credit ? ` · ${activeModel.credit}` : ''}
+              </p>
+            ) : null}
           </div>
 
           <div>
@@ -165,6 +167,13 @@ export default function DronesSandboxPage() {
               Drag mode
             </button>
             <button
+              onClick={() => setRetint((v) => !v)}
+              disabled={activeModel?.hp !== true}
+              className={`${chip} ${retint ? 'bg-brand text-brand-foreground' : 'hover:bg-surface'} disabled:opacity-40`}
+            >
+              Retint
+            </button>
+            <button
               onClick={() => setWireframe((v) => !v)}
               className={`${chip} ${wireframe ? 'bg-brand text-brand-foreground' : 'hover:bg-surface'}`}
             >
@@ -173,10 +182,11 @@ export default function DronesSandboxPage() {
           </div>
 
           <p className="border-t border-border pt-8 text-xs leading-relaxed text-muted-foreground">
-            The three .glb models are CC-BY from Poly Pizza and ship as light
-            grey plastic; they are retinted at runtime. Attribution is required
-            before any of this goes public, and the individual creator names are
-            still missing from public/models/CREDITS.md.
+            Parrot is by domiiniic and FPV racer by eagleanurag, both CC-BY on
+            Sketchfab; the other two are CC-BY from Poly Pizza. Attribution is
+            required wherever these are shown publicly — see
+            public/models/CREDITS.md. The Poly Pizza creator names are still
+            missing there.
           </p>
         </aside>
       </div>

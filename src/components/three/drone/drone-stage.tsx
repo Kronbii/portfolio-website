@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
 import { BEHAVIORS, type DroneVariant } from './behaviors'
@@ -34,6 +35,10 @@ export interface DroneStageProps {
   /** Drag to rotate. Disables the behaviour's own camera moves. */
   draggable?: boolean
   tint?: number
+  /** Keep the model's own PBR materials instead of flat-tinting it. The
+   *  Sketchfab models ship with real texture sets; retinting throws them away
+   *  and is what made the low-poly one look like plastic. */
+  keepMaterials?: boolean
   className?: string
 }
 
@@ -43,6 +48,7 @@ export function DroneStage({
   wireframe = false,
   draggable = false,
   tint = DRONE_COLORS.body,
+  keepMaterials = false,
   className,
 }: DroneStageProps) {
   const hostRef = useRef<HTMLDivElement>(null)
@@ -103,7 +109,13 @@ export function DroneStage({
         }
       }
     } else {
-      new GLTFLoader().load(
+      const loader = new GLTFLoader()
+      // The Sketchfab models are Draco-compressed: 172k faces in 756KB rather
+      // than ~6MB. The decoder is served from /public/draco.
+      const draco = new DRACOLoader()
+      draco.setDecoderPath('/draco/')
+      loader.setDRACOLoader(draco)
+      loader.load(
         source,
         (gltf) => {
           const group = new THREE.Group()
@@ -120,16 +132,18 @@ export function DroneStage({
           gltf.scene.scale.setScalar(2.6 / span)
           gltf.scene.position.sub(centre.multiplyScalar(2.6 / span))
 
-          gltf.scene.traverse((child) => {
-            if (child instanceof THREE.Mesh) {
-              child.material = new THREE.MeshStandardMaterial({
-                color: tint,
-                metalness: 0.35,
-                roughness: 0.55,
-                wireframe,
-              })
-            }
-          })
+          if (!keepMaterials || wireframe) {
+            gltf.scene.traverse((child) => {
+              if (child instanceof THREE.Mesh) {
+                child.material = new THREE.MeshStandardMaterial({
+                  color: tint,
+                  metalness: 0.35,
+                  roughness: 0.55,
+                  wireframe,
+                })
+              }
+            })
+          }
 
           mount({
             group,
@@ -143,6 +157,8 @@ export function DroneStage({
         undefined,
         () => {}
       )
+      // Draco holds a worker pool; release it with the scene.
+      queueMicrotask(() => draco.dispose())
     }
 
     // Drag to rotate
@@ -225,7 +241,7 @@ export function DroneStage({
       renderer.dispose()
       renderer.domElement.remove()
     }
-  }, [source, variant, wireframe, draggable, tint])
+  }, [source, variant, wireframe, draggable, tint, keepMaterials])
 
   return <div ref={hostRef} className={className} />
 }

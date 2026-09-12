@@ -18,21 +18,35 @@ import { homeContent } from '@/content/home'
  * own work.
  */
 
+// Pexels clips are 3840x2160 sources encoded down to 1080p; Coverr clips were
+// only ever 1080p. Both sets are capped at 2.2 Mbps because these sit under a
+// heavy veil, where bitrate spent on hidden detail is wasted.
 const CLIPS = [
-  { id: 'none', label: 'None', note: 'Current: flat ground.' },
-  { id: 'launch', label: 'Launch', note: 'Drone pre-launch on the pad. Most literally on-subject.' },
-  { id: 'landing', label: 'Landing', note: 'Quadcopter touching down. Controlled, deliberate.' },
-  { id: 'flight', label: 'Flight', note: 'Airframe in steady cruise against sky.' },
-  { id: 'handoff', label: 'Hand-off', note: 'Operator catching a drone out of the air. The most human of the set.' },
-  { id: 'radar', label: 'Radar', note: 'Rotating radar station. Closest thing here to tactical.' },
-  { id: 'pylon', label: 'Pylon', note: 'Infrastructure inspection — nearest to the RSMS subject.' },
-  { id: 'industrial', label: 'Industrial', note: 'Plant and hardware. Reads as field engineering.' },
-  { id: 'ridge', label: 'Ridge', note: 'Terrain from altitude. Survey-like but generic.' },
-  { id: 'cloud', label: 'Cloud', note: 'Soft and abstract. Least literal.' },
-  { id: 'wing', label: 'Wing', note: 'Fixed-wing through cloud.' },
-  { id: 'launch-scrub', label: 'Launch (scrub)', note: '5-frame GOP — advances only as you scroll.' },
-  { id: 'ridge-scrub', label: 'Ridge (scrub)', note: '5-frame GOP — advances only as you scroll.' },
-  { id: 'cloud-scrub', label: 'Cloud (scrub)', note: '5-frame GOP — advances only as you scroll.' },
+  { id: 'none', label: 'None', group: '', note: 'Current: flat ground.' },
+
+  { id: 'dusk-drone', label: 'Dusk drone', group: 'Pexels', note: 'Airframe silhouetted against a sunset sky. The most cinematic of the set.' },
+  { id: 'field-drone', label: 'Field drone', group: 'Pexels', note: 'Drone on the ground against industrial cranes. Reads as field hardware, not product shot.' },
+  { id: 'thermal-rail', label: 'Thermal rail', group: 'Pexels', note: 'Monochrome night aerial over rail infrastructure — reads as thermal. Ties to the super-resolution project.' },
+  { id: 'thermal-city', label: 'Thermal city', group: 'Pexels', note: 'Monochrome night aerial. Same register, wider subject.' },
+  { id: 'night-grid', label: 'Night grid', group: 'Pexels', note: 'Night aerial, warm sodium lights. Dark enough to sit under type.' },
+  { id: 'inspection', label: 'Inspection', group: 'Pexels', note: 'Aerial infrastructure inspection — closest to the RSMS subject.' },
+  { id: 'survey', label: 'Survey', group: 'Pexels', note: 'Monochrome aerial of warehouses. Reads as mapping and survey.' },
+  { id: 'machine', label: 'Machine', group: 'Pexels', note: 'CNC cutting, dark with sparks. Hardware texture rather than aerial.' },
+
+  { id: 'launch', label: 'Launch', group: 'Coverr', note: 'Drone pre-launch on the pad.' },
+  { id: 'landing', label: 'Landing', group: 'Coverr', note: 'Quadcopter touching down.' },
+  { id: 'flight', label: 'Flight', group: 'Coverr', note: 'Airframe in steady cruise against sky.' },
+  { id: 'handoff', label: 'Hand-off', group: 'Coverr', note: 'Operator catching a drone out of the air.' },
+  { id: 'radar', label: 'Radar', group: 'Coverr', note: 'Rotating radar station.' },
+  { id: 'pylon', label: 'Pylon', group: 'Coverr', note: 'Infrastructure inspection.' },
+  { id: 'industrial', label: 'Industrial', group: 'Coverr', note: 'Plant and hardware.' },
+  { id: 'ridge', label: 'Ridge', group: 'Coverr', note: 'Terrain from altitude. Generic.' },
+  { id: 'cloud', label: 'Cloud', group: 'Coverr', note: 'Soft and abstract.' },
+  { id: 'wing', label: 'Wing', group: 'Coverr', note: 'Fixed-wing through cloud.' },
+
+  { id: 'launch-scrub', label: 'Launch (scrub)', group: 'Scrub', note: '5-frame GOP — advances only as you scroll.' },
+  { id: 'ridge-scrub', label: 'Ridge (scrub)', group: 'Scrub', note: '5-frame GOP — advances only as you scroll.' },
+  { id: 'cloud-scrub', label: 'Cloud (scrub)', group: 'Scrub', note: '5-frame GOP — advances only as you scroll.' },
 ] as const
 
 const SECTIONS = [
