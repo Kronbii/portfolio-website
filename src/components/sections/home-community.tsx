@@ -36,7 +36,7 @@ export function HomeCommunitySection() {
       className="border-b border-border bg-background"
     >
       <Container className="max-w-[90rem] pt-24 sm:pt-28">
-        <p className="font-mono text-[0.625rem] uppercase tracking-[0.3em] text-muted-foreground">
+        <p className="font-mono text-[0.6875rem] uppercase tracking-[0.3em] text-muted-foreground">
           {homeContent.community.eyebrow}
         </p>
         <h2 className="mt-6 whitespace-nowrap text-[clamp(1.125rem,4.2vw,4rem)] leading-[1.1] tracking-tight">
@@ -76,20 +76,20 @@ export function HomeCommunitySection() {
                   </div>
 
                   <div className="flex items-center gap-4">
-                    <span className="font-mono text-[0.625rem] uppercase tracking-[0.2em] text-foreground">
+                    <span className="font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-foreground">
                       {(index + 1).toString().padStart(2, '0')}
                     </span>
                     <span className="h-px w-10 shrink-0 bg-border" />
-                    <span className="font-mono text-[0.625rem] uppercase tracking-[0.2em] text-muted-foreground">
+                    <span className="font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-muted-foreground">
                       {item.date}
                     </span>
                   </div>
 
-                  <div className="py-12">
-                    <h3 className="text-4xl leading-[0.95] tracking-tight lg:text-5xl">
+                  <div className="py-6 xl:py-8">
+                    <h3 className="text-[2.5rem] leading-[0.95] tracking-tight lg:text-[3rem] xl:text-[3.5rem]">
                       {item.title}
                     </h3>
-                    <p className="mt-8 max-w-[40ch] text-base leading-[1.7] text-muted-foreground">
+                    <p className="mt-6 max-w-[38ch] text-[1.0625rem] leading-[1.6] text-muted-foreground xl:mt-7 xl:text-[1.1875rem]">
                       {item.tagline}
                     </p>
                   </div>
@@ -100,7 +100,7 @@ export function HomeCommunitySection() {
                         {item.points.slice(0, 3).map((point) => (
                           <li
                             key={point}
-                            className="border-b border-border py-4 text-sm leading-relaxed text-muted-foreground"
+                            className="border-b border-border py-3 text-[0.9375rem] leading-[1.55] text-muted-foreground xl:py-[0.875rem] xl:text-[1.03125rem]"
                           >
                             {point}
                           </li>
@@ -113,7 +113,7 @@ export function HomeCommunitySection() {
                         href={item.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group mt-6 inline-flex items-center gap-2 font-mono text-[0.625rem] uppercase tracking-[0.2em] text-foreground"
+                        className="group mt-6 inline-flex items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-foreground"
                       >
                         Visit
                         <ArrowUpRight
@@ -149,7 +149,7 @@ export function HomeCommunitySection() {
                   />
                   {/* Inside the frame, so the incoming image occludes it.
                       Outside, every previous caption stays visible. */}
-                  <figcaption className="absolute bottom-0 right-0 bg-background px-3 py-2 font-mono text-[0.625rem] uppercase tracking-[0.2em] text-muted-foreground">
+                  <figcaption className="absolute bottom-0 right-0 bg-background px-3 py-2 font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-muted-foreground">
                     {(index + 1).toString().padStart(2, '0')} / {total}
                   </figcaption>
                 </div>
