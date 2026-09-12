@@ -2,6 +2,16 @@ import Link from 'next/link'
 
 const experiments = [
   {
+    href: '/sandbox/drones',
+    title: 'Drone models & behaviours',
+    note: 'All three .glb models plus the procedural airframe, against all ten archived behaviours. Raw three.js.',
+  },
+  {
+    href: '/sandbox/video-backgrounds',
+    title: 'Video backgrounds',
+    note: 'Every homepage section over every clip, chosen per section. Veil and loop/scrub are adjustable.',
+  },
+  {
     href: '/sandbox/community/scroll-expand',
     title: 'Community A — Scroll to expand',
     note: 'React Bits ScrollExpand, chained. Each item opens to full bleed, then hands over to the next.',
