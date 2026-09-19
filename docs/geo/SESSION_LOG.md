@@ -37,4 +37,5 @@
 - Recorded deployment blockers, including the public provenance manifest's local-path disclosure, so a fresh session cannot mistake the local build for deployment-ready work.
 - Prepared a 65-file additive-only Git checkpoint; no file from the base commit was modified.
 - At the user's request, removed the auxiliary worktree and checked out `claude/geo-authority-pages` directly at `/home/kronbii/repos/portfolio-website`. The `main` branch itself remains unchanged.
+- Added a private, Git-excluded digital-replica brief for Claude covering Rami's identity, interests, career direction, values, public positioning, known portfolio, and publication boundaries. The tracked continuation protocol reads it when present but forbids copying private material into public output without approval.
 - The next session should begin with user pruning and editorial approval, not new discovery or a redesign.

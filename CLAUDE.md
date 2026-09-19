@@ -95,11 +95,12 @@ This repository is now designed to be continued directly by Claude Code.
 When the user says `continue`, `continue the GEO work`, or an equivalent short instruction:
 
 1. Read this file completely.
-2. Read `docs/geo/README.md` completely and follow its required read order.
-3. Inspect the current branch and working tree before changing anything.
-4. Read `docs/geo/KNOWN_ISSUES.md`, then resume the first unchecked item in `docs/geo/TASKS.md` whose prerequisites are satisfied.
-5. Preserve the publication states and disclosure boundaries in `docs/geo/CONTENT_REGISTRY.md`.
-6. Update `docs/geo/CURRENT_STATE.md`, `docs/geo/TASKS.md`, and `docs/geo/SESSION_LOG.md` after every material milestone.
+2. If `.claude-private/RAMI_DIGITAL_REPLICA.md` exists, read it completely. It is private reasoning context: never quote, copy, commit, or publish its private material without explicit user approval.
+3. Read `docs/geo/README.md` completely and follow its required read order.
+4. Inspect the current branch and working tree before changing anything.
+5. Read `docs/geo/KNOWN_ISSUES.md`, then resume the first unchecked item in `docs/geo/TASKS.md` whose prerequisites are satisfied.
+6. Preserve the publication states and disclosure boundaries in `docs/geo/CONTENT_REGISTRY.md`.
+7. Update `docs/geo/CURRENT_STATE.md`, `docs/geo/TASKS.md`, and `docs/geo/SESSION_LOG.md` after every material milestone.
 
 Do not restart discovery, redesign the system, or ask the user to repeat established context. Ask only when a decision is listed as user-owned in `docs/geo/TASKS.md` or when new evidence creates a material conflict.
 

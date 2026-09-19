@@ -9,16 +9,17 @@ It is written so a fresh Claude Code session can continue without access to the 
 Read these files in order before taking action:
 
 1. `../../CLAUDE.md` — hard write boundary, implementation contract, and continuation protocol.
-2. `CURRENT_STATE.md` — what exists now, what has been verified, and what is intentionally not done.
-3. `TASKS.md` — the ordered execution queue and the exact next task.
-4. `KNOWN_ISSUES.md` — blockers and risks that must be resolved before deployment.
-5. `DECISIONS.md` — decisions that must not be silently reopened.
-6. `CONTENT_REGISTRY.md` — complete content inventory and `ready` / `review` / `hold` states.
-7. `EDITORIAL_POLICY.md` — evidence, conflict, voice, disclosure, and media rules.
-8. `AUTHOR_COPY_READY.md` and `AUTHOR_COPY_REVIEW.md` — canonical article prose.
-9. `GEO_AND_PUBLISHING_PLAN.md` — canonical-site, structured-data, integration, syndication, and indexing plan.
-10. `SURFACE_BRIEF.md` and `../../.impeccable/surfaces/src-app-projects-slug-page-tsx.md` — route-level visual direction.
-11. `claude/IMPLEMENTATION_REPORT.md` — detailed implementation and verification record.
+2. `../../.claude-private/RAMI_DIGITAL_REPLICA.md`, when present — private identity, career-direction, interests, and reasoning context. Never publish or commit it.
+3. `CURRENT_STATE.md` — what exists now, what has been verified, and what is intentionally not done.
+4. `TASKS.md` — the ordered execution queue and the exact next task.
+5. `KNOWN_ISSUES.md` — blockers and risks that must be resolved before deployment.
+6. `DECISIONS.md` — decisions that must not be silently reopened.
+7. `CONTENT_REGISTRY.md` — complete content inventory and `ready` / `review` / `hold` states.
+8. `EDITORIAL_POLICY.md` — evidence, conflict, voice, disclosure, and media rules.
+9. `AUTHOR_COPY_READY.md` and `AUTHOR_COPY_REVIEW.md` — canonical article prose.
+10. `GEO_AND_PUBLISHING_PLAN.md` — canonical-site, structured-data, integration, syndication, and indexing plan.
+11. `SURFACE_BRIEF.md` and `../../.impeccable/surfaces/src-app-projects-slug-page-tsx.md` — route-level visual direction.
+12. `claude/IMPLEMENTATION_REPORT.md` — detailed implementation and verification record.
 
 Use `KNOWLEDGE_TRANSFER.md` when reasoning about Rami's broader positioning, intended audience, and long-term direction. Use `SESSION_LOG.md` for chronology.
 
