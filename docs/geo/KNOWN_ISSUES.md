@@ -24,6 +24,22 @@ Review routes use `noindex, nofollow` and are absent from public indexes, but an
 - Every ready page still needs the user's personal voice, collaborator-credit, date, naming, and media-rights review.
 - Review projects require the evidence listed in `TASKS.md`; `noindex` is not permission to disclose sensitive information.
 
+## Evidence conflicts found on 2026-09-20
+
+- OmniSign: the live team page on laythayache.com lists five people and does not name Rami; the review article and two live platform articles claim the project in the first person plural. Keep review until resolved.
+- NASNA: public repository credit ("AI Engineer & Developer", started October 2024) conflicts with the CV role and dates used in the review article. Keep review.
+- Thermal super-resolution: the ready page's "~45 FPS on Jetson AGX Orin" has no artifact in the public repository, which reports 229.6 FPS on an unnamed GPU; the platform article says 20–30 FPS on "Jetson Orin". The quality metrics are supported by the repository report. Narrow or corroborate before deployment.
+- Daleel: the ready page under-credits Layth Ayache (frontend contributions and the separate ingestion backend).
+- easyPID: the ready page cites version 1.0.0; 1.1.0 was released 2026-08-09.
+- Oreyeon title: third-party public sources say "Computer Vision Engineer"; the site says "Embedded Systems & Vision Engineer".
+- Existing homepage structured data dates the thermal article as a Medium original and places DevFest 2025 in "Lebanon" rather than Tripoli; both need the approved integration change.
+
+## Public-repository hygiene risks (Rami's repositories, outside this site)
+
+Sweep result 2026-09-20 (`git ls-files` across every local repository): no `.env` file is tracked anywhere; the earlier concern was about untracked working-tree files only. Tracked items that still deserve a decision: `users.json` (twice) and three videos in smart-interactive-desk; one raw video in 360-spherical-stitching; two demo videos in thermal-super-resolution; `testing/SEED-CREDENTIALS.md` in hr-app (collaborator's repository). Rami confirmed the prescription-OCR test images are consented.
+
+- Public repositories contain files that should be checked before their project pages are promoted: a committed user database and people photos in the smart-desk repository, 66 prescription images in the prescription-OCR repository, raw home videos in the 360 stitching repository, and the Valsoft take-home brief in the support-council repository. These are not website defects but they affect what the website can safely point to.
+
 ## Technical follow-ups
 
 - Validate every JSON-LD payload with current production URLs after deployment.

@@ -18,16 +18,26 @@ Work from top to bottom. Do not skip a user-owned gate.
 
 This is the immediate next phase. Claude performs the research; Rami answers only unresolved ownership, consent, or classification questions after the evidence pass.
 
-- [ ] Read the complete private knowledge suite from `.claude-private/README.md`.
-- [ ] Follow `.claude-private/PROJECT_DISCOVERY_PROTOCOL.md` and inspect every direct child under `/home/kronbii/repos` plus the current Space² sources under `/home/kronbii/space2`.
-- [ ] Create the private `.claude-private/PROJECT_CENSUS.md` with one evidence-backed classification for every accessible directory, duplicate/lineage mappings, counts, open questions, and newly discovered GEO candidates.
-- [ ] Reconcile `smart-interactive-desk` with the narrower posture-aware record and identify other renamed, split, duplicated, or superseded projects.
-- [ ] Follow `.claude-private/PUBLICATIONS_AND_VOICE.md` and audit all accessible Medium, DEV, Hashnode, ResearchGate, GitHub, LinkedIn, YouTube, and event-page publications or talks.
-- [ ] Update `PUBLICATION_REGISTRY.md` with live URLs, dates, canonical relationships, conflicts, and recommended actions. Discovery is read-only; do not modify external accounts.
-- [ ] Validate the public identity facts in `ENTITY_FACTS.md` against the live canonical CV and current first-party sources.
-- [ ] Update the private career timeline and organization map with verified dates, roles, collaborators, and disclosure boundaries.
-- [ ] Present Rami with a concise decision list covering only unresolved ownership, collaborator, consent, privacy, and publication questions.
-- [ ] Propose additions, removals, merges, and state changes to `CONTENT_REGISTRY.md`; apply them only after Rami approves.
+- [x] Read the complete private knowledge suite from `.claude-private/README.md`. (2026-09-20)
+- [x] Follow `.claude-private/PROJECT_DISCOVERY_PROTOCOL.md` and inspect every direct child under `/home/kronbii/repos` plus the current Space² sources under `/home/kronbii/space2`. (2026-09-20; 66 entries, 59 Git repositories, plus 42 GitHub-only repositories)
+- [x] Create the private `.claude-private/PROJECT_CENSUS.md` with one evidence-backed classification for every accessible directory, duplicate/lineage mappings, counts, open questions, and newly discovered GEO candidates. (2026-09-20)
+- [x] Reconcile `smart-interactive-desk` with the narrower posture-aware record and identify other renamed, split, duplicated, or superseded projects. (2026-09-20: BEMO, five-person graduation team, demo video; lineage map in the census)
+- [x] Follow `.claude-private/PUBLICATIONS_AND_VOICE.md` and audit all accessible Medium, DEV, Hashnode, ResearchGate, GitHub, LinkedIn, YouTube, and event-page publications or talks. (2026-09-20; ResearchGate, LinkedIn content, and Instagram blocked automated access; Substack copy discovered)
+- [x] Update `PUBLICATION_REGISTRY.md` with live URLs, dates, canonical relationships, conflicts, and recommended actions. Discovery is read-only; do not modify external accounts. (2026-09-20)
+- [x] Validate the public identity facts in `ENTITY_FACTS.md` against current first-party and institutional sources. (2026-09-20; the live CV was unreachable because the Google Drive connector is unauthenticated, so CV-only facts keep their `reviewed` label)
+- [x] Update the private career timeline and organization map with verified dates, roles, collaborators, and disclosure boundaries. (2026-09-20)
+- [x] Present Rami with a concise decision list covering only unresolved ownership, collaborator, consent, privacy, and publication questions. (2026-09-20; list recorded below; awaiting answers)
+- [x] Propose additions, removals, merges, and state changes to `CONTENT_REGISTRY.md`; apply them only after Rami approves. (2026-09-20: approved and applied — thermal figure narrowed, easyPID 1.1.0, Daleel credit, OmniSign/BEMO/NASNA/Space Apps records updated, discovery additions section added.)
+- [x] Draft upstream contributions (project + article), talks and teaching (article), and the NASNA article expansion. (2026-09-20; all `review`.)
+- [x] Draft the remaining approved records: OmniSign figure disclosure, BEMO image-led record, hanta dashboard, Basira, Evoid, imagen, lumiscan, water-shooting robot. (2026-09-20; all `review`.)
+- [x] Rami answered the consolidated question list (2026-09-20); twelve records promoted to `ready`, four remain `review`.
+- [ ] Collect from Rami: Physics Day and INJAZ documents; Space Apps organizer photos or certificates; DevFest slide exports; the WRO re-ranking source if one exists.
+- [ ] Public-repository hygiene follow-ups for Rami (outside this repo): remove `users.json` from smart-interactive-desk; review committed videos in 360-spherical-stitching and thermal-super-resolution; hr-app seed-credentials file; evoid.dev placeholder testimonials.
+- [ ] Voice extraction from the three live articles; interview questions for the flagship articles.
+- [ ] Ask Rami to digitize the 2021–2024 Space Apps organizer certificates into `public/images/authority/` as evidence before the mentoring article is promoted.
+- [ ] Reconcile the OmniSign figure sets (CV vs team page) with Rami before promotion.
+- [ ] Resolve the CV's "WRO National 2nd Place 2024" line against RHU's 2023 third-place record before any awards list.
+- [ ] Voice extraction: build the private voice sample bank from the three live articles and ask the flagship interview questions (deferred until Rami answers the decision list).
 
 ## Phase 1 — User pruning and editorial approval
 
@@ -110,8 +120,29 @@ Each external state change requires the user's authorization.
 
 ## User-owned decisions currently open
 
-- Which newly discovered or reclassified projects should enter the public GEO registry after Claude's census?
-- Which collaborative, employer, client, medical, accessibility, defense, and organization records are cleared for public discussion?
+Decision list presented 2026-09-20 after the Phase 0.5 evidence pass. Rami answered the same day; answers are recorded in `CONTENT_REGISTRY.md`, `ENTITY_FACTS.md`, and the private suite. Items 1–12 below are resolved; remaining follow-ups are listed after them.
+
+1. OmniSign: what exactly did you build, and does the team (Layth Ayache, Nour El Hariri, Tayseer Laz, Abou Baker Al Khatib, supervisor Dr. Oussama Mustapha) agree to public attribution of that contribution? The live team page no longer names you.
+2. NASNA: correct the role and dates. The public README says "AI Engineer & Developer" and the repository starts October 2024; the CV says co-founder/operations lead 2021–2024. Do Mohamad Homsi, Abed El-Fattah Amouneh, and Lynn El Solh approve a website article?
+3. NASA Space Apps: public sources support a 2022 student-volunteer and participant role only. Which years were you on the organizing team, under what title, and is there an official page or organizer listing per year?
+4. National Physics Day and INJAZ MENA: is there any public source? If not, both stay withheld.
+5. Oreyeon: is your current title "Computer Vision Engineer" or "Embedded Systems & Vision Engineer", and what is the start month?
+6. Thermal super-resolution: does a Jetson AGX Orin benchmark exist (the repository holds only a 229.6 FPS report on an unnamed GPU, the article says 20–30 FPS on Jetson Orin, the CV says ~45 FPS)? If not, should the page drop the edge figure?
+7. Daleel: approve crediting Layth Ayache on the ready page.
+8. BEMO smart desk: approve the five-person team credit and graduation-project framing; confirm each teammate's role; agree to remove the committed user database and people photos from the public repository before promotion.
+9. Upstream contributions (Betaflight, PX4 EKF2, OpenFront): have any PRs been opened or merged? If yes, approve an aggregated "open-source contributions" record.
+10. Talks: do you have slides or a recording for DevFest Tripoli 2025, and may the CodewithSerah bootcamp sessions and the LAU Byblos Git workshop be listed?
+11. Evoid, PadelEye, Bsheel: what is your role in each, and what may be said publicly and when?
+12. Client work: may imagen (photographer pipeline) and lumiscan (dermatology dashboard) be described publicly with the client anonymized? CV-aim-assist is recommended for permanent exclusion.
+13. Basira: it is already live on basira.ramikronbi.com. Public record, review, or hold?
+14. impact-dashboard: is the "USJ Testotheque" Oreyeon-seat author identity your own work, and is the USJ engagement disclosable?
+15. Hanta virus OSINT dashboard: add as a review candidate?
+16. Medical prescription OCR: are the 66 prescription images in the public repository synthetic or safe to keep public?
+17. Point-of-sale lineage (epos, epos-software, gravi): any version publishable, and was there a real client?
+18. Profiles: add Substack and YouTube to the site's verified profile list?
+
+Items 1–15 of the 2026-09-20 list were answered the same day and applied. Earlier open decisions remain:
+
 - Which of the 11 ready pairs should remain public after pruning?
 - Should review routes remain buildable locally after pruning, or should rejected drafts be removed entirely?
 - Which existing file(s) may change for sitemap and navigation integration?

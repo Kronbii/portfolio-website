@@ -104,3 +104,10 @@ Notes
   in scope and the registry forbids fabricating hardware imagery. Video
   file exists at project-video/video.mp4 in the source repository but is
   not copied because embedded playback is not required by the article.
+
+smart-desk/demo.gif
+  original: /home/kronbii/repos/smart-interactive-desk/images/demo.gif
+  source:   https://github.com/Kronbii/smart-interactive-desk/blob/main/images/demo.gif
+smart-desk/night-pic.jpeg
+  original: /home/kronbii/repos/smart-interactive-desk/images/night-pic.jpeg
+  source:   https://github.com/Kronbii/smart-interactive-desk/blob/main/images/night-pic.jpeg

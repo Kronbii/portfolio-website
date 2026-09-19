@@ -208,7 +208,7 @@ export const projects: ProjectRecord[] = [
     ],
     measurements: [
       { label: 'Distribution', value: 'Arduino Library Manager', context: 'contributed Device Control library' },
-      { label: 'Version', value: '1.0.0', context: 'listing dated 2026-01-15' },
+      { label: 'Versions', value: '1.0.0, 1.1.0', context: 'Arduino Library Manager listings dated 2026-01-15 and 2026-08-09' },
       { label: 'License', value: 'MIT' },
       { label: 'Architecture', value: 'Any', context: 'runs on AVR Uno-class boards and beyond' },
     ],
@@ -305,6 +305,7 @@ export const projects: ProjectRecord[] = [
       { label: 'Team scale reported', value: '>95 teams / >250 participants', context: 'WRO Future Engineers per RHU' },
     ],
     limits: [
+      'Rafik Hariri University reported third place in July 2023 and that report is the source used here. The canonical CV records a second-place standing after a later re-ranking; no institutional page for the revised standing has been located, so this page keeps the university’s figure.',
       'A twenty-day build imposes clear boundaries on how much of each subsystem can be optimised or documented.',
       'Rami’s exact scope is described conservatively; individual credit within the team should not be inflated beyond what the repository and existing first-party content support.',
       'Track and traffic-sign behavior are tied to the WRO Future Engineers 2023 environment and cannot be generalized without new testing.',
@@ -409,12 +410,12 @@ export const projects: ProjectRecord[] = [
       { label: '×2 quality', value: '34.2 dB / 0.840', context: 'PSNR / SSIM, per canonical CV' },
       { label: '×3 quality', value: '31.0 dB / 0.757', context: 'PSNR / SSIM, per canonical CV' },
       { label: '×4 quality', value: '29.6 dB / 0.713', context: 'PSNR / SSIM, per canonical CV' },
-      { label: 'Edge inference', value: '~45 FPS', context: 'Jetson AGX Orin, per canonical CV' },
+      { label: 'Edge inference', value: '~45 FPS', context: 'NVIDIA Jetson Orin after quantization, per canonical CV' },
     ],
     limits: [
       'Reported quality numbers are dataset-specific and become less constrained at larger enlargement factors.',
-      '“Real time” is a property of a full pipeline on named hardware at a named input size, not a property of a model file. The 45 FPS figure is bound to Jetson AGX Orin.',
-      'Repository claims of first/SOTA, 15× faster, 40× parameter reduction, or 250–270 FPS are held back until benchmark protocol and hardware are reconciled.',
+      '“Real time” is a property of a full pipeline on named hardware at a named input size, not a property of a model file. The ~45 FPS figure is bound to NVIDIA Jetson Orin after quantization, as recorded in the canonical CV; the public repository does not yet include that Jetson benchmark artifact.',
+      'Repository claims of first/SOTA, 15× faster, 40× parameter reduction, or 250–270 FPS are held back until benchmark protocol and hardware are reconciled. The repository’s own evaluation report records 229.6 FPS on 1,100 FLIR validation frames on an unnamed desktop GPU, and an earlier platform article reported 20–30 FPS on Jetson Orin; neither is combined with the reviewed figure here.',
       'Task-based evaluation — does downstream detection improve? — is the next honest measurement of value.',
     ],
     media: [
@@ -439,7 +440,7 @@ export const projects: ProjectRecord[] = [
         label: 'Canonical CV (2026)',
         href: 'https://github.com/Kronbii/thermal-super-resolution#readme',
         kind: 'cv',
-        note: 'Quality figures and Jetson AGX Orin frame rate are quoted from the canonical CV.',
+        note: 'Quality figures and the Jetson Orin frame rate are quoted from the canonical CV.',
       },
     ],
     articleSlug: 'adapting-super-resolution-to-thermal-imagery',
@@ -447,7 +448,7 @@ export const projects: ProjectRecord[] = [
     keywords: [
       'thermal super-resolution',
       'IMDN',
-      'Jetson AGX Orin',
+      'Jetson Orin',
       'edge inference',
       'single-channel super-resolution',
     ],
@@ -700,7 +701,7 @@ export const projects: ProjectRecord[] = [
       'An independent multilingual Lebanese parliamentary-election information platform designed around source archiving, append-only history, and verifiable records.',
     summary:
       'An independent, multilingual Lebanese parliamentary-election information platform designed around source archiving, append-only history, and verifiable records.',
-    role: 'Repository owner and implementer. No institutional endorsement or political affiliation is implied.',
+    role: 'Rami Kronbi — lead developer of the platform; Layth Ayache — frontend contributions and a separate content-ingestion backend. No institutional endorsement or political affiliation is implied.',
     form: 'artifact',
     schemaType: 'SoftwareSourceCode',
     hero: {
@@ -716,7 +717,7 @@ export const projects: ProjectRecord[] = [
       problem:
         'Political information becomes more useful when a reader can see where each fact came from and how it changed. Ordinary content systems optimize for the current value and lose that trail.',
       how: 'The platform pairs a Next.js frontend with an Express backend, Prisma and PostgreSQL, JWT authentication, CSRF protection, rate limiting, and immutable data models intended to preserve a verifiable trail of sources and changes.',
-      role: 'Rami Kronbi owns and implements the project. Daleel does not imply institutional endorsement, and its dataset is not claimed to be complete, live, or officially certified.',
+      role: 'Rami Kronbi leads development of the platform; Layth Ayache contributed to the frontend and built a separate content-ingestion backend. Daleel does not imply institutional endorsement, and its dataset is not claimed to be complete, live, or officially certified.',
     },
     stages: [
       {
@@ -1067,14 +1068,14 @@ export const projects: ProjectRecord[] = [
   // ---- Review-only project records (noindex; not surfaced in indexes) ----
   {
     slug: 'omnisign-lebanese-sign-language',
-    state: 'review',
+    state: 'ready',
     title: 'OmniSign — Lebanese Sign Language translation',
-    metaTitle: 'OmniSign — real-time Lebanese Sign Language translation (editorial review)',
+    metaTitle: 'OmniSign — real-time Lebanese Sign Language translation',
     metaDescription:
-      'Editorial review draft. Not indexable. Real-time Lebanese Sign Language translation system spanning mobile, web, and offline embedded deployments.',
+      'Real-time Lebanese Sign Language translation system spanning mobile, web, and offline embedded deployments.',
     summary:
       'A real-time translation system for Lebanese Sign Language spanning camera input, visual recognition, language output, and deployment across mobile, web, and offline embedded environments.',
-    role: 'Team member. Individual roles and collaborator credits require confirmation before publication.',
+    role: 'Co-founder and computer vision engineer, per the canonical CV, on a team with Layth Ayache, Nour El Hariri, Tayseer Laz, and Abou Baker Hussien Al Khatib, supervised by Dr. Oussama Mustapha.',
     form: 'diagram',
     schemaType: 'CreativeWork',
     hero: {
@@ -1089,7 +1090,7 @@ export const projects: ProjectRecord[] = [
       problem:
         'General sign-language datasets do not transfer to local vocabulary, signing patterns, or the communication settings in which the system will be used.',
       how: 'A recognition model consumes camera input and produces language output; the system is deployed across mobile, web, and offline embedded targets. Uncertainty handling and the option to request a repeated sign are treated as design decisions.',
-      role: 'Rami Kronbi contributed as a team member. Precise individual roles are held for review.',
+      role: 'Rami Kronbi was a co-founder and the computer vision engineer on the team, per the canonical CV. Layth Ayache led AI and data work; Nour El Hariri, Tayseer Laz, and Abou Baker Hussien Al Khatib were team members; Dr. Oussama Mustapha supervised, per the team’s public project pages.',
     },
     stages: [
       {
@@ -1118,19 +1119,25 @@ export const projects: ProjectRecord[] = [
       },
     ],
     limits: [
-      'Award language, pilot sites, dataset consent and governance, and individual credit are all pending editorial confirmation.',
+      'The team’s public project page reports a Public Choice first prize at the 2025 National FYP Demo Day and 40,000 collected samples; the canonical CV reports a 300K-image dataset, 95–97% development accuracy, ~45 FPS, and pilots in two Beirut coffee shops and one church. The two figure sets are not reconciled and are not combined.',
+      'The team collected its own dataset; per-signer consent procedures and the evaluation protocol behind the reported accuracy are not published.',
       'Existing origin-story language from earlier public writing is not reproduced.',
     ],
     sources: [
       {
         label: 'Canonical CV (2026)',
-        href: 'https://laythayache.com/projects/omnisign',
+        href: 'https://ramikronbi.com',
         kind: 'cv',
-        note: 'Referenced for dataset scale and deployment scope; not treated as narrative authority.',
+        note: 'Referenced for role, dataset scale, and deployment scope; not treated as narrative authority.',
       },
       {
-        label: 'Team project page',
+        label: 'Team project page — Layth Ayache',
         href: 'https://laythayache.com/projects/omnisign',
+        kind: 'article',
+      },
+      {
+        label: 'Team project page — Tayseer Laz',
+        href: 'https://tayseerlaz.com/work/omnisign/',
         kind: 'article',
       },
     ],
@@ -1145,29 +1152,38 @@ export const projects: ProjectRecord[] = [
   },
   {
     slug: 'posture-aware-classroom-desk',
-    state: 'review',
-    title: 'Posture-aware classroom desk',
-    metaTitle: 'Posture-aware classroom desk (editorial review)',
+    state: 'ready',
+    title: 'Smart Interactive Desk (BEMO)',
+    metaTitle: 'Smart Interactive Desk (BEMO) — a posture-aware classroom workstation',
     metaDescription:
-      'Editorial review draft. Not indexable. A posture-estimation prototype that closes a physical loop with a motorized desk.',
+      'A posture-estimation prototype that closes a physical loop with a motorized desk.',
     summary:
       'A prototype that combines computer vision, ESP32 control, motorized height and tilt, immediate LED feedback, and a dashboard for longer-term patterns.',
-    role: 'Team member. Individual role and public repository are pending confirmation.',
-    form: 'diagram',
+    role: 'Team lead and software/robotics engineer, per the canonical CV, on a senior graduation project with Bassam Kousa, Ali Daaboul, Mohamad Berjawi, and Mohamad Hariri at Rafik Hariri University.',
+    form: 'artifact',
     schemaType: 'CreativeWork',
+    media: [
+      {
+        src: '/images/authority/smart-desk/demo.gif',
+        alt: 'Animated demonstration of the BEMO desk adjusting height and tilt while its display updates.',
+        caption: 'Demonstration animation from the project repository.',
+      },
+    ],
+    diagramIds: ['posture-loop'],
     hero: {
-      kind: 'diagram',
-      diagramId: 'posture-loop',
-      caption:
-        'A closed loop between visual posture estimation, ESP32 control decisions, motorized desk motion, and immediate LED feedback back to the user.',
-      alt: 'Diagram of a posture-aware desk control loop: camera-based posture estimator, ESP32 decision logic with dead bands, motorized height and tilt, and an LED feedback channel to the user.',
+      kind: 'image',
+      media: {
+        src: '/images/authority/smart-desk/night-pic.jpeg',
+        alt: 'The BEMO smart desk prototype photographed at night with its tilting top, camera arm, and control screen lit.',
+        caption: 'The BEMO prototype, from the project repository.',
+      },
     },
     answer: {
       what: 'A prototype posture-aware desk that closes a physical loop between vision, control, and motion.',
       problem:
         'A posture model cannot be treated as an isolated prediction: camera placement, desk motion, false corrections, and mechanical limits all matter.',
       how: 'A camera-based posture estimator informs an ESP32 controller with dead bands, mechanical limits, and slow transitions, driving motorized height and tilt while an LED and dashboard communicate state back to the user.',
-      role: 'Rami Kronbi’s exact contribution is under editorial review.',
+      role: 'Rami Kronbi was the team lead and software/robotics engineer on a five-person senior graduation project with Bassam Kousa, Ali Daaboul, Mohamad Berjawi, and Mohamad Hariri; the repository history shows Rami and Mohamad Berjawi as the main committers.',
     },
     stages: [
       { step: '01', title: 'Observe', detail: 'A desk-mounted camera estimates posture.' },
@@ -1184,14 +1200,25 @@ export const projects: ProjectRecord[] = [
       },
     ],
     limits: [
-      'Repository URL, final project name, authorship split, and testing evidence are unresolved.',
+      'The repository documents the posture subsystem alongside handwriting-capture notes, a music player, and desk-to-desk messaging; this page describes only the posture loop.',
+      'Per-teammate roles and formal test outcomes live in the team’s off-repository project documents and are not reproduced here. The canonical CV records a Best Senior Project award; no institutional page for it has been located.',
     ],
     sources: [
+      {
+        label: 'GitHub — smart-interactive-desk',
+        href: 'https://github.com/Kronbii/smart-interactive-desk',
+        kind: 'repository',
+      },
+      {
+        label: 'Demo video',
+        href: 'https://youtu.be/5TPmpPc6rjY',
+        kind: 'video',
+      },
       {
         label: 'Canonical CV (2026)',
         href: 'https://ramikronbi.com',
         kind: 'cv',
-        note: 'CV entry cited pending public repository confirmation.',
+        note: 'Role and award wording cited from the CV.',
       },
     ],
     articleSlug: 'connecting-posture-estimation-to-a-motorized-desk',
@@ -1325,6 +1352,344 @@ export const projects: ProjectRecord[] = [
     articleSlug: 'lessons-from-an-edge-emotion-recognition-prototype',
     topics: ['edge-ai', 'computer-vision'],
     keywords: ['edge inference', 'emotion recognition', 'Jetson Orin Nano', 'responsible AI'],
+  },
+  {
+    slug: 'upstream-open-source-contributions',
+    state: 'ready',
+    title: 'Upstream fixes to Betaflight, PX4, and OpenFront',
+    metaTitle: 'Upstream open-source contributions — Betaflight, PX4 EKF2, OpenFront',
+    metaDescription:
+      'Small, test-backed fixes contributed upstream to Betaflight flight-controller firmware, the PX4 EKF2 estimator, and the OpenFront browser game.',
+    summary:
+      'Bug fixes contributed to three upstream open-source projects: a Redpine CC2500 debug-mode fix and a W25M flash read fix in Betaflight, an EKF2 range-height reset fix in PX4, and two HUD fixes in OpenFront.',
+    role: 'Sole author of each contribution; reviewed and merged, revised, or closed by the upstream maintainers.',
+    form: 'diagram',
+    schemaType: 'CreativeWork',
+    hero: {
+      kind: 'diagram',
+      diagramId: 'upstream-fixes',
+      caption:
+        'Each contribution follows the same path: a reported fault, an explicit root cause, the smallest fix, a regression test, and a written rationale for the maintainers.',
+      alt: 'Diagram of the contribution workflow: reported issue, root cause, minimal fix, regression test, written rationale, and maintainer review.',
+    },
+    answer: {
+      what: 'A set of small upstream pull requests to Betaflight, PX4, and OpenFront, each fixing a specific reported fault.',
+      problem:
+        'Flight-controller firmware and estimators fail in narrow, hardware-dependent ways: a debug channel that two drivers write with different meanings, a flash read that silently returns short, a height fusion path that never refreshes its timeout. The same discipline applies to a browser game HUD that a mobile browser can zoom into a stuck state.',
+      how: 'Read the code path until the mechanism is explicit, reproduce or reason through the fault, change the smallest surface that removes it, add a regression test where the project has a test harness, and write the pull request so a maintainer can verify the reasoning without re-deriving it.',
+      role: 'Rami Kronbi authored each pull request. Betaflight #15706, OpenFront #4868, and OpenFront #4985 were merged by the maintainers; Betaflight #15705 is open; PX4 #28286 was closed without merge.',
+    },
+    stages: [
+      {
+        step: '01',
+        title: 'Betaflight #15706 — Redpine CC2500 debug mode',
+        detail:
+          'The FrSky and Redpine CC2500 drivers both wrote the same debug channel with different meanings for indices 0–3, and a blackbox log records only the numeric debug mode, so the two layouts could not be told apart afterwards. The fix gives the Redpine driver its own debug mode. Merged 2026-09-16; 3 files, +24/−11.',
+      },
+      {
+        step: '02',
+        title: 'Betaflight #15705 — short die reads in W25M flash',
+        detail:
+          'The W25M wrapper split reads at die boundaries but assumed the die driver returned the full requested length. The W25N01G die driver clamps each transfer to a NAND page, so multi-page reads left the tail of the buffer unfilled while reporting success. The fix honours the returned count. Open at the time of writing; 1 file, +16/−15.',
+      },
+      {
+        step: '03',
+        title: 'PX4 #28286 — recurring EKF2 range height resets',
+        detail:
+          'When a range finder was the only active height source, successful range fusion did not refresh the estimator’s global height-fusion timestamp, so altitude reset every five seconds. The proposed fix refreshes the timestamp on successful range height fusion and adds regression coverage; the new test failed before the change and passed after it (187 of 187 tests). Closed by the maintainers without merge; 5 files, +40/−5.',
+      },
+      {
+        step: '04',
+        title: 'OpenFront #4868 and #4985 — HUD fixes',
+        detail:
+          '#4868 adds a progressive end-of-game timer warning (center alert at 1:00, alternating timer at 0:30, alternating control bar at 0:10) with reduced-motion handling and focused tests; merged 2026-08-07. #4985 stops iOS double-tap zoom from leaving the HUD stuck off-screen, using touch-action: manipulation plus a narrow touchend guard; merged 2026-08-13.',
+      },
+    ],
+    measurements: [
+      { label: 'Pull requests', value: '5', context: 'three merged, one open, one closed' },
+      { label: 'Betaflight #15706', value: 'merged', context: '2026-09-16' },
+      { label: 'OpenFront #4868', value: 'merged', context: '2026-08-07' },
+      { label: 'OpenFront #4985', value: 'merged', context: '2026-08-13' },
+      { label: 'PX4 #28286', value: 'closed', context: 'not merged; test-backed' },
+    ],
+    limits: [
+      'These are small fixes, not features or architecture work; the value is in the diagnosis and the tests, not the line count.',
+      'The PX4 change was not accepted upstream; the record states that plainly rather than counting it as a contribution.',
+      'Betaflight and PX4 are hobby and research flight-control stacks; nothing here concerns employer or defense work.',
+    ],
+    sources: [
+      { label: 'Betaflight PR #15706', href: 'https://github.com/betaflight/betaflight/pull/15706', kind: 'repository' },
+      { label: 'Betaflight PR #15705', href: 'https://github.com/betaflight/betaflight/pull/15705', kind: 'repository' },
+      { label: 'PX4 PR #28286', href: 'https://github.com/PX4/PX4-Autopilot/pull/28286', kind: 'repository' },
+      { label: 'OpenFront PR #4868', href: 'https://github.com/openfrontio/OpenFrontIO/pull/4868', kind: 'repository' },
+      { label: 'OpenFront PR #4985', href: 'https://github.com/openfrontio/OpenFrontIO/pull/4985', kind: 'repository' },
+    ],
+    articleSlug: 'what-small-upstream-fixes-teach-about-firmware',
+    topics: ['open-source-engineering', 'embedded-systems', 'robotics-perception'],
+    keywords: ['Betaflight', 'PX4', 'EKF2', 'open-source contribution', 'firmware debugging', 'C'],
+  },
+  {
+    slug: 'hantawatch-outbreak-dashboard',
+    state: 'ready',
+    title: 'Hantawatch — outbreak situational-awareness dashboard',
+    metaTitle: 'Hantawatch — an OSINT dashboard for the 2026 MV Hondius hantavirus outbreak',
+    metaDescription:
+      'A deployed dashboard that aggregates public health and news sources into a live map, event feed, and indicators for a single outbreak.',
+    summary:
+      'A deployed situational-awareness dashboard for the MV Hondius hantavirus outbreak of April–May 2026, built from public sources only: a country choropleth, status-colored case events, a linked event feed, indicators, and a news ticker.',
+    role: 'Sole developer.',
+    form: 'diagram',
+    schemaType: 'SoftwareSourceCode',
+    hero: {
+      kind: 'diagram',
+      diagramId: 'osint-feed',
+      caption: 'Public sources are aggregated server-side and rendered as a map, feed, and indicators; every event row links back to its source.',
+      alt: 'Diagram of the dashboard data flow: public sources, server-side aggregation, dashboard panels, URL-driven filters, and outbound source links.',
+    },
+    answer: {
+      what: 'A live dashboard that turns public outbreak sources into one shareable situational view.',
+      problem:
+        'During a fast-moving outbreak, the public record is scattered across agency bulletins, a GIS layer, and news feeds. Reading them together, with a map and a sense of what changed, is the missing layer.',
+      how: 'A Next.js server component fetches and normalizes WHO disease-outbreak news, CDC material, an ArcGIS case layer, and GDELT and Google News feeds; a client map renders a choropleth and case markers; filters live in the URL so any view can be shared.',
+      role: 'Rami Kronbi designed, built, and deployed the dashboard alone.',
+    },
+    stages: [
+      { step: '01', title: 'Aggregate', detail: 'Cases, case events, and news are fetched in parallel on the server and normalized into one event model with source-health checks.' },
+      { step: '02', title: 'Render', detail: 'A dark basemap with a country choropleth of active cases, circle markers colored by status, an event feed, a KPI panel with deltas, a 14-day sparkline, and a news ticker.' },
+      { step: '03', title: 'Filter', detail: 'View, search text, and country are URL parameters; clicking a country polygon or a top-countries row toggles the country filter.' },
+      { step: '04', title: 'Link out', detail: 'Every event row is an anchor to its source page. The dashboard summarizes; it does not become the source.' },
+    ],
+    limits: [
+      'Aggregate public information only; it holds no patient-level data and is not an epidemiological product.',
+      'Source parsers are specific to one outbreak and its feeds; they are not a general surveillance system.',
+      'No automated test suite and no README beyond the handoff document at the time of drafting.',
+    ],
+    sources: [
+      { label: 'Live dashboard', href: 'https://hanta-virus-dashboard.vercel.app', kind: 'demo' },
+      { label: 'GitHub — hanta-virus-dashboard', href: 'https://github.com/Kronbii/hanta-virus-dashboard', kind: 'repository' },
+    ],
+    articleSlug: 'building-an-outbreak-dashboard-from-public-sources',
+    topics: ['civic-technology', 'applied-ai'],
+    keywords: ['OSINT', 'outbreak dashboard', 'Next.js', 'Leaflet', 'public health', 'TypeScript'],
+  },
+  {
+    slug: 'basira-retinal-screening',
+    state: 'ready',
+    title: 'Basira — retinal screening decision support',
+    metaTitle: 'Basira — a council-of-models retinal screening prototype for eye clinics',
+    metaDescription:
+      'A multi-tenant prototype in which three independent retinal-image models read a fundus image, a consensus engine merges them, and a doctor confirms or overrides.',
+    summary:
+      'A prototype web platform for eye clinics in Lebanon in which three independent retinal-image models each analyze a fundus or OCT image, a consensus engine reports agreement, urgency, and a referral suggestion, and the reviewing doctor confirms or overrides before a report is issued.',
+    role: 'Sole developer. Not clinically validated; not a medical device.',
+    form: 'diagram',
+    schemaType: 'SoftwareSourceCode',
+    hero: {
+      kind: 'diagram',
+      diagramId: 'council-consensus',
+      caption: 'Three independent models vote; consensus is reported with an agreement score; a doctor has the final decision.',
+      alt: 'Diagram of the Basira pipeline: image upload, three independent models, consensus engine, doctor review, and a PDF report.',
+    },
+    answer: {
+      what: 'A decision-support prototype that second-reads retinal images for clinics and always leaves the decision to a doctor.',
+      problem:
+        'Retinal screening in a clinic depends on scarce specialist time. A second reader that prioritizes and flags, running on an ordinary CPU on site, could help, but only if it never pretends to diagnose.',
+      how: 'A FastAPI backend, a separate ML service, and a Next.js frontend share one data directory. Three independent retinal-image models, each with a classification head trained on openly licensed public datasets (DDR, IDRiD, RFMiD, PAPILA), read the image; a consensus engine merges the three; the doctor confirms or overrides; a trilingual PDF report is generated.',
+      role: 'Rami Kronbi built the platform, the model integration, and the deployment alone.',
+    },
+    stages: [
+      { step: '01', title: 'Gate', detail: 'An image-quality gate runs before any model; ungradable images are reported as such.' },
+      { step: '02', title: 'Read three times', detail: 'Each council member serves predictions only when its encoder and a trained head both load; an untrained head never produces a diagnosis, and the API reports stubs explicitly.' },
+      { step: '03', title: 'Merge', detail: 'The consensus engine reports unanimous, majority, or split agreement, an urgency level, and a referral recommendation, with explainability heatmaps.' },
+      { step: '04', title: 'Review', detail: 'The doctor’s confirmation or override is the record; the PDF report is generated from that decision.' },
+    ],
+    measurements: [
+      { label: 'Council latency', value: '~2 s per eye', context: 'all three models on a plain CPU, no GPU, per the project’s validation record' },
+          ],
+    limits: [
+      'Development status only. Retrospective benchmarking on public datasets guides engineering; it is not evidence of clinical performance, the validation study has not been run, and the platform is not a medical device.',
+      'The live deployment uses a demo clinic and demo data only.',
+    ],
+    sources: [
+      { label: 'Live prototype', href: 'https://basira.ramikronbi.com', kind: 'demo', note: 'Demo clinic and demo data only.' },
+    ],
+    articleSlug: 'designing-a-council-of-models-for-retinal-screening',
+    topics: ['applied-ai', 'health-technology'],
+    keywords: ['retinal screening', 'decision support', 'FastAPI', 'Python', 'ophthalmology'],
+  },
+  {
+    slug: 'imagen-raw-to-edit-dataset-pipeline',
+    state: 'ready',
+    title: 'Imagen — learning a photographer’s edit from RAW brackets',
+    metaTitle: 'Imagen — a RAW-to-retouched dataset pipeline and HDRNet training for real-estate photography',
+    metaDescription:
+      'An end-to-end pipeline that pairs bracketed RAW exposures with a photographer’s final edits and trains a bilateral-grid network to reproduce the style.',
+    summary:
+      'A freelance pipeline for a French real-estate photography agency that ingests bracketed RAW sessions, decodes them through a color-accurate DNG pipeline into 16-bit linear frames, pairs them with the photographer’s edited JPEGs, and trains an HDRNet model to replicate the editing style.',
+    role: 'Rami Kronbi — computer vision engineer and pipeline author; Layth Ayache contributed to training runs.',
+    form: 'diagram',
+    schemaType: 'SoftwareSourceCode',
+    hero: {
+      kind: 'diagram',
+      diagramId: 'raw-pipeline',
+      caption: 'Ingest, preprocess, targets, dataloader, and HDRNet training; each stage writes a manifest so a run can resume.',
+      alt: 'Diagram of the Imagen pipeline: RAW bracket ingestion, color-accurate preprocessing, target generation, dataloader, and HDRNet training.',
+    },
+    answer: {
+      what: 'A dataset pipeline and training setup that teaches a neural network to edit real-estate photographs the way one photographer does.',
+      problem:
+        'Architectural photographers shoot ambient brackets, flash fills, and lights-on stacks for every frame, then hand-blend and grade them. The style is consistent but slow to reproduce.',
+      how: 'Brackets are grouped by timestamp; RAW files are decoded with the full DNG color pipeline (linearization, white balance and camera calibration, forward matrix, Bradford adaptation) and lens correction into 16-bit linear sRGB; the edited JPEG is linearized as the target; an HDRNet bilateral-grid network is trained on the pairs.',
+      role: 'Rami Kronbi designed and built the pipeline and the color science; Layth Ayache contributed training and delivery runs.',
+    },
+    stages: [
+      { step: '01', title: 'Ingest', detail: 'Detect −6/−3/0/+3/+6 EV ambient brackets, flash fills, and lights-on stacks across any listing folder structure; write an index per listing.' },
+      { step: '02', title: 'Decode', detail: 'Sony ARW through LibRaw; Canon EOS R5 DNG 1.7 with JPEG XL tiles through a tifffile fallback and the DNG specification’s color pipeline.' },
+      { step: '03', title: 'Target', detail: 'The photographer’s JPEG is linearized so the artistic values are preserved exactly.' },
+      { step: '04', title: 'Train', detail: 'HDRNet learns the mapping; the pipeline resumes automatically after interruption.' },
+    ],
+    measurements: [
+      { label: 'Editing throughput before', value: '2–3 photos/day', context: 'team of three, per the client, as recorded in the canonical CV' },
+      { label: 'Editing throughput after', value: '~40 photos/day', context: 'per team member, per the client, as recorded in the canonical CV' },
+    ],
+    limits: [
+      'The client and its imagery are not shown; the repository is private and the results directory contains client photographs.',
+      'Style transfer is per photographer; the model does not generalize across agencies.',
+    ],
+    sources: [
+      { label: 'Canonical CV (2026)', href: 'https://ramikronbi.com', kind: 'cv', note: 'Freelance engagement, French real-estate agency.' },
+    ],
+    articleSlug: 'why-color-science-comes-before-the-model',
+    topics: ['computer-vision', 'applied-ai'],
+    keywords: ['HDRNet', 'RAW processing', 'DNG', 'color pipeline', 'Python', 'PyTorch'],
+  },
+  {
+    slug: 'lumiscan-lesion-dashboard',
+    state: 'ready',
+    title: 'Lumiscan dashboard — tracking skin lesions across scans',
+    metaTitle: 'Lumiscan dashboard — a multi-tenant clinical platform for a lesion-scanning device',
+    metaDescription:
+      'A patient, lesion, and scan platform built for an ESP32 lesion-scanning device, with organization-scoped data and narrative-only AI.',
+    summary:
+      'A Next.js and PostgreSQL platform that lets a clinic record patients, lesions, and successive scans from a lesion-scanning device, view metric trends over time, and generate narrative summaries, with strict organization scoping and a stubbed device-ingestion API.',
+    role: 'Sole developer, built for the device’s product owner.',
+    form: 'diagram',
+    schemaType: 'SoftwareSourceCode',
+    hero: {
+      kind: 'diagram',
+      diagramId: 'lesion-timeline',
+      caption: 'Organization scoping is structural; classification arrives from outside; the language model writes narratives only.',
+      alt: 'Diagram of the Lumiscan data model: organization, patient, lesion, scan, timeline, narrative summaries, and follow-up notes.',
+    },
+    answer: {
+      what: 'The software side of a lesion-scanning device: a place to keep patients, lesions, and scans, and to see whether a lesion is changing.',
+      problem:
+        'A device that classifies a mole is not a product on its own. Clinics need to track lesions over time, manage follow-up when something is flagged, and read a summary they can act on.',
+      how: 'Next.js with tRPC for the interface, a versioned REST endpoint for devices, Drizzle on PostgreSQL, S3-compatible private image storage, and an Anthropic-backed narrative module. Every clinical row carries an organization id derived server-side; cross-organization access returns not-found.',
+      role: 'Rami Kronbi built the platform alone for the device’s product owner; classification runs on the device, never in the app.',
+    },
+    stages: [
+      { step: '01', title: 'Scope', detail: 'Organization id is denormalized down every clinical table and never read from the client.' },
+      { step: '02', title: 'Record', detail: 'Manual entry is the MVP path; the device-ingestion API is defined, authenticated by hashed device keys, idempotent, and simulated by a script.' },
+      { step: '03', title: 'Compare', detail: 'A lesion timeline shows successive scans with metric trends and flags.' },
+      { step: '04', title: 'Narrate', detail: 'Patient-friendly and doctor-facing summaries are generated from stored results; the model never produces a classification.' },
+    ],
+    limits: [
+      'Prototype authentication with one local workspace; live device ingestion is deferred; HIPAA and GDPR are designed-for-later, not implemented.',
+      'All patient data in the demo is synthetic, including generated dermoscopic imagery.',
+      'The device and its classifier belong to the product owner and are not described here.',
+    ],
+    sources: [
+      { label: 'GitHub — lumiscan-dashboard', href: 'https://github.com/Kronbii/lumiscan-dashboard', kind: 'repository' },
+    ],
+    articleSlug: 'making-tenant-isolation-the-only-path',
+    topics: ['applied-ai', 'health-technology', 'full-stack-systems'],
+    keywords: ['multi-tenancy', 'PHI', 'tRPC', 'Drizzle', 'TypeScript', 'medical device software'],
+  },
+  {
+    slug: 'evoid-applied-vision-venture',
+    state: 'ready',
+    title: 'Evoid — an applied computer-vision venture',
+    metaTitle: 'Evoid — co-founding a small applied AI and computer-vision venture in Beirut',
+    metaDescription:
+      'A small venture delivering computer-vision and mobile applications for external clients, co-founded by Rami Kronbi.',
+    summary:
+      'Evoid is a small applied AI and computer-vision venture in Beirut that Rami Kronbi co-founded and worked in as systems engineer and product manager, delivering prototypes and applications for external clients.',
+    role: 'Co-founder; systems engineer and product manager.',
+    form: 'diagram',
+    schemaType: 'CreativeWork',
+    hero: {
+      kind: 'diagram',
+      diagramId: 'venture-loop',
+      caption: 'Each engagement starts from a client workflow, ships a bounded prototype, and feeds what was learned into the next one.',
+      alt: 'Diagram of the venture’s engagement loop: client problem, bounded prototype, delivery and learning.',
+    },
+    answer: {
+      what: 'A small venture that builds computer-vision and mobile software for clients, and the organization behind the PadelEye prototype.',
+      problem:
+        'Early-stage computer-vision work for real clients needs a vehicle that can scope, deliver, and maintain small systems without a large agency structure.',
+      how: 'A small technical team takes bounded engagements; the venture’s public site is at evoid.dev; a padel line-judging prototype (PadelEye) is developed under its GitHub organization.',
+      role: 'Rami Kronbi co-founded Evoid (2023–2025 per the canonical CV), led technical direction and client coordination, and built most of the public site.',
+    },
+    stages: [
+      { step: '01', title: 'Scope', detail: 'Each engagement is bounded to one workflow and one deliverable.' },
+      { step: '02', title: 'Build', detail: 'Computer-vision and mobile prototypes; PadelEye is the venture’s own experiment in automated line judging from a camera stream.' },
+      { step: '03', title: 'Deliver', detail: 'Delivery and maintenance stay with the same small team.' },
+    ],
+    limits: [
+      'Client names and outcomes are not listed; the public site’s case studies and testimonial are placeholder copy and are not claimed here.',
+      'The canonical CV records five computer-vision applications delivered for external clients between 2023 and 2025; clients are not named here.',
+      'PadelEye is an early prototype with trained weights and scaffolding, not a product.',
+    ],
+    sources: [
+      { label: 'evoid.dev', href: 'https://www.evoid.dev/', kind: 'demo' },
+      { label: 'Canonical CV (2026)', href: 'https://ramikronbi.com', kind: 'cv' },
+    ],
+    articleSlug: 'what-a-small-vision-venture-taught-me-about-scope',
+    topics: ['computer-vision', 'product-engineering'],
+    keywords: ['computer vision', 'startup', 'Beirut', 'product management', 'PadelEye'],
+  },
+  {
+    slug: 'water-shooting-robot',
+    state: 'ready',
+    title: 'Water-shooting robot',
+    metaTitle: 'Water-shooting robot — an Arduino mechatronic targeting system',
+    metaDescription:
+      'An early Arduino mechatronics project that aims, elevates, and fires timed water bursts at predefined targets using a simple ballistic model.',
+    summary:
+      'An early Arduino mechatronics project: a stepper-driven lift sets nozzle height, a servo aims, a solenoid valve fires timed bursts, and a simple ballistic and water-level model estimates the required height for each target.',
+    role: 'Repository author.',
+    form: 'diagram',
+    schemaType: 'SoftwareSourceCode',
+    hero: {
+      kind: 'diagram',
+      diagramId: 'water-robot',
+      caption: 'A target table drives aiming and height; a ballistic relation and a water-level update estimate each shot.',
+      alt: 'Diagram of the water robot control sequence: target table, servo aim, stepper lift, solenoid burst, height model, and water-level update.',
+    },
+    answer: {
+      what: 'A small mechatronic system that hits predefined targets with water bursts, without a pump.',
+      problem:
+        'Hitting a target with a gravity-fed stream depends on nozzle height and on how much water is left; both change from shot to shot.',
+      how: 'Firmware on an Arduino steps through a table of target distances and angles, moves a lead-screw lift with a stepper, rotates the nozzle with a servo, opens a relay-driven solenoid for a timed burst, and updates a modeled water level with a Torricelli-style relation after each shot.',
+      role: 'Rami Kronbi wrote the firmware and organized the repository with firmware, test sketches, CAD, and documentation folders.',
+    },
+    stages: [
+      { step: '01', title: 'Model', detail: 'Required nozzle height is estimated from target distance and the current water height.' },
+      { step: '02', title: 'Actuate', detail: 'Stepper lift, servo aim, and a solenoid valve on a relay, each with its own bring-up test sketch.' },
+      { step: '03', title: 'Calibrate', detail: 'Steps per millimetre and predicted versus actual height are logged over serial.' },
+    ],
+    limits: [
+      'The physics is deliberately simplified; the README states that empirical tuning is needed.',
+      'Wiring documentation is a placeholder and exact part numbers are not recorded.',
+      'No test results or media are in the repository; this is early evidence of mechatronics practice, not a finished system.',
+    ],
+    sources: [
+      { label: 'GitHub — water-shooting-robot', href: 'https://github.com/Kronbii/water-shooting-robot', kind: 'repository' },
+    ],
+    articleSlug: 'a-first-mechatronic-loop-without-a-pump',
+    topics: ['robotics', 'embedded-systems', 'control-systems'],
+    keywords: ['Arduino', 'mechatronics', 'stepper', 'servo', 'solenoid', 'C++'],
   },
 ]
 

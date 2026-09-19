@@ -280,3 +280,21 @@ Post-fix re-verification:
   `src/components/authority/authority.module.css` and this report changed from the previous fix
   pass, so the additive-only boundary is preserved. Total: 56 `A` records; zero `M`, `D`, `R`, or
   `C`.
+
+## 2026-09-20 — Phase 0.5 follow-through
+
+- Content edits after Rami's decisions: thermal edge figure bound to NVIDIA Jetson Orin per the CV with unreconciled figures disclosed in limits; easyPID versions 1.0.0 and 1.1.0; Daleel credits Layth Ayache; OmniSign, BEMO desk, NASNA, and Space Apps review records carry confirmed roles and team credits.
+- New review routes: `/projects/upstream-open-source-contributions`, `/writing/what-small-upstream-fixes-teach-about-firmware`, `/writing/talks-workshops-and-teaching`. New diagram ids `upstream-fixes` and `talks-loop` in `src/components/authority/diagrams.tsx`.
+- Verification: `npm run build` → 66 static pages; ESLint on new TS/TSX → exit 0; `git diff --name-status c2246d6…` → only `A` records (workspace and content files added on this branch were modified, no base-commit file). Generated HTML for the three new routes contains `noindex, nofollow`, the editorial-review notice, and JSON-LD.
+
+## 2026-09-20 — Discovery drafts complete
+
+- Routes added (all `review`): `/projects/hantawatch-outbreak-dashboard`, `/projects/basira-retinal-screening`, `/projects/imagen-raw-to-edit-dataset-pipeline`, `/projects/lumiscan-lesion-dashboard`, `/projects/evoid-applied-vision-venture`, `/projects/water-shooting-robot`, and their companion articles; `/writing/talks-workshops-and-teaching`; `/projects/upstream-open-source-contributions` with `/writing/what-small-upstream-fixes-teach-about-firmware`.
+- Media copied: `public/images/authority/smart-desk/night-pic.jpeg` and `demo.gif` from the public smart-interactive-desk repository; provenance appended.
+- Diagram ids added: `osint-feed`, `council-consensus`, `raw-pipeline`, `lesion-timeline`, `water-robot`, `venture-loop`, `upstream-fixes`, `talks-loop`.
+- Verification: `npm run build` → 78 static pages; new-file ESLint → exit 0; `git diff --name-status <base>` → only `A`; generated HTML for every new route contains `noindex, nofollow` and the review notice; `/projects` index HTML contains no link to a review slug.
+
+## 2026-09-20 — Promotions
+
+- Twelve records moved from `review` to `ready` after Rami's decisions; metadata rewritten without review markers; Basira record, article, and diagram carry no model names.
+- Verification: `npm run build` → 78 static pages; new-file ESLint → exit 0; additive-only diff preserved; `/projects` index lists 20 project links and `/writing` 23 article links; remaining review routes still emit `noindex, nofollow`.

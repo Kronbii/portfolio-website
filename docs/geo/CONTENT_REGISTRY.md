@@ -24,7 +24,7 @@ This registry is the complete editorial scope for the first authority-page build
 - Topics: `embedded-systems`, `control-systems`, `open-source-engineering`
 - Role: author.
 - What it is: hardware-agnostic Arduino PID controller library with independent instances, automatic or caller-supplied timing, anti-windup, derivative filtering, state introspection, output limits, runtime tuning, and an optional relay autotuner.
-- Verified distribution: listed in Arduino Library Manager as a contributed Device Control library; version 1.0.0 listing dated 2026-01-15; MIT; architecture Any.
+- Verified distribution: listed in Arduino Library Manager as a contributed Device Control library; versions 1.0.0 (2026-01-15) and 1.1.0 (2026-08-09); MIT; architecture Any. Verified live 2026-09-20.
 - Limits to state: tuning is system-specific; autotuning can create sustained oscillation and needs safe bounds and supervision.
 - Sources: `https://github.com/Kronbii/easyPID`; `https://www.arduinolibraries.info/libraries/easy-pid`; local README and examples.
 - Media: no fake hardware photo. Use a code-native closed-loop control diagram and a real example snippet from the library documentation.
@@ -37,7 +37,7 @@ This registry is the complete editorial scope for the first authority-page build
 - Role: team member with Wassim Ghaddar; describe Rami's work conservatively as system architecture, vision, sensor integration, and embedded control only where supported by repository history and existing first-party content.
 - What it is: a WRO Future Engineers vehicle dividing Jetson Nano perception from Arduino Mega real-time control, with OpenCV traffic-sign logic, PID steering, an MPU6050 IMU, and TCS34725 color sensing.
 - Verified outcome: built from scratch in 20 days; RHU reported that Rami Kronbi and Wassim Ghaddar placed third in Future Engineers in July 2023 among a competition with more than 95 teams and 250 participants.
-- Do not say: champion, 2024 champion, winner, first place.
+- Do not say: champion, 2024 champion, winner, first place. Rami states (2026-09-20) the team was re-ranked to second place after another team's disqualification; no institutional source exists, so public copy keeps RHU's third place and discloses the CV's second-place line without naming any other team.
 - Sources: `https://github.com/Kronbii/autonomous-race-car`; RHU `https://www.rhu.edu.lb/media-room/news/rhu-engineering-students-win-big-in-the-world-robotics-olympiad`.
 - Media to copy: `v-photos/demo.png`, `v-photos/front.jpeg`, `schemes/Schematic circuit .png`, one team image with both contributors if clearly identifiable.
 
@@ -49,7 +49,7 @@ This registry is the complete editorial scope for the first authority-page build
 - Role: computer vision engineer; the canonical CV describes architecture adaptation, training, and edge inference work.
 - What it is: an IMDN-derived single-channel thermal super-resolution pipeline trained with thermal-specific objectives and optimized for deployment.
 - Verified quality figures from the canonical CV: 34.2 dB PSNR / 0.840 SSIM at ×2; 31.0 / 0.757 at ×3; 29.6 / 0.713 at ×4.
-- Verified edge figure from the canonical CV: approximately 45 FPS on Jetson AGX Orin. Always name that hardware.
+- Verified edge figure from the canonical CV: approximately 45 FPS on NVIDIA Jetson Orin after quantization. Always name that hardware. The public repository's own evaluation report (2025-09-23) measures 229.6 FPS, 34.2 dB, 0.840 on 1,100 FLIR frames on an unnamed desktop GPU and contains no Jetson artifact; the platform article reports 20–30 FPS on Jetson Orin. Decision 2026-09-20 (Rami: implement): keep the CV figure, name Jetson Orin, and disclose the unreconciled figures in the limits section rather than combining them.
 - Do not publish repository claims of “first,” “new SOTA,” “15× faster,” “40× parameter reduction,” or 250–270 FPS until benchmark protocol and hardware are reconciled.
 - Sources: canonical CV; `https://github.com/Kronbii/thermal-super-resolution`; local evaluation assets.
 - Media to copy: `results/showcase/_x2_showcase.png`, `results/showcase/_x3_showcase.png`, and one comparison video if performance remains acceptable.
@@ -93,7 +93,7 @@ This registry is the complete editorial scope for the first authority-page build
 - Project slug: `daleel-lebanese-election-information`
 - Article slug: `designing-election-information-for-verifiability`
 - Topics: `civic-technology`, `information-integrity`, `full-stack-systems`
-- Role: repository owner/implementer. Do not imply institutional endorsement or political affiliation.
+- Role: Rami Kronbi lead developer; Layth Ayache contributed to the frontend (8 commits) and built a separate content-ingestion backend (`laythayache/Daleel-Backend`). Credit approved by Rami 2026-09-20. Do not imply institutional endorsement or political affiliation.
 - What it is: an independent, multilingual Lebanese parliamentary-election information platform designed around source archiving, append-only history, and verifiable records.
 - Architecture: Next.js frontend, Express backend, Prisma/PostgreSQL, JWT, CSRF protection, rate limiting, and immutable data models as documented.
 - Editorial posture: neutral public information. Do not imply the dataset is complete, currently operational, officially certified, or authoritative without current evidence.
@@ -137,20 +137,26 @@ This registry is the complete editorial scope for the first authority-page build
 - Sources: `https://github.com/Kronbii/personal-finance-tracker`; local README and architecture docs.
 - Media to copy: `images/image1.jpeg`, `images/image2.jpeg`, `images/image3.jpeg`, `assets/icon/app_icon.png`.
 
+## Promotions on 2026-09-20
+
+After Rami's answers, the following moved to `ready` in the typed content layer (the typed records supersede `AUTHOR_COPY_REVIEW.md` for them): OmniSign (12), Smart Interactive Desk BEMO (13), NASA Space Apps mentoring (17, cited to the CV per Rami's instruction), NASNA (18), upstream contributions, talks and teaching, Hantawatch, Basira (model names withheld at Rami's request), Imagen (client throughput figure included per Rami), Lumiscan, Evoid, water-shooting robot. Still `review`: runway UAV (14), FPV drone (15), emotion recognition (16), physics outreach (19, awaiting Rami's documents).
+
 ## Review: build locally, noindex, omit from indexes
 
 ### 12. OmniSign
 
 - Project slug: `omnisign-lebanese-sign-language`
 - Article slug: `building-real-time-lebanese-sign-language-translation`
-- Reason for review: public project history exists and the canonical CV supports a 300K-image dataset, 95–97% accuracy, approximately 45 FPS, mobile/web/offline embedded deployments, and pilots in two Beirut coffee shops and one church. Team role, collaborator credits, dataset consent/governance, award language, and the existing Medium origin story require confirmation before indexing.
-- Sources: canonical CV; existing portfolio media; `https://laythayache.com/projects/omnisign`; existing Medium article only as a lead, not narrative authority.
+- Resolved 2026-09-20: Rami's role is co-founder and computer vision engineer (CV, 2025–2026); the team (Layth Ayache — AI and data lead; Nour El Hariri; Tayseer Laz; Abou Baker Hussien Al Khatib; supervisor Dr. Oussama Mustapha) consents and publishes the project on its own pages; award per the team page: Public Choice first prize, 2025 National FYP Demo Day (2025-05-26).
+- Still open before promotion: reconcile the CV figures (300K images, 95–97%, ~45 FPS, pilots) with the team page (40,000 samples, 21 schools); dataset governance and evaluation protocol; a full article rewrite without the origin story.
+- Sources: canonical CV; `https://laythayache.com/projects/omnisign`; `https://tayseerlaz.com/work/omnisign/`; existing Medium/DEV article only as a lead.
 
-### 13. Posture-aware classroom desk
+### 13. Smart Interactive Desk (BEMO) — posture-aware classroom workstation
 
 - Project slug: `posture-aware-classroom-desk`
 - Article slug: `connecting-posture-estimation-to-a-motorized-desk`
-- Reason for review: the prototype and existing portfolio media are strong, but the public repository URL, final name, Rami's exact role, and testing outcome are unresolved.
+- Resolved 2026-09-20: name is Smart Interactive Desk, codename BEMO; senior graduation project at RHU (2024–2025); team Rami Kronbi (team lead and software/robotics engineer per CV), Bassam Kousa, Ali Daaboul, Mohamad Berjawi, Mohamad Hariri; public repository `https://github.com/Kronbii/smart-interactive-desk`; demo video `https://youtu.be/5TPmpPc6rjY`; Rami approved the team credit and keeping team photos.
+- Still open before promotion: per-teammate roles, testing outcomes, an institutional source for the CV's Best Senior Project award, and removal of the committed `users.json` from the public repository.
 
 ### 14. Raspberry Pi runway-inspection UAV
 
@@ -173,17 +179,17 @@ This registry is the complete editorial scope for the first authority-page build
 ### 17. NASA Space Apps technical organizing
 
 - Article slug: `what-four-years-of-technical-mentoring-taught-me`
-- Reason for review: canonical CV supports 250–400 participants annually across four years, a 10–15 member volunteer team, technical bootcamps, and six Global Top 10 placements across three consecutive years. Exact years, event pages, team credits, and public corroboration should be attached before indexing.
+- Resolved 2026-09-20: Rami confirms lead technical organizer 2021–2024, with physical organizer certificates and no official online listing. Public corroboration is limited to RHU's 2022 report naming him the university's student volunteer. Still open before promotion: digitize the certificates as evidence, list supported team names and placements, and rewrite the article around them.
 
 ### 18. NASNA crisis-support operations
 
 - Article slug: `building-technology-around-crisis-response-operations`
-- Reason for review: canonical CV supports Rami's co-founder/operations-lead role and high-level mission. Publishing needs consent, timeline, scale, safety review, collaborator credits, and an explicit decision about whether beneficiaries can be discussed.
+- Resolved 2026-09-20: Rami confirms co-founder, started 2024; the public repository README credits him as AI Engineer & Developer with Mohammad Homsi, Abed El-Fattah Amouneh, and Lynn El Solh; live at nasna.world under AGPL-3.0; Rami confirms disclosure rights. Still open before promotion: a full operational article drawn from the repository, with beneficiary privacy preserved; scale figures only if sourced.
 
 ### 19. National Physics Day and astronomy outreach
 
 - Article slug: `turning-physics-outreach-into-a-multi-university-program`
-- Reason for review: canonical CV supports the multi-university program and experimental activities. Publishing needs dates, host institutions, participant scale, links, and collaborator approval.
+- Status 2026-09-20: the CV records Society Lead of the RHU Physics & Astronomy Club 2021–2024 and founding National Physics Day across four universities; RHU's 2025 Physics Day article credits the club without naming Rami. No online corroboration; Rami states no official listing exists. Remains review until dates, institutions, and any documentation are supplied.
 
 ## Hold: registry only, no route
 
@@ -197,7 +203,7 @@ Hold pending an explicit disclosure and safety review with the Lebanese Armed Fo
 
 ### Private repositories
 
-Basira, track-3d, Gravi/ToyPOS, and any other private repository remain hold until Rami explicitly chooses what can be made public. Private repository visibility is not evidence of publication consent.
+On 2026-09-20 Rami stated he may discuss all of his own projects publicly. Private repositories therefore move from consent-blocked to evidence-blocked: each still needs a public record, verified facts, and a decision on which details to expose. Basira (live at basira.ramikronbi.com, medical), Gravi/ToyPOS, track-3d, imagen, lumiscan, and the Bsheel product are review candidates listed below, not hold. Employer repositories remain hold.
 
 ### Ambiguous or third-party repositories
 
@@ -211,6 +217,21 @@ Space² is an early-stage Lebanese innovation space/incubator and part of Rami's
 
 Do not create an indexable project page from these concepts. Claude must first verify Rami's role, collaborators, current organizational status, completed milestones, public sources, and whether a real bounded pilot exists. Future concepts are not achievements.
 
-### Undiscovered and unclassified repository work
+### Discovery additions approved for drafting (2026-09-20)
 
-This registry is the implemented first wave, not the complete census of `/home/kronbii/repos`. Claude must follow the private discovery protocol and present proposed additions or exclusions to Rami before changing this registry or the typed content layer.
+The private census is complete. Rami approved the following as candidates; each enters the typed content layer only when its record is drafted and verified. None has a route yet.
+
+1. Upstream open-source contributions — `review`, drafted 2026-09-20 as project `upstream-open-source-contributions` and article `what-small-upstream-fixes-teach-about-firmware`. Verified via GitHub: Betaflight PR #15706 merged 2026-09-16 (Redpine CC2500 debug mode) and PR #15705 open (W25M short die reads); OpenFront PR #4868 merged 2026-08-07 (end-timer warnings) and PR #4985 merged 2026-08-13 (iOS double-tap zoom); PX4 PR #28286 (EKF2 range-height resets) closed unmerged. Plan: one aggregated project record plus a short article.
+2. NASNA — article expanded 2026-09-20 from the public README (three-sided network, offline intake, privacy rules, stack, team roles); promote after Rami reads it and supplies any scale figures from team records.
+3. Smart Interactive Desk (BEMO) — project record now image-led with `smart-desk/night-pic.jpeg` and `demo.gif` copied from the public repository (provenance recorded); promote after record 13's open items.
+4. OmniSign — article now discloses both figure sets side by side; promote after the team reconciles them.
+5. Talks and teaching — `review`, drafted 2026-09-20 as article `talks-workshops-and-teaching`: DevFest Tripoli 2025 (GDG North Lebanon, 2025-12-20, Beirut Arab University Tripoli campus; speaker per indexed event snippets and Instagram promotions; local slide assets and demo recordings exist in Rami's files), CodewithSerah Pre-Winter Sprint Bootcamp sessions (January 2026, verified via the host's LinkedIn post), LAU Byblos Software Engineering Club Git workshop (April 2026, with Tarek AlSaleh). Plan: one "Talks and teaching" record.
+6. Hantawatch outbreak dashboard — `review`, drafted 2026-09-20 as project `hantawatch-outbreak-dashboard` and article `building-an-outbreak-dashboard-from-public-sources`; still needs a README and data-provenance statement in the repository.
+7. Basira — `review`, drafted 2026-09-20 as project `basira-retinal-screening` and article `designing-a-council-of-models-for-retinal-screening`; medical: AI retinal-screening platform prototype, live at basira.ramikronbi.com; strict non-diagnostic framing required; model-weight licensing must be checked before any public page.
+8. Evoid — `review`, drafted 2026-09-20 as project `evoid-applied-vision-venture` and article `what-a-small-vision-venture-taught-me-about-scope`; placeholder site copy excluded: co-founder 2023–2025 per CV; live site evoid.dev; PadelEye prototype. Needs a factual scope statement (which client applications may be named).
+9. Imagen — `review`, drafted 2026-09-20 as project `imagen-raw-to-edit-dataset-pipeline` and article `why-color-science-comes-before-the-model`: HDRNet-style RAW auto-editing pipeline for a French real-estate agency (freelance, per CV); client anonymized.
+10. Lumiscan dashboard — `review`, drafted 2026-09-20 as project `lumiscan-lesion-dashboard` and article `making-tenant-isolation-the-only-path`: dermatology device dashboard with synthetic data.
+11. Early robotics evidence — water-shooting robot drafted 2026-09-20 as project `water-shooting-robot` and article `a-first-mechatronic-loop-without-a-pump` (`review`); the ROS 2 smart-home repository was left out because its README is largely placeholder; the CNN emotion-detection code is referenced only through the existing emotion-recognition review record.
+12. Bsheel — `hold` until the product launches; Rami is co-founder and systems engineer/product manager.
+
+Permanently excluded from the public narrative by recommendation: CV-aim-assist (game-overlay detection for a client), the NSFW quantization workbench, personal memory tooling, vendor SDKs and upstream mirrors, coursework bundles, and collaborators' own repositories.

@@ -130,7 +130,7 @@ They also do not replace visual inspection. Side-by-side crops reveal whether an
 
 A robotics pipeline rarely gets the entire device to itself. Super-resolution may sit before detection, tracking, or measurement. Latency, memory traffic, and preprocessing therefore matter as much as the neural network.
 
-The deployment work moved inference toward FP16 and INT8 execution and measured the system on NVIDIA Jetson hardware. The currently reviewed figure is approximately 45 frames per second on Jetson AGX Orin. I am deliberately not combining that number with higher desktop GPU figures found in older repository copy; hardware and benchmark protocol must travel with any speed claim.
+The deployment work moved inference toward FP16 and INT8 execution and measured the system on NVIDIA Jetson hardware. The currently reviewed figure is approximately 45 frames per second on NVIDIA Jetson Orin after quantization. I am deliberately not combining that number with the higher desktop GPU figures in the repository’s own evaluation report; hardware and benchmark protocol must travel with any speed claim.
 
 That distinction is central to the project. “Real time” is not a property of a model file. It is a property of a complete pipeline on named hardware, at a named input size, while doing the work around inference.
 

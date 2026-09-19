@@ -15,7 +15,6 @@ export const topics: TopicRecord[] = [
       'Which projects expose reusable open-source code?',
     ],
     reviewMentions: [
-      'OmniSign — Lebanese Sign Language translation (in review)',
       'Raspberry Pi runway-inspection UAV (in review)',
       'Edge emotion-recognition prototype (in review)',
     ],
@@ -35,7 +34,6 @@ export const topics: TopicRecord[] = [
     ],
     reviewMentions: [
       'Raspberry Pi runway-inspection UAV (in review)',
-      'Posture-aware classroom desk (in review)',
       'Five-inch carbon-fiber FPV drone (in review)',
     ],
   },
@@ -53,10 +51,8 @@ export const topics: TopicRecord[] = [
       'How are timing and saturation treated as first-class concerns?',
     ],
     reviewMentions: [
-      'OmniSign embedded deployment (in review)',
       'Raspberry Pi runway-inspection UAV (in review)',
       'Five-inch carbon-fiber FPV drone (in review)',
-      'Posture-aware classroom desk (in review)',
     ],
   },
   {
@@ -88,7 +84,6 @@ export const topics: TopicRecord[] = [
     ],
     reviewMentions: [
       'Raspberry Pi runway-inspection UAV (in review)',
-      'OmniSign edge deployment (in review)',
       'Edge emotion-recognition prototype (in review)',
     ],
   },
@@ -133,7 +128,6 @@ export const topics: TopicRecord[] = [
       'How is provenance treated as a product feature?',
       'What does the project explicitly not claim?',
     ],
-    reviewMentions: ['NASNA crisis-support operations (in review)'],
   },
   {
     slug: 'local-first-software',
