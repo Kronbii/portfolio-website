@@ -58,7 +58,7 @@ Unknown project, article, and topic slugs return `notFound()`.
 ## Media and provenance
 
 Copied first-party assets (originals not modified) into `public/images/authority/`, organized by
-project. `public/images/authority/PROVENANCE.txt` lists every raster with its original repository
+project. `docs/geo/provenance/AUTHORITY_IMAGE_PROVENANCE.txt` (moved from the public tree on 2026-09-20) lists every raster with its original repository
 path and public source URL. Highlights:
 
 - `spherical-panorama/`: `panorama.jpg`, `goat.gif`, `side-by-side.jpg`, `pano-on-band.jpg`, four

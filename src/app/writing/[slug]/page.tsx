@@ -15,6 +15,7 @@ import { AuthorityShell, AuthoritySection } from '@/components/authority/shell'
 import { JsonLd } from '@/components/authority/structured-data'
 import { articles, getArticle } from '@/content/authority/articles'
 import { getProject } from '@/content/authority/projects'
+import { isRenderable } from '@/content/authority/visibility'
 import { getTopic } from '@/content/authority/topics'
 import { siteConfig } from '@/lib/site'
 
@@ -23,13 +24,13 @@ interface WritingPageProps {
 }
 
 export function generateStaticParams() {
-  return articles.map((article) => ({ slug: article.slug }))
+  return articles.filter((article) => isRenderable(article.state)).map((article) => ({ slug: article.slug }))
 }
 
 export async function generateMetadata({ params }: WritingPageProps): Promise<Metadata> {
   const { slug } = await params
   const article = getArticle(slug)
-  if (!article) {
+  if (!article || !isRenderable(article.state)) {
     return { title: 'Article not found', robots: { index: false, follow: false } }
   }
   const canonical = `/writing/${article.slug}`
@@ -63,7 +64,7 @@ export async function generateMetadata({ params }: WritingPageProps): Promise<Me
 export default async function WritingArticlePage({ params }: WritingPageProps) {
   const { slug } = await params
   const article = getArticle(slug)
-  if (!article) notFound()
+  if (!article || !isRenderable(article.state)) notFound()
 
   const project = article.projectSlug ? getProject(article.projectSlug) : undefined
   const canonical = `/writing/${article.slug}`

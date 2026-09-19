@@ -21,6 +21,7 @@ import { JsonLd } from '@/components/authority/structured-data'
 import { getArticle } from '@/content/authority/articles'
 import { getProject, projects } from '@/content/authority/projects'
 import { getTopic } from '@/content/authority/topics'
+import { isRenderable } from '@/content/authority/visibility'
 import { siteConfig } from '@/lib/site'
 
 interface ProjectPageProps {
@@ -28,13 +29,13 @@ interface ProjectPageProps {
 }
 
 export function generateStaticParams() {
-  return projects.map((project) => ({ slug: project.slug }))
+  return projects.filter((project) => isRenderable(project.state)).map((project) => ({ slug: project.slug }))
 }
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params
   const project = getProject(slug)
-  if (!project) {
+  if (!project || !isRenderable(project.state)) {
     return { title: 'Project not found', robots: { index: false, follow: false } }
   }
   const canonical = `/projects/${project.slug}`
@@ -86,7 +87,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params
   const project = getProject(slug)
-  if (!project) notFound()
+  if (!project || !isRenderable(project.state)) notFound()
 
   const article = getArticle(project.articleSlug)
   const canonical = `/projects/${project.slug}`

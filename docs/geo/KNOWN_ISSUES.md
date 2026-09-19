@@ -4,19 +4,17 @@ Read this file before changing or publishing the implementation.
 
 ## Deployment blockers
 
-### Public provenance manifest exposes local absolute paths
+### Public provenance manifest exposed local absolute paths — resolved 2026-09-20
 
-`public/images/authority/PROVENANCE.txt` currently records source assets using paths such as `/home/kronbii/repos/...`. Because the file is under `public/`, a production deployment would make those local workstation paths publicly reachable.
-
-Before any preview intended for sharing or any production deployment, Claude must replace the public file with a disclosure-safe form or move the detailed internal provenance record under `docs/geo/`. Keep enough public attribution to establish ownership and origin without exposing workstation paths. Re-run the build and scan the deployable output for `/home/kronbii` afterward.
+The detailed manifest now lives at `docs/geo/provenance/AUTHORITY_IMAGE_PROVENANCE.txt`; the deployed tree carries `public/images/authority/ATTRIBUTION.txt` with public source URLs only. The build output was scanned for workstation paths after the change.
 
 ### New routes are not discoverable from the incumbent site
 
 The additive-only boundary prevents changes to the existing navigation and sitemap. The pages can be visited directly but are not yet properly discoverable. Do not deploy them as a finished GEO system until the user approves the minimal integration diff in Phase 3 of `TASKS.md`.
 
-### Review routes are still buildable routes
+### Review routes are still buildable routes — resolved 2026-09-20
 
-Review routes use `noindex, nofollow` and are absent from public indexes, but anyone who knows a deployed URL could still request it. Before production, the user must decide whether review routes should remain in the build, require a preview-only gate, or be removed until promoted.
+Review records now render only in development, or when `AUTHORITY_INCLUDE_REVIEW=1` is set for a private preview build. Production builds contain no review route; requesting one returns 404. Rami chose "whatever is better"; this keeps local editorial review while removing the exposure.
 
 ## Editorial risks
 

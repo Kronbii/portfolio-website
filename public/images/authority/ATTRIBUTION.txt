@@ -1,0 +1,61 @@
+AUTHORITY IMAGE ATTRIBUTION
+
+Every file in this tree is a first-party asset copied unmodified from a public
+repository owned by Rami Kronbi (https://github.com/Kronbii) or by his project
+team. Public source URL for each file:
+
+spherical-panorama/panorama.jpg
+  source:   https://github.com/Kronbii/360-spherical-stitching/blob/main/showcase/panorama.jpg
+spherical-panorama/goat.gif
+  source:   https://github.com/Kronbii/360-spherical-stitching/blob/main/showcase/GOAT.gif
+spherical-panorama/side-by-side.jpg
+  source:   https://github.com/Kronbii/360-spherical-stitching
+spherical-panorama/pano-on-band.jpg
+  source:   https://github.com/Kronbii/360-spherical-stitching/blob/main/docs/assets/pano_on_band.jpg
+spherical-panorama/stage1-frame.jpg
+  source:   https://github.com/Kronbii/360-spherical-stitching/blob/main/docs/assets/stage1_frame.jpg
+spherical-panorama/stage2-matches.jpg
+  source:   https://github.com/Kronbii/360-spherical-stitching/blob/main/docs/assets/stage2_matches.jpg
+spherical-panorama/stage3-many.jpg
+  source:   https://github.com/Kronbii/360-spherical-stitching/blob/main/docs/assets/stage3_many.jpg
+spherical-panorama/stage4-pano.jpg
+  source:   https://github.com/Kronbii/360-spherical-stitching/blob/main/docs/assets/stage4_pano.jpg
+race-car/demo.png
+  source:   https://github.com/Kronbii/autonomous-race-car/blob/main/v-photos/demo.png
+race-car/front.jpeg
+  source:   https://github.com/Kronbii/autonomous-race-car/blob/main/v-photos/front.jpeg
+race-car/schematic.png
+  source:   https://github.com/Kronbii/autonomous-race-car/tree/main/schemes
+race-car/team.jpeg
+  source:   https://github.com/Kronbii/autonomous-race-car/tree/main/t-photos
+thermal-super-resolution/x2-showcase.png
+  source:   https://github.com/Kronbii/thermal-super-resolution/blob/main/results/showcase/_x2_showcase.png
+thermal-super-resolution/x3-showcase.png
+  source:   https://github.com/Kronbii/thermal-super-resolution/blob/main/results/showcase/_x3_showcase.png
+fine-crack/test-frame.png
+  source:   https://github.com/Kronbii/fine-crack-detection/blob/main/test-frames/test.png
+daleel/hero.jpeg
+  source:   https://github.com/Kronbii/daleel/blob/main/showcase/hero.jpeg
+motorcycle-trainer/sign-127.webp
+  source:   https://github.com/Kronbii/lebanese-driving-test/blob/main/public/signs/sign-127.webp
+motorcycle-trainer/sign-135.webp
+  source:   https://github.com/Kronbii/lebanese-driving-test/blob/main/public/signs/sign-135.webp
+motorcycle-trainer/sign-140.webp
+  source:   https://github.com/Kronbii/lebanese-driving-test/blob/main/public/signs/sign-140.webp
+motorcycle-trainer/sign-150.webp
+  source:   https://github.com/Kronbii/lebanese-driving-test/blob/main/public/signs/sign-150.webp
+ree-finance/image1.jpeg
+  source:   https://github.com/Kronbii/personal-finance-tracker/blob/main/images/image1.jpeg
+ree-finance/image2.jpeg
+  source:   https://github.com/Kronbii/personal-finance-tracker/blob/main/images/image2.jpeg
+ree-finance/image3.jpeg
+  source:   https://github.com/Kronbii/personal-finance-tracker/blob/main/images/image3.jpeg
+ree-finance/app-icon.png
+  source:   https://github.com/Kronbii/personal-finance-tracker/blob/main/assets/icon/app_icon.png
+smart-desk/demo.gif
+  source:   https://github.com/Kronbii/smart-interactive-desk/blob/main/images/demo.gif
+smart-desk/night-pic.jpeg
+  source:   https://github.com/Kronbii/smart-interactive-desk/blob/main/images/night-pic.jpeg
+
+The detailed internal provenance record (including copy-time locations) is
+maintained in the repository documentation, not in the deployed site.
