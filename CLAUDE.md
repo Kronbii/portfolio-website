@@ -16,6 +16,7 @@ This is an additive-only phase.
   - `src/content/authority/`
   - `public/images/authority/`
   - `docs/geo/`
+  - `.claude-private/` for local private context only; this directory is Git-excluded and must never be staged, committed, pushed, deployed, or copied into public output.
 - You may update any file that was added on this feature branch, including the durable handoff under `docs/geo/`. The prohibition is against modifying files that existed at the base commit.
 - You may copy verified assets from the source paths listed in `docs/geo/CONTENT_REGISTRY.md` into `public/images/authority/`. Do not alter the originals.
 - Do not install packages. Use the current stack and local primitives.
@@ -95,13 +96,13 @@ This repository is now designed to be continued directly by Claude Code.
 When the user says `continue`, `continue the GEO work`, or an equivalent short instruction:
 
 1. Read this file completely.
-2. If `.claude-private/RAMI_DIGITAL_REPLICA.md` exists, read it completely. It is private reasoning context: never quote, copy, commit, or publish its private material without explicit user approval.
+2. If `.claude-private/README.md` exists, read it and every file in its required read order completely. This is private reasoning context: never quote, copy, commit, or publish its private material without explicit user approval.
 3. Read `docs/geo/README.md` completely and follow its required read order.
 4. Inspect the current branch and working tree before changing anything.
 5. Read `docs/geo/KNOWN_ISSUES.md`, then resume the first unchecked item in `docs/geo/TASKS.md` whose prerequisites are satisfied.
 6. Preserve the publication states and disclosure boundaries in `docs/geo/CONTENT_REGISTRY.md`.
 7. Update `docs/geo/CURRENT_STATE.md`, `docs/geo/TASKS.md`, and `docs/geo/SESSION_LOG.md` after every material milestone.
 
-Do not restart discovery, redesign the system, or ask the user to repeat established context. Ask only when a decision is listed as user-owned in `docs/geo/TASKS.md` or when new evidence creates a material conflict.
+Do not restart completed implementation discovery, redesign the system, or ask the user to repeat established context. The repository-wide census and publication audit in Phase 0.5 are intentional one-time discovery tasks: complete them from accessible evidence before asking focused classification questions. Ask only when a decision is listed as user-owned in `docs/geo/TASKS.md`, the discovery protocols require a material ownership or consent decision, or new evidence creates a conflict.
 
-The durable handoff is under `docs/geo/`. `docs/geo/README.md` is its single entry point.
+The public-safe durable handoff is under `docs/geo/`. The private context entry point is `.claude-private/README.md`. Claude needs both layers to understand the work completely.

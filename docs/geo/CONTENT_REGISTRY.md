@@ -202,3 +202,15 @@ Basira, track-3d, Gravi/ToyPOS, and any other private repository remain hold unt
 ### Ambiguous or third-party repositories
 
 Forks, clones, team repositories, coursework mirrors, and external origins are not automatically Rami-authored work. They require an authorship decision before entering the project registry.
+
+## Strategic context: not current project records
+
+### Space²
+
+Space² is an early-stage Lebanese innovation space/incubator and part of Rami's institution-building direction. Its current portfolio includes a locked road-safety and enforcement direction plus emergency infrastructure, energy coordination, assistive and rehabilitation technology, accessibility, medical-equipment uptime, and municipal-system concepts.
+
+Do not create an indexable project page from these concepts. Claude must first verify Rami's role, collaborators, current organizational status, completed milestones, public sources, and whether a real bounded pilot exists. Future concepts are not achievements.
+
+### Undiscovered and unclassified repository work
+
+This registry is the implemented first wave, not the complete census of `/home/kronbii/repos`. Claude must follow the private discovery protocol and present proposed additions or exclusions to Rami before changing this registry or the typed content layer.

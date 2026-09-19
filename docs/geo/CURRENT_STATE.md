@@ -76,6 +76,8 @@ In the earlier auxiliary worktree, its `node_modules` symlink was incompatible w
 
 ## Immediate next action
 
-The first actionable item is the structured content and design review in `TASKS.md`: let the user prune the 11 ready pairs and 8 review articles from a local preview before any integration, deployment, or syndication work.
+The first actionable item is Phase 0.5 in `TASKS.md`: Claude must perform the comprehensive read-only repository census, publication audit, entity verification, and organization/timeline reconciliation. Rami should be asked only the focused ownership, consent, privacy, or classification questions that remain after Claude inspects the accessible evidence.
+
+The existing 19-record content registry remains the first implemented publishing wave, not a claim that every accessible project has been discovered or classified.
 
 Before any deployment, resolve every deployment blocker in `KNOWN_ISSUES.md`.

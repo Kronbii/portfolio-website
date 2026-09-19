@@ -50,6 +50,8 @@ These decisions are settled unless the user explicitly changes them.
 
 ## Privacy and disclosure
 
+- Claude's private context lives under `.claude-private/`, is excluded locally from Git, and may contain strategic or personal information that must never be copied into tracked or public material without explicit approval.
+- The tracked `ENTITY_FACTS.md` is the maximum default public identity surface; broader private context is for reasoning, not automatic publication.
 - Employer-confidential, defense, landmine, private-repository, beneficiary-sensitive, or uncertain-partner material stays on hold.
 - Medical and accessibility projects require stronger safety, consent, dataset-governance, and collaborator-credit review before promotion.
 - Private repository visibility is not publication consent.

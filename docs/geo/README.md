@@ -9,17 +9,19 @@ It is written so a fresh Claude Code session can continue without access to the 
 Read these files in order before taking action:
 
 1. `../../CLAUDE.md` — hard write boundary, implementation contract, and continuation protocol.
-2. `../../.claude-private/RAMI_DIGITAL_REPLICA.md`, when present — private identity, career-direction, interests, and reasoning context. Never publish or commit it.
+2. `../../.claude-private/README.md`, when present — entry point to the private identity, career, project-discovery, chronology, organization, publication, and voice suite. Follow its read order. Never publish or commit it.
 3. `CURRENT_STATE.md` — what exists now, what has been verified, and what is intentionally not done.
 4. `TASKS.md` — the ordered execution queue and the exact next task.
 5. `KNOWN_ISSUES.md` — blockers and risks that must be resolved before deployment.
 6. `DECISIONS.md` — decisions that must not be silently reopened.
 7. `CONTENT_REGISTRY.md` — complete content inventory and `ready` / `review` / `hold` states.
-8. `EDITORIAL_POLICY.md` — evidence, conflict, voice, disclosure, and media rules.
-9. `AUTHOR_COPY_READY.md` and `AUTHOR_COPY_REVIEW.md` — canonical article prose.
-10. `GEO_AND_PUBLISHING_PLAN.md` — canonical-site, structured-data, integration, syndication, and indexing plan.
-11. `SURFACE_BRIEF.md` and `../../.impeccable/surfaces/src-app-projects-slug-page-tsx.md` — route-level visual direction.
-12. `claude/IMPLEMENTATION_REPORT.md` — detailed implementation and verification record.
+8. `ENTITY_FACTS.md` — canonical public-safe identity and entity relationships.
+9. `PUBLICATION_REGISTRY.md` — known writing, profiles, conflicts, and live-audit requirements.
+10. `EDITORIAL_POLICY.md` — evidence, conflict, voice, disclosure, and media rules.
+11. `AUTHOR_COPY_READY.md` and `AUTHOR_COPY_REVIEW.md` — canonical article prose.
+12. `GEO_AND_PUBLISHING_PLAN.md` — canonical-site, structured-data, integration, syndication, and indexing plan.
+13. `SURFACE_BRIEF.md` and `../../.impeccable/surfaces/src-app-projects-slug-page-tsx.md` — route-level visual direction.
+14. `claude/IMPLEMENTATION_REPORT.md` — detailed implementation and verification record.
 
 Use `KNOWLEDGE_TRANSFER.md` when reasoning about Rami's broader positioning, intended audience, and long-term direction. Use `SESSION_LOG.md` for chronology.
 
@@ -51,12 +53,14 @@ The repository root is checked out on the feature branch. The `main` branch and 
 - `hold` content is not rendered or placed in source code.
 - Existing site files remain read-only until the user explicitly approves integration changes.
 - Claude Code owns implementation. The editorial documents own facts and scope.
+- Claude owns the read-only discovery audit of accessible repositories and public profiles. It must present proposed classifications to the user before changing public content.
 
 ## Definition of done for the overall program
 
 The program is complete only when:
 
 - the user has pruned or approved the inventory;
+- Claude has completed the private repository census and live publication audit, and the user has approved any additions to the public registry;
 - every public page has passed factual, collaborator-credit, media-rights, responsive, accessibility, metadata, and structured-data review;
 - the user has explicitly approved the minimal integration changes needed for navigation and sitemap discovery;
 - the approved branch has been merged and deployed through an authorized workflow;

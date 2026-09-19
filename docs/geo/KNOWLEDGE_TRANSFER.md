@@ -22,6 +22,8 @@ Relevant fields include:
 
 The longer-term directional model is Engineer → Systems Leader → Institution Builder → Reformer → Statesman. Treat that as strategic context, not a public title or biographical claim. Entrepreneurship and public-interest work are vehicles for agency and institution building rather than a generic startup persona.
 
+The complete private model, including values, tradeoffs, personal interests, public-service direction, life architecture, and open questions, lives in `.claude-private/RAMI_DIGITAL_REPLICA.md`. It may guide decisions but is not publication permission.
+
 ## Audiences
 
 Primary audiences:
@@ -47,6 +49,14 @@ The strongest current page is the 360° spherical panorama project because it co
 Other strong public items are easyPID, the 2023 autonomous race car, thermal super-resolution with conservative metrics, PID light tracker, fine-crack tracing, medical prescription OCR with safety framing, Daleel, the Lebanese motorcycle theory trainer, AI Customer Support Council, and REE.
 
 The content registry explains exactly why each is ready or withheld.
+
+## Space² and future institution building
+
+Space² is an early-stage Lebanese innovation space/incubator connected to Rami's institution-building direction. It combines electronics, 3D printing, prototyping, technical support, and bootcamps around practical Lebanese problems, but has limited capacity and must not be portrayed as a mature national institution.
+
+Its locked highest-priority direction is a Lebanese Road Vision Enforcement and Safety System designed around local road conditions, calibrated sensing, edge computing, unreliable power and connectivity, secure evidence, human review, appeal rights, and safety rather than surveillance or fine revenue. Related serious directions include a vehicle-mounted road-audit unit, critical-facility energy coordination, offline emergency communications, rehabilitation and assistive technology, Arabic accessibility tools, medical-equipment uptime, and municipal infrastructure systems.
+
+These are strategic directions and proposed bounded pilots, not completed Rami projects. Claude must inspect `/home/kronbii/space2/SPACE2_PROJECT_PORTFOLIO.md` and `/home/kronbii/space2/IDEA_TRACKER.md` for current status before using them.
 
 ## Canonical CV evidence
 

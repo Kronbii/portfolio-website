@@ -14,9 +14,24 @@ Work from top to bottom. Do not skip a user-owned gate.
 - [x] Create a durable fresh-Claude-session handoff.
 - [x] Create a Git checkpoint commit containing the current implementation and handoff documents.
 
+## Phase 0.5 — Claude-led comprehensive discovery
+
+This is the immediate next phase. Claude performs the research; Rami answers only unresolved ownership, consent, or classification questions after the evidence pass.
+
+- [ ] Read the complete private knowledge suite from `.claude-private/README.md`.
+- [ ] Follow `.claude-private/PROJECT_DISCOVERY_PROTOCOL.md` and inspect every direct child under `/home/kronbii/repos` plus the current Space² sources under `/home/kronbii/space2`.
+- [ ] Create the private `.claude-private/PROJECT_CENSUS.md` with one evidence-backed classification for every accessible directory, duplicate/lineage mappings, counts, open questions, and newly discovered GEO candidates.
+- [ ] Reconcile `smart-interactive-desk` with the narrower posture-aware record and identify other renamed, split, duplicated, or superseded projects.
+- [ ] Follow `.claude-private/PUBLICATIONS_AND_VOICE.md` and audit all accessible Medium, DEV, Hashnode, ResearchGate, GitHub, LinkedIn, YouTube, and event-page publications or talks.
+- [ ] Update `PUBLICATION_REGISTRY.md` with live URLs, dates, canonical relationships, conflicts, and recommended actions. Discovery is read-only; do not modify external accounts.
+- [ ] Validate the public identity facts in `ENTITY_FACTS.md` against the live canonical CV and current first-party sources.
+- [ ] Update the private career timeline and organization map with verified dates, roles, collaborators, and disclosure boundaries.
+- [ ] Present Rami with a concise decision list covering only unresolved ownership, collaborator, consent, privacy, and publication questions.
+- [ ] Propose additions, removals, merges, and state changes to `CONTENT_REGISTRY.md`; apply them only after Rami approves.
+
 ## Phase 1 — User pruning and editorial approval
 
-This is the immediate next phase.
+Begin only after Phase 0.5 produces the complete census and proposal.
 
 - [ ] Start the local preview and give the user a simple review path for `/projects`, `/writing`, and `/topics`.
 - [ ] Let the user mark each of the 11 ready project/article pairs as keep, revise, demote to review, or remove.
@@ -95,6 +110,8 @@ Each external state change requires the user's authorization.
 
 ## User-owned decisions currently open
 
+- Which newly discovered or reclassified projects should enter the public GEO registry after Claude's census?
+- Which collaborative, employer, client, medical, accessibility, defense, and organization records are cleared for public discussion?
 - Which of the 11 ready pairs should remain public after pruning?
 - Should review routes remain buildable locally after pruning, or should rejected drafts be removed entirely?
 - Which existing file(s) may change for sitemap and navigation integration?

@@ -38,4 +38,5 @@
 - Prepared a 65-file additive-only Git checkpoint; no file from the base commit was modified.
 - At the user's request, removed the auxiliary worktree and checked out `claude/geo-authority-pages` directly at `/home/kronbii/repos/portfolio-website`. The `main` branch itself remains unchanged.
 - Added a private, Git-excluded digital-replica brief for Claude covering Rami's identity, interests, career direction, values, public positioning, known portfolio, and publication boundaries. The tracked continuation protocol reads it when present but forbids copying private material into public output without approval.
-- The next session should begin with user pruning and editorial approval, not new discovery or a redesign.
+- Expanded the private context into a structured knowledge suite with Claude-led project discovery, career chronology, organization and role mapping, publication discovery, and voice extraction. Added public-safe entity facts and a publication registry, made Space² explicit, and inserted a comprehensive Phase 0.5 before editorial pruning.
+- The next session should begin with the bounded Phase 0.5 repository and publication discovery protocols, then present proposed classifications before user pruning. It should not restart implementation discovery or redesign the existing system.
