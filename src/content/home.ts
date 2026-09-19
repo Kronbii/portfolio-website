@@ -6,6 +6,8 @@ export const homeContent: HomeContent = {
     { label: 'About', href: '#about' },
     { label: 'Experience', href: '#experience' },
     { label: 'Work', href: '#selected-work' },
+    { label: 'Projects', href: '/projects' },
+    { label: 'Writing', href: '/writing' },
     { label: 'Community', href: '#community' },
     { label: 'Contact', href: '#contact' },
   ],
