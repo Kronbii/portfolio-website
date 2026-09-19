@@ -347,7 +347,47 @@ function ventureLoop() {
   )
 }
 
+function questLoop() {
+  return (
+    <div className={styles.diagram}>
+      <div className={styles.diagramRow}>
+        <Node title="Three quests" detail="The user picks one of three real-world challenges and a per-quest timer starts." />
+        <Arrow />
+        <Node title="Proof" detail="Photo or video proof is uploaded to private object storage." />
+        <Arrow />
+        <Node title="Moderation" detail="A reviewer approves or rejects; appeals exist; XP is written as a transaction." />
+      </div>
+      <div className={styles.diagramRowThree} style={{ marginTop: '1rem' }}>
+        <Node title="Feed and votes" detail="Approved quests enter a hot-ordered feed with block and visibility filtering." />
+        <Node title="Worker queue" detail="Notifications and fan-out run from a durable queue, not the client." />
+        <Node title="Admin console" detail="Moderation queue, appeals, quest catalog, Quest of the Day, XP audit." />
+      </div>
+    </div>
+  )
+}
+
+function bikeLoop() {
+  return (
+    <div className={styles.diagram}>
+      <div className={styles.diagramRow}>
+        <Node title="Ride" detail="GPS distance summed between filtered fixes." />
+        <Arrow />
+        <Node title="Odometer" detail="Each ride moves the bike’s odometer." />
+        <Arrow />
+        <Node title="Service due" detail="Maintenance schedule keyed to distance, not calendar." />
+      </div>
+      <div className={styles.diagramRow} style={{ marginTop: '1rem' }}>
+        <Node title="Find part and mechanic" detail="Local marketplace and workshop directory near where the rider rides." />
+        <Arrow />
+        <Node title="Log the work" detail="The schedule resets; road hazards from other riders feed the next ride." />
+      </div>
+    </div>
+  )
+}
+
 const RENDERERS: Record<string, () => JSX.Element> = {
+  'quest-loop': questLoop,
+  'bike-loop': bikeLoop,
   'osint-feed': osintFeed,
   'council-consensus': councilConsensus,
   'raw-pipeline': rawPipeline,

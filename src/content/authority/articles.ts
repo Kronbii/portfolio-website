@@ -1182,6 +1182,51 @@ export const articles: ArticleRecord[] = [
     topics: ['robotics', 'embedded-systems', 'control-systems'],
     keywords: ['Arduino', 'mechatronics', 'control'],
   },
+  {
+    slug: 'moderation-is-the-product-in-a-quest-app',
+    state: 'review',
+    title: 'Moderation is the product in a quest app',
+    metaTitle: 'Moderation is the product in a quest app',
+    metaDescription: 'Why Bsheel’s architecture puts proof review, appeals, and XP accounting at the center, and how a small team self-hosts it.',
+    dek: 'A quest only counts when a person has looked at the proof. Everything in Bsheel’s backend follows from that.',
+    body: [
+      { kind: 'p', text: 'Bsheel gives a user three real-world quests, one of which they complete inside a timer and prove with a photo or video. XP is awarded only after a moderator approves the proof. I co-founded the product and worked on it as systems engineer and product manager with Razan Hasbini and Tayseer Laz; it is published on Google Play and the App Store.' },
+      { kind: 'h2', text: 'The review state machine' },
+      { kind: 'p', text: 'The submissions domain owns proof metadata, a review state machine, appeals, and the XP transaction. Moderators work from a queue with reviewer context; rejected users can appeal; an XP reconciliation audit in the admin console catches drift. Treating XP as a transaction rather than a counter is what makes the audit possible.' },
+      { kind: 'h2', text: 'One API, layered the same way everywhere' },
+      { kind: 'p', text: 'Two Flutter clients, mobile and admin, talk to one self-hosted NestJS API over versioned HTTPS and a WebSocket. Every domain is split into presentation, application, domain, and infrastructure: controllers stay thin, services orchestrate, repositories are the only place SQL exists, and a repository never calls another domain’s repository. Cross-domain effects are events. A domain becomes its own service only when measured scaling justifies it.' },
+      { kind: 'h2', text: 'Work that must not run on the phone' },
+      { kind: 'p', text: 'Push notifications fan out from a durable BullMQ queue on Redis, in a worker built from the same codebase as the API and scaled separately. Private media lives in S3-compatible storage. PostgreSQL is authoritative; Redis holds only queues, locks, and disposable coordination state. nginx handles rate limiting and WebSocket upgrades in front of stateless API replicas.' },
+      { kind: 'p', text: 'The social layer, feed with hot ordering, votes, threaded comments, mentions, follows, blocks, collab groups, and leaderboards, sits on top of that core. The core is the part I would defend: moderation, appeals, and accounting are the product; the rest is what makes it fun.' },
+    ],
+    evidence: 'Google Play listing; private repository documentation.',
+    sources: [
+      { label: 'BSHEEL on Google Play', href: 'https://play.google.com/store/apps/details?id=com.questapp.mobile_app', kind: 'listing' },
+    ],
+    projectSlug: 'bsheel-quest-app',
+    topics: ['product-engineering', 'full-stack-systems', 'local-first-software'],
+    keywords: ['moderation', 'NestJS', 'Flutter', 'gamification'],
+  },
+  {
+    slug: 'a-ride-is-data-about-the-bike',
+    state: 'review',
+    title: 'A ride is data about the bike',
+    metaTitle: 'A ride is data about the bike',
+    metaDescription: 'The central design decision behind Moto 961, an early-stage motorcycle app for Lebanon: rides feed maintenance, not leaderboards.',
+    dek: 'Most motorcycle apps are trackers or classifieds. Moto 961 is built on one different idea.',
+    body: [
+      { kind: 'p', text: 'In Lebanon a motorcycle is transport and often livelihood. Around it, almost nothing is documented: potholes and closures nobody announces, mechanics found by word of mouth, parts scattered across shops, and a service history that lives in three mechanics’ memories. Moto 961, working name Bikey, is an early-stage app I am part of with Tayseer Laz, who owns the repository and wrote the current prototype.' },
+      { kind: 'p', text: 'The spine of the product is a single decision: rides are not achievements, they are data about the bike. Recorded distance moves the odometer; the odometer tells you the chain needs adjusting in 900 kilometres; the schedule points you to a part and a mechanic near where you actually ride; logging the work resets the schedule; hazards other riders hit shape your next ride. Pull one part out and the others get worse.' },
+      { kind: 'p', text: 'The prototype is a Flutter monorepo with feature packages, Mapbox, and local storage, and no backend yet. It is days old at the time of writing, so this page records the design, not a shipped product. What I contributed will be stated here once the team’s roles are written down.' },
+    ],
+    evidence: 'Private repository product brief.',
+    sources: [
+      { label: 'Repository (private)', href: 'https://github.com/TayseerLaz/bikey', kind: 'repository', note: 'Owned by Tayseer Laz.' },
+    ],
+    projectSlug: 'moto-961-bikey',
+    topics: ['product-engineering', 'lebanon'],
+    keywords: ['motorcycle', 'Lebanon', 'Flutter'],
+  },
 ]
 
 export const articleMap = Object.fromEntries(articles.map((a) => [a.slug, a]))

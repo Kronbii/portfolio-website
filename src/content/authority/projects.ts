@@ -1691,6 +1691,93 @@ export const projects: ProjectRecord[] = [
     topics: ['robotics', 'embedded-systems', 'control-systems'],
     keywords: ['Arduino', 'mechatronics', 'stepper', 'servo', 'solenoid', 'C++'],
   },
+  {
+    slug: 'bsheel-quest-app',
+    state: 'review',
+    title: 'Bsheel — a gamified quest app for Lebanon',
+    metaTitle: 'Bsheel — a gamified real-world quest app with moderated proof and a self-hosted backend',
+    metaDescription:
+      'Bsheel gives users three real-world quests a day, accepts photo or video proof, and awards XP after moderation; Flutter clients on a self-hosted NestJS, PostgreSQL, and Redis backend.',
+    summary:
+      'A gamified quest app, published on Google Play and the App Store, in which users pick one of three real-world challenges, complete it inside a timer, submit photo or video proof, and earn XP after moderator approval, with a social feed, collab groups, and leaderboards.',
+    role: 'Co-founder; systems engineer and product manager, with Razan Hasbini and Tayseer Laz.',
+    form: 'diagram',
+    schemaType: 'SoftwareSourceCode',
+    hero: {
+      kind: 'diagram',
+      diagramId: 'quest-loop',
+      caption: 'Quest selection, timed completion, proof upload, moderation, XP, feed, and the admin console that keeps the loop honest.',
+      alt: 'Diagram of the Bsheel quest loop: three quests, proof upload, moderation and XP, feed and votes, worker queue, and admin console.',
+    },
+    answer: {
+      what: 'A consumer mobile app that turns everyday routine into short real-world quests with proof and moderation.',
+      problem:
+        'Gamified apps are easy to fake and hard to moderate. Bsheel’s premise is that a quest counts only when a person has reviewed the proof, which makes moderation, appeals, and XP accounting the core of the system rather than an afterthought.',
+      how: 'Flutter mobile and admin clients talk to one self-hosted NestJS API over versioned HTTPS and a WebSocket. PostgreSQL is authoritative; Redis backs queues and locks; private media lives in S3-compatible storage; a BullMQ worker built from the same codebase handles fan-out. Each backend domain is layered as presentation, application, domain, and infrastructure, and cross-domain effects are events.',
+      role: 'Rami Kronbi co-founded the product and worked as systems engineer and product manager alongside Razan Hasbini and Tayseer Laz.',
+    },
+    stages: [
+      { step: '01', title: 'Pick', detail: 'Three random quests across fitness, creativity, social, learning, and adventure; one is chosen and a per-quest timer set by the admin starts.' },
+      { step: '02', title: 'Prove', detail: 'Photo or video proof goes to private object storage; proof metadata and a review state machine live in the submissions domain.' },
+      { step: '03', title: 'Review', detail: 'Moderators approve or reject with reviewer context; appeals exist; XP is written as a transaction and reconciled by an audit in the admin console.' },
+      { step: '04', title: 'Share', detail: 'Approved quests enter a keyset-paginated feed with hot ordering, votes, threaded comments, mentions, follows, blocks, and reporting.' },
+      { step: '05', title: 'Operate', detail: 'Push notifications fan out from a durable queue; the API and worker scale independently; nginx handles rate limiting and WebSocket upgrades.' },
+    ],
+    limits: [
+      'User metrics, revenue, and growth figures are not published here.',
+      'Handles personal data by design (accounts, proof media, consent); the privacy policy and GDPR export and deletion queue are part of the product, not described in detail on this page.',
+      'The repository is private; architecture is described from its documentation.',
+    ],
+    sources: [
+      { label: 'BSHEEL on Google Play', href: 'https://play.google.com/store/apps/details?id=com.questapp.mobile_app', kind: 'listing' },
+    ],
+    articleSlug: 'moderation-is-the-product-in-a-quest-app',
+    topics: ['product-engineering', 'full-stack-systems', 'local-first-software'],
+    keywords: ['Flutter', 'NestJS', 'PostgreSQL', 'Redis', 'gamification', 'moderation', 'Lebanon'],
+  },
+  {
+    slug: 'moto-961-bikey',
+    state: 'review',
+    title: 'Moto 961 (Bikey) — a motorcycle app for Lebanon',
+    metaTitle: 'Moto 961 (Bikey) — ride tracking as maintenance data for motorcyclists in Lebanon',
+    metaDescription:
+      'An early-stage Flutter app in which rides are recorded as odometer data that drives maintenance schedules, a parts and mechanic directory, and shared road hazards for riders in Lebanon.',
+    summary:
+      'An early-stage Flutter prototype for motorcyclists in Lebanon built around one idea: a ride is data about the bike, so recorded distance drives the maintenance schedule, which drives the parts and mechanic directory, while riders share road hazards.',
+    role: 'Team member with Tayseer Laz, who owns the repository; exact role pending Rami’s statement.',
+    form: 'diagram',
+    schemaType: 'CreativeWork',
+    hero: {
+      kind: 'diagram',
+      diagramId: 'bike-loop',
+      caption: 'Ride, odometer, service due, find part and mechanic, log the work; road hazards from other riders feed the next ride.',
+      alt: 'Diagram of the Moto 961 loop: ride tracking, odometer, service schedule, marketplace and mechanic directory, work log, and shared hazards.',
+    },
+    answer: {
+      what: 'A motorcycle app that treats rides as maintenance data rather than achievements.',
+      problem:
+        'In Lebanon a motorcycle is transport and often livelihood, and everything around it is undocumented: roads, mechanics, parts, and the bike’s own service history live in the rider’s head.',
+      how: 'GPS distance is summed between filtered fixes and moves an odometer; a distance-keyed maintenance schedule flags service; a marketplace and workshop directory are scoped to where the rider actually rides; road hazards reported by riders inform the next ride. Flutter monorepo with feature packages, Mapbox, and local storage; no backend yet.',
+      role: 'Rami Kronbi is a member of the project team; Tayseer Laz owns the repository and wrote the current prototype.',
+    },
+    stages: [
+      { step: '01', title: 'Record', detail: 'Rides are GPS tracks with noisy fixes discarded and distance computed honestly.' },
+      { step: '02', title: 'Schedule', detail: 'Service intervals are keyed to distance, so a ride matters because of what it did to the bike.' },
+      { step: '03', title: 'Find', detail: 'Parts and mechanics are surfaced near the rider’s real routes.' },
+      { step: '04', title: 'Share', detail: 'Road hazards reported by riders feed alerts for others.' },
+    ],
+    limits: [
+      'Early prototype: the repository is days old, has no backend, no authentication, and no store release.',
+      'A planned SOS and group-ride feature would involve location and emergency-contact data and is not built.',
+      'Rami’s specific contribution is not yet stated on this page.',
+    ],
+    sources: [
+      { label: 'Repository (private)', href: 'https://github.com/TayseerLaz/bikey', kind: 'repository', note: 'Owned by Tayseer Laz.' },
+    ],
+    articleSlug: 'a-ride-is-data-about-the-bike',
+    topics: ['product-engineering', 'lebanon'],
+    keywords: ['Flutter', 'motorcycle', 'Lebanon', 'maintenance', 'Mapbox'],
+  },
 ]
 
 export const projectMap = Object.fromEntries(projects.map((p) => [p.slug, p]))
