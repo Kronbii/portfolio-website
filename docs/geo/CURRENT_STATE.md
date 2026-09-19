@@ -5,7 +5,8 @@ Last updated: 2026-09-19.
 ## Git state
 
 - Isolated branch: `claude/geo-authority-pages`.
-- Isolated worktree: `/home/kronbii/repos/.worktrees/portfolio-website-geo`.
+- Active repository checkout: `/home/kronbii/repos/portfolio-website`.
+- The feature branch is checked out directly in the repository root so Claude can be launched there. The earlier auxiliary worktree has been removed.
 - Base commit: `c2246d65e526bf821359b035251ca00ce50a6005` on `main`.
 - The checkpoint contains 65 added files relative to the base commit and no modified, deleted, renamed, or copied base files.
 - Nothing has been pushed, merged, deployed, or published.
@@ -69,9 +70,9 @@ Re-run these checks in a fresh session before making claims about the current st
 - No public review item has been promoted to `ready` without user confirmation.
 - No generated marketing imagery has been created; authentic project media and code-native diagrams were preferred.
 
-## Known environment detail
+## Historical environment detail
 
-The worktree's original `node_modules` symlink was incompatible with Next 16 Turbopack because it resolved outside the worktree filesystem root. Claude replaced it with a local hardlink copy of the existing dependency tree. No package install or lockfile change was required. `node_modules` remains ignored.
+In the earlier auxiliary worktree, its `node_modules` symlink was incompatible with Next 16 Turbopack because it resolved outside that worktree's filesystem root. Claude temporarily replaced it with a local hardlink copy. That auxiliary worktree has since been removed. The repository-root checkout uses its existing ignored `node_modules`; no package or lockfile change was made.
 
 ## Immediate next action
 

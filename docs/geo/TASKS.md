@@ -4,7 +4,7 @@ Work from top to bottom. Do not skip a user-owned gate.
 
 ## Phase 0 — Handoff and checkpoint
 
-- [x] Create an isolated branch and worktree.
+- [x] Create an isolated feature branch; after the initial implementation, check it out directly in the portfolio repository root for Claude handoff.
 - [x] Capture product truth, editorial policy, content registry, author copy, topic hubs, and surface brief.
 - [x] Implement the additive authority-page system with Claude Code.
 - [x] Fix Next.js 16 asynchronous route params.

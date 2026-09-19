@@ -26,7 +26,7 @@ For a copy-paste launch instruction and preflight checklist, use `START_NEW_CLAU
 
 ## One-line continuation prompt
 
-From this worktree, the user should be able to start a fresh Claude Code session and say:
+From the portfolio repository root, the user should be able to start a fresh Claude Code session and say:
 
 > Read `CLAUDE.md` and continue the GEO authority workspace from `docs/geo/README.md`. Resume the first actionable item in `docs/geo/TASKS.md`. Preserve all publication states and the additive-only boundary.
 
@@ -34,13 +34,12 @@ If the user says only `continue`, the continuation protocol in the root `CLAUDE.
 
 ## Workspace location
 
-- Worktree: `/home/kronbii/repos/.worktrees/portfolio-website-geo`
+- Active repository checkout: `/home/kronbii/repos/portfolio-website`
 - Branch: `claude/geo-authority-pages`
-- Base repository: `/home/kronbii/repos/portfolio-website`
 - Base commit: `c2246d65e526bf821359b035251ca00ce50a6005`
 - Live site: `https://ramikronbi.com`
 
-The main branch and live site have not been changed by this workspace.
+The repository root is checked out on the feature branch. The `main` branch and live site have not been changed.
 
 ## Operating model
 

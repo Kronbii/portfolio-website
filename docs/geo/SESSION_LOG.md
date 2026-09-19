@@ -36,4 +36,5 @@
 - Added this structured workspace, fresh-session continuation protocol, decision log, knowledge transfer, task board, current-state record, and GEO/publishing plan.
 - Recorded deployment blockers, including the public provenance manifest's local-path disclosure, so a fresh session cannot mistake the local build for deployment-ready work.
 - Prepared a 65-file additive-only Git checkpoint; no file from the base commit was modified.
+- At the user's request, removed the auxiliary worktree and checked out `claude/geo-authority-pages` directly at `/home/kronbii/repos/portfolio-website`. The `main` branch itself remains unchanged.
 - The next session should begin with user pruning and editorial approval, not new discovery or a redesign.

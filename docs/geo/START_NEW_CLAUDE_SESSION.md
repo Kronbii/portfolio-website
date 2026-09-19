@@ -4,9 +4,9 @@
 
 Open Claude Code in:
 
-`/home/kronbii/repos/.worktrees/portfolio-website-geo`
+`/home/kronbii/repos/portfolio-website`
 
-Confirm the active branch is `claude/geo-authority-pages`. Do not work from the base repository checkout or `main`.
+Confirm the active branch is `claude/geo-authority-pages`. Do not switch to or work directly on `main`.
 
 ## Copy-paste prompt
 
@@ -16,7 +16,7 @@ Confirm the active branch is `claude/geo-authority-pages`. Do not work from the 
 
 Claude should report, before editing:
 
-- the branch and worktree it inspected;
+- the repository root and branch it inspected;
 - the first actionable task;
 - the relevant blocker or user-owned gate;
 - the files it expects to add or update;

@@ -10,7 +10,7 @@ These decisions are settled unless the user explicitly changes them.
 
 ## Repository safety
 
-- Work happens on `claude/geo-authority-pages` in the isolated worktree.
+- Work happens on `claude/geo-authority-pages`, checked out directly at `/home/kronbii/repos/portfolio-website`.
 - Never modify, merge into, or push `main` without explicit user approval.
 - The current phase is additive-only relative to base commit `c2246d65e526bf821359b035251ca00ce50a6005`.
 - Existing website files are read-only. New routes, components, content, media, and workspace documents are allowed.

@@ -1,6 +1,8 @@
 # Task: implement the additive authority-page system
 
-Read `CLAUDE.md`, `PRODUCT.md`, `agents.md`, every file under `docs/geo/`, and the incumbent source files needed to understand the current visual system. Then implement the complete authority-page system in this worktree.
+> Historical implementation brief. The implementation is complete. For current work, follow `README.md`, `CURRENT_STATE.md`, `KNOWN_ISSUES.md`, and `TASKS.md`; those files supersede conflicting instructions here.
+
+Read `CLAUDE.md`, `PRODUCT.md`, `agents.md`, every file under `docs/geo/`, and the incumbent source files needed to understand the current visual system. Then implement the complete authority-page system on this feature branch.
 
 ## Required content coverage
 
