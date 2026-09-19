@@ -49,7 +49,7 @@ Begin only after Phase 0.5 produces the complete census and proposal.
 - [ ] Record every decision directly in `CONTENT_REGISTRY.md` and the typed content state.
 - [ ] Confirm naming, collaborator credits, dates, ownership, and media rights for every page the user keeps.
 - [ ] Review the ready prose for voice: remove any line that feels generic, inflated, impersonal, or unlike Rami.
-- [ ] Resolve the public provenance-file path disclosure described in `KNOWN_ISSUES.md` using Claude-authored implementation changes.
+- [x] Resolve the public provenance-file path disclosure described in `KNOWN_ISSUES.md` using Claude-authored implementation changes. (2026-09-20)
 - [ ] Re-run build, new-file lint, route checks, responsive checks, and structured-data checks after pruning.
 
 Do not integrate or deploy before the user completes this phase.
@@ -71,11 +71,11 @@ Promote a record only after its checklist is resolved and the user approves the 
 
 User-owned approval required before this phase.
 
-- [ ] Present the smallest integration diff: add ready routes to `src/app/sitemap.ts` and add one discoverable entry point from the existing site.
-- [ ] Ask the user to approve the exact existing files that may change.
-- [ ] After approval, update only those files.
+- [x] Present the smallest integration diff: add ready routes to `src/app/sitemap.ts` and add one discoverable entry point from the existing site. (2026-09-20)
+- [x] Ask the user to approve the exact existing files that may change. (approved 2026-09-20)
+- [x] After approval, update only those files. (commit b12c32b; sitemap 56 URLs, zero review slugs; header gains Projects and Writing)
 - [ ] Decide whether homepage project summaries with inaccurate or `[VERIFY]` claims should be corrected in the same approved change.
-- [ ] Verify that no review or hold route enters the sitemap or public navigation.
+- [x] Verify that no review or hold route enters the sitemap or public navigation. (2026-09-20; also excluded from the production build)
 
 ## Phase 4 — Final visual and technical review
 
@@ -91,8 +91,8 @@ User-owned approval required before this phase.
 
 Each external state change requires the user's authorization.
 
-- [ ] Commit any post-pruning changes on the feature branch.
-- [ ] Create a preview deployment if the user asks.
+- [x] Commit checkpoints on the feature branch (2c51b18, 4cfe4bc, b12c32b).
+- [ ] Create a preview deployment (approved; the Vercel CLI call was blocked by the session's permission classifier and must be run by Rami or allowed in settings).
 - [ ] Obtain final approval against the preview.
 - [ ] Push the feature branch only if authorized.
 - [ ] Merge into `main` only if explicitly authorized.

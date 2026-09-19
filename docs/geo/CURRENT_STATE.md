@@ -1,6 +1,6 @@
 # Current state
 
-Last updated: 2026-09-20.
+Last updated: 2026-09-20 (evening).
 
 ## Git state
 
@@ -58,6 +58,12 @@ Claude's implementation report records:
 - At 1440 × 900, the flagship project reports no horizontal overflow.
 
 Re-run these checks in a fresh session before making claims about the current state because generated output and dependencies can drift.
+
+## Integration and deployment status (2026-09-20 evening)
+
+- Approved integration applied and committed: the generated sitemap lists 56 URLs (home, three indexes, 19 ready projects, 23 ready articles, 9 topic hubs) and the header has Projects and Writing entries. Homepage sections and the old project summaries are still unchanged.
+- Review routes are excluded from production builds; the production build is 71 pages.
+- Preview deployment, push, merge, and production were approved by Rami. The Vercel preview command was blocked by the Claude Code permission classifier in this session; see the session log for the exact command to run.
 
 ## Deliberately not done
 

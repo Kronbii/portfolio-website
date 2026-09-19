@@ -75,3 +75,10 @@
 - Answers: WRO re-ranked to second after another team's disqualification (no source; kept third place publicly with disclosure); title "Embedded Systems Engineer"; OmniSign dataset collected by the team; Space Apps cited to the CV per instruction; NASNA 2024–2025; Physics Day and INJAZ documents to follow; DevFest title confirmed; CodewithSerah date decoded from the LinkedIn activity id (post 2026-01-26), LAU workshop April 2026; Evoid clients may be described and placeholder testimonials should be removed; Imagen throughput figure approved; Basira public without model names; BEMO is an FYP; prescription images consented; hygiene sweep requested.
 - Promoted twelve records to `ready`; four remain `review`. Topic hub review mentions updated. Build 78 pages; lint clean; additive-only diff preserved.
 - Tracked-file sweep across all repositories: no tracked `.env` files in any repository; committed videos in 360-spherical-stitching (1), thermal-super-resolution (2), PID-light-tracker (1), smart-interactive-desk (3), portfolio-website (21 stock clips); `users.json` tracked twice in smart-interactive-desk; `testing/SEED-CREDENTIALS.md` tracked in hr-app. Everything else flagged by name was ordinary password-UI code or vendor test keys.
+
+## 2026-09-20 — Integration applied
+
+- Rami approved the two-file integration diff; applied and committed as b12c32b. Sitemap now generated from the typed content (56 URLs, no review slugs); header gains Projects and Writing.
+- Provenance manifest moved under docs; review routes gated out of production (commit 4cfe4bc). Production build 71 pages, no workstation paths in output.
+- Physics Day search of the RHU newsroom: 2019 and 2025 articles only, neither naming Rami; article stays review.
+- Preview deployment attempt (`vercel --yes` from the repository root, linked to project kronbiis-projects/ramikronbi) was denied by the session permission classifier as a deploy action. Rami can run it directly or allow it.

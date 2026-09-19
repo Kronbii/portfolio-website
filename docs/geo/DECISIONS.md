@@ -14,7 +14,9 @@ These decisions are settled unless the user explicitly changes them.
 - Never modify, merge into, or push `main` without explicit user approval.
 - The current phase is additive-only relative to base commit `c2246d65e526bf821359b035251ca00ce50a6005`.
 - Existing website files are read-only. New routes, components, content, media, and workspace documents are allowed.
-- Minimal integration changes to the existing sitemap, navigation, or homepage require a separate explicit approval.
+- Minimal integration changes to the existing sitemap, navigation, or homepage require a separate explicit approval. Granted 2026-09-20 for exactly two files: `src/app/sitemap.ts` (ready routes generated from the typed content) and `src/content/home.ts` (Projects and Writing navigation entries). Homepage sections, `src/content/projects.ts`, and the Person structured data remain unchanged and need their own approval.
+- Review records are excluded from production builds (`src/content/authority/visibility.ts`); they render in development or with `AUTHORITY_INCLUDE_REVIEW=1`.
+- Rami approved (2026-09-20) preview deployment, push, merge, production deployment, syndication, and indexing requests as a sequence, each to be reported after execution.
 
 ## Canonical publishing model
 
