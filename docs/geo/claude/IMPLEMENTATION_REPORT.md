@@ -298,3 +298,7 @@ Post-fix re-verification:
 
 - Twelve records moved from `review` to `ready` after Rami's decisions; metadata rewritten without review markers; Basira record, article, and diagram carry no model names.
 - Verification: `npm run build` → 78 static pages; new-file ESLint → exit 0; additive-only diff preserved; `/projects` index lists 20 project links and `/writing` 23 article links; remaining review routes still emit `noindex, nofollow`.
+
+## 2026-09-20 — Production
+
+- `main` fast-forwarded to 8161a4d by Rami; production live at https://ramikronbi.com. Live checks: 200 on ready routes with route-specific canonicals and JSON-LD; 404 on review routes; sitemap 56 URLs; robots unchanged; header links present; `/images/authority/ATTRIBUTION.txt` served without workstation paths; smart-desk media served; zero non-200 internal links from the three indexes.

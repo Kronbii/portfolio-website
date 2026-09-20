@@ -88,3 +88,8 @@
 - Rami confirmed Bsheel is live on Google Play and the App Store and shared bsheel.app; Bsheel and Moto 961 (Bikey) added as review records. CV-aim-assist left unbuilt with a written recommendation against publishing it.
 - Preview URL supplied by Rami is behind Vercel SSO protection; Phase 4 checks were run against the identical production build served locally: 200 on all ready routes, 404 on review routes, 56-URL sitemap, robots correct, no broken internal links, no overflow at 390/1440, one h1 per page, no heading jumps, no missing alt text, JSON-LD parses, focus visible.
 - Fast-forward merge to `main` was blocked by the permission classifier; the feature branch is pushed and ten commits ahead of `main`.
+
+## 2026-09-20 — Live
+
+- Rami merged the branch into `main`; Vercel deployed production within a minute. Live verification passed (routes, canonicals, JSON-LD, sitemap, robots, navigation, media, attribution, Basira model-name check, index links).
+- Prepared first-wave syndication drafts with canonical front matter under `docs/geo/syndication/`.

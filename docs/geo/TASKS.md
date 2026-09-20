@@ -93,18 +93,18 @@ Each external state change requires the user's authorization.
 
 - [x] Commit checkpoints on the feature branch (2c51b18, 4cfe4bc, b12c32b).
 - [x] Preview deployment created by Rami (behind Vercel deployment protection, so Claude verified the identical production build locally instead).
-- [ ] Merge into `main` and push (approved 2026-09-20; the merge command was blocked by the session's permission classifier and must be run by Rami or allowed).
+- [x] Merged into `main` and pushed by Rami (2026-09-20, fast-forward to 8161a4d).
 - [ ] Obtain final approval against the preview.
-- [ ] Push the feature branch only if authorized.
-- [ ] Merge into `main` only if explicitly authorized.
-- [ ] Deploy production only if explicitly authorized.
-- [ ] Verify the live routes, metadata, media, JSON-LD, robots behavior, sitemap, redirects, performance, and mobile layout.
+- [x] Feature branch pushed (2026-09-20).
+- [x] Merged into `main` by Rami (2026-09-20).
+- [x] Production deployed (Vercel picked up `main` within a minute of the merge).
+- [x] Live verification 2026-09-20: all ready routes 200 with route canonicals and JSON-LD; review routes 404; sitemap 56 URLs with no review slugs; header shows Projects and Writing; attribution file has no workstation paths; Basira page has no model names; zero broken links from the indexes. Performance not yet measured.
 
 ## Phase 6 — Syndication
 
-- [ ] Select the first 3–5 strongest articles. Recommended starting set: 360° stitching, easyPID, autonomous race car, thermal super-resolution, and one public-interest system after review.
-- [ ] Publish the canonical website page first.
-- [ ] Prepare Medium and DEV variants without changing facts or adding invented first-person narrative.
+- [x] First wave selected: 360° stitching, easyPID, autonomous race car, thermal super-resolution.
+- [x] Canonical website pages are live.
+- [x] Platform variants prepared under `docs/geo/syndication/` with canonical front matter (2026-09-20); awaiting Rami's read-through and platform access.
 - [ ] Use canonical import/link support where available.
 - [ ] Link to the project page, repository/demo, Rami's website, and relevant topic hub.
 - [ ] Record publication URL and date in a new syndication registry.
@@ -112,7 +112,7 @@ Each external state change requires the user's authorization.
 
 ## Phase 7 — Discovery and maintenance
 
-- [ ] Submit the updated sitemap through Google Search Console and Bing Webmaster Tools after deployment.
+- [ ] Submit the updated sitemap through Google Search Console and Bing Webmaster Tools (site is live; requires Rami's Google account — the site is already verified via the meta tag in the root layout).
 - [ ] Request indexing for the main indexes, topic hubs, and the first priority pages.
 - [ ] Confirm canonical selection and structured-data parsing after crawlers revisit.
 - [ ] Track search impressions, referring domains, branded queries, project-name queries, and AI-answer citations.

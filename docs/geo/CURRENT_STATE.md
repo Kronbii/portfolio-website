@@ -59,6 +59,10 @@ Claude's implementation report records:
 
 Re-run these checks in a fresh session before making claims about the current state because generated output and dependencies can drift.
 
+## Live (2026-09-20)
+
+`main` is at 8161a4d and production at ramikronbi.com serves the authority system: /projects, /writing, /topics, 19 ready projects, 23 ready articles, 9 topic hubs, 56-URL sitemap, Projects and Writing in the header. Review routes are not in the build. Syndication drafts for the first wave are in `docs/geo/syndication/`.
+
 ## Integration and deployment status (2026-09-20 evening)
 
 - Approved integration applied and committed: the generated sitemap lists 56 URLs (home, three indexes, 19 ready projects, 23 ready articles, 9 topic hubs) and the header has Projects and Writing entries. Homepage sections and the old project summaries are still unchanged.
