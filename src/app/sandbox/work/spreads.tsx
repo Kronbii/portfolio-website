@@ -21,16 +21,19 @@ export function Spreads({ work, heading }: { work: WorkItem[]; heading: string }
               sizes="(min-width: 1024px) 58vw, 100vw"
               quality={88}
               priority={i === 0}
+              className={w.tone === 'light' ? styles.lightPlate : undefined}
+              style={w.focus ? { objectPosition: w.focus } : undefined}
             />
           </div>
           <div className={styles.spreadCopy}>
             <div>
-              <p className={styles.spreadField}>{w.field}</p>
               <h2 className={styles.spreadTitle}>{w.title}</h2>
               <p className={styles.spreadDek}>{w.dek}</p>
             </div>
             <div>
-              <p className={styles.spreadRole}>{w.role}</p>
+              <p className={styles.spreadRole}>
+                {w.field} · {w.role}
+              </p>
               <EvidenceLinks canonical={w.canonical} external={w.external} />
             </div>
           </div>

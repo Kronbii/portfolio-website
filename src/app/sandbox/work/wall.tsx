@@ -7,20 +7,17 @@ import type { WorkItem } from './data'
 import { EvidenceLinks } from './shared'
 import styles from './work.module.css'
 
-const shape: Record<number, string> = { 0: styles.tileWide, 1: styles.tileTall, 3: styles.tileWide }
+const shape: Record<number, string> = { 0: styles.tileWide, 1: styles.tileTall, 3: styles.tileWide, 5: styles.tileWide }
 
 /**
  * Evidence wall. Mixed-size tiles of real media with a hairline gap; the
  * selected tile expands in place to carry the dek and links.
  */
-export function Wall({ work, heading, note }: { work: WorkItem[]; heading: string; note: string }) {
+export function Wall({ work, heading }: { work: WorkItem[]; heading: string }) {
   const [open, setOpen] = useState<string | null>(work[0]?.slug ?? null)
   return (
-    <section id="selected-work" aria-label={heading}>
-      <div className={styles.wallHead}>
-        <h2 className={styles.wallTitle}>{heading}</h2>
-        <p className={styles.wallNote}>{note}</p>
-      </div>
+    <section id="selected-work" aria-label={heading} className={styles.wallSection}>
+      <h2 className="sr-only">{heading}</h2>
       <div className={styles.wall}>
         {work.map((w, i) => {
           const isOpen = open === w.slug
@@ -39,14 +36,17 @@ export function Wall({ work, heading, note }: { work: WorkItem[]; heading: strin
                 sizes="(min-width: 1024px) 50vw, 100vw"
                 quality={85}
                 priority={i === 0}
+                className={w.tone === 'light' ? styles.lightPlate : undefined}
+                style={w.focus && !isOpen ? { objectPosition: w.focus } : undefined}
               />
               <span className={styles.tileCopy}>
-                <span className={styles.tileField}>{w.field}</span>
                 <span className={styles.tileTitle}>{w.title}</span>
                 {isOpen ? (
                   <>
                     <span className={styles.tileDek}>{w.dek}</span>
-                    <span className={styles.tileField}>{w.role}</span>
+                    <span className={styles.tileField}>
+                      {w.field} · {w.role}
+                    </span>
                     <EvidenceLinks canonical={w.canonical} external={w.external} />
                   </>
                 ) : null}
