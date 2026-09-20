@@ -10,6 +10,8 @@ type Chapter = {
   dek: string
   meta: { label: string; value: string }[]
   media: WorkItem['media']
+  tone?: 'light'
+  focus?: string
   canonical?: string
   external?: { label: string; href: string }
 }
@@ -24,6 +26,8 @@ export function workToChapters(items: WorkItem[]): Chapter[] {
       { label: 'Role', value: w.role },
     ],
     media: w.media,
+    tone: w.tone,
+    focus: w.focus,
     canonical: w.canonical,
     external: w.external,
   }))
@@ -64,9 +68,9 @@ export function Chapters({ chapters, id, heading }: { chapters: Chapter[]; id: s
             quality={88}
             priority={i === 0}
             className={styles.chapterImg}
-            style={c.media.h > c.media.w ? { objectPosition: 'center 18%' } : undefined}
+            style={c.focus ? { objectPosition: c.focus } : c.media.h > c.media.w ? { objectPosition: 'center 18%' } : undefined}
           />
-          <div className={styles.chapterVeil} aria-hidden />
+          <div className={`${styles.chapterVeil} ${c.tone === 'light' ? styles.chapterVeilDeep : ''}`} aria-hidden />
           <figcaption className={styles.chapterCopy}>
             <div>
               <h2 className={styles.chapterTitle}>{c.title}</h2>

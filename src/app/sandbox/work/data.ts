@@ -12,6 +12,10 @@ export interface WorkItem {
   role: string
   field: string
   media: { src: string; alt: string; w: number; h: number }
+  /** Light-ground plates get a deeper veil so the field stays near-black. */
+  tone?: 'light'
+  /** object-position for tiles and chapters when the default center crop fails. */
+  focus?: string
   canonical?: string
   external: { label: string; href: string }
 }
@@ -50,11 +54,13 @@ export const work: WorkItem[] = [
     dek: 'An IMDN-derived network adapted to single-channel thermal imagery and deployed on Jetson Orin.',
     role: 'Computer vision engineer',
     field: 'Edge AI',
+    tone: 'light',
+    focus: '25% 50%',
     media: {
-      src: '/images/projects/thermal-sr.webp',
+      src: '/images/authority/thermal-super-resolution/thermal-plate.webp',
       alt: 'A low-resolution thermal street scene beside the same frame upscaled three times.',
       w: 1424,
-      h: 627,
+      h: 536,
     },
     canonical: '/projects/thermal-super-resolution',
     external: { label: 'GitHub', href: 'https://github.com/Kronbii/thermal-super-resolution' },
@@ -80,6 +86,7 @@ export const work: WorkItem[] = [
     dek: 'Real-time Lebanese Sign Language translation across mobile, web, and offline embedded targets.',
     role: 'Co-founder and computer vision engineer',
     field: 'Accessibility',
+    tone: 'light',
     media: {
       src: '/images/projects/omnisign.webp',
       alt: 'Chart of Arabic sign-language handshapes, each labelled with its letter.',
@@ -111,10 +118,10 @@ export const work: WorkItem[] = [
     role: 'Author',
     field: 'Control systems',
     media: {
-      src: '/images/authority/race-car/schematic.png',
-      alt: 'Circuit schematic from the autonomous race car, the project easyPID was generalized from.',
+      src: '/images/authority/easypid/pid-loop.svg',
+      alt: 'Closed-loop PID control diagram for easyPID: setpoint and measurement form an error, P, I, and D terms with anti-windup and filtering are summed, bounded output drives the plant, and the sensor feeds back.',
       w: 1600,
-      h: 1131,
+      h: 1000,
     },
     canonical: '/projects/easypid-arduino-library',
     external: { label: 'Arduino Library Manager', href: 'https://www.arduinolibraries.info/libraries/easy-pid' },
@@ -139,7 +146,7 @@ export const moments: MomentItem[] = [
     role: 'Lead technical organizer',
     where: 'Beirut',
     when: '2021–2024',
-    dek: 'Technical bootcamps and on-ground operations for a hackathon of several hundred participants a year.',
+    dek: 'Technical bootcamps and on-ground operations for a hackathon of 250–400 participants a year.',
     media: { src: '/images/community/nasa-space-apps.webp', alt: 'NASA Space Apps Beirut.', w: 1350, h: 1800 },
     canonical: '/writing/what-four-years-of-technical-mentoring-taught-me',
     external: { label: 'Space Apps', href: 'https://www.spaceappschallenge.org/' },

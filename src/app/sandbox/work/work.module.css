@@ -12,7 +12,11 @@
   text-decoration: underline;
   text-decoration-color: rgba(245, 245, 245, 0.35);
   text-underline-offset: 0.3em;
-  transition: text-decoration-color var(--motion-base) cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .links a {
+    transition: text-decoration-color var(--motion-base) cubic-bezier(0.16, 1, 0.3, 1);
+  }
 }
 .links a:hover,
 .links a:focus-visible {
@@ -107,14 +111,46 @@
   height: 1px;
   background: var(--color-secondary);
 }
-/* The one authored motion: each plate eases into place as it takes the frame. */
+/* Deeper veil for light-ground plates so the field stays near-black. */
+.chapterVeilDeep {
+  background: linear-gradient(
+    to top,
+    rgba(12, 12, 12, 0.96) 0%,
+    rgba(12, 12, 12, 0.7) 40%,
+    rgba(12, 12, 12, 0.25) 100%
+  );
+}
+/* The one authored motion: each plate settles from 1.06 to 1 as it takes the
+   frame, driven by scroll position, and the covered chapter's copy fades as the
+   next plate arrives. Static without scroll-timeline support or with reduced motion. */
 @media (prefers-reduced-motion: no-preference) {
-  .chapterImg {
-    transform: scale(1.04);
-    transition: transform var(--motion-slow) cubic-bezier(0.16, 1, 0.3, 1);
+  @supports (animation-timeline: view()) {
+    .chapterImg {
+      animation: plateIn linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 100%;
+    }
+    .chapterCopy {
+      animation: copyOut linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 60%;
+    }
   }
-  .chapter:hover .chapterImg {
+}
+@keyframes plateIn {
+  from {
+    transform: scale(1.06);
+  }
+  to {
     transform: scale(1);
+  }
+}
+@keyframes copyOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 
@@ -155,9 +191,11 @@
   background: transparent;
   color: var(--foreground);
   cursor: pointer;
-  transition:
-    border-color var(--motion-base) cubic-bezier(0.16, 1, 0.3, 1),
-    background var(--motion-base) cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .stripBtn {
+    transition: border-color var(--motion-base) cubic-bezier(0.16, 1, 0.3, 1);
+  }
 }
 .stripBtn:hover {
   border-color: var(--foreground);
@@ -284,10 +322,8 @@
   gap: 2.5rem;
   padding: clamp(2rem, 5vw, 4.5rem) clamp(1.25rem, 4vw, 4rem);
 }
-.spreadField {
-  font-size: 0.8125rem;
-  color: var(--muted-foreground);
-  margin: 0;
+img.lightPlate {
+  filter: brightness(0.78);
 }
 .spreadTitle {
   font-family: var(--font-sans);
@@ -295,7 +331,7 @@
   font-size: clamp(2.25rem, 4.6vw, 4.5rem);
   line-height: 0.95;
   letter-spacing: -0.03em;
-  margin: 1rem 0 0;
+  margin: 0;
   text-wrap: balance;
 }
 .spreadDek {
@@ -378,7 +414,6 @@
   font-size: clamp(1.5rem, 2.6vw, 2.5rem);
   line-height: 1;
   letter-spacing: -0.02em;
-  transition: color var(--motion-base) cubic-bezier(0.16, 1, 0.3, 1);
 }
 .ledgerRowActive .ledgerTitle {
   color: var(--color-secondary);
@@ -395,15 +430,17 @@
   display: grid;
   overflow: hidden;
   grid-template-rows: 0fr;
-  transition: grid-template-rows var(--motion-slow) cubic-bezier(0.16, 1, 0.3, 1);
 }
 .ledgerRowActive .ledgerDetail {
   grid-template-rows: 1fr;
 }
+.ledgerRowActive .ledgerDetailInner {
+  padding-bottom: 1.25rem;
+}
 .ledgerDetailInner {
   overflow: hidden;
   min-height: 0;
-  padding: 0 0 1.25rem;
+  padding: 0;
   max-width: 52ch;
   font-size: 0.9375rem;
   line-height: 1.55;
@@ -426,7 +463,6 @@
 }
 .ledgerPlate img {
   object-fit: cover;
-  transition: opacity var(--motion-slow) cubic-bezier(0.16, 1, 0.3, 1);
 }
 .ledgerPlateHidden {
   opacity: 0;
@@ -445,6 +481,18 @@
 }
 .ledgerMobileMedia img {
   object-fit: cover;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ledgerTitle {
+    transition: color var(--motion-base) cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .ledgerDetail {
+    transition: grid-template-rows var(--motion-slow) cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .ledgerPlate img {
+    transition: opacity var(--motion-slow) cubic-bezier(0.16, 1, 0.3, 1);
+  }
 }
 
 /* ---------- C. Wall: evidence collage, tiles expand in place ---------- */
@@ -484,11 +532,11 @@
 }
 .tile img {
   object-fit: cover;
-  transition:
-    transform var(--motion-slow) cubic-bezier(0.16, 1, 0.3, 1),
-    filter var(--motion-slow) cubic-bezier(0.16, 1, 0.3, 1);
 }
 @media (prefers-reduced-motion: no-preference) {
+  .tile img {
+    transition: transform var(--motion-slow) cubic-bezier(0.16, 1, 0.3, 1);
+  }
   .tile:hover img,
   .tile:focus-visible img {
     transform: scale(1.03);
@@ -549,29 +597,8 @@
   max-width: 40ch;
   margin: 0;
 }
-.wallHead {
-  padding: clamp(3rem, 8svh, 6rem) clamp(1.25rem, 4vw, 4rem) 2rem;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: end;
-  justify-content: space-between;
-  gap: 1.5rem;
-}
-.wallTitle {
-  font-family: var(--font-sans);
-  font-weight: 600;
-  font-size: clamp(2rem, 5vw, 4rem);
-  line-height: 1;
-  letter-spacing: -0.03em;
-  margin: 0;
-  max-width: 18ch;
-  text-wrap: balance;
-}
-.wallNote {
-  font-size: 0.9375rem;
-  color: var(--muted-foreground);
-  max-width: 36ch;
-  margin: 0;
+.wallSection {
+  scroll-margin-top: 3.5rem;
 }
 
 /* ---------- Pairing chrome ---------- */

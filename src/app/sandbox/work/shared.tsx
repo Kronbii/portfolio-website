@@ -13,7 +13,9 @@ export function EvidenceLinks({
 }) {
   return (
     <p className={`${styles.links} ${muted ? styles.linksMuted : ''}`}>
-      {canonical ? <Link href={canonical}>Project record</Link> : null}
+      {canonical ? (
+        <Link href={canonical}>{canonical.startsWith('/writing') ? 'Read the article' : 'Project record'}</Link>
+      ) : null}
       {external ? (
         <a href={external.href} target="_blank" rel="noopener noreferrer">
           {external.label}
