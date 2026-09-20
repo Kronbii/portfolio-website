@@ -1201,6 +1201,7 @@ export const articles: ArticleRecord[] = [
     ],
     evidence: 'Google Play listing; private repository documentation.',
     sources: [
+      { label: 'bsheel.app', href: 'https://bsheel.app/', kind: 'demo' },
       { label: 'BSHEEL on Google Play', href: 'https://play.google.com/store/apps/details?id=com.questapp.mobile_app', kind: 'listing' },
     ],
     projectSlug: 'bsheel-quest-app',

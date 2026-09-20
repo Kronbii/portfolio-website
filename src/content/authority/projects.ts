@@ -1729,6 +1729,7 @@ export const projects: ProjectRecord[] = [
       'The repository is private; architecture is described from its documentation.',
     ],
     sources: [
+      { label: 'bsheel.app', href: 'https://bsheel.app/', kind: 'demo' },
       { label: 'BSHEEL on Google Play', href: 'https://play.google.com/store/apps/details?id=com.questapp.mobile_app', kind: 'listing' },
     ],
     articleSlug: 'moderation-is-the-product-in-a-quest-app',
