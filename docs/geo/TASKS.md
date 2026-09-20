@@ -119,6 +119,13 @@ Each external state change requires the user's authorization.
 - [ ] Review stale facts, broken links, and publication states quarterly.
 - [ ] Add each future project through the same evidence → draft → review → ready workflow.
 
+## Homepage work-section redesign (opened 2026-09-20)
+
+- [x] Build three sandbox pairings for Selected Work and Community at `/sandbox/work/{a,b,c}` (2026-09-20).
+- [ ] Rami picks a pairing (or a mix: one Projects treatment, one Community treatment) and any adjustments.
+- [ ] Apply the chosen treatments to `src/components/sections/home-projects.tsx` and `home-community.tsx` (base-commit files; needs Rami's explicit approval), including the accurate copy and canonical links, then remove the stale homepage project summaries that contradict the new pages.
+- [ ] Finish review, detector, build, and deploy through the same merge path.
+
 ## User-owned decisions currently open
 
 Decision list presented 2026-09-20 after the Phase 0.5 evidence pass. Rami answered the same day; answers are recorded in `CONTENT_REGISTRY.md`, `ENTITY_FACTS.md`, and the private suite. Items 1–12 below are resolved; remaining follow-ups are listed after them.

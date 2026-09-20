@@ -93,3 +93,10 @@
 
 - Rami merged the branch into `main`; Vercel deployed production within a minute. Live verification passed (routes, canonicals, JSON-LD, sitemap, robots, navigation, media, attribution, Basira model-name check, index links).
 - Prepared first-wave syndication drafts with canonical front matter under `docs/geo/syndication/`.
+
+## 2026-09-20 — Homepage work-section redesign exploration (sandbox)
+
+- Rami dislikes the current Selected Work and Community sections: identical mirrored sticky lineups, "nothing special", while every other homepage section is visually distinct. Confirmed: media should lead, large and cinematic; the two sections must differ; items link to both canonical pages and external evidence.
+- Ran the Impeccable flow: context, structured questions, degraded concept roll (seed 891fff7c; dealt structures 6 lead, 7, 2), direction contract written to `.impeccable/surfaces/src-components-sections-home-projects-tsx.md`, code-led build.
+- Built three sandbox pairings under `src/app/sandbox/work/`: A chapters + film strip, B magazine spreads + dated ledger with hover plate, C evidence wall + chapters. Data drawn from the authority records (accurate titles and roles, no "champion"). Two inspection rounds at 1440 and 390: zero overflow, detector clean; fixes applied for display font hierarchy, film-strip frame size, wall dense packing, portrait crop position, ledger collapse.
+- No existing homepage file was changed; the incumbent sections stay live until Rami locks a pairing and approves the two section files.
