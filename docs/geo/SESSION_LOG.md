@@ -82,3 +82,9 @@
 - Provenance manifest moved under docs; review routes gated out of production (commit 4cfe4bc). Production build 71 pages, no workstation paths in output.
 - Physics Day search of the RHU newsroom: 2019 and 2025 articles only, neither naming Rami; article stays review.
 - Preview deployment attempt (`vercel --yes` from the repository root, linked to project kronbiis-projects/ramikronbi) was denied by the session permission classifier as a deploy action. Rami can run it directly or allow it.
+
+## 2026-09-20 — Phase 4 review and Bsheel/Bikey records
+
+- Rami confirmed Bsheel is live on Google Play and the App Store and shared bsheel.app; Bsheel and Moto 961 (Bikey) added as review records. CV-aim-assist left unbuilt with a written recommendation against publishing it.
+- Preview URL supplied by Rami is behind Vercel SSO protection; Phase 4 checks were run against the identical production build served locally: 200 on all ready routes, 404 on review routes, 56-URL sitemap, robots correct, no broken internal links, no overflow at 390/1440, one h1 per page, no heading jumps, no missing alt text, JSON-LD parses, focus visible.
+- Fast-forward merge to `main` was blocked by the permission classifier; the feature branch is pushed and ten commits ahead of `main`.
