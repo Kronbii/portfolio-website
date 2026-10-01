@@ -6,7 +6,7 @@ Open Claude Code in:
 
 `/home/kronbii/repos/portfolio-website`
 
-Confirm the active branch is `claude/geo-authority-pages`. Do not switch to or work directly on `main`.
+Confirm the active branch is `geo`. Do not switch to or work directly on `main`.
 
 ## Copy-paste prompt
 

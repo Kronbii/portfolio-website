@@ -4,7 +4,7 @@ Last updated: 2026-09-20 (evening).
 
 ## Git state
 
-- Isolated branch: `claude/geo-authority-pages`.
+- Isolated branch: `geo`.
 - Active repository checkout: `/home/kronbii/repos/portfolio-website`.
 - The feature branch is checked out directly in the repository root so Claude can be launched there. The earlier auxiliary worktree has been removed.
 - Base commit: `c2246d65e526bf821359b035251ca00ce50a6005` on `main`.

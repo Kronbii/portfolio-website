@@ -36,14 +36,14 @@
 - Added this structured workspace, fresh-session continuation protocol, decision log, knowledge transfer, task board, current-state record, and GEO/publishing plan.
 - Recorded deployment blockers, including the public provenance manifest's local-path disclosure, so a fresh session cannot mistake the local build for deployment-ready work.
 - Prepared a 65-file additive-only Git checkpoint; no file from the base commit was modified.
-- At the user's request, removed the auxiliary worktree and checked out `claude/geo-authority-pages` directly at `/home/kronbii/repos/portfolio-website`. The `main` branch itself remains unchanged.
+- At the user's request, removed the auxiliary worktree and checked out `geo` directly at `/home/kronbii/repos/portfolio-website`. The `main` branch itself remains unchanged.
 - Added a private, Git-excluded digital-replica brief for Claude covering Rami's identity, interests, career direction, values, public positioning, known portfolio, and publication boundaries. The tracked continuation protocol reads it when present but forbids copying private material into public output without approval.
 - Expanded the private context into a structured knowledge suite with Claude-led project discovery, career chronology, organization and role mapping, publication discovery, and voice extraction. Added public-safe entity facts and a publication registry, made Space² explicit, and inserted a comprehensive Phase 0.5 before editorial pruning.
 - The next session should begin with the bounded Phase 0.5 repository and publication discovery protocols, then present proposed classifications before user pruning. It should not restart implementation discovery or redesign the existing system.
 
 ## 2026-09-20 — Phase 0.5 discovery (Claude, fresh session)
 
-- Verified Git state: branch `claude/geo-authority-pages` at `ca38e9d`, clean tree, 67 additive files versus the base commit, `main` unchanged, `.claude-private/` excluded.
+- Verified Git state: branch `geo` at `ca38e9d`, clean tree, 67 additive files versus the base commit, `main` unchanged, `.claude-private/` excluded.
 - Read the complete private suite and tracked workspace in the required order.
 - Ran an automated Git census over every direct child of `/home/kronbii/repos` and six read-only inspection passes; listed all 70 GitHub repositories with visibility; inspected the Space² repository.
 - Audited publications through the DEV API, Medium RSS, Hashnode RSS, Substack RSS, YouTube oEmbed, Arduino Library Manager, RHU news pages, GDG pages, Space Apps 2022 pages, and the indexed link inventory. ResearchGate, LinkedIn content, Instagram, and the Space Apps 2025 page were not readable.

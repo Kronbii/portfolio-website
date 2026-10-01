@@ -38,7 +38,7 @@ If the user says only `continue`, the continuation protocol in the root `CLAUDE.
 ## Workspace location
 
 - Active repository checkout: `/home/kronbii/repos/portfolio-website`
-- Branch: `claude/geo-authority-pages`
+- Branch: `geo`
 - Base commit: `c2246d65e526bf821359b035251ca00ce50a6005`
 - Live site: `https://ramikronbi.com`
 

@@ -4,6 +4,14 @@ Updated: 2026-10-01. Latest commit on this branch: `a3d350f`.
 
 Open this file first when you come back. It names the next three moves and points at the state that proves them.
 
+## Branch layout (2026-10-01)
+
+- `main` — production. ramikronbi.com serves this.
+- `geo` — this branch. GEO context, task board, syndication drafts, Phase-4 review, and the sandbox UI exploration from the design pass. Resume GEO work here.
+- `ui` — parallel branch for ongoing homepage UI edits. Started from `main`; carries a copy of the sandbox pairings as the starting point.
+
+Keep merges one-way: finish an open loop here, merge `geo` → `main`; finish a UI edit on `ui`, merge `ui` → `main`. Do not merge `geo` ↔ `ui` directly.
+
 ## What is live on `main`
 
 Production at ramikronbi.com (origin/main at `8161a4d`) serves the full authority system: 19 ready projects, 23 ready articles, 9 topic hubs, 56-URL sitemap, Projects and Writing in the header, review routes 404 in production. Verification record: `claude/IMPLEMENTATION_REPORT.md`. The homepage sections `home-projects.tsx` and `home-community.tsx` are still the mirrored sticky lineups; the sandbox exploration under `src/app/sandbox/work/` is on this branch, not on main.
