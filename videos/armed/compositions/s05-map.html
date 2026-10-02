@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>05 MAP — feature matches, 309 frames, one sheet, one sphere</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: 'Manrope'; src: url('assets/fonts/Manrope-700.ttf') format('truetype'); font-weight: 700; }
+        @font-face { font-family: 'Instrument Serif'; src: url('assets/fonts/InstrumentSerif-Italic.ttf') format('truetype'); font-style: italic; font-weight: 400; }
+        @font-face { font-family: 'JetBrains Mono'; src: url('assets/fonts/JetBrainsMono-500.ttf') format('truetype'); font-weight: 500; }
+        @font-face { font-family: 'JetBrains Mono'; src: url('assets/fonts/JetBrainsMono-600.ttf') format('truetype'); font-weight: 600; }
+        #root { position: absolute; inset: 0; pointer-events: none; transform-origin: 50% 50%; }
+        .s05-m { position: absolute; font-family: 'JetBrains Mono', monospace; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
+        #s05-no { left: 112px; top: 78px; font-size: 24px; color: #c9686a; }
+        #s05-title { position: absolute; left: 110px; top: 140px; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 72px; line-height: 1; letter-spacing: -0.035em; color: #fbf5ea; white-space: nowrap; }
+        #s05-title em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: #c9686a; font-size: 1.08em; letter-spacing: -0.01em; }
+        #s05-match { position: absolute; left: 110px; top: 250px; width: 820px; height: 723px; border-radius: 18px; overflow: hidden; box-shadow: 0 0 0 2px rgba(251, 245, 234, 0.24); transform-origin: 50% 50%; }
+        #s05-match img { width: 820px; height: 723px; display: block; }
+        #s05-match-k { left: 110px; top: 990px; font-size: 20px; color: rgba(251, 245, 234, 0.6); }
+        .s05-fig { position: absolute; font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 180px; line-height: 1; letter-spacing: -0.04em; color: #fbf5ea; font-variant-numeric: tabular-nums; white-space: nowrap; }
+        .s05-fig small { font-size: 0.4em; color: rgba(251, 245, 234, 0.6); margin-left: 8px; letter-spacing: 0; }
+        #s05-inl { left: 1040px; top: 420px; }
+        #s05-inl-k { left: 1046px; top: 616px; font-size: 22px; line-height: 1.6; color: rgba(251, 245, 234, 0.75); }
+        #s05-frames { left: 1300px; top: 96px; font-size: 150px; }
+        #s05-frames-k { left: 1306px; top: 280px; font-size: 22px; color: rgba(251, 245, 234, 0.75); }
+        #s05-strip { position: absolute; left: 0; top: 60px; width: 1920px; height: 960px; }
+        .s05-card { position: absolute; left: 0; top: 0; width: 80px; height: 960px; background-image: url('assets/img/pano-equirect.jpg'); background-size: 1920px 960px; background-repeat: no-repeat; transform-origin: 50% 50%; }
+        #s05-deg { right: 110px; top: 330px; text-align: right; }
+        #s05-deg-k { right: 112px; top: 526px; text-align: right; font-size: 22px; line-height: 1.6; color: rgba(251, 245, 234, 0.75); }
+        #s05-left { left: 112px; top: 470px; font-size: 22px; line-height: 1.7; color: rgba(251, 245, 234, 0.75); }
+        #s05-left b { color: #c9686a; font-weight: 500; }
+      </style>
+
+      <div data-hf-id="hf-z9rg" id="root" data-composition-id="s05-map" data-width="1920" data-height="1080">
+        <div data-hf-id="hf-d92c" id="s05-strip"><div data-hf-id="hf-19us" class="s05-card" style="background-position: -0px 0"></div><div data-hf-id="hf-jm0c" class="s05-card" style="background-position: -80px 0"></div><div data-hf-id="hf-m443" class="s05-card" style="background-position: -160px 0"></div><div data-hf-id="hf-nk4a" class="s05-card" style="background-position: -240px 0"></div><div data-hf-id="hf-nvhp" class="s05-card" style="background-position: -320px 0"></div><div data-hf-id="hf-fe8w" class="s05-card" style="background-position: -400px 0"></div><div data-hf-id="hf-li60" class="s05-card" style="background-position: -480px 0"></div><div data-hf-id="hf-rag7" class="s05-card" style="background-position: -560px 0"></div><div data-hf-id="hf-sx32" class="s05-card" style="background-position: -640px 0"></div><div data-hf-id="hf-3ozt" class="s05-card" style="background-position: -720px 0"></div><div data-hf-id="hf-q524" class="s05-card" style="background-position: -800px 0"></div><div data-hf-id="hf-ccxg" class="s05-card" style="background-position: -880px 0"></div><div data-hf-id="hf-zv57" class="s05-card" style="background-position: -960px 0"></div><div data-hf-id="hf-hk8r" class="s05-card" style="background-position: -1040px 0"></div><div data-hf-id="hf-mr08" class="s05-card" style="background-position: -1120px 0"></div><div data-hf-id="hf-84yt" class="s05-card" style="background-position: -1200px 0"></div><div data-hf-id="hf-l2ct" class="s05-card" style="background-position: -1280px 0"></div><div data-hf-id="hf-qmv2" class="s05-card" style="background-position: -1360px 0"></div><div data-hf-id="hf-ofpr" class="s05-card" style="background-position: -1440px 0"></div><div data-hf-id="hf-6610" class="s05-card" style="background-position: -1520px 0"></div><div data-hf-id="hf-u3nl" class="s05-card" style="background-position: -1600px 0"></div><div data-hf-id="hf-r721" class="s05-card" style="background-position: -1680px 0"></div><div data-hf-id="hf-vtwi" class="s05-card" style="background-position: -1760px 0"></div><div data-hf-id="hf-jtw3" class="s05-card" style="background-position: -1840px 0"></div></div>
+        <div data-hf-id="hf-vxq4" id="s05-no" class="s05-m">05 · Map</div>
+        <div data-hf-id="hf-c83x" id="s05-title">360° <em data-hf-id="hf-q2e2">Spherical</em> panorama stitching</div>
+        <div data-hf-id="hf-gl3d" id="s05-match"><img data-hf-id="hf-p17y" src="assets/img/pano-matches.jpg" alt="Feature matches between two adjacent phone frames"></div>
+        <div data-hf-id="hf-pdhc" id="s05-match-k" class="s05-m">Stage 2 · matches between adjacent frames</div>
+        <div data-hf-id="hf-utqp" id="s05-inl" class="s05-fig">921</div>
+        <div data-hf-id="hf-5eiq" id="s05-inl-k" class="s05-m">Median RANSAC inliers<br data-hf-id="hf-x5px">per adjacent frame pair</div>
+        <div data-hf-id="hf-xojw" id="s05-frames" class="s05-fig">000</div>
+        <div data-hf-id="hf-kanu" id="s05-frames-k" class="s05-m">Frames · one handheld phone sweep</div>
+        <div data-hf-id="hf-g23x" id="s05-deg" class="s05-fig">333<small data-hf-id="hf-q9i4">°</small></div>
+        <div data-hf-id="hf-8i9c" id="s05-deg-k" class="s05-m">Recovered sweep<br data-hf-id="hf-rsrt">4096 × 2048 equirectangular</div>
+        <div data-hf-id="hf-7b2p" id="s05-left" class="s05-m"><b data-hf-id="hf-oozh">309</b> frames<br data-hf-id="hf-szow"><b data-hf-id="hf-t4n0">1</b> sphere</div>
+      </div>
+
+      <script>
+        ;(function () {
+          const A = window.ARMED
+          const { B, BAR, E, prog, hash } = A
+          const host = document.querySelector('[data-composition-id="s05-map"]')
+          const me = host.querySelector('#root') || host
+          const cards = [...host.querySelectorAll('.s05-card')]
+          const framesEl = host.querySelector('#s05-frames')
+          const N = cards.length
+          const tl = gsap.timeline({ paused: true })
+
+          // b16: arrive through the zoom: the real feature matches, and the inlier count
+          tl.fromTo('#s05-match', { scale: 0.72, opacity: 0, filter: 'blur(18px)' }, { scale: 1, opacity: 1, filter: 'blur(0px)', duration: 0.3, ease: 'expo.out' }, 0)
+          tl.fromTo('#s05-no, #s05-title', { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.25, ease: 'expo.out', stagger: 0.04 }, 0.02)
+          tl.fromTo('#s05-match-k', { opacity: 0 }, { opacity: 1, duration: 0.2, ease: 'none' }, 0.12)
+          tl.fromTo('#s05-inl', { opacity: 0, scale: 1.6, filter: 'blur(14px)' }, { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.2, ease: 'expo.out' }, 0.08)
+          tl.fromTo('#s05-inl-k', { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.25, ease: 'expo.out' }, 0.16)
+          // b17: the pair is shoved off; the sweep's frames fan out across the frame
+          tl.to('#s05-match', { x: -900, rotation: -8, duration: 0.18, ease: 'power3.in' }, B - 0.04)
+          tl.to('#s05-match-k, #s05-inl, #s05-inl-k', { opacity: 0, duration: 0.08, ease: 'none' }, B - 0.04)
+          tl.fromTo('#s05-frames, #s05-frames-k', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.2, ease: 'expo.out', stagger: 0.03 }, B)
+          // cards: fly in fanned, then close ranks into one seamless sheet by 0.9 (the 3D sheet takes over)
+          const card = A.driver((l) => {
+            const fanIn = E.out(prog(l, B, B + 0.2))
+            const close = E.inOut(prog(l, 0.64, 0.9))
+            cards.forEach((c, i) => {
+              const k = i - (N - 1) / 2
+              const d = i * 0.006
+              const fi = E.out(prog(l, B + d, B + 0.2 + d))
+              const fanX = 960 + k * 74 - 40
+              const fanY = 70 + k * k * 1.6
+              const homeX = i * 80
+              const x = (1 - close) * (fanX + (1 - fi) * 1400) + close * homeX
+              const y = (1 - close) * fanY
+              const rot = (1 - close) * k * 2.2
+              const s = (1 - close) * 0.62 + close
+              c.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) rotate(${rot.toFixed(2)}deg) scale(${s.toFixed(4)})`
+              c.style.boxShadow = close < 0.98 ? `0 0 0 ${(2 * (1 - close)).toFixed(2)}px rgba(251,245,234,0.5)` : 'none'
+              c.style.opacity = l < B ? '0' : l >= 0.94 ? '0' : '1'
+            })
+            void fanIn
+            framesEl.textContent = String(Math.round(309 * E.out(prog(l, B, B + 0.42)))).padStart(3, '0')
+          })
+          tl.fromTo(card, { p: 0 }, { p: BAR, duration: BAR, ease: 'none' }, 0)
+          tl.to('#s05-frames, #s05-frames-k', { opacity: 0, duration: 0.08, ease: 'none' }, 0.86)
+          tl.to('#s05-no, #s05-title', { opacity: 0, duration: 0.1, ease: 'none' }, 0.6)
+          // b19: the sphere spins up; the sweep it holds
+          tl.fromTo('#s05-deg', { opacity: 0, x: 140, filter: 'blur(18px)' }, { opacity: 1, x: 0, filter: 'blur(0px)', duration: 0.22, ease: 'expo.out' }, 3 * B)
+          tl.fromTo('#s05-deg-k', { opacity: 0 }, { opacity: 1, duration: 0.2, ease: 'none' }, 3 * B + 0.1)
+          tl.fromTo('#s05-left', { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.22, ease: 'expo.out' }, 3 * B + 0.04)
+          // exit: a stepped glitch into heat
+          tl.fromTo(me, { x: 0 }, { keyframes: [{ x: -46, duration: 1 / 60 }, { x: 38, duration: 1 / 60 }, { x: -22, duration: 1 / 60 }, { x: 64, duration: 1 / 60 }, { x: 0, duration: 1 / 60 }], immediateRender: false }, BAR - 5 / 60)
+          window.__timelines['s05-map'] = tl
+        })()
+      </script>
+    </template>
+  </body>
+</html>

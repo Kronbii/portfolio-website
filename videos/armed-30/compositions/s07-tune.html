@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>07 TUNE — a step response tuned on sixteenths until it settles (simulated)</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: 'Manrope'; src: url('assets/fonts/Manrope-700.ttf') format('truetype'); font-weight: 700; }
+        @font-face { font-family: 'Instrument Serif'; src: url('assets/fonts/InstrumentSerif-Italic.ttf') format('truetype'); font-style: italic; font-weight: 400; }
+        @font-face { font-family: 'JetBrains Mono'; src: url('assets/fonts/JetBrainsMono-500.ttf') format('truetype'); font-weight: 500; }
+        #root { position: absolute; inset: 0; pointer-events: none; }
+        .s07-m { position: absolute; font-family: 'JetBrains Mono', monospace; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
+        #s07-scope { position: absolute; left: 110px; top: 130px; width: 1700px; height: 660px; border: 2px solid rgba(251, 245, 234, 0.24); border-radius: 18px; overflow: hidden;
+          background-image: linear-gradient(rgba(251, 245, 234, 0.07) 2px, transparent 2px), linear-gradient(90deg, rgba(251, 245, 234, 0.07) 2px, transparent 2px);
+          background-size: 170px 82.5px; background-position: -1px -1px; }
+        #s07-cv { position: absolute; left: 0; top: 0; width: 1700px; height: 660px; }
+        #s07-k { left: 140px; top: 156px; font-size: 22px; color: rgba(251, 245, 234, 0.75); }
+        #s07-zeta { right: 140px; top: 156px; font-size: 26px; color: #fbf5ea; text-align: right; }
+        #s07-zeta b { color: #c9686a; font-weight: 500; }
+        #s07-title { position: absolute; left: 108px; top: 820px; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 120px; line-height: 1; letter-spacing: -0.035em; color: #fbf5ea; white-space: nowrap; }
+        #s07-title em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: #c9686a; font-size: 1.08em; letter-spacing: -0.01em; }
+        #s07-no { left: 560px; top: 846px; font-size: 24px; color: #c9686a; }
+        #s07-meta { left: 560px; top: 892px; font-size: 22px; line-height: 1.7; color: rgba(251, 245, 234, 0.75); }
+        #s07-chips { position: absolute; left: 1150px; top: 826px; width: 660px; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
+        .s07-chip { padding: 7px 14px; border: 2px solid rgba(201, 104, 106, 0.9); border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 20px; letter-spacing: 0.1em; text-transform: uppercase; color: #fbf5ea; white-space: nowrap; }
+        #s07-ok { left: 1590px; top: 700px; padding: 8px 18px; border-radius: 999px; background: #c9686a; color: #0e0b0b; font-size: 22px; }
+      </style>
+
+      <div data-hf-id="hf-65nq" id="root" data-composition-id="s07-tune" data-width="1920" data-height="1080">
+        <div data-hf-id="hf-6j3k" id="s07-scope"><canvas data-hf-id="hf-8ey4" id="s07-cv" data-layout-allow-overflow="" width="1700" height="660"></canvas></div>
+        <div data-hf-id="hf-opi2" id="s07-k" class="s07-m">Step response · simulated</div>
+        <div data-hf-id="hf-e0b7" id="s07-zeta" class="s07-m">ζ <b data-hf-id="hf-mtul">0.06</b></div>
+        <div data-hf-id="hf-043k" id="s07-ok" class="s07-m">Settled</div>
+        <div data-hf-id="hf-cx3s" id="s07-title">easy<em data-hf-id="hf-v6ao">PID</em></div>
+        <div data-hf-id="hf-ymm2" id="s07-no" class="s07-m">07 · Tune</div>
+        <div data-hf-id="hf-dzrb" id="s07-meta" class="s07-m">v1.1.0 · Arduino Library Manager<br data-hf-id="hf-x5px">hardware-agnostic · MIT</div>
+        <div data-hf-id="hf-6bzx" id="s07-chips"><span data-hf-id="hf-63g0" class="s07-chip">Independent instances</span><span data-hf-id="hf-nvme" class="s07-chip">Anti-windup</span><span data-hf-id="hf-swnb" class="s07-chip">Derivative filter</span><span data-hf-id="hf-mvlt" class="s07-chip">Output limits</span><span data-hf-id="hf-0vcz" class="s07-chip">Runtime tuning</span><span data-hf-id="hf-k7je" class="s07-chip">Relay autotuner</span></div>
+      </div>
+
+      <script>
+        ;(function () {
+          const A = window.ARMED
+          const { B, E, prog, clamp } = A
+          const host = document.querySelector('[data-composition-id="s07-tune"]')
+          const cv = host.querySelector('#s07-cv')
+          const g = cv.getContext('2d')
+          const zetaEl = host.querySelector('#s07-zeta b')
+          const W = 1700, H = 660
+          const X0 = 120, X1 = 1640, Y0 = 570, Y1 = 310 // step from 0 (Y0) to setpoint (Y1)
+          const STEP_AT = 0.07
+          const RUNS = [0.06, 0.16, 0.36, 0.72] // damping per sixteenth, ringing to settled
+          const SIX = B / 4
+          function response(z, u) {
+            // unit step of a second-order loop; u is 0..1 across the trace
+            const tau = Math.max(0, u - STEP_AT) * 46
+            if (tau <= 0) return 0
+            const w = 1, wd = w * Math.sqrt(1 - z * z)
+            return 1 - Math.exp(-z * w * tau) * (Math.cos(wd * tau) + (z / Math.sqrt(1 - z * z)) * Math.sin(wd * tau))
+          }
+          const yOf = (v) => Y0 + (Y1 - Y0) * v
+          function trace(z, upto, alpha, width, glow) {
+            g.save()
+            g.lineJoin = 'round'
+            g.lineCap = 'round'
+            g.strokeStyle = `rgba(201, 104, 106, ${alpha.toFixed(3)})`
+            if (glow) { g.shadowColor = 'rgba(224, 138, 139, 0.8)'; g.shadowBlur = 18 }
+            g.lineWidth = width
+            g.beginPath()
+            const n = Math.max(2, Math.floor(upto * 420))
+            for (let i = 0; i <= n; i++) {
+              const u = (i / 420)
+              const x = X0 + (X1 - X0) * u
+              const y = yOf(response(z, u))
+              if (i === 0) g.moveTo(x, y)
+              else g.lineTo(x, y)
+            }
+            g.stroke()
+            if (glow && upto < 1) {
+              const u = upto, x = X0 + (X1 - X0) * u, y = yOf(response(z, u))
+              g.fillStyle = '#fbf5ea'
+              g.shadowColor = 'rgba(251, 245, 234, 0.9)'
+              g.shadowBlur = 26
+              g.beginPath(); g.arc(x, y, 7, 0, Math.PI * 2); g.fill()
+            }
+            g.restore()
+          }
+          function draw(l) {
+            g.clearRect(0, 0, W, H)
+            // setpoint: a dashed square step
+            g.save()
+            g.setLineDash([14, 12])
+            g.strokeStyle = 'rgba(251, 245, 234, 0.5)'
+            g.lineWidth = 3
+            g.beginPath()
+            const xs = X0 + (X1 - X0) * STEP_AT
+            g.moveTo(X0, Y0); g.lineTo(xs, Y0); g.lineTo(xs, Y1); g.lineTo(X1, Y1)
+            g.stroke()
+            g.restore()
+            // each run sweeps in one sixteenth; older runs cool like phosphor
+            RUNS.forEach((z, i) => {
+              const t0 = i * SIX
+              if (l < t0) return
+              const sweep = clamp((l - t0) / (SIX * 0.9))
+              const age = Math.max(0, l - (t0 + SIX * 0.9))
+              const last = i === RUNS.length - 1
+              const alpha = last ? 1 : Math.max(0.12, Math.exp(-age / 0.12))
+              trace(z, E.out(sweep), alpha, last ? 6 : 4, last || age < 0.05)
+            })
+            const k = Math.min(RUNS.length - 1, Math.floor(l / SIX + 1e-6))
+            zetaEl.textContent = RUNS[k].toFixed(2)
+            // exit: the settled line launches up off the top, into the sky
+            const up = E.in(prog(l, 1.72, 1.875))
+            if (up > 0) {
+              g.save()
+              g.strokeStyle = '#fbf5ea'
+              g.shadowColor = 'rgba(251, 245, 234, 0.9)'
+              g.shadowBlur = 24
+              g.lineWidth = 6
+              g.beginPath(); g.moveTo(X1, Y1); g.lineTo(X1, Y1 - up * 900); g.stroke()
+              g.restore()
+            }
+          }
+          const tl = gsap.timeline({ paused: true })
+          tl.fromTo('#s07-scope', { scaleY: 0.02, opacity: 1 }, { scaleY: 1, duration: 0.12, ease: 'expo.out' }, 0)
+          tl.fromTo('#s07-k, #s07-zeta', { opacity: 0 }, { opacity: 1, duration: 0.05, ease: 'none', stagger: 0.03 }, 0.06)
+          tl.fromTo('#s07-title', { opacity: 0, x: -80, filter: 'blur(14px)' }, { opacity: 1, x: 0, filter: 'blur(0px)', duration: 0.2, ease: 'expo.out' }, 0.04)
+          tl.fromTo('#s07-no, #s07-meta', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.22, ease: 'expo.out', stagger: 0.04 }, 0.12)
+          tl.fromTo('#s07-ok', { opacity: 0 }, { opacity: 1, duration: 0.001, ease: 'none' }, B)
+          tl.fromTo('#s07-ok', { scale: 0.4 }, { scale: 1, duration: 0.2, ease: 'back.out(2.6)' }, B)
+          const d = A.driver(draw)
+          tl.fromTo(d, { p: 0 }, { p: 4 * B, duration: 4 * B, ease: 'none' }, 0)
+          // b26: what the library does, stamped on sixteenths
+          host.querySelectorAll('.s07-chip').forEach((c, i) => {
+            tl.fromTo(c, { opacity: 0, y: 18, scale: 0.7 }, { opacity: 1, y: 0, scale: 1, duration: 0.18, ease: 'back.out(2.2)' }, 2 * B + i * (B / 4))
+          })
+          window.__timelines['s07-tune'] = tl
+        })()
+      </script>
+    </template>
+  </body>
+</html>

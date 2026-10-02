@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>11 FLY — the second drop: formations, a tunnel run, and 36 drones spelling RK.</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: 'Manrope'; src: url('assets/fonts/Manrope-800.ttf') format('truetype'); font-weight: 800; }
+        @font-face { font-family: 'JetBrains Mono'; src: url('assets/fonts/JetBrainsMono-500.ttf') format('truetype'); font-weight: 500; }
+        #root { position: absolute; inset: 0; pointer-events: none; transform-origin: 50% 50%; }
+        .s13-m { position: absolute; font-family: 'JetBrains Mono', monospace; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
+        .s13-word { position: absolute; left: 96px; top: 650px; font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 300px; line-height: 0.86; letter-spacing: -0.04em; color: #fbf5ea; white-space: nowrap; transform-origin: 0% 100%; }
+        .s13-word i { font-style: normal; color: #c9686a; }
+        #s13-no { left: 112px; top: 520px; font-size: 24px; color: #c9686a; }
+        #s13-swarm { right: 112px; top: 150px; text-align: right; font-size: 22px; color: rgba(251, 245, 234, 0.75); }
+        .s13-fly { position: absolute; left: 0; right: 0; top: 420px; text-align: center; font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 176px; line-height: 1; letter-spacing: -0.04em; color: #fbf5ea; white-space: nowrap; transform-origin: 50% 50%; }
+        .s13-l { position: absolute; width: 86px; height: 86px; border-color: #c9686a; border-style: solid; border-width: 0; }
+        #s13-l1 { left: 290px; top: 196px; border-top-width: 5px; border-left-width: 5px; }
+        #s13-l2 { left: 1544px; top: 196px; border-top-width: 5px; border-right-width: 5px; }
+        #s13-l3 { left: 290px; top: 790px; border-bottom-width: 5px; border-left-width: 5px; }
+        #s13-l4 { left: 1544px; top: 790px; border-bottom-width: 5px; border-right-width: 5px; }
+        #s13-id { left: 296px; top: 152px; font-size: 22px; color: #c9686a; }
+        #s13-cap { left: 296px; top: 900px; font-size: 22px; color: rgba(251, 245, 234, 0.75); }
+      </style>
+
+      <div data-hf-id="hf-lnsd" id="root" data-composition-id="s13-swarm" data-width="1920" data-height="1080">
+        <div data-hf-id="hf-u2oo" id="s13-no" class="s13-m">11 · Fly</div>
+        <div data-hf-id="hf-0x8c" id="s13-w1" class="s13-word">SENSE<i data-hf-id="hf-74k6">.</i></div>
+        <div data-hf-id="hf-x7wp" id="s13-w2" class="s13-word">DECIDE<i data-hf-id="hf-amyi">.</i></div>
+        <div data-hf-id="hf-4or4" id="s13-w3" class="s13-word">ACT<i data-hf-id="hf-b19j">.</i></div>
+        <div data-hf-id="hf-i4bl" id="s13-swarm" class="s13-m">36 × E58 · formation flight, simulated</div>
+        <div data-hf-id="hf-ey7v" id="s13-f1" class="s13-fly">ROBOTICS</div>
+        <div data-hf-id="hf-w9ok" id="s13-f2" class="s13-fly">COMPUTER VISION</div>
+        <div data-hf-id="hf-2mkf" id="s13-f3" class="s13-fly">CONTROL SYSTEMS</div>
+        <div data-hf-id="hf-okh0" id="s13-f4" class="s13-fly">EDGE AI</div>
+        <div data-hf-id="hf-uh8u" id="s13-id" class="s13-m">ID lock · formation</div>
+        <div data-hf-id="hf-yitr" id="s13-l1" class="s13-l"></div>
+        <div data-hf-id="hf-nnc4" id="s13-l2" class="s13-l"></div>
+        <div data-hf-id="hf-qmlp" id="s13-l3" class="s13-l"></div>
+        <div data-hf-id="hf-76pm" id="s13-l4" class="s13-l"></div>
+        <div data-hf-id="hf-pzvd" id="s13-cap" class="s13-m">36 drones · one name</div>
+      </div>
+
+      <script>
+        ;(function () {
+          const A = window.ARMED
+          const { B, BAR } = A
+          const host = document.querySelector('[data-composition-id="s13-swarm"]')
+          const me = host.querySelector('#root') || host
+          const tl = gsap.timeline({ paused: true })
+          tl.fromTo('#s13-no', { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.2, ease: 'expo.out' }, 0.02)
+          tl.fromTo('#s13-swarm', { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.25, ease: 'expo.out' }, 0.1)
+          // bar 12: one word per beat, each with its own entrance, hard cuts between
+          tl.fromTo('#s13-w1', { opacity: 0, scale: 1.9, filter: 'blur(26px)' }, { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.16, ease: 'expo.out' }, 0)
+          tl.to('#s13-w1', { opacity: 0, duration: 0.001, ease: 'none' }, B)
+          tl.fromTo('#s13-w2', { opacity: 0, x: 1400, skewX: -18 }, { opacity: 1, x: 0, skewX: 0, duration: 0.18, ease: 'expo.out' }, B)
+          tl.to('#s13-w2', { opacity: 0, duration: 0.001, ease: 'none' }, 2 * B)
+          tl.fromTo('#s13-w3', { opacity: 0, y: 340, rotation: -6 }, { opacity: 1, y: 0, rotation: 0, duration: 0.2, ease: 'back.out(1.8)' }, 2 * B)
+          tl.to('#s13-w3, #s13-no', { opacity: 0, duration: 0.001, ease: 'none' }, 3 * B)
+          // bar 13: the tunnel run. The focus areas fly at the lens, one per beat
+          ;['#s13-f1', '#s13-f2', '#s13-f3', '#s13-f4'].forEach((s, i) => {
+            const at = BAR + i * B
+            tl.fromTo(s, { opacity: 0, scale: 0.42, filter: 'blur(6px)' }, { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.16, ease: 'expo.out' }, at)
+            tl.to(s, { scale: 2.4, opacity: 0, filter: 'blur(18px)', duration: 0.24, ease: 'power3.in' }, at + B - 0.24)
+          })
+          tl.to('#s13-swarm', { opacity: 0, duration: 0.15, ease: 'none' }, BAR)
+          // bar 14: the drones spell RK.; on the next beat the lock snaps around them
+          ;['#s13-l1', '#s13-l2', '#s13-l3', '#s13-l4'].forEach((s, i) => {
+            tl.fromTo(s, { opacity: 0, x: [-160, 160, -160, 160][i], y: [-100, -100, 100, 100][i] }, { opacity: 1, x: 0, y: 0, duration: 0.24, ease: 'expo.out' }, 2 * BAR + B + i * 0.02)
+          })
+          tl.fromTo('#s13-id', { opacity: 0 }, { opacity: 1, duration: 0.04, ease: 'none', repeat: 4, yoyo: true }, 2 * BAR + B + 0.05)
+          tl.fromTo('#s13-cap', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.25, ease: 'expo.out' }, 2 * BAR + B + 0.1)
+          // exit: the overlay blows out as the drones break past the lens
+          tl.to(me, { scale: 1.3, opacity: 0, filter: 'blur(16px)', duration: 0.14, ease: 'power3.in' }, 3 * BAR - 0.14)
+          window.__timelines['s13-swarm'] = tl
+        })()
+      </script>
+    </template>
+  </body>
+</html>

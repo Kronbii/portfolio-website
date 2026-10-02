@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>09 SIGN — the lockup: portrait, name, signature, address</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: 'Manrope'; src: url('assets/fonts/Manrope-700.ttf') format('truetype'); font-weight: 700; }
+        @font-face { font-family: 'Manrope'; src: url('assets/fonts/Manrope-800.ttf') format('truetype'); font-weight: 800; }
+        @font-face { font-family: 'JetBrains Mono'; src: url('assets/fonts/JetBrainsMono-500.ttf') format('truetype'); font-weight: 500; }
+        #root { position: absolute; inset: 0; pointer-events: none; }
+        .s09-m { position: absolute; font-family: 'JetBrains Mono', monospace; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
+        #s09-photo { position: absolute; left: 110px; top: 130px; width: 540px; height: 720px; border-radius: 18px; overflow: hidden; background: #0a0808; box-shadow: 0 0 0 2px rgba(251, 245, 234, 0.24); }
+        #s09-photo img { position: absolute; left: 0; top: 0; width: 540px; height: 720px; object-fit: cover; object-position: 50% 18%; transform-origin: 50% 40%; }
+        #s09-cap { left: 112px; top: 872px; font-size: 20px; color: rgba(251, 245, 234, 0.6); }
+        #s09-name { position: absolute; left: 726px; top: 312px; font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 168px; line-height: 0.9; letter-spacing: -0.04em; color: #fbf5ea; white-space: nowrap; transform-origin: 0% 100%; }
+        #s09-name i { font-style: normal; color: #c9686a; }
+        #s09-sub { position: absolute; left: 732px; top: 494px; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 44px; letter-spacing: -0.02em; color: #fbf5ea; white-space: nowrap; }
+        #s09-where { left: 734px; top: 566px; font-size: 24px; color: rgba(251, 245, 234, 0.75); }
+        #s09-sig { position: absolute; left: 726px; top: 640px; width: 560px; height: 123px; background: #fbf5ea;
+          -webkit-mask: url('assets/img/sig.png') center / contain no-repeat; mask: url('assets/img/sig.png') center / contain no-repeat; }
+        #s09-url { position: absolute; left: 732px; top: 836px; font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 40px; letter-spacing: 0.04em; color: #fbf5ea; white-space: nowrap; }
+        #s09-links { left: 734px; top: 900px; font-size: 20px; color: rgba(251, 245, 234, 0.75); }
+        #s09-credit { right: 112px; top: 950px; text-align: right; font-size: 17px; color: rgba(251, 245, 234, 0.6); }
+        #s09-rule { position: absolute; left: 732px; top: 810px; width: 1078px; height: 2px; background: rgba(251, 245, 234, 0.24); transform-origin: 0% 50%; }
+      </style>
+
+      <div data-hf-id="hf-jqxf" id="root" data-composition-id="s09-sign" data-width="1920" data-height="1080">
+        <div data-hf-id="hf-j62q" id="s09-photo"><img data-hf-id="hf-kwnt" src="assets/img/portrait.jpeg" alt="Rami Kronbi"></div>
+        <div data-hf-id="hf-t0rd" id="s09-cap" class="s09-m">Fig. ∞ · the operator</div>
+        <div data-hf-id="hf-cmet" id="s09-name">Rami Kronbi<i data-hf-id="hf-74k6">.</i></div>
+        <div data-hf-id="hf-udvp" id="s09-sub">Robotics &amp; embedded-systems engineer</div>
+        <div data-hf-id="hf-pmqp" id="s09-where" class="s09-m">Beirut · Lebanon</div>
+        <div data-hf-id="hf-3x0c" id="s09-sig" role="img" aria-label="Signature"></div>
+        <div data-hf-id="hf-hyyw" id="s09-rule"></div>
+        <div data-hf-id="hf-pfkk" id="s09-url">ramikronbi.com</div>
+        <div data-hf-id="hf-qxv7" id="s09-links" class="s09-m">github.com/Kronbii · linkedin.com/in/rami-kronbi</div>
+        <div data-hf-id="hf-bwdd" id="s09-credit" class="s09-m">E58 drone model · the_Thorminator · CC BY 4.0</div>
+      </div>
+
+      <script>
+        ;(function () {
+          const A = window.ARMED
+          const { B, BAR } = A
+          const tl = gsap.timeline({ paused: true })
+          // the downbeat: everything that was flying lands here
+          tl.fromTo('#s09-name', { opacity: 0, scale: 1.45, filter: 'blur(24px)' }, { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.2, ease: 'expo.out' }, 0)
+          tl.fromTo('#s09-name i', { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(3)' }, 0.16)
+          // the portrait develops: an inset clip opens, the blur and zoom resolve
+          tl.fromTo('#s09-photo', { clipPath: 'inset(30% 0 30% 0 round 18px)', opacity: 0 }, { clipPath: 'inset(0% 0 0% 0 round 18px)', opacity: 1, duration: 0.42, ease: 'expo.out' }, 0.02)
+          tl.fromTo('#s09-photo img', { scale: 1.18, filter: 'blur(10px)' }, { scale: 1, filter: 'blur(0px)', duration: 0.6, ease: 'expo.out' }, 0.02)
+          tl.fromTo('#s09-cap', { opacity: 0 }, { opacity: 1, duration: 0.2, ease: 'none' }, 0.3)
+          tl.fromTo('#s09-sub', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3, ease: 'expo.out' }, 0.1)
+          tl.fromTo('#s09-where', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: 'expo.out' }, 0.16)
+          // beat 29: the signature writes itself left to right
+          tl.fromTo('#s09-sig', { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 0.5, ease: 'power1.inOut' }, B)
+          // beat 30: the address
+          tl.fromTo('#s09-rule', { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: 'expo.out' }, 2 * B - 0.1)
+          tl.fromTo('#s09-url', { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.3, ease: 'expo.out' }, 2 * B)
+          tl.fromTo('#s09-links', { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'none' }, 2 * B + 0.1)
+          tl.fromTo('#s09-credit', { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'none' }, 2 * B + 0.2)
+          // the hold: a slow push on the portrait to the last frame
+          tl.fromTo('#s09-photo img', { scale: 1 }, { scale: 1.04, duration: BAR - 0.6, ease: 'none', immediateRender: false }, 0.62)
+          window.__timelines['s09-sign'] = tl
+        })()
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>10 GLIDE — the breakdown: a chase over the field, the claim, then a strobe recap into the drop</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: 'Manrope'; src: url('assets/fonts/Manrope-700.ttf') format('truetype'); font-weight: 700; }
+        @font-face { font-family: 'Instrument Serif'; src: url('assets/fonts/InstrumentSerif-Italic.ttf') format('truetype'); font-style: italic; font-weight: 400; }
+        @font-face { font-family: 'JetBrains Mono'; src: url('assets/fonts/JetBrainsMono-500.ttf') format('truetype'); font-weight: 500; }
+        #root { position: absolute; inset: 0; pointer-events: none; }
+        .s12-m { position: absolute; font-family: 'JetBrains Mono', monospace; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
+        #s12-horizon { position: absolute; left: 160px; top: 300px; width: 1600px; height: 360px; border-radius: 50%;
+          background: radial-gradient(closest-side, rgba(201, 104, 106, 0.32), rgba(201, 104, 106, 0) 100%); }
+        #s12-claim { position: absolute; left: 108px; top: 724px; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 86px; line-height: 1.2; letter-spacing: -0.035em; color: #fbf5ea; }
+        #s12-claim .ln { display: block; white-space: nowrap; }
+        #s12-claim .w { display: inline-block; margin-right: 0.24em; }
+        #s12-claim em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: #c9686a; font-size: 1.12em; letter-spacing: -0.01em; }
+        #s12-k { left: 112px; top: 676px; font-size: 22px; color: rgba(251, 245, 234, 0.75); }
+        #s12-cam { right: 112px; top: 150px; text-align: right; font-size: 22px; color: rgba(251, 245, 234, 0.75); }
+        #s12-strobe { position: absolute; inset: 0; }
+        .s12-f { position: absolute; inset: 0; background: #0a0808 center / cover no-repeat; opacity: 0; }
+        .s12-f.ink { background-size: contain; }
+        .s12-cap { position: absolute; left: 112px; bottom: 112px; padding: 8px 16px; border-radius: 999px; background: rgba(14, 11, 11, 0.86); font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 22px; letter-spacing: 0.12em; text-transform: uppercase; color: #fbf5ea; white-space: nowrap; }
+        .s12-cap b { color: #c9686a; font-weight: 500; }
+      </style>
+
+      <div data-hf-id="hf-7wtr" id="root" data-composition-id="s12-glide" data-width="1920" data-height="1080">
+        <div data-hf-id="hf-oxg3" id="s12-horizon"></div>
+        <div data-hf-id="hf-7fks" id="s12-k" class="s12-m">From the record</div>
+        <div data-hf-id="hf-r3pq" id="s12-claim">
+          <span data-hf-id="hf-smev" class="ln"><span data-hf-id="hf-xlyb" class="w">I</span><span data-hf-id="hf-mjig" class="w">build</span><span data-hf-id="hf-2zni" class="w">systems</span><span data-hf-id="hf-33w1" class="w">that</span><span data-hf-id="hf-fr20" class="w"><em data-hf-id="hf-r3ar">sense</em></span></span>
+          <span data-hf-id="hf-oupj" class="ln"><span data-hf-id="hf-9o0j" class="w">the</span><span data-hf-id="hf-f5e4" class="w">world</span><span data-hf-id="hf-difl" class="w">and</span><span data-hf-id="hf-izv8" class="w">act</span><span data-hf-id="hf-mx6p" class="w">on</span><span data-hf-id="hf-3rmp" class="w">it.</span></span>
+        </div>
+        <div data-hf-id="hf-2jg8" id="s12-cam" class="s12-m">Chase cam · simulated</div>
+        <div data-hf-id="hf-n8z9" id="s12-strobe">
+          <div data-hf-id="hf-af48" class="s12-f" style="background-image: url('assets/img/race-team.jpg'); background-position: 50% 18%"><span data-hf-id="hf-9jp2" class="s12-cap"><b data-hf-id="hf-s74c">Team</b> Brainiacs · with Wassim Ghaddar</span></div>
+          <div data-hf-id="hf-6f4w" class="s12-f ink" style="background-image: url('assets/img/race-edges.png')"><span data-hf-id="hf-auxs" class="s12-cap"><b data-hf-id="hf-vz2u">Sobel</b> edges</span></div>
+          <div data-hf-id="hf-vo7q" class="s12-f" style="background-image: url('assets/img/pano-matches.jpg')"><span data-hf-id="hf-73ab" class="s12-cap"><b data-hf-id="hf-ijdl">921</b> inliers per pair</span></div>
+          <div data-hf-id="hf-vixj" class="s12-f" style="background-image: url('assets/img/thermal-low.png'); image-rendering: pixelated"><span data-hf-id="hf-tpji" class="s12-cap"><b data-hf-id="hf-fs1s">Thermal</b> input</span></div>
+          <div data-hf-id="hf-wx2n" class="s12-f" style="background-image: url('assets/img/thermal-x3.png')"><span data-hf-id="hf-6mmj" class="s12-cap"><b data-hf-id="hf-1b33">×3</b> output</span></div>
+          <div data-hf-id="hf-08jp" class="s12-f ink" style="background-image: url('assets/img/crack-ink.png')"><span data-hf-id="hf-5lya" class="s12-cap"><b data-hf-id="hf-u99d">Crack</b> mask</span></div>
+          <div data-hf-id="hf-4b21" class="s12-f" style="background-image: url('assets/img/race-schematic.png'); background-size: contain; background-color: #fbf5ea"><span data-hf-id="hf-3tbw" class="s12-cap"><b data-hf-id="hf-rct7">Arduino</b> Mega</span></div>
+          <div data-hf-id="hf-zyzj" class="s12-f" style="background-image: url('assets/img/pano-equirect.jpg')"><span data-hf-id="hf-um2u" class="s12-cap"><b data-hf-id="hf-3wps">333°</b> sweep</span></div>
+        </div>
+      </div>
+
+      <script>
+        ;(function () {
+          const A = window.ARMED
+          const { B, BAR } = A
+          const host = document.querySelector('[data-composition-id="s12-glide"]')
+          const frames = [...host.querySelectorAll('.s12-f')]
+          const words = [...host.querySelectorAll('#s12-claim .w')]
+          const STROBE = 6 * B // the last two beats
+          const tl = gsap.timeline({ paused: true })
+          tl.fromTo('#s12-horizon', { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 1.2, ease: 'power2.out' }, 0)
+          tl.fromTo('#s12-cam, #s12-k', { opacity: 0 }, { opacity: 1, duration: 0.4, ease: 'none', stagger: 0.1 }, 0.1)
+          // the claim, one word per eighth; "sense" lands on the beat with weight
+          const at = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.25, 4.5]
+          words.forEach((w, i) => {
+            const big = i === 4
+            tl.fromTo(w, { opacity: 0, y: big ? 0 : 50, scale: big ? 1.8 : 1, filter: 'blur(12px)' }, { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', duration: big ? 0.22 : 0.3, ease: big ? 'expo.out' : 'power3.out', transformOrigin: '0% 80%' }, at[i] * B)
+          })
+          // the strobe recap: eight real frames on sixteenths, hard cuts into the drop
+          const strobe = A.driver((l) => {
+            const k = l >= STROBE ? Math.min(7, Math.floor((l - STROBE) / (B / 4) + 1e-6)) : -1
+            frames.forEach((f, i) => {
+              f.style.opacity = i === k ? '1' : '0'
+              if (i === k) {
+                const u = (l - STROBE - k * (B / 4)) / (B / 4)
+                f.style.transform = `scale(${(1.1 - 0.08 * u).toFixed(4)})`
+              }
+            })
+          })
+          tl.fromTo(strobe, { p: 0 }, { p: 2 * BAR, duration: 2 * BAR, ease: 'none' }, 0)
+          window.__timelines['s12-glide'] = tl
+        })()
+      </script>
+    </template>
+  </body>
+</html>
