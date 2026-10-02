@@ -263,3 +263,30 @@ html[data-v2-vt]::view-transition-new(v2-header) {
     padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px));
   }
 }
+
+/*
+ * The preflight intro. The page never changes width under it (the scrollbar
+ * is tinted, not hidden, so nothing shifts at the reveal), and the home
+ * heading waits unseen while the intro's copy of the name glides onto it.
+ * If the intro's script never arrives, the heading shows itself anyway.
+ */
+html:has([data-v2][data-intro='on']),
+html:has([data-v2][data-intro='playing']) {
+  scrollbar-color: #0a0808 #0a0808;
+}
+
+[data-v2][data-intro='on'] #v2-name,
+[data-v2][data-intro='playing'] #v2-name,
+[data-v2][data-intro='reveal'] #v2-name {
+  opacity: 0;
+}
+
+[data-v2][data-intro='on'] #v2-name {
+  animation: v2-name-failsafe 0.4s ease 6.5s forwards;
+}
+
+@keyframes v2-name-failsafe {
+  to {
+    opacity: 1;
+  }
+}

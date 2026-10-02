@@ -1,6 +1,6 @@
 import * as THREE from 'three'
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { GLTFLoader, type GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js'
 
 import { buildDrone } from '@/components/three/drone/geometry'
 
@@ -29,7 +29,13 @@ export interface Airframe {
   dispose(): void
 }
 
-export const E58_URL = '/models/eachine-e58.glb'
+/*
+ * The web build of the E58 (built from eachine-e58.glb): the same mesh and the
+ * same colour and normal maps, with meshopt geometry instead of Draco (no decoder
+ * download or workers), smaller helper maps, the source tilt undone in the file,
+ * and no glass transmission pass on the lenses.
+ */
+export const E58_URL = '/models/eachine-e58-web.glb'
 
 /*
  * The E58 ships as two merged meshes (body and lenses) with a tilt baked into
@@ -87,15 +93,8 @@ function rotorBlurTexture(): THREE.CanvasTexture {
 
 export async function loadE58(labels: string[]): Promise<Airframe> {
   const loader = new GLTFLoader()
-  const draco = new DRACOLoader()
-  draco.setDecoderPath('/draco/')
-  loader.setDRACOLoader(draco)
-  let gltf: GLTF
-  try {
-    gltf = await loader.loadAsync(E58_URL)
-  } finally {
-    draco.dispose()
-  }
+  loader.setMeshoptDecoder(MeshoptDecoder)
+  const gltf: GLTF = await loader.loadAsync(E58_URL)
 
   const model = gltf.scene
   const materials: THREE.MeshStandardMaterial[] = []

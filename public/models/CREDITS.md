@@ -20,6 +20,14 @@ Attribution is required wherever these are displayed publicly.
 | `tricopter.glb` | Tricopter | [pierre.paslier](https://sketchfab.com/pierre.paslier) | 36,144 | 81 KB | https://sketchfab.com/3d-models/none-ac47df697aee4834a2b3ff24c83eb180 |
 | `uav.glb` | UAV | [dread_comrade](https://sketchfab.com/dread_comrade) | 28,712 | 49 KB | https://sketchfab.com/3d-models/none-e39be240a697462c945e96a9a0f5d9d3 |
 | `eachine-e58.glb` | Eachine E58 Pocket Drone - Game Ready Asset | [the_Thorminator](https://sketchfab.com/the_Thorminator) | 20,758 | 386 KB | https://sketchfab.com/3d-models/none-95c15555467b455ea9e2e923904e9b60 |
+| `eachine-e58-web.glb` | Eachine E58 Pocket Drone (web build of the row above) | [the_Thorminator](https://sketchfab.com/the_Thorminator) | 20,758 | 379 KB | https://sketchfab.com/3d-models/none-95c15555467b455ea9e2e923904e9b60 |
+
+`eachine-e58-web.glb` is what the /v2 home drone and intro load. It is
+derived from `eachine-e58.glb` with the glTF-Transform API: the source tilt is
+reset on its nodes, the lenses' `KHR_materials_transmission` is removed,
+the packed metallic-roughness map is resized to 512 px and the lens maps to
+256 px (base colour and normal maps are untouched), and the geometry uses
+meshopt (`EXT_meshopt_compression`, high) instead of Draco.
 
 Each is processed with `gltf-transform optimize --texture-compress webp
 --texture-size 1024 --compress draco`. Draco alone was not enough: it

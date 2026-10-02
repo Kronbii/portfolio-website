@@ -123,10 +123,30 @@ export function Specimen() {
   const copy = v2Home.specimen
   const modelLabels = [copy.propLabel(1), copy.callouts.arm, copy.callouts.airframe, copy.callouts.camera]
 
+  // While the preflight intro plays, the specimen does not exist yet: no renderer,
+  // no model, no shader compiles competing with the intro for the main thread.
+  // It builds once the intro has handed over, and its drop-in is the next beat.
+  const [introClear, setIntroClear] = useState(false)
+  useEffect(() => {
+    const v2 = host.current?.closest<HTMLElement>('[data-v2]')
+    const active = () => ['on', 'playing', 'reveal'].includes(v2?.dataset.intro ?? '')
+    if (!v2 || !active()) {
+      setIntroClear(true)
+      return
+    }
+    const watch = new MutationObserver(() => {
+      if (active()) return
+      watch.disconnect()
+      setIntroClear(true)
+    })
+    watch.observe(v2, { attributes: true, attributeFilter: ['data-intro'] })
+    return () => watch.disconnect()
+  }, [])
+
   useEffect(() => {
     const root = host.current
     const mount = canvasHost.current
-    if (!root || !mount) return
+    if (!introClear || !root || !mount) return
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     let disposed = false
 
@@ -372,6 +392,7 @@ export function Specimen() {
     // ---- loop
     const clock = new THREE.Clock()
     let raf = 0
+    let onScreen = true
     let visible = true
     let t = 0
     let uiTick = 0
@@ -454,15 +475,17 @@ export function Specimen() {
       }
     }
 
-    const io = new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting && document.visibilityState === 'visible'
-      if (visible) wake()
-    })
-    io.observe(root)
-    const onVis = () => {
-      visible = document.visibilityState === 'visible'
+    // paused off screen and in a hidden tab
+    const update = () => {
+      visible = onScreen && document.visibilityState === 'visible'
       if (visible) wake()
     }
+    const io = new IntersectionObserver(([entry]) => {
+      onScreen = entry.isIntersecting
+      update()
+    })
+    io.observe(root)
+    const onVis = () => update()
     document.addEventListener('visibilitychange', onVis)
 
     resize()
@@ -487,9 +510,9 @@ export function Specimen() {
       renderer.dispose()
       renderer.domElement.remove()
     }
-    // the effect owns the scene for the component's life; copy is static
+    // the effect owns the scene for the component's life once the intro is clear; copy is static
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [introClear])
 
   const { model } = copy
   return (

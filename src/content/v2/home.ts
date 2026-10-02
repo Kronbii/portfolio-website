@@ -247,3 +247,24 @@ export const v2Chrome = {
     { label: 'Arduino Libraries', href: siteConfig.socials.arduinolibraries },
   ],
 }
+
+/*
+ * The preflight: a one-per-session intro that doubles as the loading screen.
+ * The arm sequence waits on the real model download; the flight and its
+ * readouts are a simulation, labelled as such.
+ */
+export const v2Intro = {
+  descriptor: 'Robotics & embedded-systems engineer',
+  disarmed: 'Disarmed',
+  armed: 'Armed',
+  mode: 'Angle mode',
+  modeFlip: 'Acro · flip',
+  preflight: 'Preflight check',
+  sim: 'Simulated flight · E58 model',
+  throttle: 'Throttle',
+  roll: 'Roll',
+  alt: 'Alt',
+  lock: 'Lock · camera',
+  cap: { key: 'Ch5', text: 'arm switch · motors spool' },
+  skip: 'Skip intro',
+}
