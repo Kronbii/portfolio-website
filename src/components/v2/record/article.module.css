@@ -1,0 +1,133 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  padding-block: clamp(2.5rem, 5vw, 4rem) clamp(3.5rem, 7vw, 6rem);
+  border-top: 1px solid var(--hair);
+}
+
+.margin {
+  align-self: start;
+  position: sticky;
+  top: calc(var(--nav-h) + 1.5rem);
+  display: grid;
+  gap: 1.75rem;
+}
+
+.meta {
+  display: grid;
+  gap: 6px;
+}
+.metaLabel {
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.metaLink {
+  font-weight: 700;
+  font-size: 0.9375rem;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  color: var(--ink);
+  transition: color var(--fast) var(--ease);
+}
+.metaLink:hover {
+  color: var(--brand);
+}
+.metaText {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.toc {
+  display: grid;
+  gap: 10px;
+}
+.tocLabel {
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.toc ol {
+  display: grid;
+  border-top: 1px solid var(--hair);
+}
+.toc a {
+  display: grid;
+  grid-template-columns: 1.75rem minmax(0, 1fr);
+  gap: 8px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--hair);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--ink-3);
+  transition: color var(--fast) var(--ease);
+}
+.toc a:hover {
+  color: var(--ink);
+}
+.toc a[aria-current] {
+  color: var(--ink);
+}
+.toc a[aria-current] .tocNo {
+  color: var(--brand);
+}
+.tocNo {
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  padding-top: 0.15em;
+  color: var(--ink-3);
+}
+
+.body {
+  max-width: 68ch;
+  font-size: clamp(1.0625rem, 1.25vw, 1.1875rem);
+  line-height: 1.72;
+  color: var(--ink);
+}
+.body p + p {
+  margin-top: 1.15em;
+}
+.body h2 {
+  margin: 2.4em 0 0.7em;
+  font-size: clamp(1.5rem, 2.2vw, 1.875rem);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  scroll-margin-top: calc(var(--nav-h) + 1.5rem);
+}
+.body h3 {
+  margin: 1.9em 0 0.5em;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  scroll-margin-top: calc(var(--nav-h) + 1.5rem);
+}
+.body > :first-child {
+  margin-top: 0;
+}
+.body > p:first-child {
+  font-size: 1.15em;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.hero {
+  padding-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+@media (max-width: 960px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .margin {
+    position: static;
+  }
+  .toc {
+    display: none;
+  }
+}

@@ -1,0 +1,28 @@
+/** Generated from public/ by measuring each file; regenerate when media changes. */
+
+export const mediaSize: Record<string, [number, number]> = {
+  '/images/authority/daleel/hero.jpeg': [1600, 777],
+  '/images/authority/fine-crack/test-frame.png': [2448, 2048],
+  '/images/authority/motorcycle-trainer/sign-127.webp': [162, 152],
+  '/images/authority/motorcycle-trainer/sign-135.webp': [119, 119],
+  '/images/authority/motorcycle-trainer/sign-140.webp': [137, 137],
+  '/images/authority/motorcycle-trainer/sign-150.webp': [149, 149],
+  '/images/authority/race-car/demo.png': [1024, 1024],
+  '/images/authority/race-car/front.jpeg': [1200, 1600],
+  '/images/authority/race-car/schematic.png': [1169, 828],
+  '/images/authority/race-car/team.jpeg': [1200, 1600],
+  '/images/authority/ree-finance/image1.jpeg': [1600, 876],
+  '/images/authority/ree-finance/image2.jpeg': [1600, 876],
+  '/images/authority/ree-finance/image3.jpeg': [1600, 876],
+  '/images/authority/smart-desk/demo.gif': [800, 453],
+  '/images/authority/smart-desk/night-pic.jpeg': [527, 529],
+  '/images/authority/spherical-panorama/goat.gif': [600, 290],
+  '/images/authority/spherical-panorama/pano-on-band.jpg': [1700, 319],
+  '/images/authority/spherical-panorama/panorama.jpg': [4096, 2048],
+  '/images/authority/spherical-panorama/side-by-side.jpg': [1800, 1896],
+  '/images/authority/spherical-panorama/stage1-frame.jpg': [700, 1244],
+  '/images/authority/spherical-panorama/stage2-matches.jpg': [1200, 1058],
+  '/images/authority/spherical-panorama/stage3-many.jpg': [2048, 1024],
+  '/images/authority/thermal-super-resolution/x2-showcase.png': [1424, 627],
+  '/images/authority/thermal-super-resolution/x3-showcase.png': [1424, 627],
+}

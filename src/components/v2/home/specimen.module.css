@@ -1,0 +1,249 @@
+.specimen {
+  margin: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.plate {
+  position: relative;
+  flex: 1;
+  min-height: 420px;
+  overflow: hidden;
+  border-radius: var(--r-tile);
+  border: 1px solid var(--hair);
+  background:
+    linear-gradient(var(--grid) 1px, transparent 1px) 0 0 / 80px 80px,
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0 / 80px 80px,
+    radial-gradient(120% 90% at 50% 100%, var(--brand-tint), transparent 60%),
+    var(--sunk);
+  cursor: grab;
+  touch-action: pan-y;
+  outline-offset: -3px;
+}
+.plate:active {
+  cursor: grabbing;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.leaders {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+.leader {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.leaderDot {
+  fill: var(--bg);
+  stroke: var(--brand);
+  stroke-width: 1.5;
+}
+
+.callout {
+  position: absolute;
+  top: 0;
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  white-space: nowrap;
+  pointer-events: none;
+  will-change: transform;
+}
+.callout[data-side='left'] {
+  left: 24px;
+}
+.callout[data-side='right'] {
+  right: 24px;
+}
+
+.hud {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  pointer-events: none;
+}
+
+.attitude {
+  display: flex;
+  gap: clamp(14px, 2.4vw, 28px);
+}
+.attitude span {
+  display: grid;
+  gap: 6px;
+}
+.attitude i {
+  font-style: normal;
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.attitude b {
+  font-family: var(--f-mono);
+  font-weight: 600;
+  font-size: clamp(0.9375rem, 1.5vw, 1.125rem);
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.mixer {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.mode {
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--hair-strong);
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  transition: color var(--fast) var(--ease), border-color var(--fast) var(--ease), background-color var(--fast) var(--ease);
+}
+.mode[data-mode='manual'] {
+  color: var(--brand-ink);
+  background: var(--brand);
+  border-color: var(--brand);
+}
+.mode[data-mode='level'] {
+  color: var(--brand);
+  border-color: var(--brand);
+}
+
+.bars {
+  display: flex;
+  gap: 6px;
+}
+.barWell {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+}
+.barWell::before {
+  content: '';
+  width: 6px;
+  height: 34px;
+  border-radius: 3px;
+  background: var(--hair);
+  grid-area: 1 / 1;
+}
+.bar {
+  grid-area: 1 / 1;
+  align-self: end;
+  width: 6px;
+  height: 34px;
+  border-radius: 3px;
+  background: var(--brand);
+  transform-origin: 50% 100%;
+  transform: scaleY(0.5);
+}
+.barWell em {
+  font-style: normal;
+  font-family: var(--f-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+}
+
+.plate[data-failed] .leaders,
+.plate[data-failed] .hud {
+  display: none;
+}
+.plate[data-failed] .callout {
+  position: static;
+  display: block;
+  margin: 24px 24px 0;
+}
+
+.caption {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  margin-top: 12px;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+.figLabel {
+  flex: none;
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+@media (max-width: 960px) {
+  .plate {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 640px) {
+  .callout {
+    font-size: 0.5625rem;
+  }
+  .callout[data-side='left'] {
+    left: 14px;
+  }
+  .callout[data-side='right'] {
+    right: 14px;
+  }
+  .hud {
+    left: 14px;
+    right: 14px;
+    bottom: 12px;
+  }
+  .attitude {
+    gap: 12px;
+  }
+  .bars {
+    display: none;
+  }
+}
+
+/* Callouts wait for an airframe to point at. */
+.leaders,
+.callout {
+  transition: opacity 400ms var(--ease);
+}
+.plate:not([data-ready]) .leaders,
+.plate:not([data-ready]) .callout {
+  opacity: 0;
+}
+
+.credit {
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-decoration-color: var(--hair-strong);
+  text-underline-offset: 3px;
+  transition: color var(--fast) var(--ease), text-decoration-color var(--fast) var(--ease);
+}
+.credit:hover {
+  color: var(--brand);
+  text-decoration-color: var(--brand);
+}
