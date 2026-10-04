@@ -7,9 +7,10 @@
  * for the display go back with every frame.
  */
 import { createPreflight, type PreflightScene, type PreflightSize } from './preflight-scene'
+import { FLIGHT_SPEED } from './timing'
 
 type Msg =
-  | { type: 'init'; canvas: OffscreenCanvas; size: PreflightSize; armAbs: number }
+  | { type: 'init'; canvas: OffscreenCanvas; size: PreflightSize; armAbs: number; tint?: string }
   | { type: 'model'; bytes: ArrayBuffer | null }
   | { type: 'arm'; armAbs: number }
   | { type: 'size'; size: PreflightSize }
@@ -43,7 +44,7 @@ const nextFrame = (cb: () => void) =>
 
 function loop() {
   if (!running || !scene) return
-  const r = scene.frame((clock() - armAbs) / 1000)
+  const r = scene.frame(((clock() - armAbs) / 1000) * FLIGHT_SPEED)
   ctx.postMessage({ type: 'frame', r })
   nextFrame(loop)
 }
@@ -53,7 +54,7 @@ ctx.onmessage = (e: MessageEvent<Msg>) => {
   if (m.type === 'init') {
     armAbs = m.armAbs
     try {
-      scene = createPreflight(m.canvas, m.size, model)
+      scene = createPreflight(m.canvas, m.size, model, m.tint)
     } catch {
       ctx.postMessage({ type: 'fail' })
       return

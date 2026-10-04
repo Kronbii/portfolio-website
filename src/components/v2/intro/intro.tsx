@@ -65,18 +65,17 @@ function overlayHTML() {
 <div class="${s.name}" data-part="name">
   <div class="${s.line}" data-part="n1">${esc(NAME[0])}</div>
   <div class="${s.line}" data-part="n2">${esc(NAME[1])}<span data-part="dot">.</span></div>
-  <div class="${s.sub}" data-part="sub">${esc(i.descriptor)}</div>
 </div>`
 }
 
 const HTML = overlayHTML()
 
-function wanted() {
+function wanted(root: HTMLElement) {
   try {
     if (new URLSearchParams(window.location.search).has('intro')) return true
-    if (window.location.pathname.replace(/\/$/, '') !== INTRO_PATH) return false
+    if (window.location.pathname.replace(/\/$/, '') !== (root.dataset.introPath || INTRO_PATH)) return false
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false
-    return !new RegExp(`(?:^|; )${INTRO_COOKIE}=seen`).test(document.cookie)
+    return !new RegExp(`(?:^|; )${root.dataset.introCookie || INTRO_COOKIE}=seen`).test(document.cookie)
   } catch {
     return false
   }
@@ -84,7 +83,7 @@ function wanted() {
 
 // Start as soon as this module runs: the overlay is already in the HTML.
 if (typeof window !== 'undefined') {
-  const root = document.querySelector<HTMLElement>('[data-v2]')
+  const root = document.querySelector<HTMLElement>('[data-intro-root]')
   const el = document.querySelector<HTMLElement>('[data-intro-overlay]')
   if (root?.dataset.intro === 'on' && el) runPreflight(el, root)
 }
@@ -94,13 +93,13 @@ export function Intro() {
   const box = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const root = document.querySelector<HTMLElement>('[data-v2]')
+    const root = document.querySelector<HTMLElement>('[data-intro-root]')
     const el = box.current
     if (!root || !el) return
     let run = currentRun()
     if (!run) {
       const state = root.dataset.intro
-      if (!(state === 'on' || (state === undefined && wanted()))) {
+      if (!(state === 'on' || (state === undefined && wanted(root)))) {
         root.dataset.intro = 'off'
         setLive(false)
         return

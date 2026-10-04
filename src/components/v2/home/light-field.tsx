@@ -38,8 +38,10 @@ const wrapAngle = (a: number) => Math.atan2(Math.sin(a), Math.cos(a))
 /** Height of the readout strip at the foot of the panel, in CSS pixels. */
 const GUTTER = 44
 
-export function LightField() {
-  const copy = v2Home.lightField
+export type LightFieldCopy = typeof v2Home.lightField
+
+/** Defaults to the /v2 copy; another version passes its own (same shape, its own links). */
+export function LightField({ copy = v2Home.lightField }: { copy?: LightFieldCopy }) {
   const [preset, setPreset] = useState(copy.presets[0].id)
   const gains = useRef(copy.presets[0])
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -55,7 +57,7 @@ export function LightField() {
     if (!canvas) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return
-    const root = canvas.closest<HTMLElement>('[data-v2]') ?? document.documentElement
+    const root = canvas.closest<HTMLElement>('[data-v2], [data-v3]') ?? document.documentElement
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     let ink: Rgb = [251, 245, 234]
@@ -231,12 +233,14 @@ export function LightField() {
       if (!raf) frame(performance.now())
     }
     window.addEventListener('v2-theme', onTheme)
+    window.addEventListener('v3-theme', onTheme)
 
     return () => {
       cancelAnimationFrame(raf)
       ro.disconnect()
       io.disconnect()
       window.removeEventListener('v2-theme', onTheme)
+      window.removeEventListener('v3-theme', onTheme)
       canvas.removeEventListener('pointermove', toLocal)
       canvas.removeEventListener('pointerdown', toLocal)
       canvas.removeEventListener('pointerleave', onLeave)

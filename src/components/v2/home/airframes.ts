@@ -42,7 +42,7 @@ export const E58_URL = '/models/eachine-e58-web.glb'
  * its nodes and no named parts or animation. Its geometry was measured once
  * with the tilt undone; these are model units, nose along -z.
  */
-const E58_HUBS: [number, number, number][] = [
+export const E58_HUBS: [number, number, number][] = [
   [-0.055, 0.0141, -0.0391], // front left (front arms sit higher, Mavic-style)
   [0.0546, 0.0138, -0.039], // front right
   [0.0499, -0.0001, 0.0414], // rear right

@@ -5,7 +5,15 @@ export const INTRO_COOKIE = 'v2-intro'
 export const INTRO_MODEL = '/models/eachine-e58-web.glb'
 export const INTRO_PRELOAD = [INTRO_MODEL]
 
-/** Phase marks of the preflight, in seconds since the arm switch. Shared by the 3D layer and the overlay. */
+/**
+ * How fast the flight plays. The marks below are the choreography's own time,
+ * in seconds of flight; the clock runs this many times faster than real time,
+ * so one number tightens or loosens the whole flight, 3D and overlay together.
+ * (The CSS opening and the handoff glide are in real time.)
+ */
+export const FLIGHT_SPEED = 1.85
+
+/** Phase marks of the preflight, in seconds of flight since the motors spool. Shared by the 3D layer and the overlay. */
 export const PREFLIGHT = {
   armedOut: 0.62,
   pull: [0.36, 1.34] as const,
@@ -17,7 +25,8 @@ export const PREFLIGHT = {
   iris: [2.88, 3.08] as const,
   name: 3.08,
   /** the name glides onto the page heading while the stage crossfades away behind it */
-  handoff: 3.95,
-  handoffDur: 1.25,
+  handoff: 3.6,
+  /** real seconds */
+  handoffDur: 0.8,
 }
 

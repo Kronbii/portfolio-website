@@ -3,7 +3,7 @@ import { gsap } from 'gsap'
 import { v2Intro } from '@/content/v2/home'
 
 import type { FlightReadout, PreflightScene, PreflightSize } from './preflight-scene'
-import { INTRO_COOKIE, INTRO_MODEL, PREFLIGHT as PF } from './timing'
+import { FLIGHT_SPEED, INTRO_COOKIE, INTRO_MODEL, PREFLIGHT as PF } from './timing'
 
 /*
  * The preflight's driver. Plain DOM and GSAP over the server-rendered overlay,
@@ -18,7 +18,6 @@ import { INTRO_COOKIE, INTRO_MODEL, PREFLIGHT as PF } from './timing'
  * and removes it when this reports the end.
  */
 
-const GLYPHS = 'ABCDEFGHJKLMNPRSTUVXYZ0123456789#/<>*+='
 const SKIP_KEYS = new Set(['Escape', 'Enter', ' ', 'ArrowDown', 'PageDown', 'Tab'])
 
 /** The 3D layer, wherever it renders. */
@@ -59,7 +58,12 @@ export interface PreflightRun {
 let current: PreflightRun | null = null
 export const currentRun = () => current
 
-/** Drive the overlay `el` inside the v2 root. Idempotent: a second call returns the running one. */
+/**
+ * Drive the overlay `el` inside its host root. Idempotent: a second call returns
+ * the running one. The root names its own session cookie (data-intro-cookie) and
+ * the heading the name lands on (data-intro-name); the overlay's --i-brand tints
+ * the 3D scene, so each version flies in its own colours.
+ */
 export function runPreflight(el: HTMLElement, root: HTMLElement): PreflightRun {
   if (current) return current
   const ends: (() => void)[] = []
@@ -73,7 +77,7 @@ export function runPreflight(el: HTMLElement, root: HTMLElement): PreflightRun {
   current = run
 
   // a session cookie: shared across tabs, gone when the browser closes
-  document.cookie = `${INTRO_COOKIE}=seen; path=/; SameSite=Lax`
+  document.cookie = `${root.dataset.introCookie || INTRO_COOKIE}=seen; path=/; SameSite=Lax`
   root.dataset.intro = 'playing'
   if (!window.location.hash) window.scrollTo(0, 0)
 
@@ -90,7 +94,7 @@ export function runPreflight(el: HTMLElement, root: HTMLElement): PreflightRun {
   const nameBox = q('name')
   const lines = [q('n1'), q('n2')]
   const dot = q('dot')
-  const sub = q('sub')
+  const tint = getComputedStyle(el).getPropertyValue('--i-brand').trim() || undefined
 
   let layer: Layer | null = null
   let layerIn = false
@@ -99,7 +103,7 @@ export function runPreflight(el: HTMLElement, root: HTMLElement): PreflightRun {
   let hand: gsap.core.Timeline | null = null
   let ending = false
   // when the CSS arm switch flipped, on the document timeline (ms)
-  let armAt = now() + 450
+  let armAt = now() + 350
 
   const stopDrawing = () => gsap.ticker.remove(tick)
   const finish = () => {
@@ -141,7 +145,8 @@ export function runPreflight(el: HTMLElement, root: HTMLElement): PreflightRun {
   window.addEventListener('touchmove', skip, { passive: true })
   el.addEventListener('pointerdown', skip)
 
-  const elapsed = () => (now() - armAt) / 1000
+  // seconds of flight (the choreography's time), not real seconds
+  const elapsed = () => ((now() - armAt) / 1000) * FLIGHT_SPEED
   const sizeNow = (): PreflightSize => ({
     width: canvas.clientWidth || window.innerWidth,
     height: canvas.clientHeight || window.innerHeight,
@@ -174,7 +179,7 @@ export function runPreflight(el: HTMLElement, root: HTMLElement): PreflightRun {
     }
     w.onerror = () => settle[1](new Error('preflight worker'))
     const armAbs = () => performance.timeOrigin + armAt
-    w.postMessage({ type: 'init', canvas: off, size: sizeNow(), armAbs: armAbs() }, [off])
+    w.postMessage({ type: 'init', canvas: off, size: sizeNow(), armAbs: armAbs(), tint }, [off])
     void modelBytes.then((bytes) => w.postMessage({ type: 'model', bytes }, bytes ? [bytes] : []))
     return {
       ready,
@@ -192,7 +197,7 @@ export function runPreflight(el: HTMLElement, root: HTMLElement): PreflightRun {
     let scene: PreflightScene | null = null
     const ready = import('./preflight-scene').then((m) => {
       if (ended || ending) throw new Error('ended')
-      scene = m.createPreflight(canvas, sizeNow(), modelBytes)
+      scene = m.createPreflight(canvas, sizeNow(), modelBytes, tint)
       return scene.ready
     })
     return {
@@ -224,7 +229,7 @@ export function runPreflight(el: HTMLElement, root: HTMLElement): PreflightRun {
     const h = gsap.timeline({ onComplete: finish })
     hand = h
 
-    const h1 = document.getElementById('v2-name')
+    const h1 = document.getElementById(root.dataset.introName || 'v2-name')
     const targets = h1 ? Array.from(h1.children).filter((c): c is HTMLElement => c instanceof HTMLElement) : []
     const vh = window.innerHeight
     const onScreen =
@@ -288,32 +293,9 @@ export function runPreflight(el: HTMLElement, root: HTMLElement): PreflightRun {
     // the name drops over the FPV run
     t.fromTo(q('flash'), { opacity: 0.34 }, { opacity: 0, duration: 0.55, ease: 'power2.out', immediateRender: false }, PF.name)
     t.fromTo(q('glow'), { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.9, ease: 'expo.out' }, PF.name)
-    t.fromTo(lines[0], { opacity: 0, scale: 1.22 }, { opacity: 1, scale: 1, duration: 0.62, ease: 'expo.out' }, PF.name)
-    t.fromTo(lines[1], { opacity: 0, x: '14vw' }, { opacity: 1, x: 0, duration: 0.58, ease: 'expo.out' }, PF.name + 0.14)
-    t.fromTo(dot, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(3)' }, PF.name + 0.4)
-    const decode = { p: 0 }
-    let last = ''
-    const text = v2Intro.descriptor
-    t.fromTo(
-      decode,
-      { p: 0 },
-      {
-        p: 1,
-        duration: 0.5,
-        ease: 'none',
-        onUpdate: () => {
-          const f = Math.floor(decode.p * 24)
-          const s = text
-            .split('')
-            .map((c, i) => (c === ' ' || i / text.length < decode.p ? c : GLYPHS[(i * 7 + f * 13) % GLYPHS.length]))
-            .join('')
-          if (s !== last) sub.textContent = last = s
-        },
-      },
-      PF.name + 0.28,
-    )
-    t.fromTo(sub, { opacity: 0 }, { opacity: 1, duration: 0.01, ease: 'none' }, PF.name + 0.28)
-    t.to(sub, { opacity: 0, y: 8, duration: 0.32, ease: 'power2.in' }, PF.handoff - 0.2)
+    t.fromTo(lines[0], { opacity: 0, scale: 1.22 }, { opacity: 1, scale: 1, duration: 0.5, ease: 'expo.out' }, PF.name)
+    t.fromTo(lines[1], { opacity: 0, x: '14vw' }, { opacity: 1, x: 0, duration: 0.42, ease: 'expo.out' }, PF.name + 0.06)
+    t.fromTo(dot, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(3)' }, PF.name + 0.2)
 
     // the handoff, and the FPV run keeps flying underneath it
     t.call(handoff, [], PF.handoff)
@@ -331,7 +313,7 @@ export function runPreflight(el: HTMLElement, root: HTMLElement): PreflightRun {
    * the lens iris and the name.
    */
   const MAX_WAIT = 2.5
-  const LEAD = 0.25
+  const LEAD = 0.15
   let cssArm = armAt
   let flying = false
   armAt = cssArm + MAX_WAIT * 1000
@@ -354,7 +336,7 @@ export function runPreflight(el: HTMLElement, root: HTMLElement): PreflightRun {
   // can never drift from the 3D), the no-drone fallback, and the readouts
   function tick() {
     if (ended) return
-    if (!flying && now() >= cssArm + MAX_WAIT * 1000) launch(now() - 2.96 * 1000) // no drone: to the iris
+    if (!flying && now() >= cssArm + MAX_WAIT * 1000) launch(now() - (2.96 / FLIGHT_SPEED) * 1000) // no drone: to the iris
     const t = elapsed()
     // the FPV run after the name needs only the terrain, so a very late model joins there
     if (layerIn && !shown && t >= PF.name && t < PF.handoff - 0.4) show(0.3)

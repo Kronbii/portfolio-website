@@ -42,8 +42,10 @@ function FlipLink({ label, href }: { label: string; href: string }) {
   )
 }
 
-export function SignOff() {
-  const copy = v2Home.signOff
+export type SignOffCopy = typeof v2Home.signOff
+
+/** Defaults to the /v2 copy; another version passes its own. */
+export function SignOff({ copy = v2Home.signOff }: { copy?: SignOffCopy }) {
   const panel = useRef<HTMLDivElement>(null)
   const [front, setFront] = useState('#c9686a')
   const [hot, setHot] = useState(false)
@@ -55,11 +57,13 @@ export function SignOff() {
     const read = () => setFront(getComputedStyle(el).getPropertyValue('--brand').trim() || '#c9686a')
     read()
     window.addEventListener('v2-theme', read)
+    window.addEventListener('v3-theme', read)
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const io = new IntersectionObserver(([entry]) => setShow(entry.isIntersecting && !reduced), { rootMargin: '200px' })
     io.observe(el)
     return () => {
       window.removeEventListener('v2-theme', read)
+      window.removeEventListener('v3-theme', read)
       io.disconnect()
     }
   }, [])

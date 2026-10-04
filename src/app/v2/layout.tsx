@@ -54,6 +54,7 @@ export default function V2Layout({ children }: { children: React.ReactNode }) {
   return (
     <div
       data-v2=""
+      data-intro-root=""
       data-theme="dark"
       data-lenis-prevent=""
       className={`${sans.variable} ${serif.variable} ${mono.variable}`}

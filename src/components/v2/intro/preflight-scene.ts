@@ -45,14 +45,14 @@ const out3 = (k: number) => 1 - Math.pow(1 - k, 3)
 const in3 = (k: number) => k * k * k
 
 // Measured once from the E58 with the tilt undone; model units, nose along -z.
-const HUBS: [number, number, number][] = [
+export const HUBS: [number, number, number][] = [
   [-0.055, 0.0141, -0.0391],
   [0.0546, 0.0138, -0.039],
   [0.0499, -0.0001, 0.0414],
   [-0.0504, -0.0001, 0.0415],
 ]
 const LENS: [number, number, number] = [-0.0003, -0.0012, -0.0379]
-const PROP_R = 0.0262
+export const PROP_R = 0.0262
 
 const TERRAIN_VERT = /* glsl */ `
   uniform float uTime; uniform float uShift;
@@ -132,7 +132,7 @@ function blurTexture(): THREE.CanvasTexture<OffscreenCanvas | HTMLCanvasElement>
 }
 
 /** Lift the four propellers out of the merged body mesh, each re-centred on its hub. */
-function splitProps(geo: THREE.BufferGeometry) {
+export function splitProps(geo: THREE.BufferGeometry) {
   const pos = geo.attributes.position
   const index = geo.index ? Array.from(geo.index.array) : Array.from({ length: pos.count }, (_, i) => i)
   const keep: number[] = []
@@ -171,6 +171,8 @@ export function createPreflight(
   canvas: HTMLCanvasElement | OffscreenCanvas,
   size: PreflightSize,
   model?: Promise<ArrayBuffer | null>,
+  /** The host's brand colour: the rim light and the terrain lines. */
+  tint = '#c9686a',
 ): PreflightScene {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' })
   renderer.setPixelRatio(Math.min(size.dpr || 1, 1.75))
@@ -188,7 +190,7 @@ export function createPreflight(
   const key = new THREE.DirectionalLight(0xfff3e8, 2.4)
   key.position.set(3.5, 5, 4)
   scene.add(key)
-  const rim = new THREE.DirectionalLight(0xc9686a, 2.8)
+  const rim = new THREE.DirectionalLight(new THREE.Color(tint), 2.8)
   rim.position.set(-4, 1.5, -3.5)
   scene.add(rim)
 
@@ -198,7 +200,7 @@ export function createPreflight(
     uniforms: {
       uTime: { value: 0 },
       uShift: { value: 0 },
-      uColor: { value: new THREE.Color('#c9686a') },
+      uColor: { value: new THREE.Color(tint) },
       uOpacity: { value: 0 },
       uNear: { value: 1.5 },
       uGrid: { value: 0.1 },

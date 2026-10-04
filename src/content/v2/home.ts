@@ -254,7 +254,6 @@ export const v2Chrome = {
  * readouts are a simulation, labelled as such.
  */
 export const v2Intro = {
-  descriptor: 'Robotics & embedded-systems engineer',
   disarmed: 'Disarmed',
   armed: 'Armed',
   mode: 'Angle mode',

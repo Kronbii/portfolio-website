@@ -7,14 +7,16 @@
   --i-bg: #0e0b0b;
   --i-sunk: #0a0808;
   --i-ink: #fbf5ea;
-  --i-ink-2: rgba(251, 245, 234, 0.75);
-  --i-ink-3: rgba(251, 245, 234, 0.55);
+  --i-ink-2: rgba(var(--i-ink-rgb), 0.75);
+  --i-ink-3: rgba(var(--i-ink-rgb), 0.55);
   --i-brand: #c9686a;
   --i-brand-strong: #e08a8b;
+  --i-brand-rgb: 201, 104, 106;
+  --i-ink-rgb: 251, 245, 234;
   --i-edge: clamp(16px, 3vw, 56px);
   --boot: cubic-bezier(0.16, 1, 0.3, 1);
   /* the arm switch: the moment the driver's clock (and the whole flight) is set from */
-  --arm: 0.45s;
+  --arm: 0.35s;
   position: fixed;
   inset: 0;
   z-index: 1000;
@@ -26,9 +28,9 @@
   -webkit-user-select: none;
 }
 
-:global([data-v2][data-intro='on']) .intro,
-:global([data-v2][data-intro='playing']) .intro,
-:global([data-v2][data-intro='reveal']) .intro,
+:global([data-intro-root][data-intro='on']) .intro,
+:global([data-intro-root][data-intro='playing']) .intro,
+:global([data-intro-root][data-intro='reveal']) .intro,
 .intro[data-exiting] {
   display: block;
 }
@@ -38,7 +40,7 @@
 }
 
 /* if the script that drives it never arrives, get out of the way */
-:global([data-v2][data-intro='on']) .intro {
+:global([data-intro-root][data-intro='on']) .intro {
   animation: intro-failsafe 0.5s ease 6.5s forwards;
 }
 
@@ -60,7 +62,7 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 70% 55% at 50% 62%, rgba(201, 104, 106, 0.14), rgba(201, 104, 106, 0) 70%),
+    radial-gradient(ellipse 70% 55% at 50% 62%, rgba(var(--i-brand-rgb), 0.14), rgba(var(--i-brand-rgb), 0) 70%),
     var(--i-bg);
   animation: i-fade 0.45s ease-out both;
 }
@@ -135,7 +137,7 @@
   width: 84%;
   height: 40%;
   border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(201, 104, 106, 0.3), rgba(201, 104, 106, 0));
+  background: radial-gradient(closest-side, rgba(var(--i-brand-rgb), 0.3), rgba(var(--i-brand-rgb), 0));
   opacity: 0;
 }
 
@@ -159,7 +161,7 @@
   position: absolute;
   width: clamp(28px, 4vw, 60px);
   height: clamp(28px, 4vw, 60px);
-  border: 0 solid rgba(251, 245, 234, 0.7);
+  border: 0 solid rgba(var(--i-ink-rgb), 0.7);
 }
 
 .corner {
@@ -212,7 +214,7 @@
   width: 64px;
   height: 64px;
   margin: -32px 0 0 -32px;
-  border: 2px solid rgba(251, 245, 234, 0.7);
+  border: 2px solid rgba(var(--i-ink-rgb), 0.7);
   border-radius: 50%;
   animation: i-cross 0.42s var(--boot) 0.04s both;
 }
@@ -232,7 +234,7 @@
 .horizon i {
   width: 38%;
   height: 2px;
-  background: rgba(251, 245, 234, 0.7);
+  background: rgba(var(--i-ink-rgb), 0.7);
   transform-origin: 100% 50%;
   animation: i-grow 0.36s var(--boot) 0.08s both;
 }
@@ -245,7 +247,7 @@
   width: 2px;
   height: 12px;
   margin-top: -10px;
-  background: rgba(251, 245, 234, 0.7);
+  background: rgba(var(--i-ink-rgb), 0.7);
 }
 
 .mode {
@@ -271,7 +273,7 @@
   display: inline-block;
   padding: 8px 18px;
   border-radius: 999px;
-  border: 2px solid rgba(251, 245, 234, 0.6);
+  border: 2px solid rgba(var(--i-ink-rgb), 0.6);
   font-size: 14px;
   color: var(--i-ink);
 }
@@ -353,7 +355,7 @@
   position: relative;
   width: 14px;
   height: min(260px, 30vh);
-  border: 2px solid rgba(251, 245, 234, 0.6);
+  border: 2px solid rgba(var(--i-ink-rgb), 0.6);
   transform-origin: 50% 100%;
   animation: i-draw 0.36s var(--boot) 0.1s both;
 }
@@ -428,13 +430,13 @@
   opacity: 0;
   will-change: transform, opacity;
   animation:
-    i-slam 0.5s var(--boot) var(--arm) both,
-    i-condense 0.36s cubic-bezier(0.55, 0, 1, 0.45) calc(var(--arm) + 0.62s) forwards;
+    i-slam 0.45s var(--boot) var(--arm) both,
+    i-condense 0.32s cubic-bezier(0.55, 0, 1, 0.45) calc(var(--arm) + 0.52s) forwards;
 }
 
 .word.echo {
-  -webkit-text-stroke: clamp(1px, 0.15vw, 2px) rgba(251, 245, 234, 0.5);
-  animation: i-echo 0.7s ease-out calc(var(--arm) + 0.05s) forwards;
+  -webkit-text-stroke: clamp(1px, 0.15vw, 2px) rgba(var(--i-ink-rgb), 0.5);
+  animation: i-echo 0.6s ease-out calc(var(--arm) + 0.05s) forwards;
 }
 
 @keyframes i-slam {
@@ -482,8 +484,8 @@
 
 .cap {
   animation:
-    i-cap-in 0.45s var(--boot) calc(var(--arm) + 0.12s) both,
-    i-off 0.3s ease-in calc(var(--arm) + 1.3s) forwards;
+    i-cap-in 0.4s var(--boot) calc(var(--arm) + 0.1s) both,
+    i-off 0.25s ease-in calc(var(--arm) + 0.95s) forwards;
 }
 
 @keyframes i-cap-in {
@@ -608,16 +610,6 @@
   opacity: 0;
 }
 
-.sub {
-  margin-top: clamp(16px, 2.4vw, 40px);
-  font-family: var(--f-sans);
-  font-weight: 700;
-  font-size: clamp(17px, 2.2vw, 40px);
-  letter-spacing: -0.02em;
-  color: var(--i-ink);
-  white-space: nowrap;
-  opacity: 0;
-}
 
 .skip {
   animation: i-fade 0.3s ease-out 0.2s both;
@@ -648,7 +640,4 @@
     font-size: 11px;
   }
 
-  .sub {
-    white-space: normal;
-  }
 }
