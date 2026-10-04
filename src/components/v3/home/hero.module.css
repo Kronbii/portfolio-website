@@ -1,0 +1,243 @@
+.hero {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: calc(var(--nav-h) + clamp(20px, 4vh, 48px)) var(--gutter) 0;
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: center;
+}
+
+.text {
+  display: grid;
+  gap: clamp(18px, 2.4vh, 28px);
+  align-content: center;
+}
+
+/* the heading the intro's name glides onto; keep in step with v3.css */
+.name {
+  font-size: clamp(3.25rem, 8vw, 7.5rem);
+  font-weight: 800;
+  font-stretch: var(--wide);
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+}
+.name > span {
+  display: block;
+  white-space: nowrap;
+}
+.dot {
+  color: var(--brand);
+}
+
+.claim {
+  max-width: 22ch;
+  font-size: clamp(1.45rem, 2.5vw, 2.25rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.now {
+  display: inline-grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 14px;
+  align-items: baseline;
+  max-width: 52ch;
+  padding: 14px 18px;
+  border: 1px solid var(--hair);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  transition: border-color var(--fast) var(--ease);
+}
+.now:hover {
+  border-color: var(--hair-strong);
+}
+.nowLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--brand);
+  font-family: var(--f-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--brand);
+  box-shadow: 0 0 0 0 var(--brand-wash);
+  animation: pulse 2.4s ease-out infinite;
+}
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--brand-wash);
+  }
+  70% {
+    box-shadow: 0 0 0 9px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+.nowText {
+  color: var(--ink);
+  font-size: 15.5px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 12px;
+}
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 20px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 650;
+  transition:
+    background var(--fast) var(--ease),
+    border-color var(--fast) var(--ease);
+}
+.primary {
+  background: var(--brand);
+  color: var(--brand-ink);
+}
+.primary:hover {
+  background: var(--brand-strong);
+}
+.secondary {
+  border: 1px solid var(--hair-strong);
+}
+.secondary:hover {
+  border-color: var(--ink-3);
+}
+.where {
+  margin-left: 6px;
+  color: var(--ink-3);
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.feed {
+  min-width: 0;
+}
+
+/* a hint for the lens's focus pull; mouse only */
+.hold {
+  flex-basis: 100%;
+  color: var(--ink-3);
+  font-family: var(--f-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+}
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .hold {
+    display: none;
+  }
+}
+
+/* ---------- the four facts, under everything ---------- */
+.creds {
+  margin-top: clamp(28px, 5vh, 56px);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--hair);
+}
+.creds > li + li {
+  border-left: 1px solid var(--hair);
+}
+.cred {
+  display: grid;
+  gap: 4px;
+  height: 100%;
+  padding: 22px clamp(14px, 1.6vw, 24px) 26px;
+  transition: background var(--fast) var(--ease);
+}
+.creds > li:first-child .cred {
+  padding-left: 0;
+}
+.cred:hover {
+  background: var(--brand-tint);
+}
+.credBig {
+  font-size: clamp(1.9rem, 3.2vw, 2.9rem);
+  font-weight: 800;
+  font-stretch: var(--wide);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--brand);
+}
+.credLabel {
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.3;
+}
+.credNote {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--ink-3);
+  font-size: 13.5px;
+}
+
+@media (max-width: 1020px) {
+  .hero {
+    min-height: 0;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .feed {
+    max-width: 560px;
+  }
+  .creds {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .creds > li:nth-child(3) {
+    border-left: 0;
+  }
+  .creds > li:nth-child(n + 3) {
+    border-top: 1px solid var(--hair);
+  }
+  .creds > li:nth-child(3) .cred {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .cred {
+    padding: 18px 12px 20px;
+  }
+  .creds > li:nth-child(odd) .cred {
+    padding-left: 0;
+  }
+  .credLabel {
+    font-size: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse {
+    animation: none;
+  }
+}

@@ -1,0 +1,114 @@
+.section {
+  padding: clamp(48px, 8vw, 104px) 0;
+}
+.wrap {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+.head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  gap: 16px 40px;
+  align-items: end;
+  margin-bottom: clamp(20px, 3vw, 32px);
+}
+.h2 {
+  font-size: clamp(2.2rem, 5vw, 4.5rem);
+  font-weight: 800;
+  font-stretch: var(--wide);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+}
+.lede {
+  max-width: 44ch;
+  color: var(--ink-2);
+  font-size: 17px;
+}
+.all {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 16px;
+  border: 1px solid var(--hair-strong);
+  border-radius: 10px;
+  font-size: 14.5px;
+  font-weight: 650;
+  white-space: nowrap;
+  transition: border-color var(--fast) var(--ease);
+}
+.all:hover {
+  border-color: var(--brand);
+}
+
+.list {
+  border-top: 1px solid var(--hair);
+}
+.note {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: start;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--hair);
+}
+.no {
+  color: var(--ink-3);
+  font-family: var(--f-mono);
+  font-size: 13px;
+  padding-top: 6px;
+}
+.body {
+  display: grid;
+  gap: 6px;
+}
+.title {
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  transition: color var(--fast) var(--ease);
+}
+.note:hover .title {
+  color: var(--brand);
+}
+.dek {
+  max-width: 70ch;
+  color: var(--ink-2);
+  font-size: 15.5px;
+}
+.about {
+  color: var(--ink-3);
+  font-family: var(--f-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.go {
+  margin-top: 4px;
+  color: var(--ink-3);
+  transition:
+    color var(--fast) var(--ease),
+    transform var(--med) var(--ease-out);
+}
+.note:hover .go {
+  color: var(--brand);
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 860px) {
+  .head {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .all {
+    justify-self: start;
+  }
+  .note {
+    grid-template-columns: 40px minmax(0, 1fr);
+  }
+  .go {
+    display: none;
+  }
+}

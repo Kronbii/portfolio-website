@@ -1,0 +1,128 @@
+.layer {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  pointer-events: none;
+}
+
+.box,
+.dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 160ms ease;
+  will-change: transform;
+}
+.box[data-show='on'],
+.dot[data-show='on'] {
+  opacity: 1;
+}
+
+.box {
+  width: 22px;
+  height: 22px;
+  color: var(--ink);
+}
+.box[data-lock='on'] {
+  color: var(--brand);
+}
+/* the brackets are seen through the same glass: a hairline fringe either side */
+.box .c {
+  filter: drop-shadow(0.75px 0 0 color-mix(in srgb, var(--ca-a) 70%, transparent))
+    drop-shadow(-0.75px 0 0 color-mix(in srgb, var(--ca-b) 70%, transparent));
+}
+
+/* four corner brackets; their arms grow a little when locked */
+.c {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border: 0 solid currentColor;
+  transition:
+    width 220ms var(--ease-out),
+    height 220ms var(--ease-out);
+}
+.box[data-lock='on'] .c {
+  width: 12px;
+  height: 12px;
+}
+.c[data-c='tl'] {
+  top: 0;
+  left: 0;
+  border-top-width: 1.5px;
+  border-left-width: 1.5px;
+}
+.c[data-c='tr'] {
+  top: 0;
+  right: 0;
+  border-top-width: 1.5px;
+  border-right-width: 1.5px;
+}
+.c[data-c='bl'] {
+  bottom: 0;
+  left: 0;
+  border-bottom-width: 1.5px;
+  border-left-width: 1.5px;
+}
+.c[data-c='br'] {
+  bottom: 0;
+  right: 0;
+  border-bottom-width: 1.5px;
+  border-right-width: 1.5px;
+}
+
+/* the class tag, above the top-left bracket, as a detector prints it */
+.tag {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 4px);
+  padding: 2px 6px 3px;
+  border-radius: 3px;
+  background: var(--brand);
+  color: var(--brand-ink);
+  font-family: var(--f-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(3px);
+  transition:
+    opacity 160ms ease,
+    transform 220ms var(--ease-out);
+}
+.box[data-lock='on'] .tag {
+  opacity: 1;
+  transform: none;
+}
+
+/* exactly on the pointer, never lagged */
+.dot {
+  width: 0;
+  height: 0;
+}
+.dot::before {
+  content: '';
+  position: absolute;
+  left: -2.5px;
+  top: -2.5px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--brand);
+  /* the dispersion: the two fringe colours, pulled apart along the motion */
+  box-shadow:
+    0 0 0 1.5px var(--bg),
+    calc(var(--vx, 0) * 1px) calc(var(--vy, 0) * 1px) 0 0.5px color-mix(in srgb, var(--ca-a) 85%, transparent),
+    calc(var(--vx, 0) * -1px) calc(var(--vy, 0) * -1px) 0 0.5px color-mix(in srgb, var(--ca-b) 85%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c,
+  .tag {
+    transition: none;
+  }
+}
