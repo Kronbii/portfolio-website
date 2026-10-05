@@ -4,7 +4,7 @@ import { siteConfig } from '@/lib/site'
 import { Mark } from './chrome'
 import styles from './shell.module.css'
 
-export function Footer() {
+export function Footer({ note = v3Chrome.footer.note }: { note?: string }) {
   const f = v3Chrome.footer
   return (
     <footer className={styles.footer}>
@@ -14,7 +14,7 @@ export function Footer() {
             <Mark />
             {siteConfig.name}
           </div>
-          <p className={styles.footNote}>{f.note}</p>
+          <p className={styles.footNote}>{note}</p>
         </div>
         <ul className={styles.footLinks} aria-label="Profiles">
           {v3Chrome.profiles.map((p) => (

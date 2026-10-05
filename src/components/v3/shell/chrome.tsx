@@ -40,7 +40,14 @@ export function Mark({ className }: { className?: string }) {
   )
 }
 
-export function Chrome() {
+interface ChromeProps {
+  /** The version's home, e.g. /v3. */
+  base?: string
+  nav?: readonly { label: string; href: string }[]
+  preview?: string
+}
+
+export function Chrome({ base = '/v3', nav = v3Nav, preview = v3Chrome.preview }: ChromeProps) {
   const pathname = usePathname()
   const [theme, setTheme] = useState<Theme>('dark')
   const [open, setOpen] = useState(false)
@@ -96,15 +103,15 @@ export function Chrome() {
       </a>
       <header className={styles.bar} data-scrolled={scrolled || open || undefined}>
         <div className={styles.barInner}>
-          <Link href="/v3" className={styles.brand} aria-label={`${v3Chrome.brand}, home`} data-lock="Home">
+          <Link href={base} className={styles.brand} aria-label={`${v3Chrome.brand}, home`} data-lock="Home">
             <Mark />
             <span className={styles.brandName}>{v3Chrome.brand}</span>
-            <span className={styles.brandTag}>{v3Chrome.preview}</span>
+            <span className={styles.brandTag}>{preview}</span>
           </Link>
 
           <nav className={styles.nav} aria-label="Primary">
-            {v3Nav.map((item) => {
-              const active = item.href === '/v3/projects' && pathname.startsWith('/v3/projects')
+            {nav.map((item) => {
+              const active = item.href === `${base}/projects` && pathname.startsWith(`${base}/projects`)
               return (
                 <Link
                   key={item.href}
@@ -123,7 +130,7 @@ export function Chrome() {
             <button type="button" className={styles.iconButton} onClick={toggle} aria-label={themeLabel} title={themeLabel}>
               {theme === 'dark' ? <Sun size={17} strokeWidth={1.75} /> : <Moon size={17} strokeWidth={1.75} />}
             </button>
-            <Link href="/v3#contact" className={styles.cta} data-lock="Contact">
+            <Link href={`${base}#contact`} className={styles.cta} data-lock="Contact">
               {v3Chrome.contact}
             </Link>
             <button
@@ -140,12 +147,12 @@ export function Chrome() {
         </div>
 
         <nav id="v3-menu" className={styles.sheet} data-open={open || undefined} aria-label="Menu" hidden={!open}>
-          {v3Nav.map((item) => (
+          {nav.map((item) => (
             <Link key={item.href} href={item.href} className={styles.sheetLink} onClick={() => setOpen(false)}>
               {item.label}
             </Link>
           ))}
-          <Link href="/v3#contact" className={styles.sheetLink} onClick={() => setOpen(false)}>
+          <Link href={`${base}#contact`} className={styles.sheetLink} onClick={() => setOpen(false)}>
             {v3Chrome.contact}
           </Link>
         </nav>

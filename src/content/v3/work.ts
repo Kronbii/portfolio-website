@@ -220,6 +220,8 @@ export const workBySlug = (slug: string): WorkItem | undefined => {
 }
 
 export const V3 = '/v3'
-export const workHref = (slug: string) => `${V3}/projects/${slug}`
+export const workHref = (slug: string, base: string = V3) => `${base}/projects/${slug}`
+/** Moves a /v3 link into another version (e.g. /v4), leaving every other link alone. */
+export const rebase = (href: string, base: string) => href.replace(/^\/v3(?=[/#?]|$)/, base)
 /** Writing stays on the live record until /v3 has its own reader. */
 export const noteHref = (slug: string) => `/writing/${slug}`

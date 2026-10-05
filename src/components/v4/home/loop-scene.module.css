@@ -1,0 +1,249 @@
+.section {
+  position: relative;
+  padding-top: clamp(64px, 10vw, 128px);
+}
+.head {
+  margin-bottom: -24px;
+}
+.pin {
+  min-height: 100svh;
+  padding: calc(var(--nav-h) + 16px) 0 24px;
+  display: grid;
+  align-content: center;
+  background: var(--bg);
+}
+.wrap {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  width: 100%;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+}
+
+/* ---------- the four steps ---------- */
+.steps {
+  display: grid;
+  gap: 4px;
+}
+.step {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: var(--r-card);
+  border: 1px solid transparent;
+  opacity: 0.38;
+  transition:
+    opacity var(--med) var(--ease),
+    background var(--med) var(--ease),
+    border-color var(--med) var(--ease);
+}
+.step[data-on='past'] {
+  opacity: 0.6;
+}
+.step[data-on='on'] {
+  opacity: 1;
+  background: var(--surface);
+  border-color: var(--hair);
+}
+.stepNo {
+  padding-top: 4px;
+  color: var(--brand);
+  font-family: var(--f-mono);
+  font-size: 12px;
+  font-weight: 600;
+}
+.stepBody {
+  display: grid;
+  gap: 4px;
+}
+.stepTitle {
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  font-weight: 800;
+  font-stretch: var(--wide);
+  letter-spacing: -0.02em;
+}
+.stepText {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+/* the links only take room on the step that is playing */
+.chips {
+  display: none;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  margin-top: 6px;
+}
+.step[data-on='on'] .chips {
+  display: flex;
+}
+.chipsLabel {
+  color: var(--ink-3);
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border: 1px solid var(--hair-strong);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.chip:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
+/* ---------- the stage: always a camera's dark picture ---------- */
+.stage {
+  position: relative;
+  border-radius: var(--r-tile);
+  overflow: hidden;
+  color: var(--media-ink);
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 30%, color-mix(in srgb, var(--t2) 34%, transparent), transparent 70%),
+    linear-gradient(180deg, color-mix(in srgb, var(--t1) 30%, var(--t0)), var(--t0));
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--t5) 18%, transparent),
+    var(--shadow);
+}
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  will-change: transform;
+}
+.svg :is(path, rect, circle) {
+  vector-effect: non-scaling-stroke;
+}
+
+.cell {
+  fill: var(--signal);
+  fill-opacity: 0;
+  stroke: color-mix(in srgb, var(--media-ink) 7%, transparent);
+  stroke-width: 1;
+}
+.num {
+  fill: color-mix(in srgb, var(--media-ink) 85%, transparent);
+  font-family: var(--f-mono);
+  font-size: 13px;
+  opacity: 0;
+}
+.ink,
+.dim,
+.box,
+.plan,
+.needle,
+.frame,
+.lane {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ink {
+  stroke: color-mix(in srgb, var(--media-ink) 80%, transparent);
+  stroke-width: 2;
+}
+.dim {
+  stroke: color-mix(in srgb, var(--media-ink) 28%, transparent);
+  stroke-width: 1.5;
+}
+.lane {
+  stroke: color-mix(in srgb, var(--media-ink) 55%, transparent);
+  stroke-width: 3;
+  stroke-dasharray: 14 18;
+  opacity: 0;
+}
+.box {
+  stroke: var(--signal);
+  stroke-width: 1.5;
+}
+.tagBg {
+  fill: var(--signal);
+}
+.tag {
+  fill: var(--signal-ink);
+  font-family: var(--f-mono);
+  font-size: 10px;
+  font-weight: 600;
+}
+.plan {
+  stroke: var(--ca-b);
+  stroke-width: 3;
+  stroke-dasharray: 2 9;
+}
+.arrow {
+  fill: var(--ca-b);
+}
+.label {
+  fill: var(--ca-b);
+  font-family: var(--f-mono);
+  font-size: 12px;
+}
+.needle {
+  stroke: var(--signal);
+  stroke-width: 3;
+}
+.hub {
+  fill: var(--signal);
+}
+.frame {
+  stroke: color-mix(in srgb, var(--media-ink) 50%, transparent);
+  stroke-width: 1.5;
+}
+
+/* the step track under the picture */
+.progress {
+  position: absolute;
+  left: 16px;
+  bottom: 14px;
+  display: flex;
+  gap: 6px;
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.progress span {
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--media-ink) 28%, transparent);
+  color: color-mix(in srgb, var(--media-ink) 55%, transparent);
+  transition:
+    background var(--med) var(--ease),
+    color var(--med) var(--ease);
+}
+.progress span[data-on='on'] {
+  background: var(--signal);
+  border-color: var(--signal);
+  color: var(--signal-ink);
+}
+
+@media (max-width: 1020px) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+  .stage {
+    order: -1;
+  }
+  .step:not([data-on='on']) .stepText {
+    display: none;
+  }
+}
+@media (max-width: 640px) {
+  .progress {
+    display: none;
+  }
+}
