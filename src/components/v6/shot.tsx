@@ -1,7 +1,15 @@
 'use client'
 
 import { gsap } from 'gsap'
-import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from 'react'
 
 import { B, BAR, clamp, kick, timecode, type Impact } from './armed'
 
@@ -41,6 +49,23 @@ export interface ShotProps {
   /** Shown on the replay control. */
   replay?: string
 }
+
+/**
+ * How a host plays its shots. The reel's own pages use the defaults; a calmer
+ * host (Vneo) slows the tempo, drops the shake, flash, and inversion, and
+ * keeps only the chromatic ghost, split green and magenta.
+ */
+export interface ShotMode {
+  calm: boolean
+  /** Timeline speed: 0.75 plays the 128 BPM cut at 96 BPM. */
+  speed: number
+  /** Called when a shot reaches its hold. */
+  onDone?: (scene: string) => void
+}
+export const ShotModeContext = createContext<ShotMode>({
+  calm: false,
+  speed: 1,
+})
 
 export interface ShotClock {
   /** Local time of the shot, in seconds: -1 before it starts; past the hold it keeps counting (but not under reduced motion). */
@@ -85,6 +110,9 @@ export function Shot({
     playing: () => !!tl.current?.isActive(),
   }).current
   const nBeats = Math.round(hold / B)
+  const mode = useContext(ShotModeContext)
+  const modeRef = useRef(mode)
+  modeRef.current = mode
 
   // the frame: kicks, flash, ghost, invert, the readouts; a pure function of the timeline's time
   const paint = useCallback(
@@ -92,7 +120,15 @@ export function Shot({
       const k = live
         ? kick(impacts, t)
         : { x: 0, y: 0, r: 0, s: 0, fl: 0, gh: 0, inv: 0 }
-      if (rig.current) {
+      const calm = modeRef.current.calm
+      if (rig.current && calm) {
+        // calm: no kick, only the aberration, green out and magenta in
+        const g = clamp(k.gh + k.fl * 0.5)
+        rig.current.style.filter =
+          g > 0.02
+            ? `drop-shadow(${(-9 * g).toFixed(1)}px 0 0 rgba(224, 143, 208, ${(0.7 * g).toFixed(3)})) drop-shadow(${(9 * g).toFixed(1)}px 0 0 rgba(166, 230, 143, ${(0.7 * g).toFixed(3)}))`
+            : ''
+      } else if (rig.current) {
         rig.current.style.transform =
           k.s || k.x || k.y
             ? `translate(${k.x.toFixed(2)}px, ${k.y.toFixed(2)}px) rotate(${k.r.toFixed(3)}deg) scale(${(1 + k.s).toFixed(4)})`
@@ -103,9 +139,9 @@ export function Shot({
           rig.current.style.filter = `drop-shadow(${(-26 * g).toFixed(1)}px ${(6 * g).toFixed(1)}px 0 rgba(201, 104, 106, ${(0.6 * g).toFixed(3)}))`
         } else rig.current.style.filter = ''
       }
-      if (flash.current)
+      if (flash.current && !calm)
         flash.current.style.opacity = clamp(k.fl * 0.55).toFixed(3)
-      if (invert.current) invert.current.style.opacity = String(k.inv)
+      if (invert.current && !calm) invert.current.style.opacity = String(k.inv)
       if (tc.current) tc.current.textContent = timecode(Math.max(0, t))
       if (ticks.current) {
         const nb = Math.min(nBeats - 1, Math.floor(t / B + 1e-6))
@@ -125,6 +161,7 @@ export function Shot({
     let undo: void | (() => void)
     const ctx = gsap.context(() => {
       const t = gsap.timeline({ paused: true })
+      t.timeScale(modeRef.current.speed)
       undo = build(root, t)
       // hold on the last frame: the reel's exits are cut, the shot stays
       t.set({}, {}, hold)
@@ -133,6 +170,7 @@ export function Shot({
         if (!reduce) doneAt.current = performance.now()
         paint(t.time(), false)
         setState('held')
+        modeRef.current.onDone?.(scene)
       })
       tl.current = t
     }, root)
@@ -150,7 +188,7 @@ export function Shot({
       if (typeof undo === 'function') undo()
       tl.current = null
     }
-  }, [build, hold, paint])
+  }, [build, hold, paint, scene])
 
   const play = useCallback(() => {
     const t = tl.current

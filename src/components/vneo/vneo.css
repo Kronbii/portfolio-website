@@ -1,0 +1,831 @@
+/*
+ * Vneo: v7's Sage system (v7.css) is the base; this sheet adds what the
+ * other versions bring, in the same colour and type: the reel's scenes
+ * (v6), the tracker field and sign-off (v2), the lock-on cursor (v3), the
+ * chapter rail (v4), and the flown path (v5 and v3).
+ */
+
+/* ---------- shared section heads ---------- */
+[data-vneo] :is(.vn-tracker, .vn-path, .vn-sec) h2 {
+  margin-top: 18px;
+  font-weight: 600;
+  font-size: clamp(2rem, 3.6vw, 3.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+[data-vneo] .vn-sec {
+  padding: clamp(80px, 14vh, 140px) var(--gutter);
+}
+[data-vneo] .vn-sec-lede {
+  margin-top: 16px;
+  max-width: 54ch;
+  color: var(--ink2);
+}
+
+/* ---------- under the hood: the reel's scenes, in Sage ---------- */
+[data-vneo] .vn-reel {
+  --accent: var(--sage);
+  --accent-rgb: var(--sage-rgb);
+  --accent2: var(--sage2);
+  --accent2-rgb: 208, 230, 196;
+  --paper: var(--ink);
+  --paper-rgb: var(--ink-rgb);
+  --paper-75: rgba(var(--ink-rgb), 0.75);
+  --paper-60: rgba(var(--ink-rgb), 0.6);
+  --paper-52: rgba(var(--ink-rgb), 0.52);
+  --paper-40: rgba(var(--ink-rgb), 0.4);
+  --paper-24: rgba(var(--ink-rgb), 0.24);
+  --paper-12: rgba(var(--ink-rgb), 0.12);
+  --ground: #121614;
+  --ground-rgb: 18, 22, 20;
+  margin-top: clamp(28px, 5vh, 48px);
+  max-width: 1320px;
+}
+[data-vneo] .vn-reel-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+[data-vneo] .vn-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+[data-vneo] .vn-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px 8px 10px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--hair);
+  color: var(--ink2);
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
+}
+[data-vneo] .vn-tab-n {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--raised);
+  font-size: 0.8rem;
+  color: var(--ink3);
+}
+[data-vneo] .vn-tab:hover {
+  color: var(--ink);
+}
+[data-vneo] .vn-tab[aria-selected='true'] {
+  background: rgba(var(--sage-rgb), 0.14);
+  box-shadow: inset 0 0 0 1px rgba(var(--sage-rgb), 0.55);
+  color: var(--sage);
+}
+[data-vneo] .vn-tab[aria-selected='true'] .vn-tab-n {
+  background: var(--sage);
+  color: var(--sage-ink);
+}
+[data-vneo] .vn-reel-auto {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--ink3);
+  cursor: pointer;
+}
+[data-vneo] .vn-reel-auto:hover {
+  color: var(--sage);
+}
+[data-vneo] .vn-reel-auto svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+[data-vneo] .vn-reel-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
+  gap: clamp(20px, 3vw, 44px);
+  align-items: end;
+}
+[data-vneo] .vn-reel-cap h3 {
+  font-weight: 600;
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+[data-vneo] .vn-reel-cap p {
+  margin: 12px 0 18px;
+  color: var(--ink2);
+}
+[data-vneo] .vn-reel-cap {
+  animation: vn-cap 0.9s var(--ease) both;
+}
+@keyframes vn-cap {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+    text-shadow:
+      -4px 0 0 rgba(var(--fr-m), 0.6),
+      4px 0 0 rgba(var(--fr-g), 0.6);
+  }
+}
+@media (max-width: 900px) {
+  [data-vneo] .vn-reel-panel {
+    grid-template-columns: 1fr;
+  }
+  [data-vneo] .vn-reel-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* the reel's frame, calm: no timecode, no flash, the scene's own numbering hidden */
+[data-vneo] .vn-reel .v6-shot {
+  position: relative;
+  width: 100%;
+}
+[data-vneo] .vn-reel .v6-frame {
+  position: relative;
+  container-type: inline-size;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 28px;
+  background: var(--ground);
+  box-shadow: 0 0 0 1px var(--hair);
+  isolation: isolate;
+}
+[data-vneo] .vn-reel .v6-stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1920px;
+  height: 1080px;
+  transform-origin: 0 0;
+  transform: scale(tan(atan2(100cqw, 1920px)));
+}
+[data-vneo] .vn-reel .v6-shot[data-armed][data-state='idle'] .v6-scene {
+  visibility: hidden;
+}
+[data-vneo] .vn-reel .v6-rig {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+}
+[data-vneo] .vn-reel .v6-gl {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+[data-vneo] .vn-reel .v6-canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1920px;
+  height: 1080px;
+  display: block;
+}
+[data-vneo]
+  .vn-reel
+  :is(.v6-flash, .v6-invert, .v6-hud, .v6-replay, .v6-vignette) {
+  display: none;
+}
+[data-vneo] .vn-reel :is(.s04-no, .s05-no, .s06-no, .s07-no, .s10-no, .s11-no) {
+  display: none;
+}
+@media (max-width: 720px) {
+  [data-vneo] .vn-reel .v6-shot[data-crop] .v6-frame {
+    aspect-ratio: var(--crop-ar);
+  }
+  [data-vneo] .vn-reel .v6-shot[data-crop] .v6-stage {
+    transform: translate(
+        calc(var(--cx) * -1 * tan(atan2(100cqw, var(--cw)))),
+        calc(var(--cy) * -1 * tan(atan2(100cqw, var(--cw))))
+      )
+      scale(tan(atan2(100cqw, var(--cw))));
+  }
+}
+/* the scenes' own type, in Vneo's faces */
+[data-vneo] .vn-reel .v6-scene {
+  position: absolute;
+  inset: 0;
+  width: 1920px;
+  height: 1080px;
+  color: var(--paper);
+  font-family: var(--f-display);
+  font-weight: 500;
+}
+[data-vneo] .vn-reel .v6-scene .m {
+  position: absolute;
+  font-family: var(--f-mono);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+[data-vneo] .vn-reel .v6-scene .m b {
+  color: var(--accent);
+  font-weight: 500;
+}
+[data-vneo] .vn-reel .v6-scene .fig {
+  position: absolute;
+  font-family: var(--f-display);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--paper);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+[data-vneo] .vn-reel .v6-scene .fig small {
+  font-size: 0.4em;
+  color: var(--paper-60);
+  margin-left: 10px;
+  letter-spacing: 0;
+}
+[data-vneo] .vn-reel .v6-scene .s11-count small {
+  margin-left: 0;
+}
+[data-vneo] .vn-reel .v6-scene em {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+  font-size: 1.08em;
+  letter-spacing: -0.01em;
+}
+[data-vneo] .vn-reel .v6-scene .ln {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+[data-vneo] .vn-reel .v6-scene .w {
+  display: inline-block;
+}
+[data-vneo] .vn-reel .v6-scene img {
+  display: block;
+  max-width: none;
+}
+[data-vneo]
+  .vn-reel
+  .v6-scene
+  :is(.s04-title, .s06-title, .s10-title, .s11-title, .s07-title, .s05-title) {
+  font-weight: 600;
+}
+
+/* ---------- a small experiment: the tracker field ---------- */
+[data-vneo] .vn-tracker {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(32px, 6vw, 110px);
+  align-items: center;
+  padding: clamp(80px, 14vh, 140px) var(--gutter);
+}
+[data-vneo] .vn-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+[data-vneo] .vn-presets button {
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--hair);
+  color: var(--ink2);
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+[data-vneo] .vn-presets button[aria-pressed='true'] {
+  background: var(--sage);
+  color: var(--sage-ink);
+  box-shadow: none;
+}
+[data-vneo] .vn-readouts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 22px;
+  max-width: 460px;
+}
+[data-vneo] .vn-readouts div {
+  padding-top: 12px;
+  border-top: 1px solid var(--hair);
+}
+[data-vneo] .vn-readouts dt {
+  color: var(--ink3);
+  font-size: 0.85rem;
+}
+[data-vneo] .vn-readouts dd {
+  margin-top: 4px;
+  font-family: var(--f-mono);
+  font-size: 1.05rem;
+  font-variant-numeric: tabular-nums;
+}
+[data-vneo] .vn-tracker-plate {
+  position: relative;
+  margin: 0;
+  border-radius: 32px;
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: 0 0 0 1px var(--hair);
+}
+[data-vneo] .vn-tracker-plate canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 5 / 4;
+  touch-action: pan-y;
+}
+[data-vneo] .vn-tracker-plate figcaption {
+  position: absolute;
+  left: 18px;
+  bottom: 14px;
+  color: var(--ink3);
+  font-family: var(--f-mono);
+  font-size: 0.75rem;
+}
+@media (max-width: 900px) {
+  [data-vneo] .vn-tracker {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- the path, flown ---------- */
+[data-vneo] .vn-path {
+  padding: clamp(80px, 14vh, 140px) var(--gutter);
+}
+[data-vneo] .vn-route {
+  position: relative;
+  margin-top: clamp(32px, 6vh, 64px);
+  max-width: 900px;
+  padding-left: 72px;
+}
+[data-vneo] .vn-route ol {
+  position: relative;
+  --flown: 0px;
+}
+/* the route, and the part already flown */
+[data-vneo] .vn-route ol::before,
+[data-vneo] .vn-route ol::after {
+  content: '';
+  position: absolute;
+  left: -48px;
+  top: 0;
+  width: 2px;
+  border-radius: 1px;
+}
+[data-vneo] .vn-route ol::before {
+  bottom: 0;
+  background: repeating-linear-gradient(
+    var(--hair2) 0 6px,
+    transparent 6px 12px
+  );
+}
+[data-vneo] .vn-route ol::after {
+  height: var(--flown);
+  background: var(--sage);
+  box-shadow:
+    -2px 0 0 rgba(var(--fr-m), 0.55),
+    2px 0 0 rgba(var(--fr-g), 0.55);
+}
+[data-vneo] .vn-route li {
+  position: relative;
+  padding: 0 0 clamp(28px, 5vh, 44px);
+}
+[data-vneo] .vn-route li::before {
+  content: '';
+  position: absolute;
+  left: -55px;
+  top: 6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--bg);
+  box-shadow: inset 0 0 0 2px var(--hair2);
+  transition:
+    background 0.4s,
+    box-shadow 0.4s;
+}
+[data-vneo] .vn-route li[data-lit]::before {
+  background: var(--sage);
+  box-shadow:
+    0 0 0 4px rgba(var(--sage-rgb), 0.18),
+    -2px 0 0 rgba(var(--fr-m), 0.6),
+    2px 0 0 rgba(var(--fr-g), 0.6);
+}
+[data-vneo] .vn-route a {
+  display: block;
+}
+[data-vneo] .vn-wp {
+  display: block;
+  font-family: var(--f-mono);
+  font-size: 0.8rem;
+  color: var(--ink3);
+  transition: color 0.4s;
+}
+[data-vneo] .vn-route li[data-lit] .vn-wp {
+  color: var(--sage);
+}
+[data-vneo] .vn-route b {
+  display: block;
+  margin-top: 4px;
+  font-weight: 600;
+  font-size: clamp(1.25rem, 1.8vw, 1.55rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  transition: color 0.2s;
+}
+[data-vneo] .vn-route a:hover b {
+  color: var(--sage);
+}
+[data-vneo] .vn-wp-note {
+  display: block;
+  margin-top: 6px;
+  max-width: 56ch;
+  color: var(--ink2);
+}
+[data-vneo] .vn-drone {
+  position: absolute;
+  left: 7px;
+  top: -14px;
+  width: 30px;
+  height: 30px;
+  z-index: 2;
+  will-change: transform;
+}
+[data-vneo] .vn-drone svg {
+  width: 30px;
+  height: 30px;
+  fill: var(--bg);
+  stroke: var(--sage);
+  stroke-width: 2.5;
+  filter: drop-shadow(-1.5px 0 0 rgba(var(--fr-m), 0.7))
+    drop-shadow(1.5px 0 0 rgba(var(--fr-g), 0.7));
+}
+
+/* ---------- writing ---------- */
+[data-vneo] .vn-notes {
+  margin-top: clamp(28px, 5vh, 48px);
+  max-width: 1100px;
+}
+[data-vneo] .vn-notes a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 8px 40px;
+  padding: 22px 0;
+  border-top: 1px solid var(--hair);
+}
+[data-vneo] .vn-notes b {
+  font-weight: 600;
+  font-size: clamp(1.2rem, 1.7vw, 1.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  transition: color 0.2s;
+}
+[data-vneo] .vn-notes span {
+  color: var(--ink2);
+}
+[data-vneo] .vn-notes a:hover b {
+  color: var(--sage);
+}
+@media (max-width: 760px) {
+  [data-vneo] .vn-notes a {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- the sign-off (v2's), in Sage ---------- */
+[data-vneo] .vn-signoff {
+  --wrap: 1400px;
+  --r-tile: 32px;
+  --r-card: 20px;
+  --brand: #b7d3a8;
+  --brand-tint: rgba(183, 211, 168, 0.12);
+  --brand-ink: #10180d;
+  --ink-2: var(--ink2);
+  --ink-3: var(--ink3);
+  --hair-strong: var(--hair2);
+  --fast: 0.2s;
+  --f-sans: var(--f-display);
+  border-top: 1px solid var(--hair);
+}
+[data-vneo] .vn-signoff h2 {
+  font-weight: 600;
+}
+[data-vneo] .vn-signoff a[href^='http'],
+[data-vneo] .vn-signoff a[href^='mailto'] {
+  font-weight: 600;
+}
+
+/* ---------- the lock-on cursor (v3's) ---------- */
+[data-vneo][data-cursor='on'],
+[data-vneo][data-cursor='on'] * {
+  cursor: none !important;
+}
+[data-vneo][data-cursor='on']
+  :is(input, textarea, select, [contenteditable='true']) {
+  cursor: text !important;
+}
+[data-vneo] .vn-cursor {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  pointer-events: none;
+}
+[data-vneo] .vn-cbox,
+[data-vneo] .vn-cdot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 160ms ease;
+  will-change: transform;
+}
+[data-vneo] .vn-cbox[data-show='on'],
+[data-vneo] .vn-cdot[data-show='on'] {
+  opacity: 1;
+}
+[data-vneo] .vn-cbox {
+  width: 22px;
+  height: 22px;
+  color: var(--ink);
+}
+[data-vneo] .vn-cbox[data-lock='on'] {
+  color: var(--sage);
+}
+[data-vneo] .vn-cbox i {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border: 0 solid currentColor;
+  filter: drop-shadow(0.75px 0 0 rgba(var(--fr-g), 0.7))
+    drop-shadow(-0.75px 0 0 rgba(var(--fr-m), 0.7));
+  transition:
+    width 220ms var(--ease),
+    height 220ms var(--ease);
+}
+[data-vneo] .vn-cbox[data-lock='on'] i {
+  width: 12px;
+  height: 12px;
+}
+[data-vneo] .vn-cbox i[data-c='tl'] {
+  top: 0;
+  left: 0;
+  border-top-width: 1.5px;
+  border-left-width: 1.5px;
+}
+[data-vneo] .vn-cbox i[data-c='tr'] {
+  top: 0;
+  right: 0;
+  border-top-width: 1.5px;
+  border-right-width: 1.5px;
+}
+[data-vneo] .vn-cbox i[data-c='bl'] {
+  bottom: 0;
+  left: 0;
+  border-bottom-width: 1.5px;
+  border-left-width: 1.5px;
+}
+[data-vneo] .vn-cbox i[data-c='br'] {
+  bottom: 0;
+  right: 0;
+  border-bottom-width: 1.5px;
+  border-right-width: 1.5px;
+}
+[data-vneo] .vn-ctag {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 4px);
+  padding: 2px 7px 3px;
+  border-radius: 4px;
+  background: var(--sage);
+  color: var(--sage-ink);
+  font-family: var(--f-mono);
+  font-size: 10px;
+  line-height: 1.2;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(3px);
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+[data-vneo] .vn-cbox[data-lock='on'] .vn-ctag:not(:empty) {
+  opacity: 1;
+  transform: none;
+}
+[data-vneo] .vn-cdot {
+  width: 0;
+  height: 0;
+}
+/* a point of light: at rest one sage dot; moving, it splits into green and magenta along the motion */
+[data-vneo] .vn-cdot::before,
+[data-vneo] .vn-cdot::after {
+  content: '';
+  position: absolute;
+  left: -2.5px;
+  top: -2.5px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+}
+[data-vneo] .vn-cdot::before {
+  background: rgb(var(--fr-g));
+  transform: translate(calc(var(--vx, 0) * 1px), calc(var(--vy, 0) * 1px));
+}
+[data-vneo] .vn-cdot::after {
+  background: rgb(var(--fr-m));
+  transform: translate(calc(var(--vx, 0) * -1px), calc(var(--vy, 0) * -1px));
+}
+
+/* ---------- the chapter rail (v4's timeline nav, quiet) ---------- */
+[data-vneo] .vn-rail {
+  position: fixed;
+  right: 18px;
+  top: 50%;
+  z-index: 40;
+  transform: translate(12px, -50%);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.4s,
+    transform 0.4s var(--ease);
+}
+[data-vneo] .vn-rail[data-shown] {
+  opacity: 1;
+  transform: translate(0, -50%);
+  pointer-events: auto;
+}
+[data-vneo] .vn-rail ol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+[data-vneo] .vn-rail a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 5px 0;
+}
+[data-vneo] .vn-rail i {
+  width: 10px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--hair2);
+  transition:
+    width 0.3s var(--ease),
+    background 0.3s;
+}
+[data-vneo] .vn-rail span {
+  font-size: 0.8rem;
+  color: var(--ink2);
+  opacity: 0;
+  transform: translateX(6px);
+  transition:
+    opacity 0.25s,
+    transform 0.25s;
+  white-space: nowrap;
+}
+[data-vneo] .vn-rail li[data-on] i {
+  width: 22px;
+  background: var(--sage);
+}
+[data-vneo] .vn-rail a:hover span,
+[data-vneo] .vn-rail a:focus-visible span {
+  opacity: 1;
+  transform: none;
+}
+/* names show on hover, over a backing, so they never sit on the page's own text */
+[data-vneo] .vn-rail span {
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(var(--bg-rgb), 0.92);
+}
+[data-vneo] .vn-rail li[data-on] span {
+  color: var(--sage);
+}
+@media (max-width: 1180px) {
+  [data-vneo] .vn-rail {
+    display: none;
+  }
+}
+
+/* ---------- a project: the engineering, folded ---------- */
+[data-vneo] .vn-engineers {
+  margin-top: clamp(20px, 3vh, 32px);
+  border-top: 1px solid var(--hair2);
+  border-bottom: 1px solid var(--hair2);
+}
+[data-vneo] .vn-engineers summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 0;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 600;
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  letter-spacing: -0.02em;
+}
+[data-vneo] .vn-engineers summary::-webkit-details-marker {
+  display: none;
+}
+[data-vneo] .vn-engineers summary small {
+  display: block;
+  margin-top: 4px;
+  font-weight: 400;
+  font-size: 1rem;
+  letter-spacing: 0;
+  color: var(--ink3);
+}
+[data-vneo] .vn-engineers summary i {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--raised);
+  box-shadow: inset 0 0 0 1px var(--hair2);
+  position: relative;
+  transition: transform 0.3s var(--ease);
+}
+[data-vneo] .vn-engineers summary i::before,
+[data-vneo] .vn-engineers summary i::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 2px;
+  margin: -1px 0 0 -6px;
+  background: var(--sage);
+}
+[data-vneo] .vn-engineers summary i::after {
+  transform: rotate(90deg);
+  transition: transform 0.3s var(--ease);
+}
+[data-vneo] .vn-engineers[open] summary i::after {
+  transform: rotate(0deg);
+}
+[data-vneo] .vn-engineers-body {
+  padding-bottom: 28px;
+}
+[data-vneo] .vn-engineers-body h3 {
+  margin-top: 22px;
+  font-weight: 600;
+  color: var(--sage);
+}
+[data-vneo] .vn-engineers-body p {
+  margin-top: 8px;
+  max-width: 70ch;
+  color: var(--ink2);
+}
+[data-vneo] .vn-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+[data-vneo] .vn-keywords li {
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--hair);
+  color: var(--ink2);
+  font-size: 0.9rem;
+}
+[data-vneo] .vn-case-reel {
+  width: 100%;
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+/* ---------- the top bar on phones ---------- */
+[data-vneo] .v7-nav a {
+  white-space: nowrap;
+}
+@media (max-width: 640px) {
+  [data-vneo] .v7-nav a:nth-child(2) {
+    display: none;
+  }
+}

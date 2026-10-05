@@ -9,9 +9,12 @@ import { siteConfig } from '@/lib/site'
 import { Emph } from '../emph'
 import styles from './sign-off.module.css'
 
-const Dithering = dynamic(() => import('@paper-design/shaders-react').then((m) => m.Dithering), {
-  ssr: false,
-})
+const Dithering = dynamic(
+  () => import('@paper-design/shaders-react').then((m) => m.Dithering),
+  {
+    ssr: false,
+  }
+)
 
 const channels = [
   { label: 'Email', href: `mailto:${siteConfig.email}` },
@@ -32,7 +35,11 @@ function FlipLink({ label, href }: { label: string; href: string }) {
     >
       <span className={styles.flipRow} aria-hidden="true">
         {label.split('').map((ch, i) => (
-          <span key={i} className={styles.flipChar} style={{ ['--i' as string]: i }}>
+          <span
+            key={i}
+            className={styles.flipChar}
+            style={{ ['--i' as string]: i }}
+          >
             <span>{ch}</span>
             <span>{ch}</span>
           </span>
@@ -44,32 +51,79 @@ function FlipLink({ label, href }: { label: string; href: string }) {
 
 export type SignOffCopy = typeof v2Home.signOff
 
-/** Defaults to the /v2 copy; another version passes its own. */
-export function SignOff({ copy = v2Home.signOff }: { copy?: SignOffCopy }) {
+/**
+ * Defaults to the /v2 copy; another version passes its own. `warm` mounts the
+ * shader in idle time after load (so its compile never lands mid-scroll) and
+ * holds it still while it is off screen.
+ */
+export function SignOff({
+  copy = v2Home.signOff,
+  warm = false,
+}: {
+  copy?: SignOffCopy
+  warm?: boolean
+}) {
   const panel = useRef<HTMLDivElement>(null)
   const [front, setFront] = useState('#c9686a')
   const [hot, setHot] = useState(false)
   const [show, setShow] = useState(false)
+  const [near, setNear] = useState(false)
 
   useEffect(() => {
     const el = panel.current
     if (!el) return
-    const read = () => setFront(getComputedStyle(el).getPropertyValue('--brand').trim() || '#c9686a')
+    const read = () =>
+      setFront(
+        getComputedStyle(el).getPropertyValue('--brand').trim() || '#c9686a'
+      )
     read()
     window.addEventListener('v2-theme', read)
     window.addEventListener('v3-theme', read)
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const io = new IntersectionObserver(([entry]) => setShow(entry.isIntersecting && !reduced), { rootMargin: '200px' })
+    const reduced = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        setNear(entry.isIntersecting)
+        if (!warm) setShow(entry.isIntersecting && !reduced)
+      },
+      { rootMargin: '200px' }
+    )
     io.observe(el)
+    let idle = 0
+    if (warm && !reduced) {
+      const ric = (
+        window as Window & {
+          requestIdleCallback?: (
+            cb: () => void,
+            o?: { timeout: number }
+          ) => number
+        }
+      ).requestIdleCallback
+      idle = ric
+        ? ric(() => setShow(true), { timeout: 4000 })
+        : window.setTimeout(() => setShow(true), 2500)
+    }
     return () => {
+      if (idle) {
+        const cic = (
+          window as Window & { cancelIdleCallback?: (h: number) => void }
+        ).cancelIdleCallback
+        if (cic) cic(idle)
+        else clearTimeout(idle)
+      }
       window.removeEventListener('v2-theme', read)
       window.removeEventListener('v3-theme', read)
       io.disconnect()
     }
-  }, [])
+  }, [warm])
 
   return (
-    <section className={styles.section} id="sign-off" aria-labelledby="sign-off-h">
+    <section
+      className={styles.section}
+      id="sign-off"
+      aria-labelledby="sign-off-h"
+    >
       <div className={styles.inner}>
         <div
           ref={panel}
@@ -85,7 +139,7 @@ export function SignOff({ copy = v2Home.signOff }: { copy?: SignOffCopy }) {
                 shape="warp"
                 type="4x4"
                 size={2}
-                speed={hot ? 0.55 : 0.18}
+                speed={warm && !near ? 0 : hot ? 0.55 : 0.18}
                 minPixelRatio={1}
                 style={{ width: '100%', height: '100%' }}
               />
@@ -113,7 +167,11 @@ export function SignOff({ copy = v2Home.signOff }: { copy?: SignOffCopy }) {
               </p>
               <div className={styles.signed}>
                 <span className={styles.footLabel}>{copy.signed}</span>
-                <span className={styles.sig} role="img" aria-label={`${siteConfig.name}’s signature`} />
+                <span
+                  className={styles.sig}
+                  role="img"
+                  aria-label={`${siteConfig.name}’s signature`}
+                />
                 <span className={styles.witness}>{copy.witness}</span>
               </div>
             </div>
