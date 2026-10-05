@@ -21,8 +21,22 @@ export const writingHref = (slug: string) => `${VN}/writing/${slug}`
 const intoVneo = (href: string) =>
   href.startsWith('/writing/') ? `${VN}${href}` : href
 
+/** The Brainiacs car, in its refined photograph. */
+export const RACE_PHOTO = '/images/vneo/race-refined.jpg'
+const RACE_ORIGINAL = '/images/authority/race-car/front.jpeg'
+export const racePhoto = <T extends { src: string }>(m: T): T =>
+  m.src === RACE_ORIGINAL ? { ...m, src: RACE_PHOTO } : m
+
 export const chapters: Chapter[] = buildChapters(VN).map((c) => ({
   ...c,
+  plate:
+    c.id === 'machines'
+      ? {
+          kind: 'image' as const,
+          src: '/images/vneo/race-refined-crop.jpg',
+          position: '50% 50%',
+        }
+      : c.plate,
   link: { ...c.link, href: intoVneo(c.link.href) },
   more: c.more ? { ...c.more, href: intoVneo(c.more.href) } : undefined,
 }))
@@ -116,6 +130,8 @@ export type WorkItem = ReturnType<typeof workItem>
 export type TileSize = 'big' | 'wide' | 'tall' | 'one'
 export type ShowItem = WorkItem & {
   size: TileSize
+  /** Its place in the desktop grid (grid-template-areas in vneo.css). */
+  area: string
   image?: { src: string; position?: string; fit?: 'contain' }
   figure?: { from: string; fromNote: string; to: string; toNote: string }
   /** Opens outside the site (a project with no page here yet). */
@@ -134,7 +150,8 @@ const juno: ShowItem = {
   motion: undefined,
   shows: '',
   alt: 'Juno’s home screen with demo data: the month’s spending, budgets, and accounts.',
-  size: 'one',
+  size: 'wide',
+  area: 'juno',
   image: { src: '/images/vneo/juno-home.jpg', position: '0% 0%' },
   external: true,
 }
@@ -151,6 +168,7 @@ export const showcase: ShowItem[] = [
       'A hand read as tracked points, then turned into text on a phone, the web, or an offline device.'
     ),
     size: 'big',
+    area: 'omni',
   },
   {
     ...workItem(
@@ -158,7 +176,8 @@ export const showcase: ShowItem[] = [
       { kind: 'shot', id: 'see' },
       'The car’s camera view, its edges, its strongest corners, and the lock.'
     ),
-    size: 'big',
+    size: 'wide',
+    area: 'race',
   },
   {
     ...workItem(
@@ -166,7 +185,8 @@ export const showcase: ShowItem[] = [
       { kind: 'scene', id: 'voters' },
       'A fact, traced back to its source, with its history kept.'
     ),
-    size: 'wide',
+    size: 'one',
+    area: 'dal',
   },
   {
     ...workItem(
@@ -174,7 +194,8 @@ export const showcase: ShowItem[] = [
       { kind: 'shot', id: 'heat' },
       'The low-resolution thermal input, swept by its ×3 output.'
     ),
-    size: 'wide',
+    size: 'tall',
+    area: 'heat',
   },
   {
     ...workItem(
@@ -183,6 +204,7 @@ export const showcase: ShowItem[] = [
       'Five pull requests to Betaflight, PX4, and OpenFront: three merged.'
     ),
     size: 'wide',
+    area: 'ship',
   },
   {
     ...workItem(
@@ -191,6 +213,7 @@ export const showcase: ShowItem[] = [
       '309 frames from one phone sweep, closing into one sphere.'
     ),
     size: 'one',
+    area: 'pano',
   },
   {
     ...workItem(
@@ -199,6 +222,7 @@ export const showcase: ShowItem[] = [
       'A simulated step response settling as the damping rises.'
     ),
     size: 'one',
+    area: 'pid',
   },
   {
     ...workItem(
@@ -206,11 +230,13 @@ export const showcase: ShowItem[] = [
       { kind: 'shot', id: 'trace' },
       'A crack mask becomes candidate points, a spanning tree, and one smooth path.'
     ),
-    size: 'one',
+    size: 'tall',
+    area: 'crk',
   },
   {
     ...workItem('imagen-raw-to-edit-dataset-pipeline', undefined, ''),
-    size: 'one',
+    size: 'wide',
+    area: 'img',
     figure: {
       from: '2–3',
       fromNote: 'a day, team of three',
@@ -221,6 +247,7 @@ export const showcase: ShowItem[] = [
   {
     ...workItem('lebanese-motorcycle-theory-trainer', undefined, ''),
     size: 'one',
+    area: 'moto',
     image: {
       src: '/images/authority/motorcycle-trainer/sign-127.webp',
       fit: 'contain',

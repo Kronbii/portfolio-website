@@ -31,17 +31,16 @@ function build(root: HTMLElement, tl: gsap.core.Timeline) {
 export function MachinesScene({
   label,
   replay,
+  src = '/images/v6/race-crop.jpg',
 }: {
   label: string
   replay: string
+  /** The car's photograph (the chapter's plate). */
+  src?: string
 }) {
   return (
     <Scene name="machines" label={label} build={build} replay={replay}>
-      <Optic
-        className="m-plate"
-        src="/images/v6/race-crop.jpg"
-        position="50% 60%"
-      />
+      <Optic className="m-plate" src={src} position="50% 60%" />
       <div className="m-days fx">
         <b>20</b> days
       </div>

@@ -8,7 +8,14 @@ import { Plate } from '@/components/v7/plate'
 import { getArticle } from '@/content/authority'
 import { projectImages, sourceKindLabel } from '@/content/v2/record'
 import { workBySlug, works } from '@/content/v3/work'
-import { VN, chapterOf, reel, workHref, writingHref } from '@/content/vneo/site'
+import {
+  VN,
+  chapterOf,
+  racePhoto,
+  reel,
+  workHref,
+  writingHref,
+} from '@/content/vneo/site'
 
 import { BackButton } from './back'
 import { CaseShot } from './case-shot'
@@ -52,8 +59,12 @@ export function Case({ slug }: { slug: string }) {
   const shot = reel.find((r) => r.slug === slug)
   const at = works.findIndex((x) => x.project.slug === slug)
   const next = works[(at + 1) % works.length]
-  const images = PRIVATE_MEDIA.has(slug) ? [] : projectImages(p)
-  const lead = PRIVATE_MEDIA.has(slug) ? undefined : (plain.image ?? images[0])
+  const images = PRIVATE_MEDIA.has(slug) ? [] : projectImages(p).map(racePhoto)
+  const lead = PRIVATE_MEDIA.has(slug)
+    ? undefined
+    : plain.image
+      ? racePhoto(plain.image)
+      : images[0]
   const article = getArticle(p.articleSlug)
   const note =
     article && article.state === 'ready' ? writingHref(article.slug) : undefined

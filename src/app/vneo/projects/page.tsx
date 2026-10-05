@@ -7,7 +7,7 @@ import { BackButton } from '@/components/vneo/back'
 import { ProjectGrid, type GridItem } from '@/components/vneo/project-grid'
 import { projectImages } from '@/content/v2/record'
 import { fields } from '@/content/v3/work'
-import { VN, showcase, workHref, works } from '@/content/vneo/site'
+import { VN, racePhoto, showcase, workHref, works } from '@/content/vneo/site'
 
 const copy = {
   title: 'Projects',
@@ -33,10 +33,11 @@ export default function VneoProjects() {
     // REE is superseded by Juno
     .filter(({ project: p }) => p.slug !== 'ree-personal-finance-tracker')
     .map(({ project: p, plain }) => {
-      const img = PRIVATE_MEDIA.has(p.slug)
+      const raw = PRIVATE_MEDIA.has(p.slug)
         ? undefined
         : (plain.image ??
           projectImages(p).find((m) => !/\.(gif|svg)$/.test(m.src)))
+      const img = raw ? racePhoto(raw) : undefined
       return {
         slug: p.slug,
         title: p.title.split(' — ')[0],

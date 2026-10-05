@@ -30,7 +30,13 @@ export function SceneFor({ chapter: c }: { chapter: Chapter }) {
     case 'students':
       return <StudentsScene label={c.alt} replay={r} />
     case 'machines':
-      return <MachinesScene label={c.alt} replay={r} />
+      return (
+        <MachinesScene
+          label={c.alt}
+          replay={r}
+          src={c.plate.kind === 'image' ? c.plate.src : undefined}
+        />
+      )
   }
 }
 

@@ -118,6 +118,7 @@ export function Work() {
           <li
             key={item.slug}
             className={`vn-tile is-${item.size}`}
+            style={{ '--area': item.area } as React.CSSProperties}
             data-feature={i < FEATURED ? '' : undefined}
             onPointerEnter={(ev) => replayIn(ev.currentTarget)}
             onFocusCapture={(ev) => replayIn(ev.currentTarget)}
@@ -141,7 +142,10 @@ export function Work() {
               className="vn-tile-media"
               aria-hidden="true"
               data-fit={
-                item.size === 'tall' || item.size === 'big' ? 'crop' : 'full'
+                // every piece fills its tile, except the upstream graph, which needs its whole width
+                item.motion?.kind === 'shot' && item.motion.id === 'ship'
+                  ? 'full'
+                  : 'crop'
               }
             >
               {item.motion ? (

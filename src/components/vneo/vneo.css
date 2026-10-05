@@ -1607,3 +1607,83 @@
     aspect-ratio: 1;
   }
 }
+
+/* ---------- the bento grids: only a little smaller than they began ---------- */
+[data-vneo] :is(.vn-bento, .vn-cbento) {
+  width: min(1260px, calc(100% - 2 * var(--gutter)));
+  gap: 14px;
+}
+[data-vneo] .vn-tile-media {
+  aspect-ratio: 16 / 10;
+}
+[data-vneo] .vn-tile-cap {
+  gap: 6px;
+  padding: 14px 16px 16px;
+}
+[data-vneo] .vn-tile-cap h3 {
+  font-size: 1.1rem;
+}
+[data-vneo] .vn-tile-cap p {
+  font-size: 0.92rem;
+}
+[data-vneo] .vn-ctile.is-big .vn-tile-media {
+  min-height: 320px;
+}
+
+/* ---------- the projects grid: every tile a shape of its own ---------- */
+@media (min-width: 1021px) {
+  [data-vneo] .vn-showcase {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-areas:
+      'omni omni race race'
+      'omni omni dal  heat'
+      'ship ship pano heat'
+      'pid  crk  img  img'
+      'moto crk  juno juno';
+    grid-auto-rows: 300px;
+    grid-auto-flow: row;
+  }
+  [data-vneo] .vn-showcase .vn-tile {
+    grid-area: var(--area);
+    grid-column: var(--area);
+    grid-row: var(--area);
+  }
+  [data-vneo] .vn-showcase .vn-tile-media {
+    aspect-ratio: auto;
+    flex: 1;
+    min-height: 0;
+  }
+  [data-vneo] .vn-showcase .vn-tile.is-big .vn-tile-media,
+  [data-vneo] .vn-showcase .vn-tile.is-tall .vn-tile-media {
+    min-height: 0;
+  }
+  /* wide tiles lie on their side: the picture left, the words right */
+  [data-vneo] .vn-showcase .vn-tile.is-wide {
+    flex-direction: row;
+  }
+  [data-vneo] .vn-showcase .vn-tile.is-wide .vn-tile-media {
+    flex: 1.35;
+    height: 100%;
+  }
+  [data-vneo] .vn-showcase .vn-tile.is-wide .vn-tile-cap {
+    flex: 1;
+    justify-content: center;
+    padding: 18px 20px;
+  }
+  [data-vneo] .vn-showcase .vn-tile.is-wide .vn-tile-cap h3 {
+    font-size: 1.2rem;
+  }
+  [data-vneo] .vn-showcase .vn-tile.is-wide .vn-tile-cap p {
+    -webkit-line-clamp: 4;
+  }
+  [data-vneo] .vn-showcase .vn-tile.is-wide .vn-watch {
+    right: auto;
+    left: 12px;
+  }
+  [data-vneo] .vn-showcase .vn-tile.is-big .vn-tile-cap h3 {
+    font-size: 1.4rem;
+  }
+  [data-vneo] .vn-showcase .vn-tile.is-big .vn-tile-cap p {
+    -webkit-line-clamp: 3;
+  }
+}

@@ -3,6 +3,7 @@
 import { HeatShot } from '@/components/v6/scenes/heat'
 import { MapShot } from '@/components/v6/scenes/map'
 import { SeeShot } from '@/components/v6/scenes/see'
+import { refinedSee } from '@/content/vneo/see-refined'
 import { ShipShot } from '@/components/v6/scenes/ship'
 import { TraceShot } from '@/components/v6/scenes/trace'
 import { TuneShot } from '@/components/v6/scenes/tune'
@@ -22,7 +23,7 @@ const SHOTS: Record<
   ReelId,
   (p: { label: string; replay?: string }) => React.ReactNode
 > = {
-  see: SeeShot,
+  see: (p) => <SeeShot {...p} plate={refinedSee} />,
   map: MapShot,
   heat: HeatShot,
   tune: TuneShot,

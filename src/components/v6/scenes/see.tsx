@@ -9,10 +9,43 @@ import { Shot, type Rect } from '../shot'
 
 const IMPACTS: Impact[] = [{ t: 0, k: 0.55, flash: 0.3, ghost: 0.6 }]
 const CROP: Rect = [930, 80, 920, 960]
-const BOX = [40, 140, 780, 800]
 const STEP = ['Raw', 'Edges', 'Features', 'Lock']
 
-function build(root: HTMLElement, tl: gsap.core.Timeline) {
+/** The plate's photograph and what the vision passes found in it; a host can bring its own. */
+export interface SeePlate {
+  img: string
+  edges: string
+  features: [number, number][]
+  links: [number, number, number, number][]
+  /** The lock box around the vehicle, in plate pixels. */
+  box: [number, number, number, number]
+}
+const REEL_PLATE: SeePlate = {
+  img: '/images/v6/race-crop.jpg',
+  edges: '/images/v6/race-edges.png',
+  features: seeFeatures,
+  links: seeLinks,
+  box: [40, 140, 780, 800],
+}
+
+const builds = new WeakMap<
+  SeePlate,
+  (root: HTMLElement, tl: gsap.core.Timeline) => void
+>()
+const buildFor = (plate: SeePlate) => {
+  let b = builds.get(plate)
+  if (!b) {
+    b = (root, tl) => build(root, tl, plate.box)
+    builds.set(plate, b)
+  }
+  return b
+}
+
+function build(
+  root: HTMLElement,
+  tl: gsap.core.Timeline,
+  BOX: SeePlate['box']
+) {
   const tag = root.querySelector<HTMLElement>('.s04-tag')!
   const steps = root.querySelectorAll<HTMLElement>('.s04-steps span')
 
@@ -159,13 +192,21 @@ function build(root: HTMLElement, tl: gsap.core.Timeline) {
   )
 }
 
-export function SeeShot({ label, replay }: { label: string; replay?: string }) {
+export function SeeShot({
+  label,
+  replay,
+  plate = REEL_PLATE,
+}: {
+  label: string
+  replay?: string
+  plate?: SeePlate
+}) {
   return (
     <Shot
       scene="s04"
       label={label}
       impacts={IMPACTS}
-      build={build}
+      build={buildFor(plate)}
       crop={CROP}
       replay={replay}
     >
@@ -197,16 +238,16 @@ export function SeeShot({ label, replay }: { label: string; replay?: string }) {
       </div>
       <div className="s04-plate">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className="s04-img" src="/images/v6/race-crop.jpg" alt="" />
+        <img className="s04-img" src={plate.img} alt="" />
         <div className="s04-edges">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/v6/race-edges.png" alt="" />
+          <img src={plate.edges} alt="" />
         </div>
         <svg className="s04-feat" viewBox="0 0 900 900">
-          {seeLinks.map(([a, b, c, d], i) => (
+          {plate.links.map(([a, b, c, d], i) => (
             <line key={`l${i}`} x1={a} y1={b} x2={c} y2={d} />
           ))}
-          {seeFeatures.map(([x, y], i) => (
+          {plate.features.map(([x, y], i) => (
             <circle key={`c${i}`} cx={x} cy={y} r={8} />
           ))}
         </svg>
