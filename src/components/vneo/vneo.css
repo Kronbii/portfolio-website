@@ -508,30 +508,6 @@
   line-height: 1.15;
   letter-spacing: -0.02em;
 }
-[data-vneo] .vn-hero-line {
-  margin-top: 12px;
-  max-width: 46ch;
-  color: var(--ink2);
-  font-size: clamp(1.05rem, 1.3vw, 1.2rem);
-}
-[data-vneo] .vn-hero-now {
-  margin-top: 14px;
-  max-width: 50ch;
-  color: var(--ink3);
-  font-size: 0.95rem;
-}
-[data-vneo] .vn-hero-now b {
-  margin-right: 8px;
-  font-weight: 600;
-  color: var(--sage);
-}
-[data-vneo] .vn-hero-now a {
-  color: var(--ink2);
-  border-bottom: 1px solid var(--hair2);
-}
-[data-vneo] .vn-hero-now a:hover {
-  color: var(--sage);
-}
 [data-vneo] .vn-chips {
   display: flex;
   flex-wrap: wrap;
@@ -562,9 +538,17 @@
   font-family: var(--f-mono);
   font-size: 0.8rem;
 }
+/* the drone's plate stands tall: it fills the column beside the name */
 [data-vneo] .vn-hero-drone {
   position: relative;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  height: clamp(480px, 74svh, 820px);
+}
+[data-vneo] .vn-hero-drone > figure {
+  flex: 1;
+  min-height: 0;
 }
 @media (max-width: 900px) {
   [data-vneo] .vn-hero {
@@ -573,6 +557,9 @@
   }
   [data-vneo] .vn-name {
     font-size: min(18vw, 20svh);
+  }
+  [data-vneo] .vn-hero-drone {
+    height: clamp(400px, 58svh, 600px);
   }
 }
 /* the preflight lands on this name; the slam waits for its own entrance */
@@ -586,7 +573,7 @@
 }
 [data-vneo][data-intro='off']
   .vn-hero:not([data-rolled])
-  :is(.vn-n1, .vn-n2, .vn-hero-line, .vn-hero-now, .vn-chip) {
+  :is(.vn-n1, .vn-n2, .vn-chip) {
   opacity: 0;
   animation: v7-failsafe 0.4s ease 3s forwards;
 }
@@ -1755,48 +1742,40 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(260px, 0.5fr);
   gap: clamp(28px, 5vw, 80px);
-  align-items: end;
+  align-items: center;
   margin-top: 22px;
 }
-[data-vneo] .vn-build-text {
-  padding-bottom: clamp(8px, 2vw, 28px);
-}
+/* the sentence rests in one even, solid ink (a translucent glyph would let the
+   lens's fringe show through it); a phrase lights up only while pointed at */
 [data-vneo] .vn-build-sentence {
   max-width: 21ch;
+  color: color-mix(in srgb, var(--ink) 70%, var(--bg));
   font-weight: 600;
   font-size: clamp(2.2rem, 4.6vw, 4.4rem);
   line-height: 1.06;
   letter-spacing: -0.035em;
   text-wrap: balance;
 }
-/* solid inks: a translucent glyph would let the lens's fringe show through it */
 [data-vneo] .vn-phrase {
-  color: color-mix(in srgb, var(--ink) 52%, var(--bg));
   text-decoration: underline;
   text-decoration-thickness: 0.06em;
   text-decoration-color: var(--hair2);
   text-underline-offset: 0.14em;
-  border-radius: 6px;
-  cursor: pointer;
   transition:
     color 0.28s var(--ease),
-    text-decoration-color 0.28s var(--ease);
+    text-decoration-color 0.28s var(--ease),
+    text-shadow 0.28s var(--ease);
 }
-[data-vneo] .vn-phrase:hover {
-  color: color-mix(in srgb, var(--ink) 74%, var(--bg));
-}
-[data-vneo] .vn-phrase[aria-pressed='true'] {
-  color: var(--ink);
-  text-decoration-color: var(--sage);
-}
-[data-vneo] .vn-phrase:focus-visible {
-  outline: 2px solid var(--sage);
-  outline-offset: 4px;
-}
-[data-vneo] .vn-build-hint {
-  margin-top: 18px;
-  color: var(--ink3);
-  font-size: 0.95rem;
+@media (hover: hover) {
+  [data-vneo] .vn-phrase:hover {
+    color: var(--ink);
+    text-decoration-color: var(--sage);
+    text-shadow:
+      calc(var(--lx, 0) * 1px) calc(var(--ly, 0) * 1px) 0 rgba(var(--fr-g), 0.7),
+      calc(var(--lx, 0) * -1px) calc(var(--ly, 0) * -1px) 0
+        rgba(var(--fr-m), 0.7),
+      0 0 0.45em rgba(var(--sage-rgb), 0.45);
+  }
 }
 
 /* the portrait: the live site's cutout, set on a lit sage backdrop, through the lens */
@@ -1820,10 +1799,10 @@
 }
 [data-vneo] .vn-plock {
   position: absolute;
-  left: 30%;
+  left: 21%;
   top: 9%;
-  width: 58%;
-  height: 52%;
+  width: 56%;
+  height: 50%;
   pointer-events: none;
 }
 [data-vneo] .vn-plock i {
@@ -1858,7 +1837,7 @@
 }
 [data-vneo] .vn-ptag {
   position: absolute;
-  left: 30%;
+  left: 21%;
   top: calc(9% - 26px);
   color: var(--sage-ink);
   font-family: var(--f-mono);
@@ -1868,119 +1847,6 @@
   text-transform: uppercase;
 }
 
-/* the work behind the phrase */
-[data-vneo] .vn-build-items {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
-  margin-top: clamp(28px, 4vw, 44px);
-}
-[data-vneo] .vn-build-items > li {
-  animation: vn-rise 520ms var(--ease) both;
-  animation-delay: calc(var(--i) * 60ms);
-}
-@keyframes vn-rise {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-}
-[data-vneo] .vn-bitem {
-  position: relative;
-  display: grid;
-  grid-template-rows: auto auto auto 1fr;
-  gap: 6px;
-  height: 100%;
-  padding: 10px 10px 18px;
-  border-radius: 22px;
-  background: var(--surface);
-  box-shadow: 0 0 0 1px var(--hair);
-  color: inherit;
-  text-decoration: none;
-  transition:
-    box-shadow 0.2s var(--ease),
-    transform 0.28s var(--ease);
-}
-[data-vneo] .vn-bitem:hover {
-  box-shadow: 0 0 0 1px var(--hair2);
-  transform: translateY(-3px);
-}
-[data-vneo] .vn-bitem:focus-visible {
-  outline: 2px solid var(--sage);
-  outline-offset: 3px;
-}
-[data-vneo] .vn-bthumb {
-  position: relative;
-  display: grid;
-  place-items: center;
-  aspect-ratio: 16 / 10;
-  margin-bottom: 8px;
-  border-radius: 14px;
-  overflow: hidden;
-  background:
-    radial-gradient(
-        circle,
-        rgba(var(--sage-rgb), 0.22) 1.2px,
-        transparent 1.6px
-      )
-      0 0 / 14px 14px,
-    var(--raised);
-}
-[data-vneo] .vn-bthumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s var(--ease);
-}
-[data-vneo] .vn-bitem:hover .vn-bthumb img {
-  transform: scale(1.04);
-}
-[data-vneo] .vn-bthumb-kind {
-  padding: 0 14px;
-  color: var(--sage);
-  font-family: var(--f-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  text-align: center;
-  text-transform: uppercase;
-}
-[data-vneo] .vn-bkind {
-  padding: 0 6px;
-  color: var(--sage);
-  font-family: var(--f-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-[data-vneo] .vn-btitle {
-  padding: 0 6px;
-  font-size: 1.06rem;
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-}
-[data-vneo] .vn-bline {
-  padding: 0 6px;
-  color: var(--ink2);
-  font-size: 0.88rem;
-  line-height: 1.45;
-}
-[data-vneo] .vn-bgo {
-  position: absolute;
-  right: 16px;
-  bottom: 14px;
-  color: var(--sage);
-  opacity: 0;
-  transition: opacity 0.2s var(--ease);
-}
-[data-vneo] .vn-bitem:hover .vn-bgo {
-  opacity: 1;
-}
-@media (max-width: 1020px) {
-  [data-vneo] .vn-build-items {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
 @media (max-width: 760px) {
   [data-vneo] .vn-build-top {
     grid-template-columns: 1fr;
@@ -1988,25 +1854,6 @@
   [data-vneo] .vn-portrait {
     justify-self: start;
     max-width: min(78vw, 340px);
-  }
-}
-@media (max-width: 560px) {
-  [data-vneo] .vn-build-items {
-    grid-template-columns: 1fr;
-  }
-  [data-vneo] .vn-bitem {
-    grid-template-columns: 96px 1fr;
-    grid-template-rows: auto auto 1fr;
-    column-gap: 12px;
-    padding: 10px;
-  }
-  [data-vneo] .vn-bthumb {
-    grid-row: 1 / span 3;
-    margin: 0;
-    aspect-ratio: 1;
-  }
-  [data-vneo] :is(.vn-bkind, .vn-btitle, .vn-bline) {
-    padding: 0;
   }
 }
 

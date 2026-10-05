@@ -12,7 +12,7 @@ import { vneo } from '@/content/vneo/site'
  * The first screen: v6's name slam, at Vneo's calmer tempo, beside v2's
  * drone. RAMI drops in out of a colour fringe, KRONBI slides in on the next
  * beat, the ID-lock brackets close on the name, and the title decodes out of
- * glyph noise; beside it, the E58 you can tilt, which levels itself. When
+ * glyph noise, and the links rise in; beside it, the E58 you can tilt, which levels itself. When
  * the preflight played, the name is already where it landed, and the slam
  * picks up at the lock.
  */
@@ -97,20 +97,6 @@ export function Hero() {
       })
       tl.fromTo(dec, { p: 0 }, { p: 1, duration: 1.2 * B, ease: 'none' }, LOCK)
       tl.fromTo(
-        '.vn-hero-line, .vn-hero-now',
-        { opacity: 0, y: 14, filter: 'blur(6px)' },
-        {
-          opacity: 1,
-          y: 0,
-          filter: 'blur(0px)',
-          duration: B,
-          ease: 'power2.out',
-          stagger: 0.4 * B,
-          clearProps: 'filter',
-        },
-        3 * B
-      )
-      tl.fromTo(
         '.vn-chip',
         { opacity: 0, y: 14 },
         {
@@ -120,7 +106,7 @@ export function Hero() {
           ease: 'power2.out',
           stagger: B / 3,
         },
-        3.6 * B
+        3 * B
       )
       tl.fromTo(
         '.vn-hero-drone',
@@ -212,11 +198,6 @@ export function Hero() {
         </div>
         <p className="vn-hero-sub" aria-label={c.sub}>
           {c.sub}
-        </p>
-        <p className="vn-hero-line">{c.line}</p>
-        <p className="vn-hero-now">
-          <b>{c.now.label}</b>
-          <a href={c.now.href}>{c.now.text}</a>
         </p>
         <nav className="vn-chips" aria-label="On this page">
           {c.chips.map((ch) => (

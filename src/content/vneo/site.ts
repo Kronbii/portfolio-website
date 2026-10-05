@@ -313,24 +313,14 @@ export const shownAbove = new Set([
   'ree-personal-finance-tracker',
 ])
 
-/** What I build (v3's sentence): each phrase brings up the work behind it. */
+/** What I build (v3's sentence): one line, each phrase lit while pointed at. */
 const build = {
-  ...v3Home.build,
-  groups: v3Home.build.groups.map((g) => ({
-    id: g.id,
-    phrase: g.phrase,
-    joiner: g.joiner,
-    items: g.slugs
-      .map((slug) => workBySlug(slug))
-      .filter((w) => w !== undefined)
-      .map(({ project, plain }) => ({
-        slug: project.slug,
-        title: project.title.split(' — ')[0],
-        kind: plain.kind,
-        line: plain.line,
-        href: workHref(project.slug, VN),
-        image: plain.image ? racePhoto(plain.image) : undefined,
-      })),
+  title: v3Home.build.title,
+  lead: v3Home.build.lead,
+  groups: v3Home.build.groups.map(({ id, phrase, joiner }) => ({
+    id,
+    phrase,
+    joiner,
   })),
   portrait: {
     // the live site's portrait (/images/home/portrait.webp), set on a lit sage backdrop
@@ -339,15 +329,23 @@ const build = {
     tag: 'ID lock · Rami',
   },
 }
-export type BuildGroup = (typeof build.groups)[number]
 
-/** The path so far (v3's flight log, as v4 flew it), its links moved into Vneo. */
+/**
+ * The path so far (v3's flight log, as v4 flew it), its links moved into
+ * Vneo: only the turning points, so not the talk or the single upstream fix.
+ */
+const LOG_SKIP = new Set([
+  'Spoke at GDG DevFest Tripoli',
+  'A fix merged into Betaflight',
+])
 const log = {
   ...v3Home.log,
-  points: v3Home.log.points.map((p) => ({
-    ...p,
-    href: intoVneo(rebase(p.href, VN)),
-  })),
+  points: v3Home.log.points
+    .filter((p) => !LOG_SKIP.has(p.what))
+    .map((p) => ({
+      ...p,
+      href: intoVneo(rebase(p.href, VN)),
+    })),
 }
 
 const note = (slug: string) => {
@@ -368,9 +366,7 @@ export const vneo = {
     first: 'Rami',
     last: 'Kronbi',
     sub: 'Robotics, embedded & systems engineer',
-    line: 'I build for people: voters, clinics, students, people who sign, and families in a crisis.',
     where: siteConfig.location.replace(', ', ' · '),
-    now: v3Home.hero.now,
     chips: [
       { label: 'Work', href: '#work' },
       { label: 'Community', href: '#community' },

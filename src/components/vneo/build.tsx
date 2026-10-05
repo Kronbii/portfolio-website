@@ -1,8 +1,7 @@
 'use client'
 
 import { gsap } from 'gsap'
-import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 import { B } from '@/components/v7/tempo'
 import { vneo } from '@/content/vneo/site'
@@ -11,16 +10,13 @@ import { LensImage } from './lens'
 import { SlateMark } from './slate'
 
 /*
- * What I build (v3's), as one sentence a visitor reads in a breath. Each
- * phrase is a control: pointing at it (or focusing, or tapping it) brings up
- * the work behind it, so the sentence doubles as the index. Beside it, my
- * portrait, seen through the page's lens, with the ID lock closing on it
- * once, on first sight.
+ * What I build (v3's), as one sentence a visitor reads in a breath; each
+ * phrase lights up while you point at it. The work itself is the next
+ * section down. Beside it, my portrait, seen through the page's lens, with
+ * the ID lock closing on it once, on first sight.
  */
 export function Build() {
   const c = vneo.build
-  const [active, setActive] = useState(0)
-  const group = c.groups[active]
   const plate = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -68,35 +64,13 @@ export function Build() {
           </h2>
           <p className="vn-build-sentence" data-lens="0.5">
             {c.lead}{' '}
-            {c.groups.map((g, i) => (
+            {c.groups.map((g) => (
               <span key={g.id}>
-                {/* a span, not a <button>: a phrase has to wrap with the sentence around it */}
-                <span
-                  role="button"
-                  tabIndex={0}
-                  className="vn-phrase"
-                  aria-pressed={i === active}
-                  aria-controls="build-items"
-                  onPointerEnter={(e) =>
-                    e.pointerType === 'mouse' && setActive(i)
-                  }
-                  onFocus={() => setActive(i)}
-                  onClick={() => setActive(i)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault()
-                      setActive(i)
-                    }
-                  }}
-                  data-lock="Show"
-                >
-                  {g.phrase}
-                </span>
+                <span className="vn-phrase">{g.phrase}</span>
                 {g.joiner}{' '}
               </span>
             ))}
           </p>
-          <p className="vn-build-hint">{c.hint}</p>
         </div>
 
         <figure className="vn-portrait">
@@ -106,7 +80,6 @@ export function Build() {
               alt={c.portrait.alt}
               position="50% 100%"
               className="vn-portrait-img"
-              weight={1}
             />
             <span className="vn-plock" aria-hidden="true">
               <i />
@@ -120,41 +93,6 @@ export function Build() {
           </div>
         </figure>
       </div>
-
-      <ul
-        className="vn-build-items"
-        id="build-items"
-        aria-live="polite"
-        key={group.id}
-      >
-        {group.items.map((it, i) => (
-          <li key={it.slug} style={{ '--i': i } as React.CSSProperties}>
-            <Link href={it.href} className="vn-bitem">
-              <span className="vn-bthumb" aria-hidden={!it.image}>
-                {it.image ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={it.image.src}
-                    alt={it.image.alt}
-                    loading="lazy"
-                    style={{
-                      objectPosition: it.image.position ?? '50% 50%',
-                    }}
-                  />
-                ) : (
-                  <span className="vn-bthumb-kind">{it.kind}</span>
-                )}
-              </span>
-              <span className="vn-bkind">{it.kind}</span>
-              <span className="vn-btitle">{it.title}</span>
-              <span className="vn-bline">{it.line}</span>
-              <span className="vn-bgo" aria-hidden="true">
-                →
-              </span>
-            </Link>
-          </li>
-        ))}
-      </ul>
     </section>
   )
 }
