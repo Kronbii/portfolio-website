@@ -6,14 +6,14 @@ import { FlyShot } from '@/components/v6/scenes/fly'
 import { ShotModeContext } from '@/components/v6/shot'
 import { vneo } from '@/content/vneo/site'
 
-import { BoardShot } from './board'
+import { RobotsShot } from './robots'
 import { SlateMark } from './slate'
 
 /*
  * The closing shot, before the sign-off: sense, decide, act, played calm.
- * Two cuts of it: v6's drone swarm spelling RK., and the systems board, the
- * same three bars for the robotics, vision, and embedded work. Both are here
- * until Rami picks the one to keep.
+ * Two cuts of it: v6's drone swarm spelling RK., and the robot pack, the
+ * same three bars for the robotics, vision, and embedded work (36 Go2s on a
+ * circuit board). Both are here until Rami picks the one to keep.
  */
 
 const CALM = { calm: true, speed: 0.75 }
@@ -50,10 +50,13 @@ export function Loop() {
           {pick === 'drones' ? (
             <FlyShot key="drones" replay={c.replay} accent={c.accent} />
           ) : (
-            <BoardShot key="board" replay={c.replay} />
+            <RobotsShot key="pack" replay={c.replay} accent={c.accent} />
           )}
         </ShotModeContext.Provider>
       </div>
+      {pick === 'pack' ? (
+        <p className="vn-loop-credit">{c.pack.credit}</p>
+      ) : null}
     </section>
   )
 }

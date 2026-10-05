@@ -429,7 +429,7 @@ export const vneo = {
   },
   build,
   log,
-  /** The closing shot: sense, decide, act, two ways; Rami picks the one to keep. */
+  /** The closing shot: sense, decide, act, as a drone swarm or a robot pack; Rami picks the one to keep. */
   loop: {
     label: 'Sense, decide, act',
     heading:
@@ -437,18 +437,21 @@ export const vneo = {
     pick: 'Finale',
     options: [
       { id: 'drones', label: 'Drone swarm' },
-      { id: 'board', label: 'Systems board' },
+      { id: 'pack', label: 'Robot pack' },
     ],
     replay: 'Play again',
     accent: '#b7d3a8',
-    board: {
+    pack: {
       words: ['Sense', 'Decide', 'Act'],
-      parts: ['Camera', 'Microcontroller', 'Actuator'],
-      note: 'camera → MCU → actuator · one loop',
+      note: '36 × Unitree Go2 · on a circuit board, simulated',
+      tracks: [30, 22, 27, 32],
+      track: 'Go2',
       focus: ['Robotics', 'Computer vision', 'Embedded systems', 'Edge AI'],
-      id: 'ID lock · system',
-      cap: 'One loop · one name',
-      alt: 'Three words, sense, decide, act, as a camera, a microcontroller, and an actuator wire up into one loop; then four focus areas fly at the lens: robotics, computer vision, embedded systems, edge AI; then circuit traces route themselves into the letters RK.',
+      id: 'ID lock · pack',
+      cap: '36 robots · one name',
+      credit:
+        'Unitree Go2 model © Unitree Robotics (BSD 3-Clause), via MuJoCo Menagerie.',
+      alt: 'Three words, sense, decide, act, as a pack of 36 simulated Unitree Go2 robot dogs on a circuit board is scanned and tracked, falls into ranks, and trots out into a ring; then four focus areas fly at the lens, robotics, computer vision, embedded systems, edge AI, as the pack gallops at it; then the robots walk into the letters RK., the board lights a trace between them, and a jump runs through the letters.',
     },
   },
   more: {

@@ -1969,147 +1969,33 @@
   pointer-events: none;
 }
 
-/* ---------- the systems board (board.tsx): FLY's equivalent, on its stage ---------- */
-[data-vneo] .v6-scene .s14-floor {
-  position: absolute;
-  left: -240px;
-  top: 0;
-  width: 2400px;
-  height: 1080px;
-  background: radial-gradient(
-      circle,
-      rgba(var(--sage-rgb), 0.34) 2.4px,
-      transparent 3px
-    )
-    50% 50% / 44px 44px;
-  -webkit-mask-image: radial-gradient(
-    ellipse 46% 52% at 50% 50%,
-    #000 30%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    ellipse 46% 52% at 50% 50%,
-    #000 30%,
-    transparent 100%
-  );
-  opacity: 0;
-}
-[data-vneo] .v6-scene .s14-svg {
+/* ---------- the robot pack (robots.tsx): the vision layer's boxes ---------- */
+[data-vneo] .v6-scene .s15-box {
   position: absolute;
   left: 0;
   top: 0;
-  width: 1920px;
-  height: 1080px;
-  overflow: visible;
-}
-[data-vneo] .s14-pcb {
-  fill: var(--raised);
-  stroke: var(--sage);
-  stroke-width: 4;
-}
-[data-vneo] .s14-hole {
-  fill: var(--bg);
-  stroke: rgba(var(--sage-rgb), 0.55);
-  stroke-width: 3;
-}
-[data-vneo] .s14-ring {
-  fill: none;
-  stroke: var(--sage);
-  stroke-width: 4;
-}
-[data-vneo] .s14-ring.s14-aperture {
-  fill: rgb(var(--fr-g));
-  stroke: none;
-}
-[data-vneo] .s14-pin {
-  stroke: var(--sage);
-  stroke-width: 7;
-  stroke-linecap: round;
-}
-[data-vneo] .s14-die {
-  fill: none;
-  stroke: rgba(var(--sage-rgb), 0.4);
-  stroke-width: 2;
-  stroke-dasharray: 6 6;
-}
-[data-vneo] .s14-mcu-t {
-  fill: var(--sage);
-  font-family: var(--f-mono);
-  font-size: 34px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-anchor: middle;
-  dominant-baseline: central;
-}
-[data-vneo] .s14-link {
-  fill: var(--raised);
-  stroke: var(--sage);
-  stroke-width: 4;
-}
-[data-vneo] .s14-joint {
-  fill: var(--sage);
-}
-[data-vneo] .s14-grip {
-  fill: none;
-  stroke: var(--sage);
-  stroke-width: 7;
-  stroke-linecap: round;
-}
-[data-vneo] .s14-lab {
-  fill: var(--paper-60);
-  font-family: var(--f-mono);
-  font-size: 22px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-anchor: middle;
-}
-[data-vneo] .s14-trace {
-  fill: none;
-  stroke: rgba(var(--sage-rgb), 0.85);
-  stroke-width: 8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 1 1;
-  stroke-dashoffset: calc(var(--d, 1) * 1px);
-}
-[data-vneo] .s14-trace.s14-fb {
-  stroke: rgba(var(--ink-rgb), 0.3);
-  stroke-width: 3;
-}
-[data-vneo] .s14-pulse {
-  fill: none;
-  stroke: rgb(var(--fr-g));
-  stroke-width: 12;
-  stroke-linecap: round;
-  stroke-dasharray: 0.07 2;
-  stroke-dashoffset: calc(var(--p, 0.08) * 1px);
   opacity: 0;
+  border: 3px solid rgb(var(--fr-g));
+  border-radius: 6px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
+  will-change: transform;
 }
-[data-vneo] .s14-pulse.s14-pf {
-  stroke-width: 7;
+[data-vneo] .v6-scene .s15-box .m {
+  position: absolute;
+  left: -3px;
+  bottom: 100%;
+  margin-bottom: 6px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgb(var(--fr-g));
+  color: var(--sage-ink);
+  font-size: 18px;
+  letter-spacing: 0.06em;
 }
-[data-vneo] .s14-sq {
-  opacity: 0;
-}
-[data-vneo] .s14-sq :is(rect, path) {
-  fill: none;
-  stroke: var(--sage);
-  stroke-width: 3;
-  vector-effect: non-scaling-stroke;
-}
-[data-vneo] .s14-via {
-  fill: var(--bg);
-  stroke: var(--sage);
-  stroke-width: 7;
-}
-[data-vneo] .s14-chip rect {
-  fill: var(--sage);
-}
-[data-vneo] .s14-chip path {
-  stroke: var(--sage);
-  stroke-width: 7;
-  stroke-linecap: round;
-}
-[data-vneo] .s14-chip-dot {
-  fill: var(--bg);
+[data-vneo] .vn-loop-credit {
+  margin-top: 10px;
+  color: var(--ink3);
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
 }
