@@ -9,20 +9,23 @@
 import { getArticle } from '@/content/authority'
 import { v2Home } from '@/content/v2/home'
 import { v3Home } from '@/content/v3/home'
-import {
-  noteHref,
-  rebase,
-  workBySlug,
-  workHref,
-  works,
-} from '@/content/v3/work'
+import { noteHref, workBySlug, workHref, works } from '@/content/v3/work'
 import { shotAlt } from '@/content/v6/reel'
 import { buildChapters, buildGroups, type Chapter } from '@/content/v7/home'
 import { siteConfig } from '@/lib/site'
 
 export const VN = '/vneo'
 
-export const chapters: Chapter[] = buildChapters(VN)
+/** Writing opens inside Vneo, with a way back. */
+export const writingHref = (slug: string) => `${VN}/writing/${slug}`
+const intoVneo = (href: string) =>
+  href.startsWith('/writing/') ? `${VN}${href}` : href
+
+export const chapters: Chapter[] = buildChapters(VN).map((c) => ({
+  ...c,
+  link: { ...c.link, href: intoVneo(c.link.href) },
+  more: c.more ? { ...c.more, href: intoVneo(c.more.href) } : undefined,
+}))
 export const groups = buildGroups(VN)
 /** "More of the work": the groups, minus what the page already shows. */
 export const moreGroups = () =>
@@ -86,7 +89,7 @@ export const reel = (
 })
 export type ReelId = (typeof reel)[number]['id']
 
-/** Work: four told in motion (the sticky player), then the rest at a glance (the bento). */
+/** A piece of work as the grid and the theater show it. */
 type Motion =
   | { kind: 'shot'; id: ReelId }
   | { kind: 'scene'; id: Chapter['id'] }
@@ -110,35 +113,69 @@ const workItem = (slug: string, motion: Motion | undefined, shows: string) => {
 }
 export type WorkItem = ReturnType<typeof workItem>
 
-export const featured: WorkItem[] = [
-  workItem(
-    'brainiacs-autonomous-race-car',
-    { kind: 'shot', id: 'see' },
-    'The car’s camera view, its edges, its strongest corners, and the lock.'
-  ),
-  workItem(
-    'daleel-lebanese-election-information',
-    { kind: 'scene', id: 'voters' },
-    'A fact, traced back to its source, with its history kept.'
-  ),
-  workItem(
-    'thermal-super-resolution',
-    { kind: 'shot', id: 'heat' },
-    'The low-resolution thermal input, swept by its ×3 output.'
-  ),
-  workItem(
-    '360-spherical-panorama-stitching',
-    { kind: 'shot', id: 'map' },
-    '309 frames from one phone sweep, closing into one sphere.'
-  ),
-]
-
 export type TileSize = 'big' | 'wide' | 'tall' | 'one'
-export const bento: (WorkItem & {
+export type ShowItem = WorkItem & {
   size: TileSize
   image?: { src: string; position?: string; fit?: 'contain' }
   figure?: { from: string; fromNote: string; to: string; toNote: string }
-})[] = [
+  /** Opens outside the site (a project with no page here yet). */
+  external?: boolean
+}
+
+/** Juno, the new version of my finance app; its record is its public repository. */
+const juno: ShowItem = {
+  slug: 'juno',
+  title: 'Juno',
+  kind: 'App · personal finance',
+  line: 'The new version of my finance app: a local-first personal and household tracker for the Linux desktop and iPhone, with optional sync between them.',
+  proof: 'Public on GitHub · Flutter',
+  part: 'Built solo',
+  href: 'https://github.com/Kronbii/juno',
+  motion: undefined,
+  shows: '',
+  alt: 'Juno’s home screen with demo data: the month’s spending, budgets, and accounts.',
+  size: 'one',
+  image: { src: '/images/vneo/juno-home.jpg', position: '0% 0%' },
+  external: true,
+}
+
+/**
+ * The work, as one tight grid, by importance: the biggest tiles for the work
+ * that matters most. The first four play in turn like a reel.
+ */
+export const showcase: ShowItem[] = [
+  {
+    ...workItem(
+      'omnisign-lebanese-sign-language',
+      { kind: 'scene', id: 'signers' },
+      'A hand read as tracked points, then turned into text on a phone, the web, or an offline device.'
+    ),
+    size: 'big',
+  },
+  {
+    ...workItem(
+      'brainiacs-autonomous-race-car',
+      { kind: 'shot', id: 'see' },
+      'The car’s camera view, its edges, its strongest corners, and the lock.'
+    ),
+    size: 'big',
+  },
+  {
+    ...workItem(
+      'daleel-lebanese-election-information',
+      { kind: 'scene', id: 'voters' },
+      'A fact, traced back to its source, with its history kept.'
+    ),
+    size: 'wide',
+  },
+  {
+    ...workItem(
+      'thermal-super-resolution',
+      { kind: 'shot', id: 'heat' },
+      'The low-resolution thermal input, swept by its ×3 output.'
+    ),
+    size: 'wide',
+  },
   {
     ...workItem(
       'upstream-open-source-contributions',
@@ -146,6 +183,14 @@ export const bento: (WorkItem & {
       'Five pull requests to Betaflight, PX4, and OpenFront: three merged.'
     ),
     size: 'wide',
+  },
+  {
+    ...workItem(
+      '360-spherical-panorama-stitching',
+      { kind: 'shot', id: 'map' },
+      '309 frames from one phone sweep, closing into one sphere.'
+    ),
+    size: 'one',
   },
   {
     ...workItem(
@@ -161,7 +206,7 @@ export const bento: (WorkItem & {
       { kind: 'shot', id: 'trace' },
       'A crack mask becomes candidate points, a spanning tree, and one smooth path.'
     ),
-    size: 'tall',
+    size: 'one',
   },
   {
     ...workItem('imagen-raw-to-edit-dataset-pipeline', undefined, ''),
@@ -181,27 +226,10 @@ export const bento: (WorkItem & {
       fit: 'contain',
     },
   },
-  {
-    ...workItem('ree-personal-finance-tracker', undefined, ''),
-    size: 'one',
-    image: {
-      src: '/images/authority/ree-finance/image1.jpeg',
-      position: '50% 30%',
-    },
-  },
+  juno,
 ]
-
-/**
- * The work, as one tight grid: the four featured pieces take the big tiles
- * and play in turn like a reel; the rest pack around them.
- */
-export const showcase: (typeof bento)[number][] = [
-  { ...featured[0], size: 'big' },
-  { ...featured[2], size: 'wide' },
-  { ...featured[1], size: 'one' },
-  { ...featured[3], size: 'one' },
-  ...bento,
-]
+/** How many of the first tiles play in turn when the grid arrives. */
+export const FEATURED = 4
 
 /** In the community: the work built for people, and the rooms where it is shared. */
 const scene = (id: Chapter['id']) => chapters.find((c) => c.id === id)!
@@ -209,11 +237,10 @@ export const community = {
   label: 'In the community',
   title: 'Built for people, and shared in person.',
   hot: 'people',
-  lede: 'Software for families in a crisis, clinics, and people who sign; a desk for students; and the talks and workshops where I teach what I know.',
+  lede: 'Software for families in a crisis and for clinics, a desk for students, and the talks and workshops where I teach what I know.',
   built: [
     { ...scene('families'), size: 'big' as const },
-    { ...scene('clinics'), size: 'one' as const },
-    { ...scene('signers'), size: 'one' as const },
+    { ...scene('clinics'), size: 'tall' as const },
     { ...scene('students'), size: 'one' as const },
   ],
   talk: {
@@ -224,7 +251,7 @@ export const community = {
       'On-Device Multimodal Assistants: Can We Fit GPT-Vision on Small Hardware?',
     note: 'Quantization, memory budgets, and hardware acceleration, ending with a live demo.',
     demo: 'Live demo',
-    href: noteHref('talks-workshops-and-teaching'),
+    href: writingHref('talks-workshops-and-teaching'),
   },
   workshops: {
     label: 'Workshops',
@@ -233,31 +260,30 @@ export const community = {
       'CodewithSerah bootcamp · January 2026',
       'LAU Byblos Software Engineering Club · April 2026',
     ],
-    href: noteHref('talks-workshops-and-teaching'),
+    href: writingHref('talks-workshops-and-teaching'),
   },
   mentoring: {
     label: 'Mentoring',
     title: 'NASA Space Apps, Beirut',
     years: ['2021', '2022', '2023', '2024'],
     note: 'Lead technical organizer, per my CV: bootcamps on NASA data, problem selection, and prototyping for its teams.',
-    href: noteHref('what-four-years-of-technical-mentoring-taught-me'),
+    href: writingHref('what-four-years-of-technical-mentoring-taught-me'),
   },
   read: 'Read more',
 }
 
-/** Already shown above, so "More of the work" lists only the rest. */
+/** Already shown above, so "More of the work" lists only the rest; REE is superseded by Juno. */
 export const shownAbove = new Set([
-  ...featured.map((f) => f.slug),
-  ...bento.map((b) => b.slug),
+  ...showcase.map((t) => t.slug),
   'basira-retinal-screening',
-  'omnisign-lebanese-sign-language',
   'posture-aware-classroom-desk',
+  'ree-personal-finance-tracker',
 ])
 
 const note = (slug: string) => {
   const a = getArticle(slug)
   return a && a.state === 'ready'
-    ? { title: a.title, dek: a.dek, href: noteHref(a.slug) }
+    ? { title: a.title, dek: a.dek, href: writingHref(a.slug) }
     : undefined
 }
 
@@ -281,13 +307,38 @@ export const vneo = {
       { label: 'Contact', href: '#sign-off' },
     ],
   },
-  glance: v3Home.creds.map((c) => ({ ...c, href: rebase(c.href, VN) })),
+  glance: [
+    {
+      big: 'Now',
+      label: 'Embedded Systems Engineer at Oreyeon',
+      note: 'real-time vision for runway safety',
+      href: siteConfig.employer.url,
+    },
+    {
+      big: '3×',
+      label: 'Co-founder',
+      note: 'Evoid · NASNA · OmniSign',
+      href: `${VN}#community`,
+    },
+    {
+      big: '2025',
+      label: 'Mechatronics engineer, RHU',
+      note: 'graduated with a full master’s scholarship',
+      href: siteConfig.education.url,
+    },
+    {
+      big: 'Mentor',
+      label: 'Speaker and mentor',
+      note: 'GDG DevFest Tripoli · NASA Space Apps Beirut',
+      href: writingHref('talks-workshops-and-teaching'),
+    },
+  ],
   work: {
     no: 2,
-    label: 'Selected work',
-    title: 'Work you can watch work.',
-    hot: 'watch',
-    lede: 'The first four play as a reel when you arrive; hover any piece to see it again, or watch it full size. Every one says what it does, my part, and the fact to check.',
+    label: 'Work',
+    title: 'Selected projects.',
+    hot: 'projects',
+    lede: 'The most important come first and play as you arrive; hover any to see it again, or press Watch for the full view. Each says what it does, my part, and the fact to check.',
     all: 'All projects',
     open: 'Open the project',
     watch: 'Watch',
@@ -308,7 +359,7 @@ export const vneo = {
     ]
       .map(note)
       .filter((n): n is NonNullable<typeof n> => !!n),
-    all: { label: 'All writing', href: '/writing' },
+    all: { label: 'All writing', href: `${VN}/writing` },
   },
   more: {
     label: 'More of the work',

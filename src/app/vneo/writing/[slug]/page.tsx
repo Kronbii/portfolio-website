@@ -1,0 +1,129 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+
+import { JsonLd } from '@/components/v2/json-ld'
+import { articleJsonLd, liveCrumbs } from '@/components/v2/schema'
+import { BackButton } from '@/components/vneo/back'
+import { getArticle, getProject, readyArticles } from '@/content/authority'
+import { sourceKindLabel } from '@/content/v2/record'
+import { VN, workHref, writingHref } from '@/content/vneo/site'
+
+interface Props {
+  params: Promise<{ slug: string }>
+}
+
+const ready = (slug: string) => {
+  const a = getArticle(slug)
+  return a && a.state === 'ready' ? a : undefined
+}
+
+export function generateStaticParams() {
+  return readyArticles.map((a) => ({ slug: a.slug }))
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params
+  const a = ready(slug)
+  if (!a) return { title: 'Not found', robots: { index: false, follow: false } }
+  return {
+    title: { absolute: a.metaTitle },
+    description: a.metaDescription,
+    alternates: { canonical: `/writing/${slug}` },
+    robots: { index: false, follow: false },
+  }
+}
+
+/** A note, set to read, with a way back. */
+export default async function VneoArticle({ params }: Props) {
+  const { slug } = await params
+  const a = ready(slug)
+  if (!a) notFound()
+  const project = a.projectSlug ? getProject(a.projectSlug) : undefined
+  const companion = project && project.state === 'ready' ? project : undefined
+  const at = readyArticles.findIndex((x) => x.slug === slug)
+  const next = readyArticles[(at + 1) % readyArticles.length]
+
+  return (
+    <>
+      <JsonLd
+        data={[
+          articleJsonLd(a),
+          liveCrumbs([
+            { label: 'Home', href: '/' },
+            { label: 'Writing', href: '/writing' },
+            { label: a.title, href: `/writing/${a.slug}` },
+          ]),
+        ]}
+      />
+      <article className="vn-article">
+        <div className="vn-backbar">
+          <BackButton fallback={`${VN}/writing`} label="Back" />
+          <nav className="v7-crumbs" aria-label="Breadcrumb">
+            <ol>
+              <li>
+                <Link href={VN}>Home</Link>
+              </li>
+              <li>
+                <Link href={`${VN}/writing`}>Writing</Link>
+              </li>
+              <li aria-current="page">{a.title}</li>
+            </ol>
+          </nav>
+        </div>
+        <header className="vn-article-head">
+          <span className="v7-label">
+            <i aria-hidden="true" />
+            Writing
+          </span>
+          <h1 data-lens="">{a.title}</h1>
+          <p className="vn-article-dek">{a.dek}</p>
+          {companion ? (
+            <Link className="v7-go" href={workHref(companion.slug, VN)}>
+              The project: {companion.title.split(' — ')[0]} →
+            </Link>
+          ) : null}
+        </header>
+        <div className="vn-article-body">
+          {a.body.map((b, i) =>
+            b.kind === 'h2' ? (
+              <h2 key={i}>{b.text}</h2>
+            ) : b.kind === 'h3' ? (
+              <h3 key={i}>{b.text}</h3>
+            ) : (
+              <p key={i}>{b.text}</p>
+            )
+          )}
+        </div>
+        <section className="vn-article-evidence" aria-labelledby="evidence-h">
+          <h2 id="evidence-h">Evidence and links</h2>
+          <p className="vn-article-ev">{a.evidence}</p>
+          {a.sources.length ? (
+            <ul className="v7-sources">
+              {a.sources.map((s) => (
+                <li key={s.href}>
+                  <a href={s.href} rel="noopener" target="_blank">
+                    <span className="v7-source-k">
+                      {sourceKindLabel[s.kind]}
+                    </span>
+                    <span className="v7-source-l">{s.label} ↗</span>
+                    {s.note ? (
+                      <span className="v7-source-n">{s.note}</span>
+                    ) : null}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </section>
+        <nav className="vn-article-foot" aria-label="More writing">
+          <BackButton fallback={`${VN}/writing`} label="Back" />
+          <Link className="vn-article-next" href={writingHref(next.slug)}>
+            <span>Next note</span>
+            <b>{next.title} →</b>
+          </Link>
+        </nav>
+      </article>
+    </>
+  )
+}

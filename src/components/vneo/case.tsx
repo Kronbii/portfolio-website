@@ -7,9 +7,10 @@ import { SceneFor } from '@/components/v7/chapter'
 import { Plate } from '@/components/v7/plate'
 import { getArticle } from '@/content/authority'
 import { projectImages, sourceKindLabel } from '@/content/v2/record'
-import { noteHref, workBySlug, works } from '@/content/v3/work'
-import { VN, chapterOf, reel, workHref } from '@/content/vneo/site'
+import { workBySlug, works } from '@/content/v3/work'
+import { VN, chapterOf, reel, workHref, writingHref } from '@/content/vneo/site'
 
+import { BackButton } from './back'
 import { CaseShot } from './case-shot'
 
 /*
@@ -55,7 +56,7 @@ export function Case({ slug }: { slug: string }) {
   const lead = PRIVATE_MEDIA.has(slug) ? undefined : (plain.image ?? images[0])
   const article = getArticle(p.articleSlug)
   const note =
-    article && article.state === 'ready' ? noteHref(article.slug) : undefined
+    article && article.state === 'ready' ? writingHref(article.slug) : undefined
   const src =
     p.sources.find((s) => s.kind === 'demo') ??
     p.sources.find((s) => s.kind === 'repository') ??
@@ -74,17 +75,20 @@ export function Case({ slug }: { slug: string }) {
         ]}
       />
       <article className="v7-case">
-        <nav className="v7-crumbs" aria-label="Breadcrumb">
-          <ol>
-            <li>
-              <Link href={VN}>{T.home}</Link>
-            </li>
-            <li>
-              <Link href={`${VN}/projects`}>{T.projects}</Link>
-            </li>
-            <li aria-current="page">{p.title.split(' — ')[0]}</li>
-          </ol>
-        </nav>
+        <div className="vn-backbar">
+          <BackButton fallback={`${VN}/projects`} label="Back" />
+          <nav className="v7-crumbs" aria-label="Breadcrumb">
+            <ol>
+              <li>
+                <Link href={VN}>{T.home}</Link>
+              </li>
+              <li>
+                <Link href={`${VN}/projects`}>{T.projects}</Link>
+              </li>
+              <li aria-current="page">{p.title.split(' — ')[0]}</li>
+            </ol>
+          </nav>
+        </div>
         <header className="v7-ch v7-case-head">
           <div className="v7-ch-text">
             <span className="v7-label">
@@ -257,6 +261,12 @@ export function Case({ slug }: { slug: string }) {
           </ul>
         </section>
 
+        <div className="vn-case-foot">
+          <BackButton fallback={`${VN}/projects`} label="Back" />
+          <Link className="v7-go quiet" href={`${VN}/projects`}>
+            All projects →
+          </Link>
+        </div>
         <nav className="v7-next" aria-label={T.next}>
           <Link href={workHref(next.project.slug, VN)}>
             <span>{T.next}</span>

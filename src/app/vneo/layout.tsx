@@ -11,6 +11,7 @@ import { INTRO_PRELOAD } from '@/components/v2/intro/timing'
 import '@/components/v6/scenes.css'
 import { Lens } from '@/components/v7/lens'
 import '@/components/v7/v7.css'
+import { NavTrail } from '@/components/vneo/back'
 import { Cursor } from '@/components/vneo/cursor'
 import '@/components/vneo/vneo.css'
 import { VN, vneoChrome } from '@/content/vneo/site'
@@ -93,6 +94,7 @@ export default function VneoLayout({
         </p>
         <p>{vneoChrome.footer.copyright}</p>
       </footer>
+      <NavTrail />
       <Lens />
       <Cursor />
     </div>

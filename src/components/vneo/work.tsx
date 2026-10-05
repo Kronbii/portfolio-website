@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { showcase, vneo, VN } from '@/content/vneo/site'
+import { FEATURED, showcase, vneo, VN } from '@/content/vneo/site'
 
 import { Motion, replayIn } from './motion'
 import { Slate } from './slate'
@@ -19,7 +19,6 @@ import { Slate } from './slate'
  */
 
 const STEP = 3300 // ms per featured piece in the opening run
-const FEATURED = 4 // the first four tiles of the showcase
 
 export function Work() {
   const c = vneo.work
@@ -123,11 +122,21 @@ export function Work() {
             onPointerEnter={(ev) => replayIn(ev.currentTarget)}
             onFocusCapture={(ev) => replayIn(ev.currentTarget)}
           >
-            <Link
-              href={item.href}
-              className="vn-tile-link"
-              aria-label={`${item.title}: ${item.line}`}
-            />
+            {item.external ? (
+              <a
+                href={item.href}
+                className="vn-tile-link"
+                target="_blank"
+                rel="noopener"
+                aria-label={`${item.title}: ${item.line} (opens GitHub)`}
+              />
+            ) : (
+              <Link
+                href={item.href}
+                className="vn-tile-link"
+                aria-label={`${item.title}: ${item.line}`}
+              />
+            )}
             <div
               className="vn-tile-media"
               aria-hidden="true"

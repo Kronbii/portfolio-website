@@ -1359,3 +1359,251 @@
     border-top: 1px solid var(--hair);
   }
 }
+
+/* ---------- back, on every project and writing page ---------- */
+[data-vneo] .vn-backbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 18px;
+}
+[data-vneo] .v7-case > .vn-backbar {
+  padding: 0 var(--gutter);
+}
+[data-vneo] .vn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px 9px 12px;
+  border-radius: 999px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--hair2);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
+}
+[data-vneo] .vn-back svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.25s var(--ease);
+}
+[data-vneo] .vn-back:hover {
+  background: var(--sage);
+  color: var(--sage-ink);
+  box-shadow: none;
+}
+[data-vneo] .vn-back:hover svg {
+  transform: translateX(-3px);
+}
+[data-vneo] .vn-case-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 22px;
+  max-width: 1200px;
+  margin: clamp(56px, 9vh, 96px) auto 0;
+  padding: 0 var(--gutter);
+}
+[data-vneo] .vn-case-foot + .v7-next {
+  margin-top: 28px;
+}
+
+/* ---------- the writing, inside Vneo ---------- */
+[data-vneo] .vn-index .vn-backbar {
+  margin-bottom: 4px;
+}
+[data-vneo] .vn-notes-list {
+  margin-top: clamp(28px, 5vh, 44px);
+  max-width: 1100px;
+}
+[data-vneo] .vn-notes-list a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 6px 36px;
+  padding: 20px 0;
+  border-top: 1px solid var(--hair);
+}
+[data-vneo] .vn-notes-list b {
+  font-weight: 600;
+  font-size: 1.15rem;
+  line-height: 1.25;
+  transition: color 0.2s;
+}
+[data-vneo] .vn-notes-list span {
+  color: var(--ink3);
+}
+[data-vneo] .vn-notes-list a:hover b {
+  color: var(--sage);
+}
+@media (max-width: 760px) {
+  [data-vneo] .vn-notes-list a {
+    grid-template-columns: 1fr;
+  }
+}
+[data-vneo] .vn-article {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(100px, 14vh, 140px) var(--gutter) clamp(48px, 8vh, 80px);
+  box-sizing: content-box;
+}
+[data-vneo] .vn-article-head {
+  margin-top: clamp(28px, 5vh, 48px);
+}
+[data-vneo] .vn-article-head h1 {
+  margin-top: 16px;
+  font-weight: 700;
+  font-size: clamp(2.1rem, 4.6vw, 3.6rem);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+[data-vneo] .vn-article-dek {
+  margin: 18px 0 20px;
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: clamp(1.25rem, 2vw, 1.55rem);
+  line-height: 1.4;
+  color: var(--ink2);
+}
+[data-vneo] .vn-article-body {
+  margin-top: clamp(32px, 5vh, 48px);
+  padding-top: clamp(24px, 4vh, 36px);
+  border-top: 1px solid var(--hair2);
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+[data-vneo] .vn-article-body p {
+  max-width: 68ch;
+  margin: 0 0 1.2em;
+  color: rgba(var(--ink-rgb), 0.88);
+}
+[data-vneo] .vn-article-body h2 {
+  margin: 1.8em 0 0.6em;
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+[data-vneo] .vn-article-body h3 {
+  margin: 1.5em 0 0.5em;
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--sage);
+}
+[data-vneo] .vn-article-evidence {
+  margin-top: clamp(40px, 7vh, 64px);
+}
+[data-vneo] .vn-article-evidence h2 {
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+}
+[data-vneo] .vn-article-ev {
+  margin-top: 10px;
+  color: var(--ink3);
+}
+[data-vneo] .vn-article-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: clamp(48px, 8vh, 80px);
+  padding-top: 24px;
+  border-top: 1px solid var(--hair2);
+}
+[data-vneo] .vn-article-next {
+  text-align: right;
+}
+[data-vneo] .vn-article-next span {
+  display: block;
+  color: var(--ink3);
+  font-size: 0.9rem;
+}
+[data-vneo] .vn-article-next b {
+  font-weight: 600;
+  transition: color 0.2s;
+}
+[data-vneo] .vn-article-next:hover b {
+  color: var(--sage);
+}
+
+/* ---------- the bento grids, a size smaller ---------- */
+[data-vneo] :is(.vn-bento, .vn-cbento) {
+  width: min(1180px, calc(100% - 2 * var(--gutter)));
+  margin-inline: auto;
+  padding: 0;
+  gap: 12px;
+}
+[data-vneo] :is(.vn-tile, .vn-ctile) {
+  border-radius: 20px;
+}
+[data-vneo] .vn-tile-media {
+  aspect-ratio: 16 / 9;
+}
+[data-vneo] .vn-tile.is-big .vn-tile-media {
+  min-height: 260px;
+}
+[data-vneo] .vn-ctile.is-big .vn-tile-media {
+  min-height: 280px;
+}
+[data-vneo] .vn-tile-cap {
+  gap: 5px;
+  padding: 12px 14px 14px;
+}
+[data-vneo] .vn-tile-cap h3 {
+  font-size: 1.02rem;
+}
+[data-vneo] .vn-tile.is-big .vn-tile-cap h3 {
+  font-size: 1.25rem;
+}
+[data-vneo] .vn-tile-cap p {
+  font-size: 0.88rem;
+  -webkit-line-clamp: 2;
+}
+[data-vneo] .vn-badge {
+  font-size: 0.78rem;
+  padding: 3px 9px;
+}
+[data-vneo] .vn-figure b {
+  font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+}
+[data-vneo] .vn-ctile.is-tall {
+  grid-row: span 2;
+}
+[data-vneo] .vn-ctile.is-tall .vn-tile-media {
+  aspect-ratio: auto;
+  flex: 1;
+  min-height: 220px;
+}
+/* scenes in wide tiles show whole (no cropping their top and bottom) */
+[data-vneo] .vn-tile-media[data-fit='full'] .v7-stage {
+  --k: min(tan(atan2(100cqw, 1200px)), tan(atan2(100cqh, 1200px)));
+}
+[data-vneo] .vn-talk-slide,
+[data-vneo] .vn-years,
+[data-vneo] .vn-git {
+  margin: 12px 12px 0;
+}
+[data-vneo] .vn-talk-slide {
+  min-height: 180px;
+  padding: 22px 22px 18px;
+}
+@media (max-width: 560px) {
+  [data-vneo] .vn-ctile.is-tall {
+    grid-row: auto;
+  }
+  [data-vneo] .vn-ctile.is-tall .vn-tile-media {
+    flex: none;
+    aspect-ratio: 1;
+  }
+}

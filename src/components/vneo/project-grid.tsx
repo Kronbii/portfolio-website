@@ -17,6 +17,8 @@ export interface GridItem {
   field: string
   href: string
   image?: { src: string; position?: string; contain?: boolean }
+  /** Opens outside the site. */
+  external?: boolean
 }
 
 export function ProjectGrid({
