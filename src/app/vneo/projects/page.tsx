@@ -2,18 +2,23 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { JsonLd } from '@/components/v2/json-ld'
-import { collectionJsonLd, liveCrumbs } from '@/components/v2/schema'
-import { VN, chapters, groups, reel, works } from '@/content/vneo/site'
+import { liveCrumbs, collectionJsonLd } from '@/components/v2/schema'
+import { ProjectGrid, type GridItem } from '@/components/vneo/project-grid'
+import { projectImages } from '@/content/v2/record'
+import { fields } from '@/content/v3/work'
+import { VN, workHref, works } from '@/content/vneo/site'
 
 const copy = {
   title: 'Projects',
   description:
-    'Every project Rami Kronbi has published, by who it serves: voters, families in a crisis, clinics, people who sign, students, learners, and engineers.',
+    'Every project Rami Kronbi has published: robots and drones, vision and AI, health, civic, open-source work, and tools, each in one plain sentence with one fact to check.',
   lede: (n: number) =>
-    `${n} projects, by who they serve. Each in a sentence; the whole story is a click away.`,
-  people: 'Built for people',
-  hood: 'Under the hood',
+    `${n} projects. Each in a sentence, with the one fact you can check; the whole story is a click away.`,
+  all: 'All',
 }
+
+/** Imagen's photographs belong to its client. */
+const PRIVATE_MEDIA = new Set(['imagen-raw-to-edit-dataset-pipeline'])
 
 export const metadata: Metadata = {
   title: { absolute: 'Projects — Rami Kronbi' },
@@ -23,6 +28,28 @@ export const metadata: Metadata = {
 }
 
 export default function VneoProjects() {
+  const items: GridItem[] = works.map(({ project: p, plain }) => {
+    const img = PRIVATE_MEDIA.has(p.slug)
+      ? undefined
+      : (plain.image ??
+        projectImages(p).find((m) => !/\.(gif|svg)$/.test(m.src)))
+    return {
+      slug: p.slug,
+      title: p.title.split(' — ')[0],
+      kind: plain.kind,
+      line: plain.line,
+      proof: plain.proof,
+      field: plain.field,
+      href: workHref(p.slug, VN),
+      image: img
+        ? {
+            src: img.src,
+            position: plain.image?.position,
+            contain: /sign-|schematic|\.png$/.test(img.src),
+          }
+        : undefined,
+    }
+  })
   return (
     <>
       <JsonLd
@@ -39,7 +66,7 @@ export default function VneoProjects() {
           ]),
         ]}
       />
-      <section className="v7-index">
+      <section className="v7-index vn-index">
         <nav className="v7-crumbs" aria-label="Breadcrumb">
           <ol>
             <li>
@@ -52,59 +79,7 @@ export default function VneoProjects() {
           {copy.title}
         </h1>
         <p className="v7-more-lede">{copy.lede(works.length)}</p>
-        <div className="v7-groups">
-          <div className="v7-group">
-            <h2 className="v7-group-h">{copy.people}</h2>
-            <ul>
-              {chapters.map((c) => (
-                <li key={c.id}>
-                  <Link href={c.link.href}>
-                    <b>{c.name}</b>
-                    <span>
-                      {c.label}: {c.title}
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="v7-group">
-            <h2 className="v7-group-h">{copy.hood}</h2>
-            <ul>
-              {reel
-                .filter((r) => !chapters.some((c) => c.link.href === r.href))
-                .map((r) => (
-                  <li key={r.id}>
-                    <Link href={r.href}>
-                      <b>{r.title}</b>
-                      <span>{r.line}</span>
-                    </Link>
-                  </li>
-                ))}
-            </ul>
-          </div>
-          {groups.map((g) => {
-            const items = g.items.filter(
-              (it) => !reel.some((r) => r.href === it.href)
-            )
-            if (!items.length) return null
-            return (
-              <div key={g.label} className="v7-group">
-                <h2 className="v7-group-h">{g.label}</h2>
-                <ul>
-                  {items.map((it) => (
-                    <li key={it.href}>
-                      <Link href={it.href}>
-                        <b>{it.title}</b>
-                        <span>{it.line}</span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )
-          })}
-        </div>
+        <ProjectGrid items={items} fields={fields} all={copy.all} />
       </section>
     </>
   )

@@ -24,6 +24,14 @@ export const VN = '/vneo'
 
 export const chapters: Chapter[] = buildChapters(VN)
 export const groups = buildGroups(VN)
+/** "More of the work": the groups, minus what the page already shows. */
+export const moreGroups = () =>
+  groups
+    .map((g) => ({
+      ...g,
+      items: g.items.filter((it) => !shownAbove.has(it.href.split('/').pop()!)),
+    }))
+    .filter((g) => g.items.length)
 export const chapterOf = (slug: string) =>
   chapters.find((c) => c.link.href === workHref(slug, VN))
 
@@ -78,6 +86,158 @@ export const reel = (
 })
 export type ReelId = (typeof reel)[number]['id']
 
+/** Work: four told in motion (the sticky player), then the rest at a glance (the bento). */
+type Motion =
+  | { kind: 'shot'; id: ReelId }
+  | { kind: 'scene'; id: Chapter['id'] }
+const workItem = (slug: string, motion: Motion | undefined, shows: string) => {
+  const w = workBySlug(slug)!
+  return {
+    slug,
+    title: w.project.title.split(' — ')[0],
+    kind: w.plain.kind,
+    line: w.plain.line,
+    proof: w.plain.proof,
+    part: w.plain.part,
+    href: workHref(slug, VN),
+    motion,
+    shows,
+    alt:
+      motion?.kind === 'shot'
+        ? shotAlt[motion.id]
+        : (chapters.find((c) => c.id === motion?.id)?.alt ?? w.plain.line),
+  }
+}
+export type WorkItem = ReturnType<typeof workItem>
+
+export const featured: WorkItem[] = [
+  workItem(
+    'brainiacs-autonomous-race-car',
+    { kind: 'shot', id: 'see' },
+    'The car’s camera view, its edges, its strongest corners, and the lock.'
+  ),
+  workItem(
+    'daleel-lebanese-election-information',
+    { kind: 'scene', id: 'voters' },
+    'A fact, traced back to its source, with its history kept.'
+  ),
+  workItem(
+    'thermal-super-resolution',
+    { kind: 'shot', id: 'heat' },
+    'The low-resolution thermal input, swept by its ×3 output.'
+  ),
+  workItem(
+    '360-spherical-panorama-stitching',
+    { kind: 'shot', id: 'map' },
+    '309 frames from one phone sweep, closing into one sphere.'
+  ),
+]
+
+export type TileSize = 'wide' | 'tall' | 'one'
+export const bento: (WorkItem & {
+  size: TileSize
+  image?: { src: string; position?: string; fit?: 'contain' }
+  figure?: { from: string; fromNote: string; to: string; toNote: string }
+})[] = [
+  {
+    ...workItem(
+      'upstream-open-source-contributions',
+      { kind: 'shot', id: 'ship' },
+      ''
+    ),
+    size: 'wide',
+  },
+  {
+    ...workItem('easypid-arduino-library', { kind: 'shot', id: 'tune' }, ''),
+    size: 'one',
+  },
+  {
+    ...workItem(
+      'fine-crack-tracing-toolkit',
+      { kind: 'shot', id: 'trace' },
+      ''
+    ),
+    size: 'tall',
+  },
+  {
+    ...workItem('imagen-raw-to-edit-dataset-pipeline', undefined, ''),
+    size: 'one',
+    figure: {
+      from: '2–3',
+      fromNote: 'a day, team of three',
+      to: '~40',
+      toNote: 'a day, per person',
+    },
+  },
+  {
+    ...workItem('lebanese-motorcycle-theory-trainer', undefined, ''),
+    size: 'one',
+    image: {
+      src: '/images/authority/motorcycle-trainer/sign-127.webp',
+      fit: 'contain',
+    },
+  },
+  {
+    ...workItem('ree-personal-finance-tracker', undefined, ''),
+    size: 'one',
+    image: {
+      src: '/images/authority/ree-finance/image1.jpeg',
+      position: '50% 30%',
+    },
+  },
+]
+
+/** In the community: the work built for people, and the rooms where it is shared. */
+const scene = (id: Chapter['id']) => chapters.find((c) => c.id === id)!
+export const community = {
+  label: 'In the community',
+  title: 'Built for people, and shared in person.',
+  hot: 'people',
+  lede: 'Software for families in a crisis, clinics, and people who sign; a desk for students; and the talks and workshops where I teach what I know.',
+  built: [
+    { ...scene('families'), size: 'big' as const },
+    { ...scene('clinics'), size: 'one' as const },
+    { ...scene('signers'), size: 'one' as const },
+    { ...scene('students'), size: 'one' as const },
+  ],
+  talk: {
+    label: 'Speaker',
+    event: 'GDG DevFest Tripoli 2025',
+    when: '20 December 2025',
+    title:
+      'On-Device Multimodal Assistants: Can We Fit GPT-Vision on Small Hardware?',
+    note: 'Quantization, memory budgets, and hardware acceleration, ending with a live demo.',
+    demo: 'Live demo',
+    href: noteHref('talks-workshops-and-teaching'),
+  },
+  workshops: {
+    label: 'Workshops',
+    title: 'Git & GitHub, hands on',
+    items: [
+      'CodewithSerah bootcamp · January 2026',
+      'LAU Byblos Software Engineering Club · April 2026',
+    ],
+    href: noteHref('talks-workshops-and-teaching'),
+  },
+  mentoring: {
+    label: 'Mentoring',
+    title: 'NASA Space Apps, Beirut',
+    years: ['2021', '2022', '2023', '2024'],
+    note: 'Lead technical organizer, per my CV: bootcamps on NASA data, problem selection, and prototyping for its teams.',
+    href: noteHref('what-four-years-of-technical-mentoring-taught-me'),
+  },
+  read: 'Read more',
+}
+
+/** Already shown above, so "More of the work" lists only the rest. */
+export const shownAbove = new Set([
+  ...featured.map((f) => f.slug),
+  ...bento.map((b) => b.slug),
+  'basira-retinal-screening',
+  'omnisign-lebanese-sign-language',
+  'posture-aware-classroom-desk',
+])
+
 const note = (slug: string) => {
   const a = getArticle(slug)
   return a && a.state === 'ready'
@@ -91,39 +251,32 @@ export const vneo = {
     description:
       'Rami Kronbi is a robotics, embedded, and systems engineer in Beirut who builds for people: election information for voters, crisis coordination for displaced families, second readings for clinics, and robots that steer themselves.',
   },
-  glance: v3Home.creds.map((c) => ({ ...c, href: rebase(c.href, VN) })),
-  reel: {
-    label: 'Under the hood',
-    title: 'The engineering, in motion.',
-    hot: 'motion',
-    lede: 'Six pieces of the work, the way the flight reel cuts them. Each plays, holds, and hands over to the next; pick any to see it again.',
-    open: 'Open the project',
-    pause: 'Pause',
-    play: 'Play',
-  },
-  tracker: {
-    ...v2Home.lightField,
-    label: 'A small experiment',
-    links: [
-      {
-        label: 'PID Light Tracker',
-        href: workHref('pid-light-tracking-robot', VN),
-      },
-      { label: 'easyPID', href: workHref('easypid-arduino-library', VN) },
-      {
-        label: 'What a two-axis light tracker teaches',
-        href: noteHref(
-          'what-a-two-axis-light-tracker-teaches-about-pid-control'
-        ),
-      },
+  hero: {
+    id: 'ID lock · engineer',
+    first: 'Rami',
+    last: 'Kronbi',
+    sub: 'Robotics, embedded & systems engineer',
+    line: 'I build for people: voters, clinics, students, people who sign, and families in a crisis.',
+    where: siteConfig.location.replace(', ', ' · '),
+    now: v3Home.hero.now,
+    chips: [
+      { label: 'Work', href: '#work' },
+      { label: 'Community', href: '#community' },
+      { label: 'Contact', href: '#sign-off' },
     ],
   },
-  path: {
-    label: 'The path',
-    title: 'The path so far, one waypoint at a time.',
-    hot: 'waypoint',
-    points: v3Home.log.points.map((p) => ({ ...p, href: rebase(p.href, VN) })),
+  glance: v3Home.creds.map((c) => ({ ...c, href: rebase(c.href, VN) })),
+  work: {
+    no: 2,
+    label: 'Selected work',
+    title: 'Work you can watch work.',
+    hot: 'watch',
+    lede: 'Four pieces in motion, then the rest at a glance. Every one says what it does, my part, and the fact to check.',
+    all: 'All projects',
+    open: 'Open the project',
+    playing: 'Now showing',
   },
+
   notes: {
     label: 'Writing',
     title: 'How the work was done.',
@@ -140,7 +293,7 @@ export const vneo = {
   },
   more: {
     label: 'More of the work',
-    title: 'Everything else, by who it serves.',
+    title: 'And the rest, by who it serves.',
     hot: 'serves',
     all: 'Every project',
   },
@@ -151,25 +304,10 @@ export const vneoChrome = {
   brand: 'Rami Kronbi',
   skip: 'Skip to content',
   nav: [
-    { label: 'Work', href: `${VN}#voters` },
-    { label: 'Under the hood', href: `${VN}#reel` },
+    { label: 'Work', href: `${VN}#work` },
+    { label: 'Community', href: `${VN}#community` },
     { label: 'Projects', href: `${VN}/projects` },
     { label: 'Contact', href: `${VN}#sign-off` },
-  ],
-  /** The chapter rail: where you are on the page. */
-  rail: [
-    { id: 'top', label: 'Rami Kronbi' },
-    { id: 'voters', label: 'For voters' },
-    { id: 'families', label: 'For families in a crisis' },
-    { id: 'clinics', label: 'For clinics' },
-    { id: 'signers', label: 'For people who sign' },
-    { id: 'students', label: 'For students' },
-    { id: 'machines', label: 'Machines that move' },
-    { id: 'reel', label: 'Under the hood' },
-    { id: 'tracker', label: 'A small experiment' },
-    { id: 'path', label: 'The path' },
-    { id: 'more', label: 'More of the work' },
-    { id: 'sign-off', label: 'Contact' },
   ],
   footer: {
     note: 'This is /vneo, the candidate for ramikronbi.com. It is not indexed yet; the live site stays canonical until it is promoted.',

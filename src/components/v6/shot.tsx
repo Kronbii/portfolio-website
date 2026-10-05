@@ -61,6 +61,8 @@ export interface ShotMode {
   speed: number
   /** Called when a shot reaches its hold. */
   onDone?: (scene: string) => void
+  /** false: rest on the last frame until asked (its replay control), instead of rolling on sight. */
+  autoplay?: boolean
 }
 export const ShotModeContext = createContext<ShotMode>({
   calm: false,
@@ -176,8 +178,9 @@ export function Shot({
     }, root)
     // nothing has played yet: the stage holds the scene's first frame, hidden until it rolls
     tl.current?.progress(0)
-    if (!reduce && host.current) host.current.dataset.armed = ''
-    if (reduce) {
+    const still = !reduce && modeRef.current.autoplay === false
+    if (!reduce && !still && host.current) host.current.dataset.armed = ''
+    if (reduce || still) {
       played.current = true
       tl.current?.progress(1)
       paint(hold, false)

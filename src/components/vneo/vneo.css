@@ -5,26 +5,8 @@
  * chapter rail (v4), and the flown path (v5 and v3).
  */
 
-/* ---------- shared section heads ---------- */
-[data-vneo] :is(.vn-tracker, .vn-path, .vn-sec) h2 {
-  margin-top: 18px;
-  font-weight: 600;
-  font-size: clamp(2rem, 3.6vw, 3.4rem);
-  line-height: 1.08;
-  letter-spacing: -0.03em;
-  text-wrap: balance;
-}
-[data-vneo] .vn-sec {
-  padding: clamp(80px, 14vh, 140px) var(--gutter);
-}
-[data-vneo] .vn-sec-lede {
-  margin-top: 16px;
-  max-width: 54ch;
-  color: var(--ink2);
-}
-
-/* ---------- under the hood: the reel's scenes, in Sage ---------- */
-[data-vneo] .vn-reel {
+/* ---------- the reel's scenes (v6), in Sage: their tokens, mapped ---------- */
+[data-vneo] {
   --accent: var(--sage);
   --accent-rgb: var(--sage-rgb);
   --accent2: var(--sage2);
@@ -39,126 +21,13 @@
   --paper-12: rgba(var(--ink-rgb), 0.12);
   --ground: #121614;
   --ground-rgb: 18, 22, 20;
-  margin-top: clamp(28px, 5vh, 48px);
-  max-width: 1320px;
 }
-[data-vneo] .vn-reel-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 18px;
-}
-[data-vneo] .vn-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-[data-vneo] .vn-tab {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px 8px 10px;
-  border: 0;
-  border-radius: 999px;
-  background: var(--surface);
-  box-shadow: inset 0 0 0 1px var(--hair);
-  color: var(--ink2);
-  font-weight: 500;
-  cursor: pointer;
-  transition:
-    background 0.2s,
-    color 0.2s,
-    box-shadow 0.2s;
-}
-[data-vneo] .vn-tab-n {
-  display: grid;
-  place-items: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: var(--raised);
-  font-size: 0.8rem;
-  color: var(--ink3);
-}
-[data-vneo] .vn-tab:hover {
-  color: var(--ink);
-}
-[data-vneo] .vn-tab[aria-selected='true'] {
-  background: rgba(var(--sage-rgb), 0.14);
-  box-shadow: inset 0 0 0 1px rgba(var(--sage-rgb), 0.55);
-  color: var(--sage);
-}
-[data-vneo] .vn-tab[aria-selected='true'] .vn-tab-n {
-  background: var(--sage);
-  color: var(--sage-ink);
-}
-[data-vneo] .vn-reel-auto {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  border: 0;
-  border-radius: 999px;
-  background: none;
-  color: var(--ink3);
-  cursor: pointer;
-}
-[data-vneo] .vn-reel-auto:hover {
-  color: var(--sage);
-}
-[data-vneo] .vn-reel-auto svg {
-  width: 14px;
-  height: 14px;
-  fill: currentColor;
-  stroke: currentColor;
-  stroke-width: 2.2;
-  stroke-linecap: round;
-}
-[data-vneo] .vn-reel-panel {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
-  gap: clamp(20px, 3vw, 44px);
-  align-items: end;
-}
-[data-vneo] .vn-reel-cap h3 {
-  font-weight: 600;
-  font-size: clamp(1.4rem, 2vw, 1.8rem);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-}
-[data-vneo] .vn-reel-cap p {
-  margin: 12px 0 18px;
-  color: var(--ink2);
-}
-[data-vneo] .vn-reel-cap {
-  animation: vn-cap 0.9s var(--ease) both;
-}
-@keyframes vn-cap {
-  from {
-    opacity: 0;
-    filter: blur(6px);
-    text-shadow:
-      -4px 0 0 rgba(var(--fr-m), 0.6),
-      4px 0 0 rgba(var(--fr-g), 0.6);
-  }
-}
-@media (max-width: 900px) {
-  [data-vneo] .vn-reel-panel {
-    grid-template-columns: 1fr;
-  }
-  [data-vneo] .vn-reel-bar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-
 /* the reel's frame, calm: no timecode, no flash, the scene's own numbering hidden */
-[data-vneo] .vn-reel .v6-shot {
+[data-vneo] .v6-shot {
   position: relative;
   width: 100%;
 }
-[data-vneo] .vn-reel .v6-frame {
+[data-vneo] .v6-frame {
   position: relative;
   container-type: inline-size;
   aspect-ratio: 16 / 9;
@@ -168,7 +37,7 @@
   box-shadow: 0 0 0 1px var(--hair);
   isolation: isolate;
 }
-[data-vneo] .vn-reel .v6-stage {
+[data-vneo] .v6-stage {
   position: absolute;
   left: 0;
   top: 0;
@@ -177,20 +46,20 @@
   transform-origin: 0 0;
   transform: scale(tan(atan2(100cqw, 1920px)));
 }
-[data-vneo] .vn-reel .v6-shot[data-armed][data-state='idle'] .v6-scene {
+[data-vneo] .v6-shot[data-armed][data-state='idle'] .v6-scene {
   visibility: hidden;
 }
-[data-vneo] .vn-reel .v6-rig {
+[data-vneo] .v6-rig {
   position: absolute;
   inset: 0;
   transform-origin: 50% 50%;
 }
-[data-vneo] .vn-reel .v6-gl {
+[data-vneo] .v6-gl {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
-[data-vneo] .vn-reel .v6-canvas {
+[data-vneo] .v6-canvas {
   position: absolute;
   left: 0;
   top: 0;
@@ -198,19 +67,17 @@
   height: 1080px;
   display: block;
 }
-[data-vneo]
-  .vn-reel
-  :is(.v6-flash, .v6-invert, .v6-hud, .v6-replay, .v6-vignette) {
+[data-vneo] :is(.v6-flash, .v6-invert, .v6-hud, .v6-replay, .v6-vignette) {
   display: none;
 }
-[data-vneo] .vn-reel :is(.s04-no, .s05-no, .s06-no, .s07-no, .s10-no, .s11-no) {
+[data-vneo] :is(.s04-no, .s05-no, .s06-no, .s07-no, .s10-no, .s11-no) {
   display: none;
 }
 @media (max-width: 720px) {
-  [data-vneo] .vn-reel .v6-shot[data-crop] .v6-frame {
+  [data-vneo] .v6-shot[data-crop] .v6-frame {
     aspect-ratio: var(--crop-ar);
   }
-  [data-vneo] .vn-reel .v6-shot[data-crop] .v6-stage {
+  [data-vneo] .v6-shot[data-crop] .v6-stage {
     transform: translate(
         calc(var(--cx) * -1 * tan(atan2(100cqw, var(--cw)))),
         calc(var(--cy) * -1 * tan(atan2(100cqw, var(--cw))))
@@ -219,7 +86,7 @@
   }
 }
 /* the scenes' own type, in Vneo's faces */
-[data-vneo] .vn-reel .v6-scene {
+[data-vneo] .v6-scene {
   position: absolute;
   inset: 0;
   width: 1920px;
@@ -228,7 +95,7 @@
   font-family: var(--f-display);
   font-weight: 500;
 }
-[data-vneo] .vn-reel .v6-scene .m {
+[data-vneo] .v6-scene .m {
   position: absolute;
   font-family: var(--f-mono);
   font-weight: 500;
@@ -236,11 +103,11 @@
   text-transform: uppercase;
   white-space: nowrap;
 }
-[data-vneo] .vn-reel .v6-scene .m b {
+[data-vneo] .v6-scene .m b {
   color: var(--accent);
   font-weight: 500;
 }
-[data-vneo] .vn-reel .v6-scene .fig {
+[data-vneo] .v6-scene .fig {
   position: absolute;
   font-family: var(--f-display);
   font-weight: 700;
@@ -250,16 +117,16 @@
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
-[data-vneo] .vn-reel .v6-scene .fig small {
+[data-vneo] .v6-scene .fig small {
   font-size: 0.4em;
   color: var(--paper-60);
   margin-left: 10px;
   letter-spacing: 0;
 }
-[data-vneo] .vn-reel .v6-scene .s11-count small {
+[data-vneo] .v6-scene .s11-count small {
   margin-left: 0;
 }
-[data-vneo] .vn-reel .v6-scene em {
+[data-vneo] .v6-scene em {
   font-family: var(--f-serif);
   font-style: italic;
   font-weight: 400;
@@ -267,252 +134,27 @@
   font-size: 1.08em;
   letter-spacing: -0.01em;
 }
-[data-vneo] .vn-reel .v6-scene .ln {
+[data-vneo] .v6-scene .ln {
   display: block;
   overflow: hidden;
   padding-bottom: 0.06em;
   margin-bottom: -0.06em;
 }
-[data-vneo] .vn-reel .v6-scene .w {
+[data-vneo] .v6-scene .w {
   display: inline-block;
 }
-[data-vneo] .vn-reel .v6-scene img {
+[data-vneo] .v6-scene img {
   display: block;
   max-width: none;
 }
 [data-vneo]
-  .vn-reel
   .v6-scene
   :is(.s04-title, .s06-title, .s10-title, .s11-title, .s07-title, .s05-title) {
   font-weight: 600;
 }
 
-/* ---------- a small experiment: the tracker field ---------- */
-[data-vneo] .vn-tracker {
-  display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-  gap: clamp(32px, 6vw, 110px);
-  align-items: center;
-  padding: clamp(80px, 14vh, 140px) var(--gutter);
-}
-[data-vneo] .vn-presets {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 24px;
-}
-[data-vneo] .vn-presets button {
-  padding: 8px 16px;
-  border: 0;
-  border-radius: 999px;
-  background: var(--surface);
-  box-shadow: inset 0 0 0 1px var(--hair);
-  color: var(--ink2);
-  cursor: pointer;
-  transition:
-    background 0.2s,
-    color 0.2s;
-}
-[data-vneo] .vn-presets button[aria-pressed='true'] {
-  background: var(--sage);
-  color: var(--sage-ink);
-  box-shadow: none;
-}
-[data-vneo] .vn-readouts {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 22px;
-  max-width: 460px;
-}
-[data-vneo] .vn-readouts div {
-  padding-top: 12px;
-  border-top: 1px solid var(--hair);
-}
-[data-vneo] .vn-readouts dt {
-  color: var(--ink3);
-  font-size: 0.85rem;
-}
-[data-vneo] .vn-readouts dd {
-  margin-top: 4px;
-  font-family: var(--f-mono);
-  font-size: 1.05rem;
-  font-variant-numeric: tabular-nums;
-}
-[data-vneo] .vn-tracker-plate {
-  position: relative;
-  margin: 0;
-  border-radius: 32px;
-  overflow: hidden;
-  background: var(--surface);
-  box-shadow: 0 0 0 1px var(--hair);
-}
-[data-vneo] .vn-tracker-plate canvas {
-  display: block;
-  width: 100%;
-  aspect-ratio: 5 / 4;
-  touch-action: pan-y;
-}
-[data-vneo] .vn-tracker-plate figcaption {
-  position: absolute;
-  left: 18px;
-  bottom: 14px;
-  color: var(--ink3);
-  font-family: var(--f-mono);
-  font-size: 0.75rem;
-}
-@media (max-width: 900px) {
-  [data-vneo] .vn-tracker {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ---------- the path, flown ---------- */
-[data-vneo] .vn-path {
-  padding: clamp(80px, 14vh, 140px) var(--gutter);
-}
-[data-vneo] .vn-route {
-  position: relative;
-  margin-top: clamp(32px, 6vh, 64px);
-  max-width: 900px;
-  padding-left: 72px;
-}
-[data-vneo] .vn-route ol {
-  position: relative;
-  --flown: 0px;
-}
-/* the route, and the part already flown */
-[data-vneo] .vn-route ol::before,
-[data-vneo] .vn-route ol::after {
-  content: '';
-  position: absolute;
-  left: -48px;
-  top: 0;
-  width: 2px;
-  border-radius: 1px;
-}
-[data-vneo] .vn-route ol::before {
-  bottom: 0;
-  background: repeating-linear-gradient(
-    var(--hair2) 0 6px,
-    transparent 6px 12px
-  );
-}
-[data-vneo] .vn-route ol::after {
-  height: var(--flown);
-  background: var(--sage);
-  box-shadow:
-    -2px 0 0 rgba(var(--fr-m), 0.55),
-    2px 0 0 rgba(var(--fr-g), 0.55);
-}
-[data-vneo] .vn-route li {
-  position: relative;
-  padding: 0 0 clamp(28px, 5vh, 44px);
-}
-[data-vneo] .vn-route li::before {
-  content: '';
-  position: absolute;
-  left: -55px;
-  top: 6px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--bg);
-  box-shadow: inset 0 0 0 2px var(--hair2);
-  transition:
-    background 0.4s,
-    box-shadow 0.4s;
-}
-[data-vneo] .vn-route li[data-lit]::before {
-  background: var(--sage);
-  box-shadow:
-    0 0 0 4px rgba(var(--sage-rgb), 0.18),
-    -2px 0 0 rgba(var(--fr-m), 0.6),
-    2px 0 0 rgba(var(--fr-g), 0.6);
-}
-[data-vneo] .vn-route a {
-  display: block;
-}
-[data-vneo] .vn-wp {
-  display: block;
-  font-family: var(--f-mono);
-  font-size: 0.8rem;
-  color: var(--ink3);
-  transition: color 0.4s;
-}
-[data-vneo] .vn-route li[data-lit] .vn-wp {
-  color: var(--sage);
-}
-[data-vneo] .vn-route b {
-  display: block;
-  margin-top: 4px;
-  font-weight: 600;
-  font-size: clamp(1.25rem, 1.8vw, 1.55rem);
-  line-height: 1.2;
-  letter-spacing: -0.015em;
-  transition: color 0.2s;
-}
-[data-vneo] .vn-route a:hover b {
-  color: var(--sage);
-}
-[data-vneo] .vn-wp-note {
-  display: block;
-  margin-top: 6px;
-  max-width: 56ch;
-  color: var(--ink2);
-}
-[data-vneo] .vn-drone {
-  position: absolute;
-  left: 7px;
-  top: -14px;
-  width: 30px;
-  height: 30px;
-  z-index: 2;
-  will-change: transform;
-}
-[data-vneo] .vn-drone svg {
-  width: 30px;
-  height: 30px;
-  fill: var(--bg);
-  stroke: var(--sage);
-  stroke-width: 2.5;
-  filter: drop-shadow(-1.5px 0 0 rgba(var(--fr-m), 0.7))
-    drop-shadow(1.5px 0 0 rgba(var(--fr-g), 0.7));
-}
-
-/* ---------- writing ---------- */
-[data-vneo] .vn-notes {
-  margin-top: clamp(28px, 5vh, 48px);
-  max-width: 1100px;
-}
-[data-vneo] .vn-notes a {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 8px 40px;
-  padding: 22px 0;
-  border-top: 1px solid var(--hair);
-}
-[data-vneo] .vn-notes b {
-  font-weight: 600;
-  font-size: clamp(1.2rem, 1.7vw, 1.5rem);
-  line-height: 1.2;
-  letter-spacing: -0.015em;
-  transition: color 0.2s;
-}
-[data-vneo] .vn-notes span {
-  color: var(--ink2);
-}
-[data-vneo] .vn-notes a:hover b {
-  color: var(--sage);
-}
-@media (max-width: 760px) {
-  [data-vneo] .vn-notes a {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* ---------- the sign-off (v2's), in Sage ---------- */
-[data-vneo] .vn-signoff {
+[data-vneo] :is(.vn-signoff, .vn-v2) {
   --wrap: 1400px;
   --r-tile: 32px;
   --r-card: 20px;
@@ -656,80 +298,6 @@
   transform: translate(calc(var(--vx, 0) * -1px), calc(var(--vy, 0) * -1px));
 }
 
-/* ---------- the chapter rail (v4's timeline nav, quiet) ---------- */
-[data-vneo] .vn-rail {
-  position: fixed;
-  right: 18px;
-  top: 50%;
-  z-index: 40;
-  transform: translate(12px, -50%);
-  opacity: 0;
-  pointer-events: none;
-  transition:
-    opacity 0.4s,
-    transform 0.4s var(--ease);
-}
-[data-vneo] .vn-rail[data-shown] {
-  opacity: 1;
-  transform: translate(0, -50%);
-  pointer-events: auto;
-}
-[data-vneo] .vn-rail ol {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 2px;
-}
-[data-vneo] .vn-rail a {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 10px;
-  padding: 5px 0;
-}
-[data-vneo] .vn-rail i {
-  width: 10px;
-  height: 2px;
-  border-radius: 1px;
-  background: var(--hair2);
-  transition:
-    width 0.3s var(--ease),
-    background 0.3s;
-}
-[data-vneo] .vn-rail span {
-  font-size: 0.8rem;
-  color: var(--ink2);
-  opacity: 0;
-  transform: translateX(6px);
-  transition:
-    opacity 0.25s,
-    transform 0.25s;
-  white-space: nowrap;
-}
-[data-vneo] .vn-rail li[data-on] i {
-  width: 22px;
-  background: var(--sage);
-}
-[data-vneo] .vn-rail a:hover span,
-[data-vneo] .vn-rail a:focus-visible span {
-  opacity: 1;
-  transform: none;
-}
-/* names show on hover, over a backing, so they never sit on the page's own text */
-[data-vneo] .vn-rail span {
-  padding: 3px 8px;
-  border-radius: 6px;
-  background: rgba(var(--bg-rgb), 0.92);
-}
-[data-vneo] .vn-rail li[data-on] span {
-  color: var(--sage);
-}
-@media (max-width: 1180px) {
-  [data-vneo] .vn-rail {
-    display: none;
-  }
-}
-
 /* ---------- a project: the engineering, folded ---------- */
 [data-vneo] .vn-engineers {
   margin-top: clamp(20px, 3vh, 32px);
@@ -828,4 +396,850 @@
   [data-vneo] .v7-nav a:nth-child(2) {
     display: none;
   }
+}
+
+/* ---------- v2's pieces (drone, sign-off) read v2's tokens: bridged to Sage ---------- */
+[data-vneo] .vn-v2 {
+  --grid: rgba(var(--ink-rgb), 0.06);
+  --bg: #0b0d0c;
+}
+
+/* ---------- the first screen: v6's name slam, v2's drone ---------- */
+[data-vneo] .vn-hero {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+  align-items: center;
+  gap: clamp(24px, 4vw, 72px);
+  padding: clamp(96px, 14vh, 140px) var(--gutter) clamp(40px, 7vh, 72px);
+  overflow: hidden;
+}
+[data-vneo] .vn-hero-glow {
+  position: absolute;
+  left: 2%;
+  top: 12%;
+  width: 62%;
+  height: 52%;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgba(var(--sage-rgb), 0.16),
+    rgba(var(--sage-rgb), 0)
+  );
+  pointer-events: none;
+}
+[data-vneo] .vn-hero-text {
+  position: relative;
+  min-width: 0;
+}
+[data-vneo] .vn-hero-id {
+  margin: 0 0 calc(1.8vh + 14px);
+  color: var(--sage);
+  font-family: var(--f-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+[data-vneo] .vn-name-box {
+  position: relative;
+  width: max-content;
+  max-width: 100%;
+}
+[data-vneo] .vn-name {
+  display: flex;
+  flex-direction: column;
+  font-weight: 700;
+  font-size: min(11.6vw, 23svh);
+  line-height: 0.86;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  font-variation-settings: 'opsz' 96;
+  white-space: nowrap;
+}
+[data-vneo] .vn-name > span {
+  display: block;
+  width: max-content;
+  transform-origin: 0% 60%;
+}
+[data-vneo] .vn-name > span > span {
+  display: inline-block;
+  color: var(--sage);
+}
+[data-vneo] .vn-lock {
+  position: absolute;
+  inset: -1.8vh -1.4vw -2.2vh -1.4vw;
+  pointer-events: none;
+}
+[data-vneo] .vn-lock i {
+  position: absolute;
+  width: clamp(24px, 3vw, 54px);
+  height: clamp(24px, 3vw, 54px);
+  border: 0 solid var(--sage);
+}
+[data-vneo] .vn-lock i:nth-child(1) {
+  left: 0;
+  top: 0;
+  border-top-width: 3px;
+  border-left-width: 3px;
+}
+[data-vneo] .vn-lock i:nth-child(2) {
+  right: 0;
+  top: 0;
+  border-top-width: 3px;
+  border-right-width: 3px;
+}
+[data-vneo] .vn-lock i:nth-child(3) {
+  left: 0;
+  bottom: 0;
+  border-bottom-width: 3px;
+  border-left-width: 3px;
+}
+[data-vneo] .vn-lock i:nth-child(4) {
+  right: 0;
+  bottom: 0;
+  border-bottom-width: 3px;
+  border-right-width: 3px;
+}
+[data-vneo] .vn-hero-sub {
+  margin-top: clamp(26px, 4.4vh, 44px);
+  font-weight: 600;
+  font-size: clamp(1.4rem, 2.3vw, 2.25rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+[data-vneo] .vn-hero-line {
+  margin-top: 12px;
+  max-width: 46ch;
+  color: var(--ink2);
+  font-size: clamp(1.05rem, 1.3vw, 1.2rem);
+}
+[data-vneo] .vn-hero-now {
+  margin-top: 14px;
+  max-width: 50ch;
+  color: var(--ink3);
+  font-size: 0.95rem;
+}
+[data-vneo] .vn-hero-now b {
+  margin-right: 8px;
+  font-weight: 600;
+  color: var(--sage);
+}
+[data-vneo] .vn-hero-now a {
+  color: var(--ink2);
+  border-bottom: 1px solid var(--hair2);
+}
+[data-vneo] .vn-hero-now a:hover {
+  color: var(--sage);
+}
+[data-vneo] .vn-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: clamp(22px, 3.6vh, 34px);
+}
+[data-vneo] .vn-chip {
+  padding: 9px 18px;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1.5px rgba(var(--sage-rgb), 0.6);
+  font-weight: 600;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+[data-vneo] .vn-chip:first-child {
+  background: var(--sage);
+  color: var(--sage-ink);
+}
+[data-vneo] .vn-chip:hover {
+  background: var(--sage2);
+  color: var(--sage-ink);
+}
+[data-vneo] .vn-where {
+  margin-left: 8px;
+  color: var(--ink3);
+  font-family: var(--f-mono);
+  font-size: 0.8rem;
+}
+[data-vneo] .vn-hero-drone {
+  position: relative;
+  min-width: 0;
+}
+@media (max-width: 900px) {
+  [data-vneo] .vn-hero {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  [data-vneo] .vn-name {
+    font-size: min(18vw, 20svh);
+  }
+}
+/* the preflight lands on this name; the slam waits for its own entrance */
+[data-vneo][data-intro='on'] #vneo-name,
+[data-vneo][data-intro='playing'] #vneo-name,
+[data-vneo][data-intro='reveal'] #vneo-name {
+  opacity: 0;
+}
+[data-vneo][data-intro='on'] #vneo-name {
+  animation: v7-failsafe 0.4s ease 6.5s forwards;
+}
+[data-vneo][data-intro='off']
+  .vn-hero:not([data-rolled])
+  :is(.vn-n1, .vn-n2, .vn-hero-line, .vn-hero-now, .vn-chip) {
+  opacity: 0;
+  animation: v7-failsafe 0.4s ease 3s forwards;
+}
+
+/* ---------- a slate (v4's), in Sage ---------- */
+[data-vneo] .vn-slate {
+  padding: 0 var(--gutter);
+}
+[data-vneo] .vn-slate-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--ink3);
+  font-family: var(--f-mono);
+  font-size: 0.8rem;
+}
+[data-vneo] .vn-sc {
+  color: var(--sage);
+}
+[data-vneo] .vn-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--hair2);
+  transform-origin: 0 50%;
+}
+[data-vneo] .vn-slate h2 {
+  margin-top: 18px;
+  max-width: 22ch;
+  font-weight: 600;
+  font-size: clamp(2.2rem, 4.6vw, 4.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+[data-vneo] .vn-slate-lede {
+  margin-top: 16px;
+  max-width: 54ch;
+  color: var(--ink2);
+}
+[data-vneo] .vn-slate-extra {
+  margin-top: 18px;
+}
+
+/* ---------- selected work: the sticky player, then the bento ---------- */
+[data-vneo] .vn-work,
+[data-vneo] .vn-community {
+  padding: clamp(80px, 14vh, 140px) 0 0;
+}
+[data-vneo] .vn-reelwork {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+  gap: clamp(28px, 4vw, 72px);
+  padding: clamp(36px, 6vh, 64px) var(--gutter) 0;
+}
+[data-vneo] .vn-player-col {
+  position: relative;
+}
+[data-vneo] .vn-player {
+  position: sticky;
+  top: clamp(84px, 13vh, 120px);
+}
+[data-vneo] .vn-screen {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 28px;
+  overflow: hidden;
+  background: var(--ground);
+  box-shadow: 0 0 0 1px var(--hair);
+}
+[data-vneo] .vn-pane {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+[data-vneo] .vn-pane[data-on] {
+  display: block;
+}
+/* a cut between pieces: a sage wipe with its fringes, once per change */
+[data-vneo] .vn-cut {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: var(--sage);
+  box-shadow:
+    -10px 0 0 rgba(var(--fr-m), 0.7),
+    10px 0 0 rgba(var(--fr-g), 0.7);
+  transform: translateX(-101%);
+  animation: vn-cut 0.62s cubic-bezier(0.7, 0, 0.3, 1) both;
+  pointer-events: none;
+}
+@keyframes vn-cut {
+  0% {
+    transform: translateX(-101%);
+  }
+  45%,
+  55% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(101%);
+  }
+}
+[data-vneo] .vn-player-hud {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  margin-top: 14px;
+  color: var(--ink3);
+  font-size: 0.95rem;
+}
+[data-vneo] .vn-player-hud span:first-child {
+  font-family: var(--f-mono);
+  color: var(--sage);
+}
+[data-vneo] .vn-entries > li {
+  min-height: 58vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px 0;
+  opacity: 0.45;
+  transition: opacity 0.5s;
+}
+[data-vneo] .vn-entries > li[data-on] {
+  opacity: 1;
+}
+[data-vneo] .vn-entry-no {
+  color: var(--sage);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+[data-vneo] .vn-entries h3 {
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: clamp(1.6rem, 2.4vw, 2.3rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+[data-vneo] .vn-entries h3 a:hover {
+  color: var(--sage);
+}
+[data-vneo] .vn-entry-line {
+  margin-top: 12px;
+  color: var(--ink2);
+}
+[data-vneo] .vn-entry-facts {
+  display: grid;
+  gap: 0;
+  margin: 18px 0;
+  border-top: 1px solid var(--hair);
+}
+[data-vneo] .vn-entry-facts div {
+  display: grid;
+  grid-template-columns: 6.5em minmax(0, 1fr);
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--hair);
+  font-size: 0.98rem;
+}
+[data-vneo] .vn-entry-facts dt {
+  color: var(--ink3);
+}
+[data-vneo] .vn-entry-facts dd {
+  font-weight: 600;
+}
+[data-vneo] .vn-inline {
+  margin-bottom: 18px;
+}
+@media (max-width: 1020px) {
+  [data-vneo] .vn-reelwork {
+    grid-template-columns: 1fr;
+  }
+  [data-vneo] .vn-entries > li {
+    min-height: 0;
+    opacity: 1;
+    padding: 28px 0;
+    border-top: 1px solid var(--hair);
+  }
+}
+
+/* motion that fills its box: the whole composition in the player, the part that carries it in a tile */
+[data-vneo] :is(.vn-pane, .vn-tile-media) :is(.v6-shot, .v7-scene) {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  margin: 0;
+}
+[data-vneo] :is(.vn-screen, .vn-tile-media) .v6-frame {
+  height: 100%;
+  aspect-ratio: auto !important;
+  container-type: size;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+[data-vneo] .vn-screen .v6-stage {
+  transform: scale(tan(atan2(100cqw, 1920px))) !important;
+}
+[data-vneo] .vn-tile-media[data-fit='full'] .v6-stage {
+  --k: min(tan(atan2(100cqw, 1920px)), tan(atan2(100cqh, 1080px)));
+  transform: translate(
+      calc((100cqw - 1920px * var(--k)) / 2),
+      calc((100cqh - 1080px * var(--k)) / 2)
+    )
+    scale(var(--k)) !important;
+}
+[data-vneo] .vn-tile-media[data-fit='crop'] .v6-stage {
+  --k: max(
+    tan(atan2(100cqw, var(--cw, 1920px))),
+    tan(atan2(100cqh, var(--chp, 1080px)))
+  );
+  transform: translate(
+      calc(
+        (100cqw - var(--cw, 1920px) * var(--k)) / 2 - var(--cx, 0px) * var(--k)
+      ),
+      calc(
+        (100cqh - var(--chp, 1080px) * var(--k)) / 2 - var(--cy, 0px) * var(--k)
+      )
+    )
+    scale(var(--k)) !important;
+}
+[data-vneo] .vn-pane .v7-scene {
+  left: 50%;
+  width: auto;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+}
+[data-vneo] :is(.vn-screen, .vn-tile-media) .v7-frame {
+  height: 100%;
+  aspect-ratio: auto;
+  container-type: size;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+[data-vneo] :is(.vn-screen, .vn-tile-media) .v7-stage {
+  --k: max(tan(atan2(100cqw, 1200px)), tan(atan2(100cqh, 1200px)));
+  transform: translate(
+      calc((100cqw - 1200px * var(--k)) / 2),
+      calc((100cqh - 1200px * var(--k)) / 2)
+    )
+    scale(var(--k));
+}
+[data-vneo] :is(.vn-screen, .vn-tile-media) .v7-replay {
+  display: none;
+}
+
+[data-vneo] .vn-bento {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-flow: dense;
+  gap: 14px;
+  margin-top: clamp(56px, 10vh, 100px);
+  padding: 0 var(--gutter);
+}
+[data-vneo] :is(.vn-tile, .vn-ctile) {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: 0 0 0 1px var(--hair);
+  transition:
+    box-shadow 0.25s,
+    transform 0.3s var(--ease);
+}
+[data-vneo] :is(.vn-tile, .vn-ctile):hover {
+  box-shadow:
+    0 0 0 1px rgba(var(--sage-rgb), 0.55),
+    -2px 0 0 rgba(var(--fr-m), 0.35),
+    2px 0 0 rgba(var(--fr-g), 0.35);
+  transform: translateY(-2px);
+}
+[data-vneo] .vn-tile-link {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  border-radius: inherit;
+}
+[data-vneo] .vn-tile.is-wide {
+  grid-column: span 2;
+}
+[data-vneo] .vn-tile.is-tall {
+  grid-row: span 2;
+}
+[data-vneo] .vn-tile-media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--ground);
+}
+[data-vneo] .vn-tile.is-tall .vn-tile-media {
+  aspect-ratio: auto;
+  flex: 1;
+  min-height: 300px;
+}
+[data-vneo] .vn-tile-media > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+[data-vneo] .vn-tile-media > img[style*='contain'] {
+  padding: 8%;
+  background: #f6f6f1;
+}
+[data-vneo] .vn-figure {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 0 8%;
+}
+[data-vneo] .vn-figure span {
+  display: flex;
+  flex-direction: column;
+}
+[data-vneo] .vn-figure b {
+  font-weight: 700;
+  font-size: clamp(2rem, 3.4vw, 3.2rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--ink3);
+}
+[data-vneo] .vn-figure span:last-child b {
+  color: var(--sage);
+}
+[data-vneo] .vn-figure small {
+  margin-top: 6px;
+  color: var(--ink3);
+  font-size: 0.85rem;
+}
+[data-vneo] .vn-figure i {
+  font-style: normal;
+  font-size: 1.6rem;
+  color: var(--ink3);
+}
+[data-vneo] .vn-tile-cap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 18px 18px;
+}
+[data-vneo] .vn-tile-kind {
+  color: var(--sage);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+[data-vneo] .vn-tile-cap h3 {
+  font-weight: 600;
+  font-size: 1.15rem;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+[data-vneo] .vn-tile-cap p {
+  color: var(--ink2);
+  font-size: 0.95rem;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+[data-vneo] .vn-badge {
+  align-self: flex-start;
+  margin-top: 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(var(--sage-rgb), 0.12);
+  color: var(--sage);
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+@media (max-width: 1020px) {
+  [data-vneo] .vn-bento {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 560px) {
+  [data-vneo] .vn-bento {
+    grid-template-columns: 1fr;
+  }
+  [data-vneo] .vn-tile.is-wide {
+    grid-column: auto;
+  }
+  [data-vneo] .vn-tile.is-tall {
+    grid-row: auto;
+  }
+  [data-vneo] .vn-tile.is-tall .vn-tile-media {
+    flex: none;
+    aspect-ratio: 3 / 4;
+  }
+}
+
+/* ---------- in the community ---------- */
+[data-vneo] .vn-cbento {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-flow: dense;
+  gap: 14px;
+  margin-top: clamp(36px, 6vh, 64px);
+  padding: 0 var(--gutter);
+}
+[data-vneo] .vn-ctile.is-big {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+[data-vneo] .vn-ctile.is-built .vn-tile-media {
+  aspect-ratio: 1;
+}
+[data-vneo] .vn-ctile.is-big .vn-tile-media {
+  aspect-ratio: auto;
+  flex: 1;
+  min-height: 360px;
+}
+[data-vneo] :is(.vn-ctile.is-talk, .vn-ctile.is-mentoring) {
+  grid-column: span 2;
+}
+[data-vneo] .vn-talk-slide {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 14px 14px 0;
+  padding: 26px 26px 22px;
+  border-radius: 16px;
+  background: linear-gradient(140deg, var(--raised), var(--ground));
+  box-shadow: inset 0 0 0 1px var(--hair);
+  min-height: 210px;
+}
+[data-vneo] .vn-talk-event {
+  color: var(--ink3);
+  font-family: var(--f-mono);
+  font-size: 0.78rem;
+}
+[data-vneo] .vn-talk-title {
+  max-width: 30ch;
+  font-weight: 600;
+  font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+[data-vneo] .vn-demo {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(var(--sage-rgb), 0.14);
+  color: var(--sage);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+[data-vneo] .vn-demo i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgb(var(--fr-m));
+}
+[data-vneo] .vn-git {
+  display: block;
+  width: calc(100% - 28px);
+  margin: 14px 14px 0;
+  padding: 10px 6px;
+  border-radius: 16px;
+  background: var(--ground);
+  box-shadow: inset 0 0 0 1px var(--hair);
+}
+[data-vneo] .vn-git circle {
+  fill: var(--ground);
+  stroke: var(--sage);
+  stroke-width: 3;
+}
+[data-vneo] .vn-tile-list {
+  display: grid;
+  gap: 4px;
+  color: var(--ink2);
+  font-size: 0.92rem;
+}
+[data-vneo] .vn-years {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 14px 14px 0;
+  padding: 34px 20px;
+  border-radius: 16px;
+  background: var(--ground);
+  box-shadow: inset 0 0 0 1px var(--hair);
+}
+[data-vneo] .vn-years-line {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  top: 50%;
+  height: 2px;
+  background: rgba(var(--sage-rgb), 0.5);
+}
+[data-vneo] .vn-year {
+  position: relative;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: var(--ground);
+  font-weight: 700;
+  font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+  letter-spacing: -0.02em;
+  color: var(--sage);
+}
+@media (max-width: 1020px) {
+  [data-vneo] .vn-cbento {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 560px) {
+  [data-vneo] .vn-cbento {
+    grid-template-columns: 1fr;
+  }
+  [data-vneo] :is(.vn-ctile.is-big, .vn-ctile.is-talk, .vn-ctile.is-mentoring) {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  [data-vneo] .vn-ctile.is-big .vn-tile-media {
+    flex: none;
+    aspect-ratio: 1;
+    min-height: 0;
+  }
+}
+
+/* the writing, as one slim row */
+[data-vneo] .vn-writing {
+  margin-top: clamp(48px, 8vh, 80px);
+  padding: 0 var(--gutter);
+}
+[data-vneo] .vn-writing-h {
+  font-weight: 600;
+  color: var(--sage);
+}
+[data-vneo] .vn-writing ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+  gap: 14px 28px;
+  align-items: start;
+  margin-top: 14px;
+  padding-top: 16px;
+  border-top: 1px solid var(--hair2);
+}
+[data-vneo] .vn-writing a b {
+  display: block;
+  font-weight: 600;
+  font-size: 1.08rem;
+  line-height: 1.25;
+  transition: color 0.2s;
+}
+[data-vneo] .vn-writing a span {
+  display: block;
+  margin-top: 6px;
+  color: var(--ink3);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+[data-vneo] .vn-writing a:hover b {
+  color: var(--sage);
+}
+[data-vneo] .vn-writing-all {
+  align-self: center;
+}
+@media (max-width: 900px) {
+  [data-vneo] .vn-writing ul {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- more of the work ---------- */
+[data-vneo] .vn-more {
+  padding: clamp(80px, 14vh, 140px) 0 clamp(48px, 8vh, 80px);
+}
+[data-vneo] .vn-more .v7-groups,
+[data-vneo] .vn-more .v7-more-all {
+  padding: 0 var(--gutter);
+}
+
+/* ---------- every project: filters and tight tiles (v3) ---------- */
+[data-vneo] .vn-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: clamp(28px, 5vh, 44px);
+}
+[data-vneo] .vn-filters button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--hair);
+  color: var(--ink2);
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+[data-vneo] .vn-filters button span {
+  color: var(--ink3);
+  font-size: 0.85em;
+}
+[data-vneo] .vn-filters button[aria-pressed='true'] {
+  background: var(--sage);
+  color: var(--sage-ink);
+  box-shadow: none;
+}
+[data-vneo] .vn-filters button[aria-pressed='true'] span {
+  color: rgba(16, 24, 13, 0.65);
+}
+[data-vneo] .vn-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 14px;
+  margin-top: 22px;
+}
+[data-vneo] .vn-grid .vn-tile-cap h2 {
+  font-weight: 600;
+  font-size: 1.15rem;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+[data-vneo] .vn-tile-type {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 0 10%;
+  background: radial-gradient(
+    circle at 50% 45%,
+    var(--raised),
+    var(--ground) 72%
+  );
+  color: var(--sage);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+[data-vneo] .vn-grid .vn-tile-media > img[style*='contain'] {
+  padding: 8%;
+  background: #f6f6f1;
 }

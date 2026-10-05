@@ -1,7 +1,15 @@
 'use client'
 
 import { gsap } from 'gsap'
-import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from 'react'
 
 /*
  * A scene: one square 1200 x 1200 composition, scaled to its column in CSS
@@ -11,6 +19,12 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
  * just the picture coming into focus. Reduced motion lands on the last frame.
  * The scene is illustration; the page's words carry the facts.
  */
+
+/**
+ * A host that shows many scenes at once (a grid of tiles) can turn the
+ * ambient loops off, and have scenes rest on their last frame until asked.
+ */
+export const SceneHostContext = createContext({ ambient: true, autoplay: true })
 
 export interface SceneProps {
   name: string
@@ -41,6 +55,9 @@ export function Scene({
   const loop = useRef<gsap.core.Timeline | gsap.core.Tween | null>(null)
   const played = useRef(false)
   const [state, setState] = useState<'idle' | 'playing' | 'held'>('idle')
+  const hostMode = useContext(SceneHostContext)
+  const ambientOn = hostMode.ambient
+  const still = !hostMode.autoplay
 
   useEffect(() => {
     const root = stage.current
@@ -51,11 +68,12 @@ export function Scene({
       build(root, t)
       t.eventCallback('onComplete', () => {
         setState('held')
-        if (ambient && !reduce) loop.current = ambient(root) || null
+        if (ambient && ambientOn && !reduce)
+          loop.current = ambient(root) || null
       })
       tl.current = t
       t.progress(0)
-      if (reduce) {
+      if (reduce || still) {
         played.current = true
         t.progress(1)
         setState('held')
@@ -66,7 +84,7 @@ export function Scene({
       ctx.revert()
       tl.current = null
     }
-  }, [build, ambient])
+  }, [build, ambient, ambientOn, still])
 
   const play = useCallback(() => {
     const t = tl.current

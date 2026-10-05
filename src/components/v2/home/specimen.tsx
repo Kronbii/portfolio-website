@@ -95,7 +95,6 @@ const TERRAIN_FRAG = /* glsl */ `
   }
 `
 
-
 type Mode = 'loading' | 'manual' | 'level' | 'settled'
 
 /** Where each callout's label sits; the order matches the airframe's anchors. */
@@ -114,22 +113,35 @@ export function Specimen() {
   const lines = useRef<(SVGPolylineElement | null)[]>([])
   const dots = useRef<(SVGCircleElement | null)[]>([])
   const labels = useRef<(HTMLSpanElement | null)[]>([])
-  const readout = useRef<{ roll?: HTMLElement | null; pitch?: HTMLElement | null; yaw?: HTMLElement | null }>({})
+  const readout = useRef<{
+    roll?: HTMLElement | null
+    pitch?: HTMLElement | null
+    yaw?: HTMLElement | null
+  }>({})
   const bars = useRef<(HTMLSpanElement | null)[]>([])
   const [mode, setMode] = useState<Mode>('loading')
   const [failed, setFailed] = useState(false)
-  const [airframe, setAirframe] = useState<'none' | 'model' | 'procedural'>('none')
+  const [airframe, setAirframe] = useState<'none' | 'model' | 'procedural'>(
+    'none'
+  )
 
   const copy = v2Home.specimen
-  const modelLabels = [copy.propLabel(1), copy.callouts.arm, copy.callouts.airframe, copy.callouts.camera]
+  const modelLabels = [
+    copy.propLabel(1),
+    copy.callouts.arm,
+    copy.callouts.airframe,
+    copy.callouts.camera,
+  ]
 
   // While the preflight intro plays, the specimen does not exist yet: no renderer,
   // no model, no shader compiles competing with the intro for the main thread.
   // It builds once the intro has handed over, and its drop-in is the next beat.
   const [introClear, setIntroClear] = useState(false)
   useEffect(() => {
-    const v2 = host.current?.closest<HTMLElement>('[data-v2]')
-    const active = () => ['on', 'playing', 'reveal'].includes(v2?.dataset.intro ?? '')
+    // the root that hosts the intro (v2's own, or any version that hosts it)
+    const v2 = host.current?.closest<HTMLElement>('[data-intro-root]')
+    const active = () =>
+      ['on', 'playing', 'reveal'].includes(v2?.dataset.intro ?? '')
     if (!v2 || !active()) {
       setIntroClear(true)
       return
@@ -147,12 +159,18 @@ export function Specimen() {
     const root = host.current
     const mount = canvasHost.current
     if (!introClear || !root || !mount) return
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const reduced = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
     let disposed = false
 
     let renderer: THREE.WebGLRenderer
     try {
-      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' })
+      renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+        powerPreference: 'high-performance',
+      })
     } catch {
       setFailed(true)
       return
@@ -174,7 +192,8 @@ export function Specimen() {
 
     // ---- terrain
     const brandColor = () => {
-      const v = getComputedStyle(root).getPropertyValue('--brand').trim() || '#c9686a'
+      const v =
+        getComputedStyle(root).getPropertyValue('--brand').trim() || '#c9686a'
       return new THREE.Color(v)
     }
     const terrainMat = new THREE.ShaderMaterial({
@@ -216,7 +235,8 @@ export function Specimen() {
     scene.add(rig)
     let air: Airframe | null = null
     let arrivedAt = -1
-    const isLight = () => root.closest('[data-v2]')?.getAttribute('data-theme') === 'light'
+    const isLight = () =>
+      root.closest('[data-v2]')?.getAttribute('data-theme') === 'light'
 
     const mountAirframe = (a: Airframe, kind: 'model' | 'procedural') => {
       if (disposed) {
@@ -262,7 +282,11 @@ export function Specimen() {
     loadE58(modelLabels)
       .then((a) => mountAirframe(a, 'model'))
       .catch(() => {
-        if (!disposed) mountAirframe(proceduralDrone([...copy.fallbackCallouts], brandColor()), 'procedural')
+        if (!disposed)
+          mountAirframe(
+            proceduralDrone([...copy.fallbackCallouts], brandColor()),
+            'procedural'
+          )
       })
 
     const onTheme = () => {
@@ -275,7 +299,14 @@ export function Specimen() {
     window.addEventListener('v2-theme', onTheme)
 
     // ---- flight state
-    const s = { roll: 0, pitch: 0, rollRate: 0, pitchRate: 0, yaw: -0.55, yawRate: 0 }
+    const s = {
+      roll: 0,
+      pitch: 0,
+      rollRate: 0,
+      pitchRate: 0,
+      yaw: -0.55,
+      yawRate: 0,
+    }
     let dragging = false
     let lastX = 0
     let lastY = 0
@@ -368,12 +399,21 @@ export function Specimen() {
         const px = (p.x * 0.5 + 0.5) * w
         const py = (-p.y * 0.5 + 0.5) * h
         const c = SLOTS[i]
-        const targetY = Math.min(0.9, Math.max(0.1, c.slot * 0.6 + (py / h) * 0.4))
+        const targetY = Math.min(
+          0.9,
+          Math.max(0.1, c.slot * 0.6 + (py / h) * 0.4)
+        )
         labelY[i] += (targetY - labelY[i]) * 0.12
         const ly = labelY[i] * h
         const edge = c.side === 'left' ? 24 : w - 24
-        const elbow = c.side === 'left' ? Math.min(px - 36, w * 0.3) : Math.max(px + 36, w * 0.7)
-        lines.current[i]?.setAttribute('points', `${edge},${ly} ${elbow},${ly} ${px},${py}`)
+        const elbow =
+          c.side === 'left'
+            ? Math.min(px - 36, w * 0.3)
+            : Math.max(px + 36, w * 0.7)
+        lines.current[i]?.setAttribute(
+          'points',
+          `${edge},${ly} ${elbow},${ly} ${px},${py}`
+        )
         dots.current[i]?.setAttribute('cx', String(px))
         dots.current[i]?.setAttribute('cy', String(py))
         const label = labels.current[i]
@@ -408,21 +448,40 @@ export function Specimen() {
         s.rollRate += (-KP * s.roll - KD * s.rollRate) * dt
         s.pitchRate += (-KP * s.pitch - KD * s.pitchRate) * dt
       }
-      s.roll = THREE.MathUtils.clamp(s.roll + s.rollRate * dt, -MAX_TILT, MAX_TILT)
-      s.pitch = THREE.MathUtils.clamp(s.pitch + s.pitchRate * dt, -MAX_TILT, MAX_TILT)
+      s.roll = THREE.MathUtils.clamp(
+        s.roll + s.rollRate * dt,
+        -MAX_TILT,
+        MAX_TILT
+      )
+      s.pitch = THREE.MathUtils.clamp(
+        s.pitch + s.pitchRate * dt,
+        -MAX_TILT,
+        MAX_TILT
+      )
       s.yawRate *= Math.exp(-2.4 * dt)
       s.yaw += s.yawRate * dt
 
       const settled =
-        Math.abs(s.roll) < 0.004 && Math.abs(s.pitch) < 0.004 && Math.abs(s.rollRate) < 0.02 && Math.abs(s.pitchRate) < 0.02
+        Math.abs(s.roll) < 0.004 &&
+        Math.abs(s.pitch) < 0.004 &&
+        Math.abs(s.rollRate) < 0.02 &&
+        Math.abs(s.pitchRate) < 0.02
       if (!dragging) setModeIfChanged(settled ? 'settled' : 'level')
 
       // controller outputs (or the pilot's command while dragging)
-      const uRoll = dragging ? cmdRoll * 0.25 : (-KP * s.roll - KD * s.rollRate) * 0.04
-      const uPitch = dragging ? cmdPitch * 0.25 : (-KP * s.pitch - KD * s.pitchRate) * 0.04
+      const uRoll = dragging
+        ? cmdRoll * 0.25
+        : (-KP * s.roll - KD * s.rollRate) * 0.04
+      const uPitch = dragging
+        ? cmdPitch * 0.25
+        : (-KP * s.pitch - KD * s.pitchRate) * 0.04
       const uYaw = -s.yawRate * 0.12
       air.rotors.forEach(({ x, z, dir }, i) => {
-        const m = THREE.MathUtils.clamp(0.52 + uRoll * z * 0.7 - uPitch * x * 0.7 + uYaw * dir, 0.05, 1)
+        const m = THREE.MathUtils.clamp(
+          0.52 + uRoll * z * 0.7 - uPitch * x * 0.7 + uYaw * dir,
+          0.05,
+          1
+        )
         motor[i] += (m - motor[i]) * 0.3
       })
       air.update(dt, motor, !reduced || dragging || !settled)
@@ -458,13 +517,15 @@ export function Specimen() {
         const r = readout.current
         if (r.roll) r.roll.textContent = fmt(s.roll)
         if (r.pitch) r.pitch.textContent = fmt(s.pitch)
-        if (r.yaw) r.yaw.textContent = `${(((THREE.MathUtils.radToDeg(s.yaw) % 360) + 360) % 360).toFixed(1).padStart(5, '0')}°`
+        if (r.yaw)
+          r.yaw.textContent = `${(((THREE.MathUtils.radToDeg(s.yaw) % 360) + 360) % 360).toFixed(1).padStart(5, '0')}°`
         motor.forEach((m, i) => {
           const bar = bars.current[i]
           if (bar) bar.style.transform = `scaleY(${m.toFixed(3)})`
         })
       }
-      const idle = reduced && !dragging && (modeNow === 'settled' || modeNow === 'loading')
+      const idle =
+        reduced && !dragging && (modeNow === 'settled' || modeNow === 'loading')
       if (visible && !idle) raf = window.requestAnimationFrame(frame)
     }
 
@@ -532,8 +593,18 @@ export function Specimen() {
         <svg className={styles.leaders} aria-hidden="true">
           {SLOTS.map((c, i) => (
             <g key={c.key}>
-              <polyline ref={(el) => void (lines.current[i] = el)} className={styles.leader} points="0,0" />
-              <circle ref={(el) => void (dots.current[i] = el)} className={styles.leaderDot} r="3" cx="-10" cy="-10" />
+              <polyline
+                ref={(el) => void (lines.current[i] = el)}
+                className={styles.leader}
+                points="0,0"
+              />
+              <circle
+                ref={(el) => void (dots.current[i] = el)}
+                className={styles.leaderDot}
+                r="3"
+                cx="-10"
+                cy="-10"
+              />
             </g>
           ))}
         </svg>
@@ -571,7 +642,10 @@ export function Specimen() {
             <span className={styles.bars} title={copy.simulated}>
               {[0, 1, 2, 3].map((i) => (
                 <span key={i} className={styles.barWell}>
-                  <span ref={(el) => void (bars.current[i] = el)} className={styles.bar} />
+                  <span
+                    ref={(el) => void (bars.current[i] = el)}
+                    className={styles.bar}
+                  />
                   <em>M{i + 1}</em>
                 </span>
               ))}
@@ -587,15 +661,30 @@ export function Specimen() {
           </span>
         ) : (
           <span>
-            <a className={styles.credit} href={model.href} target="_blank" rel="noopener noreferrer">
+            <a
+              className={styles.credit}
+              href={model.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               “{model.title}”
             </a>{' '}
             by{' '}
-            <a className={styles.credit} href={model.authorHref} target="_blank" rel="noopener noreferrer">
+            <a
+              className={styles.credit}
+              href={model.authorHref}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {model.author}
             </a>
             ,{' '}
-            <a className={styles.credit} href={model.licenseHref} target="_blank" rel="noopener noreferrer license">
+            <a
+              className={styles.credit}
+              href={model.licenseHref}
+              target="_blank"
+              rel="noopener noreferrer license"
+            >
               {model.license}
             </a>
             . {copy.hint}
