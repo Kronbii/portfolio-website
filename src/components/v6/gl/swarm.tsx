@@ -90,7 +90,14 @@ function formation(i: number, l: number): V3 {
   return p
 }
 
-export function Swarm({ clock }: { clock: ShotClock }) {
+export function Swarm({
+  clock,
+  accent,
+}: {
+  clock: ShotClock
+  /** The ground's grid and the rim light; the reel's burgundy by default. */
+  accent?: string
+}) {
   const canvas = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -99,10 +106,11 @@ export function Swarm({ clock }: { clock: ShotClock }) {
     return startGL(cv, async (THREE, renderer) => {
       const scene = new THREE.Scene()
       const camera = new THREE.PerspectiveCamera(40, 1920 / 1080, 0.02, 200)
-      reelLights(THREE, scene, renderer)
+      reelLights(THREE, scene, renderer, accent)
       scene.environment = await environment(THREE, renderer)
       await yieldFrame()
       const ground = makeTerrain(THREE)
+      if (accent) ground.mat.uniforms.uColor.value.set(accent)
       ground.mesh.position.set(0, -3.6, -8)
       ground.mat.uniforms.uOpacity.value = 0.55
       ground.mat.uniforms.uNear.value = 1.5
@@ -249,7 +257,7 @@ export function Swarm({ clock }: { clock: ShotClock }) {
         },
       }
     })
-  }, [clock])
+  }, [clock, accent])
 
   return (
     <canvas ref={canvas} className="v6-canvas" width={1920} height={1080} />

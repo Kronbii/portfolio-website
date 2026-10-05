@@ -175,11 +175,12 @@ export function startGL(
   }
 }
 
-/** The E58's look under the reel's lights: warm key, burgundy rim. */
+/** The E58's look under the reel's lights: warm key, burgundy rim (or a host's own accent). */
 export function reelLights(
   THREE: Three,
   scene: THREE_NS.Scene,
-  renderer: THREE_NS.WebGLRenderer
+  renderer: THREE_NS.WebGLRenderer,
+  rimColor: THREE_NS.ColorRepresentation = 0xc9686a
 ) {
   renderer.toneMapping = THREE.ACESFilmicToneMapping
   renderer.toneMappingExposure = 1.05
@@ -187,7 +188,7 @@ export function reelLights(
   const key = new THREE.DirectionalLight(0xfff3e8, 2.4)
   key.position.set(3.5, 5, 4)
   scene.add(key)
-  const rim = new THREE.DirectionalLight(0xc9686a, 2.8)
+  const rim = new THREE.DirectionalLight(rimColor, 2.8)
   rim.position.set(-4, 1.5, -3.5)
   scene.add(rim)
 }

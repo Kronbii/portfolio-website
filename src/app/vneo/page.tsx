@@ -2,10 +2,13 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { SignOff } from '@/components/v2/home/sign-off'
+import { FlightLog } from '@/components/v3/home/flight-log'
+import { Build } from '@/components/vneo/build'
 import { Community } from '@/components/vneo/community'
 import { Glance } from '@/components/vneo/glance'
 import { Hero } from '@/components/vneo/hero'
-import { Slate } from '@/components/vneo/slate'
+import { Loop } from '@/components/vneo/loop'
+import { Slate, SlateMark } from '@/components/vneo/slate'
 import { Work } from '@/components/vneo/work'
 import { VN, moreGroups, vneo } from '@/content/vneo/site'
 
@@ -24,12 +27,13 @@ export default function Vneo() {
     <>
       <Hero />
       <Glance items={c.glance} label="At a glance" />
+      <Build />
       <Work />
       <Community />
 
       <section id="more" className="vn-more" aria-labelledby="more-h">
         <Slate
-          no={4}
+          no={5}
           label={c.more.label}
           title={c.more.title}
           hot={c.more.hot}
@@ -59,6 +63,17 @@ export default function Vneo() {
           </Link>
         </p>
       </section>
+
+      <div className="vn-log vn-v3">
+        <SlateMark no={6} label="The path" />
+        <FlightLog
+          title={c.log.title}
+          lede={c.log.lede}
+          points={c.log.points}
+        />
+      </div>
+
+      <Loop />
 
       <div className="vn-signoff">
         <SignOff copy={c.signOff} warm />

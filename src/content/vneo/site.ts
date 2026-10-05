@@ -9,7 +9,13 @@
 import { getArticle } from '@/content/authority'
 import { v2Home } from '@/content/v2/home'
 import { v3Home } from '@/content/v3/home'
-import { noteHref, workBySlug, workHref, works } from '@/content/v3/work'
+import {
+  noteHref,
+  rebase,
+  workBySlug,
+  workHref,
+  works,
+} from '@/content/v3/work'
 import { shotAlt } from '@/content/v6/reel'
 import { buildChapters, buildGroups, type Chapter } from '@/content/v7/home'
 import { siteConfig } from '@/lib/site'
@@ -307,6 +313,43 @@ export const shownAbove = new Set([
   'ree-personal-finance-tracker',
 ])
 
+/** What I build (v3's sentence): each phrase brings up the work behind it. */
+const build = {
+  ...v3Home.build,
+  groups: v3Home.build.groups.map((g) => ({
+    id: g.id,
+    phrase: g.phrase,
+    joiner: g.joiner,
+    items: g.slugs
+      .map((slug) => workBySlug(slug))
+      .filter((w) => w !== undefined)
+      .map(({ project, plain }) => ({
+        slug: project.slug,
+        title: project.title.split(' — ')[0],
+        kind: plain.kind,
+        line: plain.line,
+        href: workHref(project.slug, VN),
+        image: plain.image ? racePhoto(plain.image) : undefined,
+      })),
+  })),
+  portrait: {
+    // the live site's portrait (/images/home/portrait.webp), set on a lit sage backdrop
+    src: '/images/vneo/portrait-sage.webp',
+    alt: 'Rami Kronbi in profile, in black and white.',
+    tag: 'ID lock · Rami',
+  },
+}
+export type BuildGroup = (typeof build.groups)[number]
+
+/** The path so far (v3's flight log, as v4 flew it), its links moved into Vneo. */
+const log = {
+  ...v3Home.log,
+  points: v3Home.log.points.map((p) => ({
+    ...p,
+    href: intoVneo(rebase(p.href, VN)),
+  })),
+}
+
 const note = (slug: string) => {
   const a = getArticle(slug)
   return a && a.state === 'ready'
@@ -361,7 +404,7 @@ export const vneo = {
     },
   ],
   work: {
-    no: 2,
+    no: 3,
     label: 'Work',
     title: 'Selected projects.',
     hot: 'projects',
@@ -387,6 +430,30 @@ export const vneo = {
       .map(note)
       .filter((n): n is NonNullable<typeof n> => !!n),
     all: { label: 'All writing', href: `${VN}/writing` },
+  },
+  build,
+  log,
+  /** The closing shot: sense, decide, act, two ways; Rami picks the one to keep. */
+  loop: {
+    label: 'Sense, decide, act',
+    heading:
+      'Sense, decide, act: robotics, computer vision, embedded systems, and edge AI.',
+    pick: 'Finale',
+    options: [
+      { id: 'drones', label: 'Drone swarm' },
+      { id: 'board', label: 'Systems board' },
+    ],
+    replay: 'Play again',
+    accent: '#b7d3a8',
+    board: {
+      words: ['Sense', 'Decide', 'Act'],
+      parts: ['Camera', 'Microcontroller', 'Actuator'],
+      note: 'camera → MCU → actuator · one loop',
+      focus: ['Robotics', 'Computer vision', 'Embedded systems', 'Edge AI'],
+      id: 'ID lock · system',
+      cap: 'One loop · one name',
+      alt: 'Three words, sense, decide, act, as a camera, a microcontroller, and an actuator wire up into one loop; then four focus areas fly at the lens: robotics, computer vision, embedded systems, edge AI; then circuit traces route themselves into the letters RK.',
+    },
   },
   more: {
     label: 'More of the work',

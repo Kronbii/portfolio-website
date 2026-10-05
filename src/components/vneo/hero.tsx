@@ -86,7 +86,7 @@ export function Hero() {
       tl.fromTo(
         '.vn-hero-id',
         { opacity: 0 },
-        { opacity: 1, duration: 0.06, ease: 'none', repeat: 3, yoyo: true },
+        { opacity: 1, duration: 0.06, ease: 'none', repeat: 4, yoyo: true },
         LOCK + 0.1
       )
       // the title decodes out of glyph noise

@@ -118,7 +118,14 @@ function build(root: HTMLElement, tl: gsap.core.Timeline) {
   )
 }
 
-export function FlyShot({ replay }: { replay?: string }) {
+export function FlyShot({
+  replay,
+  accent,
+}: {
+  replay?: string
+  /** The swarm's ground and rim light, for a host in another colour. */
+  accent?: string
+}) {
   return (
     <Shot
       scene="s13"
@@ -127,7 +134,7 @@ export function FlyShot({ replay }: { replay?: string }) {
       build={build}
       hold={3 * BAR}
       replay={replay}
-      gl={(clock) => <Swarm clock={clock} />}
+      gl={(clock) => <Swarm clock={clock} accent={accent} />}
     >
       <div className="m s13-no">{c.no}</div>
       {c.words.map((w, i) => (
