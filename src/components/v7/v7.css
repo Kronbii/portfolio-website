@@ -43,6 +43,10 @@
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
 }
+/* The incumbent root layout still mounts its pop-up pill nav; this version has its own. */
+body:has([data-v7]) > header {
+  display: none !important;
+}
 html:has([data-v7]),
 html:has([data-v7]) body {
   background: #0b0d0c;

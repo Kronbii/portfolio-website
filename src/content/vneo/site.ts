@@ -133,7 +133,7 @@ export const featured: WorkItem[] = [
   ),
 ]
 
-export type TileSize = 'wide' | 'tall' | 'one'
+export type TileSize = 'big' | 'wide' | 'tall' | 'one'
 export const bento: (WorkItem & {
   size: TileSize
   image?: { src: string; position?: string; fit?: 'contain' }
@@ -143,19 +143,23 @@ export const bento: (WorkItem & {
     ...workItem(
       'upstream-open-source-contributions',
       { kind: 'shot', id: 'ship' },
-      ''
+      'Five pull requests to Betaflight, PX4, and OpenFront: three merged.'
     ),
     size: 'wide',
   },
   {
-    ...workItem('easypid-arduino-library', { kind: 'shot', id: 'tune' }, ''),
+    ...workItem(
+      'easypid-arduino-library',
+      { kind: 'shot', id: 'tune' },
+      'A simulated step response settling as the damping rises.'
+    ),
     size: 'one',
   },
   {
     ...workItem(
       'fine-crack-tracing-toolkit',
       { kind: 'shot', id: 'trace' },
-      ''
+      'A crack mask becomes candidate points, a spanning tree, and one smooth path.'
     ),
     size: 'tall',
   },
@@ -185,6 +189,18 @@ export const bento: (WorkItem & {
       position: '50% 30%',
     },
   },
+]
+
+/**
+ * The work, as one tight grid: the four featured pieces take the big tiles
+ * and play in turn like a reel; the rest pack around them.
+ */
+export const showcase: (typeof bento)[number][] = [
+  { ...featured[0], size: 'big' },
+  { ...featured[2], size: 'wide' },
+  { ...featured[1], size: 'one' },
+  { ...featured[3], size: 'one' },
+  ...bento,
 ]
 
 /** In the community: the work built for people, and the rooms where it is shared. */
@@ -271,10 +287,13 @@ export const vneo = {
     label: 'Selected work',
     title: 'Work you can watch work.',
     hot: 'watch',
-    lede: 'Four pieces in motion, then the rest at a glance. Every one says what it does, my part, and the fact to check.',
+    lede: 'The first four play as a reel when you arrive; hover any piece to see it again, or watch it full size. Every one says what it does, my part, and the fact to check.',
     all: 'All projects',
     open: 'Open the project',
-    playing: 'Now showing',
+    watch: 'Watch',
+    prev: 'Previous piece',
+    next: 'Next piece',
+    close: 'Close',
   },
 
   notes: {

@@ -634,27 +634,6 @@
 [data-vneo] .vn-community {
   padding: clamp(80px, 14vh, 140px) 0 0;
 }
-[data-vneo] .vn-reelwork {
-  display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
-  gap: clamp(28px, 4vw, 72px);
-  padding: clamp(36px, 6vh, 64px) var(--gutter) 0;
-}
-[data-vneo] .vn-player-col {
-  position: relative;
-}
-[data-vneo] .vn-player {
-  position: sticky;
-  top: clamp(84px, 13vh, 120px);
-}
-[data-vneo] .vn-screen {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  border-radius: 28px;
-  overflow: hidden;
-  background: var(--ground);
-  box-shadow: 0 0 0 1px var(--hair);
-}
 [data-vneo] .vn-pane {
   position: absolute;
   inset: 0;
@@ -688,49 +667,6 @@
     transform: translateX(101%);
   }
 }
-[data-vneo] .vn-player-hud {
-  display: flex;
-  gap: 16px;
-  justify-content: space-between;
-  margin-top: 14px;
-  color: var(--ink3);
-  font-size: 0.95rem;
-}
-[data-vneo] .vn-player-hud span:first-child {
-  font-family: var(--f-mono);
-  color: var(--sage);
-}
-[data-vneo] .vn-entries > li {
-  min-height: 58vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 24px 0;
-  opacity: 0.45;
-  transition: opacity 0.5s;
-}
-[data-vneo] .vn-entries > li[data-on] {
-  opacity: 1;
-}
-[data-vneo] .vn-entry-no {
-  color: var(--sage);
-  font-weight: 600;
-  font-size: 0.95rem;
-}
-[data-vneo] .vn-entries h3 {
-  margin-top: 10px;
-  font-weight: 600;
-  font-size: clamp(1.6rem, 2.4vw, 2.3rem);
-  line-height: 1.1;
-  letter-spacing: -0.025em;
-}
-[data-vneo] .vn-entries h3 a:hover {
-  color: var(--sage);
-}
-[data-vneo] .vn-entry-line {
-  margin-top: 12px;
-  color: var(--ink2);
-}
 [data-vneo] .vn-entry-facts {
   display: grid;
   gap: 0;
@@ -751,21 +687,6 @@
 [data-vneo] .vn-entry-facts dd {
   font-weight: 600;
 }
-[data-vneo] .vn-inline {
-  margin-bottom: 18px;
-}
-@media (max-width: 1020px) {
-  [data-vneo] .vn-reelwork {
-    grid-template-columns: 1fr;
-  }
-  [data-vneo] .vn-entries > li {
-    min-height: 0;
-    opacity: 1;
-    padding: 28px 0;
-    border-top: 1px solid var(--hair);
-  }
-}
-
 /* motion that fills its box: the whole composition in the player, the part that carries it in a tile */
 [data-vneo] :is(.vn-pane, .vn-tile-media) :is(.v6-shot, .v7-scene) {
   position: absolute;
@@ -775,7 +696,7 @@
   max-width: none;
   margin: 0;
 }
-[data-vneo] :is(.vn-screen, .vn-tile-media) .v6-frame {
+[data-vneo] :is(.vn-pane, .vn-tile-media) .v6-frame {
   height: 100%;
   aspect-ratio: auto !important;
   container-type: size;
@@ -783,7 +704,7 @@
   box-shadow: none;
   background: transparent;
 }
-[data-vneo] .vn-screen .v6-stage {
+[data-vneo] .vn-pane .v6-stage {
   transform: scale(tan(atan2(100cqw, 1920px))) !important;
 }
 [data-vneo] .vn-tile-media[data-fit='full'] .v6-stage {
@@ -815,7 +736,7 @@
   aspect-ratio: 1;
   transform: translateX(-50%);
 }
-[data-vneo] :is(.vn-screen, .vn-tile-media) .v7-frame {
+[data-vneo] :is(.vn-pane, .vn-tile-media) .v7-frame {
   height: 100%;
   aspect-ratio: auto;
   container-type: size;
@@ -823,7 +744,7 @@
   box-shadow: none;
   background: transparent;
 }
-[data-vneo] :is(.vn-screen, .vn-tile-media) .v7-stage {
+[data-vneo] :is(.vn-pane, .vn-tile-media) .v7-stage {
   --k: max(tan(atan2(100cqw, 1200px)), tan(atan2(100cqh, 1200px)));
   transform: translate(
       calc((100cqw - 1200px * var(--k)) / 2),
@@ -831,7 +752,7 @@
     )
     scale(var(--k));
 }
-[data-vneo] :is(.vn-screen, .vn-tile-media) .v7-replay {
+[data-vneo] :is(.vn-pane, .vn-tile-media) .v7-replay {
   display: none;
 }
 
@@ -1242,4 +1163,199 @@
 [data-vneo] .vn-grid .vn-tile-media > img[style*='contain'] {
   padding: 8%;
   background: #f6f6f1;
+}
+
+/* ---------- the showcase: one grid, a reel run, a theater ---------- */
+[data-vneo] .vn-tile.is-big {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+[data-vneo] .vn-tile.is-big .vn-tile-media {
+  aspect-ratio: auto;
+  flex: 1;
+  min-height: 360px;
+}
+[data-vneo] .vn-tile.is-big .vn-tile-cap h3 {
+  font-size: 1.45rem;
+}
+/* the piece now playing in the opening run */
+[data-vneo] .vn-tile[data-live] {
+  box-shadow:
+    0 0 0 2px var(--sage),
+    -3px 0 0 rgba(var(--fr-m), 0.5),
+    3px 0 0 rgba(var(--fr-g), 0.5);
+}
+[data-vneo] .vn-watch {
+  position: absolute;
+  z-index: 5;
+  right: 12px;
+  top: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 13px 7px 10px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(var(--bg-rgb), 0.78);
+  box-shadow: inset 0 0 0 1px var(--hair2);
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    opacity 0.25s,
+    transform 0.25s var(--ease),
+    background 0.2s,
+    color 0.2s;
+}
+[data-vneo] .vn-watch svg {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+}
+[data-vneo] .vn-tile:hover .vn-watch,
+[data-vneo] .vn-tile:focus-within .vn-watch,
+[data-vneo] .vn-tile[data-live] .vn-watch {
+  opacity: 1;
+  transform: none;
+}
+[data-vneo] .vn-watch:hover {
+  background: var(--sage);
+  color: var(--sage-ink);
+}
+@media (hover: none) {
+  [data-vneo] .vn-watch {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (max-width: 1020px) {
+  [data-vneo] .vn-tile.is-big .vn-tile-media {
+    min-height: 300px;
+  }
+}
+@media (max-width: 560px) {
+  [data-vneo] .vn-tile.is-big {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  [data-vneo] .vn-tile.is-big .vn-tile-media {
+    flex: none;
+    aspect-ratio: 1;
+    min-height: 0;
+  }
+}
+
+[data-vneo] .vn-theater {
+  width: min(1180px, calc(100vw - 32px));
+  max-width: none;
+  max-height: calc(100svh - 32px);
+  margin: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 28px;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow:
+    0 0 0 1px var(--hair2),
+    0 40px 120px rgba(0, 0, 0, 0.6);
+  overflow: auto;
+}
+[data-vneo] .vn-theater::backdrop {
+  background: rgba(7, 9, 8, 0.82);
+  backdrop-filter: blur(6px);
+}
+[data-vneo] .vn-theater[open] {
+  animation: vn-theater-in 0.5s var(--ease) both;
+}
+@keyframes vn-theater-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+    filter: blur(8px);
+  }
+}
+[data-vneo] .vn-theater-in {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 330px);
+  gap: 0;
+}
+[data-vneo] .vn-theater-screen {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  align-self: center;
+  background: var(--ground);
+}
+[data-vneo] .vn-theater-slate {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 28px 26px 24px;
+  border-left: 1px solid var(--hair);
+}
+[data-vneo] .vn-theater-slate h3 {
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+[data-vneo] .vn-theater-slate p {
+  color: var(--ink2);
+  font-size: 0.98rem;
+}
+[data-vneo] .vn-theater-shows {
+  color: var(--sage) !important;
+}
+[data-vneo] .vn-theater-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 8px;
+}
+[data-vneo] .vn-theater-nav {
+  display: flex;
+  gap: 8px;
+}
+[data-vneo] .vn-theater-nav button,
+[data-vneo] .vn-theater-close {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--raised);
+  box-shadow: inset 0 0 0 1px var(--hair2);
+  color: var(--ink);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+[data-vneo] .vn-theater-nav button:hover,
+[data-vneo] .vn-theater-close:hover {
+  background: var(--sage);
+  color: var(--sage-ink);
+}
+[data-vneo] .vn-theater-close {
+  position: absolute;
+  z-index: 6;
+  right: 12px;
+  top: 12px;
+  font-size: 1.4rem;
+}
+@media (max-width: 860px) {
+  [data-vneo] .vn-theater-in {
+    grid-template-columns: 1fr;
+  }
+  [data-vneo] .vn-theater-slate {
+    border-left: 0;
+    border-top: 1px solid var(--hair);
+  }
 }
