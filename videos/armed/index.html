@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <title>ARMED — Rami Kronbi</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/js/core.js"></script>
+    <style>
+      @font-face { font-family: 'Manrope'; src: url('assets/fonts/Manrope-500.ttf') format('truetype'); font-weight: 500; }
+      @font-face { font-family: 'Manrope'; src: url('assets/fonts/Manrope-700.ttf') format('truetype'); font-weight: 700; }
+      @font-face { font-family: 'Manrope'; src: url('assets/fonts/Manrope-800.ttf') format('truetype'); font-weight: 800; }
+      @font-face { font-family: 'Instrument Serif'; src: url('assets/fonts/InstrumentSerif-Italic.ttf') format('truetype'); font-style: italic; font-weight: 400; }
+      @font-face { font-family: 'JetBrains Mono'; src: url('assets/fonts/JetBrainsMono-500.ttf') format('truetype'); font-weight: 500; }
+      @font-face { font-family: 'JetBrains Mono'; src: url('assets/fonts/JetBrainsMono-600.ttf') format('truetype'); font-weight: 600; }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #0e0b0b; }
+      #root {
+        position: relative; width: 100%; height: 100%; overflow: hidden;
+        background: #0e0b0b; color: #fbf5ea; font-family: 'Manrope', sans-serif; font-weight: 500;
+        -webkit-font-smoothing: antialiased;
+      }
+      .layer { position: absolute; inset: 0; width: 100%; height: 100%; }
+      .mono { font-family: 'JetBrains Mono', monospace; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; font-variant-numeric: tabular-nums; }
+
+      /* ground: warm black and one breathing burgundy glow (radial, never a full linear gradient) */
+      #glow { position: absolute; left: 50%; top: 58%; width: 2200px; height: 1500px; margin: -750px 0 0 -1100px;
+        background: radial-gradient(closest-side, rgba(201, 104, 106, 0.17), rgba(201, 104, 106, 0) 100%); }
+
+      /* the rig carries the camera kicks for the 3D layer and every scene at once */
+      #rig { position: absolute; inset: 0; transform-origin: 50% 50%; will-change: transform; }
+      #rig > div[data-composition-src] { position: absolute; inset: 0; }
+      #gl { position: absolute; inset: 0; width: 1920px; height: 1080px; display: block; pointer-events: none; }
+
+      #flash { background: #fbf5ea; opacity: 0; pointer-events: none; }
+      #invert { background: #fbf5ea; mix-blend-mode: difference; opacity: 0; pointer-events: none; }
+      #vignette { background: radial-gradient(ellipse at 50% 50%, rgba(10, 8, 8, 0) 55%, rgba(10, 8, 8, 0.55) 100%); pointer-events: none; }
+
+      #chrome { pointer-events: none; }
+      .chrome-t { position: absolute; font-size: 17px; color: rgba(251, 245, 234, 0.6); white-space: nowrap; }
+      #c-brand { left: 56px; top: 44px; }
+      #c-rec { right: 56px; top: 44px; display: flex; align-items: center; gap: 12px; }
+      #c-dot { width: 10px; height: 10px; border-radius: 50%; background: #c9686a; }
+      #c-grid { position: absolute; left: 56px; bottom: 44px; display: flex; gap: 10px; align-items: flex-end; }
+      .c-bar { display: flex; gap: 3px; }
+      .c-b { width: 7px; height: 16px; background: rgba(251, 245, 234, 0.14); }
+      .c-b.on { background: rgba(251, 245, 234, 0.6); }
+      .c-b.now { background: #c9686a; }
+      #c-bpm { margin-left: 12px; font-size: 17px; color: rgba(251, 245, 234, 0.6); }
+      #c-sec { right: 56px; bottom: 44px; display: flex; gap: 14px; align-items: baseline; }
+      #c-num { color: #c9686a; }
+      #c-label { color: #fbf5ea; }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-kbh8" id="root" data-composition-id="main" data-start="0" data-duration="15" data-width="1920" data-height="1080">
+      <!-- Score: procedural, composed to the cut (audio/score.py). -->
+      <audio data-hf-id="hf-fgmy" id="score" src=".media/audio/bgm/bgm_001.wav" data-start="0" data-duration="15" data-track-index="10" data-volume="1"></audio>
+      <svg data-hf-id="hf-p3r6" width="0" height="0" style="position: absolute" aria-hidden="true">
+        <filter data-hf-id="hf-l2bk" id="ghost" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+          <!-- a burgundy copy of the frame, offset and screened back over it -->
+          <fecolormatrix data-hf-id="hf-d2p5" in="SourceGraphic" type="matrix" values="0.237 0.469 0.083 0 0  0.123 0.243 0.043 0 0  0.126 0.249 0.044 0 0  0 0 0 1 0" result="tint" />
+          <feoffset data-hf-id="hf-mz7c" id="ghost-off" in="tint" dx="0" dy="0" result="off" />
+          <feblend data-hf-id="hf-uwjq" in="SourceGraphic" in2="off" mode="screen" />
+        </filter>
+      </svg>
+
+      <div data-hf-id="hf-x7vu" id="ground" class="clip layer" data-start="0" data-duration="15" data-track-index="0">
+        <div data-hf-id="hf-27c6" id="glow"></div>
+      </div>
+
+      <div data-hf-id="hf-jy91" id="rig">
+        <canvas data-hf-id="hf-ypow" id="gl" class="clip" data-layout-allow-overflow="" width="1920" height="1080" data-start="0" data-duration="15" data-track-index="1"></canvas>
+        <div data-hf-id="hf-ngli" id="el-s01" data-composition-id="s01-arm" data-composition-src="compositions/s01-arm.html" data-start="0" data-duration="1.875" data-track-index="2" data-width="1920" data-height="1080"></div>
+        <div data-hf-id="hf-w6xk" id="el-s02" data-composition-id="s02-flip" data-composition-src="compositions/s02-flip.html" data-start="1.875" data-duration="1.875" data-track-index="2" data-width="1920" data-height="1080"></div>
+        <div data-hf-id="hf-k45r" id="el-s03" data-composition-id="s03-name" data-composition-src="compositions/s03-name.html" data-start="3.75" data-duration="1.875" data-track-index="2" data-width="1920" data-height="1080"></div>
+        <div data-hf-id="hf-5v65" id="el-osd" data-composition-id="osd" data-composition-src="compositions/osd.html" data-start="0" data-duration="3.75" data-track-index="3" data-width="1920" data-height="1080"></div>
+        <div data-hf-id="hf-w7wt" id="el-s04" data-composition-id="s04-see" data-composition-src="compositions/s04-see.html" data-start="5.625" data-duration="1.875" data-track-index="2" data-width="1920" data-height="1080"></div>
+        <div data-hf-id="hf-y6ge" id="el-s05" data-composition-id="s05-map" data-composition-src="compositions/s05-map.html" data-start="7.5" data-duration="1.875" data-track-index="2" data-width="1920" data-height="1080"></div>
+        <div data-hf-id="hf-csge" id="el-s06" data-composition-id="s06-heat" data-composition-src="compositions/s06-heat.html" data-start="9.375" data-duration="0.9375" data-track-index="2" data-width="1920" data-height="1080"></div>
+        <div data-hf-id="hf-cnb5" id="el-s07" data-composition-id="s07-tune" data-composition-src="compositions/s07-tune.html" data-start="10.3125" data-duration="0.9375" data-track-index="2" data-width="1920" data-height="1080"></div>
+        <div data-hf-id="hf-3pdu" id="el-s08" data-composition-id="s08-fly" data-composition-src="compositions/s08-fly.html" data-start="11.25" data-duration="1.875" data-track-index="2" data-width="1920" data-height="1080"></div>
+        <div data-hf-id="hf-lsic" id="el-s09" data-composition-id="s09-sign" data-composition-src="compositions/s09-sign.html" data-start="13.125" data-duration="1.875" data-track-index="2" data-width="1920" data-height="1080"></div>
+      </div>
+
+      <div data-hf-id="hf-9ua1" id="vignette" class="clip layer" data-start="0" data-duration="15" data-track-index="20"></div>
+      <div data-hf-id="hf-ofon" id="chrome" class="clip layer" data-layout-ignore="" data-start="0" data-duration="15" data-track-index="21">
+        <div data-hf-id="hf-ouk7" id="c-brand" class="chrome-t mono">Rami Kronbi — Flight reel</div>
+        <div data-hf-id="hf-dfjq" id="c-rec" class="chrome-t mono"><span data-hf-id="hf-eti3" id="c-dot"></span><span data-hf-id="hf-suwx" id="c-tc">00:00:00:00</span></div>
+        <div data-hf-id="hf-ab5f" id="c-grid" class="mono"></div>
+        <div data-hf-id="hf-vsvf" id="c-sec" class="chrome-t mono"><span data-hf-id="hf-aw81" id="c-num">01</span><span data-hf-id="hf-x2ky" id="c-label">ARM</span></div>
+      </div>
+      <div data-hf-id="hf-5ba9" id="flash" class="clip layer" data-start="0" data-duration="15" data-track-index="22"></div>
+      <div data-hf-id="hf-w568" id="invert" class="clip layer" data-start="0" data-duration="15" data-track-index="23"></div>
+
+      <div data-hf-id="hf-dpxz" id="grain-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100">
+        <div data-hf-id="hf-0qtj" class="grain-texture"></div>
+      </div>
+    </div>
+
+    <style>
+      @keyframes hf-grain-noise {
+        0%, 100% { transform: translate(0, 0); }
+        10% { transform: translate(-5%, -5%); }
+        20% { transform: translate(-10%, 5%); }
+        30% { transform: translate(5%, -10%); }
+        40% { transform: translate(-5%, 15%); }
+        50% { transform: translate(-10%, 5%); }
+        60% { transform: translate(15%, 0); }
+        70% { transform: translate(0, 10%); }
+        80% { transform: translate(-15%, 0); }
+        90% { transform: translate(10%, 5%); }
+      }
+      #grain-overlay .grain-texture {
+        position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+        background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        opacity: 0.1;
+        animation: hf-grain-noise 0.5s steps(1) 30;
+      }
+    </style>
+
+    <script>
+      ;(function () {
+        const A = window.ARMED
+        const { clamp, noise, IMPACTS, SCENES, B } = A
+        const $ = (s) => document.querySelector(s)
+        const rig = $('#rig')
+        const flash = $('#flash')
+        const invert = $('#invert')
+        const ghostOff = $('#ghost-off')
+        const glow = $('#glow')
+        const tc = $('#c-tc')
+        const dot = $('#c-dot')
+        const num = $('#c-num')
+        const label = $('#c-label')
+
+        // the beat grid: 8 bars of 4 beats
+        const grid = $('#c-grid')
+        const cells = []
+        for (let b = 0; b < 8; b++) {
+          const bar = document.createElement('div')
+          bar.className = 'c-bar'
+          for (let k = 0; k < 4; k++) {
+            const c = document.createElement('div')
+            c.className = 'c-b'
+            bar.appendChild(c)
+            cells.push(c)
+          }
+          grid.appendChild(bar)
+        }
+        const bpm = document.createElement('div')
+        bpm.id = 'c-bpm'
+        bpm.textContent = '128 BPM'
+        grid.appendChild(bpm)
+
+        // camera: decaying kicks on every impact, plus an engine buzz while airborne
+        function kick(t) {
+          let x = 0, y = 0, r = 0, s = 0, fl = 0, gh = 0, inv = 0
+          IMPACTS.forEach((im, i) => {
+            const d = t - im.t
+            if (d < 0 || d > 0.6) return
+            const env = Math.exp(-d * 11) * im.k
+            x += (noise(d * 38, 3 + i) - 0.5) * 52 * env
+            y += (noise(d * 41, 9 + i) - 0.5) * 52 * env
+            r += (noise(d * 30, 17 + i) - 0.5) * 1.6 * env
+            s += 0.07 * Math.exp(-d * 9) * im.k
+            if (im.flash) fl += im.flash * Math.exp(-d * 20)
+            if (im.ghost) gh += im.ghost * Math.exp(-d * 13)
+            if (im.invert && d < 0.06) inv = 1
+          })
+          const air = t < 5.625 || (t >= 11.25 && t < 13.125) ? 1 : 0
+          x += air * (noise(t * 27, 41) - 0.5) * 4
+          y += air * (noise(t * 31, 43) - 0.5) * 4
+          return { x, y, r, s, fl, gh, inv }
+        }
+
+        let lastSec = -1
+        let lastBeat = -2
+        let ghostOn = false
+        function update(t) {
+          const k = kick(t)
+          rig.style.transform = `translate(${k.x.toFixed(2)}px, ${k.y.toFixed(2)}px) rotate(${k.r.toFixed(3)}deg) scale(${(1 + k.s).toFixed(4)})`
+          flash.style.opacity = clamp(k.fl * 0.9).toFixed(3)
+          invert.style.opacity = String(k.inv)
+          const g = clamp(k.gh)
+          if (g > 0.02) {
+            if (!ghostOn) rig.style.filter = 'url(#ghost)'
+            ghostOn = true
+            ghostOff.setAttribute('dx', (-26 * g).toFixed(2))
+            ghostOff.setAttribute('dy', (6 * g).toFixed(2))
+          } else if (ghostOn) {
+            rig.style.filter = 'none'
+            ghostOn = false
+          }
+          // the glow breathes on the kick
+          const bt = t % B
+          glow.style.opacity = (0.75 + 0.25 * Math.exp(-bt * 6) * (t > 3.75 && t < 13.2 ? 1 : 0.3)).toFixed(3)
+
+          // chrome
+          const f = Math.floor(t * 30 + 1e-6)
+          tc.textContent = `00:00:${String(Math.floor(f / 30)).padStart(2, '0')}:${String(f % 30).padStart(2, '0')}`
+          dot.style.opacity = Math.floor(t * 2) % 2 === 0 ? '1' : '0.25'
+          const nb = Math.min(31, Math.floor(t / B + 1e-6))
+          if (nb !== lastBeat) {
+            cells.forEach((c, i) => (c.className = i < nb ? 'c-b on' : i === nb ? 'c-b now' : 'c-b'))
+            lastBeat = nb
+          }
+          const si = SCENES.findIndex((s) => t >= s.a - 1e-6 && t < s.b - 1e-6)
+          const sec = si < 0 ? SCENES.length - 1 : si
+          if (sec !== lastSec) {
+            num.textContent = String(sec + 1).padStart(2, '0')
+            label.textContent = SCENES[sec].label
+            lastSec = sec
+          }
+        }
+
+        const tl = gsap.timeline({ paused: true })
+        // seek-safe driver: GSAP writes `t` on every render, seeks included
+        const driver = {}
+        let value = 0
+        Object.defineProperty(driver, 't', {
+          get: () => value,
+          set: (v) => {
+            value = v
+            update(v)
+          },
+        })
+        tl.to(driver, { t: 15, duration: 15, ease: 'none' }, 0)
+        update(0)
+        window.__timelines['main'] = tl
+      })()
+    </script>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "./assets/vendor/three/build/three.module.js",
+          "three/addons/": "./assets/vendor/three/addons/"
+        }
+      }
+    </script>
+    <script type="module" src="assets/js/gl.js"></script>
+  </body>
+</html>

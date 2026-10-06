@@ -1,0 +1,75 @@
+/**
+ * The one italic word in each page heading (Juno's rule, borrowed from
+ * Lazpress): never more than one per heading, and a title with no entry here
+ * simply renders without one. Matching is whole-word and case-sensitive.
+ */
+
+export const projectEmphasis: Record<string, string> = {
+  '360-spherical-panorama-stitching': 'Spherical',
+  'brainiacs-autonomous-race-car': 'Autonomous',
+  'thermal-super-resolution': 'Thermal',
+  'pid-light-tracking-robot': 'Light',
+  'fine-crack-tracing-toolkit': 'Tracing',
+  'multilingual-medical-prescription-ocr': 'Multilingual',
+  'lebanese-motorcycle-theory-trainer': 'Theory',
+  'local-first-ai-support-triage': 'Council',
+  'ree-personal-finance-tracker': 'Finance',
+  'omnisign-lebanese-sign-language': 'translation',
+  'posture-aware-classroom-desk': 'Interactive',
+  'raspberry-pi-runway-inspection-uav': 'runway-inspection',
+  'five-inch-carbon-fiber-fpv-drone': 'carbon-fiber',
+  'emotion-recognition-autism-support': 'emotion-recognition',
+  'upstream-open-source-contributions': 'Upstream',
+  'hantawatch-outbreak-dashboard': 'situational-awareness',
+  'basira-retinal-screening': 'retinal',
+  'imagen-raw-to-edit-dataset-pipeline': 'edit',
+  'lumiscan-lesion-dashboard': 'lesions',
+  'evoid-applied-vision-venture': 'venture',
+  'water-shooting-robot': 'Water-shooting',
+  'bsheel-quest-app': 'quest',
+  'moto-961-bikey': 'motorcycle',
+}
+
+export const articleEmphasis: Record<string, string> = {
+  'building-a-360-panorama-stitcher-from-a-phone-sweep': 'sweep',
+  'designing-a-pid-library-for-real-embedded-control': 'real',
+  'building-an-autonomous-race-car-in-twenty-days': 'twenty',
+  'adapting-super-resolution-to-thermal-imagery': 'thermal',
+  'what-a-two-axis-light-tracker-teaches-about-pid-control': 'teaches',
+  'turning-segmented-cracks-into-measurable-paths': 'measurable',
+  'extracting-medicine-names-from-multilingual-prescriptions': 'multilingual',
+  'designing-election-information-for-verifiability': 'verifiability',
+  'building-an-adaptive-motorcycle-theory-trainer-for-lebanon': 'adaptive',
+  'building-a-local-first-ai-support-triage-council': 'local-first',
+  'designing-an-offline-first-personal-finance-desktop-app': 'offline-first',
+  'building-real-time-lebanese-sign-language-translation': 'real-time',
+  'connecting-posture-estimation-to-a-motorized-desk': 'motorized',
+  'running-fod-detection-on-a-raspberry-pi-uav': 'FOD',
+  'engineering-a-five-inch-fpv-drone-from-first-principles': 'first',
+  'lessons-from-an-edge-emotion-recognition-prototype': 'edge',
+  'what-four-years-of-technical-mentoring-taught-me': 'mentoring',
+  'building-technology-around-crisis-response-operations': 'crisis-response',
+  'turning-physics-outreach-into-a-multi-university-program': 'outreach',
+  'what-small-upstream-fixes-teach-about-firmware': 'small',
+  'talks-workshops-and-teaching': 'teaching',
+  'building-an-outbreak-dashboard-from-public-sources': 'public',
+  'designing-a-council-of-models-for-retinal-screening': 'council',
+  'why-color-science-comes-before-the-model': 'before',
+  'making-tenant-isolation-the-only-path': 'only',
+  'what-a-small-vision-venture-taught-me-about-scope': 'scope',
+  'a-first-mechatronic-loop-without-a-pump': 'without',
+  'moderation-is-the-product-in-a-quest-app': 'product',
+  'a-ride-is-data-about-the-bike': 'data',
+}
+
+export const topicEmphasis: Record<string, string> = {
+  'computer-vision': 'vision',
+  'robotics-perception': 'perception',
+  'embedded-systems': 'Embedded',
+  'control-systems': 'Control',
+  'edge-ai': 'Edge',
+  'open-source-engineering': 'Open-source',
+  'applied-ai': 'Applied',
+  'civic-technology': 'Civic',
+  'local-first-software': 'Local-first',
+}

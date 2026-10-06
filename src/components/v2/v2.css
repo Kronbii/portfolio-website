@@ -1,0 +1,292 @@
+/*
+ * /v2 — the engineering notebook.
+ * Juno's synthesis: Bikey's hairline instrument, Lazpress's type, Tayseer's
+ * burgundy on warm black. Everything is scoped to [data-v2] so the live site
+ * never sees it.
+ */
+
+[data-v2] {
+  /* grounds */
+  --bg: #0e0b0b;
+  --surface: #1a1414;
+  --raised: #221a1a;
+  --sunk: #0a0808;
+  /* structure */
+  --hair: rgba(251, 245, 234, 0.12);
+  --hair-strong: rgba(251, 245, 234, 0.24);
+  --grid: rgba(251, 245, 234, 0.045);
+  /* ink */
+  --ink: #fbf5ea;
+  --ink-2: rgba(251, 245, 234, 0.7);
+  --ink-3: rgba(251, 245, 234, 0.52);
+  /* accent: the only colour that is not ink */
+  --brand: #c9686a;
+  --brand-strong: #e08a8b;
+  --brand-ink: #0e0b0b;
+  --brand-tint: rgba(201, 104, 106, 0.1);
+  --brand-wash: rgba(201, 104, 106, 0.18);
+  --ok: #3fb950;
+  --warn: #e3b341;
+  --shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.7);
+
+  --f-sans: var(--font-v2-sans), 'Manrope', system-ui, sans-serif;
+  --f-serif: var(--font-v2-serif), 'Instrument Serif', Georgia, serif;
+  --f-mono: var(--font-v2-mono), 'JetBrains Mono', ui-monospace, monospace;
+
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --fast: 180ms;
+  --med: 260ms;
+
+  --gutter: clamp(1rem, 3.2vw, 2rem);
+  --wrap: 1440px;
+  --nav-h: 64px;
+
+  --r-tile: 26px;
+  --r-card: 20px;
+  --r-plate: 14px;
+  --r-chip: 12px;
+
+  color-scheme: dark;
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--f-sans);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'ss01' 1;
+  cursor: default;
+  overflow-x: clip;
+}
+
+[data-v2][data-theme='light'] {
+  --bg: #ffffff;
+  --surface: #f6f4f0;
+  --raised: #efebe4;
+  --sunk: #f6f4f0;
+  --hair: #e7e3dc;
+  --hair-strong: #cfc9bf;
+  --grid: rgba(21, 23, 26, 0.05);
+  --ink: #15171a;
+  --ink-2: #3a3d42;
+  --ink-3: #64676d;
+  --brand: #8c3839;
+  --brand-strong: #6b2a2b;
+  --brand-ink: #ffffff;
+  --brand-tint: rgba(140, 56, 57, 0.07);
+  --brand-wash: rgba(140, 56, 57, 0.14);
+  --ok: #1a7f37;
+  --warn: #9a6700;
+  --shadow: 0 24px 60px -28px rgba(21, 23, 26, 0.28);
+  color-scheme: light;
+}
+
+/* The incumbent root layout still mounts its pill nav; /v2 has its own. */
+body:has([data-v2]) > header {
+  display: none !important;
+}
+
+html:has([data-v2]) {
+  background: #0e0b0b;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(251, 245, 234, 0.22) #0e0b0b;
+  scroll-padding-top: 88px;
+}
+html:has([data-v2][data-theme='light']) {
+  background: #ffffff;
+  scrollbar-color: #cfc9bf #ffffff;
+}
+html:has([data-v2])::-webkit-scrollbar {
+  display: block;
+  width: 10px;
+}
+html:has([data-v2])::-webkit-scrollbar-thumb {
+  background: rgba(251, 245, 234, 0.2);
+  border-radius: 999px;
+  border: 3px solid #0e0b0b;
+}
+html:has([data-v2][data-theme='light'])::-webkit-scrollbar-thumb {
+  background: #cfc9bf;
+  border-color: #ffffff;
+}
+
+/* The incumbent globals set a crosshair everywhere; undo it at zero specificity. */
+:where([data-v2] *) {
+  cursor: inherit;
+}
+
+[data-v2] ::selection {
+  background: var(--brand);
+  color: var(--brand-ink);
+}
+
+[data-v2] :focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+}
+
+:where([data-v2]) a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:where([data-v2]) img {
+  max-width: 100%;
+  display: block;
+}
+
+:where([data-v2]) :is(h1, h2, h3, h4) {
+  font-family: var(--f-sans);
+  font-weight: 700;
+  margin: 0;
+  text-wrap: balance;
+}
+
+:where([data-v2]) p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+:where([data-v2]) :is(ul, ol) {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:where([data-v2]) button {
+  font: inherit;
+  color: inherit;
+}
+
+/* One italic serif word per heading. Serif x-height runs small; lift it. */
+[data-v2] .v2-em {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.08em;
+  letter-spacing: -0.01em;
+  color: var(--brand);
+  padding-right: 0.04em;
+}
+
+[data-v2] .v2-mono {
+  font-family: var(--f-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+[data-v2] .v2-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/*
+ * Sheets. Opening an entry slides its sheet over the contents with a little
+ * overshoot; the contents stay beneath, pushed back. Returning reverses it.
+ * Raised by the exposure-record sheets.
+ */
+@keyframes v2-sheet-in {
+  from {
+    transform: translateY(16vh);
+  }
+  72% {
+    transform: translateY(-0.7vh);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes v2-sheet-under {
+  to {
+    transform: scale(0.955) translateY(-1.5vh);
+    opacity: 0.45;
+  }
+}
+@keyframes v2-sheet-out {
+  to {
+    transform: translateY(100vh);
+  }
+}
+@keyframes v2-sheet-rise {
+  from {
+    transform: scale(0.955) translateY(-1.5vh);
+    opacity: 0.45;
+  }
+}
+
+html[data-v2-vt='forward']::view-transition-old(root) {
+  animation: v2-sheet-under 560ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+html[data-v2-vt='forward']::view-transition-new(root) {
+  animation: v2-sheet-in 640ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  box-shadow: 0 -30px 80px rgba(0, 0, 0, 0.45);
+}
+html[data-v2-vt='back']::view-transition-old(root) {
+  animation: v2-sheet-out 520ms cubic-bezier(0.55, 0, 0.75, 0.3) both;
+  z-index: 2;
+}
+html[data-v2-vt='back']::view-transition-new(root) {
+  animation: v2-sheet-rise 560ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+html[data-v2-vt]::view-transition-group(v2-header) {
+  animation: none;
+}
+html[data-v2-vt]::view-transition-old(v2-header) {
+  display: none;
+}
+html[data-v2-vt]::view-transition-new(v2-header) {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-v2-vt]::view-transition-old(root),
+  html[data-v2-vt]::view-transition-new(root) {
+    animation: none;
+  }
+}
+
+/* The floating dock sits over the page bottom on phones; give the footer room. */
+@media (max-width: 900px) {
+  [data-v2] {
+    padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/*
+ * The preflight intro. The page never changes width under it (the scrollbar
+ * is tinted, not hidden, so nothing shifts at the reveal), and the home
+ * heading waits unseen while the intro's copy of the name glides onto it.
+ * If the intro's script never arrives, the heading shows itself anyway.
+ */
+html:has([data-v2][data-intro='on']),
+html:has([data-v2][data-intro='playing']) {
+  scrollbar-color: #0a0808 #0a0808;
+}
+
+[data-v2][data-intro='on'] #v2-name,
+[data-v2][data-intro='playing'] #v2-name,
+[data-v2][data-intro='reveal'] #v2-name {
+  opacity: 0;
+}
+
+[data-v2][data-intro='on'] #v2-name {
+  animation: v2-name-failsafe 0.4s ease 6.5s forwards;
+}
+
+@keyframes v2-name-failsafe {
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <title>One Loop — Rami Kronbi</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/js/signal.js"></script>
+    <style>
+      @font-face { font-family: 'Manrope'; src: url('assets/fonts/Manrope-500.ttf') format('truetype'); font-weight: 500; }
+      @font-face { font-family: 'Manrope'; src: url('assets/fonts/Manrope-700.ttf') format('truetype'); font-weight: 700; }
+      @font-face { font-family: 'Manrope'; src: url('assets/fonts/Manrope-800.ttf') format('truetype'); font-weight: 800; }
+      @font-face { font-family: 'Instrument Serif'; src: url('assets/fonts/InstrumentSerif-Italic.ttf') format('truetype'); font-style: italic; font-weight: 400; }
+      @font-face { font-family: 'JetBrains Mono'; src: url('assets/fonts/JetBrainsMono-500.ttf') format('truetype'); font-weight: 500; }
+      @font-face { font-family: 'JetBrains Mono'; src: url('assets/fonts/JetBrainsMono-600.ttf') format('truetype'); font-weight: 600; }
+      @font-face { font-family: 'Noto Naskh Arabic'; src: url('assets/fonts/NotoNaskhArabic-Bold.ttf') format('truetype'); font-weight: 700; }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #0e0b0b; }
+      #root {
+        position: relative; width: 100%; height: 100%; overflow: hidden;
+        background: #0e0b0b; color: #fbf5ea;
+        font-family: 'Manrope', sans-serif; font-weight: 500;
+        -webkit-font-smoothing: antialiased;
+      }
+      .layer { position: absolute; inset: 0; width: 100%; height: 100%; }
+      .mono { font-family: 'JetBrains Mono', monospace; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; font-variant-numeric: tabular-nums; }
+      .em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: #c9686a; letter-spacing: -0.01em; font-size: 1.08em; }
+
+      /* background: ground plus a breathing burgundy glow (radial, never a full linear gradient) */
+      #bg-glow { position: absolute; left: 50%; top: 52%; width: 1800px; height: 1300px; margin: -650px 0 0 -900px;
+        background: radial-gradient(closest-side, rgba(201, 104, 106, 0.16), rgba(201, 104, 106, 0) 100%); }
+      /* Overlays (canvases, HUD, footer): transparent except what they draw, never hit targets. */
+      #drone-gl { position: absolute; inset: 0; width: 1920px; height: 1080px; display: block; pointer-events: none; }
+      #signal { position: absolute; inset: 0; width: 1920px; height: 1080px; display: block; pointer-events: none; }
+      #roll-hud, #hud, #footer { pointer-events: none; }
+
+      /* the world: one oversized page, moved by one camera */
+      #world { position: absolute; left: 0; top: 0; width: 1px; height: 1px; transform-origin: 0 0; will-change: transform; }
+      .w { position: absolute; }
+      #paper { left: -560px; top: 300px; width: 6770px; height: 2790px;
+        background-image: linear-gradient(rgba(251, 245, 234, 0.05) 2px, transparent 2px), linear-gradient(90deg, rgba(251, 245, 234, 0.05) 2px, transparent 2px);
+        background-size: 80px 80px; border: 2px solid rgba(251, 245, 234, 0.12); border-radius: 28px; }
+      .page-head { font-size: 26px; color: rgba(251, 245, 234, 0.52); white-space: nowrap; }
+
+      .mask { overflow: hidden; }
+      .inner { display: block; will-change: transform; }
+
+      #name { left: 1250px; top: 330px; height: 256px; display: flex; align-items: flex-end; font-weight: 800; font-size: 220px; line-height: 1; letter-spacing: -0.045em; white-space: nowrap; }
+      #name .ch { display: inline-block; will-change: transform; }
+      #period { width: 46px; height: 46px; border-radius: 50%; background: #c9686a; left: 2482px; top: 541px; }
+      #subtitle { left: 1256px; top: 648px; font-size: 38px; font-weight: 700; letter-spacing: -0.02em; color: rgba(251, 245, 234, 0.7); white-space: nowrap; }
+
+      .tick-word { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 170px; line-height: 1.1; white-space: nowrap; transform-origin: 50% 100%; }
+
+      .col-top { width: 580px; display: flex; flex-direction: column; justify-content: flex-end; }
+      .col-bot { width: 580px; }
+      .no { font-size: 26px; color: #c9686a; letter-spacing: 0.04em; margin-bottom: 18px; }
+      .title { font-weight: 700; font-size: 66px; line-height: 1.02; letter-spacing: -0.035em; }
+      .title .mask { padding-bottom: 0.08em; margin-bottom: -0.08em; padding-right: 0.1em; }
+      .fig { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 108px; line-height: 1; letter-spacing: -0.05em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+      .fig .unit { font-size: 0.4em; letter-spacing: 0; color: rgba(251, 245, 234, 0.52); margin-left: 0.18em; }
+      .lab { font-size: 21px; color: rgba(251, 245, 234, 0.52); margin-top: 16px; }
+      .sub { font-size: 30px; font-weight: 700; letter-spacing: -0.015em; color: rgba(251, 245, 234, 0.7); margin-top: 22px; line-height: 1.3; }
+
+      .plate { overflow: hidden; border-radius: 18px; border: 2px solid rgba(251, 245, 234, 0.14); background: #0a0808; }
+      .plate img { position: absolute; display: block; }
+      .tag { position: absolute; top: 18px; padding: 8px 14px; border-radius: 999px; background: rgba(14, 11, 11, 0.82); color: #fbf5ea; font-size: 20px; }
+
+      #arabic { left: 2860px; top: 2650px; width: 600px; height: 300px; overflow: visible; }
+      #arabic text { font-family: 'Noto Naskh Arabic', serif; font-weight: 700; font-size: 190px; fill: #c9686a; fill-opacity: 0; stroke: #c9686a; stroke-width: 3; stroke-dasharray: 2600; stroke-dashoffset: 2600; }
+
+      .merge-label { font-size: 20px; color: rgba(251, 245, 234, 0.7); white-space: nowrap; letter-spacing: 0.04em; }
+      #settled { left: 5390px; top: 2470px; font-size: 22px; color: rgba(251, 245, 234, 0.7); white-space: nowrap; }
+
+      #sig { left: 4450px; top: 2700px; width: 1200px; height: 264px; background: #fbf5ea;
+        -webkit-mask: url('assets/img/sig.png') center / 100% 100% no-repeat; mask: url('assets/img/sig.png') center / 100% 100% no-repeat; }
+
+      /* screen-space chrome */
+      .hud { font-size: 18px; color: rgba(251, 245, 234, 0.6); white-space: nowrap; }
+      #hud-tl { left: 64px; top: 48px; }
+      #hud-tr { right: 64px; top: 48px; display: flex; gap: 14px; align-items: center; }
+      #rec { width: 11px; height: 11px; border-radius: 50%; background: #c9686a; display: inline-block; }
+      #hud-bl { left: 64px; bottom: 52px; }
+      #progress { left: 0; bottom: 0; width: 1920px; height: 4px; background: #c9686a; transform-origin: 0 50%; }
+      #roll-hud { left: 120px; top: 780px; display: flex; gap: 56px; align-items: flex-end; }
+      #roll-hud .v { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 54px; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; color: #fbf5ea; }
+      #roll-hud .k { font-size: 17px; color: rgba(251, 245, 234, 0.52); margin-top: 12px; }
+      #mode-pill { font-size: 17px; padding: 10px 18px; border-radius: 999px; border: 2px solid #c9686a; color: #c9686a; margin-bottom: 8px; }
+      #footer { left: 80px; right: 80px; bottom: 52px; display: flex; justify-content: space-between; align-items: baseline; }
+      #footer .url { font-size: 30px; color: #fbf5ea; letter-spacing: 0.06em; text-transform: none; }
+      #footer .credit { font-size: 17px; color: rgba(251, 245, 234, 0.52); letter-spacing: 0.06em; text-transform: none; }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-kbh8" id="root" data-composition-id="main" data-start="0" data-duration="15" data-width="1920" data-height="1080">
+      <!-- Score: procedural, composed to picture (audio/score.py). The signal's own voice is in it. -->
+      <audio data-hf-id="hf-fgmy" id="score" src=".media/audio/bgm/bgm_002.wav" data-start="0" data-duration="15" data-track-index="10" data-volume="1"></audio>
+      <div data-hf-id="hf-x0fm" id="bg" class="clip layer" data-start="0" data-duration="15" data-track-index="0">
+        <div data-hf-id="hf-isbq" id="bg-glow"></div>
+      </div>
+
+      <canvas data-hf-id="hf-2mds" id="drone-gl" class="clip" data-layout-allow-overflow="" width="1920" height="1080" data-start="0" data-duration="3" data-track-index="1"></canvas>
+
+      <div data-hf-id="hf-jofp" id="stage" class="clip layer" data-start="0" data-duration="15" data-track-index="2">
+        <!-- One world plane, panned by the camera: everything off-frame is meant to be off-frame. -->
+        <div data-hf-id="hf-k6zw" id="world" data-layout-allow-overflow="">
+          <div data-hf-id="hf-klp9" id="paper" class="w"></div>
+          <div data-hf-id="hf-76q0" class="w page-head mono" style="left: -480px; top: 350px">Engineering record — Rami Kronbi — 2026</div>
+          <div data-hf-id="hf-rmj0" class="w page-head mono" style="left: 5980px; top: 350px">p. 01</div>
+          <div data-hf-id="hf-bs2h" class="w mono page-head" style="left: 40px; top: 680px; font-size: 22px">Fig. 0 — roll telemetry, simulated</div>
+
+          <!-- frame 2: the name rises from behind the line -->
+          <div data-hf-id="hf-rpna" id="name" class="w mask"></div>
+          <div data-hf-id="hf-5rmm" id="period" class="w"></div>
+          <div data-hf-id="hf-ts3r" id="subtitle" class="w mask"><span data-hf-id="hf-wu6b" class="inner">Robotics &amp; embedded-systems engineer · Beirut, Lebanon</span></div>
+
+          <!-- frame 3: the loop -->
+          <div data-hf-id="hf-v7w4" class="w mask tick" style="left: 2900px; top: 340px; transform: translateX(-50%)"><span data-hf-id="hf-5buj" class="inner tick-word">sense</span></div>
+          <div data-hf-id="hf-t4sn" class="w mask tick" style="left: 4060px; top: 340px; transform: translateX(-50%)"><span data-hf-id="hf-cpt8" class="inner tick-word">perceive</span></div>
+          <div data-hf-id="hf-dwbe" class="w mask tick" style="left: 5200px; top: 340px; transform: translateX(-50%)"><span data-hf-id="hf-yq0t" class="inner tick-word">act</span></div>
+
+          <!-- frame 4: 360° panorama (row two runs right to left) -->
+          <div data-hf-id="hf-p3it" class="w col-top station" data-st="pano" style="left: 3630px; top: 1180px; height: 392px">
+            <div data-hf-id="hf-hgu8" class="no mono">No. 01</div>
+            <div data-hf-id="hf-j8jm" class="title"><div data-hf-id="hf-dolc" class="mask"><span data-hf-id="hf-odgq" class="inner">360° <span data-hf-id="hf-slqu" class="em">Spherical</span></span></div><div data-hf-id="hf-i5rs" class="mask"><span data-hf-id="hf-1dck" class="inner">Panorama</span></div><div data-hf-id="hf-gyup" class="mask"><span data-hf-id="hf-ehge" class="inner">Stitching</span></div></div>
+          </div>
+          <div data-hf-id="hf-v8gl" class="w col-bot station" data-st="pano" style="left: 3630px; top: 1636px">
+            <div data-hf-id="hf-yef2" class="fig"><span data-hf-id="hf-luq6" class="num" id="pano-num">0</span><span data-hf-id="hf-41th" class="unit">°</span></div>
+            <div data-hf-id="hf-ymtj" class="lab mono">Recovered sweep</div>
+            <div data-hf-id="hf-pzj7" class="sub">309 frames · one handheld phone sweep</div>
+          </div>
+          <div data-hf-id="hf-glfu" id="pano-plate" class="w plate" style="left: 4250px; top: 1300px; width: 1200px; height: 600px">
+            <img data-hf-id="hf-th1i" id="pano-img" src="assets/img/panorama.jpg" alt="Equirectangular panorama recovered from a handheld phone sweep" style="left: 0; top: -45px; width: 1380px; height: 690px">
+            <div data-hf-id="hf-kiw9" id="pano-scan" class="w" style="top: 0; width: 2px; height: 600px; background: #fbf5ea; left: 1200px"></div>
+          </div>
+
+          <!-- frame 5: thermal super-resolution, the head is the wipe -->
+          <div data-hf-id="hf-be60" class="w col-top station" data-st="thermal" style="left: 1780px; top: 1180px; height: 392px">
+            <div data-hf-id="hf-fhb3" class="no mono">No. 04</div>
+            <div data-hf-id="hf-pzza" class="title"><div data-hf-id="hf-hd5q" class="mask"><span data-hf-id="hf-m4kr" class="inner"><span data-hf-id="hf-6qdy" class="em">Thermal</span></span></div><div data-hf-id="hf-g68n" class="mask"><span data-hf-id="hf-6c9d" class="inner">Super-</span></div><div data-hf-id="hf-gkjo" class="mask"><span data-hf-id="hf-dm01" class="inner">Resolution</span></div></div>
+          </div>
+          <div data-hf-id="hf-ylaa" class="w col-bot station" data-st="thermal" style="left: 1780px; top: 1636px">
+            <div data-hf-id="hf-o5eq" class="fig"><span data-hf-id="hf-63d5" class="num" id="thermal-num">0.0</span><span data-hf-id="hf-awkh" class="unit">dB</span></div>
+            <div data-hf-id="hf-vfih" class="lab mono">×3 upscale · PSNR</div>
+            <div data-hf-id="hf-jq4b" class="sub">SSIM 0.757 · IMDN-derived, single channel</div>
+          </div>
+          <div data-hf-id="hf-7l1t" id="thermal-plate" class="w plate" style="left: 2400px; top: 1258px; width: 900px; height: 685px">
+            <img data-hf-id="hf-ovvf" src="assets/img/thermal-plate.webp" alt="Low-resolution thermal street scene" style="left: -19.65px; top: 0; width: 1866px; height: 702px">
+            <div data-hf-id="hf-idsm" id="thermal-up" class="layer" style="clip-path: inset(0 0 0 100%); background-image: url('assets/img/thermal-plate.webp'); background-size: 1866px 702px; background-position: -947.4px 0; background-repeat: no-repeat"></div>
+            <div data-hf-id="hf-4zdq" id="thermal-div" style="position: absolute; top: 0; width: 2px; height: 685px; background: #fbf5ea; left: 900px; box-shadow: 0 0 0 1px rgba(14, 11, 11, 0.35)"></div>
+            <span data-hf-id="hf-umra" class="tag mono" style="left: 18px">Input</span>
+            <span data-hf-id="hf-3qba" class="tag mono" style="right: 18px">Upscaled ×3</span>
+          </div>
+
+          <!-- frame 6: the lap -->
+          <div data-hf-id="hf-08sf" class="w col-top station" data-st="race" style="left: 100px; top: 1180px; height: 392px">
+            <div data-hf-id="hf-go86" class="no mono">No. 03</div>
+            <div data-hf-id="hf-qeab" class="title"><div data-hf-id="hf-fdml" class="mask"><span data-hf-id="hf-ufo1" class="inner">Brainiacs</span></div><div data-hf-id="hf-frxm" class="mask"><span data-hf-id="hf-onez" class="inner"><span data-hf-id="hf-6dsr" class="em">Autonomous</span></span></div><div data-hf-id="hf-kxwz" class="mask"><span data-hf-id="hf-3u4s" class="inner">Race Car</span></div></div>
+          </div>
+          <div data-hf-id="hf-3ebf" class="w col-bot station" data-st="race" style="left: 100px; top: 1636px">
+            <div data-hf-id="hf-ojpr" class="fig"><span data-hf-id="hf-dn0v" class="num" id="race-num">0</span><span data-hf-id="hf-3rhs" class="unit">days</span></div>
+            <div data-hf-id="hf-pis0" class="lab mono">Built from scratch</div>
+            <div data-hf-id="hf-epbh" class="sub">Third place · WRO Future Engineers 2023 · with Wassim Ghaddar</div>
+          </div>
+          <div data-hf-id="hf-6c3c" id="race-plate" class="w plate" style="left: 760px; top: 1338px; width: 700px; height: 525px">
+            <img data-hf-id="hf-9lc5" src="assets/img/race-car.jpg" alt="The Brainiacs autonomous race car, front view" style="left: 0; top: 0; width: 700px; height: 525px; object-fit: cover">
+          </div>
+
+          <!-- frame 7: easyPID -->
+          <div data-hf-id="hf-7vsg" class="w col-top station" data-st="pid" style="left: 100px; top: 2180px; height: 392px">
+            <div data-hf-id="hf-g9x5" class="no mono">No. 02</div>
+            <div data-hf-id="hf-qslc" class="title"><div data-hf-id="hf-lc80" class="mask"><span data-hf-id="hf-jgoa" class="inner">easyPID</span></div></div>
+          </div>
+          <div data-hf-id="hf-bz9u" class="w col-bot station" data-st="pid" style="left: 100px; top: 2636px">
+            <div data-hf-id="hf-oy0s" class="fig"><span data-hf-id="hf-5ypt" class="num" id="pid-num">v1.1.0</span></div>
+            <div data-hf-id="hf-4kli" class="lab mono">Arduino Library Manager</div>
+            <div data-hf-id="hf-z2gq" class="sub">Anti-windup · filtering · autotuning</div>
+          </div>
+          <div data-hf-id="hf-3ya5" class="w mono page-head station" data-st="pid" style="left: 720px; top: 2130px; font-size: 20px">Simulated step response · ζ 0.35 · overshoot 31%</div>
+
+          <!-- frame 8: Daleel -->
+          <div data-hf-id="hf-zgol" class="w col-top station" data-st="daleel" style="left: 2020px; top: 2180px; height: 392px">
+            <div data-hf-id="hf-dw2z" class="no mono">No. 08</div>
+            <div data-hf-id="hf-o0g5" class="title"><div data-hf-id="hf-dtlk" class="mask"><span data-hf-id="hf-tx8u" class="inner">Daleel</span></div></div>
+          </div>
+          <div data-hf-id="hf-4705" class="w col-bot station" data-st="daleel" style="left: 2020px; top: 2636px">
+            <div data-hf-id="hf-199h" class="lab mono" style="margin-top: 0">Election information · Lebanon</div>
+            <div data-hf-id="hf-qb4s" class="sub">Source archiving · append-only history · lead developer, with Layth Ayache</div>
+          </div>
+          <div data-hf-id="hf-ed4w" id="daleel-plate" class="w plate" style="left: 2660px; top: 2075px; width: 1000px; height: 486px">
+            <img data-hf-id="hf-cmhx" src="assets/img/daleel.jpg" alt="The Daleel election-information platform" style="left: 0; top: 0; width: 1000px; height: 486px; object-fit: cover">
+          </div>
+          <svg data-hf-id="hf-q9s2" id="arabic" class="w" viewBox="0 0 600 300"><text data-hf-id="hf-5wff" x="590" y="215" direction="rtl" text-anchor="start">دليل</text></svg>
+
+          <!-- frame 9: upstream -->
+          <div data-hf-id="hf-w3n4" class="w col-top station" data-st="up" style="left: 3800px; top: 2180px; height: 392px">
+            <div data-hf-id="hf-56am" class="no mono">No. 14</div>
+            <div data-hf-id="hf-oer6" class="title"><div data-hf-id="hf-dfaj" class="mask"><span data-hf-id="hf-o93y" class="inner"><span data-hf-id="hf-crke" class="em">Upstream</span></span></div><div data-hf-id="hf-d0zi" class="mask"><span data-hf-id="hf-424e" class="inner">fixes</span></div></div>
+          </div>
+          <div data-hf-id="hf-h76m" class="w col-bot station" data-st="up" style="left: 3800px; top: 2636px">
+            <div data-hf-id="hf-pcbt" class="fig"><span data-hf-id="hf-xy3b" class="num" id="up-num">0</span><span data-hf-id="hf-042v" class="unit">/ 5</span></div>
+            <div data-hf-id="hf-j2xj" class="lab mono">Pull requests merged</div>
+          </div>
+          <div data-hf-id="hf-gdtd" class="w merge-label mono" style="left: 4550px; top: 2420px; transform: translateX(-50%)">Betaflight #15706</div>
+          <div data-hf-id="hf-686w" class="w merge-label mono" style="left: 4800px; top: 2380px; transform: translateX(-50%)">OpenFront #4868</div>
+          <div data-hf-id="hf-mb27" class="w merge-label mono" style="left: 5050px; top: 2420px; transform: translateX(-50%)">OpenFront #4985</div>
+          <div data-hf-id="hf-xqdy" id="settled" class="w mono">Settled · e → 0</div>
+
+          <!-- frame 10: the signature -->
+          <div data-hf-id="hf-4r4s" id="sig" class="w" style="clip-path: inset(0 100% 0 0)"></div>
+        </div>
+      </div>
+
+      <canvas data-hf-id="hf-qyfh" id="signal" class="clip" data-layout-allow-overflow="" width="1920" height="1080" data-start="0" data-duration="15" data-track-index="3"></canvas>
+
+      <div data-hf-id="hf-1i7m" id="roll-hud" class="clip w" data-start="0" data-duration="2.4" data-track-index="4">
+        <div data-hf-id="hf-yeow"><div data-hf-id="hf-5s5x" class="v" id="roll-v">+00.0°</div><div data-hf-id="hf-l6g7" class="k mono">Roll</div></div>
+        <div data-hf-id="hf-y7yw"><div data-hf-id="hf-4wtu" class="v" id="pitch-v">+00.0°</div><div data-hf-id="hf-ryai" class="k mono">Pitch</div></div>
+        <div data-hf-id="hf-ckjz" id="mode-pill" class="mono">Self-level</div>
+      </div>
+      <div data-hf-id="hf-7tm5" id="hud" class="clip layer" data-start="0" data-duration="15" data-track-index="5">
+        <div data-hf-id="hf-dmxv" id="hud-tl" class="w hud mono">Rami Kronbi — engineering record</div>
+        <div data-hf-id="hf-6y81" id="hud-tr" class="w hud mono"><span data-hf-id="hf-qh50" id="rec"></span><span data-hf-id="hf-ke1x">Rec</span><span data-hf-id="hf-tphd" id="tc">00:00:00:00</span></div>
+        <div data-hf-id="hf-qbg3" id="hud-bl" class="w hud mono">Fig. 0 · Eachine E58 · self-level loop, simulated</div>
+        <div data-hf-id="hf-3j3g" id="progress" class="w"></div>
+      </div>
+      <div data-hf-id="hf-2d9z" id="footer" class="clip w" data-start="13.6" data-duration="1.4" data-track-index="6">
+        <span data-hf-id="hf-p610" class="url mono">ramikronbi.com</span>
+        <span data-hf-id="hf-elwa" class="credit mono">E58 drone model by the_Thorminator · CC BY 4.0</span>
+      </div>
+
+      <div data-hf-id="hf-dpxz" id="grain-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100">
+        <div data-hf-id="hf-0qtj" class="grain-texture"></div>
+      </div>
+    </div>
+
+    <style>
+      @keyframes hf-grain-noise {
+        0%, 100% { transform: translate(0, 0); }
+        10% { transform: translate(-5%, -5%); }
+        20% { transform: translate(-10%, 5%); }
+        30% { transform: translate(5%, -10%); }
+        40% { transform: translate(-5%, 15%); }
+        50% { transform: translate(-10%, 5%); }
+        60% { transform: translate(15%, 0); }
+        70% { transform: translate(0, 10%); }
+        80% { transform: translate(-15%, 0); }
+        90% { transform: translate(10%, 5%); }
+      }
+      #grain-overlay .grain-texture {
+        position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+        background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        opacity: 0.09;
+        animation: hf-grain-noise 0.5s steps(1) 30;
+      }
+    </style>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "./assets/vendor/three/build/three.module.js",
+          "three/addons/": "./assets/vendor/three/addons/"
+        }
+      }
+    </script>
+    <script type="module" src="assets/js/drone.js"></script>
+    <script>
+/*
+ * One Loop — the root timeline. One paused GSAP timeline: a linear driver
+ * renders the camera, the signal, the wipes, and the readouts as pure
+ * functions of time; every entrance is a fromTo placed where the head
+ * reaches it (times come from the signal engine, so reveals are synced to
+ * the line by construction).
+ */
+;(function () {
+  'use strict'
+  const O = window.OneLoop
+  const { W, clamp, lerp } = O
+  const $ = (s) => document.querySelector(s)
+  const $$ = (s) => Array.from(document.querySelectorAll(s))
+
+  // The signature's ink centerline (column-wise ink centroid of sig.png),
+  // normalised to the ink box [37, 8]–[2327, 506] of the 2360×519 image.
+  const SIG = { box: [37, 8, 2327, 506], size: [2360, 519], line: [0.5071, 0.5089, 0.5138, 0.5223, 0.5306, 0.5369, 0.5415, 0.5485, 0.5556, 0.5613, 0.5683, 0.5724, 0.5793, 0.5859, 0.5922, 0.5964, 0.5998, 0.6004, 0.6005, 0.6021, 0.5969, 0.5951, 0.5863, 0.5711, 0.5558, 0.5297, 0.5167, 0.5151, 0.5149, 0.5148, 0.5155, 0.5644, 0.6355, 0.6491, 0.6548, 0.6626, 0.6679, 0.6731, 0.6737, 0.6789, 0.6806, 0.686, 0.6781, 0.6695, 0.6583, 0.6451, 0.6268, 0.6086, 0.5882, 0.5596, 0.5362, 0.511, 0.5117, 0.5108, 0.5102, 0.5096, 0.5104, 0.5101, 0.5108, 0.5175, 0.5499, 0.5775, 0.5992, 0.615, 0.6288, 0.6394, 0.6467, 0.6508, 0.6624, 0.6648, 0.6744, 0.6745, 0.6749, 0.6778, 0.6812, 0.6829, 0.676, 0.6767, 0.6744, 0.6766, 0.6741, 0.6726, 0.6701, 0.6718, 0.6661, 0.6745, 0.6732, 0.6701, 0.6642, 0.6671, 0.6664, 0.6652, 0.6652, 0.6652, 0.6672, 0.6647, 0.6582, 0.6608, 0.6629, 0.6534, 0.6496, 0.6509, 0.6545, 0.6518, 0.6471, 0.6479, 0.6426, 0.641, 0.6406, 0.6361, 0.6404, 0.6353, 0.6273, 0.6324, 0.6229, 0.626, 0.6153, 0.6098, 0.5323, 0.4673, 0.4785, 0.4809, 0.4644, 0.468, 0.5101, 0.7938, 0.8103, 0.8082, 0.8053, 0.8, 0.7962, 0.7944, 0.788, 0.7841, 0.7804, 0.7742, 0.7699, 0.7645, 0.7043, 0.5614, 0.4947, 0.4636, 0.4128, 0.3783, 0.3626, 0.6549, 0.6963, 0.6863, 0.676, 0.6649, 0.6526, 0.6411, 0.6275, 0.6157, 0.6015, 0.5843, 0.5698, 0.5525, 0.5344, 0.5226, 0.5142] }
+  const SIG_T = [13.75, 14.5]
+
+  function build() {
+    const tl = gsap.timeline({ paused: true })
+    const ctx = $('#signal').getContext('2d')
+    const world = $('#world')
+
+    /* ------------------------------------------------------ the name */
+    const name = $('#name')
+    'Rami Kronbi'.split('').forEach((c) => {
+      const s = document.createElement('span')
+      s.className = 'ch'
+      s.textContent = c === ' ' ? ' ' : c
+      name.appendChild(s)
+    })
+    const chars = $$('#name .ch')
+    chars.forEach((c) => {
+      const cx = W.name.x + c.offsetLeft + c.offsetWidth / 2
+      const at = O.timeAtX(cx, W.row[0], 1) ?? 2.2
+      tl.fromTo(c, { yPercent: 112 }, { yPercent: 0, duration: 0.55, ease: 'power3.out' }, at - 0.06)
+    })
+    tl.fromTo('#period', { scale: 0 }, { scale: 1, duration: 0.32, ease: 'back.out(3)' }, 3.3)
+    tl.fromTo('#subtitle .inner', { yPercent: 110 }, { yPercent: 0, duration: 0.6, ease: 'power3.out' }, 2.55)
+    tl.fromTo('#paper', { opacity: 0 }, { opacity: 1, duration: 0.8, ease: 'power1.out' }, 2.2)
+    $$('.page-head').forEach((el) => tl.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.6 }, 2.4))
+
+    /* ---------------------------------------------- the loop's ticks */
+    $$('.tick .inner').forEach((el, i) => {
+      const at = O.timeAtX(W.ticks[i], W.row[0], 1)
+      tl.fromTo(el, { yPercent: 105 }, { yPercent: 0, duration: 0.42, ease: 'power3.out' }, at - 0.04)
+      tl.fromTo(el, { color: '#c9686a' }, { color: '#fbf5ea', duration: 0.7, ease: 'power1.in' }, at + 0.25)
+    })
+
+    /* ------------------------------------------------------- stations */
+    const station = (key, at, count) => {
+      const lines = $$(`.station[data-st="${key}"] .title .inner`)
+      tl.fromTo(lines, { yPercent: 112 }, { yPercent: 0, duration: 0.5, ease: 'power3.out', stagger: 0.06 }, at)
+      tl.fromTo($$(`.station[data-st="${key}"] .no`), { opacity: 0, x: -18 }, { opacity: 1, x: 0, duration: 0.35, ease: 'power2.out' }, at)
+      const bot = $$(`.station[data-st="${key}"].col-bot > *`)
+      tl.fromTo(bot, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out', stagger: 0.07 }, at + 0.12)
+      const misc = $$(`.station[data-st="${key}"].page-head`)
+      if (misc.length) tl.fromTo(misc, { opacity: 0 }, { opacity: 1, duration: 0.4 }, at + 0.2)
+      if (count) {
+        const el = document.getElementById(count.id)
+        const p = { v: 0 }
+        tl.fromTo(p, { v: 0 }, { v: count.to, duration: count.dur, ease: count.ease || 'power2.out', onUpdate: () => (el.textContent = p.v.toFixed(count.dp || 0)) }, at + 0.1)
+      }
+    }
+    // panorama: the line is its horizon; a slit opens out of it
+    const tPano = O.timeAtX(W.pano.x + W.pano.w, W.row[1], -1)
+    station('pano', 5.05, null)
+    tl.fromTo('#pano-plate', { clipPath: 'inset(50% 0% 50% 0% round 18px)' }, { clipPath: 'inset(0% 0% 0% 0% round 18px)', duration: 0.55, ease: 'expo.out' }, tPano - 0.05)
+    tl.fromTo('#pano-img', { x: 0 }, { x: -180, duration: 1.4, ease: 'none' }, tPano)
+    // thermal
+    station('thermal', 6.3, { id: 'thermal-num', to: 31.0, dp: 1, dur: 0.9 })
+    tl.fromTo('#thermal-plate', { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.45, ease: 'power3.out' }, 6.25)
+    // race car
+    station('race', 7.65, { id: 'race-num', to: 20, dur: 0.8 })
+    tl.fromTo('#race-plate', { clipPath: 'inset(50% 0% 50% 0% round 18px)' }, { clipPath: 'inset(0% 0% 0% 0% round 18px)', duration: 0.5, ease: 'expo.out' }, 7.6)
+    tl.fromTo('#race-plate img', { scale: 1.12 }, { scale: 1, duration: 1.6, ease: 'power2.out' }, 7.6)
+    // easyPID
+    station('pid', 9.55, null)
+    // Daleel: the plate grows up out of the line; the Arabic strokes as the head passes under it
+    station('daleel', 10.7, null)
+    tl.fromTo('#daleel-plate', { clipPath: 'inset(100% 0% 0% 0% round 18px)' }, { clipPath: 'inset(0% 0% 0% 0% round 18px)', duration: 0.55, ease: 'expo.out' }, 10.75)
+    const ta = O.timeAtX(2860, W.row[2], 1), tb = O.timeAtX(3460, W.row[2], 1)
+    tl.fromTo('#arabic text', { strokeDashoffset: 2600 }, { strokeDashoffset: 0, duration: Math.max(0.35, tb - ta + 0.25), ease: 'power1.inOut' }, ta - 0.1)
+    tl.fromTo('#arabic text', { fillOpacity: 0 }, { fillOpacity: 1, duration: 0.35, ease: 'power1.out' }, tb + 0.05)
+    // upstream: the count steps on each merge
+    station('up', 11.7, null)
+    const upNum = $('#up-num')
+    W.merges.forEach(([, b], i) => {
+      const t = O.timeAtX(b, W.row[2], 1)
+      tl.set(upNum, { textContent: String(i + 1) }, t)
+    })
+    $$('.merge-label').forEach((el, i) => {
+      const t = O.timeAtX(W.merges[i][1], W.row[2], 1)
+      tl.fromTo(el, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, t - 0.05)
+    })
+    tl.fromTo('#settled', { opacity: 0 }, { opacity: 1, duration: 0.4 }, 12.85)
+
+    /* ------------------------------------------------------ chrome */
+    tl.fromTo('#bg-glow', { scale: 0.94 }, { scale: 1.06, duration: 1.875, ease: 'sine.inOut', yoyo: true, repeat: 7 }, 0)
+    tl.fromTo('#roll-hud > *', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.06, ease: 'power3.out' }, 0.35)
+    tl.to('#roll-hud > *', { opacity: 0, duration: 0.3 }, 2.0)
+    tl.fromTo('#hud-tl, #hud-tr', { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.15)
+    tl.fromTo('#hud-bl', { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.5)
+    tl.to('#hud-bl', { opacity: 0, duration: 0.3 }, 2.05)
+    tl.to('#hud-tl, #hud-tr, #progress', { opacity: 0, duration: 0.5 }, 13.0)
+    tl.fromTo('#footer > *', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: 'power3.out' }, 13.65)
+
+    /* ------------------------------------------------------ the driver */
+    const tc = $('#tc'), rollV = $('#roll-v'), pitchV = $('#pitch-v'), pill = $('#mode-pill')
+    const progress = $('#progress'), up = $('#thermal-up'), thermalDiv = $('#thermal-div'), scan = $('#pano-scan'), panoNum = $('#pano-num'), sig = $('#sig')
+    const deg = (rad) => {
+      const d = (rad * 180) / Math.PI
+      return `${d >= 0 ? '+' : '−'}${Math.abs(d).toFixed(1).padStart(4, '0')}°`
+    }
+    function sigPen(t) {
+      const k = clamp((t - SIG_T[0]) / (SIG_T[1] - SIG_T[0]), 0, 1)
+      const [bx0, by0, bx1, by1] = SIG.box
+      const n = SIG.line.length - 1
+      const f = k * n, i = Math.min(n - 1, Math.floor(f))
+      const v = lerp(SIG.line[i], SIG.line[i + 1], f - i)
+      const ix = lerp(bx0, bx1, k), iy = lerp(by0, by1, v)
+      return { k, x: W.sig.x + (ix / SIG.size[0]) * W.sig.w, y: W.sig.y + (iy / SIG.size[1]) * W.sig.h, clip: 100 * (1 - ix / SIG.size[0]) }
+    }
+
+    function render(t) {
+      const cam = O.camera(t)
+      world.style.transform = `translate(${(960 - cam.x * cam.s).toFixed(2)}px, ${(540 - cam.y * cam.s).toFixed(2)}px) scale(${cam.s.toFixed(5)})`
+      O.draw(ctx, t, cam, { headLive: t < 13.0 })
+
+      // the head is the thermal wipe: right of it is upscaled
+      const [hx] = O.head(t)
+      const pct = clamp((hx - W.thermal.x) / W.thermal.w, 0, 1)
+      up.style.clipPath = `inset(0 0 0 ${(pct * 100).toFixed(2)}%)`
+      thermalDiv.style.left = `${(pct * W.thermal.w - 1).toFixed(1)}px`
+      thermalDiv.style.opacity = pct > 0 && pct < 1 ? '1' : '0'
+      // the panorama's sweep reads off the head
+      const pk = clamp((W.pano.x + W.pano.w - hx) / W.pano.w, 0, 1)
+      panoNum.textContent = String(Math.round(333 * (t > 6.4 ? 1 : pk)))
+      scan.style.left = `${(clamp(hx - W.pano.x, 0, W.pano.w) - 1).toFixed(1)}px`
+      scan.style.opacity = pk > 0 && pk < 1 ? '1' : '0'
+
+      // the signature: revealed under a pen that rides the ink centerline
+      const pen = sigPen(t)
+      sig.style.clipPath = `inset(0 ${pen.clip.toFixed(2)}% 0 0)`
+      if (t >= SIG_T[0] && pen.k < 1.02) {
+        const X = (pen.x - cam.x) * cam.s + 960, Y = (pen.y - cam.y) * cam.s + 540
+        const live = 1 - clamp((t - SIG_T[1]) / 0.3, 0, 1)
+        if (live > 0) {
+          const g = ctx.createRadialGradient(X, Y, 0, X, Y, 26)
+          g.addColorStop(0, `rgba(224,138,139,${0.8 * live})`)
+          g.addColorStop(1, 'rgba(201,104,106,0)')
+          ctx.fillStyle = g
+          ctx.beginPath()
+          ctx.arc(X, Y, 26, 0, Math.PI * 2)
+          ctx.fill()
+          ctx.fillStyle = `rgba(251,245,234,${0.95 * live})`
+          ctx.beginPath()
+          ctx.arc(X, Y, 3.2, 0, Math.PI * 2)
+          ctx.fill()
+        }
+      }
+
+      // chrome
+      const f = Math.floor(t * 30 + 1e-6)
+      tc.textContent = `00:00:${String(Math.floor(f / 30)).padStart(2, '0')}:${String(f % 30).padStart(2, '0')}`
+      progress.style.transform = `scaleX(${(t / 15).toFixed(4)})`
+      $('#rec').style.opacity = (t * 2) % 1 < 0.5 ? '1' : '0.3'
+      if (t < 2.4) {
+        rollV.textContent = deg(O.roll(t))
+        pitchV.textContent = deg(-0.35 * O.roll(t - 0.09))
+        pill.textContent = t < 0.4 ? 'Manual' : t < 1.7 ? 'Self-level' : 'Level'
+      }
+      if (window.__oneLoopDrone) window.__oneLoopDrone.render(t)
+    }
+    const drive = { t: 0 }
+    tl.fromTo(drive, { t: 0 }, { t: 15, duration: 15, ease: 'none', onUpdate: () => render(drive.t) }, 0)
+    render(0)
+    // The trace is drawn over the page's ink by design (the head writes the
+    // name and runs through each station), and a canvas reads as opaque to
+    // the occlusion audit, so the world's text is marked as layered under it.
+    $$('#world *').forEach((el) => el.setAttribute('data-layout-allow-occlusion', ''))
+    return tl
+  }
+
+  const fonts = ['800 220px Manrope', '700 66px Manrope', '500 20px Manrope', 'italic 400 170px "Instrument Serif"', '500 20px "JetBrains Mono"', '600 108px "JetBrains Mono"', '700 190px "Noto Naskh Arabic"']
+  Promise.all(fonts.map((f) => document.fonts.load(f, f.includes('Naskh') ? 'دليل' : 'Rami'))).then(() => {
+    window.__timelines['main'] = build()
+  })
+})()
+    </script>
+  </body>
+</html>

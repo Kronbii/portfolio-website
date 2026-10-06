@@ -1,0 +1,183 @@
+.section {
+  padding: clamp(64px, 10vw, 128px) 0;
+}
+.wrap {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(28px, 5vw, 80px);
+  align-items: start;
+}
+
+.head {
+  position: sticky;
+  top: calc(var(--nav-h) + 32px);
+  display: grid;
+  gap: 16px;
+}
+.h2 {
+  font-size: clamp(2.2rem, 5vw, 4.5rem);
+  font-weight: 800;
+  font-stretch: var(--wide);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+}
+.lede {
+  max-width: 34ch;
+  color: var(--ink-2);
+  font-size: 17px;
+}
+
+.track {
+  position: relative;
+}
+.svg {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+.base {
+  fill: none;
+  stroke: var(--hair-strong);
+  stroke-width: 1.5;
+  stroke-dasharray: 2 6;
+}
+.flown {
+  fill: none;
+  stroke: var(--brand);
+  stroke-width: 2.25;
+  stroke-linecap: round;
+}
+.drone {
+  fill: none;
+  stroke: var(--brand);
+  stroke-width: 1.6;
+  transition: opacity 200ms ease;
+}
+.drone circle {
+  fill: var(--bg);
+}
+.drone rect {
+  fill: var(--brand);
+  stroke: none;
+}
+
+.points {
+  position: relative;
+  display: grid;
+  gap: clamp(14px, 2vw, 22px);
+  padding: 8px 0;
+}
+.point {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  align-items: center;
+}
+.node {
+  justify-self: center;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid var(--hair-strong);
+  background: var(--bg);
+  transition:
+    border-color 300ms var(--ease),
+    transform 400ms var(--ease-out);
+}
+.node > span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--hair-strong);
+  transition: background 300ms var(--ease);
+}
+.node[data-visited='on'] {
+  border-color: var(--brand);
+  transform: scale(1.12);
+}
+.node[data-visited='on'] > span {
+  background: var(--brand);
+}
+
+.card {
+  display: grid;
+  gap: 6px;
+  padding: 18px 22px;
+  border: 1px solid var(--hair);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  transition:
+    border-color var(--fast) var(--ease),
+    transform var(--med) var(--ease-out);
+}
+.card:hover {
+  border-color: var(--hair-strong);
+  transform: translateX(4px);
+}
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--f-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.wp {
+  color: var(--ink-3);
+}
+.when {
+  color: var(--brand);
+  font-weight: 600;
+}
+.what {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.what svg {
+  flex: none;
+  color: var(--ink-3);
+  transition: color var(--fast) var(--ease);
+}
+.card:hover .what svg {
+  color: var(--brand);
+}
+.note {
+  max-width: 60ch;
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+@media (max-width: 900px) {
+  .wrap {
+    grid-template-columns: 1fr;
+  }
+  .head {
+    position: static;
+  }
+  .point {
+    grid-template-columns: 40px minmax(0, 1fr);
+  }
+  .card {
+    padding: 16px 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .node,
+  .card {
+    transition: none;
+  }
+}

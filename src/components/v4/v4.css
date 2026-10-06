@@ -1,0 +1,22 @@
+/*
+ * /v4 — Reel. Built on the /v3 system (its tokens, palettes, lens, cursor, and
+ * shell all apply: the root carries data-v3 as well), with motion graphics as
+ * the page's medium. Only what is new lives here, scoped to [data-v4].
+ */
+
+/* the intro lands on #v4-name: it waits unseen while the name glides onto it */
+[data-v4][data-intro='on'] #v4-name,
+[data-v4][data-intro='playing'] #v4-name,
+[data-v4][data-intro='reveal'] #v4-name {
+  opacity: 0;
+}
+[data-v4][data-intro='on'] #v4-name {
+  animation: v3-name-failsafe 0.4s ease 6.5s forwards;
+}
+
+/* the chapter timeline sits at the foot of the window on wide screens */
+@media (min-width: 900px) {
+  [data-v4] {
+    --timeline-h: 0px;
+  }
+}

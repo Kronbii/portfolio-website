@@ -1,0 +1,587 @@
+.wrap {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+/* ---------- shared pills (mirrors record pills) ---------- */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid var(--hair-strong);
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  white-space: nowrap;
+  transition:
+    border-color var(--fast) var(--ease),
+    background-color var(--fast) var(--ease),
+    transform var(--fast) var(--ease);
+}
+.pill:hover {
+  border-color: var(--ink-3);
+  background: var(--surface);
+}
+.pill:active {
+  transform: scale(0.97);
+}
+.pill svg {
+  transition: transform var(--fast) var(--ease);
+}
+.pill:hover svg {
+  transform: translateX(3px);
+}
+.pillPrimary {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: var(--brand-ink);
+  font-weight: 700;
+}
+.pillPrimary:hover {
+  background: var(--brand-strong);
+  border-color: var(--brand-strong);
+}
+
+/* ---------- contents spread (hero) ---------- */
+
+.hero {
+  padding-block: clamp(1rem, 2.4vw, 1.75rem) clamp(2.5rem, 5vw, 4rem);
+}
+
+.spread {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(1.25rem, 3vw, 3rem);
+  min-height: clamp(560px, calc(100svh - var(--nav-h) - 40px - 3.5rem), 860px);
+}
+
+.spreadText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding-block: clamp(0.5rem, 2vw, 1.5rem) 0.25rem;
+}
+
+.name {
+  font-weight: 800;
+  font-size: clamp(3.25rem, 7.4vw, 6rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+}
+.nameDot {
+  color: var(--brand);
+}
+
+.claim {
+  margin-top: clamp(1.25rem, 2.4vw, 1.75rem);
+  max-width: 20ch;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.5vw, 2.125rem);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.descriptor {
+  margin-top: 1rem;
+  font-size: 0.9375rem;
+  color: var(--ink-2);
+}
+
+.contents {
+  margin-top: auto;
+  padding-top: clamp(1.75rem, 3vw, 2.5rem);
+}
+.contentsHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--hair-strong);
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.contentsList a {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--hair);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  transition: color var(--fast) var(--ease);
+}
+.contentsList a:hover {
+  color: var(--brand);
+}
+.contentsNo {
+  flex: none;
+  width: 3.4rem;
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-3);
+}
+.contentsTitle {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* notebook leaders between a title and its filing */
+.contentsLeader {
+  flex: 1;
+  min-width: 1.5rem;
+  border-bottom: 1px dotted var(--hair-strong);
+  transform: translateY(-4px);
+}
+.contentsField {
+  flex: none;
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+.spreadActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 1.25rem;
+}
+
+.specimenSlot {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.specimenSlot > figure {
+  flex: 1;
+}
+
+/* ---------- section heads ---------- */
+
+.sectionHead {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(1.25rem, 3vw, 3rem);
+  align-items: end;
+  padding-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+.h2 {
+  font-size: clamp(2.5rem, 5.6vw, 4.75rem);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+}
+.sectionAside {
+  display: grid;
+  gap: 1.25rem;
+  justify-items: start;
+}
+.sectionLede {
+  max-width: 44ch;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+/* ---------- entries ---------- */
+
+.entries {
+  border-top: 1px solid var(--hair);
+  padding-block: clamp(4rem, 8vw, 7rem) 0;
+}
+
+.entryList {
+  display: grid;
+}
+
+.entry {
+  display: grid;
+  gap: clamp(1rem, 2.4vw, 2rem) clamp(1.25rem, 3vw, 3rem);
+  padding-block: clamp(2.5rem, 5vw, 4.5rem);
+  border-top: 1px solid var(--hair);
+  scroll-margin-top: calc(var(--nav-h) + 1rem);
+}
+.entryFigure {
+  grid-area: fig;
+  min-width: 0;
+}
+.entryMargin {
+  grid-area: margin;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+.entryText {
+  grid-area: text;
+  min-width: 0;
+}
+.entryNote {
+  grid-area: note;
+  align-self: start;
+  min-width: 0;
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--hair);
+}
+
+.entry[data-layout='wide'] {
+  grid-template-columns: minmax(0, 3fr) minmax(0, 6fr) minmax(0, 3fr);
+  grid-template-areas:
+    'fig fig fig'
+    'margin text note';
+}
+.entry[data-layout='left'],
+.entry[data-layout='compare'] {
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    'fig text'
+    'fig note';
+}
+.entry[data-layout='right'] {
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    'text fig'
+    'note fig';
+}
+
+/* No eyebrows: where the margin column is not beside the heading, the entry
+   number hangs on the heading's baseline and the tags follow the summary. */
+.titleRow {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+.entry .entryNoInline,
+.entry .entryTopicsInline {
+  display: none;
+}
+.entryNoInline {
+  flex: none;
+  font-family: var(--f-mono);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--brand);
+}
+.entryTopicsInline {
+  margin-top: 0.85rem;
+}
+.entry:is([data-layout='left'], [data-layout='right'], [data-layout='compare']) .entryMargin {
+  display: none;
+}
+.entry:is([data-layout='left'], [data-layout='right'], [data-layout='compare']) .entryNoInline {
+  display: inline;
+}
+.entry:is([data-layout='left'], [data-layout='right'], [data-layout='compare']) .entryTopicsInline {
+  display: flex;
+}
+.entry[data-layout='figure'] {
+  grid-template-columns: minmax(0, 3fr) minmax(0, 6fr) minmax(0, 3fr);
+  grid-template-areas:
+    'margin text note'
+    'fig fig fig';
+}
+.entry[data-layout='left'] .entryFigure,
+.entry[data-layout='right'] .entryFigure {
+  max-height: 78svh;
+}
+.entry[data-layout='left'] .entryFigure :global(img),
+.entry[data-layout='right'] .entryFigure :global(img) {
+  object-fit: cover !important;
+}
+.entry[data-layout='left'] .entryFigure figure > div,
+.entry[data-layout='right'] .entryFigure figure > div {
+  max-height: 70svh;
+}
+.entry[data-layout='left'] .entryNote,
+.entry[data-layout='right'] .entryNote,
+.entry[data-layout='compare'] .entryNote {
+  align-self: end;
+}
+
+.entryNo {
+  font-family: var(--f-mono);
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--brand);
+}
+.entryTopics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+}
+.entryTopics a {
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+  transition: color var(--fast) var(--ease);
+}
+.entryTopics a:hover {
+  color: var(--brand);
+}
+
+.entryTitle {
+  font-size: clamp(1.875rem, 3.3vw, 2.875rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.entryTitle a {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size var(--med) var(--ease);
+}
+.entryTitle a:hover {
+  background-size: 100% 1px;
+}
+.entrySummary {
+  margin-top: 1rem;
+  max-width: 56ch;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+.entryReadings {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin: 1.5rem 0 0;
+  background: var(--hair);
+  border: 1px solid var(--hair);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.entryReadings > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px;
+  background: var(--bg);
+  min-width: 0;
+}
+.entryReadings dt {
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.entryReadings dd {
+  order: -1;
+  margin: 0;
+  --figure-max: 1.5rem;
+}
+.entryReadings > div {
+  container-type: inline-size;
+}
+
+.entryActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 1.5rem;
+}
+
+.noteLabel {
+  display: block;
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 8px;
+}
+.noteLabel::before {
+  content: '';
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--brand);
+  margin-bottom: 12px;
+}
+.entryNote p {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: 1.1875rem;
+  line-height: 1.38;
+  color: var(--ink-2);
+  max-width: 34ch;
+}
+
+/* ---------- notes, roles, methods ---------- */
+
+.block {
+  border-top: 1px solid var(--hair);
+  padding-block: clamp(4rem, 8vw, 7rem);
+}
+
+.roles {
+  border-top: 1px solid var(--hair-strong);
+}
+.roleRow {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 3fr) minmax(0, 3fr) minmax(0, 5fr) 24px;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  align-items: baseline;
+  padding: 1.15rem 0.25rem;
+  border-bottom: 1px solid var(--hair);
+  transition: background-color var(--fast) var(--ease);
+}
+a.roleRow:hover {
+  background: var(--surface);
+}
+.rolePeriod {
+  font-family: var(--f-mono);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-3);
+}
+.roleName {
+  font-weight: 700;
+  font-size: 1.0625rem;
+  letter-spacing: -0.015em;
+}
+.roleOrg {
+  font-size: 0.9375rem;
+  color: var(--ink);
+}
+.roleNote {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.roleArrow {
+  align-self: center;
+  color: var(--ink-3);
+  transition: transform var(--fast) var(--ease), color var(--fast) var(--ease);
+}
+a.roleRow:hover .roleArrow {
+  color: var(--brand);
+  transform: translate(3px, -3px);
+}
+.rolesHead {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 3fr) minmax(0, 3fr) minmax(0, 5fr) 24px;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  padding: 0 0.25rem 10px;
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 1100px) {
+  .spread {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 960px) {
+  /* Phones: name and claim, then the specimen inside the first viewport,
+     then the contents. The text column dissolves into the spread's grid. */
+  .spread {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+    gap: 0;
+  }
+  .spreadText {
+    display: contents;
+  }
+  .name {
+    order: 1;
+    padding-top: 0.5rem;
+  }
+  .claim {
+    order: 2;
+  }
+  .specimenSlot {
+    order: 3;
+    margin-top: 1.5rem;
+    height: min(112vw, 540px);
+  }
+  .descriptor {
+    order: 4;
+    margin-top: 1.25rem;
+  }
+  .contents {
+    order: 5;
+    margin-top: 0;
+  }
+  .spreadActions {
+    order: 6;
+  }
+  .sectionHead {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+  .entry[data-layout] {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    grid-template-areas:
+      'fig'
+      'text'
+      'note';
+  }
+  .entry[data-layout] .entryMargin {
+    display: none;
+  }
+  .entry[data-layout] .entryNoInline {
+    display: inline;
+  }
+  .entry[data-layout] .entryTopicsInline {
+    display: flex;
+  }
+  .entryNote {
+    padding-left: 0;
+    border-left: 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--hair);
+  }
+  .rolesHead {
+    display: none;
+  }
+  .roleRow {
+    grid-template-columns: minmax(0, 1fr) 24px;
+    gap: 4px 12px;
+  }
+  .roleRow > * {
+    grid-column: 1;
+  }
+  .roleArrow {
+    grid-column: 2 !important;
+    grid-row: 1 / span 4;
+  }
+}
+
+@media (max-width: 520px) {
+  .entryReadings {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .contentsField {
+    display: none;
+  }
+}

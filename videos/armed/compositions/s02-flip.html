@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>02 FLIP — roll counter, target lock, and the iris into the lens</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: 'Manrope'; src: url('assets/fonts/Manrope-800.ttf') format('truetype'); font-weight: 800; }
+        @font-face { font-family: 'JetBrains Mono'; src: url('assets/fonts/JetBrainsMono-500.ttf') format('truetype'); font-weight: 500; }
+        @font-face { font-family: 'JetBrains Mono'; src: url('assets/fonts/JetBrainsMono-600.ttf') format('truetype'); font-weight: 600; }
+        #root { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+        #s02-skate { position: absolute; left: 0; top: 250px; font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 560px; line-height: 1; letter-spacing: -0.04em; white-space: nowrap;
+          color: transparent; -webkit-text-stroke: 3px rgba(251, 245, 234, 0.32); }
+        #s02-roll { position: absolute; left: 212px; top: 752px; font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 150px; line-height: 1; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; color: #fbf5ea; white-space: nowrap; }
+        #s02-roll small { font-size: 0.4em; color: rgba(251, 245, 234, 0.6); margin-left: 8px; }
+        #s02-roll-k { position: absolute; left: 220px; top: 676px; font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 22px; letter-spacing: 0.12em; text-transform: uppercase; color: #c9686a; white-space: nowrap; }
+        .s02-l { position: absolute; width: 90px; height: 90px; border-color: #c9686a; border-style: solid; border-width: 0; }
+        #s02-l1 { left: 0; top: 0; border-top-width: 5px; border-left-width: 5px; }
+        #s02-l2 { right: 0; top: 0; border-top-width: 5px; border-right-width: 5px; }
+        #s02-l3 { left: 0; bottom: 0; border-bottom-width: 5px; border-left-width: 5px; }
+        #s02-l4 { right: 0; bottom: 0; border-bottom-width: 5px; border-right-width: 5px; }
+        #s02-lock { position: absolute; left: 700px; top: 330px; width: 520px; height: 440px; }
+        #s02-lock-k { position: absolute; left: 700px; top: 288px; font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 22px; letter-spacing: 0.12em; text-transform: uppercase; color: #c9686a; white-space: nowrap; }
+        #s02-iris { position: absolute; left: 960px; top: 560px; width: 2400px; height: 2400px; margin: -1200px 0 0 -1200px; border-radius: 50%; background: #0a0808; box-shadow: 0 0 0 10px #c9686a; transform-origin: 50% 50%; }
+      </style>
+
+      <div data-hf-id="hf-acqy" id="root" data-composition-id="s02-flip" data-width="1920" data-height="1080">
+        <div data-hf-id="hf-izgj" id="s02-skate" data-layout-ignore="">FLIP · FLIP · FLIP</div>
+        <div data-hf-id="hf-csc3" id="s02-roll-k">Roll · acro</div>
+        <div data-hf-id="hf-2qku" id="s02-roll">000<small data-hf-id="hf-q9i4">°</small></div>
+        <div data-hf-id="hf-vgcb" id="s02-lock-k">Lock · camera</div>
+        <div data-hf-id="hf-6312" id="s02-lock">
+          <div data-hf-id="hf-phj3" id="s02-l1" class="s02-l"></div>
+          <div data-hf-id="hf-em1g" id="s02-l2" class="s02-l"></div>
+          <div data-hf-id="hf-fdp9" id="s02-l3" class="s02-l"></div>
+          <div data-hf-id="hf-y5ey" id="s02-l4" class="s02-l"></div>
+        </div>
+        <div data-hf-id="hf-1s2y" id="s02-iris"></div>
+      </div>
+
+      <script>
+        ;(function () {
+          const A = window.ARMED
+          const { beat, BAR, prog, E } = A
+          const host = document.querySelector('[data-composition-id="s02-flip"]')
+          const rollEl = host.querySelector('#s02-roll')
+          const T0 = BAR // this scene starts at bar 2
+          const L = (g) => g - T0 // global → local time
+
+          const tl = gsap.timeline({ paused: true })
+          // the flip: a giant word skates through behind the airframe
+          tl.fromTo('#s02-skate', { x: 1900 }, { x: -3600, duration: 0.95, ease: 'power1.inOut' }, L(beat(5)) - 0.15)
+          // the roll counter wakes on the flip and spins through 360
+          tl.fromTo('#s02-roll-k, #s02-roll', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.25, ease: 'expo.out', stagger: 0.04 }, L(beat(5)) - 0.05)
+          // lock: the brackets fly in from the frame corners onto the face-on airframe
+          tl.fromTo('#s02-l1', { x: -640, y: -260, opacity: 0 }, { x: 0, y: 0, opacity: 1, duration: 0.3, ease: 'expo.out' }, L(beat(6)) + 0.12)
+          tl.fromTo('#s02-l2', { x: 640, y: -260, opacity: 0 }, { x: 0, y: 0, opacity: 1, duration: 0.3, ease: 'expo.out' }, L(beat(6)) + 0.15)
+          tl.fromTo('#s02-l3', { x: -640, y: 260, opacity: 0 }, { x: 0, y: 0, opacity: 1, duration: 0.3, ease: 'expo.out' }, L(beat(6)) + 0.18)
+          tl.fromTo('#s02-l4', { x: 640, y: 260, opacity: 0 }, { x: 0, y: 0, opacity: 1, duration: 0.3, ease: 'expo.out' }, L(beat(6)) + 0.21)
+          tl.fromTo('#s02-lock-k', { opacity: 0 }, { opacity: 1, duration: 0.05, ease: 'none', repeat: 4, yoyo: true }, L(beat(6)) + 0.3)
+          // then the lock tightens onto the lens as the airframe dives at us
+          tl.to('#s02-lock', { scale: 0.42, y: 70, duration: 0.45, ease: 'power3.in' }, L(beat(7)))
+          tl.to('#s02-lock-k', { opacity: 0, duration: 0.1, ease: 'none' }, L(beat(7)))
+          tl.to('#s02-roll-k, #s02-roll', { opacity: 0, x: -60, duration: 0.2, ease: 'power2.in' }, L(beat(7)))
+          // into the lens: a dark iris swallows the frame on the last eighth
+          tl.fromTo('#s02-iris', { scale: 0 }, { scale: 1, duration: 0.2, ease: 'power3.in' }, L(2 * BAR) - 0.2)
+
+          const driver = {}
+          let v = 0
+          Object.defineProperty(driver, 't', {
+            get: () => v,
+            set: (x) => {
+              v = x
+              const deg = Math.round(360 * E.inOut(prog(x + T0, beat(5), 2.74)))
+              rollEl.firstChild.nodeValue = String(deg).padStart(3, '0')
+            },
+          })
+          tl.to(driver, { t: BAR, duration: BAR, ease: 'none' }, 0)
+          window.__timelines['s02-flip'] = tl
+        })()
+      </script>
+    </template>
+  </body>
+</html>

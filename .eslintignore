@@ -1,0 +1,2 @@
+# The showreels carry vendored, minified libraries (three.js, Draco, GSAP) and are not site code.
+videos/

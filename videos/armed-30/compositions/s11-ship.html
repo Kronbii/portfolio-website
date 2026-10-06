@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>09 SHIP — five upstream pull requests: three merged, one open, one closed</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: 'Manrope'; src: url('assets/fonts/Manrope-700.ttf') format('truetype'); font-weight: 700; }
+        @font-face { font-family: 'Instrument Serif'; src: url('assets/fonts/InstrumentSerif-Italic.ttf') format('truetype'); font-style: italic; font-weight: 400; }
+        @font-face { font-family: 'JetBrains Mono'; src: url('assets/fonts/JetBrainsMono-500.ttf') format('truetype'); font-weight: 500; }
+        @font-face { font-family: 'JetBrains Mono'; src: url('assets/fonts/JetBrainsMono-600.ttf') format('truetype'); font-weight: 600; }
+        #root { position: absolute; inset: 0; pointer-events: none; }
+        .s11-m { position: absolute; font-family: 'JetBrains Mono', monospace; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
+        #s11-no { left: 112px; top: 96px; font-size: 24px; color: #c9686a; }
+        #s11-title { position: absolute; left: 108px; top: 170px; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 96px; line-height: 1; letter-spacing: -0.035em; color: #fbf5ea; white-space: nowrap; }
+        #s11-title em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: #c9686a; font-size: 1.08em; letter-spacing: -0.01em; }
+        #s11-sub { left: 112px; top: 296px; font-size: 24px; color: rgba(251, 245, 234, 0.75); }
+        #s11-count { position: absolute; right: 110px; top: 120px; text-align: right; font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 150px; line-height: 1; letter-spacing: -0.04em; color: #fbf5ea; font-variant-numeric: tabular-nums; white-space: nowrap; }
+        #s11-count small { font-size: 0.4em; color: rgba(251, 245, 234, 0.6); letter-spacing: 0; }
+        #s11-count-k { right: 112px; top: 300px; text-align: right; font-size: 22px; color: rgba(251, 245, 234, 0.75); }
+        #s11-svg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+        #s11-main { fill: none; stroke: rgba(251, 245, 234, 0.85); stroke-width: 5; stroke-linecap: round; }
+        .s11-lane, .s11-merge { fill: none; stroke: #c9686a; stroke-width: 4; stroke-linecap: round; }
+        .s11-fork { fill: #fbf5ea; }
+        .s11-commit { fill: #0e0b0b; stroke: #c9686a; stroke-width: 3; }
+        .s11-dot { fill: #c9686a; stroke: #fbf5ea; stroke-width: 3; }
+        .s11-open { fill: #0e0b0b; stroke: #e08a8b; stroke-width: 4; }
+        .s11-x path { stroke: rgba(251, 245, 234, 0.85); stroke-width: 4; stroke-linecap: round; }
+        .s11-lab { position: absolute; white-space: nowrap; }
+        .s11-repo { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 30px; letter-spacing: -0.02em; color: #fbf5ea; }
+        .s11-repo span { color: #e08a8b; }
+        .s11-what { margin-top: 6px; font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 20px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(251, 245, 234, 0.75); }
+        .s11-pill { position: absolute; padding: 6px 13px; border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 20px; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
+        .s11-merged { background: #c9686a; color: #0e0b0b; }
+        .s11-open { background: transparent; border: 2px solid #e08a8b; color: #fbf5ea; }
+        .s11-closed { background: transparent; border: 2px solid rgba(251, 245, 234, 0.5); color: #fbf5ea; }
+      </style>
+
+      <div data-hf-id="hf-eqrj" id="root" data-composition-id="s11-ship" data-width="1920" data-height="1080">
+        <div data-hf-id="hf-3nuq" id="s11-no" class="s11-m">09 · Ship</div>
+        <div data-hf-id="hf-ndrq" id="s11-title">Upstream <em data-hf-id="hf-ajaq">fixes</em></div>
+        <div data-hf-id="hf-2xds" id="s11-sub" class="s11-m">Betaflight · PX4 · OpenFront</div>
+        <div data-hf-id="hf-muck" id="s11-count">0<small data-hf-id="hf-4742"> / 5</small></div>
+        <div data-hf-id="hf-4kvd" id="s11-count-k" class="s11-m">Pull requests merged</div>
+        <svg data-hf-id="hf-qp0c" id="s11-svg" viewBox="0 0 1920 1080"><path data-hf-id="hf-geyb" id="s11-main" d="M110 640 H1810" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" /><path data-hf-id="hf-7kih" id="s11-lane0" class="s11-lane" d="M190 640 C 240 640 210 500 270 500 H 520" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" /><path data-hf-id="hf-d60q" id="s11-merge0" class="s11-merge" d="M520 500 C 580 500 550 640 600 640" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" /><circle data-hf-id="hf-cjab" id="s11-dot0" class="s11-dot" cx="600" cy="640" r="11" /><circle data-hf-id="hf-towo" class="s11-fork" cx="190" cy="640" r="7" /><circle data-hf-id="hf-1isf" class="s11-commit" cx="310" cy="500" r="6" /><circle data-hf-id="hf-6ryh" class="s11-commit" cx="415" cy="500" r="6" /><path data-hf-id="hf-flcm" id="s11-lane1" class="s11-lane" d="M520 640 C 570 640 540 780 600 780 H 850" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" /><path data-hf-id="hf-1gbo" id="s11-merge1" class="s11-merge" d="M850 780 C 910 780 880 640 930 640" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" /><circle data-hf-id="hf-atda" id="s11-dot1" class="s11-dot" cx="930" cy="640" r="11" /><circle data-hf-id="hf-bfq3" class="s11-fork" cx="520" cy="640" r="7" /><circle data-hf-id="hf-v8dr" class="s11-commit" cx="640" cy="780" r="6" /><circle data-hf-id="hf-5k5f" class="s11-commit" cx="745" cy="780" r="6" /><path data-hf-id="hf-lwmj" id="s11-lane2" class="s11-lane" d="M850 640 C 900 640 870 500 930 500 H 1180" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" /><path data-hf-id="hf-wc1s" id="s11-merge2" class="s11-merge" d="M1180 500 C 1240 500 1210 640 1260 640" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" /><circle data-hf-id="hf-rd5w" id="s11-dot2" class="s11-dot" cx="1260" cy="640" r="11" /><circle data-hf-id="hf-4fmz" class="s11-fork" cx="850" cy="640" r="7" /><circle data-hf-id="hf-2z2j" class="s11-commit" cx="970" cy="500" r="6" /><circle data-hf-id="hf-7uy6" class="s11-commit" cx="1075" cy="500" r="6" /><path data-hf-id="hf-kxk9" id="s11-lane3" class="s11-lane" d="M1180 640 C 1230 640 1200 780 1260 780 H 1560" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" /><circle data-hf-id="hf-ydxg" id="s11-dot3" class="s11-open" cx="1560" cy="780" r="11" /><circle data-hf-id="hf-47bm" class="s11-fork" cx="1180" cy="640" r="7" /><circle data-hf-id="hf-6575" class="s11-commit" cx="1300" cy="780" r="6" /><circle data-hf-id="hf-lmr0" class="s11-commit" cx="1390" cy="780" r="6" /><path data-hf-id="hf-07kl" id="s11-lane4" class="s11-lane" d="M1480 640 C 1530 640 1500 500 1560 500 H 1800" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" /><g data-hf-id="hf-hh53" id="s11-dot4" class="s11-x"><path data-hf-id="hf-rgly" d="M1789 489 L1811 511 M1811 489 L1789 511" /></g><circle data-hf-id="hf-3gm9" class="s11-fork" cx="1480" cy="640" r="7" /><circle data-hf-id="hf-7hdo" class="s11-commit" cx="1600" cy="500" r="6" /><circle data-hf-id="hf-w7cq" class="s11-commit" cx="1660" cy="500" r="6" /></svg>
+        <div data-hf-id="hf-x7gn" id="s11-l0" class="s11-lab" style="left: 270px; top: 408px"><div data-hf-id="hf-gwdi" class="s11-repo">Betaflight <span data-hf-id="hf-3c8b">#15706</span></div><div data-hf-id="hf-rhg5" class="s11-what">Redpine debug mode</div></div><div data-hf-id="hf-l9wg" id="s11-p0" class="s11-pill s11-merged" style="left: 560px; top: 582px">Merged</div><div data-hf-id="hf-gvex" id="s11-l1" class="s11-lab" style="left: 600px; top: 806px"><div data-hf-id="hf-xen1" class="s11-repo">OpenFront <span data-hf-id="hf-pe10">#4868</span></div><div data-hf-id="hf-6smy" class="s11-what">Progressive timer warning</div></div><div data-hf-id="hf-sx4s" id="s11-p1" class="s11-pill s11-merged" style="left: 890px; top: 662px">Merged</div><div data-hf-id="hf-m6ea" id="s11-l2" class="s11-lab" style="left: 930px; top: 408px"><div data-hf-id="hf-9zzl" class="s11-repo">OpenFront <span data-hf-id="hf-rljy">#4985</span></div><div data-hf-id="hf-ejhs" class="s11-what">iOS HUD zoom fix</div></div><div data-hf-id="hf-3o6u" id="s11-p2" class="s11-pill s11-merged" style="left: 1220px; top: 582px">Merged</div><div data-hf-id="hf-vtko" id="s11-l3" class="s11-lab" style="left: 1260px; top: 806px"><div data-hf-id="hf-zcru" class="s11-repo">Betaflight <span data-hf-id="hf-2xxa">#15705</span></div><div data-hf-id="hf-k5pb" class="s11-what">W25M flash read</div></div><div data-hf-id="hf-poey" id="s11-p3" class="s11-pill s11-open" style="left: 1540px; top: 720px">Open</div><div data-hf-id="hf-zzrs" id="s11-l4" class="s11-lab" style="left: 1560px; top: 408px"><div data-hf-id="hf-c3ay" class="s11-repo">PX4 <span data-hf-id="hf-xxg0">#28286</span></div><div data-hf-id="hf-zw28" class="s11-what">EKF2 range-height reset</div></div><div data-hf-id="hf-bshs" id="s11-p4" class="s11-pill s11-closed" style="left: 1514px; top: 526px">Closed · test-backed</div>
+      </div>
+
+      <script>
+        ;(function () {
+          const A = window.ARMED
+          const { B, BAR } = A
+          const host = document.querySelector('[data-composition-id="s11-ship"]')
+          const count = host.querySelector('#s11-count')
+          const tl = gsap.timeline({ paused: true })
+          tl.fromTo('#s11-no, #s11-sub', { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.22, ease: 'expo.out', stagger: 0.04 }, 0.02)
+          tl.fromTo('#s11-title', { opacity: 0, scale: 1.3, filter: 'blur(14px)' }, { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.2, ease: 'expo.out', transformOrigin: '0% 50%' }, 0)
+          tl.fromTo('#s11-count, #s11-count-k', { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.22, ease: 'expo.out', stagger: 0.04 }, 0.04)
+          // b32: main draws left to right; every branch forks off it
+          tl.fromTo('#s11-main', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.3, ease: 'power2.out' }, 0)
+          tl.fromTo('.s11-fork', { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.12, ease: 'back.out(3)', stagger: 0.05 }, 0.1)
+          for (let i = 0; i < 5; i++) {
+            tl.fromTo('#s11-lane' + i, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.26, ease: 'power2.out' }, 0.12 + i * 0.07)
+            tl.fromTo('#s11-l' + i, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.2, ease: 'expo.out' }, 0.18 + i * 0.07)
+          }
+          tl.fromTo('.s11-commit', { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.12, ease: 'back.out(3)', stagger: 0.03 }, 0.3)
+          // the outcomes, on eighths: three merges, one open, one closed
+          const OUT = [[0, B], [1, 1.5 * B], [2, 2 * B], [3, 2.5 * B], [4, 3 * B]]
+          OUT.forEach(([i, at]) => {
+            const merge = host.querySelector('#s11-merge' + i)
+            if (merge) tl.fromTo(merge, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.12, ease: 'power2.in' }, at - 0.12)
+            tl.fromTo('#s11-dot' + i, { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.2, ease: 'back.out(3)' }, at)
+            tl.fromTo('#s11-p' + i, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.2, ease: 'back.out(2.6)' }, at)
+          })
+          tl.fromTo('#s11-dot3', { opacity: 1 }, { opacity: 0.35, duration: 0.12, ease: 'none', repeat: 4, yoyo: true, immediateRender: false }, 2.5 * B + 0.2)
+          let shown = -1
+          const c = A.driver((l) => {
+            const n = l >= 2 * B ? 3 : l >= 1.5 * B ? 2 : l >= B ? 1 : 0
+            if (n !== shown) { count.firstChild.nodeValue = String(n); shown = n }
+          })
+          tl.fromTo(c, { p: 0 }, { p: BAR, duration: BAR, ease: 'none' }, 0)
+          ;[B, 1.5 * B, 2 * B].forEach((at) => tl.fromTo('#s11-count', { scale: 1.25 }, { scale: 1, duration: 0.2, ease: 'back.out(2.4)', immediateRender: false, transformOrigin: '100% 50%' }, at))
+          window.__timelines['s11-ship'] = tl
+        })()
+      </script>
+    </template>
+  </body>
+</html>

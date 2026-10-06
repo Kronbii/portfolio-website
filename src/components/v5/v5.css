@@ -1,0 +1,144 @@
+/*
+ * /v5 — Sectional. The record as an aeronautical chart in a ground-control
+ * station. Its own system, shared with no other version: paper and pastel
+ * terrain tints by day, a navy night chart by night; magenta for the route,
+ * blue for labels and links, green for what has been reached. Barlow Condensed
+ * letters the chart, Barlow carries the reading, Martian Mono the telemetry.
+ * Scoped to [data-v5].
+ */
+
+[data-v5] {
+  --paper: #f3efe3;
+  --paper-2: #ebe5d4;
+  --panel: #fbf9f3;
+  --ink: #1b1d22;
+  --ink-2: #474b55;
+  --ink-3: #6b6e77;
+  --rule: #d9d2c0;
+  --rule-strong: #bdb39b;
+  --magenta: #b0166c;
+  --magenta-soft: rgba(176, 22, 108, 0.09);
+  --blue: #1d58a3;
+  --blue-soft: rgba(29, 88, 163, 0.09);
+  --green: #3f7d33;
+  --on-accent: #ffffff;
+  /* the chart */
+  --water: #bcd7e7;
+  --t-low: #e4ead1;
+  --t-mid: #ece0bd;
+  --t-high: #dcc69b;
+  --contour: #b49774;
+  --contour-major: #8c7152;
+  --shadow: 0 18px 40px -22px rgba(40, 32, 18, 0.35);
+
+  --f-display: var(--font-v5-display), 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --f-text: var(--font-v5-text), 'Barlow', system-ui, sans-serif;
+  --f-mono: var(--font-v5-mono), 'Martian Mono', ui-monospace, monospace;
+  /* the shared intro asks for these */
+  --f-sans: var(--f-display);
+
+  --bar-h: 52px;
+  --status-h: 30px;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  color-scheme: light;
+  min-height: 100svh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-text);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  cursor: default;
+}
+
+[data-v5][data-theme='night'] {
+  --paper: #0b1220;
+  --paper-2: #0f182a;
+  --panel: #0e1727;
+  --ink: #e6ebf3;
+  --ink-2: #a9b3c4;
+  --ink-3: #7f8a9d;
+  --rule: #1e2a3f;
+  --rule-strong: #2e3c55;
+  --magenta: #ff5fb4;
+  --magenta-soft: rgba(255, 95, 180, 0.12);
+  --blue: #74abff;
+  --blue-soft: rgba(116, 171, 255, 0.12);
+  --green: #6be39a;
+  --on-accent: #0b1220;
+  --water: #0a1829;
+  --t-low: #101b2a;
+  --t-mid: #14202f;
+  --t-high: #1a2636;
+  --contour: #2c3d55;
+  --contour-major: #46597a;
+  --shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.8);
+  color-scheme: dark;
+}
+
+body:has([data-v5]) > header {
+  display: none !important;
+}
+html:has([data-v5]) {
+  background: #f3efe3;
+}
+html:has([data-v5][data-theme='night']) {
+  background: #0b1220;
+}
+:where([data-v5] *) {
+  cursor: inherit;
+}
+:where([data-v5]) :is(h1, h2, h3, p, ul, ol) {
+  margin: 0;
+}
+:where([data-v5]) :is(ul, ol) {
+  padding: 0;
+  list-style: none;
+}
+:where([data-v5]) a {
+  color: inherit;
+  text-decoration: none;
+}
+:where([data-v5]) button {
+  font: inherit;
+  color: inherit;
+}
+[data-v5] :focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+[data-v5] ::selection {
+  background: var(--magenta);
+  color: var(--on-accent);
+}
+
+/* ---------- the shared preflight, in the chart's colours ---------- */
+[data-v5] [data-intro-overlay] {
+  --i-bg: #0b1220;
+  --i-sunk: #070c16;
+  --i-ink: #e6ebf3;
+  --i-ink-rgb: 230, 235, 243;
+  --i-brand: #ff5fb4;
+  --i-brand-strong: #ff8cc9;
+  --i-brand-rgb: 255, 95, 180;
+}
+[data-v5] [data-intro-overlay] :is([data-part='n1'], [data-part='n2']) {
+  font-family: var(--f-display);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 0.88;
+}
+[data-v5][data-intro='on'] #v5-name,
+[data-v5][data-intro='playing'] #v5-name,
+[data-v5][data-intro='reveal'] #v5-name {
+  opacity: 0;
+}
+[data-v5][data-intro='on'] #v5-name {
+  animation: v5-name-failsafe 0.4s ease 6.5s forwards;
+}
+@keyframes v5-name-failsafe {
+  to {
+    opacity: 1;
+  }
+}

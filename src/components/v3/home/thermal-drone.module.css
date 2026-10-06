@@ -1,0 +1,267 @@
+.feed {
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+/* the feed is always a thermal camera, whatever the page theme */
+.panel {
+  --hx: 50%;
+  --hy: 60%;
+  position: relative;
+  aspect-ratio: 4 / 4.4;
+  border-radius: var(--r-tile);
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(
+      circle at var(--hx) var(--hy),
+      color-mix(in srgb, var(--t3) 34%, transparent),
+      color-mix(in srgb, var(--t2) 14%, transparent) 16%,
+      transparent 34%
+    ),
+    radial-gradient(ellipse 80% 60% at 50% 70%, color-mix(in srgb, var(--t1) 90%, transparent), transparent 70%),
+    linear-gradient(180deg, color-mix(in srgb, var(--t1) 30%, var(--t0)), var(--t0) 70%);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--t5) 18%, transparent),
+    var(--shadow);
+}
+
+/* sensor grain and a faint line scan, so the ground reads as an image, not a fill */
+.panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.022) 0 1px, transparent 1px 3px),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.62  0 0 0 0 0.62  0 0 0 0 0.62  0 0 0 0.42 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.5;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 700ms var(--ease-out);
+}
+.panel[data-phase='live'] .canvas,
+.panel[data-phase='still'] .canvas {
+  opacity: 1;
+}
+
+/* ---------- the detector box around the airframe ---------- */
+.det {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 0;
+  height: 0;
+  color: var(--signal);
+  opacity: 0;
+  transition: opacity 400ms ease 300ms;
+  pointer-events: none;
+}
+.panel[data-phase='live'] .det,
+.panel[data-phase='still'] .det {
+  opacity: 1;
+}
+.det i {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 0 solid currentColor;
+}
+.det i[data-c='tl'] {
+  top: 0;
+  left: 0;
+  border-top-width: 1.5px;
+  border-left-width: 1.5px;
+}
+.det i[data-c='tr'] {
+  top: 0;
+  right: 0;
+  border-top-width: 1.5px;
+  border-right-width: 1.5px;
+}
+.det i[data-c='bl'] {
+  bottom: 0;
+  left: 0;
+  border-bottom-width: 1.5px;
+  border-left-width: 1.5px;
+}
+.det i[data-c='br'] {
+  bottom: 0;
+  right: 0;
+  border-bottom-width: 1.5px;
+  border-right-width: 1.5px;
+}
+.detTag {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 5px);
+  padding: 2px 6px 3px;
+  border-radius: 3px;
+  background: var(--signal);
+  color: var(--signal-ink);
+  font-family: var(--f-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ---------- HUD ---------- */
+.hud {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  color: color-mix(in srgb, var(--media-ink) 78%, transparent);
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.hud b {
+  color: var(--media-ink);
+  font-weight: 600;
+}
+.hudTL,
+.hudTR,
+.hudBL {
+  position: absolute;
+}
+.hudTL {
+  top: 20px;
+  left: 22px;
+}
+.hudTR {
+  top: 18px;
+  right: 20px;
+  padding: 2px 7px;
+  border: 1px solid color-mix(in srgb, var(--media-ink) 30%, transparent);
+  border-radius: 999px;
+}
+.hudBL {
+  left: 22px;
+  bottom: 50px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.dotLive {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--media-ink) 45%, transparent);
+}
+.panel[data-phase='live'] .dotLive {
+  background: var(--signal);
+  animation: blink 1.6s steps(2, jump-none) infinite;
+}
+.panel[data-tracking='on'] .hudBL {
+  color: var(--signal);
+}
+@keyframes blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+.cross {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 26px;
+  height: 26px;
+  transform: translate(-50%, -50%);
+  opacity: 0.35;
+  background:
+    linear-gradient(currentColor, currentColor) center / 1px 100% no-repeat,
+    linear-gradient(currentColor, currentColor) center / 100% 1px no-repeat;
+  -webkit-mask: radial-gradient(circle, transparent 4px, #000 4.5px);
+  mask: radial-gradient(circle, transparent 4px, #000 4.5px);
+}
+
+/* the colour scale: the legend a thermal camera prints with every frame */
+.scale {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 20px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+}
+.scaleBar {
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--t0), var(--t1), var(--t2), var(--t3), var(--t4), var(--t5), var(--t6), var(--t7));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--media-ink) 12%, transparent);
+}
+
+/* the frame's own corner marks */
+.fc {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 0 solid color-mix(in srgb, var(--media-ink) 50%, transparent);
+}
+.fc[data-c='tl'] {
+  top: 10px;
+  left: 10px;
+  border-top-width: 1.5px;
+  border-left-width: 1.5px;
+}
+.fc[data-c='tr'] {
+  top: 10px;
+  right: 10px;
+  border-top-width: 1.5px;
+  border-right-width: 1.5px;
+}
+.fc[data-c='bl'] {
+  bottom: 10px;
+  left: 10px;
+  border-bottom-width: 1.5px;
+  border-left-width: 1.5px;
+}
+.fc[data-c='br'] {
+  bottom: 10px;
+  right: 10px;
+  border-bottom-width: 1.5px;
+  border-right-width: 1.5px;
+}
+
+.caption {
+  color: var(--ink-3);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+.caption a {
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-decoration-color: var(--hair-strong);
+  text-underline-offset: 2px;
+}
+.caption a:hover {
+  color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel[data-phase='live'] .dotLive {
+    animation: none;
+  }
+  .canvas,
+  .det {
+    transition: none;
+  }
+}

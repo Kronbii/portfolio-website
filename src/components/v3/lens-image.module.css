@@ -1,0 +1,36 @@
+/* shrink-wraps the photograph: no letterbox, so the channels always cover the frame */
+.lens {
+  position: relative;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  overflow: hidden;
+  isolation: isolate;
+  background: #000;
+}
+
+.base {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  visibility: hidden;
+}
+
+.a,
+.b {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+.a {
+  filter: var(--ch-a);
+  transform: translate3d(calc(var(--lx, 0) * 1px), calc(var(--ly, 0) * 1px), 0) scale(1.02);
+}
+.b {
+  filter: var(--ch-b);
+  transform: translate3d(calc(var(--lx, 0) * -1px), calc(var(--ly, 0) * -1px), 0) scale(1.02);
+}

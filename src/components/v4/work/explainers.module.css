@@ -1,0 +1,174 @@
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--media-ink);
+  will-change: transform;
+}
+.svg :is(path, rect, circle) {
+  vector-effect: non-scaling-stroke;
+}
+
+.ink,
+.dim,
+.trail,
+.fringe,
+.ring,
+.check,
+.stripLine {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ink {
+  stroke: color-mix(in srgb, var(--media-ink) 80%, transparent);
+  stroke-width: 2;
+}
+.dim {
+  stroke: color-mix(in srgb, var(--media-ink) 24%, transparent);
+  stroke-width: 1.5;
+}
+.trail {
+  stroke: var(--signal);
+  stroke-width: 2.5;
+  stroke-dasharray: 1 8;
+}
+.fringe {
+  stroke: var(--ca-b);
+  stroke-width: 2.5;
+}
+.fillSignal {
+  fill: var(--signal);
+}
+.fillInk {
+  fill: color-mix(in srgb, var(--media-ink) 72%, transparent);
+}
+.fillDim {
+  fill: color-mix(in srgb, var(--media-ink) 22%, transparent);
+}
+.fillA {
+  fill: var(--ca-a);
+}
+.fillB {
+  fill: var(--ca-b);
+}
+.cone {
+  fill: color-mix(in srgb, var(--signal) 18%, transparent);
+}
+.chip {
+  fill: color-mix(in srgb, var(--signal) 18%, transparent);
+  stroke: var(--signal);
+  stroke-width: 1.5;
+}
+.chipText {
+  fill: var(--media-ink);
+  font-family: var(--f-mono);
+  font-size: 11px;
+  font-weight: 600;
+}
+.label {
+  fill: color-mix(in srgb, var(--media-ink) 80%, transparent);
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+}
+.fine {
+  fill: color-mix(in srgb, var(--media-ink) 50%, transparent);
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+.tagDark {
+  fill: color-mix(in srgb, var(--t0) 78%, transparent);
+  stroke: color-mix(in srgb, var(--media-ink) 26%, transparent);
+  stroke-width: 1;
+}
+.tagInk {
+  fill: var(--media-ink);
+  font-family: var(--f-mono);
+  font-size: 11px;
+}
+.tagOn {
+  fill: var(--signal-ink);
+  font-family: var(--f-mono);
+  font-size: 11px;
+  font-weight: 600;
+}
+.phone {
+  fill: var(--t1);
+  stroke: var(--media-ink);
+  stroke-width: 2;
+}
+.stripLine {
+  stroke: var(--signal);
+  stroke-width: 2;
+}
+.camera {
+  fill: color-mix(in srgb, var(--media-ink) 30%, transparent);
+  stroke: var(--media-ink);
+  stroke-width: 1.5;
+}
+.keyBad {
+  fill: var(--ca-b);
+}
+.keyGood {
+  fill: var(--signal);
+}
+.pr {
+  fill: color-mix(in srgb, var(--t0) 70%, transparent);
+  stroke: color-mix(in srgb, var(--media-ink) 30%, transparent);
+  stroke-width: 1.5;
+}
+.prTitle {
+  fill: var(--media-ink);
+  font-family: var(--f-mono);
+  font-size: 12px;
+  font-weight: 600;
+}
+.check {
+  stroke: var(--signal);
+  stroke-width: 2.5;
+}
+.ring {
+  stroke: #a98bf5;
+  stroke-width: 2;
+}
+.merge {
+  fill: #8957e5;
+}
+.mergePill {
+  fill: color-mix(in srgb, #8957e5 30%, transparent);
+  stroke: #8957e5;
+  stroke-width: 1.5;
+}
+.mergeText {
+  fill: #d7c8ff;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  font-weight: 600;
+}
+.roomBg {
+  fill: color-mix(in srgb, var(--t3) 55%, var(--t1));
+}
+.window {
+  fill: color-mix(in srgb, var(--t6) 70%, transparent);
+}
+.roomLine {
+  fill: none;
+  stroke: color-mix(in srgb, var(--media-ink) 60%, transparent);
+  stroke-width: 1.5;
+}
+.under {
+  fill: #000;
+}
+.over {
+  fill: #fff;
+}
+.editFrame {
+  fill: none;
+  stroke: var(--signal);
+  stroke-width: 2;
+}
+.grade {
+  fill: color-mix(in srgb, var(--t6) 10%, transparent);
+}

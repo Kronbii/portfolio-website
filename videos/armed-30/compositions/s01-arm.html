@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>01 ARM — the arming slam over the macro prop</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: 'Manrope'; src: url('assets/fonts/Manrope-800.ttf') format('truetype'); font-weight: 800; }
+        @font-face { font-family: 'JetBrains Mono'; src: url('assets/fonts/JetBrainsMono-500.ttf') format('truetype'); font-weight: 500; }
+        #root { position: absolute; inset: 0; pointer-events: none; }
+        #s01-word { position: absolute; left: 0; right: 0; top: 330px; text-align: center; font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 400px; line-height: 1; letter-spacing: -0.04em;
+          color: transparent; -webkit-text-stroke: 5px #c9686a; white-space: nowrap; transform-origin: 50% 50%; }
+        #s01-word2 { position: absolute; left: 0; right: 0; top: 330px; text-align: center; font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 400px; line-height: 1; letter-spacing: -0.04em;
+          color: transparent; -webkit-text-stroke: 2px rgba(251, 245, 234, 0.5); white-space: nowrap; transform-origin: 50% 50%; }
+        #s01-cap { position: absolute; left: 132px; top: 760px; font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 22px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(251, 245, 234, 0.75); white-space: nowrap; }
+        #s01-cap b { color: #c9686a; font-weight: 500; }
+      </style>
+
+      <div data-hf-id="hf-w6f0" id="root" data-composition-id="s01-arm" data-width="1920" data-height="1080">
+        <div data-hf-id="hf-2g7m" id="s01-word2" data-layout-ignore="">ARMED</div>
+        <div data-hf-id="hf-xr76" id="s01-word" data-layout-ignore="">ARMED</div>
+        <div data-hf-id="hf-t22f" id="s01-cap"><b data-hf-id="hf-2p41">Ch5</b> · arm switch · motors spool</div>
+      </div>
+
+      <script>
+        ;(function () {
+          const A = window.ARMED
+          const { beat } = A
+          const tl = gsap.timeline({ paused: true })
+          // the switch flips on beat 1: the word slams in from huge, an echo trails it
+          tl.fromTo('#s01-word', { opacity: 0, scale: 2.6, filter: 'blur(24px)' }, { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.16, ease: 'expo.out' }, beat(1))
+          tl.fromTo('#s01-word2', { opacity: 0, scale: 1 }, { opacity: 1, scale: 1.18, duration: 0.42, ease: 'power2.out' }, beat(1) + 0.03)
+          tl.to('#s01-word2', { opacity: 0, duration: 0.3, ease: 'power1.in' }, beat(1) + 0.16)
+          // on beat 2 the word condenses up into the OSD's pill as the camera pulls back
+          tl.to('#s01-word', { scale: 0.07, y: -428, opacity: 0, duration: 0.2, ease: 'power3.in' }, beat(2) - 0.06)
+          tl.fromTo('#s01-cap', { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3, ease: 'expo.out' }, beat(1) + 0.08)
+          tl.to('#s01-cap', { opacity: 0, duration: 0.15, ease: 'none' }, beat(3) + 0.1)
+          window.__timelines['s01-arm'] = tl
+        })()
+      </script>
+    </template>
+  </body>
+</html>

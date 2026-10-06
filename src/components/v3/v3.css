@@ -1,0 +1,313 @@
+/*
+ * /v3 — what his systems see.
+ * A near-black ground, ink like a cold sensor, and one accent for the things
+ * that matter. The colourways live in src/content/v3/palettes.ts (rendered as
+ * CSS in the layout); the values here are the backlogged Thermal amber, the
+ * fallback. Each palette also sets a camera colour map (--t0 … --t7) for
+ * imagery only; it never paints the UI. Archivo runs the type at two widths:
+ * expanded for display, normal for reading. Scoped to [data-v3].
+ */
+
+[data-v3] {
+  /* grounds */
+  --bg: #08090d;
+  --surface: #10121a;
+  --raised: #171a24;
+  --sunk: #050609;
+  /* structure */
+  --hair: rgba(226, 231, 245, 0.1);
+  --hair-strong: rgba(226, 231, 245, 0.22);
+  --grid: rgba(226, 231, 245, 0.04);
+  /* ink */
+  --ink: #edf0f7;
+  --ink-2: rgba(237, 240, 247, 0.72);
+  --ink-3: rgba(237, 240, 247, 0.54);
+  /* hot: the only UI colour that is not ink */
+  --brand: #ffa53a;
+  --brand-strong: #ffc46e;
+  --brand-ink: #150b02;
+  --brand-tint: rgba(255, 165, 58, 0.09);
+  --brand-wash: rgba(255, 165, 58, 0.17);
+  /* over photographs and inside the camera frames: always the dark-theme accent */
+  --signal: #ffa53a;
+  --signal-ink: #150b02;
+  --media-ink: #edf0f7;
+  --media-ground: #05040f;
+  --ramp: url(#v3-ramp-thermal);
+  --ok: #3fb950;
+  --warn: #e3b341;
+  --shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.8);
+
+  /* the camera's colour map, cold to hot (each palette sets its own) */
+  --t0: #05040f;
+  --t1: #1b0b4a;
+  --t2: #4a0e7a;
+  --t3: #8e1a86;
+  --t4: #d2364f;
+  --t5: #f46d1e;
+  --t6: #ffb23f;
+  --t7: #ffe9a8;
+
+  --f-sans: var(--font-v3-sans), 'Archivo', system-ui, sans-serif;
+  --f-mono: var(--font-v3-mono), 'Geist Mono', ui-monospace, monospace;
+  /* components shared with /v2 ask for a serif; here everything is Archivo */
+  --f-serif: var(--f-sans);
+  --wide: 118%;
+
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --fast: 180ms;
+  --med: 280ms;
+
+  --gutter: clamp(1rem, 3.2vw, 2.25rem);
+  --wrap: 1400px;
+  --nav-h: 64px;
+
+  --r-tile: 22px;
+  --r-card: 18px;
+  --r-plate: 12px;
+  --r-chip: 10px;
+
+  color-scheme: dark;
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--f-sans);
+  font-size: 1rem;
+  font-weight: 450;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  cursor: default;
+  overflow-x: clip;
+}
+
+[data-v3][data-theme='light'] {
+  --bg: #f6f6f3;
+  --surface: #ffffff;
+  --raised: #ecece7;
+  --sunk: #eeeee9;
+  --hair: #dfdfd8;
+  --hair-strong: #c4c4bb;
+  --grid: rgba(14, 16, 22, 0.045);
+  --ink: #0e1016;
+  --ink-2: #3a3e49;
+  --ink-3: #62666f;
+  --brand: #9a4e00;
+  --brand-strong: #7a3d00;
+  --brand-ink: #ffffff;
+  --brand-tint: rgba(154, 78, 0, 0.07);
+  --brand-wash: rgba(154, 78, 0, 0.13);
+  --ok: #1a7f37;
+  --warn: #9a6700;
+  --shadow: 0 30px 70px -34px rgba(14, 16, 22, 0.3);
+  color-scheme: light;
+}
+
+/* The incumbent root layout still mounts its pill nav; /v3 has its own. */
+body:has([data-v3]) > header {
+  display: none !important;
+}
+
+html:has([data-v3]) {
+  background: #08090d;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(237, 240, 247, 0.22) #08090d;
+  scroll-padding-top: 88px;
+}
+html:has([data-v3][data-theme='light']) {
+  background: #f6f6f3;
+  scrollbar-color: #c4c4bb #f6f6f3;
+}
+
+/* The incumbent globals set a crosshair everywhere; undo it at zero specificity. */
+:where([data-v3] *) {
+  cursor: inherit;
+}
+
+/* The lock-on cursor replaces the pointer once it is drawing (fine pointers only). */
+[data-v3][data-cursor='on'],
+[data-v3][data-cursor='on'] * {
+  cursor: none !important;
+}
+[data-v3][data-cursor='on'] :is(input, textarea, select, [contenteditable='true']) {
+  cursor: auto !important;
+}
+
+[data-v3] ::selection {
+  background: var(--brand);
+  color: var(--brand-ink);
+  /* selected text disperses */
+  text-shadow:
+    2px 0 0 var(--ca-a),
+    -2px 0 0 var(--ca-b);
+}
+
+[data-v3] :focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+}
+
+:where([data-v3]) a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:where([data-v3]) img {
+  max-width: 100%;
+  display: block;
+}
+
+:where([data-v3]) :is(h1, h2, h3, h4) {
+  font-family: var(--f-sans);
+  font-weight: 700;
+  margin: 0;
+  text-wrap: balance;
+}
+
+:where([data-v3]) p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+:where([data-v3]) :is(ul, ol) {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:where([data-v3]) button {
+  font: inherit;
+  color: inherit;
+}
+
+/* The one hot word. Shared /v2 components mark theirs .v2-em; both read as heat here. */
+[data-v3] :is(.v3-hot, .v2-em) {
+  font-family: inherit;
+  font-style: normal;
+  font-weight: inherit;
+  font-size: 1em;
+  letter-spacing: inherit;
+  color: var(--brand);
+  padding: 0;
+}
+
+[data-v3] .v3-mono {
+  font-family: var(--f-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+[data-v3] .v3-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- the preflight intro, in v3's colours ---------- */
+
+[data-v3] [data-intro-overlay] {
+  --i-bg: #08090d;
+  --i-sunk: #050609;
+  --i-ink: #edf0f7;
+  --i-ink-rgb: 237, 240, 247;
+  --i-brand: #ffa53a;
+  --i-brand-strong: #ffc46e;
+  --i-brand-rgb: 255, 165, 58;
+}
+
+/* the intro's name is set exactly as the heading it lands on */
+[data-v3] [data-intro-overlay] :is([data-part='n1'], [data-part='n2']) {
+  font-size: clamp(52px, 12.5vw, 232px);
+  font-stretch: var(--wide);
+  letter-spacing: -0.035em;
+}
+
+html:has([data-v3][data-intro='on']),
+html:has([data-v3][data-intro='playing']) {
+  scrollbar-color: #050609 #050609;
+}
+
+[data-v3][data-intro='on'] #v3-name,
+[data-v3][data-intro='playing'] #v3-name,
+[data-v3][data-intro='reveal'] #v3-name {
+  opacity: 0;
+}
+[data-v3][data-intro='on'] #v3-name {
+  animation: v3-name-failsafe 0.4s ease 6.5s forwards;
+}
+@keyframes v3-name-failsafe {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---------- the lens (see shell/lens.tsx) ---------- */
+
+[data-v3] {
+  /* fallbacks; each palette sets its own fringe pair and channel split */
+  --ca-a: #ff4d4d;
+  --ca-b: #3de0ff;
+  --ch-a: url(#v3-ch-r);
+  --ch-b: url(#v3-ch-gb);
+}
+
+/*
+ * Display type through the lens: the two fringe colours, each at full and at
+ * half the separation, so the edge reads as a short spectrum, not a doubled
+ * outline. (No blur: a blurred shadow on display type repaints too slowly to
+ * follow a scroll.) On the optical axis (--lx = --ly = 0) the shadows sit under the
+ * glyphs and the type is sharp.
+ */
+[data-v3] :is(#v3-main h1, #v3-main h2, [data-lens]) {
+  text-shadow:
+    calc(var(--lx, 0) * 1px) calc(var(--ly, 0) * 1px) 0 color-mix(in srgb, var(--ca-a) 70%, transparent),
+    calc(var(--lx, 0) * 0.5px) calc(var(--ly, 0) * 0.5px) 0 color-mix(in srgb, var(--ca-a) 30%, transparent),
+    calc(var(--lx, 0) * -0.5px) calc(var(--ly, 0) * -0.5px) 0 color-mix(in srgb, var(--ca-b) 30%, transparent),
+    calc(var(--lx, 0) * -1px) calc(var(--ly, 0) * -1px) 0 color-mix(in srgb, var(--ca-b) 70%, transparent);
+}
+
+/*
+ * Focus lock: the intro's name lands dispersed and converges as it settles on
+ * the heading, the moment a lens comes into focus.
+ */
+[data-v3][data-intro='reveal'] [data-intro-overlay] :is([data-part='n1'], [data-part='n2']) {
+  animation: v3-focus-lock 0.95s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes v3-focus-lock {
+  from {
+    text-shadow:
+      18px 0 0 color-mix(in srgb, var(--ca-a) 85%, transparent),
+      9px 0 0 color-mix(in srgb, var(--ca-a) 40%, transparent),
+      -9px 0 0 color-mix(in srgb, var(--ca-b) 40%, transparent),
+      -18px 0 0 color-mix(in srgb, var(--ca-b) 85%, transparent);
+  }
+  to {
+    text-shadow:
+      0 0 0 transparent,
+      0 0 0 transparent,
+      0 0 0 transparent,
+      0 0 0 transparent;
+  }
+}
+
+[data-v3][data-aberration='off'] ::selection {
+  text-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-v3][data-intro='reveal'] [data-intro-overlay] :is([data-part='n1'], [data-part='n2']) {
+    animation: none;
+  }
+}
+[data-v3][data-aberration='off'][data-intro='reveal'] [data-intro-overlay] :is([data-part='n1'], [data-part='n2']) {
+  animation: none;
+}

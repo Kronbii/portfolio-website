@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>03 ID — the name slams through the FPV feed (the drop)</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: 'Manrope'; src: url('assets/fonts/Manrope-700.ttf') format('truetype'); font-weight: 700; }
+        @font-face { font-family: 'Manrope'; src: url('assets/fonts/Manrope-800.ttf') format('truetype'); font-weight: 800; }
+        @font-face { font-family: 'JetBrains Mono'; src: url('assets/fonts/JetBrainsMono-500.ttf') format('truetype'); font-weight: 500; }
+        #root { position: absolute; inset: 0; pointer-events: none; }
+        #s03-glow { position: absolute; left: 260px; top: 260px; width: 1400px; height: 420px; border-radius: 50%;
+          background: radial-gradient(closest-side, rgba(201, 104, 106, 0.3), rgba(201, 104, 106, 0) 100%); }
+        .s03-big { position: absolute; left: 96px; font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 380px; line-height: 0.86; letter-spacing: -0.04em; color: #fbf5ea; white-space: nowrap; transform-origin: 0% 60%; }
+        #s03-rami { top: 128px; }
+        #s03-kronbi { top: 452px; }
+        #s03-kronbi i { font-style: normal; color: #c9686a; }
+        .s03-l { position: absolute; width: 74px; height: 74px; border-color: #c9686a; border-style: solid; border-width: 0; }
+        #s03-l1 { left: 70px; top: 126px; border-top-width: 5px; border-left-width: 5px; }
+        #s03-l2 { left: 1700px; top: 126px; border-top-width: 5px; border-right-width: 5px; }
+        #s03-l3 { left: 70px; top: 800px; border-bottom-width: 5px; border-left-width: 5px; }
+        #s03-l4 { left: 1700px; top: 800px; border-bottom-width: 5px; border-right-width: 5px; }
+        .s03-m { position: absolute; font-family: 'JetBrains Mono', monospace; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
+        #s03-id { left: 74px; top: 86px; font-size: 22px; color: #c9686a; }
+        #s03-sub { position: absolute; left: 104px; top: 900px; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 44px; letter-spacing: -0.02em; color: #fbf5ea; white-space: nowrap; }
+        #s03-where { left: 1250px; top: 916px; font-size: 24px; color: rgba(251, 245, 234, 0.75); }
+        #s03-chips { position: absolute; left: 1250px; top: 862px; display: flex; gap: 10px; }
+        .s03-chip { padding: 6px 14px; border: 2px solid #c9686a; border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 20px; letter-spacing: 0.12em; color: #fbf5ea; }
+      </style>
+
+      <div data-hf-id="hf-5l5b" id="root" data-composition-id="s03-name" data-width="1920" data-height="1080">
+        <div data-hf-id="hf-632r" id="s03-glow"></div>
+        <div data-hf-id="hf-u11z" id="s03-id" class="s03-m" data-layout-allow-overlap="">ID lock · operator</div>
+        <div data-hf-id="hf-t3uc" id="s03-rami" class="s03-big" data-layout-allow-overlap="">RAMI</div>
+        <div data-hf-id="hf-bcos" id="s03-kronbi" class="s03-big" data-layout-allow-overlap="">KRONBI<i data-hf-id="hf-74k6">.</i></div>
+        <div data-hf-id="hf-8s91" id="s03-l1" class="s03-l"></div>
+        <div data-hf-id="hf-exyu" id="s03-l2" class="s03-l"></div>
+        <div data-hf-id="hf-iw2v" id="s03-l3" class="s03-l"></div>
+        <div data-hf-id="hf-mu6w" id="s03-l4" class="s03-l"></div>
+        <div data-hf-id="hf-9av7" id="s03-sub">Robotics &amp; embedded-systems engineer</div>
+        <div data-hf-id="hf-onqh" id="s03-chips"><span data-hf-id="hf-ngld" class="s03-chip">SEE</span><span data-hf-id="hf-gjy8" class="s03-chip">MAP</span><span data-hf-id="hf-ww5s" class="s03-chip">TUNE</span><span data-hf-id="hf-3prb" class="s03-chip">FLY</span></div>
+        <div data-hf-id="hf-9jx1" id="s03-where" class="s03-m">Beirut · Lebanon</div>
+      </div>
+
+      <script>
+        ;(function () {
+          const A = window.ARMED
+          const { beat, BAR, B, hash } = A
+          const host = document.querySelector('[data-composition-id="s03-name"]')
+          const me = host.querySelector('#root') || host
+          const sub = host.querySelector('#s03-sub')
+          const T0 = 2 * BAR
+          const L = (g) => g - T0
+          const SUB = 'Robotics & embedded-systems engineer'
+          const GLYPHS = 'ABCDEFGHJKLMNPRSTUVXYZ0123456789#/<>*+='
+
+          const tl = gsap.timeline({ paused: true })
+          // the drop: RAMI slams from huge, then rattles for three frames
+          tl.fromTo('#s03-rami', { opacity: 0, scale: 1.7, filter: 'blur(26px)' }, { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.16, ease: 'expo.out' }, 0)
+          tl.fromTo('#s03-rami', { x: 0 }, { keyframes: [{ x: 14, duration: 1 / 60 }, { x: -10, duration: 1 / 60 }, { x: 6, duration: 1 / 60 }, { x: 0, duration: 1 / 60 }], immediateRender: false }, 0.16)
+          tl.fromTo('#s03-glow', { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: 'expo.out' }, 0)
+          // KRONBI side-snaps in from the right on the next beat
+          tl.fromTo('#s03-kronbi', { opacity: 0, x: 1100, filter: 'blur(30px)' }, { opacity: 1, x: 0, filter: 'blur(0px)', duration: 0.2, ease: 'expo.out' }, L(beat(9)))
+          tl.fromTo('#s03-kronbi i', { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.25, ease: 'back.out(3)' }, L(beat(9)) + 0.18)
+          // ID lock: brackets snap onto the name, the label blinks
+          ;['#s03-l1', '#s03-l2', '#s03-l3', '#s03-l4'].forEach((s, i) => {
+            tl.fromTo(s, { opacity: 0, x: [-120, 120, -120, 120][i], y: [-80, -80, 80, 80][i] }, { opacity: 1, x: 0, y: 0, duration: 0.22, ease: 'expo.out' }, L(beat(10)) + i * 0.02)
+          })
+          tl.fromTo('#s03-id', { opacity: 0 }, { opacity: 1, duration: 0.04, ease: 'none', repeat: 4, yoyo: true }, L(beat(10)) + 0.05)
+          // the subtitle decodes out of glyph noise
+          tl.fromTo('#s03-sub', { opacity: 0 }, { opacity: 1, duration: 0.01, ease: 'none' }, L(beat(10)))
+          let last = ''
+          const dec = A.driver((p) => {
+            const frame = Math.floor(p * 24)
+            const shown = SUB.split('').map((c, i) => (c === ' ' || i / SUB.length < p ? c : GLYPHS[Math.floor(hash(i, frame) * GLYPHS.length)])).join('')
+            if (shown !== last) sub.textContent = last = shown
+          })
+          tl.fromTo(dec, { p: 0 }, { p: 1, duration: 0.4, ease: 'none' }, L(beat(10)))
+          // the chapter chips stamp on sixteenths, then where
+          host.querySelectorAll('.s03-chip').forEach((c, i) => {
+            tl.fromTo(c, { opacity: 0, y: 26, scale: 0.6 }, { opacity: 1, y: 0, scale: 1, duration: 0.18, ease: 'back.out(2.2)' }, L(beat(11)) + i * (B / 4))
+          })
+          tl.fromTo('#s03-where', { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.25, ease: 'expo.out' }, L(beat(11)) + B)
+          // whip out to the left: the next scene arrives from the right at the same speed
+          tl.to(me, { x: -620, filter: 'blur(22px)', duration: 0.12, ease: 'power3.in' }, BAR - 0.12)
+          window.__timelines['s03-name'] = tl
+        })()
+      </script>
+    </template>
+  </body>
+</html>

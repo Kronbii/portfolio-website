@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>04 SEE — the race car through a vision stack: raw, edges, features, lock</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: 'Manrope'; src: url('assets/fonts/Manrope-700.ttf') format('truetype'); font-weight: 700; }
+        @font-face { font-family: 'Instrument Serif'; src: url('assets/fonts/InstrumentSerif-Italic.ttf') format('truetype'); font-style: italic; font-weight: 400; }
+        @font-face { font-family: 'JetBrains Mono'; src: url('assets/fonts/JetBrainsMono-500.ttf') format('truetype'); font-weight: 500; }
+        @font-face { font-family: 'JetBrains Mono'; src: url('assets/fonts/JetBrainsMono-600.ttf') format('truetype'); font-weight: 600; }
+        #root { position: absolute; inset: 0; pointer-events: none; transform-origin: 50% 50%; }
+        .s04-m { position: absolute; font-family: 'JetBrains Mono', monospace; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
+        #s04-no { left: 112px; top: 150px; font-size: 24px; color: #c9686a; }
+        #s04-title { position: absolute; left: 108px; top: 196px; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 92px; line-height: 1.02; letter-spacing: -0.035em; color: #fbf5ea; }
+        #s04-title .ln { display: block; overflow: hidden; padding-bottom: 0.06em; margin-bottom: -0.06em; }
+        #s04-title .w { display: inline-block; }
+        #s04-title em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: #c9686a; font-size: 1.08em; letter-spacing: -0.01em; }
+        #s04-fig { position: absolute; left: 108px; top: 548px; font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 150px; line-height: 1; letter-spacing: -0.04em; color: #fbf5ea; font-variant-numeric: tabular-nums; white-space: nowrap; }
+        #s04-fig small { font-size: 0.4em; color: rgba(251, 245, 234, 0.6); margin-left: 10px; letter-spacing: 0; }
+        #s04-fig-k { left: 112px; top: 712px; font-size: 22px; color: rgba(251, 245, 234, 0.6); }
+        #s04-place { position: absolute; left: 110px; top: 764px; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 38px; line-height: 1.3; letter-spacing: -0.02em; color: #fbf5ea; white-space: nowrap; }
+        #s04-place span { display: block; color: rgba(251, 245, 234, 0.75); font-size: 28px; }
+        #s04-arch { left: 112px; top: 900px; font-size: 22px; line-height: 1.7; color: rgba(251, 245, 234, 0.75); }
+        #s04-arch b { color: #c9686a; font-weight: 500; }
+        #s04-plate { position: absolute; left: 940px; top: 90px; width: 900px; height: 900px; border-radius: 18px; overflow: hidden; background: #0a0808; box-shadow: 0 0 0 2px rgba(251, 245, 234, 0.24); }
+        #s04-plate > * { position: absolute; left: 0; top: 0; width: 900px; height: 900px; }
+        #s04-edges { background: #0a0808; }
+        #s04-edges img { position: absolute; inset: 0; width: 900px; height: 900px; }
+        #s04-scan { left: 0; top: 0; width: 900px; height: 4px; background: #c9686a; box-shadow: 0 0 24px 6px rgba(201, 104, 106, 0.6); }
+        #s04-feat circle { fill: none; stroke: #c9686a; stroke-width: 3; }
+        #s04-feat line { stroke: rgba(224, 138, 139, 0.55); stroke-width: 1.5; }
+        .s04-l { position: absolute; width: 64px; height: 64px; border-color: #e08a8b; border-style: solid; border-width: 0; }
+        #s04-tag { position: absolute; left: 22px; top: 22px; width: auto; height: auto; padding: 8px 16px; border-radius: 999px; background: rgba(14, 11, 11, 0.86); font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 22px; letter-spacing: 0.12em; color: #fbf5ea; }
+        #s04-tag b { color: #c9686a; font-weight: 500; }
+        #s04-steps { position: absolute; left: 940px; top: 1004px; display: flex; gap: 28px; font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 20px; letter-spacing: 0.12em; color: rgba(251, 245, 234, 0.52); }
+        #s04-steps span.on { color: #c9686a; }
+        #s04-schem { position: absolute; left: 800px; top: 650px; width: 440px; height: 312px; border-radius: 18px; overflow: hidden; box-shadow: 0 0 0 2px rgba(251, 245, 234, 0.24), 0 30px 60px rgba(10, 8, 8, 0.6); }
+        #s04-schem img { width: 440px; height: 312px; display: block; }
+      </style>
+
+      <div data-hf-id="hf-6q9y" id="root" data-composition-id="s04-see" data-width="1920" data-height="1080">
+        <div data-hf-id="hf-dzts" id="s04-no" class="s04-m">04 · See</div>
+        <div data-hf-id="hf-dcv1" id="s04-title">
+          <span data-hf-id="hf-smev" class="ln"><span data-hf-id="hf-8zps" class="w">Brainiacs</span></span>
+          <span data-hf-id="hf-oupj" class="ln"><span data-hf-id="hf-mz7s" class="w">autonomous</span></span>
+          <span data-hf-id="hf-ogei" class="ln"><span data-hf-id="hf-43bq" class="w"><em data-hf-id="hf-d9ui">race</em> car</span></span>
+        </div>
+        <div data-hf-id="hf-t8er" id="s04-fig">20<small data-hf-id="hf-e6af">days</small></div>
+        <div data-hf-id="hf-9mbl" id="s04-fig-k" class="s04-m">Built from scratch</div>
+        <div data-hf-id="hf-ila4" id="s04-place">3rd · WRO Future Engineers 2023<span data-hf-id="hf-yf0e">with Wassim Ghaddar</span></div>
+        <div data-hf-id="hf-y5t3" id="s04-arch" class="s04-m"><b data-hf-id="hf-4712">Jetson Nano</b> → perception<br data-hf-id="hf-x5px"><b data-hf-id="hf-pzqf">Arduino Mega</b> → real-time control</div>
+
+        <div data-hf-id="hf-ukr7" id="s04-plate">
+          <img data-hf-id="hf-zrlw" id="s04-img" src="assets/img/race-crop.jpg" alt="The Brainiacs autonomous race car">
+          <div data-hf-id="hf-gd4x" id="s04-edges"><img data-hf-id="hf-v6n1" src="assets/img/race-edges.png" alt=""></div>
+          <svg data-hf-id="hf-vkrb" id="s04-feat" viewBox="0 0 900 900"><line data-hf-id="hf-a32h" x1="390" y1="321" x2="421" y2="378" /><line data-hf-id="hf-sgtj" x1="372" y1="173" x2="351" y2="209" /><line data-hf-id="hf-ne94" x1="434" y1="626" x2="478" y2="581" /><line data-hf-id="hf-aedj" x1="571" y1="214" x2="585" y2="263" /><line data-hf-id="hf-y4t3" x1="589" y1="215" x2="585" y2="263" /><line data-hf-id="hf-tygz" x1="508" y1="705" x2="531" y2="663" /><line data-hf-id="hf-v4lf" x1="514" y1="412" x2="517" y2="344" /><line data-hf-id="hf-o5m4" x1="557" y1="501" x2="586" y2="471" /><line data-hf-id="hf-2l8l" x1="259" y1="454" x2="195" y2="447" /><line data-hf-id="hf-5dk9" x1="595" y1="496" x2="486" y2="513" /><line data-hf-id="hf-9hw6" x1="386" y1="519" x2="390" y2="453" /><line data-hf-id="hf-n8j0" x1="405" y1="154" x2="405" y2="105" /><line data-hf-id="hf-b1zi" x1="256" y1="473" x2="208" y2="511" /><line data-hf-id="hf-yeby" x1="491" y1="709" x2="531" y2="663" /><line data-hf-id="hf-vyug" x1="570" y1="186" x2="545" y2="144" /><line data-hf-id="hf-zhwa" x1="495" y1="378" x2="517" y2="344" /><line data-hf-id="hf-equw" x1="422" y1="310" x2="381" y2="345" /><line data-hf-id="hf-p56u" x1="600" y1="236" x2="570" y2="186" /><line data-hf-id="hf-ddt0" x1="468" y1="90" x2="405" y2="105" /><line data-hf-id="hf-1jjo" x1="385" y1="155" x2="350" y2="191" /><line data-hf-id="hf-lvg1" x1="444" y1="162" x2="403" y2="131" /><line data-hf-id="hf-0ah1" x1="384" y1="244" x2="351" y2="209" /><line data-hf-id="hf-237b" x1="697" y1="336" x2="572" y2="340" /><line data-hf-id="hf-jeqx" x1="443" y1="241" x2="384" y2="244" /><line data-hf-id="hf-1g3k" x1="421" y1="744" x2="491" y2="709" /><line data-hf-id="hf-n7vn" x1="421" y1="378" x2="381" y2="345" /><line data-hf-id="hf-fjcg" x1="486" y1="513" x2="478" y2="581" /><line data-hf-id="hf-4qrt" x1="315" y1="260" x2="351" y2="209" /><line data-hf-id="hf-led8" x1="381" y1="345" x2="342" y2="373" /><line data-hf-id="hf-vh83" x1="181" y1="631" x2="208" y2="511" /><line data-hf-id="hf-cvpt" x1="447" y1="216" x2="444" y2="162" /><line data-hf-id="hf-wiwf" x1="553" y1="300" x2="572" y2="340" /><line data-hf-id="hf-e73b" x1="411" y1="325" x2="421" y2="378" /><line data-hf-id="hf-ixww" x1="570" y1="236" x2="570" y2="186" /><circle data-hf-id="hf-edx4" cx="390" cy="321" r="8" /><circle data-hf-id="hf-smez" cx="372" cy="173" r="8" /><circle data-hf-id="hf-1wb5" cx="434" cy="626" r="8" /><circle data-hf-id="hf-3byi" cx="571" cy="214" r="8" /><circle data-hf-id="hf-69j0" cx="589" cy="215" r="8" /><circle data-hf-id="hf-6z6h" cx="508" cy="705" r="8" /><circle data-hf-id="hf-szqf" cx="514" cy="412" r="8" /><circle data-hf-id="hf-68wn" cx="557" cy="501" r="8" /><circle data-hf-id="hf-rkgv" cx="259" cy="454" r="8" /><circle data-hf-id="hf-tm3c" cx="595" cy="496" r="8" /><circle data-hf-id="hf-zhds" cx="386" cy="519" r="8" /><circle data-hf-id="hf-mt7p" cx="405" cy="154" r="8" /><circle data-hf-id="hf-xogb" cx="256" cy="473" r="8" /><circle data-hf-id="hf-bjb0" cx="491" cy="709" r="8" /><circle data-hf-id="hf-hdq3" cx="570" cy="186" r="8" /><circle data-hf-id="hf-pgaw" cx="495" cy="378" r="8" /><circle data-hf-id="hf-2urk" cx="422" cy="310" r="8" /><circle data-hf-id="hf-izzj" cx="600" cy="236" r="8" /><circle data-hf-id="hf-cs2n" cx="468" cy="90" r="8" /><circle data-hf-id="hf-b4l5" cx="385" cy="155" r="8" /><circle data-hf-id="hf-fppp" cx="444" cy="162" r="8" /><circle data-hf-id="hf-k3vv" cx="350" cy="191" r="8" /><circle data-hf-id="hf-66uj" cx="384" cy="244" r="8" /><circle data-hf-id="hf-0kqa" cx="697" cy="336" r="8" /><circle data-hf-id="hf-myta" cx="443" cy="241" r="8" /><circle data-hf-id="hf-im7q" cx="421" cy="744" r="8" /><circle data-hf-id="hf-42zr" cx="421" cy="378" r="8" /><circle data-hf-id="hf-dlik" cx="517" cy="344" r="8" /><circle data-hf-id="hf-17tz" cx="478" cy="581" r="8" /><circle data-hf-id="hf-ph60" cx="403" cy="131" r="8" /><circle data-hf-id="hf-sdm7" cx="486" cy="513" r="8" /><circle data-hf-id="hf-yqvj" cx="315" cy="260" r="8" /><circle data-hf-id="hf-h39o" cx="381" cy="345" r="8" /><circle data-hf-id="hf-tb0i" cx="181" cy="631" r="8" /><circle data-hf-id="hf-22ev" cx="405" cy="105" r="8" /><circle data-hf-id="hf-qxxv" cx="585" cy="263" r="8" /><circle data-hf-id="hf-dbye" cx="447" cy="216" r="8" /><circle data-hf-id="hf-1jic" cx="553" cy="300" r="8" /><circle data-hf-id="hf-nwxt" cx="208" cy="511" r="8" /><circle data-hf-id="hf-9159" cx="545" cy="144" r="8" /><circle data-hf-id="hf-tf0m" cx="411" cy="325" r="8" /><circle data-hf-id="hf-qs8e" cx="195" cy="447" r="8" /><circle data-hf-id="hf-wbec" cx="351" cy="209" r="8" /><circle data-hf-id="hf-a2mp" cx="586" cy="471" r="8" /><circle data-hf-id="hf-tjcg" cx="531" cy="663" r="8" /><circle data-hf-id="hf-iuhi" cx="170" cy="79" r="8" /><circle data-hf-id="hf-u431" cx="572" cy="340" r="8" /><circle data-hf-id="hf-zm2w" cx="390" cy="453" r="8" /><circle data-hf-id="hf-vaxa" cx="342" cy="373" r="8" /><circle data-hf-id="hf-ak9d" cx="570" cy="236" r="8" /><circle data-hf-id="hf-5di9" cx="405" cy="248" r="8" /><circle data-hf-id="hf-03gm" cx="626" cy="538" r="8" /><circle data-hf-id="hf-n2bf" cx="666" cy="243" r="8" /><circle data-hf-id="hf-38qj" cx="462" cy="133" r="8" /><circle data-hf-id="hf-wz8n" cx="718" cy="384" r="8" /><circle data-hf-id="hf-3ntd" cx="550" cy="285" r="8" /><circle data-hf-id="hf-l974" cx="669" cy="483" r="8" /><circle data-hf-id="hf-f80c" cx="510" cy="604" r="8" /><circle data-hf-id="hf-s5im" cx="465" cy="713" r="8" /><circle data-hf-id="hf-70op" cx="333" cy="301" r="8" /><circle data-hf-id="hf-2zgf" cx="403" cy="424" r="8" /><circle data-hf-id="hf-yeeb" cx="453" cy="74" r="8" /><circle data-hf-id="hf-br0f" cx="366" cy="389" r="8" /><circle data-hf-id="hf-lwmg" cx="349" cy="338" r="8" /><circle data-hf-id="hf-jh4o" cx="431" cy="677" r="8" /><circle data-hf-id="hf-lcax" cx="389" cy="289" r="8" /><circle data-hf-id="hf-m9ir" cx="324" cy="336" r="8" /><circle data-hf-id="hf-cq39" cx="335" cy="242" r="8" /><circle data-hf-id="hf-2i0y" cx="536" cy="277" r="8" /><circle data-hf-id="hf-6nxv" cx="425" cy="648" r="8" /><circle data-hf-id="hf-cjjg" cx="505" cy="743" r="8" /><circle data-hf-id="hf-xjtn" cx="473" cy="306" r="8" /><circle data-hf-id="hf-mbbp" cx="376" cy="427" r="8" /><circle data-hf-id="hf-4jvk" cx="465" cy="41" r="8" /><circle data-hf-id="hf-uefc" cx="369" cy="325" r="8" /><circle data-hf-id="hf-ypmv" cx="667" cy="280" r="8" /><circle data-hf-id="hf-erqw" cx="688" cy="288" r="8" /><circle data-hf-id="hf-ot35" cx="269" cy="266" r="8" /><circle data-hf-id="hf-lbo5" cx="572" cy="559" r="8" /><circle data-hf-id="hf-83yf" cx="467" cy="71" r="8" /><circle data-hf-id="hf-vt56" cx="362" cy="94" r="8" /><circle data-hf-id="hf-osxp" cx="410" cy="527" r="8" /><circle data-hf-id="hf-rolc" cx="440" cy="277" r="8" /><circle data-hf-id="hf-lyog" cx="639" cy="352" r="8" /><circle data-hf-id="hf-u51w" cx="423" cy="348" r="8" /><circle data-hf-id="hf-v7yq" cx="523" cy="510" r="8" /><circle data-hf-id="hf-0r5e" cx="694" cy="430" r="8" /><circle data-hf-id="hf-194e" cx="486" cy="534" r="8" /><circle data-hf-id="hf-tvex" cx="518" cy="173" r="8" /><circle data-hf-id="hf-rke3" cx="233" cy="92" r="8" /><circle data-hf-id="hf-0bjs" cx="473" cy="558" r="8" /><circle data-hf-id="hf-ci5k" cx="396" cy="671" r="8" /><circle data-hf-id="hf-gi99" cx="241" cy="318" r="8" /><circle data-hf-id="hf-ctfs" cx="398" cy="637" r="8" /><circle data-hf-id="hf-h9ju" cx="547" cy="185" r="8" /><circle data-hf-id="hf-y5jv" cx="317" cy="572" r="8" /><circle data-hf-id="hf-nwzw" cx="337" cy="450" r="8" /><circle data-hf-id="hf-y44j" cx="408" cy="397" r="8" /><circle data-hf-id="hf-okdr" cx="512" cy="212" r="8" /><circle data-hf-id="hf-4rgc" cx="319" cy="205" r="8" /><circle data-hf-id="hf-yc5u" cx="250" cy="489" r="8" /><circle data-hf-id="hf-ygqy" cx="296" cy="443" r="8" /><circle data-hf-id="hf-ykn2" cx="443" cy="142" r="8" /><circle data-hf-id="hf-mq17" cx="579" cy="376" r="8" /><circle data-hf-id="hf-1f5j" cx="365" cy="407" r="8" /><circle data-hf-id="hf-x5dr" cx="680" cy="351" r="8" /><circle data-hf-id="hf-nqmu" cx="614" cy="508" r="8" /><circle data-hf-id="hf-1znv" cx="366" cy="547" r="8" /><circle data-hf-id="hf-v1ij" cx="598" cy="409" r="8" /><circle data-hf-id="hf-hk0n" cx="626" cy="658" r="8" /><circle data-hf-id="hf-7t3s" cx="293" cy="150" r="8" /><circle data-hf-id="hf-f7ro" cx="532" cy="385" r="8" /><circle data-hf-id="hf-4bzp" cx="586" cy="646" r="8" /><circle data-hf-id="hf-6lod" cx="297" cy="317" r="8" /><circle data-hf-id="hf-9npr" cx="482" cy="351" r="8" /><circle data-hf-id="hf-m5i9" cx="567" cy="320" r="8" /><circle data-hf-id="hf-zytw" cx="570" cy="471" r="8" /><circle data-hf-id="hf-93zs" cx="617" cy="239" r="8" /><circle data-hf-id="hf-bobj" cx="308" cy="334" r="8" /><circle data-hf-id="hf-y1ni" cx="394" cy="266" r="8" /><circle data-hf-id="hf-qqrl" cx="468" cy="744" r="8" /><circle data-hf-id="hf-ge3r" cx="497" cy="289" r="8" /><circle data-hf-id="hf-c0e3" cx="549" cy="216" r="8" /><circle data-hf-id="hf-0avo" cx="319" cy="72" r="8" /><circle data-hf-id="hf-ye5k" cx="281" cy="290" r="8" /><circle data-hf-id="hf-skm3" cx="407" cy="455" r="8" /><circle data-hf-id="hf-aaeu" cx="650" cy="427" r="8" /><circle data-hf-id="hf-xkpx" cx="159" cy="53" r="8" /><circle data-hf-id="hf-syl6" cx="574" cy="495" r="8" /><circle data-hf-id="hf-stl8" cx="351" cy="568" r="8" /><circle data-hf-id="hf-hu54" cx="275" cy="477" r="8" /><circle data-hf-id="hf-ofm3" cx="421" cy="482" r="8" /><circle data-hf-id="hf-tcs4" cx="506" cy="250" r="8" /><circle data-hf-id="hf-trs8" cx="337" cy="397" r="8" /><circle data-hf-id="hf-8hmk" cx="496" cy="461" r="8" /><circle data-hf-id="hf-vvu7" cx="466" cy="616" r="8" /><circle data-hf-id="hf-hazr" cx="438" cy="457" r="8" /><circle data-hf-id="hf-xe4k" cx="405" cy="58" r="8" /><circle data-hf-id="hf-3qvx" cx="411" cy="74" r="8" /><circle data-hf-id="hf-ps9b" cx="447" cy="352" r="8" /><circle data-hf-id="hf-7n1g" cx="322" cy="548" r="8" /><circle data-hf-id="hf-ublf" cx="455" cy="368" r="8" /><circle data-hf-id="hf-y2a0" cx="463" cy="681" r="8" /><circle data-hf-id="hf-cngz" cx="220" cy="559" r="8" /><circle data-hf-id="hf-vw8a" cx="486" cy="673" r="8" /><circle data-hf-id="hf-vwe0" cx="438" cy="296" r="8" /><circle data-hf-id="hf-bq97" cx="464" cy="517" r="8" /><circle data-hf-id="hf-3t89" cx="139" cy="204" r="8" /><circle data-hf-id="hf-zhik" cx="459" cy="459" r="8" /><circle data-hf-id="hf-e0qv" cx="338" cy="434" r="8" /></svg>
+          <div data-hf-id="hf-fxbu" id="s04-scan"></div>
+          <div data-hf-id="hf-6088" id="s04-box">
+            <div data-hf-id="hf-rvk4" id="s04-b1" class="s04-l" style="border-top-width: 5px; border-left-width: 5px"></div>
+            <div data-hf-id="hf-l4cc" id="s04-b2" class="s04-l" style="border-top-width: 5px; border-right-width: 5px"></div>
+            <div data-hf-id="hf-1ibi" id="s04-b3" class="s04-l" style="border-bottom-width: 5px; border-left-width: 5px"></div>
+            <div data-hf-id="hf-pzbo" id="s04-b4" class="s04-l" style="border-bottom-width: 5px; border-right-width: 5px"></div>
+          </div>
+          <div data-hf-id="hf-nurr" id="s04-tag"><b data-hf-id="hf-27a2">01</b> Raw</div>
+        </div>
+        <div data-hf-id="hf-fj5q" id="s04-steps"><span data-hf-id="hf-r6rg">01 Raw</span><span data-hf-id="hf-cv09">02 Edges</span><span data-hf-id="hf-69x3">03 Features</span><span data-hf-id="hf-ym88">04 Lock</span></div>
+        <div data-hf-id="hf-8b5f" id="s04-schem"><img data-hf-id="hf-cv0f" src="assets/img/race-schematic.png" alt="The race car's Arduino Mega schematic"></div>
+      </div>
+
+      <script>
+        ;(function () {
+          const A = window.ARMED
+          const { B, BAR } = A
+          const host = document.querySelector('[data-composition-id="s04-see"]')
+          const me = host.querySelector('#root') || host
+          const q = (s) => host.querySelector(s)
+          const BOX = [40, 140, 780, 800]
+          const tag = q('#s04-tag')
+          const steps = host.querySelectorAll('#s04-steps span')
+          const STEP = ['Raw', 'Edges', 'Features', 'Lock']
+          const tl = gsap.timeline({ paused: true })
+
+          // arrive: the plate whips in from the right at the speed the name left
+          tl.fromTo('#s04-plate', { x: 760, filter: 'blur(22px)' }, { x: 0, filter: 'blur(0px)', duration: 0.24, ease: 'expo.out' }, 0)
+          tl.fromTo('#s04-no', { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.25, ease: 'expo.out' }, 0.02)
+          tl.fromTo('#s04-title .w', { yPercent: 115 }, { yPercent: 0, duration: 0.32, ease: 'expo.out', stagger: 0.045 }, 0.04)
+          tl.fromTo('#s04-steps span', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.2, ease: 'expo.out', stagger: 0.03 }, 0.08)
+
+          // the passes, one per beat: the tag and the step index are a pure function of time
+          let shown = -1
+          const state = A.driver((l) => {
+            const k = Math.max(0, Math.min(3, Math.floor(l / B + 1e-6)))
+            if (k === shown) return
+            tag.innerHTML = `<b>0${k + 1}</b> ${STEP[k]}`
+            steps.forEach((s, j) => s.classList.toggle('on', j === k))
+            shown = k
+          })
+          tl.fromTo(state, { p: 0 }, { p: BAR, duration: BAR, ease: 'none' }, 0)
+          ;[0, B, 2 * B, 3 * B].forEach((at) => tl.fromTo('#s04-tag', { scale: 1.35 }, { scale: 1, duration: 0.2, ease: 'back.out(2.4)', immediateRender: false }, at))
+          // 02 edges: the photo cuts to its Sobel map, a scan bar draws it top to bottom
+          tl.fromTo('#s04-img', { opacity: 1 }, { opacity: 0, duration: 0.001, ease: 'none', immediateRender: false }, B)
+          tl.fromTo('#s04-edges', { opacity: 0, clipPath: 'inset(0 0 100% 0)' }, { opacity: 1, clipPath: 'inset(0 0 0% 0)', duration: 0.22, ease: 'power2.out' }, B)
+          tl.fromTo('#s04-scan', { opacity: 0, y: 0 }, { opacity: 1, y: 896, duration: 0.22, ease: 'power2.out' }, B)
+          tl.to('#s04-scan', { opacity: 0, duration: 0.06, ease: 'none' }, B + 0.22)
+          // 03 features: the photo comes back dim, the corners pop as a radial wave
+          tl.fromTo('#s04-img', { opacity: 0 }, { opacity: 0.55, duration: 0.001, ease: 'none', immediateRender: false }, 2 * B)
+          tl.to('#s04-edges', { opacity: 0.32, duration: 0.12, ease: 'none' }, 2 * B)
+          const pts = host.querySelectorAll('#s04-feat circle')
+          pts.forEach((c) => {
+            const x = +c.getAttribute('cx'), y = +c.getAttribute('cy')
+            const d = Math.hypot(x - 450, y - 470) / 640
+            tl.fromTo(c, { scale: 0, svgOrigin: `${x} ${y}` }, { scale: 1, svgOrigin: `${x} ${y}`, duration: 0.16, ease: 'back.out(3)' }, 2 * B + d * 0.26)
+          })
+          tl.fromTo('#s04-feat line', { opacity: 0 }, { opacity: 1, duration: 0.12, ease: 'none', stagger: 0.004 }, 2 * B + 0.18)
+          // the facts land with the passes
+          tl.fromTo('#s04-fig, #s04-fig-k', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.25, ease: 'expo.out', stagger: 0.04 }, B)
+          tl.fromTo('#s04-place', { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.25, ease: 'expo.out' }, 2 * B)
+          // 04 lock: brackets fly from the plate's corners onto the vehicle
+          const [x0, y0, x1, y1] = BOX
+          const corners = [['#s04-b1', 0, 0, x0, y0], ['#s04-b2', 836, 0, x1 - 64, y0], ['#s04-b3', 0, 836, x0, y1 - 64], ['#s04-b4', 836, 836, x1 - 64, y1 - 64]]
+          corners.forEach(([s, fx, fy, tx, ty], i) => {
+            tl.fromTo(s, { x: fx, y: fy, opacity: 0 }, { x: tx, y: ty, opacity: 1, duration: 0.24, ease: 'expo.out' }, 3 * B + i * 0.02)
+          })
+          tl.to('#s04-feat', { opacity: 0.45, duration: 0.1, ease: 'none' }, 3 * B)
+          tl.fromTo('#s04-arch', { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.25, ease: 'expo.out' }, 3 * B)
+          tl.fromTo('#s04-schem', { opacity: 0, x: -220, y: 120, rotation: -14 }, { opacity: 1, x: 0, y: 0, rotation: -4, duration: 0.3, ease: 'expo.out' }, 3 * B + 0.06)
+          // exit: zoom through the frame into the next scene
+          tl.to(me, { scale: 1.28, filter: 'blur(18px)', duration: 0.13, ease: 'power3.in' }, BAR - 0.13)
+          window.__timelines['s04-see'] = tl
+        })()
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>06 HEAT — the real thermal input, enhanced ×3 on the beat</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: 'Manrope'; src: url('assets/fonts/Manrope-700.ttf') format('truetype'); font-weight: 700; }
+        @font-face { font-family: 'Instrument Serif'; src: url('assets/fonts/InstrumentSerif-Italic.ttf') format('truetype'); font-style: italic; font-weight: 400; }
+        @font-face { font-family: 'JetBrains Mono'; src: url('assets/fonts/JetBrainsMono-500.ttf') format('truetype'); font-weight: 500; }
+        @font-face { font-family: 'JetBrains Mono'; src: url('assets/fonts/JetBrainsMono-600.ttf') format('truetype'); font-weight: 600; }
+        #root { position: absolute; inset: 0; pointer-events: none; }
+        .s06-m { position: absolute; font-family: 'JetBrains Mono', monospace; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
+        #s06-no { left: 112px; top: 150px; font-size: 24px; color: #c9686a; }
+        #s06-title { position: absolute; left: 108px; top: 196px; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 88px; line-height: 1.02; letter-spacing: -0.035em; color: #fbf5ea; }
+        #s06-title .ln { display: block; overflow: hidden; padding-bottom: 0.06em; margin-bottom: -0.06em; }
+        #s06-title .w { display: inline-block; }
+        #s06-title em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: #c9686a; font-size: 1.08em; letter-spacing: -0.01em; }
+        #s06-x { position: absolute; left: 100px; top: 440px; font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 250px; line-height: 1; letter-spacing: -0.04em; color: #fbf5ea; white-space: nowrap; transform-origin: 0% 50%; }
+        #s06-q { left: 112px; top: 730px; font-size: 26px; line-height: 1.7; color: #fbf5ea; }
+        #s06-q span { color: rgba(251, 245, 234, 0.6); }
+        #s06-how { left: 112px; top: 850px; font-size: 20px; line-height: 1.7; color: rgba(251, 245, 234, 0.6); }
+        #s06-plate { position: absolute; left: 820px; top: 140px; width: 1000px; height: 799px; border-radius: 18px; overflow: hidden; background: #0a0808; box-shadow: 0 0 0 2px rgba(251, 245, 234, 0.24); }
+        #s06-plate img { position: absolute; left: 0; top: 0; width: 1000px; height: 799px; }
+        #s06-low { image-rendering: pixelated; }
+        #s06-scan { position: absolute; left: 0; top: 0; width: 4px; height: 799px; background: #fbf5ea; box-shadow: 0 0 30px 8px rgba(251, 245, 234, 0.55); }
+        #s06-tag { position: absolute; left: 22px; top: 22px; padding: 8px 16px; border-radius: 999px; background: rgba(14, 11, 11, 0.86); font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 22px; letter-spacing: 0.12em; color: #fbf5ea; }
+        #s06-tag b { color: #c9686a; font-weight: 500; }
+      </style>
+
+      <div data-hf-id="hf-1rsn" id="root" data-composition-id="s06-heat" data-width="1920" data-height="1080">
+        <div data-hf-id="hf-2x7h" id="s06-no" class="s06-m">06 · Heat</div>
+        <div data-hf-id="hf-7h7b" id="s06-title">
+          <span data-hf-id="hf-smev" class="ln"><span data-hf-id="hf-ax4n" class="w">Thermal</span></span>
+          <span data-hf-id="hf-oupj" class="ln"><span data-hf-id="hf-3gpp" class="w"><em data-hf-id="hf-vmve">super</em>-resolution</span></span>
+        </div>
+        <div data-hf-id="hf-9j2z" id="s06-x">×3</div>
+        <div data-hf-id="hf-z86e" id="s06-q" class="s06-m">31.0 dB <span data-hf-id="hf-4d4o">PSNR</span> · 0.757 <span data-hf-id="hf-alul">SSIM</span></div>
+        <div data-hf-id="hf-ok5l" id="s06-how" class="s06-m">IMDN · single channel<br data-hf-id="hf-x5px">edge inference on Jetson</div>
+        <div data-hf-id="hf-si11" id="s06-plate">
+          <img data-hf-id="hf-6uak" id="s06-low" src="assets/img/thermal-low.png" alt="The low-resolution thermal input">
+          <img data-hf-id="hf-y98n" id="s06-hi" src="assets/img/thermal-x3.png" alt="The same frame enhanced three times">
+          <div data-hf-id="hf-vt5w" id="s06-scan"></div>
+          <div data-hf-id="hf-4116" id="s06-tag"><b data-hf-id="hf-m726">IN</b> Low-res input</div>
+        </div>
+      </div>
+
+      <script>
+        ;(function () {
+          const A = window.ARMED
+          const { B } = A
+          const host = document.querySelector('[data-composition-id="s06-heat"]')
+          const tag = host.querySelector('#s06-tag')
+          const tl = gsap.timeline({ paused: true })
+          // b20: the raw sensor frame slams in, blocky
+          tl.fromTo('#s06-plate', { scale: 1.22, filter: 'blur(16px)' }, { scale: 1, filter: 'blur(0px)', duration: 0.16, ease: 'expo.out' }, 0)
+          tl.fromTo('#s06-no', { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.2, ease: 'expo.out' }, 0.02)
+          tl.fromTo('#s06-title .w', { yPercent: 115 }, { yPercent: 0, duration: 0.28, ease: 'expo.out', stagger: 0.05 }, 0.03)
+          tl.fromTo('#s06-how', { opacity: 0 }, { opacity: 1, duration: 0.2, ease: 'none' }, 0.18)
+          // b21: enhance. A scan sweeps the ×3 output across the input
+          tl.fromTo('#s06-hi', { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 0.2, ease: 'power2.inOut' }, B)
+          tl.fromTo('#s06-scan', { x: 0, opacity: 1 }, { x: 996, duration: 0.2, ease: 'power2.inOut' }, B)
+          tl.to('#s06-scan', { opacity: 0, duration: 0.05, ease: 'none' }, B + 0.2)
+          tl.fromTo('#s06-x', { opacity: 0, scale: 1.8, filter: 'blur(20px)' }, { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.18, ease: 'expo.out' }, B)
+          tl.fromTo('#s06-q', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.22, ease: 'expo.out' }, B + 0.08)
+          const swap = A.driver((l) => {
+            const enhanced = l >= B
+            tag.innerHTML = enhanced ? '<b>×3</b> Enhanced output' : '<b>IN</b> Low-res input'
+          })
+          tl.fromTo(swap, { p: 0 }, { p: 2 * B, duration: 2 * B, ease: 'none' }, 0)
+          tl.fromTo('#s06-tag', { scale: 1.35 }, { scale: 1, duration: 0.2, ease: 'back.out(2.4)', immediateRender: false }, B)
+          window.__timelines['s06-heat'] = tl
+        })()
+      </script>
+    </template>
+  </body>
+</html>

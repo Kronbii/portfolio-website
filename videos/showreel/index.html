@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Rami Kronbi — Showreel</title>
+    <style>
+      @font-face { font-family: 'Manrope'; src: url('fonts/Manrope-500.ttf') format('truetype'); font-weight: 500; }
+      @font-face { font-family: 'Manrope'; src: url('fonts/Manrope-600.ttf') format('truetype'); font-weight: 600; }
+      @font-face { font-family: 'Manrope'; src: url('fonts/Manrope-700.ttf') format('truetype'); font-weight: 700; }
+      @font-face { font-family: 'Manrope'; src: url('fonts/Manrope-800.ttf') format('truetype'); font-weight: 800; }
+      @font-face { font-family: 'Instrument Serif'; src: url('fonts/InstrumentSerif-Italic.ttf') format('truetype'); font-style: italic; font-weight: 400; }
+      @font-face { font-family: 'JetBrains Mono'; src: url('fonts/JetBrainsMono-500.ttf') format('truetype'); font-weight: 500; }
+      @font-face { font-family: 'JetBrains Mono'; src: url('fonts/JetBrainsMono-600.ttf') format('truetype'); font-weight: 600; }
+
+      :root {
+        --bg: #0e0b0b;
+        --surface: #1a1414;
+        --sunk: #0a0808;
+        --ink: #fbf5ea;
+        --ink2: rgba(251, 245, 234, 0.7);
+        --ink3: rgba(251, 245, 234, 0.52);
+        --hair: rgba(251, 245, 234, 0.12);
+        --hair2: rgba(251, 245, 234, 0.24);
+        --grid: rgba(251, 245, 234, 0.045);
+        --brand: #c9686a;
+        --brand2: #e08a8b;
+      }
+      html, body { margin: 0; background: #000; }
+      body { display: grid; place-items: start; }
+      #stage {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: 'Manrope', sans-serif;
+        font-weight: 500;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: geometricPrecision;
+      }
+      .layer { position: absolute; inset: 0; }
+      .grid {
+        background-image:
+          linear-gradient(var(--grid) 1px, transparent 1px),
+          linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+        background-size: 80px 80px;
+      }
+      .mono {
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: 500;
+        font-variant-numeric: tabular-nums;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .serif { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; }
+      .em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--brand); letter-spacing: -0.01em; font-size: 1.08em; padding-right: 0.03em; }
+      .mask { display: block; overflow: hidden; }
+      .abs { position: absolute; }
+      .nowrap { white-space: nowrap; }
+      img { display: block; }
+      #gl { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+    </style>
+  </head>
+  <body>
+    <div id="stage"></div>
+    <script type="importmap">
+      { "imports": { "three": "/node_modules/three/build/three.module.js" } }
+    </script>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

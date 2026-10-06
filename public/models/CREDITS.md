@@ -20,6 +20,14 @@ Attribution is required wherever these are displayed publicly.
 | `tricopter.glb` | Tricopter | [pierre.paslier](https://sketchfab.com/pierre.paslier) | 36,144 | 81 KB | https://sketchfab.com/3d-models/none-ac47df697aee4834a2b3ff24c83eb180 |
 | `uav.glb` | UAV | [dread_comrade](https://sketchfab.com/dread_comrade) | 28,712 | 49 KB | https://sketchfab.com/3d-models/none-e39be240a697462c945e96a9a0f5d9d3 |
 | `eachine-e58.glb` | Eachine E58 Pocket Drone - Game Ready Asset | [the_Thorminator](https://sketchfab.com/the_Thorminator) | 20,758 | 386 KB | https://sketchfab.com/3d-models/none-95c15555467b455ea9e2e923904e9b60 |
+| `eachine-e58-web.glb` | Eachine E58 Pocket Drone (web build of the row above) | [the_Thorminator](https://sketchfab.com/the_Thorminator) | 20,758 | 379 KB | https://sketchfab.com/3d-models/none-95c15555467b455ea9e2e923904e9b60 |
+
+`eachine-e58-web.glb` is what the /v2 home drone and intro load. It is
+derived from `eachine-e58.glb` with the glTF-Transform API: the source tilt is
+reset on its nodes, the lenses' `KHR_materials_transmission` is removed,
+the packed metallic-roughness map is resized to 512 px and the lens maps to
+256 px (base colour and normal maps are untouched), and the geometry uses
+meshopt (`EXT_meshopt_compression`, high) instead of Draco.
 
 Each is processed with `gltf-transform optimize --texture-compress webp
 --texture-size 1024 --compress draco`. Draco alone was not enough: it
@@ -51,3 +59,43 @@ nothing references it.
 **TODO before shipping publicly:** the Poly Pizza creator names are still
 missing — confirm each on its model page and list it here and in the footer.
 The Sketchfab authors above are confirmed from the API.
+
+## MuJoCo Menagerie — BSD 3-Clause
+
+| File | Model | Source |
+|---|---|---|
+| `unitree-go2.glb` | Unitree Go2 quadruped | https://github.com/google-deepmind/mujoco_menagerie/tree/main/unitree_go2 |
+
+Built from the menagerie's 16 OBJ visual meshes (themselves converted from
+Unitree's public URDF): grouped by body and finish into 13 parts in MuJoCo's
+frame (z up, metres; the two feet folded into the calves), welded, simplified
+with `gltf-transform simplify --ratio 0.06 --error 0.004` (about 30k triangles
+a robot, from about 400k), and compressed with `gltf-transform meshopt
+--level high` (81KB). Normals are rebuilt at load with a 30° crease. Its
+licence asks that the notice travel with it:
+
+> Copyright (c) 2016-2022 HangZhou YuShu TECHNOLOGY CO.,LTD. ("Unitree Robotics")
+> All rights reserved.
+>
+> Redistribution and use in source and binary forms, with or without
+> modification, are permitted provided that the following conditions are met:
+>
+> * Redistributions of source code must retain the above copyright notice, this
+>   list of conditions and the following disclaimer.
+> * Redistributions in binary form must reproduce the above copyright notice,
+>   this list of conditions and the following disclaimer in the documentation
+>   and/or other materials provided with the distribution.
+> * Neither the name of the copyright holder nor the names of its
+>   contributors may be used to endorse or promote products derived from
+>   this software without specific prior written permission.
+>
+> THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+> AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+> IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+> DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+> FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+> DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+> SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+> CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+> OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+> OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.

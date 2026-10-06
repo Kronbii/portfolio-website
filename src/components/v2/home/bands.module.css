@@ -1,0 +1,106 @@
+/* ---------- ticker ---------- */
+
+.ticker {
+  overflow: hidden;
+  border-bottom: 1px solid var(--hair);
+  background: var(--sunk);
+  padding: 11px 0;
+}
+.tickerTrack {
+  display: flex;
+  width: max-content;
+  animation: run 46s linear infinite;
+}
+.ticker:hover .tickerTrack {
+  animation-play-state: paused;
+}
+.tickerItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 40px;
+  padding-right: 40px;
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.tickerItem::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--brand);
+}
+
+/* ---------- marquee ---------- */
+
+.marquee {
+  border-block: 1px solid var(--hair);
+  padding-block: clamp(1.5rem, 3vw, 2.25rem);
+  overflow: hidden;
+  display: grid;
+  gap: clamp(0.5rem, 1.2vw, 1rem);
+}
+.row {
+  overflow: hidden;
+}
+.track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: run 60s linear infinite;
+}
+.rowReverse .track {
+  animation-direction: reverse;
+  animation-duration: 48s;
+}
+.marquee:hover .track {
+  animation-play-state: paused;
+}
+
+.word {
+  font-weight: 800;
+  font-size: clamp(2.25rem, 6vw, 4.75rem);
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: var(--ink);
+  white-space: nowrap;
+  padding-inline: clamp(0.75rem, 2vw, 1.5rem);
+}
+.sep {
+  width: clamp(10px, 1.2vw, 14px);
+  height: clamp(10px, 1.2vw, 14px);
+  border-radius: 50%;
+  border: 1.5px solid var(--brand);
+  flex: none;
+}
+
+.loopWord {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.05;
+  color: var(--ink-3);
+  padding-inline: clamp(0.75rem, 2vw, 1.5rem);
+  white-space: nowrap;
+}
+.arrow {
+  width: clamp(28px, 3vw, 40px);
+  flex: none;
+  color: var(--brand);
+}
+
+@keyframes run {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tickerTrack,
+  .track {
+    animation: none;
+  }
+}
