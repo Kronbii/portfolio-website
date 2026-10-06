@@ -229,7 +229,7 @@ export const projects: ProjectRecord[] = [
         caption: 'The captured band is only about 37% of the full sphere.',
       },
       {
-        src: '/images/authority/spherical-panorama/goat.gif',
+        src: '/images/authority/spherical-panorama/goat.webp',
         alt: 'Interactive Three.js viewer showing the reconstructed panorama being explored.',
         caption: 'Three.js viewer — the reconstructed geometry, in a browser.',
       },
@@ -403,7 +403,7 @@ export const projects: ProjectRecord[] = [
     hero: {
       kind: 'image',
       media: {
-        src: '/images/authority/race-car/demo.png',
+        src: '/images/authority/race-car/demo.webp',
         alt: 'The Brainiacs vehicle running an obstacle-course lap during a WRO Future Engineers demonstration.',
         caption:
           'The vehicle in motion, demonstrating a full obstacle-avoidance lap.',
@@ -531,7 +531,7 @@ export const projects: ProjectRecord[] = [
     hero: {
       kind: 'image',
       media: {
-        src: '/images/authority/thermal-super-resolution/x2-showcase.png',
+        src: '/images/authority/thermal-super-resolution/x2-showcase.webp',
         alt: 'Side-by-side comparison of a low-resolution thermal frame and its ×2 super-resolved output.',
         caption:
           '×2 super-resolution — a low-resolution thermal frame beside the reconstructed output on the same scene.',
@@ -600,12 +600,12 @@ export const projects: ProjectRecord[] = [
     ],
     media: [
       {
-        src: '/images/authority/thermal-super-resolution/x2-showcase.png',
+        src: '/images/authority/thermal-super-resolution/x2-showcase.webp',
         alt: 'Low-resolution thermal frame and its ×2 super-resolved reconstruction placed side by side.',
         caption: '×2 comparison.',
       },
       {
-        src: '/images/authority/thermal-super-resolution/x3-showcase.png',
+        src: '/images/authority/thermal-super-resolution/x3-showcase.webp',
         alt: 'Low-resolution thermal frame and its ×3 super-resolved reconstruction placed side by side.',
         caption:
           '×3 comparison — the task becomes less constrained as scale grows.',
@@ -1370,7 +1370,7 @@ export const projects: ProjectRecord[] = [
     schemaType: 'CreativeWork',
     media: [
       {
-        src: '/images/authority/smart-desk/demo.gif',
+        src: '/images/authority/smart-desk/demo.webp',
         alt: 'Animated demonstration of the BEMO desk adjusting height and tilt while its display updates.',
         caption: 'Demonstration animation from the project repository.',
       },

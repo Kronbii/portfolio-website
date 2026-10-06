@@ -179,6 +179,8 @@ export function CardShot({
           <>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
+              loading="lazy"
+              decoding="async"
               className="c-img"
               src={image.src}
               alt=""

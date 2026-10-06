@@ -232,7 +232,7 @@ export const articles: ArticleRecord[] = [
       'Upscaling a thermal frame is not the same problem as enlarging an RGB photograph, especially when the result must run beside the rest of a perception stack.',
     dek: 'Upscaling a thermal frame is not the same problem as enlarging an RGB photograph, especially when the result must run beside the rest of a perception stack.',
     heroMedia: {
-      src: '/images/authority/thermal-super-resolution/x3-showcase.png',
+      src: '/images/authority/thermal-super-resolution/x3-showcase.webp',
       alt: 'Side-by-side ×3 thermal super-resolution comparison from the project results directory.',
       caption: '×3 thermal super-resolution — comparison from the results directory.',
     },

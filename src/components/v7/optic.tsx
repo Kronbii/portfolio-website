@@ -31,11 +31,11 @@ export function Optic({
     >
       <span className="v7-chan v7-chan-m">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={src} alt="" style={img} decoding="async" />
+        <img loading="lazy" src={src} alt="" style={img} decoding="async" />
       </span>
       <span className="v7-chan v7-chan-g">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={src} alt="" style={img} decoding="async" />
+        <img loading="lazy" src={src} alt="" style={img} decoding="async" />
       </span>
     </span>
   )

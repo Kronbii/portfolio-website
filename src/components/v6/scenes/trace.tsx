@@ -182,7 +182,13 @@ export function TraceShot({
       <div className="s10-stage">
         <div className="s10-plate">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="s10-ink" src="/images/v6/crack-ink.png" alt="" />
+          <img
+            loading="lazy"
+            decoding="async"
+            className="s10-ink"
+            src="/images/v6/crack-ink.png"
+            alt=""
+          />
           <svg viewBox="0 0 470 944">
             {traceEdges.map(([x1, y1, x2, y2, len, k]) => (
               <line

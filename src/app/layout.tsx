@@ -1,23 +1,8 @@
 import type { Metadata, Viewport } from 'next'
-import { Fraunces, Zalando_Sans } from 'next/font/google'
 
-import { SmoothScrollProvider } from '@/components/providers/smooth-scroll-provider'
 import { StructuredData } from '@/components/structured-data'
 import { siteConfig } from '@/lib/site'
 import '@/styles/globals.css'
-
-const zalandoSans = Zalando_Sans({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-zalando',
-})
-
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-fraunces',
-  axes: ['opsz', 'SOFT'],
-})
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -43,7 +28,7 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [
       {
-        url: '/images/vneo/card.jpg',
+        url: '/images/vneo/rami-kronbi-card.jpg',
         width: 1200,
         height: 630,
         alt: 'Rami Kronbi, robotics, embedded & systems engineer',
@@ -54,7 +39,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: siteConfig.title,
     description: siteConfig.description,
-    images: ['/images/vneo/card.jpg'],
+    images: ['/images/vneo/rami-kronbi-card.jpg'],
   },
   icons: {
     icon: [
@@ -101,18 +86,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html
-      lang="en"
-      className={`${zalandoSans.variable} ${fraunces.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
-        <SmoothScrollProvider>
-          <StructuredData />
-          <div className="min-h-svh bg-background text-foreground">
-            {children}
-          </div>
-        </SmoothScrollProvider>
+        <StructuredData />
+        <div className="min-h-svh bg-background text-foreground">
+          {children}
+        </div>
       </body>
     </html>
   )

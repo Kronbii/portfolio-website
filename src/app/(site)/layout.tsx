@@ -6,7 +6,6 @@ import {
 import Link from 'next/link'
 
 import { Intro } from '@/components/v2/intro/intro'
-import { INTRO_PRELOAD } from '@/components/v2/intro/timing'
 import '@/components/v6/scenes.css'
 import '@/components/v7/v7.css'
 import { NavTrail } from '@/components/vneo/back'
@@ -27,6 +26,8 @@ const serif = Newsreader({
   display: 'swap',
   variable: '--font-v7-serif',
   style: ['italic'],
+  // its first words are below the fold: no preload, so the first screen's downloads go first
+  preload: false,
 })
 const mono = Spline_Sans_Mono({
   subsets: ['latin'],
@@ -36,8 +37,9 @@ const mono = Spline_Sans_Mono({
 
 const COOKIE = 'vneo-intro'
 
-// The preflight, under its own cookie, landing on the hero's name (#vneo-name).
-const introScript = `(function(){try{var r=document.currentScript.parentElement;var q=/[?&]intro(?:[=&]|$)/.test(location.search);var home=location.pathname.replace(/\\/$/,'')==='${VN}';var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;var seen=/(?:^|; )${COOKIE}=seen/.test(document.cookie);var on=q||(home&&!rm&&!seen);r.dataset.intro=on?'on':'off';if(on)${JSON.stringify(INTRO_PRELOAD)}.forEach(function(h){var l=document.createElement('link');l.rel='preload';l.as='fetch';l.crossOrigin='anonymous';l.href=h;document.head.appendChild(l)})}catch(e){}})()`
+// The preflight, once per tab (its key in sessionStorage), landing on the hero's name (#vneo-name). The
+// drone it flies is preloaded by the home page itself, from the top of the document.
+const introScript = `(function(){try{var r=document.currentScript.parentElement;var q=/[?&]intro(?:[=&]|$)/.test(location.search);var home=location.pathname.replace(/\\/$/,'')==='${VN}';var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;var seen=false;try{seen=sessionStorage.getItem('${COOKIE}')==='seen'}catch(e){}r.dataset.intro=q||(home&&!rm&&!seen)?'on':'off'}catch(e){}})()`
 
 /**
  * The site (Vneo): v7's Sage system (data-v7) carrying what every version

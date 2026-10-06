@@ -2290,3 +2290,13 @@
   display: flex;
   gap: 22px;
 }
+
+/* ---------- pictures painted by CSS wait until their section is near (shot.tsx, near.tsx) ---------- */
+[data-vneo] .v6-shot:not([data-near]) .v6-scene :is(.s05-card, .s12-f) {
+  background-image: none !important;
+}
+[data-vneo] .vn-signoff:not([data-near]) [class$='__sig'] {
+  -webkit-mask: none !important;
+  mask: none !important;
+  visibility: hidden;
+}
