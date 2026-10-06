@@ -429,16 +429,11 @@ export const vneo = {
   },
   build,
   log,
-  /** The closing shot: sense, decide, act, as a drone swarm or a robot pack; Rami picks the one to keep. */
+  /** The closing shot: sense, decide, act, as the robot pack (the drone swarm is in the backlog). */
   loop: {
     label: 'Sense, decide, act',
     heading:
       'Sense, decide, act: robotics, computer vision, embedded systems, and edge AI.',
-    pick: 'Finale',
-    options: [
-      { id: 'drones', label: 'Drone swarm' },
-      { id: 'pack', label: 'Robot pack' },
-    ],
     replay: 'Play again',
     accent: '#b7d3a8',
     pack: {

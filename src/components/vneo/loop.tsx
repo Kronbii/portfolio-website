@@ -1,8 +1,5 @@
 'use client'
 
-import { useState } from 'react'
-
-import { FlyShot } from '@/components/v6/scenes/fly'
 import { ShotModeContext } from '@/components/v6/shot'
 import { vneo } from '@/content/vneo/site'
 
@@ -10,18 +7,16 @@ import { RobotsShot } from './robots'
 import { SlateMark } from './slate'
 
 /*
- * The closing shot, before the sign-off: sense, decide, act, played calm.
- * Two cuts of it: v6's drone swarm spelling RK., and the robot pack, the
- * same three bars for the robotics, vision, and embedded work (36 Go2s on a
- * circuit board). Both are here until Rami picks the one to keep.
+ * The closing shot, before the sign-off: sense, decide, act, played calm, as
+ * the robot pack (36 Go2s on a circuit board) for the robotics, vision, and
+ * embedded work. The drone-swarm cut of the same three bars (v6's FlyShot,
+ * which takes Vneo's accent) is in the backlog.
  */
 
 const CALM = { calm: true, speed: 0.75 }
-type Pick = (typeof vneo.loop.options)[number]['id']
 
 export function Loop() {
   const c = vneo.loop
-  const [pick, setPick] = useState<Pick>('drones')
   return (
     <section id="loop" className="vn-loop" aria-labelledby="loop-h">
       <div className="vn-loop-head">
@@ -29,34 +24,13 @@ export function Loop() {
         <h2 id="loop-h" className="v7-vh">
           {c.heading}
         </h2>
-        <div className="vn-pick" role="group" aria-label={c.pick}>
-          <span className="vn-pick-k" aria-hidden="true">
-            {c.pick}
-          </span>
-          {c.options.map((o) => (
-            <button
-              key={o.id}
-              type="button"
-              aria-pressed={pick === o.id}
-              onClick={() => setPick(o.id)}
-            >
-              {o.label}
-            </button>
-          ))}
-        </div>
       </div>
       <div className="vn-loop-frame">
         <ShotModeContext.Provider value={CALM}>
-          {pick === 'drones' ? (
-            <FlyShot key="drones" replay={c.replay} accent={c.accent} />
-          ) : (
-            <RobotsShot key="pack" replay={c.replay} accent={c.accent} />
-          )}
+          <RobotsShot replay={c.replay} accent={c.accent} />
         </ShotModeContext.Provider>
       </div>
-      {pick === 'pack' ? (
-        <p className="vn-loop-credit">{c.pack.credit}</p>
-      ) : null}
+      <p className="vn-loop-credit">{c.pack.credit}</p>
     </section>
   )
 }
