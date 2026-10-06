@@ -12,6 +12,7 @@ import '@/components/v6/scenes.css'
 import '@/components/v7/v7.css'
 import { NavTrail } from '@/components/vneo/back'
 import { Cursor } from '@/components/vneo/cursor'
+import { RaMark } from '@/components/vneo/emblem'
 import { Lens } from '@/components/vneo/lens'
 import '@/components/vneo/vneo.css'
 import { VN, vneoChrome } from '@/content/vneo/site'
@@ -74,9 +75,12 @@ export default function VneoLayout({
       </a>
       <Intro />
       <header className="v7-top">
-        <Link href={VN} className="v7-brand">
-          <i aria-hidden="true" />
-          {vneoChrome.brand}
+        <Link
+          href={VN}
+          className="v7-brand vn-brand"
+          aria-label={`${vneoChrome.brand}, home`}
+        >
+          <RaMark />
         </Link>
         <nav className="v7-nav" aria-label="Primary">
           {vneoChrome.nav.map((n) => (
