@@ -101,3 +101,9 @@
 - Built three sandbox pairings under `src/app/sandbox/work/`: A chapters + film strip, B magazine spreads + dated ledger with hover plate, C evidence wall + chapters. Data drawn from the authority records (accurate titles and roles, no "champion"). Two inspection rounds at 1440 and 390: zero overflow, detector clean; fixes applied for display font hierarchy, film-strip frame size, wall dense packing, portrait crop position, ledger collapse.
 - No existing homepage file was changed; the incumbent sections stay live until Rami locks a pairing and approves the two section files.
 - Finish reviewer (impeccable-finish-reviewer) returned eight material fixes; all applied: eyebrows removed from spreads and wall tiles; easyPID now uses an authored dark-ground PID-loop SVG plate instead of the race-car schematic; thermal plate cropped to remove baked labels with a light-tone veil; ledger collapse leak fixed; link labels say "Read the article" for /writing targets; every transition guarded by prefers-reduced-motion; chapters gained a scroll-driven plate settle and title hand-off (animation-timeline: view(), static where unsupported); wall header block removed and thermal tile focus set. Detector clean after fixes.
+
+## 2026-10-06 — Personal voice, every project written up, cross-posting kit
+
+- Rewrote the ready project and writing copy in Rami's own voice (see CONTENT_REGISTRY "Voice revision"). A crawl of all 60 sitemap pages found none of the old meta-language left.
+- Published the FPV drone article; added Juno as a project and article. All 22 ready projects now have a ready write-up.
+- Added `/feed.xml` (full-text RSS, linked from every page's head) and `docs/crosspost/` (Markdown exports, a DEV/Medium/Hashnode publisher with a dry run by default, and instructions). No platform keys exist on this machine, and Hashnode's API now needs a Pro plan, so nothing was posted.

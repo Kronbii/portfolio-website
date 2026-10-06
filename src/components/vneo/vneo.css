@@ -1494,9 +1494,8 @@
   font-size: 1.5rem;
   letter-spacing: -0.02em;
 }
-[data-vneo] .vn-article-ev {
-  margin-top: 10px;
-  color: var(--ink3);
+[data-vneo] .vn-case-note {
+  margin-top: clamp(20px, 3vh, 32px);
 }
 [data-vneo] .vn-article-foot {
   display: flex;
@@ -2265,19 +2264,6 @@
   font-weight: 600;
   font-size: 1.35rem;
   letter-spacing: -0.02em;
-}
-[data-vneo] .vn-topic-q {
-  margin-top: 14px;
-  max-width: 68ch;
-  padding-left: 1.2em;
-  list-style: disc;
-  color: var(--ink2);
-}
-[data-vneo] .vn-topic-q li + li {
-  margin-top: 8px;
-}
-[data-vneo] .vn-topic-q li::marker {
-  color: var(--sage);
 }
 [data-vneo] .vn-topic-count {
   color: var(--sage);

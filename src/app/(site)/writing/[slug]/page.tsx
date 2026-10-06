@@ -107,9 +107,8 @@ export default async function VneoArticle({ params }: Props) {
             )
           )}
         </div>
-        <section className="vn-article-evidence" aria-labelledby="evidence-h">
-          <h2 id="evidence-h">Evidence and links</h2>
-          <p className="vn-article-ev">{a.evidence}</p>
+        <section className="vn-article-evidence" aria-label="Links and topics">
+          {a.sources.length ? <h2>Links</h2> : null}
           {a.sources.length ? (
             <ul className="v7-sources">
               {a.sources.map((s) => (

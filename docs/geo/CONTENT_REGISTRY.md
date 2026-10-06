@@ -143,7 +143,21 @@ After Rami's answers, the following moved to `ready` in the typed content layer 
 
 ## Promotions on 2026-10-06
 
-FPV drone (15) moved to `ready` at Rami's request, as the lead tile of the site's selected projects. Copy follows the canonical CV entry he supplied ("5-inch Carbon-Fiber FPV Drone — Designer & Builder"), including the GPS, RF-link, and GNSS-jamming evaluation as worded there, with no measurements or test details. Public media: his build photograph (`public/images/authority/fpv-drone/build.jpg`). The article `engineering-a-five-inch-fpv-drone-from-first-principles` stays in `review` and is not linked.
+FPV drone (15) moved to `ready` at Rami's request, as the lead tile of the site's selected projects. Copy follows the canonical CV entry he supplied ("5-inch Carbon-Fiber FPV Drone — Designer & Builder"), including the GPS, RF-link, and GNSS-jamming evaluation as worded there, with no measurements or test details. Public media: his build photograph (`public/images/authority/fpv-drone/build.jpg`). Later the same day the article `engineering-a-five-inch-fpv-drone-from-first-principles` moved to `ready` too, at Rami's request that every project have a write-up. It is rewritten from the same CV entry: the build steps in first person, plus general explanation of thrust, weight, and current trade-offs, PID loops, return-to-home, and GNSS jamming. It adds no measurements, parts, dates, or test results.
+
+## Juno, added 2026-10-06
+
+Juno (`juno`) is Rami's public finance app (github.com/Kronbii/juno, single author). Its project record and the article `rebuilding-my-finance-app-around-local-first-sync` are drawn only from the repository README and docs. Media: `public/images/vneo/juno-home.jpg`, plus three screenshots in `public/images/authority/juno/`, rendered by the app's own screenshot test on its demo data. The home page's Juno tile now opens the project page instead of GitHub.
+
+## Voice revision, 2026-10-06
+
+Rami asked for the project and writing pages to read like his own blog, not an audit: no "per the canonical CV", "held back", "not claimed here", "editorial review", or "no evidence was published" language. Applied across every ready record:
+
+- Roles are in first person ("I built…"), and collaborators are still credited by name.
+- Figures that came from his CV are stated as his own: the Brainiacs re-ranking to second (the page still keeps RHU's third place), the BEMO Best Senior Project award (now under Results), the OmniSign dataset, accuracy, speed, pilots, and prize (now under Results, with the team page's sample counts still shown beside them), the NASA Space Apps placements, and Evoid's five client applications.
+- "CV" entries were removed from the link lists, since they pointed to the home page. Project pages now show "Links" instead of "Evidence and links", and article pages no longer print the evidence summary line (the field is gone from the type).
+- Topic hubs no longer show the FAQ-style "What this hub connects" questions.
+- The README hype figures for thermal super-resolution (first/SOTA, 15×, 40×, 250–270 FPS) are no longer listed even as rejected claims. The page says only that speed figures from other hardware are kept apart from the Jetson figure.
 
 ## Review: build locally, noindex, omit from indexes
 

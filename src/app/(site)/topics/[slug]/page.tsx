@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   })
 }
 
-/** A topic hub: what the field is, the questions it connects, and the work behind it. */
+/** A topic hub: what the field is, and the work and writing behind it. */
 export default async function Topic({ params }: Props) {
   const { slug } = await params
   const t = hub(slug)
@@ -79,13 +79,6 @@ export default async function Topic({ params }: Props) {
           {t.title}
         </h1>
         <p className="v7-more-lede">{t.definition}</p>
-
-        <h2 className="vn-topic-h">What this hub connects</h2>
-        <ul className="vn-topic-q">
-          {t.questions.map((q) => (
-            <li key={q}>{q}</li>
-          ))}
-        </ul>
 
         {projects.length ? (
           <>
