@@ -141,6 +141,10 @@ This registry is the complete editorial scope for the first authority-page build
 
 After Rami's answers, the following moved to `ready` in the typed content layer (the typed records supersede `AUTHOR_COPY_REVIEW.md` for them): OmniSign (12), Smart Interactive Desk BEMO (13), NASA Space Apps mentoring (17, cited to the CV per Rami's instruction), NASNA (18), upstream contributions, talks and teaching, Hantawatch, Basira (model names withheld at Rami's request), Imagen (client throughput figure included per Rami), Lumiscan, Evoid, water-shooting robot. Still `review`: runway UAV (14), FPV drone (15), emotion recognition (16), physics outreach (19, awaiting Rami's documents).
 
+## Promotions on 2026-10-06
+
+FPV drone (15) moved to `ready` at Rami's request, as the lead tile of the site's selected projects. Copy follows the canonical CV entry he supplied ("5-inch Carbon-Fiber FPV Drone — Designer & Builder"), including the GPS, RF-link, and GNSS-jamming evaluation as worded there, with no measurements or test details. Public media: his build photograph (`public/images/authority/fpv-drone/build.jpg`). The article `engineering-a-five-inch-fpv-drone-from-first-principles` stays in `review` and is not linked.
+
 ## Review: build locally, noindex, omit from indexes
 
 ### 12. OmniSign
@@ -169,6 +173,7 @@ After Rami's answers, the following moved to `ready` in the typed content layer 
 - Project slug: `five-inch-carbon-fiber-fpv-drone`
 - Article slug: `engineering-a-five-inch-fpv-drone-from-first-principles`
 - Reason for review: canonical CV supports component sizing, Betaflight PID tuning, GPS and return-to-home configuration, and performance evaluation, but public media, dates, logs, and project repository are not yet identified.
+- Promoted to `ready` on 2026-10-06 (see Promotions on 2026-10-06); the article remains in review.
 
 ### 16. Emotion recognition for children with autism
 

@@ -1622,11 +1622,12 @@
   [data-vneo] .vn-showcase {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-template-areas:
-      'omni omni race race'
-      'omni omni dal  heat'
-      'ship ship pano heat'
-      'pid  crk  img  img'
-      'moto crk  juno juno';
+      'fpv  fpv  race race'
+      'fpv  fpv  omni heat'
+      'ship ship omni heat'
+      'dal  dal  pid  crk'
+      'pano pano moto crk'
+      'img  img  juno juno';
     grid-auto-rows: 300px;
     grid-auto-flow: row;
   }

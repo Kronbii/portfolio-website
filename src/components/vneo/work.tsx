@@ -28,6 +28,7 @@ export function Work() {
   const watchable = showcase
     .map((t, i) => (t.motion ? i : -1))
     .filter((i) => i >= 0)
+  const featured = new Set(watchable.slice(0, FEATURED))
 
   // the opening run: the featured tiles play in turn, once, while the grid is in view
   useEffect(() => {
@@ -124,7 +125,7 @@ export function Work() {
             key={item.slug}
             className={`vn-tile is-${item.size}`}
             style={{ '--area': item.area } as React.CSSProperties}
-            data-feature={i < FEATURED ? '' : undefined}
+            data-feature={featured.has(i) ? '' : undefined}
             onPointerEnter={(ev) => replayIn(ev.currentTarget)}
             onFocusCapture={(ev) => replayIn(ev.currentTarget)}
           >
@@ -147,8 +148,10 @@ export function Work() {
               className="vn-tile-media"
               aria-hidden="true"
               data-fit={
-                // every piece fills its tile, except the upstream graph, which needs its whole width
-                item.motion?.kind === 'shot' && item.motion.id === 'ship'
+                // every piece fills its tile, except the upstream graph, which needs its whole width,
+                // and a square explainer in a tall tile, which would lose its sides
+                (item.motion?.kind === 'shot' && item.motion.id === 'ship') ||
+                (item.motion?.kind === 'scene' && item.size === 'tall')
                   ? 'full'
                   : 'crop'
               }
