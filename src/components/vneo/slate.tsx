@@ -29,7 +29,7 @@ export function Slate({
   label: string
   title: string
   hot: string
-  lede?: string
+  lede?: ReactNode
   id: string
   children?: ReactNode
 }) {

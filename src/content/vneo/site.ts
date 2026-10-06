@@ -405,6 +405,9 @@ export const vneo = {
     title: 'Selected projects.',
     hot: 'projects',
     lede: 'The most important come first and play as you arrive; hover any to see it again, or press Watch for the full view. Each says what it does, my part, and the fact to check.',
+    /** The same, for a phone: no hover there, and the grid becomes a row to swipe. */
+    ledeTouch:
+      'The most important come first, each playing as it comes into view; swipe for the rest, or press Watch for the full view. Each says what it does, my part, and the fact to check.',
     all: 'All projects',
     open: 'Open the project',
     watch: 'Watch',

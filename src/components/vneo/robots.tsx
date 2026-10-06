@@ -25,6 +25,8 @@ const IMPACTS: Impact[] = [
   { t: 8 * B, k: 0.8, flash: 0.5, ghost: 0.8 },
 ]
 const c = vneo.loop.pack
+/** On a phone the frame narrows to 4:3: the middle of the stage, where the letters and the lock sit. */
+const CROP: [number, number, number, number] = [240, 0, 1440, 1080]
 
 function build(root: HTMLElement, tl: gsap.core.Timeline) {
   tl.fromTo(
@@ -143,6 +145,7 @@ export function RobotsShot({
       build={build}
       hold={3 * BAR}
       replay={replay}
+      crop={CROP}
       gl={(clock) => <PackGL clock={clock} accent={accent} />}
     >
       {c.tracks.map((i) => (

@@ -1996,3 +1996,230 @@
     transition: none;
   }
 }
+
+/* ======================================================================
+ * Phones: a structure of their own. Everything below is either inside a
+ * phone-width query or hides an element that only phones show, so the
+ * desktop layout is untouched.
+ * ====================================================================== */
+
+/* copy written for touch, shown only where there is no hover */
+[data-vneo] .vn-on-touch {
+  display: none;
+}
+@media (hover: none) and (max-width: 640px) {
+  [data-vneo] .vn-on-hover {
+    display: none;
+  }
+  [data-vneo] .vn-on-touch {
+    display: inline;
+  }
+}
+
+/* the robot pack, cropped to 4:3 on a phone: its type re-set to the narrower frame */
+@media (max-width: 720px) {
+  [data-vneo] .v6-shot[data-crop] .v6-scene.s15 .s13-word {
+    left: 300px;
+  }
+  [data-vneo] .v6-shot[data-crop] .v6-scene.s15 .s13-fly {
+    font-size: 132px;
+  }
+  [data-vneo] .v6-shot[data-crop] .v6-scene.s15 .m {
+    font-size: 40px;
+  }
+  [data-vneo] .v6-shot[data-crop] .v6-scene.s15 .s13-swarm {
+    right: 300px;
+    top: 70px;
+  }
+  [data-vneo] .v6-shot[data-crop] .v6-scene.s15 .s13-id {
+    top: 132px;
+  }
+  [data-vneo] .v6-shot[data-crop] .v6-scene.s15 .s15-box .m {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 640px) {
+  /* a little less air between sections: a phone scrolls enough already */
+  [data-vneo] :is(.vn-work, .vn-community) {
+    padding-top: 72px;
+  }
+  [data-vneo] .vn-build {
+    padding-top: 64px;
+  }
+  [data-vneo] .vn-more {
+    padding: 72px 0 40px;
+  }
+  [data-vneo] .vn-log {
+    padding-top: 72px;
+  }
+  [data-vneo] .vn-loop {
+    padding: 72px var(--gutter) 56px;
+  }
+
+  /* the hero: the drone's plate a card's height, so the name and the drone share the first screens */
+  [data-vneo] .vn-hero-drone {
+    height: clamp(320px, 46svh, 410px);
+  }
+  [data-vneo] .vn-where {
+    flex-basis: 100%;
+    margin: 4px 0 0 2px;
+  }
+
+  /* at a glance: four facts in a tight two by two */
+  [data-vneo] .v7-glance a {
+    gap: 4px;
+    padding: 18px 14px 20px 0;
+  }
+  [data-vneo] .v7-glance li + li a {
+    padding-left: 14px;
+  }
+  [data-vneo] .v7-glance li:nth-child(3) a {
+    padding-left: 0;
+  }
+  [data-vneo] .v7-glance b {
+    font-size: 1.6rem;
+  }
+  [data-vneo] .v7-glance span {
+    font-size: 0.95rem;
+  }
+  [data-vneo] .v7-glance small {
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  /* what I build: the sentence a size down, the portrait a card beside it in spirit */
+  [data-vneo] .vn-build-sentence {
+    font-size: 1.95rem;
+  }
+  [data-vneo] .vn-portrait {
+    max-width: min(76vw, 300px);
+  }
+
+  /* selected projects: a row to swipe, the next card peeking in */
+  [data-vneo] .vn-showcase {
+    display: flex;
+    width: auto;
+    margin-inline: 0;
+    padding: 2px var(--gutter) 12px;
+    gap: 12px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+  }
+  [data-vneo] .vn-showcase::-webkit-scrollbar {
+    display: none;
+  }
+  [data-vneo] .vn-showcase > .vn-tile {
+    flex: 0 0 84%;
+    min-width: 0;
+    scroll-snap-align: start;
+  }
+  [data-vneo] .vn-showcase .vn-tile-media,
+  [data-vneo] .vn-showcase .vn-tile.is-big .vn-tile-media,
+  [data-vneo] .vn-showcase .vn-tile.is-tall .vn-tile-media {
+    flex: none;
+    aspect-ratio: 4 / 3;
+    min-height: 0;
+  }
+  [data-vneo] .vn-showcase .vn-tile-cap {
+    flex: 1;
+  }
+  [data-vneo] .vn-showcase .vn-badge {
+    margin-top: auto;
+  }
+
+  /* in the community: the same swipe for the work built for people and the rooms it is shared in */
+  [data-vneo] .vn-cbento {
+    display: flex;
+    width: auto;
+    margin-inline: 0;
+    padding: 2px var(--gutter) 12px;
+    gap: 12px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+  }
+  [data-vneo] .vn-cbento::-webkit-scrollbar {
+    display: none;
+  }
+  [data-vneo] .vn-cbento > .vn-ctile {
+    flex: 0 0 84%;
+    min-width: 0;
+    scroll-snap-align: start;
+  }
+  [data-vneo] .vn-cbento .vn-ctile.is-built .vn-tile-media,
+  [data-vneo] .vn-cbento .vn-ctile.is-big .vn-tile-media,
+  [data-vneo] .vn-cbento .vn-ctile.is-tall .vn-tile-media {
+    flex: none;
+    aspect-ratio: 4 / 3;
+    min-height: 0;
+  }
+  [data-vneo] .vn-cbento .vn-tile-cap {
+    margin-top: auto;
+  }
+
+  /* every project: compact rows, the picture beside the words, so the list scans like one */
+  [data-vneo] .vn-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  [data-vneo] .vn-grid > .vn-tile {
+    flex-direction: row;
+    grid-column: auto;
+    grid-row: auto;
+  }
+  [data-vneo] .vn-grid .vn-tile-media {
+    flex: 0 0 34%;
+    aspect-ratio: auto;
+    min-height: 118px;
+  }
+  /* a project without a picture: its title is already beside it, so the plate is just texture */
+  [data-vneo] .vn-grid .vn-tile-type {
+    font-size: 0;
+    background:
+      radial-gradient(
+          circle,
+          rgba(var(--sage-rgb), 0.24) 1.2px,
+          transparent 1.7px
+        )
+        0 0 / 12px 12px,
+      radial-gradient(circle at 50% 45%, var(--raised), var(--ground) 72%);
+  }
+  [data-vneo] .vn-grid .vn-tile-cap {
+    flex: 1;
+    min-width: 0;
+    justify-content: center;
+    gap: 4px;
+    padding: 12px 14px;
+  }
+  [data-vneo] .vn-grid .vn-tile-cap h2 {
+    font-size: 1rem;
+  }
+  [data-vneo] .vn-grid .vn-tile-cap p {
+    font-size: 0.84rem;
+    -webkit-line-clamp: 2;
+  }
+  [data-vneo] .vn-grid .vn-badge {
+    font-size: 0.72rem;
+  }
+
+  /* breadcrumbs: the page's own title is the heading just below, so the trail stops one short */
+  [data-vneo] .v7-crumbs li:last-child:nth-child(n + 3) {
+    display: none;
+  }
+
+  /* the closing shot, edge to edge */
+  [data-vneo] .vn-loop-frame {
+    width: auto;
+    margin-inline: calc(var(--gutter) * -1);
+  }
+  [data-vneo] .vn-loop .v6-frame {
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
