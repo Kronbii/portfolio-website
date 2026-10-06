@@ -43,10 +43,10 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [
       {
-        url: '/images/vneo/og.jpg',
+        url: '/images/vneo/card.jpg',
         width: 1200,
         height: 630,
-        alt: siteConfig.title,
+        alt: 'Rami Kronbi, robotics, embedded & systems engineer',
       },
     ],
   },
@@ -54,10 +54,11 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: siteConfig.title,
     description: siteConfig.description,
-    images: ['/images/vneo/og.jpg'],
+    images: ['/images/vneo/card.jpg'],
   },
   icons: {
     icon: [
+      { url: '/icons/icon.svg', type: 'image/svg+xml' },
       { url: '/icons/favicon.ico', sizes: 'any' },
       { url: '/icons/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
       { url: '/icons/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
@@ -77,6 +78,18 @@ export const metadata: Metadata = {
     shortcut: '/favicon.ico',
   },
   manifest: '/manifest.json',
+  // let search show a large preview image (the portrait), not just a thumbnail
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
   verification: {
     google: 'NYZnC5C68zUWoECvjepE8pdOfwlGSfp6V1siItS1Ss4',
   },

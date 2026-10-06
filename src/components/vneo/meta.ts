@@ -2,10 +2,10 @@ import type { Metadata } from 'next'
 
 import { siteConfig } from '@/lib/site'
 
-/** The site's sharing card: the emblem and the name, in Sage. */
+/** The site's sharing card: Rami's portrait beside the emblem and his name, in Sage. */
 export const CARD = {
-  src: '/images/vneo/og.jpg',
-  alt: 'Rami Kronbi, robotics, embedded & systems engineer: the Rā’ emblem and his name, in sage on dark.',
+  src: '/images/vneo/card.jpg',
+  alt: 'Rami Kronbi in profile beside his name and the Rā’ emblem: robotics, embedded & systems engineer.',
 }
 
 /**

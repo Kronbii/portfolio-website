@@ -1,13 +1,19 @@
 {
   "name": "Rami Kronbi",
   "short_name": "Rami Kronbi",
-  "description": "Rami Kronbi — robotics and embedded systems engineer building intelligent systems for the physical world.",
+  "description": "Rami Kronbi — robotics, embedded, and systems engineer in Beirut, building for people.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f3efe8",
-  "theme_color": "#f3efe8",
+  "background_color": "#0b0d0c",
+  "theme_color": "#0b0d0c",
   "orientation": "portrait-primary",
   "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
     {
       "src": "/icons/icon-192.png",
       "sizes": "192x192",
