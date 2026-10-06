@@ -23,7 +23,13 @@ export function StructuredData() {
       jobTitle: 'Embedded Systems & Vision Engineer',
       description:
         'Rami Kronbi is a Lebanese engineer building intelligent systems for the physical world. He works as Embedded Systems & Vision Engineer at Oreyeon, where he develops real-time perception for runway safety systems running in live airport operations. He studied mechatronics engineering at Rafik Hariri University, graduating in 2025 as recipient of the Nazik Rafik Hariri Graduate Studies Award. His work spans embedded systems, computer vision, and control: a real-time thermal super-resolution pipeline for edge hardware, an autonomous vehicle built for World Robot Olympiad Future Engineers 2023, OmniSign (a Lebanese Sign Language translator), and easyPID, an open-source embedded PID controller library published in the Arduino Library Manager. He is moving deeper into robotics, autonomous and aerial systems, and is open to research collaboration. Alongside engineering he helps organise NASA Space Apps Beirut and public science events in Lebanon.',
-      image: `${siteConfig.url}/images/home/portrait.avif`,
+      image: {
+        '@type': 'ImageObject',
+        url: `${siteConfig.url}/images/vneo/rami-kronbi-1x1.jpg`,
+        width: 1200,
+        height: 1200,
+        caption: 'Rami Kronbi',
+      },
       homeLocation: {
         '@type': 'Place',
         name: 'Beirut, Lebanon',
@@ -71,7 +77,8 @@ export function StructuredData() {
     {
       '@context': 'https://schema.org',
       '@type': 'Article',
-      '@id': 'https://medium.com/@ramikronbi/seeing-in-the-dark-real-time-thermal-super-resolution-that-actually-runs-on-edge-devices-5d95b4bab7b2',
+      '@id':
+        'https://medium.com/@ramikronbi/seeing-in-the-dark-real-time-thermal-super-resolution-that-actually-runs-on-edge-devices-5d95b4bab7b2',
       headline:
         'Seeing in the Dark: Real-Time Thermal Super-Resolution That Actually Runs on Edge Devices',
       author: { '@id': personId },
@@ -88,7 +95,8 @@ export function StructuredData() {
     {
       '@context': 'https://schema.org',
       '@type': 'Article',
-      '@id': 'https://medium.com/@ramikronbi/ai-should-serve-society-not-just-industry-and-billionaires-52d6b685e35d',
+      '@id':
+        'https://medium.com/@ramikronbi/ai-should-serve-society-not-just-industry-and-billionaires-52d6b685e35d',
       headline: 'AI Should Serve Society — Not Just Industry and Billionaires',
       author: { '@id': personId },
       url: 'https://medium.com/@ramikronbi/ai-should-serve-society-not-just-industry-and-billionaires-52d6b685e35d',
@@ -140,7 +148,8 @@ export function StructuredData() {
     {
       '@context': 'https://schema.org',
       '@type': 'Event',
-      '@id': 'https://www.spaceappschallenge.org/2025/local-events/beirut/#event',
+      '@id':
+        'https://www.spaceappschallenge.org/2025/local-events/beirut/#event',
       name: 'NASA Space Apps Challenge Beirut 2025',
       startDate: '2025-10-01',
       eventStatus: 'https://schema.org/EventScheduled',
@@ -166,4 +175,3 @@ export function StructuredData() {
     </>
   )
 }
-

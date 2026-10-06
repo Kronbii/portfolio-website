@@ -9,7 +9,8 @@ import { pageMeta } from '@/components/vneo/meta'
 import { TopicLinks } from '@/components/vneo/topics'
 import { getArticle, getProject, readyArticles } from '@/content/authority'
 import { sourceKindLabel } from '@/content/v2/record'
-import { HOME, VN, workHref, writingHref } from '@/content/vneo/site'
+import { HOME, VN, racePhoto, workHref, writingHref } from '@/content/vneo/site'
+import { siteConfig } from '@/lib/site'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: a.metaDescription,
     type: 'article',
     image: a.heroMedia
-      ? { src: a.heroMedia.src, alt: a.heroMedia.alt ?? a.title }
+      ? { src: racePhoto(a.heroMedia).src, alt: a.heroMedia.alt ?? a.title }
       : undefined,
     keywords: a.keywords,
   })
@@ -54,7 +55,12 @@ export default async function VneoArticle({ params }: Props) {
     <>
       <JsonLd
         data={[
-          articleJsonLd(a),
+          a.heroMedia
+            ? {
+                ...articleJsonLd(a),
+                image: `${siteConfig.url}${racePhoto(a.heroMedia).src}`,
+              }
+            : articleJsonLd(a),
           liveCrumbs([
             { label: 'Home', href: '/' },
             { label: 'Writing', href: '/writing' },

@@ -12,11 +12,13 @@ import {
   HOME,
   VN,
   chapterOf,
+  RACE_PHOTO,
   racePhoto,
   reel,
   workHref,
   writingHref,
 } from '@/content/vneo/site'
+import { siteConfig } from '@/lib/site'
 
 import { BackButton } from './back'
 import { TopicLinks } from './topics'
@@ -79,7 +81,10 @@ export function Case({ slug }: { slug: string }) {
     <>
       <JsonLd
         data={[
-          projectJsonLd(p),
+          // the car's image for search is its refined photograph, not the old one on the bench
+          slug === 'brainiacs-autonomous-race-car'
+            ? { ...projectJsonLd(p), image: `${siteConfig.url}${RACE_PHOTO}` }
+            : projectJsonLd(p),
           liveCrumbs([
             { label: 'Home', href: '/' },
             { label: 'Projects', href: '/projects' },

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { SignOff } from '@/components/v2/home/sign-off'
+import { JsonLd } from '@/components/v2/json-ld'
 import { FlightLog } from '@/components/v3/home/flight-log'
 import { Build } from '@/components/vneo/build'
 import { Community } from '@/components/vneo/community'
@@ -12,6 +13,7 @@ import { Slate, SlateMark } from '@/components/vneo/slate'
 import { pageMeta } from '@/components/vneo/meta'
 import { Work } from '@/components/vneo/work'
 import { VN, moreGroups, vneo } from '@/content/vneo/site'
+import { siteConfig } from '@/lib/site'
 
 export const metadata: Metadata = pageMeta({
   path: '/',
@@ -19,12 +21,41 @@ export const metadata: Metadata = pageMeta({
   description: vneo.meta.description,
 })
 
+/**
+ * The home page as a WebPage about Rami, its primary image his portrait: the
+ * picture search should show for the site, in the three shapes it asks for.
+ */
+const portrait = (shape: string, width: number, height: number) => ({
+  '@type': 'ImageObject',
+  url: `${siteConfig.url}/images/vneo/rami-kronbi-${shape}.jpg`,
+  width,
+  height,
+  caption: 'Rami Kronbi',
+})
+const homeJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${siteConfig.url}/#webpage`,
+  url: siteConfig.url,
+  name: vneo.meta.title,
+  description: vneo.meta.description,
+  isPartOf: { '@id': `${siteConfig.url}/#website` },
+  about: { '@id': `${siteConfig.url}/#person` },
+  primaryImageOfPage: portrait('1x1', 1200, 1200),
+  image: [
+    portrait('1x1', 1200, 1200),
+    portrait('4x3', 1200, 900),
+    portrait('16x9', 1600, 900),
+  ],
+}
+
 export default function Vneo() {
   const c = vneo
   const groups = moreGroups()
   const n = groups.reduce((k, g) => k + g.items.length, 0)
   return (
     <>
+      <JsonLd data={[homeJsonLd]} />
       <Hero />
       <Glance items={c.glance} label="At a glance" />
       <Build />
