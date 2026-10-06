@@ -2,6 +2,86 @@ import type { ProjectRecord } from './types'
 
 export const projects: ProjectRecord[] = [
   {
+    slug: 'five-inch-carbon-fiber-fpv-drone',
+    state: 'ready',
+    title: '5-inch Carbon-Fiber FPV Drone',
+    metaTitle:
+      '5-inch carbon-fiber FPV drone — designed, built, and tuned in Betaflight',
+    metaDescription:
+      'A 5-inch carbon-fiber FPV drone designed and built by Rami Kronbi: propulsion and power sized from thrust, weight, and current calculations, and Betaflight PID loops, flight modes, GPS, and return-to-home configured and tuned.',
+    summary:
+      'A 5-inch carbon-fiber UAV, designed and integrated with its propulsion and power components selected from thrust, weight, and current calculations; its Betaflight PID loops, flight modes, GPS features, and return-to-home behavior configured and tuned; and its GPS accuracy, RF link quality, and flight performance evaluated under GNSS jamming and IMU/GNSS integration constraints.',
+    role: 'Designer and builder.',
+    form: 'artifact',
+    schemaType: 'CreativeWork',
+    hero: {
+      kind: 'image',
+      media: {
+        src: '/images/authority/fpv-drone/build.jpg',
+        alt: 'The drone mid-build on an ESD mat: the 5-inch carbon-fiber frame with its four motors, beside the electronics, a battery, the radio transmitter, and calipers.',
+        caption:
+          'Mid-build: the 5-inch carbon-fiber frame and its motors, with the electronics, battery, and radio laid out beside it.',
+        width: 1200,
+        height: 1600,
+      },
+    },
+    answer: {
+      what: 'A 5-inch carbon-fiber FPV drone that Rami Kronbi designed and built.',
+      problem:
+        'A drone flies well only if its propulsion and power fit its thrust, weight, and current budget, and only if its flight controller is configured and tuned before it is trusted with GPS features and return-to-home.',
+      how: 'The propulsion and power components were selected from thrust, weight, and current calculations and integrated on a 5-inch carbon-fiber frame. Betaflight’s PID loops, flight modes, GPS features, and return-to-home behavior were configured and tuned, and GPS accuracy, RF link quality, and flight performance were evaluated under GNSS jamming and IMU/GNSS integration constraints.',
+      role: 'Rami Kronbi designed and built the drone, and configured, tuned, and evaluated it.',
+    },
+    stages: [
+      {
+        step: '01',
+        title: 'Size',
+        detail:
+          'Propulsion and power components selected from thrust, weight, and current calculations.',
+      },
+      {
+        step: '02',
+        title: 'Build',
+        detail: 'The components integrated on a 5-inch carbon-fiber frame.',
+      },
+      {
+        step: '03',
+        title: 'Tune',
+        detail:
+          'Betaflight PID loops, flight modes, GPS features, and return-to-home behavior configured and tuned.',
+      },
+      {
+        step: '04',
+        title: 'Evaluate',
+        detail:
+          'GPS accuracy, RF link quality, and flight performance evaluated under GNSS jamming and IMU/GNSS integration constraints.',
+      },
+    ],
+    limits: [
+      'No flight logs, test data, or measured results are published with this record; it states what was done, not how well.',
+    ],
+    sources: [
+      {
+        label: 'Canonical CV (2026)',
+        href: 'https://ramikronbi.com',
+        kind: 'cv',
+      },
+    ],
+    // its write-up is still in editorial review, so the page does not link it yet
+    articleSlug: 'engineering-a-five-inch-fpv-drone-from-first-principles',
+    topics: ['control-systems', 'embedded-systems', 'robotics-perception'],
+    keywords: [
+      'FPV drone',
+      'quadcopter',
+      'UAV',
+      'Betaflight',
+      'PID tuning',
+      'GPS',
+      'return to home',
+      'carbon fiber',
+    ],
+  },
+  {
     slug: '360-spherical-panorama-stitching',
     state: 'ready',
     title: '360° Spherical Panorama Stitching',
@@ -68,15 +148,51 @@ export const projects: ProjectRecord[] = [
       },
     ],
     measurements: [
-      { label: 'Sample frames', value: '309', context: 'phone video, single handheld sweep' },
-      { label: 'Recovered sweep', value: '333°', context: 'from a horizontal pan' },
-      { label: 'Median RANSAC inliers', value: '921', context: 'per adjacent pair' },
-      { label: 'Interpolated pairs', value: '15 of 308', context: 'recovered across a gap' },
-      { label: 'Sphere imaged', value: '36.9%', context: 'phone-height horizontal band' },
-      { label: 'Output resolution', value: '4096 × 2048', context: 'equirectangular' },
-      { label: 'End-to-end time', value: '~2 minutes', context: 'Ryzen 7 5800H, CPU only' },
-      { label: 'Pitch wobble reduction', value: '13.5×', context: 'temporal smoothing, documented sample' },
-      { label: 'Roll wobble reduction', value: '5.2×', context: 'temporal smoothing, documented sample' },
+      {
+        label: 'Sample frames',
+        value: '309',
+        context: 'phone video, single handheld sweep',
+      },
+      {
+        label: 'Recovered sweep',
+        value: '333°',
+        context: 'from a horizontal pan',
+      },
+      {
+        label: 'Median RANSAC inliers',
+        value: '921',
+        context: 'per adjacent pair',
+      },
+      {
+        label: 'Interpolated pairs',
+        value: '15 of 308',
+        context: 'recovered across a gap',
+      },
+      {
+        label: 'Sphere imaged',
+        value: '36.9%',
+        context: 'phone-height horizontal band',
+      },
+      {
+        label: 'Output resolution',
+        value: '4096 × 2048',
+        context: 'equirectangular',
+      },
+      {
+        label: 'End-to-end time',
+        value: '~2 minutes',
+        context: 'Ryzen 7 5800H, CPU only',
+      },
+      {
+        label: 'Pitch wobble reduction',
+        value: '13.5×',
+        context: 'temporal smoothing, documented sample',
+      },
+      {
+        label: 'Roll wobble reduction',
+        value: '5.2×',
+        context: 'temporal smoothing, documented sample',
+      },
     ],
     limits: [
       'Pure-rotation camera model — translation while sweeping introduces parallax that no homography can explain.',
@@ -104,7 +220,8 @@ export const projects: ProjectRecord[] = [
       {
         src: '/images/authority/spherical-panorama/side-by-side.jpg',
         alt: 'Side-by-side comparison of the panorama with and without temporal smoothing.',
-        caption: 'Smoothing comparison — long horizontal edges before and after.',
+        caption:
+          'Smoothing comparison — long horizontal edges before and after.',
       },
       {
         src: '/images/authority/spherical-panorama/pano-on-band.jpg',
@@ -123,7 +240,11 @@ export const projects: ProjectRecord[] = [
         href: 'https://github.com/Kronbii/360-spherical-stitching',
         kind: 'repository',
       },
-      { label: 'Live viewer — 360.ramikronbi.com', href: 'https://360.ramikronbi.com', kind: 'demo' },
+      {
+        label: 'Live viewer — 360.ramikronbi.com',
+        href: 'https://360.ramikronbi.com',
+        kind: 'demo',
+      },
       {
         label: 'README, TECHNICAL.md, and TEMPORAL_SMOOTHING.md',
         href: 'https://github.com/Kronbii/360-spherical-stitching#readme',
@@ -131,7 +252,11 @@ export const projects: ProjectRecord[] = [
       },
     ],
     articleSlug: 'building-a-360-panorama-stitcher-from-a-phone-sweep',
-    topics: ['computer-vision', 'robotics-perception', 'open-source-engineering'],
+    topics: [
+      'computer-vision',
+      'robotics-perception',
+      'open-source-engineering',
+    ],
     keywords: [
       'panorama stitching',
       'equirectangular projection',
@@ -207,10 +332,23 @@ export const projects: ProjectRecord[] = [
       },
     ],
     measurements: [
-      { label: 'Distribution', value: 'Arduino Library Manager', context: 'contributed Device Control library' },
-      { label: 'Versions', value: '1.0.0, 1.1.0', context: 'Arduino Library Manager listings dated 2026-01-15 and 2026-08-09' },
+      {
+        label: 'Distribution',
+        value: 'Arduino Library Manager',
+        context: 'contributed Device Control library',
+      },
+      {
+        label: 'Versions',
+        value: '1.0.0, 1.1.0',
+        context:
+          'Arduino Library Manager listings dated 2026-01-15 and 2026-08-09',
+      },
       { label: 'License', value: 'MIT' },
-      { label: 'Architecture', value: 'Any', context: 'runs on AVR Uno-class boards and beyond' },
+      {
+        label: 'Architecture',
+        value: 'Any',
+        context: 'runs on AVR Uno-class boards and beyond',
+      },
     ],
     limits: [
       'Tuning is system-specific; a gain set that behaves on one plant will misbehave on another.',
@@ -218,7 +356,11 @@ export const projects: ProjectRecord[] = [
       'Filter and anti-windup behavior are choices with tradeoffs; the library exposes them rather than hiding them.',
     ],
     sources: [
-      { label: 'GitHub — easyPID', href: 'https://github.com/Kronbii/easyPID', kind: 'repository' },
+      {
+        label: 'GitHub — easyPID',
+        href: 'https://github.com/Kronbii/easyPID',
+        kind: 'repository',
+      },
       {
         label: 'Arduino Library Manager listing',
         href: 'https://www.arduinolibraries.info/libraries/easy-pid',
@@ -263,7 +405,8 @@ export const projects: ProjectRecord[] = [
       media: {
         src: '/images/authority/race-car/demo.png',
         alt: 'The Brainiacs vehicle running an obstacle-course lap during a WRO Future Engineers demonstration.',
-        caption: 'The vehicle in motion, demonstrating a full obstacle-avoidance lap.',
+        caption:
+          'The vehicle in motion, demonstrating a full obstacle-avoidance lap.',
       },
     },
     answer: {
@@ -300,9 +443,21 @@ export const projects: ProjectRecord[] = [
       },
     ],
     measurements: [
-      { label: 'Build time', value: '20 days', context: 'from scratch, per RHU coverage' },
-      { label: 'Placement', value: 'Third, Future Engineers', context: 'World Robot Olympiad, July 2023' },
-      { label: 'Team scale reported', value: '>95 teams / >250 participants', context: 'WRO Future Engineers per RHU' },
+      {
+        label: 'Build time',
+        value: '20 days',
+        context: 'from scratch, per RHU coverage',
+      },
+      {
+        label: 'Placement',
+        value: 'Third, Future Engineers',
+        context: 'World Robot Olympiad, July 2023',
+      },
+      {
+        label: 'Team scale reported',
+        value: '>95 teams / >250 participants',
+        context: 'WRO Future Engineers per RHU',
+      },
     ],
     limits: [
       'Rafik Hariri University reported third place in July 2023 and that report is the source used here. The canonical CV records a second-place standing after a later re-ranking; no institutional page for the revised standing has been located, so this page keeps the university’s figure.',
@@ -314,12 +469,14 @@ export const projects: ProjectRecord[] = [
       {
         src: '/images/authority/race-car/front.jpeg',
         alt: 'Front view of the Brainiacs vehicle showing camera, chassis, and drive wheels.',
-        caption: 'Front view — camera mounted above the drivetrain for the perception pipeline.',
+        caption:
+          'Front view — camera mounted above the drivetrain for the perception pipeline.',
       },
       {
         src: '/images/authority/race-car/schematic.png',
         alt: 'Full electrical schematic of the vehicle, including Jetson Nano, Arduino Mega, motor driver, IMU, and color sensor.',
-        caption: 'System schematic — perception, control, sensing, and drive on one diagram.',
+        caption:
+          'System schematic — perception, control, sensing, and drive on one diagram.',
       },
       {
         src: '/images/authority/race-car/team.jpeg',
@@ -335,13 +492,19 @@ export const projects: ProjectRecord[] = [
         kind: 'repository',
       },
       {
-        label: 'RHU — Engineering students win big in the World Robotics Olympiad',
+        label:
+          'RHU — Engineering students win big in the World Robotics Olympiad',
         href: 'https://www.rhu.edu.lb/media-room/news/rhu-engineering-students-win-big-in-the-world-robotics-olympiad',
         kind: 'institution',
       },
     ],
     articleSlug: 'building-an-autonomous-race-car-in-twenty-days',
-    topics: ['robotics', 'embedded-systems', 'computer-vision', 'control-systems'],
+    topics: [
+      'robotics',
+      'embedded-systems',
+      'computer-vision',
+      'control-systems',
+    ],
     keywords: [
       'WRO Future Engineers',
       'Jetson Nano',
@@ -356,7 +519,8 @@ export const projects: ProjectRecord[] = [
     slug: 'thermal-super-resolution',
     state: 'ready',
     title: 'Thermal Super-Resolution',
-    metaTitle: 'Thermal super-resolution — IMDN adapted to single-channel thermal imagery',
+    metaTitle:
+      'Thermal super-resolution — IMDN adapted to single-channel thermal imagery',
     metaDescription:
       'An IMDN-derived thermal super-resolution pipeline trained with thermal-specific objectives and optimized for edge inference on NVIDIA Jetson hardware.',
     summary:
@@ -407,10 +571,26 @@ export const projects: ProjectRecord[] = [
       },
     ],
     measurements: [
-      { label: '×2 quality', value: '34.2 dB / 0.840', context: 'PSNR / SSIM, per canonical CV' },
-      { label: '×3 quality', value: '31.0 dB / 0.757', context: 'PSNR / SSIM, per canonical CV' },
-      { label: '×4 quality', value: '29.6 dB / 0.713', context: 'PSNR / SSIM, per canonical CV' },
-      { label: 'Edge inference', value: '~45 FPS', context: 'NVIDIA Jetson Orin after quantization, per canonical CV' },
+      {
+        label: '×2 quality',
+        value: '34.2 dB / 0.840',
+        context: 'PSNR / SSIM, per canonical CV',
+      },
+      {
+        label: '×3 quality',
+        value: '31.0 dB / 0.757',
+        context: 'PSNR / SSIM, per canonical CV',
+      },
+      {
+        label: '×4 quality',
+        value: '29.6 dB / 0.713',
+        context: 'PSNR / SSIM, per canonical CV',
+      },
+      {
+        label: 'Edge inference',
+        value: '~45 FPS',
+        context: 'NVIDIA Jetson Orin after quantization, per canonical CV',
+      },
     ],
     limits: [
       'Reported quality numbers are dataset-specific and become less constrained at larger enlargement factors.',
@@ -427,7 +607,8 @@ export const projects: ProjectRecord[] = [
       {
         src: '/images/authority/thermal-super-resolution/x3-showcase.png',
         alt: 'Low-resolution thermal frame and its ×3 super-resolved reconstruction placed side by side.',
-        caption: '×3 comparison — the task becomes less constrained as scale grows.',
+        caption:
+          '×3 comparison — the task becomes less constrained as scale grows.',
       },
     ],
     sources: [
@@ -457,7 +638,8 @@ export const projects: ProjectRecord[] = [
     slug: 'pid-light-tracking-robot',
     state: 'ready',
     title: 'PID Light Tracker',
-    metaTitle: 'PID light tracker — a two-axis Arduino experiment in real control',
+    metaTitle:
+      'PID light tracker — a two-axis Arduino experiment in real control',
     metaDescription:
       'An Arduino two-axis light-tracking robot that turns PID tuning, sensor noise, saturation, and settling into a visible control experiment.',
     summary:
@@ -536,7 +718,8 @@ export const projects: ProjectRecord[] = [
     slug: 'fine-crack-tracing-toolkit',
     state: 'ready',
     title: 'Fine Crack Tracing Toolkit',
-    metaTitle: 'Fine crack tracing — turning segmentation masks into measurable paths',
+    metaTitle:
+      'Fine crack tracing — turning segmentation masks into measurable paths',
     metaDescription:
       'An installable Python package and CLI that turns pre-segmented crack masks into ordered lines, splines, overlays, and evaluation metrics for infrastructure inspection.',
     summary:
@@ -549,7 +732,8 @@ export const projects: ProjectRecord[] = [
       media: {
         src: '/images/authority/fine-crack/test-frame.png',
         alt: 'Test frame containing a thin crack across a rough surface, used as an input to the tracing toolkit.',
-        caption: 'Test frame from the repository — a starting point for the tracing pipeline.',
+        caption:
+          'Test frame from the repository — a starting point for the tracing pipeline.',
       },
     },
     answer: {
@@ -603,7 +787,11 @@ export const projects: ProjectRecord[] = [
       },
     ],
     articleSlug: 'turning-segmented-cracks-into-measurable-paths',
-    topics: ['computer-vision', 'infrastructure-inspection', 'open-source-engineering'],
+    topics: [
+      'computer-vision',
+      'infrastructure-inspection',
+      'open-source-engineering',
+    ],
     keywords: [
       'crack tracing',
       'segmentation post-processing',
@@ -616,7 +804,8 @@ export const projects: ProjectRecord[] = [
     slug: 'multilingual-medical-prescription-ocr',
     state: 'ready',
     title: 'Multilingual Medical Prescription OCR',
-    metaTitle: 'Multilingual medical prescription OCR — CLI and FastAPI service',
+    metaTitle:
+      'Multilingual medical prescription OCR — CLI and FastAPI service',
     metaDescription:
       'A CLI and FastAPI service that extracts medicine names from Arabic, English, and French prescription images, framed as a prototype extraction tool with human review.',
     summary:
@@ -696,7 +885,8 @@ export const projects: ProjectRecord[] = [
     slug: 'daleel-lebanese-election-information',
     state: 'ready',
     title: 'Daleel',
-    metaTitle: 'Daleel — a verifiable Lebanese parliamentary-election information platform',
+    metaTitle:
+      'Daleel — a verifiable Lebanese parliamentary-election information platform',
     metaDescription:
       'An independent multilingual Lebanese parliamentary-election information platform designed around source archiving, append-only history, and verifiable records.',
     summary:
@@ -709,7 +899,8 @@ export const projects: ProjectRecord[] = [
       media: {
         src: '/images/authority/daleel/hero.jpeg',
         alt: 'Daleel product hero image from the project repository showing the platform’s branded interface.',
-        caption: 'Daleel — the platform’s hero identity as published in the project repository.',
+        caption:
+          'Daleel — the platform’s hero identity as published in the project repository.',
       },
     },
     answer: {
@@ -751,7 +942,11 @@ export const projects: ProjectRecord[] = [
       'Correction workflows, contributor governance, legal review, and a visible policy for disputed information remain institutional work that a database cannot do on its own.',
     ],
     sources: [
-      { label: 'GitHub — daleel', href: 'https://github.com/Kronbii/daleel', kind: 'repository' },
+      {
+        label: 'GitHub — daleel',
+        href: 'https://github.com/Kronbii/daleel',
+        kind: 'repository',
+      },
       {
         label: 'Technical documentation (TECHNICAL.md)',
         href: 'https://github.com/Kronbii/daleel/blob/main/TECHNICAL.md',
@@ -840,9 +1035,17 @@ export const projects: ProjectRecord[] = [
     ],
     measurements: [
       { label: 'Total questions', value: '251', context: 'multiple choice' },
-      { label: 'Road-sign questions', value: '101', context: 'with extracted sign imagery' },
+      {
+        label: 'Road-sign questions',
+        value: '101',
+        context: 'with extracted sign imagery',
+      },
       { label: 'Exam length', value: '30', context: 'per attempt' },
-      { label: 'Passing threshold', value: '25 / 30', context: 'documented exam mode' },
+      {
+        label: 'Passing threshold',
+        value: '25 / 30',
+        context: 'documented exam mode',
+      },
     ],
     limits: [
       'The trainer is not an official government application.',
@@ -887,7 +1090,8 @@ export const projects: ProjectRecord[] = [
     slug: 'local-first-ai-support-triage',
     state: 'ready',
     title: 'AI Customer Support Council',
-    metaTitle: 'AI Customer Support Council — a local-first internal triage console',
+    metaTitle:
+      'AI Customer Support Council — a local-first internal triage console',
     metaDescription:
       'A self-hosted internal admin console built as a Valsoft Corporation technical assessment: LLM triage, deterministic routing, human review, and JSON export.',
     summary:
@@ -986,7 +1190,8 @@ export const projects: ProjectRecord[] = [
       media: {
         src: '/images/authority/ree-finance/image1.jpeg',
         alt: 'Screenshot of REE showing the desktop finance interface with wallets, transactions, and analysis views.',
-        caption: 'REE desktop — the primary workspace as shipped in the repository.',
+        caption:
+          'REE desktop — the primary workspace as shipped in the repository.',
       },
     },
     answer: {
@@ -1154,7 +1359,8 @@ export const projects: ProjectRecord[] = [
     slug: 'posture-aware-classroom-desk',
     state: 'ready',
     title: 'Smart Interactive Desk (BEMO)',
-    metaTitle: 'Smart Interactive Desk (BEMO) — a posture-aware classroom workstation',
+    metaTitle:
+      'Smart Interactive Desk (BEMO) — a posture-aware classroom workstation',
     metaDescription:
       'A posture-estimation prototype that closes a physical loop with a motorized desk.',
     summary:
@@ -1186,17 +1392,27 @@ export const projects: ProjectRecord[] = [
       role: 'Rami Kronbi was the team lead and software/robotics engineer on a five-person senior graduation project with Bassam Kousa, Ali Daaboul, Mohamad Berjawi, and Mohamad Hariri; the repository history shows Rami and Mohamad Berjawi as the main committers.',
     },
     stages: [
-      { step: '01', title: 'Observe', detail: 'A desk-mounted camera estimates posture.' },
+      {
+        step: '01',
+        title: 'Observe',
+        detail: 'A desk-mounted camera estimates posture.',
+      },
       {
         step: '02',
         title: 'Decide',
-        detail: 'The ESP32 applies dead bands, mechanical limits, and slow transitions before acting.',
+        detail:
+          'The ESP32 applies dead bands, mechanical limits, and slow transitions before acting.',
       },
-      { step: '03', title: 'Move', detail: 'Motorized height and tilt actuators change the work surface.' },
+      {
+        step: '03',
+        title: 'Move',
+        detail: 'Motorized height and tilt actuators change the work surface.',
+      },
       {
         step: '04',
         title: 'Signal',
-        detail: 'Immediate LED feedback and a longer-term dashboard keep the user in the loop.',
+        detail:
+          'Immediate LED feedback and a longer-term dashboard keep the user in the loop.',
       },
     ],
     limits: [
@@ -1252,63 +1468,43 @@ export const projects: ProjectRecord[] = [
       role: 'Rami Kronbi’s contribution scope, employer separation, and public repository are all pending editorial confirmation.',
     },
     stages: [
-      { step: '01', title: 'Fly', detail: 'A UAV moves the sensor over a paved area at controlled altitude.' },
-      { step: '02', title: 'See', detail: 'The Raspberry Pi 5B runs a YOLOv11 detector onboard.' },
-      { step: '03', title: 'Match', detail: 'Similarity matching and false-positive filtering trim noisy detections.' },
-      { step: '04', title: 'Track', detail: 'A tracked detection stream is produced for downstream review.' },
+      {
+        step: '01',
+        title: 'Fly',
+        detail:
+          'A UAV moves the sensor over a paved area at controlled altitude.',
+      },
+      {
+        step: '02',
+        title: 'See',
+        detail: 'The Raspberry Pi 5B runs a YOLOv11 detector onboard.',
+      },
+      {
+        step: '03',
+        title: 'Match',
+        detail:
+          'Similarity matching and false-positive filtering trim noisy detections.',
+      },
+      {
+        step: '04',
+        title: 'Track',
+        detail: 'A tracked detection stream is produced for downstream review.',
+      },
     ],
     limits: [
       'Exact model variant, input size, data rights, evaluation split, meaning of the reported 75–80% development accuracy, and flight-test ownership are pending editorial review.',
       'Confidential employer work is intentionally not expanded in this draft.',
     ],
     sources: [
-      { label: 'Canonical CV (2026)', href: 'https://ramikronbi.com', kind: 'cv' },
+      {
+        label: 'Canonical CV (2026)',
+        href: 'https://ramikronbi.com',
+        kind: 'cv',
+      },
     ],
     articleSlug: 'running-fod-detection-on-a-raspberry-pi-uav',
     topics: ['edge-ai', 'robotics-perception', 'computer-vision'],
     keywords: ['FOD detection', 'Raspberry Pi 5B', 'YOLOv11', 'edge inference'],
-  },
-  {
-    slug: 'five-inch-carbon-fiber-fpv-drone',
-    state: 'review',
-    title: 'Five-inch carbon-fiber FPV drone',
-    metaTitle: 'Five-inch carbon-fiber FPV drone (editorial review)',
-    metaDescription:
-      'Editorial review draft. Not indexable. A five-inch FPV quadcopter designed from thrust, weight, and current calculations, then tuned in Betaflight.',
-    summary:
-      'A five-inch carbon-fiber quadcopter designed from thrust, weight, and current calculations, followed by Betaflight configuration, PID tuning, flight-mode setup, GPS features, and return-to-home behavior.',
-    role: 'Builder. Public media, dates, hardware specifications, and test locations are pending review.',
-    form: 'diagram',
-    schemaType: 'CreativeWork',
-    hero: {
-      kind: 'diagram',
-      diagramId: 'fpv-stack',
-      caption:
-        'The FPV stack as coupled constraints: motors and propellers, battery and current, weight and placement, and the Betaflight tuning that follows.',
-      alt: 'Diagram of a five-inch FPV drone build stack: motor and propeller selection, battery and current budget, frame weight and placement, and a Betaflight configuration and tuning column.',
-    },
-    answer: {
-      what: 'A five-inch carbon-fiber FPV drone build derived from first-principles calculations.',
-      problem:
-        'FPV builds fail when component choices are made independently; motor, propeller, battery, frame, and firmware are coupled constraints.',
-      how: 'Motor and propeller choices flow from thrust and current targets; battery voltage sets the power budget; frame weight and component placement decide response. Software tuning begins only after the physical build is coherent, using Betaflight configuration, PID tuning, flight modes, GPS features, and return-to-home behavior.',
-      role: 'Rami Kronbi built and tuned the aircraft; public media, dates, hardware specifications, and test locations are pending editorial confirmation.',
-    },
-    stages: [
-      { step: '01', title: 'Size', detail: 'Motor and propeller choices flow from thrust and current requirements.' },
-      { step: '02', title: 'Power', detail: 'Battery voltage sets the power budget; frame weight decides response.' },
-      { step: '03', title: 'Configure', detail: 'Betaflight configuration wires the flight-controller behavior together.' },
-      { step: '04', title: 'Tune', detail: 'PID tuning, flight modes, GPS features, and return-to-home behavior are set after the build is coherent.' },
-    ],
-    limits: [
-      'GPS accuracy, RF link quality, and observations under GNSS jamming or IMU/GNSS integration constraints require careful public boundaries and are not published as measurements here.',
-    ],
-    sources: [
-      { label: 'Canonical CV (2026)', href: 'https://ramikronbi.com', kind: 'cv' },
-    ],
-    articleSlug: 'engineering-a-five-inch-fpv-drone-from-first-principles',
-    topics: ['embedded-systems', 'control-systems', 'robotics-perception'],
-    keywords: ['FPV drone', 'Betaflight', 'PID tuning', 'GPS return-to-home'],
   },
   {
     slug: 'emotion-recognition-autism-support',
@@ -1337,27 +1533,56 @@ export const projects: ProjectRecord[] = [
       role: 'Rami Kronbi’s contribution scope and team credits are pending editorial review; clinical framing must be resolved before publication.',
     },
     stages: [
-      { step: '01', title: 'Detect', detail: 'A camera captures the face; landmarks are extracted.' },
-      { step: '02', title: 'Classify', detail: 'A CNN produces a candidate label at the edge on Jetson Orin Nano.' },
-      { step: '03', title: 'Qualify', detail: 'Predictions are qualified with confidence and framed as engineering signals.' },
-      { step: '04', title: 'Review', detail: 'Any useful system must communicate uncertainty and be evaluated with the people and contexts it is intended to support.' },
+      {
+        step: '01',
+        title: 'Detect',
+        detail: 'A camera captures the face; landmarks are extracted.',
+      },
+      {
+        step: '02',
+        title: 'Classify',
+        detail:
+          'A CNN produces a candidate label at the edge on Jetson Orin Nano.',
+      },
+      {
+        step: '03',
+        title: 'Qualify',
+        detail:
+          'Predictions are qualified with confidence and framed as engineering signals.',
+      },
+      {
+        step: '04',
+        title: 'Review',
+        detail:
+          'Any useful system must communicate uncertainty and be evaluated with the people and contexts it is intended to support.',
+      },
     ],
     limits: [
       'Team credits, dataset licenses, class definitions, evaluation protocol, acquisition language, intended users, and clinical review are pending confirmation.',
       'Approximately 92% development accuracy is a development-set figure, not clinical validation.',
     ],
     sources: [
-      { label: 'Canonical CV (2026)', href: 'https://ramikronbi.com', kind: 'cv' },
+      {
+        label: 'Canonical CV (2026)',
+        href: 'https://ramikronbi.com',
+        kind: 'cv',
+      },
     ],
     articleSlug: 'lessons-from-an-edge-emotion-recognition-prototype',
     topics: ['edge-ai', 'computer-vision'],
-    keywords: ['edge inference', 'emotion recognition', 'Jetson Orin Nano', 'responsible AI'],
+    keywords: [
+      'edge inference',
+      'emotion recognition',
+      'Jetson Orin Nano',
+      'responsible AI',
+    ],
   },
   {
     slug: 'upstream-open-source-contributions',
     state: 'ready',
     title: 'Upstream fixes to Betaflight, PX4, and OpenFront',
-    metaTitle: 'Upstream open-source contributions — Betaflight, PX4 EKF2, OpenFront',
+    metaTitle:
+      'Upstream open-source contributions — Betaflight, PX4 EKF2, OpenFront',
     metaDescription:
       'Small, test-backed fixes contributed upstream to Betaflight flight-controller firmware, the PX4 EKF2 estimator, and the OpenFront browser game.',
     summary:
@@ -1406,11 +1631,19 @@ export const projects: ProjectRecord[] = [
       },
     ],
     measurements: [
-      { label: 'Pull requests', value: '5', context: 'three merged, one open, one closed' },
+      {
+        label: 'Pull requests',
+        value: '5',
+        context: 'three merged, one open, one closed',
+      },
       { label: 'Betaflight #15706', value: 'merged', context: '2026-09-16' },
       { label: 'OpenFront #4868', value: 'merged', context: '2026-08-07' },
       { label: 'OpenFront #4985', value: 'merged', context: '2026-08-13' },
-      { label: 'PX4 #28286', value: 'closed', context: 'not merged; test-backed' },
+      {
+        label: 'PX4 #28286',
+        value: 'closed',
+        context: 'not merged; test-backed',
+      },
     ],
     limits: [
       'These are small fixes, not features or architecture work; the value is in the diagnosis and the tests, not the line count.',
@@ -1418,21 +1651,53 @@ export const projects: ProjectRecord[] = [
       'Betaflight and PX4 are hobby and research flight-control stacks; nothing here concerns employer or defense work.',
     ],
     sources: [
-      { label: 'Betaflight PR #15706', href: 'https://github.com/betaflight/betaflight/pull/15706', kind: 'repository' },
-      { label: 'Betaflight PR #15705', href: 'https://github.com/betaflight/betaflight/pull/15705', kind: 'repository' },
-      { label: 'PX4 PR #28286', href: 'https://github.com/PX4/PX4-Autopilot/pull/28286', kind: 'repository' },
-      { label: 'OpenFront PR #4868', href: 'https://github.com/openfrontio/OpenFrontIO/pull/4868', kind: 'repository' },
-      { label: 'OpenFront PR #4985', href: 'https://github.com/openfrontio/OpenFrontIO/pull/4985', kind: 'repository' },
+      {
+        label: 'Betaflight PR #15706',
+        href: 'https://github.com/betaflight/betaflight/pull/15706',
+        kind: 'repository',
+      },
+      {
+        label: 'Betaflight PR #15705',
+        href: 'https://github.com/betaflight/betaflight/pull/15705',
+        kind: 'repository',
+      },
+      {
+        label: 'PX4 PR #28286',
+        href: 'https://github.com/PX4/PX4-Autopilot/pull/28286',
+        kind: 'repository',
+      },
+      {
+        label: 'OpenFront PR #4868',
+        href: 'https://github.com/openfrontio/OpenFrontIO/pull/4868',
+        kind: 'repository',
+      },
+      {
+        label: 'OpenFront PR #4985',
+        href: 'https://github.com/openfrontio/OpenFrontIO/pull/4985',
+        kind: 'repository',
+      },
     ],
     articleSlug: 'what-small-upstream-fixes-teach-about-firmware',
-    topics: ['open-source-engineering', 'embedded-systems', 'robotics-perception'],
-    keywords: ['Betaflight', 'PX4', 'EKF2', 'open-source contribution', 'firmware debugging', 'C'],
+    topics: [
+      'open-source-engineering',
+      'embedded-systems',
+      'robotics-perception',
+    ],
+    keywords: [
+      'Betaflight',
+      'PX4',
+      'EKF2',
+      'open-source contribution',
+      'firmware debugging',
+      'C',
+    ],
   },
   {
     slug: 'hantawatch-outbreak-dashboard',
     state: 'ready',
     title: 'Hantawatch — outbreak situational-awareness dashboard',
-    metaTitle: 'Hantawatch — an OSINT dashboard for the 2026 MV Hondius hantavirus outbreak',
+    metaTitle:
+      'Hantawatch — an OSINT dashboard for the 2026 MV Hondius hantavirus outbreak',
     metaDescription:
       'A deployed dashboard that aggregates public health and news sources into a live map, event feed, and indicators for a single outbreak.',
     summary:
@@ -1443,7 +1708,8 @@ export const projects: ProjectRecord[] = [
     hero: {
       kind: 'diagram',
       diagramId: 'osint-feed',
-      caption: 'Public sources are aggregated server-side and rendered as a map, feed, and indicators; every event row links back to its source.',
+      caption:
+        'Public sources are aggregated server-side and rendered as a map, feed, and indicators; every event row links back to its source.',
       alt: 'Diagram of the dashboard data flow: public sources, server-side aggregation, dashboard panels, URL-driven filters, and outbound source links.',
     },
     answer: {
@@ -1454,10 +1720,30 @@ export const projects: ProjectRecord[] = [
       role: 'Rami Kronbi designed, built, and deployed the dashboard alone.',
     },
     stages: [
-      { step: '01', title: 'Aggregate', detail: 'Cases, case events, and news are fetched in parallel on the server and normalized into one event model with source-health checks.' },
-      { step: '02', title: 'Render', detail: 'A dark basemap with a country choropleth of active cases, circle markers colored by status, an event feed, a KPI panel with deltas, a 14-day sparkline, and a news ticker.' },
-      { step: '03', title: 'Filter', detail: 'View, search text, and country are URL parameters; clicking a country polygon or a top-countries row toggles the country filter.' },
-      { step: '04', title: 'Link out', detail: 'Every event row is an anchor to its source page. The dashboard summarizes; it does not become the source.' },
+      {
+        step: '01',
+        title: 'Aggregate',
+        detail:
+          'Cases, case events, and news are fetched in parallel on the server and normalized into one event model with source-health checks.',
+      },
+      {
+        step: '02',
+        title: 'Render',
+        detail:
+          'A dark basemap with a country choropleth of active cases, circle markers colored by status, an event feed, a KPI panel with deltas, a 14-day sparkline, and a news ticker.',
+      },
+      {
+        step: '03',
+        title: 'Filter',
+        detail:
+          'View, search text, and country are URL parameters; clicking a country polygon or a top-countries row toggles the country filter.',
+      },
+      {
+        step: '04',
+        title: 'Link out',
+        detail:
+          'Every event row is an anchor to its source page. The dashboard summarizes; it does not become the source.',
+      },
     ],
     limits: [
       'Aggregate public information only; it holds no patient-level data and is not an epidemiological product.',
@@ -1465,18 +1751,34 @@ export const projects: ProjectRecord[] = [
       'No automated test suite and no README beyond the handoff document at the time of drafting.',
     ],
     sources: [
-      { label: 'Live dashboard', href: 'https://hanta-virus-dashboard.vercel.app', kind: 'demo' },
-      { label: 'GitHub — hanta-virus-dashboard', href: 'https://github.com/Kronbii/hanta-virus-dashboard', kind: 'repository' },
+      {
+        label: 'Live dashboard',
+        href: 'https://hanta-virus-dashboard.vercel.app',
+        kind: 'demo',
+      },
+      {
+        label: 'GitHub — hanta-virus-dashboard',
+        href: 'https://github.com/Kronbii/hanta-virus-dashboard',
+        kind: 'repository',
+      },
     ],
     articleSlug: 'building-an-outbreak-dashboard-from-public-sources',
     topics: ['civic-technology', 'applied-ai'],
-    keywords: ['OSINT', 'outbreak dashboard', 'Next.js', 'Leaflet', 'public health', 'TypeScript'],
+    keywords: [
+      'OSINT',
+      'outbreak dashboard',
+      'Next.js',
+      'Leaflet',
+      'public health',
+      'TypeScript',
+    ],
   },
   {
     slug: 'basira-retinal-screening',
     state: 'ready',
     title: 'Basira — retinal screening decision support',
-    metaTitle: 'Basira — a council-of-models retinal screening prototype for eye clinics',
+    metaTitle:
+      'Basira — a council-of-models retinal screening prototype for eye clinics',
     metaDescription:
       'A multi-tenant prototype in which three independent retinal-image models read a fundus image, a consensus engine merges them, and a doctor confirms or overrides.',
     summary:
@@ -1487,7 +1789,8 @@ export const projects: ProjectRecord[] = [
     hero: {
       kind: 'diagram',
       diagramId: 'council-consensus',
-      caption: 'Three independent models vote; consensus is reported with an agreement score; a doctor has the final decision.',
+      caption:
+        'Three independent models vote; consensus is reported with an agreement score; a doctor has the final decision.',
       alt: 'Diagram of the Basira pipeline: image upload, three independent models, consensus engine, doctor review, and a PDF report.',
     },
     answer: {
@@ -1498,30 +1801,67 @@ export const projects: ProjectRecord[] = [
       role: 'Rami Kronbi built the platform, the model integration, and the deployment alone.',
     },
     stages: [
-      { step: '01', title: 'Gate', detail: 'An image-quality gate runs before any model; ungradable images are reported as such.' },
-      { step: '02', title: 'Read three times', detail: 'Each council member serves predictions only when its encoder and a trained head both load; an untrained head never produces a diagnosis, and the API reports stubs explicitly.' },
-      { step: '03', title: 'Merge', detail: 'The consensus engine reports unanimous, majority, or split agreement, an urgency level, and a referral recommendation, with explainability heatmaps.' },
-      { step: '04', title: 'Review', detail: 'The doctor’s confirmation or override is the record; the PDF report is generated from that decision.' },
+      {
+        step: '01',
+        title: 'Gate',
+        detail:
+          'An image-quality gate runs before any model; ungradable images are reported as such.',
+      },
+      {
+        step: '02',
+        title: 'Read three times',
+        detail:
+          'Each council member serves predictions only when its encoder and a trained head both load; an untrained head never produces a diagnosis, and the API reports stubs explicitly.',
+      },
+      {
+        step: '03',
+        title: 'Merge',
+        detail:
+          'The consensus engine reports unanimous, majority, or split agreement, an urgency level, and a referral recommendation, with explainability heatmaps.',
+      },
+      {
+        step: '04',
+        title: 'Review',
+        detail:
+          'The doctor’s confirmation or override is the record; the PDF report is generated from that decision.',
+      },
     ],
     measurements: [
-      { label: 'Council latency', value: '~2 s per eye', context: 'all three models on a plain CPU, no GPU, per the project’s validation record' },
-          ],
+      {
+        label: 'Council latency',
+        value: '~2 s per eye',
+        context:
+          'all three models on a plain CPU, no GPU, per the project’s validation record',
+      },
+    ],
     limits: [
       'Development status only. Retrospective benchmarking on public datasets guides engineering; it is not evidence of clinical performance, the validation study has not been run, and the platform is not a medical device.',
       'The live deployment uses a demo clinic and demo data only.',
     ],
     sources: [
-      { label: 'Live prototype', href: 'https://basira.ramikronbi.com', kind: 'demo', note: 'Demo clinic and demo data only.' },
+      {
+        label: 'Live prototype',
+        href: 'https://basira.ramikronbi.com',
+        kind: 'demo',
+        note: 'Demo clinic and demo data only.',
+      },
     ],
     articleSlug: 'designing-a-council-of-models-for-retinal-screening',
     topics: ['applied-ai', 'health-technology'],
-    keywords: ['retinal screening', 'decision support', 'FastAPI', 'Python', 'ophthalmology'],
+    keywords: [
+      'retinal screening',
+      'decision support',
+      'FastAPI',
+      'Python',
+      'ophthalmology',
+    ],
   },
   {
     slug: 'imagen-raw-to-edit-dataset-pipeline',
     state: 'ready',
     title: 'Imagen — learning a photographer’s edit from RAW brackets',
-    metaTitle: 'Imagen — a RAW-to-retouched dataset pipeline and HDRNet training for real-estate photography',
+    metaTitle:
+      'Imagen — a RAW-to-retouched dataset pipeline and HDRNet training for real-estate photography',
     metaDescription:
       'An end-to-end pipeline that pairs bracketed RAW exposures with a photographer’s final edits and trains a bilateral-grid network to reproduce the style.',
     summary:
@@ -1532,7 +1872,8 @@ export const projects: ProjectRecord[] = [
     hero: {
       kind: 'diagram',
       diagramId: 'raw-pipeline',
-      caption: 'Ingest, preprocess, targets, dataloader, and HDRNet training; each stage writes a manifest so a run can resume.',
+      caption:
+        'Ingest, preprocess, targets, dataloader, and HDRNet training; each stage writes a manifest so a run can resume.',
       alt: 'Diagram of the Imagen pipeline: RAW bracket ingestion, color-accurate preprocessing, target generation, dataloader, and HDRNet training.',
     },
     answer: {
@@ -1543,31 +1884,74 @@ export const projects: ProjectRecord[] = [
       role: 'Rami Kronbi designed and built the pipeline and the color science; Layth Ayache contributed training and delivery runs.',
     },
     stages: [
-      { step: '01', title: 'Ingest', detail: 'Detect −6/−3/0/+3/+6 EV ambient brackets, flash fills, and lights-on stacks across any listing folder structure; write an index per listing.' },
-      { step: '02', title: 'Decode', detail: 'Sony ARW through LibRaw; Canon EOS R5 DNG 1.7 with JPEG XL tiles through a tifffile fallback and the DNG specification’s color pipeline.' },
-      { step: '03', title: 'Target', detail: 'The photographer’s JPEG is linearized so the artistic values are preserved exactly.' },
-      { step: '04', title: 'Train', detail: 'HDRNet learns the mapping; the pipeline resumes automatically after interruption.' },
+      {
+        step: '01',
+        title: 'Ingest',
+        detail:
+          'Detect −6/−3/0/+3/+6 EV ambient brackets, flash fills, and lights-on stacks across any listing folder structure; write an index per listing.',
+      },
+      {
+        step: '02',
+        title: 'Decode',
+        detail:
+          'Sony ARW through LibRaw; Canon EOS R5 DNG 1.7 with JPEG XL tiles through a tifffile fallback and the DNG specification’s color pipeline.',
+      },
+      {
+        step: '03',
+        title: 'Target',
+        detail:
+          'The photographer’s JPEG is linearized so the artistic values are preserved exactly.',
+      },
+      {
+        step: '04',
+        title: 'Train',
+        detail:
+          'HDRNet learns the mapping; the pipeline resumes automatically after interruption.',
+      },
     ],
     measurements: [
-      { label: 'Editing throughput before', value: '2–3 photos/day', context: 'team of three, per the client, as recorded in the canonical CV' },
-      { label: 'Editing throughput after', value: '~40 photos/day', context: 'per team member, per the client, as recorded in the canonical CV' },
+      {
+        label: 'Editing throughput before',
+        value: '2–3 photos/day',
+        context:
+          'team of three, per the client, as recorded in the canonical CV',
+      },
+      {
+        label: 'Editing throughput after',
+        value: '~40 photos/day',
+        context:
+          'per team member, per the client, as recorded in the canonical CV',
+      },
     ],
     limits: [
       'The client and its imagery are not shown; the repository is private and the results directory contains client photographs.',
       'Style transfer is per photographer; the model does not generalize across agencies.',
     ],
     sources: [
-      { label: 'Canonical CV (2026)', href: 'https://ramikronbi.com', kind: 'cv', note: 'Freelance engagement, French real-estate agency.' },
+      {
+        label: 'Canonical CV (2026)',
+        href: 'https://ramikronbi.com',
+        kind: 'cv',
+        note: 'Freelance engagement, French real-estate agency.',
+      },
     ],
     articleSlug: 'why-color-science-comes-before-the-model',
     topics: ['computer-vision', 'applied-ai'],
-    keywords: ['HDRNet', 'RAW processing', 'DNG', 'color pipeline', 'Python', 'PyTorch'],
+    keywords: [
+      'HDRNet',
+      'RAW processing',
+      'DNG',
+      'color pipeline',
+      'Python',
+      'PyTorch',
+    ],
   },
   {
     slug: 'lumiscan-lesion-dashboard',
     state: 'ready',
     title: 'Lumiscan dashboard — tracking skin lesions across scans',
-    metaTitle: 'Lumiscan dashboard — a multi-tenant clinical platform for a lesion-scanning device',
+    metaTitle:
+      'Lumiscan dashboard — a multi-tenant clinical platform for a lesion-scanning device',
     metaDescription:
       'A patient, lesion, and scan platform built for an ESP32 lesion-scanning device, with organization-scoped data and narrative-only AI.',
     summary:
@@ -1578,7 +1962,8 @@ export const projects: ProjectRecord[] = [
     hero: {
       kind: 'diagram',
       diagramId: 'lesion-timeline',
-      caption: 'Organization scoping is structural; classification arrives from outside; the language model writes narratives only.',
+      caption:
+        'Organization scoping is structural; classification arrives from outside; the language model writes narratives only.',
       alt: 'Diagram of the Lumiscan data model: organization, patient, lesion, scan, timeline, narrative summaries, and follow-up notes.',
     },
     answer: {
@@ -1589,10 +1974,30 @@ export const projects: ProjectRecord[] = [
       role: 'Rami Kronbi built the platform alone for the device’s product owner; classification runs on the device, never in the app.',
     },
     stages: [
-      { step: '01', title: 'Scope', detail: 'Organization id is denormalized down every clinical table and never read from the client.' },
-      { step: '02', title: 'Record', detail: 'Manual entry is the MVP path; the device-ingestion API is defined, authenticated by hashed device keys, idempotent, and simulated by a script.' },
-      { step: '03', title: 'Compare', detail: 'A lesion timeline shows successive scans with metric trends and flags.' },
-      { step: '04', title: 'Narrate', detail: 'Patient-friendly and doctor-facing summaries are generated from stored results; the model never produces a classification.' },
+      {
+        step: '01',
+        title: 'Scope',
+        detail:
+          'Organization id is denormalized down every clinical table and never read from the client.',
+      },
+      {
+        step: '02',
+        title: 'Record',
+        detail:
+          'Manual entry is the MVP path; the device-ingestion API is defined, authenticated by hashed device keys, idempotent, and simulated by a script.',
+      },
+      {
+        step: '03',
+        title: 'Compare',
+        detail:
+          'A lesion timeline shows successive scans with metric trends and flags.',
+      },
+      {
+        step: '04',
+        title: 'Narrate',
+        detail:
+          'Patient-friendly and doctor-facing summaries are generated from stored results; the model never produces a classification.',
+      },
     ],
     limits: [
       'Prototype authentication with one local workspace; live device ingestion is deferred; HIPAA and GDPR are designed-for-later, not implemented.',
@@ -1600,17 +2005,29 @@ export const projects: ProjectRecord[] = [
       'The device and its classifier belong to the product owner and are not described here.',
     ],
     sources: [
-      { label: 'GitHub — lumiscan-dashboard', href: 'https://github.com/Kronbii/lumiscan-dashboard', kind: 'repository' },
+      {
+        label: 'GitHub — lumiscan-dashboard',
+        href: 'https://github.com/Kronbii/lumiscan-dashboard',
+        kind: 'repository',
+      },
     ],
     articleSlug: 'making-tenant-isolation-the-only-path',
     topics: ['applied-ai', 'health-technology', 'full-stack-systems'],
-    keywords: ['multi-tenancy', 'PHI', 'tRPC', 'Drizzle', 'TypeScript', 'medical device software'],
+    keywords: [
+      'multi-tenancy',
+      'PHI',
+      'tRPC',
+      'Drizzle',
+      'TypeScript',
+      'medical device software',
+    ],
   },
   {
     slug: 'evoid-applied-vision-venture',
     state: 'ready',
     title: 'Evoid — an applied computer-vision venture',
-    metaTitle: 'Evoid — co-founding a small applied AI and computer-vision venture in Beirut',
+    metaTitle:
+      'Evoid — co-founding a small applied AI and computer-vision venture in Beirut',
     metaDescription:
       'A small venture delivering computer-vision and mobile applications for external clients, co-founded by Rami Kronbi.',
     summary:
@@ -1621,7 +2038,8 @@ export const projects: ProjectRecord[] = [
     hero: {
       kind: 'diagram',
       diagramId: 'venture-loop',
-      caption: 'Each engagement starts from a client workflow, ships a bounded prototype, and feeds what was learned into the next one.',
+      caption:
+        'Each engagement starts from a client workflow, ships a bounded prototype, and feeds what was learned into the next one.',
       alt: 'Diagram of the venture’s engagement loop: client problem, bounded prototype, delivery and learning.',
     },
     answer: {
@@ -1632,9 +2050,23 @@ export const projects: ProjectRecord[] = [
       role: 'Rami Kronbi co-founded Evoid (2023–2025 per the canonical CV), led technical direction and client coordination, and built most of the public site.',
     },
     stages: [
-      { step: '01', title: 'Scope', detail: 'Each engagement is bounded to one workflow and one deliverable.' },
-      { step: '02', title: 'Build', detail: 'Computer-vision and mobile prototypes; PadelEye is the venture’s own experiment in automated line judging from a camera stream.' },
-      { step: '03', title: 'Deliver', detail: 'Delivery and maintenance stay with the same small team.' },
+      {
+        step: '01',
+        title: 'Scope',
+        detail:
+          'Each engagement is bounded to one workflow and one deliverable.',
+      },
+      {
+        step: '02',
+        title: 'Build',
+        detail:
+          'Computer-vision and mobile prototypes; PadelEye is the venture’s own experiment in automated line judging from a camera stream.',
+      },
+      {
+        step: '03',
+        title: 'Deliver',
+        detail: 'Delivery and maintenance stay with the same small team.',
+      },
     ],
     limits: [
       'Client names and outcomes are not listed; the public site’s case studies and testimonial are placeholder copy and are not claimed here.',
@@ -1643,11 +2075,21 @@ export const projects: ProjectRecord[] = [
     ],
     sources: [
       { label: 'evoid.dev', href: 'https://www.evoid.dev/', kind: 'demo' },
-      { label: 'Canonical CV (2026)', href: 'https://ramikronbi.com', kind: 'cv' },
+      {
+        label: 'Canonical CV (2026)',
+        href: 'https://ramikronbi.com',
+        kind: 'cv',
+      },
     ],
     articleSlug: 'what-a-small-vision-venture-taught-me-about-scope',
     topics: ['computer-vision', 'product-engineering'],
-    keywords: ['computer vision', 'startup', 'Beirut', 'product management', 'PadelEye'],
+    keywords: [
+      'computer vision',
+      'startup',
+      'Beirut',
+      'product management',
+      'PadelEye',
+    ],
   },
   {
     slug: 'water-shooting-robot',
@@ -1664,7 +2106,8 @@ export const projects: ProjectRecord[] = [
     hero: {
       kind: 'diagram',
       diagramId: 'water-robot',
-      caption: 'A target table drives aiming and height; a ballistic relation and a water-level update estimate each shot.',
+      caption:
+        'A target table drives aiming and height; a ballistic relation and a water-level update estimate each shot.',
       alt: 'Diagram of the water robot control sequence: target table, servo aim, stepper lift, solenoid burst, height model, and water-level update.',
     },
     answer: {
@@ -1675,9 +2118,24 @@ export const projects: ProjectRecord[] = [
       role: 'Rami Kronbi wrote the firmware and organized the repository with firmware, test sketches, CAD, and documentation folders.',
     },
     stages: [
-      { step: '01', title: 'Model', detail: 'Required nozzle height is estimated from target distance and the current water height.' },
-      { step: '02', title: 'Actuate', detail: 'Stepper lift, servo aim, and a solenoid valve on a relay, each with its own bring-up test sketch.' },
-      { step: '03', title: 'Calibrate', detail: 'Steps per millimetre and predicted versus actual height are logged over serial.' },
+      {
+        step: '01',
+        title: 'Model',
+        detail:
+          'Required nozzle height is estimated from target distance and the current water height.',
+      },
+      {
+        step: '02',
+        title: 'Actuate',
+        detail:
+          'Stepper lift, servo aim, and a solenoid valve on a relay, each with its own bring-up test sketch.',
+      },
+      {
+        step: '03',
+        title: 'Calibrate',
+        detail:
+          'Steps per millimetre and predicted versus actual height are logged over serial.',
+      },
     ],
     limits: [
       'The physics is deliberately simplified; the README states that empirical tuning is needed.',
@@ -1685,17 +2143,29 @@ export const projects: ProjectRecord[] = [
       'No test results or media are in the repository; this is early evidence of mechatronics practice, not a finished system.',
     ],
     sources: [
-      { label: 'GitHub — water-shooting-robot', href: 'https://github.com/Kronbii/water-shooting-robot', kind: 'repository' },
+      {
+        label: 'GitHub — water-shooting-robot',
+        href: 'https://github.com/Kronbii/water-shooting-robot',
+        kind: 'repository',
+      },
     ],
     articleSlug: 'a-first-mechatronic-loop-without-a-pump',
     topics: ['robotics', 'embedded-systems', 'control-systems'],
-    keywords: ['Arduino', 'mechatronics', 'stepper', 'servo', 'solenoid', 'C++'],
+    keywords: [
+      'Arduino',
+      'mechatronics',
+      'stepper',
+      'servo',
+      'solenoid',
+      'C++',
+    ],
   },
   {
     slug: 'bsheel-quest-app',
     state: 'review',
     title: 'Bsheel — a gamified quest app for Lebanon',
-    metaTitle: 'Bsheel — a gamified real-world quest app with moderated proof and a self-hosted backend',
+    metaTitle:
+      'Bsheel — a gamified real-world quest app with moderated proof and a self-hosted backend',
     metaDescription:
       'Bsheel gives users three real-world quests a day, accepts photo or video proof, and awards XP after moderation; Flutter clients on a self-hosted NestJS, PostgreSQL, and Redis backend.',
     summary:
@@ -1706,7 +2176,8 @@ export const projects: ProjectRecord[] = [
     hero: {
       kind: 'diagram',
       diagramId: 'quest-loop',
-      caption: 'Quest selection, timed completion, proof upload, moderation, XP, feed, and the admin console that keeps the loop honest.',
+      caption:
+        'Quest selection, timed completion, proof upload, moderation, XP, feed, and the admin console that keeps the loop honest.',
       alt: 'Diagram of the Bsheel quest loop: three quests, proof upload, moderation and XP, feed and votes, worker queue, and admin console.',
     },
     answer: {
@@ -1717,11 +2188,36 @@ export const projects: ProjectRecord[] = [
       role: 'Rami Kronbi co-founded the product and worked as systems engineer and product manager alongside Razan Hasbini and Tayseer Laz.',
     },
     stages: [
-      { step: '01', title: 'Pick', detail: 'Three random quests across fitness, creativity, social, learning, and adventure; one is chosen and a per-quest timer set by the admin starts.' },
-      { step: '02', title: 'Prove', detail: 'Photo or video proof goes to private object storage; proof metadata and a review state machine live in the submissions domain.' },
-      { step: '03', title: 'Review', detail: 'Moderators approve or reject with reviewer context; appeals exist; XP is written as a transaction and reconciled by an audit in the admin console.' },
-      { step: '04', title: 'Share', detail: 'Approved quests enter a keyset-paginated feed with hot ordering, votes, threaded comments, mentions, follows, blocks, and reporting.' },
-      { step: '05', title: 'Operate', detail: 'Push notifications fan out from a durable queue; the API and worker scale independently; nginx handles rate limiting and WebSocket upgrades.' },
+      {
+        step: '01',
+        title: 'Pick',
+        detail:
+          'Three random quests across fitness, creativity, social, learning, and adventure; one is chosen and a per-quest timer set by the admin starts.',
+      },
+      {
+        step: '02',
+        title: 'Prove',
+        detail:
+          'Photo or video proof goes to private object storage; proof metadata and a review state machine live in the submissions domain.',
+      },
+      {
+        step: '03',
+        title: 'Review',
+        detail:
+          'Moderators approve or reject with reviewer context; appeals exist; XP is written as a transaction and reconciled by an audit in the admin console.',
+      },
+      {
+        step: '04',
+        title: 'Share',
+        detail:
+          'Approved quests enter a keyset-paginated feed with hot ordering, votes, threaded comments, mentions, follows, blocks, and reporting.',
+      },
+      {
+        step: '05',
+        title: 'Operate',
+        detail:
+          'Push notifications fan out from a durable queue; the API and worker scale independently; nginx handles rate limiting and WebSocket upgrades.',
+      },
     ],
     limits: [
       'User metrics, revenue, and growth figures are not published here.',
@@ -1730,17 +2226,34 @@ export const projects: ProjectRecord[] = [
     ],
     sources: [
       { label: 'bsheel.app', href: 'https://bsheel.app/', kind: 'demo' },
-      { label: 'BSHEEL on Google Play', href: 'https://play.google.com/store/apps/details?id=com.questapp.mobile_app', kind: 'listing' },
+      {
+        label: 'BSHEEL on Google Play',
+        href: 'https://play.google.com/store/apps/details?id=com.questapp.mobile_app',
+        kind: 'listing',
+      },
     ],
     articleSlug: 'moderation-is-the-product-in-a-quest-app',
-    topics: ['product-engineering', 'full-stack-systems', 'local-first-software'],
-    keywords: ['Flutter', 'NestJS', 'PostgreSQL', 'Redis', 'gamification', 'moderation', 'Lebanon'],
+    topics: [
+      'product-engineering',
+      'full-stack-systems',
+      'local-first-software',
+    ],
+    keywords: [
+      'Flutter',
+      'NestJS',
+      'PostgreSQL',
+      'Redis',
+      'gamification',
+      'moderation',
+      'Lebanon',
+    ],
   },
   {
     slug: 'moto-961-bikey',
     state: 'review',
     title: 'Moto 961 (Bikey) — a motorcycle app for Lebanon',
-    metaTitle: 'Moto 961 (Bikey) — ride tracking as maintenance data for motorcyclists in Lebanon',
+    metaTitle:
+      'Moto 961 (Bikey) — ride tracking as maintenance data for motorcyclists in Lebanon',
     metaDescription:
       'An early-stage Flutter app in which rides are recorded as odometer data that drives maintenance schedules, a parts and mechanic directory, and shared road hazards for riders in Lebanon.',
     summary:
@@ -1751,7 +2264,8 @@ export const projects: ProjectRecord[] = [
     hero: {
       kind: 'diagram',
       diagramId: 'bike-loop',
-      caption: 'Ride, odometer, service due, find part and mechanic, log the work; road hazards from other riders feed the next ride.',
+      caption:
+        'Ride, odometer, service due, find part and mechanic, log the work; road hazards from other riders feed the next ride.',
       alt: 'Diagram of the Moto 961 loop: ride tracking, odometer, service schedule, marketplace and mechanic directory, work log, and shared hazards.',
     },
     answer: {
@@ -1762,10 +2276,29 @@ export const projects: ProjectRecord[] = [
       role: 'Rami Kronbi is a member of the project team; Tayseer Laz owns the repository and wrote the current prototype.',
     },
     stages: [
-      { step: '01', title: 'Record', detail: 'Rides are GPS tracks with noisy fixes discarded and distance computed honestly.' },
-      { step: '02', title: 'Schedule', detail: 'Service intervals are keyed to distance, so a ride matters because of what it did to the bike.' },
-      { step: '03', title: 'Find', detail: 'Parts and mechanics are surfaced near the rider’s real routes.' },
-      { step: '04', title: 'Share', detail: 'Road hazards reported by riders feed alerts for others.' },
+      {
+        step: '01',
+        title: 'Record',
+        detail:
+          'Rides are GPS tracks with noisy fixes discarded and distance computed honestly.',
+      },
+      {
+        step: '02',
+        title: 'Schedule',
+        detail:
+          'Service intervals are keyed to distance, so a ride matters because of what it did to the bike.',
+      },
+      {
+        step: '03',
+        title: 'Find',
+        detail:
+          'Parts and mechanics are surfaced near the rider’s real routes.',
+      },
+      {
+        step: '04',
+        title: 'Share',
+        detail: 'Road hazards reported by riders feed alerts for others.',
+      },
     ],
     limits: [
       'Early prototype: the repository is days old, has no backend, no authentication, and no store release.',
@@ -1773,7 +2306,12 @@ export const projects: ProjectRecord[] = [
       'Rami’s specific contribution is not yet stated on this page.',
     ],
     sources: [
-      { label: 'Repository (private)', href: 'https://github.com/TayseerLaz/bikey', kind: 'repository', note: 'Owned by Tayseer Laz.' },
+      {
+        label: 'Repository (private)',
+        href: 'https://github.com/TayseerLaz/bikey',
+        kind: 'repository',
+        note: 'Owned by Tayseer Laz.',
+      },
     ],
     articleSlug: 'a-ride-is-data-about-the-bike',
     topics: ['product-engineering', 'lebanon'],
@@ -1786,6 +2324,8 @@ export const projectMap = Object.fromEntries(projects.map((p) => [p.slug, p]))
 export const readyProjects = projects.filter((p) => p.state === 'ready')
 export const reviewProjects = projects.filter((p) => p.state === 'review')
 
-export function getProject(slug: string): typeof projects[number] | undefined {
+export function getProject(
+  slug: string
+): (typeof projects)[number] | undefined {
   return projectMap[slug]
 }

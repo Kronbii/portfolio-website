@@ -5,9 +5,19 @@
  * technical record stays one click away on each project page.
  */
 
-import { getProject, readyProjects, type ProjectRecord } from '@/content/authority'
+import {
+  getProject,
+  readyProjects,
+  type ProjectRecord,
+} from '@/content/authority'
 
-export type Field = 'machines' | 'vision' | 'health' | 'civic' | 'open' | 'tools'
+export type Field =
+  | 'machines'
+  | 'vision'
+  | 'health'
+  | 'civic'
+  | 'open'
+  | 'tools'
 
 export const fields: { id: Field; label: string }[] = [
   { id: 'machines', label: 'Robots & drones' },
@@ -92,9 +102,22 @@ export const plain: Record<string, PlainWork> = {
   'imagen-raw-to-edit-dataset-pipeline': {
     kind: 'AI · photography',
     line: 'Taught a neural network to edit real-estate photos the way one photographer does, for a French photography agency.',
-    proof: '2–3 photos a day for a team of three, then ~40 per person, per the client',
+    proof:
+      '2–3 photos a day for a team of three, then ~40 per person, per the client',
     part: 'Pipeline author, with Layth Ayache on training',
     field: 'vision',
+  },
+  'five-inch-carbon-fiber-fpv-drone': {
+    kind: 'Drones · embedded',
+    line: 'A 5-inch carbon-fiber FPV drone, designed and built around thrust, weight, and current calculations, and tuned in Betaflight down to GPS and return-to-home.',
+    proof: 'Designed, built, and tuned',
+    part: 'Designer and builder',
+    field: 'machines',
+    image: {
+      src: '/images/authority/fpv-drone/build.jpg',
+      alt: 'The drone mid-build: the 5-inch carbon-fiber frame and its motors on an ESD mat, beside the electronics, battery, and radio.',
+      position: '50% 52%',
+    },
   },
   'upstream-open-source-contributions': {
     kind: 'Open source · drones',
@@ -216,12 +239,16 @@ export const works: WorkItem[] = readyProjects
 
 export const workBySlug = (slug: string): WorkItem | undefined => {
   const project = getProject(slug)
-  return project && project.state === 'ready' && plain[slug] ? { project, plain: plain[slug] } : undefined
+  return project && project.state === 'ready' && plain[slug]
+    ? { project, plain: plain[slug] }
+    : undefined
 }
 
 export const V3 = '/v3'
-export const workHref = (slug: string, base: string = V3) => `${base}/projects/${slug}`
+export const workHref = (slug: string, base: string = V3) =>
+  `${base}/projects/${slug}`
 /** Moves a /v3 link into another version (e.g. /v4), leaving every other link alone. */
-export const rebase = (href: string, base: string) => href.replace(/^\/v3(?=[/#?]|$)/, base)
+export const rebase = (href: string, base: string) =>
+  href.replace(/^\/v3(?=[/#?]|$)/, base)
 /** Writing stays on the live record until /v3 has its own reader. */
 export const noteHref = (slug: string) => `/writing/${slug}`

@@ -167,16 +167,26 @@ const juno: ShowItem = {
 
 /**
  * The work, as one tight grid, by importance: the biggest tiles for the work
- * that matters most. The first four play in turn like a reel.
+ * that matters most (the drone, then the car, OmniSign, and the thermal
+ * model). The first four pieces with motion play in turn like a reel.
  */
 export const showcase: ShowItem[] = [
+  {
+    ...workItem('five-inch-carbon-fiber-fpv-drone', undefined, ''),
+    size: 'big',
+    area: 'fpv',
+    image: {
+      src: '/images/authority/fpv-drone/build.jpg',
+      position: '50% 54%',
+    },
+  },
   {
     ...workItem(
       'omnisign-lebanese-sign-language',
       { kind: 'scene', id: 'signers' },
       'A hand read as tracked points, then turned into text on a phone, the web, or an offline device.'
     ),
-    size: 'big',
+    size: 'tall',
     area: 'omni',
   },
   {
@@ -194,7 +204,7 @@ export const showcase: ShowItem[] = [
       { kind: 'scene', id: 'voters' },
       'A fact, traced back to its source, with its history kept.'
     ),
-    size: 'one',
+    size: 'wide',
     area: 'dal',
   },
   {
@@ -221,7 +231,7 @@ export const showcase: ShowItem[] = [
       { kind: 'shot', id: 'map' },
       '309 frames from one phone sweep, closing into one sphere.'
     ),
-    size: 'one',
+    size: 'wide',
     area: 'pano',
   },
   {
@@ -264,7 +274,7 @@ export const showcase: ShowItem[] = [
   },
   juno,
 ]
-/** How many of the first tiles play in turn when the grid arrives. */
+/** How many of the first motion tiles play in turn when the grid arrives. */
 export const FEATURED = 4
 
 /** In the community: the work built for people, and the rooms where it is shared. */
