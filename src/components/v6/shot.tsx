@@ -210,6 +210,8 @@ export function Shot({
       ([e]) => {
         if (!e.isIntersecting) return
         io.disconnect()
+        // near now: the scene's background pictures may load (see [data-near] in the hosts' CSS)
+        if (host.current) host.current.dataset.near = ''
         el.querySelectorAll('img').forEach(
           (i) => void i.decode?.().catch(() => {})
         )

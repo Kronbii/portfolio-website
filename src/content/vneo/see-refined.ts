@@ -7,7 +7,7 @@
 
 export const refinedSee = {
   img: '/images/vneo/race-refined-crop.jpg',
-  edges: '/images/vneo/race-refined-edges.png',
+  edges: '/images/vneo/race-refined-edges.webp',
   features: [
     [548, 443],
     [621, 335],

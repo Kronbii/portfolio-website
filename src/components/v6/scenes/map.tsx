@@ -163,7 +163,12 @@ export function MapShot({ label, replay }: { label: string; replay?: string }) {
       </div>
       <div className="s05-match">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/v6/pano-matches.jpg" alt="" />
+        <img
+          loading="lazy"
+          decoding="async"
+          src="/images/v6/pano-matches.jpg"
+          alt=""
+        />
       </div>
       <div className="m s05-match-k">
         Stage 2 · matches between adjacent frames

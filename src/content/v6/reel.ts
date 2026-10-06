@@ -167,12 +167,12 @@ export const v6Copy = {
         rest: 'inliers per pair',
       },
       {
-        src: '/images/v6/thermal-low.png',
+        src: '/images/v6/thermal-low.webp',
         pixel: true,
         b: 'Thermal',
         rest: 'input',
       },
-      { src: '/images/v6/thermal-x3.png', b: '×3', rest: 'output' },
+      { src: '/images/v6/thermal-x3.webp', b: '×3', rest: 'output' },
       {
         src: '/images/v6/crack-ink.png',
         fit: 'contain',

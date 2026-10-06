@@ -76,8 +76,12 @@ export function runPreflight(el: HTMLElement, root: HTMLElement): PreflightRun {
   }
   current = run
 
-  // a session cookie: shared across tabs, gone when the browser closes
-  document.cookie = `${root.dataset.introCookie || INTRO_COOKIE}=seen; path=/; SameSite=Lax`
+  // seen in this tab: a new visit (a new tab) plays it again, a reload does not
+  try {
+    sessionStorage.setItem(root.dataset.introCookie || INTRO_COOKIE, 'seen')
+  } catch {
+    /* storage off: it simply plays again next time */
+  }
   root.dataset.intro = 'playing'
   if (!window.location.hash) window.scrollTo(0, 0)
 
@@ -312,7 +316,8 @@ export function runPreflight(el: HTMLElement, root: HTMLElement): PreflightRun {
    * One that is not in by MAX_WAIT after the arm is skipped: the intro goes to
    * the lens iris and the name.
    */
-  const MAX_WAIT = 2.5
+  // a slow connection's drone gets a little longer to arrive before the flight goes on without it
+  const MAX_WAIT = 4
   const LEAD = 0.15
   let cssArm = armAt
   let flying = false

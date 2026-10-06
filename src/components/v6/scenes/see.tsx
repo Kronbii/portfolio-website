@@ -238,10 +238,16 @@ export function SeeShot({
       </div>
       <div className="s04-plate">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className="s04-img" src={plate.img} alt="" />
+        <img
+          loading="lazy"
+          decoding="async"
+          className="s04-img"
+          src={plate.img}
+          alt=""
+        />
         <div className="s04-edges">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={plate.edges} alt="" />
+          <img loading="lazy" decoding="async" src={plate.edges} alt="" />
         </div>
         <svg className="s04-feat" viewBox="0 0 900 900">
           {plate.links.map(([a, b, c, d], i) => (
@@ -283,7 +289,12 @@ export function SeeShot({
       </div>
       <div className="s04-schem">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/v6/race-schematic.png" alt="" />
+        <img
+          loading="lazy"
+          decoding="async"
+          src="/images/v6/race-schematic.png"
+          alt=""
+        />
       </div>
     </Shot>
   )

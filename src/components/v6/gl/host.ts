@@ -37,9 +37,6 @@ const idle: Idle = (cb, o) => {
   return ric ? ric(cb, o) : window.setTimeout(cb, 200)
 }
 
-if (typeof window !== 'undefined')
-  idle(() => void loadThree(), { timeout: 2500 })
-
 /*
  * Every canvas on the page sets up in turn, in idle time, from the moment it
  * mounts: the costly one-off work (environment maps, shader compiles, the
@@ -49,6 +46,33 @@ if (typeof window !== 'undefined')
  */
 const queue: (() => Promise<void>)[] = []
 let busy = false
+
+/*
+ * While the preflight intro plays, the page's 3D waits: shader compiles and
+ * environment maps would take the main thread from the intro's own flight.
+ * Everything sets up the moment it hands over (or at once, with no intro).
+ */
+const INTRO_ON = ['on', 'playing', 'reveal']
+let introGate: Promise<void> | null = null
+function afterIntro(): Promise<void> {
+  if (introGate) return introGate
+  introGate = new Promise((resolve) => {
+    const root = document.querySelector<HTMLElement>('[data-intro-root]')
+    if (!root || !INTRO_ON.includes(root.dataset.intro ?? '')) return resolve()
+    const mo = new MutationObserver(() => {
+      if (INTRO_ON.includes(root.dataset.intro ?? '')) return
+      mo.disconnect()
+      resolve()
+    })
+    mo.observe(root, { attributes: true, attributeFilter: ['data-intro'] })
+  })
+  return introGate
+}
+
+// parse three.js in idle time, once the intro (if any) has handed over
+if (typeof window !== 'undefined')
+  void afterIntro().then(() => idle(() => void loadThree(), { timeout: 2500 }))
+
 function pump() {
   if (busy) return
   const job = queue.shift()
@@ -80,6 +104,7 @@ export function startGL(
   const begin = async () => {
     if (started) return
     started = true
+    await afterIntro()
     const THREE = await loadThree()
     await yieldFrame()
     if (disposed) return

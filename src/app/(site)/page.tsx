@@ -1,7 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { Suspense } from 'react'
+import { preload } from 'react-dom'
 
 import { SignOff } from '@/components/v2/home/sign-off'
+import { INTRO_MODEL } from '@/components/v2/intro/timing'
 import { JsonLd } from '@/components/v2/json-ld'
 import { FlightLog } from '@/components/v3/home/flight-log'
 import { Build } from '@/components/vneo/build'
@@ -9,6 +12,7 @@ import { Community } from '@/components/vneo/community'
 import { Glance } from '@/components/vneo/glance'
 import { Hero } from '@/components/vneo/hero'
 import { Loop } from '@/components/vneo/loop'
+import { Near } from '@/components/vneo/near'
 import { Slate, SlateMark } from '@/components/vneo/slate'
 import { pageMeta } from '@/components/vneo/meta'
 import { Work } from '@/components/vneo/work'
@@ -50,6 +54,12 @@ const homeJsonLd = {
 }
 
 export default function Vneo() {
+  // the E58 flies in the intro and stands in the hero: ask for it first, ahead of everything below the fold
+  preload(INTRO_MODEL, {
+    as: 'fetch',
+    crossOrigin: 'anonymous',
+    fetchPriority: 'high',
+  })
   const c = vneo
   const groups = moreGroups()
   const n = groups.reduce((k, g) => k + g.items.length, 0)
@@ -58,9 +68,16 @@ export default function Vneo() {
       <JsonLd data={[homeJsonLd]} />
       <Hero />
       <Glance items={c.glance} label="At a glance" />
-      <Build />
-      <Work />
-      <Community />
+      {/* each section hydrates as its own unit, so the intro keeps the main thread between them */}
+      <Suspense>
+        <Build />
+      </Suspense>
+      <Suspense>
+        <Work />
+      </Suspense>
+      <Suspense>
+        <Community />
+      </Suspense>
 
       <section id="more" className="vn-more" aria-labelledby="more-h">
         <Slate
@@ -95,20 +112,24 @@ export default function Vneo() {
         </p>
       </section>
 
-      <div className="vn-log vn-v3">
-        <SlateMark no={6} label="The path" />
-        <FlightLog
-          title={c.log.title}
-          lede={c.log.lede}
-          points={c.log.points}
-        />
-      </div>
+      <Suspense>
+        <div className="vn-log vn-v3">
+          <SlateMark no={6} label="The path" />
+          <FlightLog
+            title={c.log.title}
+            lede={c.log.lede}
+            points={c.log.points}
+          />
+        </div>
+      </Suspense>
 
-      <Loop />
+      <Suspense>
+        <Loop />
+      </Suspense>
 
-      <div className="vn-signoff">
+      <Near className="vn-signoff">
         <SignOff copy={c.signOff} warm />
-      </div>
+      </Near>
     </>
   )
 }

@@ -177,9 +177,21 @@ export function HeatShot({
       </div>
       <div className="s06-plate">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className="s06-low" src="/images/v6/thermal-low.png" alt="" />
+        <img
+          loading="lazy"
+          decoding="async"
+          className="s06-low"
+          src="/images/v6/thermal-low.webp"
+          alt=""
+        />
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className="s06-hi" src="/images/v6/thermal-x3.png" alt="" />
+        <img
+          loading="lazy"
+          decoding="async"
+          className="s06-hi"
+          src="/images/v6/thermal-x3.webp"
+          alt=""
+        />
         <div className="s06-scan" />
         <div className="s06-tag">
           <b>IN</b> Low-res input

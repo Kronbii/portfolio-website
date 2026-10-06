@@ -226,9 +226,18 @@ export function LensImage({
       data-lens={weight}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="vn-li-base" src={src} alt={alt} style={style} />
+      <img
+        loading="lazy"
+        decoding="async"
+        className="vn-li-base"
+        src={src}
+        alt={alt}
+        style={style}
+      />
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
+        loading="lazy"
+        decoding="async"
         className="vn-li-g"
         src={src}
         alt=""
@@ -237,6 +246,8 @@ export function LensImage({
       />
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
+        loading="lazy"
+        decoding="async"
         className="vn-li-m"
         src={src}
         alt=""

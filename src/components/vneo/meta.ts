@@ -4,7 +4,7 @@ import { siteConfig } from '@/lib/site'
 
 /** The site's sharing card: Rami's portrait beside the emblem and his name, in Sage. */
 export const CARD = {
-  src: '/images/vneo/card.jpg',
+  src: '/images/vneo/rami-kronbi-card.jpg',
   alt: 'Rami Kronbi in profile beside his name and the Rā’ emblem: robotics, embedded & systems engineer.',
 }
 

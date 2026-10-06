@@ -85,9 +85,10 @@ function wanted(root: HTMLElement) {
       return false
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches)
       return false
-    return !new RegExp(
-      `(?:^|; )${root.dataset.introCookie || INTRO_COOKIE}=seen`
-    ).test(document.cookie)
+    return (
+      sessionStorage.getItem(root.dataset.introCookie || INTRO_COOKIE) !==
+      'seen'
+    )
   } catch {
     return false
   }
