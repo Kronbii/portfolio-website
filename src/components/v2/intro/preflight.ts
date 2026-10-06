@@ -313,15 +313,27 @@ export function runPreflight(el: HTMLElement, root: HTMLElement): PreflightRun {
    * drone: when it is ready it fades in on the still prop and the motors spool up
    * a beat later, so every visit sees the same opening shot whatever the load
    * time. A drone that is in before the arm flies exactly with it, as designed.
-   * One that is not in by MAX_WAIT after the arm is skipped: the intro goes to
-   * the lens iris and the name.
+   * On a slow connection the opening holds while the model downloads (up to
+   * HARD_CAP after the arm) and gives the 3D MODEL_GRACE to build once it is in;
+   * a drone that still is not ready then is skipped: the intro goes to the lens
+   * iris and the name.
    */
-  // a slow connection's drone gets a little longer to arrive before the flight goes on without it
-  const MAX_WAIT = 4
+  const MAX_WAIT = 2.5
+  // a slow connection: while the model is still downloading, the opening holds this long after the arm at most
+  const HARD_CAP = 7
+  // once the model is in, this long to build the 3D before the flight goes on without it
+  const MODEL_GRACE = 1.5
+  let modelAt: number | null = null
+  void modelBytes.then(() => (modelAt = now()))
   const LEAD = 0.15
   let cssArm = armAt
   let flying = false
-  armAt = cssArm + MAX_WAIT * 1000
+  const deadline = () => {
+    const base = cssArm + MAX_WAIT * 1000
+    const cap = cssArm + HARD_CAP * 1000
+    return modelAt === null ? cap : Math.max(base, Math.min(cap, modelAt + MODEL_GRACE * 1000))
+  }
+  armAt = deadline()
 
   const launch = (at: number) => {
     if (flying) return
@@ -341,7 +353,7 @@ export function runPreflight(el: HTMLElement, root: HTMLElement): PreflightRun {
   // can never drift from the 3D), the no-drone fallback, and the readouts
   function tick() {
     if (ended) return
-    if (!flying && now() >= cssArm + MAX_WAIT * 1000) launch(now() - (2.96 / FLIGHT_SPEED) * 1000) // no drone: to the iris
+    if (!flying && now() >= deadline()) launch(now() - (2.96 / FLIGHT_SPEED) * 1000) // no drone: to the iris
     const t = elapsed()
     // the FPV run after the name needs only the terrain, so a very late model joins there
     if (layerIn && !shown && t >= PF.name && t < PF.handoff - 0.4) show(0.3)
@@ -371,7 +383,7 @@ export function runPreflight(el: HTMLElement, root: HTMLElement): PreflightRun {
     const delay = armAnim?.effect?.getTiming().delay
     if (typeof st !== 'number' || typeof delay !== 'number') return
     cssArm = st + delay
-    if (!flying) armAt = cssArm + MAX_WAIT * 1000
+    if (!flying) armAt = deadline()
     else if (armAt < cssArm) launch(cssArm)
   }
 
