@@ -21,7 +21,12 @@ import { INTRO_COOKIE, INTRO_PATH } from './timing'
 
 const NAME = v2Home.hero.name.split(' ')
 
-const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+const esc = (s: string) =>
+  s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
 
 function overlayHTML() {
   const s = styles
@@ -73,9 +78,16 @@ const HTML = overlayHTML()
 function wanted(root: HTMLElement) {
   try {
     if (new URLSearchParams(window.location.search).has('intro')) return true
-    if (window.location.pathname.replace(/\/$/, '') !== (root.dataset.introPath || INTRO_PATH)) return false
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false
-    return !new RegExp(`(?:^|; )${root.dataset.introCookie || INTRO_COOKIE}=seen`).test(document.cookie)
+    if (
+      window.location.pathname.replace(/\/$/, '') !==
+      (root.dataset.introPath ?? INTRO_PATH)
+    )
+      return false
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+      return false
+    return !new RegExp(
+      `(?:^|; )${root.dataset.introCookie || INTRO_COOKIE}=seen`
+    ).test(document.cookie)
   } catch {
     return false
   }

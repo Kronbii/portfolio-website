@@ -20,7 +20,10 @@ import { shotAlt } from '@/content/v6/reel'
 import { buildChapters, buildGroups, type Chapter } from '@/content/v7/home'
 import { siteConfig } from '@/lib/site'
 
-export const VN = '/vneo'
+/** Vneo is the site: its pages live at the root. */
+export const VN = ''
+/** The home page, as a link target. */
+export const HOME = '/'
 
 /** Writing opens inside Vneo, with a way back. */
 export const writingHref = (slug: string) => `${VN}/writing/${slug}`
@@ -384,7 +387,7 @@ export const vneo = {
       big: '3×',
       label: 'Co-founder',
       note: 'Evoid · NASNA · OmniSign',
-      href: `${VN}#community`,
+      href: `${HOME}#community`,
     },
     {
       big: '2025',
@@ -465,14 +468,17 @@ export const vneoChrome = {
   brand: 'Rami Kronbi',
   skip: 'Skip to content',
   nav: [
-    { label: 'Work', href: `${VN}#work` },
-    { label: 'Community', href: `${VN}#community` },
+    { label: 'Work', href: `${HOME}#work` },
+    { label: 'Community', href: `${HOME}#community` },
     { label: 'Projects', href: `${VN}/projects` },
-    { label: 'Contact', href: `${VN}#sign-off` },
+    { label: 'Contact', href: `${HOME}#sign-off` },
   ],
   footer: {
-    note: 'This is /vneo, the candidate for ramikronbi.com. It is not indexed yet; the live site stays canonical until it is promoted.',
-    live: 'Open the live site',
+    links: [
+      { label: 'Projects', href: '/projects' },
+      { label: 'Writing', href: '/writing' },
+      { label: 'Topics', href: '/topics' },
+    ],
     copyright: `© 2026 ${siteConfig.name} · ${siteConfig.location}`,
   },
 }

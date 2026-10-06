@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next'
 import { Fraunces, Zalando_Sans } from 'next/font/google'
 
 import { SmoothScrollProvider } from '@/components/providers/smooth-scroll-provider'
-import { SitePillNav } from '@/components/sections/site-pill-nav'
 import { StructuredData } from '@/components/structured-data'
 import { siteConfig } from '@/lib/site'
 import '@/styles/globals.css'
@@ -23,7 +22,7 @@ const fraunces = Fraunces({
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#f3efe8',
+  themeColor: '#0b0d0c',
 }
 
 export const metadata: Metadata = {
@@ -44,7 +43,7 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [
       {
-        url: '/images/shared/og-image.jpg',
+        url: '/images/vneo/og.jpg',
         width: 1200,
         height: 630,
         alt: siteConfig.title,
@@ -55,7 +54,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: siteConfig.title,
     description: siteConfig.description,
-    images: ['/images/shared/og-image.jpg'],
+    images: ['/images/vneo/og.jpg'],
   },
   icons: {
     icon: [
@@ -97,7 +96,6 @@ export default function RootLayout({
       <body suppressHydrationWarning>
         <SmoothScrollProvider>
           <StructuredData />
-          <SitePillNav />
           <div className="min-h-svh bg-background text-foreground">
             {children}
           </div>

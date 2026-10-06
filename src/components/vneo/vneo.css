@@ -2223,3 +2223,69 @@
     box-shadow: none;
   }
 }
+
+/* ---------- topics: the hubs, and a page's links to its fields ---------- */
+[data-vneo] .vn-topics {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px 14px;
+  margin-top: 28px;
+}
+[data-vneo] .vn-topics-k {
+  color: var(--ink3);
+  font-family: var(--f-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+[data-vneo] .vn-topics ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+[data-vneo] .vn-topics a {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px var(--hair2);
+  color: var(--ink2);
+  font-size: 0.92rem;
+  transition:
+    color 0.2s var(--ease),
+    box-shadow 0.2s var(--ease);
+}
+[data-vneo] .vn-topics a:hover {
+  color: var(--sage);
+  box-shadow: inset 0 0 0 1px rgba(var(--sage-rgb), 0.6);
+}
+[data-vneo] .vn-topic-h {
+  margin-top: 48px;
+  font-weight: 600;
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+}
+[data-vneo] .vn-topic-q {
+  margin-top: 14px;
+  max-width: 68ch;
+  padding-left: 1.2em;
+  list-style: disc;
+  color: var(--ink2);
+}
+[data-vneo] .vn-topic-q li + li {
+  margin-top: 8px;
+}
+[data-vneo] .vn-topic-q li::marker {
+  color: var(--sage);
+}
+[data-vneo] .vn-topic-count {
+  color: var(--sage);
+  font-family: var(--f-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+[data-vneo] .vn-footer-nav {
+  display: flex;
+  gap: 22px;
+}

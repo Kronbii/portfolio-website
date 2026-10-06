@@ -9,6 +9,7 @@ import { getArticle } from '@/content/authority'
 import { projectImages, sourceKindLabel } from '@/content/v2/record'
 import { workBySlug, works } from '@/content/v3/work'
 import {
+  HOME,
   VN,
   chapterOf,
   racePhoto,
@@ -18,6 +19,7 @@ import {
 } from '@/content/vneo/site'
 
 import { BackButton } from './back'
+import { TopicLinks } from './topics'
 import { CaseShot } from './case-shot'
 
 /*
@@ -91,7 +93,7 @@ export function Case({ slug }: { slug: string }) {
           <nav className="v7-crumbs" aria-label="Breadcrumb">
             <ol>
               <li>
-                <Link href={VN}>{T.home}</Link>
+                <Link href={HOME}>{T.home}</Link>
               </li>
               <li>
                 <Link href={`${VN}/projects`}>{T.projects}</Link>
@@ -270,6 +272,7 @@ export function Case({ slug }: { slug: string }) {
               </li>
             ))}
           </ul>
+          <TopicLinks slugs={p.topics} />
         </section>
 
         <div className="vn-case-foot">
