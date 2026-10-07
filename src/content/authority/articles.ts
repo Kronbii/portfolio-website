@@ -2,6 +2,77 @@ import type { ArticleRecord } from './types'
 
 export const articles: ArticleRecord[] = [
   {
+    slug: 'engineering-a-five-inch-fpv-drone-from-first-principles',
+    state: 'ready',
+    title: 'Engineering a five-inch FPV drone from first principles',
+    metaTitle: 'Engineering a five-inch FPV drone from first principles',
+    metaDescription:
+      'How Rami Kronbi designed and built a 5-inch carbon-fiber FPV drone: propulsion and power sized from thrust, weight, and current, Betaflight tuned through GPS and return-to-home, and the link and GPS tested under jamming.',
+    dek: 'Building a five-inch FPV drone is an exercise in coupled constraints: every part you choose changes what the others have to do.',
+    heroMedia: {
+      src: '/images/authority/fpv-drone/build.jpg',
+      alt: 'The drone mid-build on an ESD mat: the 5-inch carbon-fiber frame with its four motors, beside the electronics, a battery, the radio transmitter, and calipers.',
+      caption: 'Mid-build: the frame and its motors, with the electronics, battery, and radio laid out beside it.',
+    },
+    body: [
+      {
+        kind: 'p',
+        text: 'Building a five-inch FPV drone is an exercise in coupled constraints. Motor and propeller choices set thrust and current draw. Battery voltage changes the whole power system. Frame weight and where each component sits change how the drone responds. Software tuning only begins once the physical build is coherent.',
+      },
+      { kind: 'h2', text: 'Start from the numbers' },
+      {
+        kind: 'p',
+        text: 'I selected the propulsion and power components from thrust, weight, and current calculations. The three are tied together: the motors and propellers have to make enough thrust for the weight of everything on the frame, that thrust costs current, and the battery and electronics have to deliver that current while adding weight of their own.',
+      },
+      {
+        kind: 'p',
+        text: 'Change one and the others move. A bigger propeller or a stronger motor buys thrust and spends current; a battery that can supply more current is usually heavier, which asks for more thrust again. The calculation is where you find a combination that closes before you buy or solder anything.',
+      },
+      { kind: 'h2', text: 'The build' },
+      {
+        kind: 'p',
+        text: 'The components went together on a 5-inch carbon-fiber frame. The build photo on the project page catches it halfway: the frame and its four motors on an ESD mat, with the electronics, a battery, the radio transmitter, and a pair of calipers beside it.',
+      },
+      { kind: 'h2', text: 'Tuning in Betaflight' },
+      {
+        kind: 'p',
+        text: 'Betaflight is the open-source firmware that runs on the flight controller. I configured and tuned its PID loops, set up its flight modes, and configured its GPS features and return-to-home behavior.',
+      },
+      {
+        kind: 'p',
+        text: 'The PID loops are what make the drone go where the sticks point it: they compare the rotation the gyro measures with the rotation the pilot asks for and correct the difference thousands of times a second. It is the same feedback idea behind easyPID, the Arduino PID library I wrote, on a machine that reacts far faster.',
+      },
+      {
+        kind: 'p',
+        text: 'Return-to-home is the feature that flies the drone back on its own, typically when the radio link drops, and it steers by GPS. That makes it only as trustworthy as the position fix and the link behind it, which is why the last step was testing both.',
+      },
+      { kind: 'h2', text: 'Testing when GPS cannot be trusted' },
+      {
+        kind: 'p',
+        text: 'I evaluated GPS accuracy, RF link quality, and flight performance, including under GNSS jamming and the constraints of integrating IMU and GNSS data.',
+      },
+      {
+        kind: 'p',
+        text: 'Jamming matters because so much of a drone’s autonomy rests on satellite positioning. When GNSS is jammed, the position that GPS features and return-to-home depend on stops being reliable. The IMU keeps measuring motion, and it is good at that over short spans, but its estimate drifts over time. How the two are combined decides how the drone behaves when one of them degrades.',
+      },
+      {
+        kind: 'p',
+        text: 'A five-inch quad packs a lot of engineering into a small frame: the arithmetic of power and weight, a fast feedback controller, a radio link, and sensors that each fail in their own way. Betaflight is also where some of my open-source work lives; the small fixes I have contributed to its firmware are written up separately.',
+      },
+    ],
+    sources: [
+      {
+        label: 'Betaflight',
+        href: 'https://betaflight.com',
+        kind: 'documentation',
+        note: 'The open-source flight-controller firmware.',
+      },
+    ],
+    projectSlug: 'five-inch-carbon-fiber-fpv-drone',
+    topics: ['control-systems', 'embedded-systems', 'robotics-perception'],
+    keywords: ['FPV drone', 'quadcopter', 'Betaflight', 'PID tuning', 'GPS rescue', 'GNSS jamming'],
+  },
+  {
     slug: 'building-a-360-panorama-stitcher-from-a-phone-sweep',
     state: 'ready',
     title: 'Building a 360° panorama stitcher from a phone sweep',
@@ -39,7 +110,7 @@ export const articles: ArticleRecord[] = [
       { kind: 'h3', text: 'The straight line that exposed the real problem' },
       {
         kind: 'p',
-        text: 'On the documented sample, independent pairwise estimates left only small pitch and roll errors. They were still enough to turn long architectural edges into a visible staircase. A moving average over the chained rotations reduced pitch wobble by 13.5× and roll wobble by 5.2× on that run.',
+        text: 'On the sample run, independent pairwise estimates left only small pitch and roll errors. They were still enough to turn long architectural edges into a visible staircase. A moving average over the chained rotations reduced pitch wobble by 13.5× and roll wobble by 5.2× on that run.',
       },
       {
         kind: 'p',
@@ -52,18 +123,17 @@ export const articles: ArticleRecord[] = [
       },
       {
         kind: 'p',
-        text: 'Only 36.9% of the sphere had actually been photographed. A phone-height horizontal sweep sees a band around the viewer, not the floor and ceiling. The missing poles can be inpainted, but they should never be described as captured detail.',
+        text: 'Only 36.9% of the sphere had actually been photographed. A phone-height horizontal sweep sees a band around the viewer, not the floor and ceiling. The missing poles can be inpainted, but that is filling, not captured detail.',
       },
       {
         kind: 'p',
-        text: 'The other limit is parallax. The model assumes the phone rotates around its optical center. Translate while sweeping past a nearby object and the scene no longer has a single homography. Blank walls and repeated textures also weaken matching. There is no bundle adjustment or exposure matching in the current version, so drift and brightness changes remain honest targets for future work.',
+        text: 'The other limit is parallax. The model assumes the phone rotates around its optical center. Translate while sweeping past a nearby object and the scene no longer has a single homography. Blank walls and repeated textures also weaken matching. There is no bundle adjustment or exposure matching in the current version, so drift and brightness changes are still on the list.',
       },
       {
         kind: 'p',
         text: 'The result is useful because it is inspectable. Every stage has a module, the run records its resolved configuration and intrinsics, more than 200 tests cover the pipeline, and the browser viewer makes the final geometry tangible. It is less a magic panorama button than a working map of the decisions behind one.',
       },
     ],
-    evidence: 'GitHub repository; live demo; technical method; temporal smoothing notes.',
     sources: [
       {
         label: 'GitHub — 360-spherical-stitching',
@@ -123,7 +193,7 @@ export const articles: ArticleRecord[] = [
       },
       {
         kind: 'p',
-        text: 'State introspection is just as important. Exposing the proportional, integral, and derivative contributions turns tuning from a ritual into diagnosis. If the integral term is carrying the system, or the derivative term is amplifying noise, the evidence is available.',
+        text: 'State introspection is just as important. Exposing the proportional, integral, and derivative contributions turns tuning from a ritual into diagnosis. If the integral term is carrying the system, or the derivative term is amplifying noise, you can see it.',
       },
       { kind: 'h3', text: 'Autotuning is a tool with consequences' },
       {
@@ -135,7 +205,6 @@ export const articles: ArticleRecord[] = [
         text: 'easyPID is distributed through Arduino Library Manager as a contributed Device Control library and remains small enough for Uno-class AVR boards. Its main design lesson is broader than PID: reusable embedded code should expose timing, limits, state, and failure modes. The equation is the easy part. The contract around it is what makes it reusable.',
       },
     ],
-    evidence: 'GitHub repository; Arduino Library Manager listing; examples and tuning documentation.',
     sources: [
       { label: 'GitHub — easyPID', href: 'https://github.com/Kronbii/easyPID', kind: 'repository' },
       {
@@ -199,14 +268,13 @@ export const articles: ArticleRecord[] = [
       },
       {
         kind: 'p',
-        text: 'Rafik Hariri University reported that Rami Kronbi and Wassim Ghaddar placed third in the Future Engineers category in July 2023. The university also noted that its teams built their robots from scratch in twenty days.',
+        text: 'Rafik Hariri University reported that Wassim Ghaddar and I placed third in the Future Engineers category in July 2023, and noted that its teams built their robots from scratch in twenty days.',
       },
       {
         kind: 'p',
         text: 'The placement matters, but the lasting result is the architecture. The project is an end-to-end autonomous system small enough to see all at once: photons become features, features become events, events become steering commands, and those commands meet a physical vehicle with inertia, noise, and imperfect hardware.',
       },
     ],
-    evidence: 'GitHub repository; RHU’s July 2023 competition report.',
     sources: [
       {
         label: 'GitHub — autonomous-race-car',
@@ -252,7 +320,7 @@ export const articles: ArticleRecord[] = [
       { kind: 'h3', text: 'Quality has to be measured at every scale' },
       {
         kind: 'p',
-        text: 'On the evaluation reported in my canonical project record, the model reached 34.2 dB PSNR and 0.840 SSIM at ×2 enlargement, 31.0 dB and 0.757 at ×3, and 29.6 dB and 0.713 at ×4. Those numbers should be read with their scale: the task becomes less constrained as the enlargement factor grows.',
+        text: 'In evaluation, the model reached 34.2 dB PSNR and 0.840 SSIM at ×2 enlargement, 31.0 dB and 0.757 at ×3, and 29.6 dB and 0.713 at ×4. Those numbers should be read with their scale: the task becomes less constrained as the enlargement factor grows.',
       },
       {
         kind: 'p',
@@ -265,7 +333,7 @@ export const articles: ArticleRecord[] = [
       },
       {
         kind: 'p',
-        text: 'The deployment work moved inference toward FP16 and INT8 execution and measured the system on NVIDIA Jetson hardware. The currently reviewed figure is approximately 45 frames per second on NVIDIA Jetson Orin after quantization. I am deliberately not combining that number with the higher desktop GPU figures in the repository’s own evaluation report; hardware and benchmark protocol must travel with any speed claim.',
+        text: 'The deployment work moved inference toward FP16 and INT8 execution and measured the system on NVIDIA Jetson hardware: about 45 frames per second on NVIDIA Jetson Orin after quantization. The repository’s own evaluation report has higher numbers from a desktop GPU, and I keep the two apart. A speed figure means little without the hardware and the benchmark that produced it.',
       },
       {
         kind: 'p',
@@ -273,20 +341,14 @@ export const articles: ArticleRecord[] = [
       },
       {
         kind: 'p',
-        text: 'Thermal super-resolution is valuable when it improves a downstream decision without hiding uncertainty. The responsible next evaluations are therefore task-based: does a detector find more relevant objects, does measurement remain stable, and where does reconstruction create false confidence? Better-looking frames are not the final objective. Better perception is.',
+        text: 'Thermal super-resolution is valuable when it improves a downstream decision without hiding uncertainty. So the next evaluations should be task-based: does a detector find more relevant objects, does measurement remain stable, and where does reconstruction create false confidence? Better-looking frames are not the final objective. Better perception is.',
       },
     ],
-    evidence: 'GitHub repository; canonical CV; evaluation images and demo videos.',
     sources: [
       {
         label: 'GitHub — thermal-super-resolution',
         href: 'https://github.com/Kronbii/thermal-super-resolution',
         kind: 'repository',
-      },
-      {
-        label: 'Canonical CV — quality and edge figures',
-        href: 'https://github.com/Kronbii/thermal-super-resolution#readme',
-        kind: 'cv',
       },
     ],
     projectSlug: 'thermal-super-resolution',
@@ -308,7 +370,7 @@ export const articles: ArticleRecord[] = [
       },
       {
         kind: 'p',
-        text: 'The project uses light sensing to estimate directional error, an Arduino to run the controller, and yaw and pitch servos to move the sensor assembly. Rami Kronbi led the software and system architecture; Wassim Ghaddar contributed hardware integration and testing, as recorded in the repository.',
+        text: 'The project uses light sensing to estimate directional error, an Arduino to run the controller, and yaw and pitch servos to move the sensor assembly. I led the software and system architecture, and Wassim Ghaddar handled hardware integration and testing.',
       },
       {
         kind: 'p',
@@ -332,7 +394,6 @@ export const articles: ArticleRecord[] = [
         text: 'The most useful lesson is that PID tuning is not a one-time formula. It is a conversation between measurement, time, actuation, and the physical system. A two-axis tracker makes that conversation easy to see—and difficult to fake.',
       },
     ],
-    evidence: 'GitHub repository; project demonstration video.',
     sources: [
       {
         label: 'GitHub — PID-light-tracker',
@@ -386,14 +447,13 @@ export const articles: ArticleRecord[] = [
       },
       {
         kind: 'p',
-        text: 'The toolkit is not a crack detector and should not be described as one. It begins after segmentation. That boundary is useful: it keeps the package focused on geometry and evaluation while allowing different segmentation models to feed it.',
+        text: 'The toolkit is not a crack detector. It begins after segmentation. That boundary is useful: it keeps the package focused on geometry and evaluation while allowing different segmentation models to feed it.',
       },
       {
         kind: 'p',
         text: 'The next serious validation step is dataset-level comparison across crack types, widths, branching patterns, and imaging conditions. The current value is the reproducible bridge from mask to path—the layer required before a thin visual defect can become a measurement.',
       },
     ],
-    evidence: 'GitHub repository; package README and CLI documentation.',
     sources: [
       {
         label: 'GitHub — fine-crack-detection',
@@ -439,7 +499,7 @@ export const articles: ArticleRecord[] = [
       { kind: 'h3', text: 'The safety boundary is part of the product' },
       {
         kind: 'p',
-        text: 'This is an extraction prototype. It does not prescribe, dispense, check interactions, or replace a pharmacist or clinician. Every output requires human verification against the source image. Real prescription images may contain personal health information, so public demonstrations should use synthetic or safely redacted material.',
+        text: 'This is an extraction prototype. It does not prescribe, dispense, check interactions, or replace a pharmacist or clinician. Every output has to be checked by a person against the source image. Real prescription images may contain personal health information, so public demonstrations should use synthetic or safely redacted material.',
       },
       {
         kind: 'p',
@@ -450,7 +510,6 @@ export const articles: ArticleRecord[] = [
         text: 'The broader lesson is simple: applied AI becomes useful when the system around the model makes its uncertainty and limits operational. Returning a list is easy. Returning a list that a person can safely review is the real task.',
       },
     ],
-    evidence: 'GitHub repository; CLI and FastAPI documentation.',
     sources: [
       {
         label: 'GitHub — medical-prescription-OCR',
@@ -500,12 +559,12 @@ export const articles: ArticleRecord[] = [
       },
       {
         kind: 'p',
-        text: 'The documented stack pairs a Next.js frontend with an Express backend and Prisma/PostgreSQL. Authentication, CSRF protection, rate limiting, and immutable models support the public information layer. The security work is part of editorial integrity because unauthorized changes would undermine the central promise.',
+        text: 'The documented stack pairs a Next.js frontend with an Express backend and Prisma/PostgreSQL. Authentication, CSRF protection, rate limiting, and immutable models support the public information layer. The security work matters for the same reason: a single unauthorized change would undermine the central promise.',
       },
-      { kind: 'h3', text: 'What the project does not claim' },
+      { kind: 'h3', text: 'What Daleel is not' },
       {
         kind: 'p',
-        text: 'Daleel is not an official election authority, and the current repository alone does not prove that its dataset is complete or live. It should be described as an independent civic-technology initiative and an engineering approach to verifiable election information.',
+        text: 'Daleel is not an official election authority, and I don’t present its dataset as complete or live. It is an independent civic-technology project: an engineering approach to election information you can check for yourself.',
       },
       {
         kind: 'p',
@@ -516,7 +575,6 @@ export const articles: ArticleRecord[] = [
         text: 'The project is valuable because it makes those decisions explicit. For high-trust public information, a polished profile page is not enough. Provenance is a product feature.',
       },
     ],
-    evidence: 'GitHub repository; technical documentation.',
     sources: [
       { label: 'GitHub — daleel', href: 'https://github.com/Kronbii/daleel', kind: 'repository' },
       {
@@ -555,17 +613,16 @@ export const articles: ArticleRecord[] = [
         kind: 'p',
         text: 'Arabic right-to-left layout is built into the experience rather than applied at the end. Question flow, answer alignment, numbers, road-sign images, and mixed-script labels all need deliberate handling. A technically correct translation can still feel broken if directionality is inconsistent.',
       },
-      { kind: 'h3', text: 'Keep the claim honest' },
+      { kind: 'h3', text: 'What it is not' },
       {
         kind: 'p',
-        text: 'The trainer uses the documented Lebanese motorcycle question set, but it is not an official government application and should not imply endorsement. Rules and exam procedures can change; the question source and update date need to remain visible when the tool is published.',
+        text: 'The trainer uses the documented Lebanese motorcycle question set, but it is not an official government app, and no government body endorses it. Rules and exam procedures can change, so the question source and its update date should always be visible.',
       },
       {
         kind: 'p',
         text: 'The project shows how a small local-first interface can improve a very specific learning loop. It does not need profiles, streaks, social features, or an AI tutor to be useful. It needs good question coverage, clear feedback, accurate content, and a respectful Arabic interface.',
       },
     ],
-    evidence: 'GitHub repository; application README and question data.',
     sources: [
       {
         label: 'GitHub — lebanese-driving-test',
@@ -622,7 +679,6 @@ export const articles: ArticleRecord[] = [
         text: 'The best pattern here is not “replace support staff with AI.” It is to make a noisy intake queue easier to inspect while keeping policy deterministic and decisions attributable. The council metaphor works only when disagreement, uncertainty, and review remain visible.',
       },
     ],
-    evidence: 'GitHub repository; architecture and testing documentation.',
     sources: [
       {
         label: 'GitHub — AI-customer-support-council',
@@ -677,14 +733,13 @@ export const articles: ArticleRecord[] = [
       },
       {
         kind: 'p',
-        text: 'The project is not a claim that a visual style alone makes finance easier. Its stronger idea is operational: keep the data close, make repetitive work efficient, and let insights emerge from records the user can inspect.',
+        text: 'A visual style alone does not make finance easier. The stronger idea is operational: keep the data close, make repetitive work efficient, and let insights emerge from records the user can inspect.',
       },
       {
         kind: 'p',
         text: 'The next quality bar is long-term reliability—migration tests, backup restoration, import validation, and clear handling of rounding and currency. A personal finance app earns trust slowly, one predictable operation at a time.',
       },
     ],
-    evidence: 'GitHub repository; architecture, storage, and build documentation.',
     sources: [
       {
         label: 'GitHub — personal-finance-tracker',
@@ -701,7 +756,73 @@ export const articles: ArticleRecord[] = [
     topics: ['local-first-software', 'flutter', 'product-engineering'],
     keywords: ['personal finance', 'Flutter desktop', 'offline-first', 'SQLite'],
   },
-  // ---- Review-only articles (noindex; not surfaced in indexes) ----
+  {
+    slug: 'rebuilding-my-finance-app-around-local-first-sync',
+    state: 'ready',
+    title: 'Rebuilding my finance app around local-first sync',
+    metaTitle: 'Rebuilding my finance app around local-first sync',
+    metaDescription:
+      'Juno, the new version of Rami Kronbi’s finance app, keeps every entry on the device first and syncs between Linux and iPhone only if you ask it to. How the sync, the logging, and the imports work.',
+    dek: 'Juno keeps the data on the device first and syncs only if you ask. Most of the work went into making that boring and safe.',
+    heroMedia: {
+      src: '/images/authority/juno/insights.webp',
+      alt: 'Juno’s Insights screen on the desktop with demo data: the month’s spending by category, a day-by-day calendar, and what changed this month.',
+      caption: 'Insights on the desktop, with demo data.',
+    },
+    body: [
+      {
+        kind: 'p',
+        text: 'Juno is the new version of my finance app. The first one, REE, was a Flutter desktop app with local storage. Juno keeps that local-first core and adds an iPhone app, optional sync between the phone and the Linux desktop, and ways to log an expense without opening the app.',
+      },
+      {
+        kind: 'p',
+        text: 'Every entry is marked Personal or Household, so a shared household can see how much goes to each. Without any configuration Juno runs local-only; sync is something you switch on.',
+      },
+      { kind: 'h2', text: 'Sync that converges' },
+      {
+        kind: 'p',
+        text: 'Sync runs through Supabase, and its rules are deliberately simple. Every row carries an updated-at time and a soft-delete marker, so a deletion is a change like any other rather than a row that silently vanishes. Each round pushes the device’s local changes, then pulls everything the server has changed since a per-table cursor that the server itself stamps. Conflicts resolve last-write-wins.',
+      },
+      {
+        kind: 'p',
+        text: 'Seeded data needs one more rule. Default categories and the occurrences of recurring entries are created on each device, and if each device gave them random ids, the first sync would produce two of everything. They get deterministic ids instead, so two devices that create the same category or the same rent payment converge on one row rather than duplicating it. The sync engine itself is written so it can run against a fake remote in tests.',
+      },
+      { kind: 'h2', text: 'Logging without opening the app' },
+      {
+        kind: 'p',
+        text: 'A finance tracker is only as good as the entries that actually make it in. On iPhone, Juno exposes App Intents, so Siri, Shortcuts, Back Tap, and the Action Button can all log an entry, and a home-screen widget logs with one tap. Those entries land in a shared inbox, and Juno imports them the next time it launches. On the desktop, N opens a new entry and Enter saves it.',
+      },
+      { kind: 'h2', text: 'Imports that remember' },
+      {
+        kind: 'p',
+        text: 'Juno guesses the columns of a bank CSV, learns your categories, skips rows it has already seen, and lets you undo an import. Excel workbooks and Notion exports come in the same way, with any Category column matched to your own categories, and everything exports back out to CSV.',
+      },
+      {
+        kind: 'p',
+        text: 'Currencies matter in Lebanon, where accounts can be in Lebanese pounds or dollars. An account can hold LBP, EUR, or another currency at a rate you set, totals stay in USD, and each entry keeps the USD value it was logged at, so a later change in the rate does not rewrite the past.',
+      },
+      { kind: 'h2', text: 'Checked like CI, on every push' },
+      {
+        kind: 'p',
+        text: 'One script runs exactly what CI runs: generated code, formatting, analysis with infos counted as failures, and every test, and a git hook can run it on each push. A screenshot test renders every screen at phone and desktop sizes, light and dark; the screenshots on the project page come from it, using the app’s demo data.',
+      },
+      {
+        kind: 'p',
+        text: 'The look borrows from three earlier projects: the instrument-style frame of Bikey, with structure drawn in hairlines and every figure set in mono; the type system of Lazpress; and the warm dark palette of Tayseer, burgundy on near-black with cream ink.',
+      },
+    ],
+    sources: [
+      { label: 'GitHub — juno', href: 'https://github.com/Kronbii/juno', kind: 'repository' },
+      {
+        label: 'iPhone setup: widget, Siri, and Shortcuts',
+        href: 'https://github.com/Kronbii/juno/blob/main/docs/ios-setup.md',
+        kind: 'documentation',
+      },
+    ],
+    projectSlug: 'juno',
+    topics: ['local-first-software', 'flutter', 'product-engineering'],
+    keywords: ['local-first', 'Flutter', 'Supabase', 'sync', 'personal finance', 'App Intents'],
+  },
   {
     slug: 'building-real-time-lebanese-sign-language-translation',
     state: 'ready',
@@ -716,11 +837,11 @@ export const articles: ArticleRecord[] = [
       },
       {
         kind: 'p',
-        text: 'OmniSign was built as a real-time translation system spanning camera input, visual recognition, language output, and deployment across mobile, web, and offline embedded environments. My canonical project record describes a 300,000-image dataset, 95–97% development accuracy, and approximately 45 frames per second, with pilots in two Beirut coffee shops and one church.',
+        text: 'OmniSign is a real-time translation system spanning camera input, visual recognition, language output, and deployment across mobile, web, and offline embedded environments. We built a 300,000-image dataset, reached 95–97% accuracy in development at roughly 45 frames per second, and piloted it in two Beirut coffee shops and one church.',
       },
       {
         kind: 'p',
-        text: 'The two public accounts of the project report different numbers. The team’s project page describes 40,000 collected sign samples from 21 Lebanese sign-language schools, 50,000 after augmentation, and 80,000 landmark records. My canonical record describes a 300,000-image dataset, 95–97% development accuracy, roughly 45 frames per second, and pilots in two Beirut coffee shops and one church. The team collected the dataset itself. The counts differ because they measure different things, samples versus images, and no single published evaluation reconciles them, so both are given here as reported.',
+        text: 'The team’s project page gives different numbers: 40,000 sign samples collected from 21 Lebanese sign-language schools, 50,000 after augmentation, and 80,000 landmark records. We collected the dataset ourselves, and the counts differ because they measure different things, samples versus images.',
       },
       {
         kind: 'p',
@@ -728,10 +849,9 @@ export const articles: ArticleRecord[] = [
       },
       {
         kind: 'p',
-        text: 'OmniSign was a team project: Layth Ayache led AI and data work; Nour El Hariri, Tayseer Laz, and Abou Baker Hussien Al Khatib were team members; Dr. Oussama Mustapha supervised; I was a co-founder and the computer vision engineer. The team’s project page reports a Public Choice first prize at the 2025 National FYP Demo Day. This article deliberately omits the personal origin story used in an earlier platform post and states only what the team’s pages and my record support.',
+        text: 'OmniSign was a team project. Layth Ayache led the AI and data work; Nour El Hariri, Tayseer Laz, and Abou Baker Hussien Al Khatib were on the team; Dr. Oussama Mustapha supervised; I was a co-founder and the computer vision engineer. The project won the Public Choice first prize at the 2025 National FYP Demo Day.',
       },
     ],
-    evidence: 'Canonical CV; team project pages by Layth Ayache and Tayseer Laz.',
     sources: [
       { label: 'Team project page — Layth Ayache', href: 'https://laythayache.com/projects/omnisign', kind: 'article' },
       { label: 'Team project page — Tayseer Laz', href: 'https://tayseerlaz.com/work/omnisign/', kind: 'article' },
@@ -758,10 +878,9 @@ export const articles: ArticleRecord[] = [
       },
       {
         kind: 'p',
-        text: 'The project is the Smart Interactive Desk, codenamed BEMO, built as a senior graduation project at Rafik Hariri University by Rami Kronbi, Bassam Kousa, Ali Daaboul, Mohamad Berjawi, and Mohamad Hariri. The public repository and demo video are linked from the project record; the team’s formal report and test documentation live outside the repository.',
+        text: 'The Smart Interactive Desk, codenamed BEMO, was our senior graduation project at Rafik Hariri University: Bassam Kousa, Ali Daaboul, Mohamad Berjawi, Mohamad Hariri, and me as team lead. It won the Best Senior Project award. The code and a demo video are linked below; the team’s formal report and test results live outside the repository.',
       },
     ],
-    evidence: 'Public repository; demo video; canonical CV.',
     sources: [
       { label: 'GitHub — smart-interactive-desk', href: 'https://github.com/Kronbii/smart-interactive-desk', kind: 'repository' },
       { label: 'Demo video', href: 'https://youtu.be/5TPmpPc6rjY', kind: 'video' },
@@ -791,38 +910,10 @@ export const articles: ArticleRecord[] = [
         text: 'Before publication, the repository, exact model variant and input size, data rights, evaluation split, meaning of the reported 75–80% accuracy, flight-test ownership, and separation from employer work need confirmation.',
       },
     ],
-    evidence: 'Editorial review pending repository, dataset rights, and employer separation.',
     sources: [],
     projectSlug: 'raspberry-pi-runway-inspection-uav',
     topics: ['edge-ai', 'computer-vision', 'robotics-perception'],
     keywords: ['FOD detection', 'YOLOv11', 'Raspberry Pi 5B'],
-  },
-  {
-    slug: 'engineering-a-five-inch-fpv-drone-from-first-principles',
-    state: 'review',
-    title: 'Engineering a five-inch FPV drone from first principles',
-    metaTitle: 'Engineering a five-inch FPV drone from first principles (editorial review)',
-    metaDescription: 'Editorial review draft. Not indexable.',
-    dek: 'Building a five-inch FPV drone is an exercise in coupled constraints.',
-    body: [
-      {
-        kind: 'p',
-        text: 'Building a five-inch FPV drone is an exercise in coupled constraints. Motor and propeller choices affect thrust and current. Battery voltage changes the power system. Frame weight and component placement affect response. Software tuning begins only after the physical build is coherent.',
-      },
-      {
-        kind: 'p',
-        text: 'The canonical project record describes a carbon-fiber quadcopter designed from thrust, weight, and current calculations, followed by Betaflight configuration, PID tuning, flight-mode setup, GPS features, and return-to-home behavior. Evaluation included GPS accuracy, RF link quality, and flight behavior under GNSS jamming and IMU/GNSS integration constraints.',
-      },
-      {
-        kind: 'p',
-        text: 'The publishable story should show the calculation path and measured logs, not merely list components. Public media, dates, hardware specifications, test locations, and the boundary around any jamming observations still need review, so this draft remains noindex.',
-      },
-    ],
-    evidence: 'Editorial review pending public media, logs, and jamming-observation boundaries.',
-    sources: [],
-    projectSlug: 'five-inch-carbon-fiber-fpv-drone',
-    topics: ['embedded-systems', 'control-systems', 'robotics-perception'],
-    keywords: ['FPV drone', 'Betaflight', 'PID tuning'],
   },
   {
     slug: 'lessons-from-an-edge-emotion-recognition-prototype',
@@ -845,7 +936,6 @@ export const articles: ArticleRecord[] = [
         text: 'Before publication, the team credits, dataset licenses, class definitions, evaluation protocol, acquisition language, intended users, and clinical review must be confirmed. The final article should be a careful engineering retrospective, not a claim that emotion can be read reliably from a face.',
       },
     ],
-    evidence: 'Editorial review pending team credits, dataset licenses, and clinical review.',
     sources: [],
     projectSlug: 'emotion-recognition-autism-support',
     topics: ['edge-ai', 'computer-vision'],
@@ -861,7 +951,7 @@ export const articles: ArticleRecord[] = [
     body: [
       {
         kind: 'p',
-        text: 'From 2021 to 2024 I was lead technical organizer for NASA Space Apps in Beirut, supporting roughly 250–400 participants annually with a volunteer team of 10–15 people, as recorded in my canonical CV. The work included technical bootcamps using NASA datasets, problem selection, prototyping, competition requirements, and submission strategy. The CV also records six Global Top 10 placements across three consecutive years among teams supported through that ecosystem. The public record so far is narrower: Rafik Hariri University’s 2022 report names me as the university’s student volunteer at the event.',
+        text: 'From 2021 to 2024 I was lead technical organizer for NASA Space Apps in Beirut, supporting roughly 250–400 participants a year with a volunteer team of 10–15 people. The work included technical bootcamps using NASA datasets, problem selection, prototyping, competition requirements, and submission strategy. Over three consecutive years, teams we supported earned six Global Top 10 placements. Rafik Hariri University’s 2022 report on the event names me as the university’s student volunteer.',
       },
       {
         kind: 'p',
@@ -869,10 +959,9 @@ export const articles: ArticleRecord[] = [
       },
       {
         kind: 'p',
-        text: 'The organizer certificates for 2021–2024 are held privately and there is no official online organizer listing for those years, so the CV is the cited source. The placements belong to the teams and the wider community; mentoring created conditions, not results.',
+        text: 'The placements belong to the teams and the wider community. Mentoring created the conditions, not the results.',
       },
     ],
-    evidence: 'Canonical CV; RHU news (2022).',
     sources: [
       { label: 'RHU — RHU team makes it to the final stages of NASA Space Apps (2022)', href: 'https://www.rhu.edu.lb/media-room/news/rhu-team-makes-it-to-the-final-stages-of-the-nasa-space-apps-annual-international-competition', kind: 'institution' },
     ],
@@ -910,10 +999,9 @@ export const articles: ArticleRecord[] = [
       },
       {
         kind: 'p',
-        text: 'What the platform does not do is replace the people doing the work. It gives verification, triage, matching, and follow-up a shared structure. The remaining questions for this record are about scale and outcomes: how many cases moved through the pipeline and what the team learned from the ones that stalled. Those figures will be added only from the team’s own records, never estimated.',
+        text: 'What the platform does not do is replace the people doing the work. It gives verification, triage, matching, and follow-up a shared structure. The questions I still want to answer are about scale and outcomes: how many cases moved through the pipeline, and what we learned from the ones that stalled.',
       },
     ],
-    evidence: 'Public repository and README credits; live platform.',
     sources: [
       { label: 'GitHub — nasna', href: 'https://github.com/1homsi/nasna', kind: 'repository' },
       { label: 'nasna.world', href: 'https://nasna.world', kind: 'demo' },
@@ -943,7 +1031,6 @@ export const articles: ArticleRecord[] = [
         text: 'Before indexing, the event dates, participating institutions, collaborator credits, participant scale, photographs, and public references need confirmation. The final piece should document how the program was designed and repeated, not claim institutional impact that has not been measured.',
       },
     ],
-    evidence: 'Editorial review pending event dates, host institutions, and collaborator credits.',
     sources: [],
     projectSlug: '',
     topics: [],
@@ -986,7 +1073,6 @@ export const articles: ArticleRecord[] = [
         text: 'None of these changes is large. What they share is a pull request written so the maintainer can verify the mechanism without re-deriving it, and a test wherever the project has a harness. That is the part of open-source work I want to keep doing.',
       },
     ],
-    evidence: 'Pull requests and their review threads on GitHub.',
     sources: [
       { label: 'Betaflight PR #15706', href: 'https://github.com/betaflight/betaflight/pull/15706', kind: 'repository' },
       { label: 'Betaflight PR #15705', href: 'https://github.com/betaflight/betaflight/pull/15705', kind: 'repository' },
@@ -1003,17 +1089,17 @@ export const articles: ArticleRecord[] = [
     state: 'ready',
     title: 'Talks, workshops, and teaching',
     metaTitle: 'Talks, workshops, and teaching — Rami Kronbi',
-    metaDescription: 'Public talks and workshops by Rami Kronbi on on-device AI, version control, and engineering careers, each with its event, date, and source.',
-    dek: 'Public sessions on on-device AI, version control, and engineering careers, with the evidence for each.',
+    metaDescription: 'Public talks and workshops by Rami Kronbi on on-device AI, version control, and engineering careers.',
+    dek: 'Sessions I’ve given on on-device AI, version control, and engineering careers.',
     body: [
       {
         kind: 'p',
-        text: 'This page records the public talks and workshops I have given, with the event, date, and source for each. It exists so that the claims can be checked, not to collect logos.',
+        text: 'These are the public talks and workshops I have given, with the event and date for each, and a link wherever there is one.',
       },
       { kind: 'h2', text: 'GDG DevFest Tripoli 2025' },
       {
         kind: 'p',
-        text: 'On 20 December 2025 I spoke at DevFest Tripoli 2025, organized by GDG North Lebanon at Beirut Arab University’s Tripoli campus, in the 11:10–11:50 slot. The talk, “On-Device Multimodal Assistants: Can We Fit GPT-Vision on Small Hardware?”, covered quantization, memory budgets, and hardware acceleration for running vision-language models on consumer hardware, and ended with a live demo. The event’s speaker announcements described me as a computer vision engineer at Oreyeon.',
+        text: 'On 20 December 2025 I spoke at DevFest Tripoli 2025, organized by GDG North Lebanon at Beirut Arab University’s Tripoli campus, in the 11:10–11:50 slot. The talk, “On-Device Multimodal Assistants: Can We Fit GPT-Vision on Small Hardware?”, covered quantization, memory budgets, and hardware acceleration for running vision-language models on consumer hardware, and ended with a live demo.',
       },
       { kind: 'h2', text: 'CodewithSerah Pre-Winter Sprint Bootcamp, January 2026' },
       {
@@ -1025,12 +1111,7 @@ export const articles: ArticleRecord[] = [
         kind: 'p',
         text: 'In April 2026 I coordinated a hands-on Git and GitHub workshop hosted by the LAU Byblos Software Engineering Club. The exercise material, written by Tarek AlSaleh, walks students through a staged repository with merge conflicts, stashes, and rebases, and is public on GitHub.',
       },
-      {
-        kind: 'p',
-        text: 'Not listed here: sessions for which there is no public source. Slides for the DevFest talk will be attached when exported.',
-      },
     ],
-    evidence: 'Event announcements; the host’s public LinkedIn post; the workshop repository.',
     sources: [
       { label: 'GDG North Lebanon DevFest 2025', href: 'https://north25.gdglebanon.com/', kind: 'institution' },
       { label: 'CodewithSerah — LinkedIn post about the sessions', href: 'https://www.linkedin.com/posts/codewithserah_git-github-the-long-way-into-ai-rami-activity-7421484335364681728-DWk1', kind: 'article' },
@@ -1057,7 +1138,6 @@ export const articles: ArticleRecord[] = [
       { kind: 'p', text: 'Every row in the event feed is an anchor to its source page, and the ticker opens each story at its origin. The dashboard is a reading aid for public information, not a new source of it. It holds no patient-level data and makes no epidemiological claim of its own.' },
       { kind: 'p', text: 'What it lacks is also clear: the parsers are specific to this outbreak and its feeds, there is no automated test suite yet, and the repository’s documentation is a handoff note rather than a README. Those are the next things to fix before it is presented as more than a working prototype.' },
     ],
-    evidence: 'Live deployment; public repository.',
     sources: [
       { label: 'Live dashboard', href: 'https://hanta-virus-dashboard.vercel.app', kind: 'demo' },
       { label: 'GitHub — hanta-virus-dashboard', href: 'https://github.com/Kronbii/hanta-virus-dashboard', kind: 'repository' },
@@ -1082,9 +1162,8 @@ export const articles: ArticleRecord[] = [
       { kind: 'h2', text: 'Built for a clinic box, not a data center' },
       { kind: 'p', text: 'The whole council runs in about two seconds per eye on a plain CPU. That is what makes an on-premises deployment plausible in Lebanon, where connectivity and power are not guaranteed and patient images should not leave the building.' },
       { kind: 'h2', text: 'What it is not' },
-      { kind: 'p', text: 'Basira is in development. Its validation record is retrospective benchmarking on public datasets, produced to guide engineering, and states plainly that it is not clinically validated and not a medical device. The clinical study that would support any performance claim has not been run. Those constraints are part of the record, not footnotes.' },
+      { kind: 'p', text: 'Basira is in development. So far it has been benchmarked retrospectively on public datasets, to guide the engineering. It is not clinically validated and it is not a medical device; the clinical study that could support a performance figure has not been run yet. I treat those limits as part of the design, not as footnotes.' },
     ],
-    evidence: 'Live prototype with demo data; the project’s validation record.',
     sources: [
       { label: 'Live prototype', href: 'https://basira.ramikronbi.com', kind: 'demo', note: 'Demo clinic and demo data only.' },
     ],
@@ -1107,12 +1186,9 @@ export const articles: ArticleRecord[] = [
       { kind: 'p', text: 'Canon EOS R5 DNGs from recent converters use JPEG XL tiles that LibRaw cannot decode, so the pipeline falls back to tifffile and applies the DNG specification’s color pipeline itself: per-channel polynomial linearization from the opcode list, white balance and camera calibration, the forward matrix to XYZ D50, Bradford adaptation to D65, and finally linear sRGB. Lens distortion, chromatic aberration, and vignetting are corrected with lensfun profiles. The output is 16-bit linear PNG, scene-referred, with no gamma.' },
       { kind: 'h2', text: 'Targets must not be reinterpreted' },
       { kind: 'p', text: 'The photographer’s JPEG is the ground truth. It is linearized so the artistic values are preserved exactly rather than re-graded by the pipeline. If the target drifts, the model learns the pipeline’s taste instead of the photographer’s.' },
-      { kind: 'p', text: 'Layth Ayache contributed training and delivery runs. The client’s imagery stays private. The client reported that editing throughput moved from two to three photos per day for a team of three to about forty per day per team member; that figure is the client’s, recorded in my canonical CV. What I can show is the mechanism: get the decode right, keep the target exact, and the model has something honest to learn.' },
+      { kind: 'p', text: 'Layth Ayache contributed training and delivery runs. The client’s imagery stays private. By the client’s count, editing throughput went from two or three photos a day for a team of three to about forty a day per team member. What I can show here is the mechanism: get the decode right, keep the target exact, and the model has something honest to learn.' },
     ],
-    evidence: 'Canonical CV; private repository (client imagery).',
-    sources: [
-      { label: 'Canonical CV (2026)', href: 'https://ramikronbi.com', kind: 'cv' },
-    ],
+    sources: [],
     projectSlug: 'imagen-raw-to-edit-dataset-pipeline',
     topics: ['computer-vision', 'applied-ai'],
     keywords: ['HDRNet', 'RAW', 'DNG', 'color science'],
@@ -1132,9 +1208,8 @@ export const articles: ArticleRecord[] = [
       { kind: 'p', text: 'The interface uses tRPC; devices use a versioned REST endpoint with hashed device keys and idempotency. Both are thin adapters over the same service functions, so manual entry and device ingestion write the same way and differ only in who the actor is. The device API is defined, tested, and simulated by a script; live ingestion is deferred until firmware is ready.' },
       { kind: 'h2', text: 'Narratives, never classification' },
       { kind: 'p', text: 'Classification arrives from the device. A language model writes a patient-friendly explanation and a doctor-facing summary from stored results, and it is explicitly forbidden from producing a triage label that drives the interface. Images are private objects in S3-compatible storage with keys prefixed by organization; they never enter the database.' },
-      { kind: 'p', text: 'The prototype has a single local workspace instead of real authentication, and HIPAA and GDPR are designed for rather than implemented. All demo data is synthetic. Those are honest limits of an MVP; what is already settled is that the safe path is the only path.' },
+      { kind: 'p', text: 'The prototype has a single local workspace instead of real authentication, and HIPAA and GDPR are designed for rather than implemented. All demo data is synthetic. Those are the expected limits of an MVP; what is already settled is that the safe path is the only path.' },
     ],
-    evidence: 'Public repository and implementation plan.',
     sources: [
       { label: 'GitHub — lumiscan-dashboard', href: 'https://github.com/Kronbii/lumiscan-dashboard', kind: 'repository' },
     ],
@@ -1152,9 +1227,8 @@ export const articles: ArticleRecord[] = [
     body: [
       { kind: 'p', text: 'Evoid is a small venture I co-founded to do applied AI and computer-vision work for clients in Beirut, alongside a team that includes Tayseer Laz and Abou Baker Al Khatib. I worked as systems engineer and product manager: client coordination, technical direction, and building the public site.' },
       { kind: 'p', text: 'The useful lesson was about scope. A client with a workflow that a camera could improve rarely needs a platform; they need one bounded prototype that answers one question, delivered by the same people who will maintain it. PadelEye, the venture’s own experiment in automated padel line judging from a camera stream, is a case in point: trained weights and a scaffolded pipeline exist, and it is still a prototype, not a product.' },
-      { kind: 'p', text: 'This record deliberately omits client names and outcomes until each can be described with the client’s agreement, and it does not repeat the placeholder case studies on the venture’s site. The canonical CV records five computer-vision applications delivered to external clients between 2023 and 2025.' },
+      { kind: 'p', text: 'Between 2023 and 2025 we delivered five computer-vision applications for external clients. I don’t name them or their outcomes here; that is for each client to agree to first.' },
     ],
-    evidence: 'Canonical CV; the venture’s public site.',
     sources: [
       { label: 'evoid.dev', href: 'https://www.evoid.dev/', kind: 'demo' },
     ],
@@ -1174,7 +1248,6 @@ export const articles: ArticleRecord[] = [
       { kind: 'p', text: 'That choice made the physics part of the control problem. The required nozzle height for a target depends on the water level, and the water level drops after every shot. The firmware estimates height from a simple ballistic relation and updates the modeled level with a Torricelli-style expression after each burst. Both are simplifications, and the README says so: empirical tuning is needed.' },
       { kind: 'p', text: 'The repository is organized as firmware, focused bring-up test sketches for each actuator, CAD, and documentation, with calibration steps for steps-per-millimetre and predicted-versus-actual height logged over serial. It is early work, kept public because the loop is complete and the assumptions are written down.' },
     ],
-    evidence: 'Public repository.',
     sources: [
       { label: 'GitHub — water-shooting-robot', href: 'https://github.com/Kronbii/water-shooting-robot', kind: 'repository' },
     ],
@@ -1199,7 +1272,6 @@ export const articles: ArticleRecord[] = [
       { kind: 'p', text: 'Push notifications fan out from a durable BullMQ queue on Redis, in a worker built from the same codebase as the API and scaled separately. Private media lives in S3-compatible storage. PostgreSQL is authoritative; Redis holds only queues, locks, and disposable coordination state. nginx handles rate limiting and WebSocket upgrades in front of stateless API replicas.' },
       { kind: 'p', text: 'The social layer, feed with hot ordering, votes, threaded comments, mentions, follows, blocks, collab groups, and leaderboards, sits on top of that core. The core is the part I would defend: moderation, appeals, and accounting are the product; the rest is what makes it fun.' },
     ],
-    evidence: 'Google Play listing; private repository documentation.',
     sources: [
       { label: 'bsheel.app', href: 'https://bsheel.app/', kind: 'demo' },
       { label: 'BSHEEL on Google Play', href: 'https://play.google.com/store/apps/details?id=com.questapp.mobile_app', kind: 'listing' },
@@ -1220,7 +1292,6 @@ export const articles: ArticleRecord[] = [
       { kind: 'p', text: 'The spine of the product is a single decision: rides are not achievements, they are data about the bike. Recorded distance moves the odometer; the odometer tells you the chain needs adjusting in 900 kilometres; the schedule points you to a part and a mechanic near where you actually ride; logging the work resets the schedule; hazards other riders hit shape your next ride. Pull one part out and the others get worse.' },
       { kind: 'p', text: 'The prototype is a Flutter monorepo with feature packages, Mapbox, and local storage, and no backend yet. It is days old at the time of writing, so this page records the design, not a shipped product. What I contributed will be stated here once the team’s roles are written down.' },
     ],
-    evidence: 'Private repository product brief.',
     sources: [
       { label: 'Repository (private)', href: 'https://github.com/TayseerLaz/bikey', kind: 'repository', note: 'Owned by Tayseer Laz.' },
     ],

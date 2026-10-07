@@ -69,7 +69,7 @@ export const plain: Record<string, PlainWork> = {
   'posture-aware-classroom-desk': {
     kind: 'Robotics · product',
     line: 'A desk that sees how you sit and adjusts its own height and tilt, with instant light feedback and a dashboard of longer-term patterns.',
-    proof: 'Senior graduation project · team lead',
+    proof: 'Best Senior Project · team lead',
     part: 'Team lead in a team of five',
     field: 'machines',
     image: {
@@ -103,7 +103,7 @@ export const plain: Record<string, PlainWork> = {
     kind: 'AI · photography',
     line: 'Taught a neural network to edit real-estate photos the way one photographer does, for a French photography agency.',
     proof:
-      '2–3 photos a day for a team of three, then ~40 per person, per the client',
+      'From 2–3 photos a day for a team of three to ~40 per person, by the client’s count',
     part: 'Pipeline author, with Layth Ayache on training',
     field: 'vision',
   },
@@ -213,6 +213,18 @@ export const plain: Record<string, PlainWork> = {
     proof: 'Technical assessment deliverable',
     part: 'Built solo',
     field: 'tools',
+  },
+  juno: {
+    kind: 'App · personal finance',
+    line: 'The new version of my finance app: a local-first personal and household tracker for the Linux desktop and iPhone, with optional sync between them.',
+    proof: 'Public on GitHub · Flutter',
+    part: 'Built solo',
+    field: 'tools',
+    image: {
+      src: '/images/vneo/juno-home.jpg',
+      alt: 'Juno’s home screen with demo data: the month’s spending, budgets, and accounts.',
+      position: '0% 0%',
+    },
   },
   'ree-personal-finance-tracker': {
     kind: 'Desktop app',

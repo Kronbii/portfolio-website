@@ -28,7 +28,7 @@ import { CaseShot } from './case-shot'
  * A project in Vneo: who it is for and what it does, beside its picture in
  * motion (its chapter's scene, or its reel shot, or its own photograph
  * coming into focus); then the short answer and the steps for everyone; the
- * engineering folded under "For engineers" (v3's idea); the evidence, always
+ * engineering folded under "For engineers" (v3's idea); its links, always
  * visible.
  */
 
@@ -43,11 +43,11 @@ const T = {
   results: 'Results',
   media: 'From the project',
   engineers: 'For engineers',
-  engineersSub: 'How it is built, its known limits, and its keywords.',
+  engineersSub: 'How it is built, its limits, and its keywords.',
   how: 'How it works',
-  limits: 'Known limits',
+  limits: 'Limits',
   keywords: 'Keywords',
-  evidence: 'Evidence and links',
+  links: 'Links',
   note: 'Read the write-up',
   next: 'Next project',
 }
@@ -74,8 +74,7 @@ export function Case({ slug }: { slug: string }) {
     article && article.state === 'ready' ? writingHref(article.slug) : undefined
   const src =
     p.sources.find((s) => s.kind === 'demo') ??
-    p.sources.find((s) => s.kind === 'repository') ??
-    p.sources[0]
+    p.sources.find((s) => s.kind === 'repository')
 
   return (
     <>
@@ -260,23 +259,34 @@ export function Case({ slug }: { slug: string }) {
           </details>
         </section>
 
-        <section className="v7-case-sec" aria-labelledby="evidence-h">
-          <h2 id="evidence-h" className="v7-case-h" data-lens="">
-            {T.evidence}
+        <section className="v7-case-sec" aria-labelledby="links-h">
+          <h2 id="links-h" className="v7-case-h" data-lens="">
+            {T.links}
           </h2>
-          <ul className="v7-sources">
-            {p.sources.map((s) => (
-              <li key={s.href}>
-                <a href={s.href} rel="noopener" target="_blank">
-                  <span className="v7-source-k">{sourceKindLabel[s.kind]}</span>
-                  <span className="v7-source-l">{s.label} ↗</span>
-                  {s.note ? (
-                    <span className="v7-source-n">{s.note}</span>
-                  ) : null}
-                </a>
-              </li>
-            ))}
-          </ul>
+          {p.sources.length ? (
+            <ul className="v7-sources">
+              {p.sources.map((s) => (
+                <li key={s.href}>
+                  <a href={s.href} rel="noopener" target="_blank">
+                    <span className="v7-source-k">
+                      {sourceKindLabel[s.kind]}
+                    </span>
+                    <span className="v7-source-l">{s.label} ↗</span>
+                    {s.note ? (
+                      <span className="v7-source-n">{s.note}</span>
+                    ) : null}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+          {note ? (
+            <p className="vn-case-note">
+              <Link className="v7-go quiet" href={note}>
+                {T.note} →
+              </Link>
+            </p>
+          ) : null}
           <TopicLinks slugs={p.topics} />
         </section>
 

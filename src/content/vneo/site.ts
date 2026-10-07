@@ -147,22 +147,13 @@ export type ShowItem = WorkItem & {
   external?: boolean
 }
 
-/** Juno, the new version of my finance app; its record is its public repository. */
+/** Juno, the new version of my finance app, shown by its screenshot. */
 const juno: ShowItem = {
-  slug: 'juno',
-  title: 'Juno',
-  kind: 'App · personal finance',
-  line: 'The new version of my finance app: a local-first personal and household tracker for the Linux desktop and iPhone, with optional sync between them.',
-  proof: 'Public on GitHub · Flutter',
-  part: 'Built solo',
-  href: 'https://github.com/Kronbii/juno',
-  motion: undefined,
-  shows: '',
+  ...workItem('juno', undefined, ''),
   alt: 'Juno’s home screen with demo data: the month’s spending, budgets, and accounts.',
   size: 'wide',
   area: 'juno',
   image: { src: '/images/vneo/juno-home.jpg', position: '0% 0%' },
-  external: true,
 }
 
 /**
@@ -312,7 +303,7 @@ export const community = {
     label: 'Mentoring',
     title: 'NASA Space Apps, Beirut',
     years: ['2021', '2022', '2023', '2024'],
-    note: 'Lead technical organizer, per my CV: bootcamps on NASA data, problem selection, and prototyping for its teams.',
+    note: 'Lead technical organizer: bootcamps on NASA data, problem selection, and prototyping for its teams.',
     href: writingHref('what-four-years-of-technical-mentoring-taught-me'),
   },
   read: 'Read more',

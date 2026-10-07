@@ -40,7 +40,14 @@ export function pageMeta({
   return {
     title: { absolute: title },
     description,
-    alternates: { canonical: path },
+    alternates: {
+      canonical: path,
+      types: {
+        'application/rss+xml': [
+          { url: '/feed.xml', title: `Writing — ${siteConfig.name}` },
+        ],
+      },
+    },
     keywords,
     openGraph: {
       title,

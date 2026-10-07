@@ -34,7 +34,6 @@ export const topics: TopicRecord[] = [
     ],
     reviewMentions: [
       'Raspberry Pi runway-inspection UAV (in review)',
-      'Five-inch carbon-fiber FPV drone (in review)',
     ],
   },
   {
@@ -52,7 +51,6 @@ export const topics: TopicRecord[] = [
     ],
     reviewMentions: [
       'Raspberry Pi runway-inspection UAV (in review)',
-      'Five-inch carbon-fiber FPV drone (in review)',
     ],
   },
   {
@@ -126,7 +124,7 @@ export const topics: TopicRecord[] = [
     questions: [
       'Which civic tools has Rami Kronbi built?',
       'How is provenance treated as a product feature?',
-      'What does the project explicitly not claim?',
+      'Where does each project draw its own limits?',
     ],
   },
   {

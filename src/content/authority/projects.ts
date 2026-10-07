@@ -10,7 +10,7 @@ export const projects: ProjectRecord[] = [
     metaDescription:
       'A 5-inch carbon-fiber FPV drone designed and built by Rami Kronbi: propulsion and power sized from thrust, weight, and current calculations, and Betaflight PID loops, flight modes, GPS, and return-to-home configured and tuned.',
     summary:
-      'A 5-inch carbon-fiber UAV, designed and integrated with its propulsion and power components selected from thrust, weight, and current calculations; its Betaflight PID loops, flight modes, GPS features, and return-to-home behavior configured and tuned; and its GPS accuracy, RF link quality, and flight performance evaluated under GNSS jamming and IMU/GNSS integration constraints.',
+      'A 5-inch carbon-fiber quadcopter I designed and built. I sized its propulsion and power from thrust, weight, and current calculations, configured and tuned Betaflight (PID loops, flight modes, GPS features, return-to-home), and evaluated GPS accuracy, RF link quality, and flight performance under GNSS jamming and IMU/GNSS integration constraints.',
     role: 'Designer and builder.',
     form: 'artifact',
     schemaType: 'CreativeWork',
@@ -26,11 +26,11 @@ export const projects: ProjectRecord[] = [
       },
     },
     answer: {
-      what: 'A 5-inch carbon-fiber FPV drone that Rami Kronbi designed and built.',
+      what: 'A 5-inch carbon-fiber FPV drone I designed, built, and tuned myself.',
       problem:
-        'A drone flies well only if its propulsion and power fit its thrust, weight, and current budget, and only if its flight controller is configured and tuned before it is trusted with GPS features and return-to-home.',
-      how: 'The propulsion and power components were selected from thrust, weight, and current calculations and integrated on a 5-inch carbon-fiber frame. Betaflight’s PID loops, flight modes, GPS features, and return-to-home behavior were configured and tuned, and GPS accuracy, RF link quality, and flight performance were evaluated under GNSS jamming and IMU/GNSS integration constraints.',
-      role: 'Rami Kronbi designed and built the drone, and configured, tuned, and evaluated it.',
+        'A drone flies well only when its propulsion and power fit its thrust, weight, and current budget, and its flight controller has to be configured and tuned before you can trust it with GPS features and return-to-home.',
+      how: 'I selected the propulsion and power components from thrust, weight, and current calculations and integrated them on a 5-inch carbon-fiber frame. Then I configured and tuned Betaflight’s PID loops, flight modes, GPS features, and return-to-home behavior, and evaluated GPS accuracy, RF link quality, and flight performance under GNSS jamming and IMU/GNSS integration constraints.',
+      role: 'I designed and built it, then configured, tuned, and tested it.',
     },
     stages: [
       {
@@ -42,7 +42,7 @@ export const projects: ProjectRecord[] = [
       {
         step: '02',
         title: 'Build',
-        detail: 'The components integrated on a 5-inch carbon-fiber frame.',
+        detail: 'The parts go together on a 5-inch carbon-fiber frame.',
       },
       {
         step: '03',
@@ -57,17 +57,15 @@ export const projects: ProjectRecord[] = [
           'GPS accuracy, RF link quality, and flight performance evaluated under GNSS jamming and IMU/GNSS integration constraints.',
       },
     ],
-    limits: [
-      'No flight logs, test data, or measured results are published with this record; it states what was done, not how well.',
-    ],
+    limits: [],
     sources: [
       {
-        label: 'Canonical CV (2026)',
-        href: 'https://ramikronbi.com',
-        kind: 'cv',
+        label: 'Betaflight',
+        href: 'https://betaflight.com',
+        kind: 'documentation',
+        note: 'The open-source flight-controller firmware it runs.',
       },
     ],
-    // its write-up is still in editorial review, so the page does not link it yet
     articleSlug: 'engineering-a-five-inch-fpv-drone-from-first-principles',
     topics: ['control-systems', 'embedded-systems', 'robotics-perception'],
     keywords: [
@@ -107,7 +105,7 @@ export const projects: ProjectRecord[] = [
       problem:
         'General-purpose stitchers hide the geometric decisions behind a single call, which makes it hard to explain why a panorama tilts, ghosts, or drifts under real handheld capture.',
       how: 'Frames are extracted, matched with ORB features and RANSAC, related by homography under a pure-rotation camera model, projected back onto a sphere, and rendered in a browser viewer. Temporal smoothing damps the pitch and roll wobble left after per-pair estimation.',
-      role: 'Rami Kronbi is the sole developer of the pipeline, viewer, tests, and technical documentation.',
+      role: 'I built the pipeline, the viewer, the tests, and the technical documentation on my own.',
     },
     stages: [
       {
@@ -138,7 +136,7 @@ export const projects: ProjectRecord[] = [
         step: '05',
         title: 'Smooth',
         detail:
-          'A moving average over the chained global rotations damps per-pair pitch and roll wobble while remaining honest about what it is not: bundle adjustment, loop closure, or exposure matching.',
+          'A moving average over the chained global rotations damps per-pair pitch and roll wobble. It is deliberately simple: not bundle adjustment, loop closure, or exposure matching.',
       },
       {
         step: '06',
@@ -186,12 +184,12 @@ export const projects: ProjectRecord[] = [
       {
         label: 'Pitch wobble reduction',
         value: '13.5×',
-        context: 'temporal smoothing, documented sample',
+        context: 'temporal smoothing, on the sample run',
       },
       {
         label: 'Roll wobble reduction',
         value: '5.2×',
-        context: 'temporal smoothing, documented sample',
+        context: 'temporal smoothing, on the sample run',
       },
     ],
     limits: [
@@ -291,7 +289,7 @@ export const projects: ProjectRecord[] = [
       problem:
         'Most PID examples end at the equation, leaving timing, windup, noise, and diagnostics implicit — precisely the parts that decide whether a controller actually settles.',
       how: 'The library exposes independent controller instances with automatic or caller-supplied timing, selectable anti-windup, optional derivative low-pass filtering, output limits, runtime tuning, and per-term state introspection. An optional relay autotuner is available with documented operating conditions.',
-      role: 'Rami Kronbi is the author of the library, examples, and documentation.',
+      role: 'I wrote the library, its examples, and its documentation.',
     },
     stages: [
       {
@@ -341,7 +339,7 @@ export const projects: ProjectRecord[] = [
         label: 'Versions',
         value: '1.0.0, 1.1.0',
         context:
-          'Arduino Library Manager listings dated 2026-01-15 and 2026-08-09',
+          'listed on the Arduino Library Manager 2026-01-15 and 2026-08-09',
       },
       { label: 'License', value: 'MIT' },
       {
@@ -397,7 +395,7 @@ export const projects: ProjectRecord[] = [
       'A dual-processor WRO Future Engineers vehicle that splits perception on a Jetson Nano from real-time control on an Arduino Mega, with OpenCV traffic-sign logic and PID steering.',
     summary:
       'A WRO Future Engineers vehicle dividing Jetson Nano perception from Arduino Mega real-time control, with OpenCV traffic-sign logic, PID steering, an MPU6050 IMU, and TCS34725 color sensing.',
-    role: 'Team member with Wassim Ghaddar — system architecture, vision, sensor integration, and embedded control, per the repository history and existing first-party content.',
+    role: 'Built with Wassim Ghaddar; I worked on system architecture, vision, sensor integration, and embedded control.',
     form: 'artifact',
     schemaType: 'CreativeWork',
     hero: {
@@ -414,7 +412,7 @@ export const projects: ProjectRecord[] = [
       problem:
         'A twenty-day build had to combine visual understanding, traffic-marker logic, obstacle avoidance, and reliable motion on limited compute and a student budget.',
       how: 'Perception runs in Python and OpenCV on a Jetson Nano and is sent as compact events to an Arduino Mega, which owns the time-sensitive steering PID and drivetrain commands. A TCS34725 color sensor and MPU6050 IMU close gaps the camera cannot handle alone.',
-      role: 'Rami Kronbi contributed to system architecture, computer vision, sensor integration, and embedded control alongside team member Wassim Ghaddar.',
+      role: 'I worked on the system architecture, computer vision, sensor integration, and embedded control, alongside my teammate Wassim Ghaddar.',
     },
     stages: [
       {
@@ -446,7 +444,7 @@ export const projects: ProjectRecord[] = [
       {
         label: 'Build time',
         value: '20 days',
-        context: 'from scratch, per RHU coverage',
+        context: 'from scratch, as RHU reported',
       },
       {
         label: 'Placement',
@@ -454,15 +452,14 @@ export const projects: ProjectRecord[] = [
         context: 'World Robot Olympiad, July 2023',
       },
       {
-        label: 'Team scale reported',
+        label: 'Competition size',
         value: '>95 teams / >250 participants',
-        context: 'WRO Future Engineers per RHU',
+        context: 'WRO Future Engineers, as RHU reported',
       },
     ],
     limits: [
-      'Rafik Hariri University reported third place in July 2023 and that report is the source used here. The canonical CV records a second-place standing after a later re-ranking; no institutional page for the revised standing has been located, so this page keeps the university’s figure.',
-      'A twenty-day build imposes clear boundaries on how much of each subsystem can be optimised or documented.',
-      'Rami’s exact scope is described conservatively; individual credit within the team should not be inflated beyond what the repository and existing first-party content support.',
+      'Rafik Hariri University reported third place in July 2023. We were later re-ranked to second, but there is no official page for the revised standing, so this page keeps the university’s figure.',
+      'Twenty days only leaves so much time to optimise or document each subsystem.',
       'Track and traffic-sign behavior are tied to the WRO Future Engineers 2023 environment and cannot be generalized without new testing.',
     ],
     media: [
@@ -525,7 +522,7 @@ export const projects: ProjectRecord[] = [
       'An IMDN-derived thermal super-resolution pipeline trained with thermal-specific objectives and optimized for edge inference on NVIDIA Jetson hardware.',
     summary:
       'An IMDN-derived single-channel thermal super-resolution pipeline trained with thermal-specific objectives and optimized for deployment on NVIDIA Jetson hardware.',
-    role: 'Computer vision engineer — architecture adaptation, training, and edge inference work, per the canonical CV.',
+    role: 'Computer vision engineer: architecture adaptation, training, and edge inference.',
     form: 'artifact',
     schemaType: 'SoftwareSourceCode',
     hero: {
@@ -542,7 +539,7 @@ export const projects: ProjectRecord[] = [
       problem:
         'RGB-trained super-resolution models can hallucinate texture that has no thermal meaning, and higher-resolution thermal sensors are expensive relative to lower-resolution alternatives.',
       how: 'The IMDN architecture is adapted to a single channel, pretraining is transferred from RGB data, a thermal-specific training objective shifts attention toward heat-relevant gradients and contrast, and the model is optimized toward FP16 and INT8 execution on NVIDIA Jetson hardware.',
-      role: 'Rami Kronbi contributed to architecture adaptation, training, and edge inference work, as recorded in the canonical CV.',
+      role: 'I worked on the architecture adaptation, the training, and the edge inference.',
     },
     stages: [
       {
@@ -574,29 +571,29 @@ export const projects: ProjectRecord[] = [
       {
         label: '×2 quality',
         value: '34.2 dB / 0.840',
-        context: 'PSNR / SSIM, per canonical CV',
+        context: 'PSNR / SSIM',
       },
       {
         label: '×3 quality',
         value: '31.0 dB / 0.757',
-        context: 'PSNR / SSIM, per canonical CV',
+        context: 'PSNR / SSIM',
       },
       {
         label: '×4 quality',
         value: '29.6 dB / 0.713',
-        context: 'PSNR / SSIM, per canonical CV',
+        context: 'PSNR / SSIM',
       },
       {
         label: 'Edge inference',
         value: '~45 FPS',
-        context: 'NVIDIA Jetson Orin after quantization, per canonical CV',
+        context: 'NVIDIA Jetson Orin, after quantization',
       },
     ],
     limits: [
       'Reported quality numbers are dataset-specific and become less constrained at larger enlargement factors.',
-      '“Real time” is a property of a full pipeline on named hardware at a named input size, not a property of a model file. The ~45 FPS figure is bound to NVIDIA Jetson Orin after quantization, as recorded in the canonical CV; the public repository does not yet include that Jetson benchmark artifact.',
-      'Repository claims of first/SOTA, 15× faster, 40× parameter reduction, or 250–270 FPS are held back until benchmark protocol and hardware are reconciled. The repository’s own evaluation report records 229.6 FPS on 1,100 FLIR validation frames on an unnamed desktop GPU, and an earlier platform article reported 20–30 FPS on Jetson Orin; neither is combined with the reviewed figure here.',
-      'Task-based evaluation — does downstream detection improve? — is the next honest measurement of value.',
+      '“Real time” is a property of a full pipeline on named hardware at a named input size, not of a model file. The ~45 FPS figure is on NVIDIA Jetson Orin after quantization; that Jetson benchmark is not in the public repository yet.',
+      'Speed figures measured elsewhere, such as the desktop-GPU run in the repository’s evaluation report, used different hardware and protocols, so I keep them apart from the Jetson figure.',
+      'The next real test is task-based: does downstream detection actually improve?',
     ],
     media: [
       {
@@ -616,12 +613,6 @@ export const projects: ProjectRecord[] = [
         label: 'GitHub — thermal-super-resolution',
         href: 'https://github.com/Kronbii/thermal-super-resolution',
         kind: 'repository',
-      },
-      {
-        label: 'Canonical CV (2026)',
-        href: 'https://github.com/Kronbii/thermal-super-resolution#readme',
-        kind: 'cv',
-        note: 'Quality figures and the Jetson Orin frame rate are quoted from the canonical CV.',
       },
     ],
     articleSlug: 'adapting-super-resolution-to-thermal-imagery',
@@ -644,7 +635,7 @@ export const projects: ProjectRecord[] = [
       'An Arduino two-axis light-tracking robot that turns PID tuning, sensor noise, saturation, and settling into a visible control experiment.',
     summary:
       'An Arduino project that uses light sensing and two servo axes to follow a light source with PID control.',
-    role: 'Rami Kronbi — lead developer and system architecture; Wassim Ghaddar — hardware integration and testing, per repository credits.',
+    role: 'Lead developer and system architect, with Wassim Ghaddar on hardware integration and testing.',
     form: 'diagram',
     schemaType: 'SoftwareSourceCode',
     hero: {
@@ -659,7 +650,7 @@ export const projects: ProjectRecord[] = [
       problem:
         'A tracker that can be made to move with proportional control is not the same as one that settles: gain, noise, saturation, and mechanical behavior all conspire.',
       how: 'Four light-dependent resistors form directional error signals, the Arduino runs a PID controller against them, and yaw and pitch servos move the sensor assembly. Calibration includes safe mechanical limits, sensor filtering, and a consistent update rate.',
-      role: 'Rami Kronbi led the software and system architecture; Wassim Ghaddar contributed hardware integration and testing, as recorded in the repository.',
+      role: 'I led the software and system architecture; Wassim Ghaddar handled hardware integration and testing.',
     },
     stages: [
       {
@@ -690,7 +681,6 @@ export const projects: ProjectRecord[] = [
     limits: [
       'PID tuning is system-specific; per-axis gains may differ because inertia and friction differ per axis.',
       'Sensor noise can turn derivative action into jitter unless it is filtered.',
-      'README performance claims that are not supported by test logs are held back rather than published as measurements.',
     ],
     sources: [
       {
@@ -724,7 +714,7 @@ export const projects: ProjectRecord[] = [
       'An installable Python package and CLI that turns pre-segmented crack masks into ordered lines, splines, overlays, and evaluation metrics for infrastructure inspection.',
     summary:
       'An installable Python package and CLI for turning pre-segmented crack masks into ordered lines, optional splines, visual overlays, and evaluation metrics.',
-    role: 'Repository owner and maintainer. Authorship of underlying algorithms is not claimed beyond what the repository history supports.',
+    role: 'Owner and maintainer.',
     form: 'artifact',
     schemaType: 'SoftwareSourceCode',
     hero: {
@@ -741,7 +731,7 @@ export const projects: ProjectRecord[] = [
       problem:
         'A segmentation mask names the pixels but leaves inspection engineers without an ordered trace, a comparable reference, or an evaluation record.',
       how: 'The toolkit accepts frames and masks, extracts candidate crack points, orders them with a choice of classic, minimum-spanning-tree, or greedy strategies, optionally fits smoother curves, generates overlays, and exports metrics as CSV and JSON.',
-      role: 'Rami Kronbi owns and maintains the package, its command-line interface, and its documentation. Underlying algorithmic choices are attributed to their sources.',
+      role: 'I own and maintain the package, its command-line interface, and its documentation; the algorithms it builds on are credited to their sources.',
     },
     stages: [
       {
@@ -771,8 +761,8 @@ export const projects: ProjectRecord[] = [
     ],
     limits: [
       'The toolkit begins after segmentation and is not a crack detector.',
-      'Dataset-level validation across crack types, widths, and imaging conditions is the next serious step and is not yet in scope.',
-      'Metric definitions are inherited from the referenced references; the package does not redefine them.',
+      'Validation at dataset scale, across crack types, widths, and imaging conditions, is the next step.',
+      'The metrics keep their standard definitions; the package does not redefine them.',
     ],
     sources: [
       {
@@ -810,7 +800,7 @@ export const projects: ProjectRecord[] = [
       'A CLI and FastAPI service that extracts medicine names from Arabic, English, and French prescription images, framed as a prototype extraction tool with human review.',
     summary:
       'A CLI and FastAPI service that uses Gemini to extract medicine names from Arabic, English, and French prescription images, with an optional medicine database.',
-    role: 'Repository owner and implementer.',
+    role: 'Built on my own.',
     form: 'diagram',
     schemaType: 'SoftwareSourceCode',
     hero: {
@@ -824,8 +814,8 @@ export const projects: ProjectRecord[] = [
       what: 'A CLI and FastAPI service that uses a Gemini-based extraction step to pull medicine names from prescription images in Arabic, English, and French.',
       problem:
         'Prescriptions are ambiguous inputs: handwriting varies, abbreviations are local, medicine names are easy to confuse, and pages routinely mix scripts.',
-      how: 'The service wraps a bounded model call in a validated API and a batch-friendly CLI, supports an optional medicine database for normalization, keeps configuration and credentials out of the repository, and structures output for human verification.',
-      role: 'Rami Kronbi owns and implements the service, CLI, and documentation.',
+      how: 'The service wraps a bounded model call in a validated API and a batch-friendly CLI, supports an optional medicine database for normalization, keeps configuration and credentials out of the repository, and shapes its output so a person can check it.',
+      role: 'I built the service, the CLI, and the documentation.',
     },
     stages: [
       {
@@ -855,8 +845,8 @@ export const projects: ProjectRecord[] = [
     ],
     limits: [
       'The service extracts and does not prescribe, dispense, or check interactions.',
-      'Every result requires human verification against the source image.',
-      'Real prescription images may contain personal health information and are not published as demo material.',
+      'Every result has to be checked by a person against the source image.',
+      'Real prescription images can contain personal health information, so I don’t use them as demos.',
     ],
     sources: [
       {
@@ -891,7 +881,7 @@ export const projects: ProjectRecord[] = [
       'An independent multilingual Lebanese parliamentary-election information platform designed around source archiving, append-only history, and verifiable records.',
     summary:
       'An independent, multilingual Lebanese parliamentary-election information platform designed around source archiving, append-only history, and verifiable records.',
-    role: 'Rami Kronbi — lead developer of the platform; Layth Ayache — frontend contributions and a separate content-ingestion backend. No institutional endorsement or political affiliation is implied.',
+    role: 'Lead developer, with Layth Ayache on the frontend and a separate content-ingestion backend.',
     form: 'artifact',
     schemaType: 'SoftwareSourceCode',
     hero: {
@@ -908,7 +898,7 @@ export const projects: ProjectRecord[] = [
       problem:
         'Political information becomes more useful when a reader can see where each fact came from and how it changed. Ordinary content systems optimize for the current value and lose that trail.',
       how: 'The platform pairs a Next.js frontend with an Express backend, Prisma and PostgreSQL, JWT authentication, CSRF protection, rate limiting, and immutable data models intended to preserve a verifiable trail of sources and changes.',
-      role: 'Rami Kronbi leads development of the platform; Layth Ayache contributed to the frontend and built a separate content-ingestion backend. Daleel does not imply institutional endorsement, and its dataset is not claimed to be complete, live, or officially certified.',
+      role: 'I lead the platform’s development; Layth Ayache contributed to the frontend and built a separate content-ingestion backend.',
     },
     stages: [
       {
@@ -933,12 +923,12 @@ export const projects: ProjectRecord[] = [
         step: '04',
         title: 'Protect',
         detail:
-          'JWT authentication, CSRF protection, and rate limiting are part of editorial integrity because unauthorized changes would undermine the central promise.',
+          'JWT authentication, CSRF protection, and rate limiting matter here because a single unauthorized change would undermine the whole promise.',
       },
     ],
     limits: [
-      'Daleel is not an official election authority.',
-      'The public repository alone does not prove the dataset is complete, currently operational, or officially certified.',
+      'Daleel is independent: it is not an official election authority and has no institutional or political affiliation.',
+      'I don’t present its dataset as complete, live, or officially certified.',
       'Correction workflows, contributor governance, legal review, and a visible policy for disputed information remain institutional work that a database cannot do on its own.',
     ],
     sources: [
@@ -972,7 +962,7 @@ export const projects: ProjectRecord[] = [
       'An Arabic right-to-left Vite/React/TypeScript study tool for the Lebanese motorcycle theory exam with adaptive review and localStorage-only progress.',
     summary:
       'An Arabic right-to-left Vite/React/TypeScript study tool for the Lebanese motorcycle theory exam with adaptive review, coverage-aware selection, and localStorage-only progress.',
-    role: 'Repository owner and implementer. No institutional or government endorsement is implied.',
+    role: 'Built on my own.',
     form: 'diagram',
     schemaType: 'SoftwareSourceCode',
     hero: {
@@ -1005,7 +995,7 @@ export const projects: ProjectRecord[] = [
       problem:
         'Learning a fixed question bank rewards coverage of what a learner does not yet know, not repetition of what they already do. Doing this in a right-to-left interface adds directional detail that a generic quiz app does not handle well.',
       how: 'The trainer holds 251 multiple-choice questions including 101 road-sign questions, offers a 30-question exam mode with a 25/30 passing threshold, uses coverage-aware selection to surface unseen material, and stores per-learner progress in localStorage.',
-      role: 'Rami Kronbi owns and implements the project. The tool is not an official government application and does not imply endorsement.',
+      role: 'I built it on my own. It is not an official government app, and no government body endorses it.',
     },
     stages: [
       {
@@ -1044,12 +1034,12 @@ export const projects: ProjectRecord[] = [
       {
         label: 'Passing threshold',
         value: '25 / 30',
-        context: 'documented exam mode',
+        context: 'in exam mode',
       },
     ],
     limits: [
       'The trainer is not an official government application.',
-      'Rules and exam procedures can change; the question source and update date must remain visible when the tool is published.',
+      'Rules and exam procedures can change, so the question source and its update date should always be visible.',
       'Progress belongs to one browser unless a future feature exports or moves it.',
     ],
     media: [
@@ -1096,7 +1086,7 @@ export const projects: ProjectRecord[] = [
       'A self-hosted internal admin console built as a Valsoft Corporation technical assessment: LLM triage, deterministic routing, human review, and JSON export.',
     summary:
       'A self-hosted internal admin console for synthetic B2B support intake and triage, built as a technical-assessment deliverable for Valsoft Corporation. It is not a customer-facing platform.',
-    role: 'Repository owner and implementer; the project is a technical-assessment deliverable for Valsoft Corporation, exactly as the public README states.',
+    role: 'Built on my own as a technical assessment for Valsoft Corporation.',
     form: 'diagram',
     schemaType: 'SoftwareSourceCode',
     hero: {
@@ -1111,7 +1101,7 @@ export const projects: ProjectRecord[] = [
       problem:
         'An LLM can fluently propose categories and urgency, but if it quietly becomes the policy engine the workflow loses both auditability and control.',
       how: 'A React/TypeScript/Vite frontend talks to a FastAPI/Pydantic/SQLAlchemy backend with Redis- and RQ-based background jobs, PostgreSQL persistence, and an Ollama-by-default local model provider or an optional OpenAI-compatible endpoint. Deterministic rules such as confidence thresholds and escalation conditions live outside the model.',
-      role: 'Rami Kronbi owns and implements the project as a technical-assessment deliverable for Valsoft Corporation, per the public README.',
+      role: 'I built it on my own as a technical-assessment deliverable for Valsoft Corporation.',
     },
     stages: [
       {
@@ -1182,7 +1172,7 @@ export const projects: ProjectRecord[] = [
       'A Flutter desktop personal-finance application for multi-wallet transactions, subscriptions, debts, savings goals, and local insights.',
     summary:
       'A Flutter desktop personal-finance application for multi-wallet transactions, subscriptions, debts, savings goals, and local insights, with local SQLite storage.',
-    role: 'Repository owner and implementer.',
+    role: 'Built on my own.',
     form: 'artifact',
     schemaType: 'SoftwareSourceCode',
     hero: {
@@ -1190,8 +1180,7 @@ export const projects: ProjectRecord[] = [
       media: {
         src: '/images/authority/ree-finance/image1.jpeg',
         alt: 'Screenshot of REE showing the desktop finance interface with wallets, transactions, and analysis views.',
-        caption:
-          'REE desktop — the primary workspace as shipped in the repository.',
+        caption: 'REE on the desktop: the main workspace.',
       },
     },
     answer: {
@@ -1199,7 +1188,7 @@ export const projects: ProjectRecord[] = [
       problem:
         'Finance tools that begin with a dashboard hide the repeated work of records — wallets, income, expenses, transfers, subscriptions, debts, and goals — that dashboards are built on.',
       how: 'REE targets Flutter desktop with a clean data / domain / presentation split and local SQLite storage. Multi-wallet accounts, categorized transactions, bulk entry, subscriptions, debts in both directions, savings goals, and monthly and yearly analysis are first-class workflows.',
-      role: 'Rami Kronbi owns and implements the project. Backup and export are essential because local ownership without recovery is fragile.',
+      role: 'I built it on my own.',
     },
     stages: [
       {
@@ -1228,8 +1217,7 @@ export const projects: ProjectRecord[] = [
       },
     ],
     limits: [
-      'The application does not claim an Apple-quality interface; it describes design intent and observable behavior.',
-      'Long-term reliability — migration tests, backup restoration, import validation, rounding and currency handling — is the next quality bar rather than a shipped guarantee.',
+      'Long-term reliability is the next bar to clear: migration tests, backup restoration, import validation, and rounding and currency handling.',
     ],
     media: [
       {
@@ -1270,7 +1258,113 @@ export const projects: ProjectRecord[] = [
       'offline-first',
     ],
   },
-  // ---- Review-only project records (noindex; not surfaced in indexes) ----
+  {
+    slug: 'juno',
+    state: 'ready',
+    title: 'Juno',
+    metaTitle:
+      'Juno — a local-first personal and household finance tracker for Linux and iPhone',
+    metaDescription:
+      'A Flutter finance tracker for the Linux desktop and iPhone by Rami Kronbi: local-first storage, optional Supabase sync, bank CSV import, budgets and goals, and logging from Siri, Shortcuts, and Back Tap.',
+    summary:
+      'A personal and household finance tracker for the Linux desktop and iPhone, built in Flutter. It is local-first, with optional Supabase sync between devices, and it is the new version of my earlier finance app, REE.',
+    role: 'Built on my own.',
+    form: 'artifact',
+    schemaType: 'SoftwareSourceCode',
+    hero: {
+      kind: 'image',
+      media: {
+        src: '/images/vneo/juno-home.jpg',
+        alt: 'Juno’s home screen with demo data: the month’s spending, budgets, and accounts.',
+        caption: 'The home screen, with demo data.',
+        width: 1440,
+        height: 920,
+      },
+    },
+    answer: {
+      what: 'A local-first personal and household finance tracker for the Linux desktop and iPhone.',
+      problem:
+        'Tracking money only works if logging is quick enough to keep up, and a shared household needs to see what is personal and what is shared. Juno is built around both: fast entry everywhere, and a Personal or Household mark on every entry.',
+      how: 'A Flutter app on drift tables, with every read and write going through one Ledger layer. Sync is optional: each round pushes local changes to Supabase and pulls server changes since a per-table cursor, with last-write-wins conflicts and deterministic ids so two devices converge instead of duplicating. On iPhone, Siri, Shortcuts, Back Tap, and the Action Button drop entries into a shared inbox that Juno imports on its next launch.',
+      role: 'I built it on my own: the app, its sync engine, its design system, and its tests.',
+    },
+    stages: [
+      {
+        step: '01',
+        title: 'Log',
+        detail:
+          'Expenses, income, and transfers across accounts, each marked Personal or Household. On desktop, N opens a new entry; on iPhone, Siri, Shortcuts, Back Tap, the Action Button, and a home-screen widget log without opening the app.',
+      },
+      {
+        step: '02',
+        title: 'Import',
+        detail:
+          'A bank CSV comes in with its columns guessed, categories learned, already-seen rows skipped, and an undo. Excel workbooks and Notion CSV exports import too, and export writes everything back out to CSV.',
+      },
+      {
+        step: '03',
+        title: 'Plan',
+        detail:
+          'Monthly budgets per category or scope, savings goals with contributions, and recurring entries that log themselves on their due date, with a reminder on the day and budget alerts at 80% and 100%.',
+      },
+      {
+        step: '04',
+        title: 'Understand',
+        detail:
+          'Where the money went this month, what changed against the same point last month, six-month trends, top places, recurring costs, totals per tag, and net worth over twelve months.',
+      },
+      {
+        step: '05',
+        title: 'Sync',
+        detail:
+          'Optional Supabase sync with row-level security. Every row carries an update time and a soft delete, so a device pushes what changed and pulls what it missed.',
+      },
+    ],
+    limits: [
+      'Sync conflicts resolve last-write-wins, so if two devices edit the same entry before syncing, the later edit is the one kept.',
+      'Exchange rates are the ones you set: totals stay in USD, and each entry keeps the USD value it was logged at.',
+      'The iPhone app is built on a Mac and installed from Xcode.',
+    ],
+    media: [
+      {
+        src: '/images/authority/juno/insights.webp',
+        alt: 'Juno’s Insights screen on the desktop with demo data: the month’s spending by category, a day-by-day calendar, and what changed this month.',
+        caption: 'Insights on the desktop, with demo data.',
+      },
+      {
+        src: '/images/authority/juno/plan.webp',
+        alt: 'Juno’s Plan screen on the desktop with demo data: four monthly budgets with what is left in each.',
+        caption: 'Budgets in Plan.',
+      },
+      {
+        src: '/images/authority/juno/phone-home.webp',
+        alt: 'Juno’s home screen on iPhone with demo data: the month’s spending, safe to spend today, and personal versus household spending.',
+        caption: 'The home screen on iPhone.',
+      },
+    ],
+    sources: [
+      {
+        label: 'GitHub — juno',
+        href: 'https://github.com/Kronbii/juno',
+        kind: 'repository',
+      },
+      {
+        label: 'iPhone setup: widget, Siri, and Shortcuts',
+        href: 'https://github.com/Kronbii/juno/blob/main/docs/ios-setup.md',
+        kind: 'documentation',
+      },
+    ],
+    articleSlug: 'rebuilding-my-finance-app-around-local-first-sync',
+    topics: ['local-first-software', 'flutter', 'product-engineering'],
+    keywords: [
+      'personal finance',
+      'household budget',
+      'Flutter',
+      'local-first',
+      'Supabase sync',
+      'iOS App Intents',
+    ],
+  },
   {
     slug: 'omnisign-lebanese-sign-language',
     state: 'ready',
@@ -1280,7 +1374,7 @@ export const projects: ProjectRecord[] = [
       'Real-time Lebanese Sign Language translation system spanning mobile, web, and offline embedded deployments.',
     summary:
       'A real-time translation system for Lebanese Sign Language spanning camera input, visual recognition, language output, and deployment across mobile, web, and offline embedded environments.',
-    role: 'Co-founder and computer vision engineer, per the canonical CV, on a team with Layth Ayache, Nour El Hariri, Tayseer Laz, and Abou Baker Hussien Al Khatib, supervised by Dr. Oussama Mustapha.',
+    role: 'Co-founder and computer vision engineer, on a team with Layth Ayache, Nour El Hariri, Tayseer Laz, and Abou Baker Hussien Al Khatib, supervised by Dr. Oussama Mustapha.',
     form: 'diagram',
     schemaType: 'CreativeWork',
     hero: {
@@ -1295,7 +1389,7 @@ export const projects: ProjectRecord[] = [
       problem:
         'General sign-language datasets do not transfer to local vocabulary, signing patterns, or the communication settings in which the system will be used.',
       how: 'A recognition model consumes camera input and produces language output; the system is deployed across mobile, web, and offline embedded targets. Uncertainty handling and the option to request a repeated sign are treated as design decisions.',
-      role: 'Rami Kronbi was a co-founder and the computer vision engineer on the team, per the canonical CV. Layth Ayache led AI and data work; Nour El Hariri, Tayseer Laz, and Abou Baker Hussien Al Khatib were team members; Dr. Oussama Mustapha supervised, per the team’s public project pages.',
+      role: 'I co-founded the project and was the team’s computer vision engineer. Layth Ayache led the AI and data work; Nour El Hariri, Tayseer Laz, and Abou Baker Hussien Al Khatib were on the team; Dr. Oussama Mustapha supervised.',
     },
     stages: [
       {
@@ -1323,18 +1417,29 @@ export const projects: ProjectRecord[] = [
           'Deployment targets include mobile, web, and offline embedded configurations, each with its own constraints.',
       },
     ],
+    measurements: [
+      {
+        label: 'Public Choice',
+        value: '1st prize',
+        context: 'National FYP Demo Day, 2025',
+      },
+      {
+        label: 'Development accuracy',
+        value: '95–97%',
+        context: 'on our own 300,000-image dataset',
+      },
+      { label: 'Speed', value: '~45 FPS', context: 'real time' },
+      {
+        label: 'Pilots',
+        value: '3',
+        context: 'two Beirut coffee shops and one church',
+      },
+    ],
     limits: [
-      'The team’s public project page reports a Public Choice first prize at the 2025 National FYP Demo Day and 40,000 collected samples; the canonical CV reports a 300K-image dataset, 95–97% development accuracy, ~45 FPS, and pilots in two Beirut coffee shops and one church. The two figure sets are not reconciled and are not combined.',
-      'The team collected its own dataset; per-signer consent procedures and the evaluation protocol behind the reported accuracy are not published.',
-      'Existing origin-story language from earlier public writing is not reproduced.',
+      'The 95–97% accuracy was measured in development, on our own dataset.',
+      'The team’s project page counts 40,000 collected sign samples, while my count is a 300,000-image dataset. They measure different things, samples versus images, so the two are not added together.',
     ],
     sources: [
-      {
-        label: 'Canonical CV (2026)',
-        href: 'https://ramikronbi.com',
-        kind: 'cv',
-        note: 'Referenced for role, dataset scale, and deployment scope; not treated as narrative authority.',
-      },
       {
         label: 'Team project page — Layth Ayache',
         href: 'https://laythayache.com/projects/omnisign',
@@ -1365,7 +1470,7 @@ export const projects: ProjectRecord[] = [
       'A posture-estimation prototype that closes a physical loop with a motorized desk.',
     summary:
       'A prototype that combines computer vision, ESP32 control, motorized height and tilt, immediate LED feedback, and a dashboard for longer-term patterns.',
-    role: 'Team lead and software/robotics engineer, per the canonical CV, on a senior graduation project with Bassam Kousa, Ali Daaboul, Mohamad Berjawi, and Mohamad Hariri at Rafik Hariri University.',
+    role: 'Team lead and software/robotics engineer on a senior graduation project with Bassam Kousa, Ali Daaboul, Mohamad Berjawi, and Mohamad Hariri at Rafik Hariri University.',
     form: 'artifact',
     schemaType: 'CreativeWork',
     media: [
@@ -1389,7 +1494,7 @@ export const projects: ProjectRecord[] = [
       problem:
         'A posture model cannot be treated as an isolated prediction: camera placement, desk motion, false corrections, and mechanical limits all matter.',
       how: 'A camera-based posture estimator informs an ESP32 controller with dead bands, mechanical limits, and slow transitions, driving motorized height and tilt while an LED and dashboard communicate state back to the user.',
-      role: 'Rami Kronbi was the team lead and software/robotics engineer on a five-person senior graduation project with Bassam Kousa, Ali Daaboul, Mohamad Berjawi, and Mohamad Hariri; the repository history shows Rami and Mohamad Berjawi as the main committers.',
+      role: 'I was team lead and the software/robotics engineer on our five-person senior graduation project, with Bassam Kousa, Ali Daaboul, Mohamad Berjawi, and Mohamad Hariri. Mohamad Berjawi and I made most of the commits.',
     },
     stages: [
       {
@@ -1415,9 +1520,16 @@ export const projects: ProjectRecord[] = [
           'Immediate LED feedback and a longer-term dashboard keep the user in the loop.',
       },
     ],
+    measurements: [
+      {
+        label: 'Award',
+        value: 'Best Senior Project',
+        context: 'senior graduation project, 2024–2025',
+      },
+    ],
     limits: [
-      'The repository documents the posture subsystem alongside handwriting-capture notes, a music player, and desk-to-desk messaging; this page describes only the posture loop.',
-      'Per-teammate roles and formal test outcomes live in the team’s off-repository project documents and are not reproduced here. The canonical CV records a Best Senior Project award; no institutional page for it has been located.',
+      'The repository also covers handwriting capture, a music player, and desk-to-desk messaging; this page sticks to the posture loop.',
+      'Formal test results are in the team’s project report, not in the repository.',
     ],
     sources: [
       {
@@ -1429,12 +1541,6 @@ export const projects: ProjectRecord[] = [
         label: 'Demo video',
         href: 'https://youtu.be/5TPmpPc6rjY',
         kind: 'video',
-      },
-      {
-        label: 'Canonical CV (2026)',
-        href: 'https://ramikronbi.com',
-        kind: 'cv',
-        note: 'Role and award wording cited from the CV.',
       },
     ],
     articleSlug: 'connecting-posture-estimation-to-a-motorized-desk',
@@ -1601,8 +1707,8 @@ export const projects: ProjectRecord[] = [
       what: 'A set of small upstream pull requests to Betaflight, PX4, and OpenFront, each fixing a specific reported fault.',
       problem:
         'Flight-controller firmware and estimators fail in narrow, hardware-dependent ways: a debug channel that two drivers write with different meanings, a flash read that silently returns short, a height fusion path that never refreshes its timeout. The same discipline applies to a browser game HUD that a mobile browser can zoom into a stuck state.',
-      how: 'Read the code path until the mechanism is explicit, reproduce or reason through the fault, change the smallest surface that removes it, add a regression test where the project has a test harness, and write the pull request so a maintainer can verify the reasoning without re-deriving it.',
-      role: 'Rami Kronbi authored each pull request. Betaflight #15706, OpenFront #4868, and OpenFront #4985 were merged by the maintainers; Betaflight #15705 is open; PX4 #28286 was closed without merge.',
+      how: 'I read the code path until the mechanism is explicit, reproduce or reason through the fault, change the smallest surface that removes it, add a regression test where the project has a test harness, and write the pull request so a maintainer can check the reasoning without re-deriving it.',
+      role: 'I wrote each pull request. Betaflight #15706, OpenFront #4868, and OpenFront #4985 were merged by the maintainers; Betaflight #15705 is open; PX4 #28286 was closed without merge.',
     },
     stages: [
       {
@@ -1647,8 +1753,7 @@ export const projects: ProjectRecord[] = [
     ],
     limits: [
       'These are small fixes, not features or architecture work; the value is in the diagnosis and the tests, not the line count.',
-      'The PX4 change was not accepted upstream; the record states that plainly rather than counting it as a contribution.',
-      'Betaflight and PX4 are hobby and research flight-control stacks; nothing here concerns employer or defense work.',
+      'The PX4 change was not merged. I still list it, because the diagnosis and the test are the useful part, but I don’t count it as an accepted contribution.',
     ],
     sources: [
       {
@@ -1717,7 +1822,7 @@ export const projects: ProjectRecord[] = [
       problem:
         'During a fast-moving outbreak, the public record is scattered across agency bulletins, a GIS layer, and news feeds. Reading them together, with a map and a sense of what changed, is the missing layer.',
       how: 'A Next.js server component fetches and normalizes WHO disease-outbreak news, CDC material, an ArcGIS case layer, and GDELT and Google News feeds; a client map renders a choropleth and case markers; filters live in the URL so any view can be shared.',
-      role: 'Rami Kronbi designed, built, and deployed the dashboard alone.',
+      role: 'I designed, built, and deployed it on my own.',
     },
     stages: [
       {
@@ -1746,9 +1851,9 @@ export const projects: ProjectRecord[] = [
       },
     ],
     limits: [
-      'Aggregate public information only; it holds no patient-level data and is not an epidemiological product.',
-      'Source parsers are specific to one outbreak and its feeds; they are not a general surveillance system.',
-      'No automated test suite and no README beyond the handoff document at the time of drafting.',
+      'It aggregates public information only: no patient-level data, and it is not an epidemiological product.',
+      'The source parsers are specific to one outbreak and its feeds; this is not a general surveillance system.',
+      'There is no automated test suite yet, and the only documentation is a handoff note.',
     ],
     sources: [
       {
@@ -1798,7 +1903,7 @@ export const projects: ProjectRecord[] = [
       problem:
         'Retinal screening in a clinic depends on scarce specialist time. A second reader that prioritizes and flags, running on an ordinary CPU on site, could help, but only if it never pretends to diagnose.',
       how: 'A FastAPI backend, a separate ML service, and a Next.js frontend share one data directory. Three independent retinal-image models, each with a classification head trained on openly licensed public datasets (DDR, IDRiD, RFMiD, PAPILA), read the image; a consensus engine merges the three; the doctor confirms or overrides; a trilingual PDF report is generated.',
-      role: 'Rami Kronbi built the platform, the model integration, and the deployment alone.',
+      role: 'I built the platform, the model integration, and the deployment on my own.',
     },
     stages: [
       {
@@ -1830,12 +1935,11 @@ export const projects: ProjectRecord[] = [
       {
         label: 'Council latency',
         value: '~2 s per eye',
-        context:
-          'all three models on a plain CPU, no GPU, per the project’s validation record',
+        context: 'all three models on a plain CPU, no GPU',
       },
     ],
     limits: [
-      'Development status only. Retrospective benchmarking on public datasets guides engineering; it is not evidence of clinical performance, the validation study has not been run, and the platform is not a medical device.',
+      'Basira is in development. Benchmarks on public datasets guide the engineering but say nothing about clinical performance; the clinical validation study has not been run, and Basira is not a medical device.',
       'The live deployment uses a demo clinic and demo data only.',
     ],
     sources: [
@@ -1866,7 +1970,7 @@ export const projects: ProjectRecord[] = [
       'An end-to-end pipeline that pairs bracketed RAW exposures with a photographer’s final edits and trains a bilateral-grid network to reproduce the style.',
     summary:
       'A freelance pipeline for a French real-estate photography agency that ingests bracketed RAW sessions, decodes them through a color-accurate DNG pipeline into 16-bit linear frames, pairs them with the photographer’s edited JPEGs, and trains an HDRNet model to replicate the editing style.',
-    role: 'Rami Kronbi — computer vision engineer and pipeline author; Layth Ayache contributed to training runs.',
+    role: 'Computer vision engineer and author of the pipeline, with Layth Ayache on training runs.',
     form: 'diagram',
     schemaType: 'SoftwareSourceCode',
     hero: {
@@ -1881,7 +1985,7 @@ export const projects: ProjectRecord[] = [
       problem:
         'Architectural photographers shoot ambient brackets, flash fills, and lights-on stacks for every frame, then hand-blend and grade them. The style is consistent but slow to reproduce.',
       how: 'Brackets are grouped by timestamp; RAW files are decoded with the full DNG color pipeline (linearization, white balance and camera calibration, forward matrix, Bradford adaptation) and lens correction into 16-bit linear sRGB; the edited JPEG is linearized as the target; an HDRNet bilateral-grid network is trained on the pairs.',
-      role: 'Rami Kronbi designed and built the pipeline and the color science; Layth Ayache contributed training and delivery runs.',
+      role: 'I designed and built the pipeline and its color science; Layth Ayache contributed training and delivery runs.',
     },
     stages: [
       {
@@ -1913,28 +2017,19 @@ export const projects: ProjectRecord[] = [
       {
         label: 'Editing throughput before',
         value: '2–3 photos/day',
-        context:
-          'team of three, per the client, as recorded in the canonical CV',
+        context: 'a team of three, by the client’s count',
       },
       {
         label: 'Editing throughput after',
         value: '~40 photos/day',
-        context:
-          'per team member, per the client, as recorded in the canonical CV',
+        context: 'per team member, by the client’s count',
       },
     ],
     limits: [
-      'The client and its imagery are not shown; the repository is private and the results directory contains client photographs.',
+      'The photographs belong to the client, so none appear here, and the code is private.',
       'Style transfer is per photographer; the model does not generalize across agencies.',
     ],
-    sources: [
-      {
-        label: 'Canonical CV (2026)',
-        href: 'https://ramikronbi.com',
-        kind: 'cv',
-        note: 'Freelance engagement, French real-estate agency.',
-      },
-    ],
+    sources: [],
     articleSlug: 'why-color-science-comes-before-the-model',
     topics: ['computer-vision', 'applied-ai'],
     keywords: [
@@ -1971,7 +2066,7 @@ export const projects: ProjectRecord[] = [
       problem:
         'A device that classifies a mole is not a product on its own. Clinics need to track lesions over time, manage follow-up when something is flagged, and read a summary they can act on.',
       how: 'Next.js with tRPC for the interface, a versioned REST endpoint for devices, Drizzle on PostgreSQL, S3-compatible private image storage, and an Anthropic-backed narrative module. Every clinical row carries an organization id derived server-side; cross-organization access returns not-found.',
-      role: 'Rami Kronbi built the platform alone for the device’s product owner; classification runs on the device, never in the app.',
+      role: 'I built the platform on my own for the device’s product owner; classification runs on the device, never in the app.',
     },
     stages: [
       {
@@ -2002,7 +2097,7 @@ export const projects: ProjectRecord[] = [
     limits: [
       'Prototype authentication with one local workspace; live device ingestion is deferred; HIPAA and GDPR are designed-for-later, not implemented.',
       'All patient data in the demo is synthetic, including generated dermoscopic imagery.',
-      'The device and its classifier belong to the product owner and are not described here.',
+      'The device and its classifier belong to the product owner, so I don’t go into them here.',
     ],
     sources: [
       {
@@ -2031,7 +2126,7 @@ export const projects: ProjectRecord[] = [
     metaDescription:
       'A small venture delivering computer-vision and mobile applications for external clients, co-founded by Rami Kronbi.',
     summary:
-      'Evoid is a small applied AI and computer-vision venture in Beirut that Rami Kronbi co-founded and worked in as systems engineer and product manager, delivering prototypes and applications for external clients.',
+      'Evoid is a small applied AI and computer-vision venture in Beirut that I co-founded and worked in as systems engineer and product manager, delivering prototypes and applications for external clients.',
     role: 'Co-founder; systems engineer and product manager.',
     form: 'diagram',
     schemaType: 'CreativeWork',
@@ -2047,7 +2142,7 @@ export const projects: ProjectRecord[] = [
       problem:
         'Early-stage computer-vision work for real clients needs a vehicle that can scope, deliver, and maintain small systems without a large agency structure.',
       how: 'A small technical team takes bounded engagements; the venture’s public site is at evoid.dev; a padel line-judging prototype (PadelEye) is developed under its GitHub organization.',
-      role: 'Rami Kronbi co-founded Evoid (2023–2025 per the canonical CV), led technical direction and client coordination, and built most of the public site.',
+      role: 'I co-founded Evoid and worked in it from 2023 to 2025, leading technical direction and client coordination, and I built most of the public site.',
     },
     stages: [
       {
@@ -2068,18 +2163,20 @@ export const projects: ProjectRecord[] = [
         detail: 'Delivery and maintenance stay with the same small team.',
       },
     ],
+    measurements: [
+      {
+        label: 'Client applications',
+        value: '5',
+        context:
+          'computer-vision apps delivered to external clients, 2023–2025',
+      },
+    ],
     limits: [
-      'Client names and outcomes are not listed; the public site’s case studies and testimonial are placeholder copy and are not claimed here.',
-      'The canonical CV records five computer-vision applications delivered for external clients between 2023 and 2025; clients are not named here.',
+      'Client names and outcomes stay private unless a client agrees otherwise.',
       'PadelEye is an early prototype with trained weights and scaffolding, not a product.',
     ],
     sources: [
       { label: 'evoid.dev', href: 'https://www.evoid.dev/', kind: 'demo' },
-      {
-        label: 'Canonical CV (2026)',
-        href: 'https://ramikronbi.com',
-        kind: 'cv',
-      },
     ],
     articleSlug: 'what-a-small-vision-venture-taught-me-about-scope',
     topics: ['computer-vision', 'product-engineering'],
@@ -2115,7 +2212,7 @@ export const projects: ProjectRecord[] = [
       problem:
         'Hitting a target with a gravity-fed stream depends on nozzle height and on how much water is left; both change from shot to shot.',
       how: 'Firmware on an Arduino steps through a table of target distances and angles, moves a lead-screw lift with a stepper, rotates the nozzle with a servo, opens a relay-driven solenoid for a timed burst, and updates a modeled water level with a Torricelli-style relation after each shot.',
-      role: 'Rami Kronbi wrote the firmware and organized the repository with firmware, test sketches, CAD, and documentation folders.',
+      role: 'I wrote the firmware and organized the repository into firmware, test sketches, CAD, and documentation.',
     },
     stages: [
       {
@@ -2138,9 +2235,9 @@ export const projects: ProjectRecord[] = [
       },
     ],
     limits: [
-      'The physics is deliberately simplified; the README states that empirical tuning is needed.',
+      'The physics is deliberately simplified, and the README says empirical tuning is needed.',
       'Wiring documentation is a placeholder and exact part numbers are not recorded.',
-      'No test results or media are in the repository; this is early evidence of mechatronics practice, not a finished system.',
+      'There are no test results or media in the repository; it is early mechatronics work, not a finished system.',
     ],
     sources: [
       {

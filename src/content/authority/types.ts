@@ -86,7 +86,6 @@ export interface ArticleRecord {
   metaDescription: string
   dek: string
   body: ArticleBlock[]
-  evidence: string
   sources: AuthoritySource[]
   projectSlug: string
   topics: string[]
