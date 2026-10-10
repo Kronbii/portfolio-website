@@ -256,3 +256,55 @@ The private census is complete. Rami approved the following as candidates; each 
 14. CV-aim-assist — Rami now owns the work (2026-09-20). Claude recommends against a public page: the deliverable is a licensed screen-capture detector for a commercial video game, which reads as cheating tooling regardless of framing and conflicts with the site's positioning. If Rami insists, the only defensible framing is a benchmark of real-time screen-capture object detection, with the game, the licensing, and the client omitted.
 
 Permanently excluded from the public narrative by recommendation: CV-aim-assist (game-overlay detection for a client), the NSFW quantization workbench, personal memory tooling, vendor SDKs and upstream mirrors, coursework bundles, and collaborators' own repositories.
+
+## New projects branch, 2026-10-10
+
+Branch `new-projects-2026-10`, built while Rami was away from the keyboard, at his request: add every project from the
+October growth list so he can keep or drop each one on the branch before anything merges. Records on this branch are
+`ready` so they render (the live routes only build `ready` records); none of it is public until the branch merges.
+
+### Thermal super-resolution: benchmark replaces the CV figures (supersedes item 4's figures)
+
+- The repository's pull request #2 (`trustworthy-benchmark`) rebuilt the evaluation: one protocol file, 17 committed
+  FLIR ADAS v2 frames, metrics checked against scikit-image, GPU-synchronised timing, CI that keeps the README equal to
+  `results/benchmark.json`.
+- Measured: ×2 32.56 dB / 0.8469 (bicubic 31.81 / 0.8291); ×3 28.94 / 0.7342; ×4 27.87 / 0.6816; ×2 14.2 ms fp16
+  (70 FPS) and 21.9 ms fp32 on an RTX 3070 Laptop GPU; +0.91 dB at ×2 on 51 TNO images from other cameras.
+- The CV's 34.2 / 31.0 / 29.6 dB came from 1,100 unpublished validation frames under a different protocol (no border
+  crop, unquantised output), and no ×4 evaluation output exists; the 229.6 FPS report timed the GPU without
+  synchronisation. The page now uses the benchmark figures and names the withdrawn ones in its limits.
+- The Jetson Orin figure (about 45 FPS after quantization) has no artifact in the repository. It stays only as a
+  disclosed limit, in first person.
+- **This reverses the 2026-09-20 decision** to keep the CV figures. Rami signs off before merge. Surfaces changed: the
+  project record and article, the home page's Heat scene (`src/components/v6/scenes/heat.tsx`), the card line
+  (`src/content/v3/work.ts`) and the reel line (`src/content/vneo/site.ts`).
+
+### 20. Rotor-fault detection and recovery for a quadrotor
+
+- Project slug: `quadrotor-rotor-fault-recovery`; article slug: `what-losing-a-rotor-teaches-about-estimation`.
+- Topics: `control-systems`, `robotics-perception`. Role: sole author.
+- Source: `https://github.com/Kronbii/rotor-fault-recovery` (**private**; make it public before merge or the link
+  404s). Facts from its `docs/portfolio.md`, `results/headline.json` and `sitl/results/sitl_summary.json`.
+- Every figure is simulation or PX4 software-in-the-loop; the page says nothing has flown with a fault.
+- Media: plates redrawn from the committed results by `experiments/portfolio_plates.py` in that repository.
+- The article is Rami's essay draft, with Mueller and D'Andrea (ICRA 2014, DOI 10.1109/ICRA.2014.6906588) cited.
+
+### 21. ESP32 barn-door star tracker
+
+- Project slug: `esp32-barn-door-star-tracker`; article slug: `a-barn-door-tracker-that-does-the-maths`.
+- Topics: `embedded-systems`, `control-systems`. Role: sole designer.
+- Source: `https://github.com/Kronbii/star-tracker` (**private**). Facts from its README and `docs/portfolio.md`.
+- Not built. Every performance figure is labelled a prediction or a host simulation; the CAD render carries "CAD
+  RENDER | unbuilt design, not a photograph" inside the image, and the caption says the same. Replace the render
+  with a photograph of the built tracker (and later an M42 frame) once they exist.
+
+### 22. Teach it: a drone-control bootcamp
+
+- Project slug: `drone-control-bootcamp`; article slug: `teaching-drone-control-from-an-rc-circuit-up`.
+- Topics: `control-systems`, `embedded-systems`. Role: sole author.
+- Source: `https://github.com/Kronbii/drone-control-bootcamp` (**private**). Facts from its README and
+  `docs/portfolio.md`; plates from its `tools/portfolio_plates.py`.
+- Not taught; no rig built. The page claims no learning outcomes and labels every figure as simulation.
+- **Space² is left off the page on purpose.** The repository says the course is designed for Space² and calls Rami a
+  co-organiser; that wording came from Claude's brief, not from Rami. Per the Space² rule above, his role and Space²'s
+  status need his confirmation before they appear publicly (in the page or the repository).
