@@ -308,3 +308,16 @@ October growth list so he can keep or drop each one on the branch before anythin
 - **Space² is left off the page on purpose.** The repository says the course is designed for Space² and calls Rami a
   co-organiser; that wording came from Claude's brief, not from Rami. Per the Space² rule above, his role and Space²'s
   status need his confirmation before they appear publicly (in the page or the repository).
+
+### 23. Road-speed audit from one fixed camera
+
+- Project slug: `road-speed-audit`; article slug: `measuring-road-speed-with-one-camera`.
+- Topics: `computer-vision`, `civic-technology`. Role: sole author.
+- Source: `https://github.com/Kronbii/road-speed-audit` (**private**). Facts from its README, `docs/portfolio.md` and
+  `results/` (221 simulated runs, 13 experiments); plates from its `experiments/portfolio_plates.py`.
+- Simulation only, not field-validated, not an enforcement device; the page says so, along with the tuning-on-the-same-
+  simulator caveat. The WHO speed-risk sentence in the article cites the WHO road traffic injuries fact sheet, as the
+  repository does.
+- **Space² is left off the page.** The repository presents the tool as step one of a Space² road-safety pilot; per the
+  Space² rule above, that framing needs Rami's confirmation (his role, whether a real bounded pilot exists) before it is
+  public anywhere.

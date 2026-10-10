@@ -94,3 +94,10 @@ drone-control-bootcamp/plate.png, rig-cascade.png, pid-rc.png, rotor-loss.png
   source:   github.com/Kronbii/drone-control-bootcamp, drawn by
             tools/portfolio_plates.py from the same panel code as the README's
             hero figure (tools/hero_figure.py). Simulation with assumed parameters.
+
+road-speed-audit/plate.png, scene.png, distance.png, contact.png
+  source:   github.com/Kronbii/road-speed-audit, drawn by
+            experiments/portfolio_plates.py: square and 4:3 crops of the
+            simulated hero frame (figures/hero_frame.png) with its "SIMULATED
+            SCENE" label redrawn, and plates from results/e02_distance.json and
+            results/e12_contact.json. Simulated video, not a real road.

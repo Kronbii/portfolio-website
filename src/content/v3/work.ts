@@ -259,6 +259,17 @@ export const plain: Record<string, PlainWork> = {
       alt: 'Plot of the seesaw rig’s beam angle under a single PID loop and a rate and angle cascade, with a tap at four seconds.',
     },
   },
+  'road-speed-audit': {
+    kind: 'Vision · road safety',
+    line: 'Measures how fast cars drive on one street from a single camera, and says how far each number can be trusted.',
+    proof: '95 % of speeds within 1 km/h, on simulated video',
+    part: 'Sole author',
+    field: 'civic',
+    image: {
+      src: '/images/authority/road-speed-audit/plate.png',
+      alt: 'A rendered street scene labelled “Simulated scene”, with tracked vehicles showing measured and true speeds.',
+    },
+  },
   'ree-personal-finance-tracker': {
     kind: 'Desktop app',
     line: 'A private, offline personal-finance app for wallets, subscriptions, debts, and savings goals.',

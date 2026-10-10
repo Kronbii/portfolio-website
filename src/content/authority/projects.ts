@@ -2773,6 +2773,119 @@ export const projects: ProjectRecord[] = [
     topics: ['control-systems', 'embedded-systems'],
     keywords: ['drone control course', 'PID', 'easyPID', 'quadrotor', 'control education', 'Arduino'],
   },
+  {
+    slug: 'road-speed-audit',
+    state: 'ready',
+    title: 'Road-speed audit from one fixed camera',
+    metaTitle: 'Road-speed audit — measuring vehicle speeds with one fixed camera, validated on simulated video',
+    metaDescription:
+      'An offline tool that measures vehicle speeds on one road segment with one fixed camera, stores numbers rather than images, and reports mean speed, V85 and share over the limit with uncertainty. Accuracy characterised on simulated video with exact ground truth; not yet field-validated.',
+    summary:
+      'An offline, open-source tool that measures vehicle speeds on one road segment from one fixed camera and gives a municipality the numbers it plans with: mean speed, the 85th-percentile speed, the share over the limit and flow, each with an uncertainty. Its accuracy, and where it fails, is measured on simulated video with exact ground truth. It has not been checked against radar on a real road yet.',
+    role: 'Sole author: calibration, detection and tracking, speed estimation, uncertainty, the video simulator, the experiments and the report.',
+    form: 'artifact',
+    schemaType: 'SoftwareSourceCode',
+    hero: {
+      kind: 'image',
+      media: {
+        src: '/images/authority/road-speed-audit/scene.png',
+        alt: 'A rendered street scene labelled “Simulated scene”: a two-lane road with a green measurement zone, three tracked vehicles with their measured and true speeds, such as 54.8 km/h against a true 54.4.',
+        caption:
+          'A frame from the simulator, which knows every vehicle’s true speed. Measured speed beside the truth for each tracked vehicle. Simulated, not a real road.',
+      },
+    },
+    answer: {
+      what: 'A camera, a calibration and a tracker that measure vehicle speeds on one road segment, with an uncertainty on every number, a human review queue for doubtful records, and the statistics a municipality uses.',
+      problem:
+        'A municipality that wants to calm a street or check whether a measure worked needs speed data for that street. Radar surveys cost money and staff time; a camera on a pole is cheap, but only useful if its numbers can be trusted and it does not become a surveillance device.',
+      how: 'Surveyed road points give a homography from the image to metres on the road. Background subtraction finds vehicles, a Kalman tracker follows them through occlusions, and a robust fit of position against time inside a measurement zone gives each speed. Monte Carlo over the calibration gives each speed its uncertainty, and doubtful records go to a person instead of the statistics.',
+      role: 'I wrote the pipeline, the simulator that renders road scenes with exact ground truth, and the thirteen experiments that measure where it holds and where it breaks.',
+    },
+    stages: [
+      {
+        step: '01',
+        title: 'Calibrate',
+        detail:
+          'Six or more surveyed road points clicked on one frame give an image-to-road homography, with residuals and a recovered camera as a plausibility check.',
+      },
+      {
+        step: '02',
+        title: 'Track',
+        detail:
+          'Shadow-aware background subtraction with a sub-pixel bottom edge, a two-stage Kalman and Hungarian tracker, coasting through occlusions, and stitching of partial tracks in road coordinates.',
+      },
+      {
+        step: '03',
+        title: 'Measure',
+        detail:
+          'A robust fit of position against time inside the zone, quality flags that reject or send records to review, and a Monte-Carlo uncertainty that carries the calibration error into the report.',
+      },
+      {
+        step: '04',
+        title: 'Validate',
+        detail:
+          '221 simulated runs over 13 experiments: distance, height, tilt, resolution, frame rate, traffic density, calibration error, lighting and weather-like conditions, and the point on the vehicle that is tracked.',
+      },
+      {
+        step: '05',
+        title: 'Report',
+        detail:
+          'Mean speed, 85th-percentile speed, share over the limit and flow by lane and direction, with 95 % confidence intervals. Numbers only: no images are kept.',
+      },
+    ],
+    measurements: [
+      {
+        label: 'Speed error',
+        value: '1.0 km/h',
+        context: '95th-percentile error on 118 simulated vehicles; bias −0.23 km/h, no false records',
+      },
+      {
+        label: '85th-percentile speed',
+        value: '1.2 km/h',
+        context: 'RMSE of the V85 a municipality would see, over 20 simulated traffic runs',
+      },
+      {
+        label: 'Recommended zone',
+        value: '≤ 25 m',
+        context: 'from the pole, for a 95th-percentile error under 2 km/h with at least 80 % of vehicles measured (simulation)',
+      },
+      {
+        label: 'Tracked point',
+        value: '1.1 km/h',
+        context: 'error tracking the sub-pixel bottom edge; tracking the box centre instead gave 17.4 km/h (simulated)',
+      },
+    ],
+    limits: [
+      'Every figure comes from simulated video: a flat, straight road, an ideal lens and box-shaped vehicles. The tool has not been checked against radar or GPS on a real road; a field protocol for that is written.',
+      'The method was tuned on the same simulator, on other seeds, so real video will likely do worse than these numbers.',
+      'Accuracy falls quickly with distance: at 75 m the 95th-percentile error is 7.6 km/h and fewer than half the vehicles are measured. A lamp post in the line of sight cut the share measured from 86 % to 50 %.',
+      'Dusk and scenes without cast shadows raise the error to about 1.8 km/h and make the stated uncertainty too small.',
+      'It is an audit tool for planning, not a certified enforcement device.',
+    ],
+    media: [
+      {
+        src: '/images/authority/road-speed-audit/distance.png',
+        alt: 'Plot of the 95th-percentile speed error against the distance of the measurement zone from the pole, rising from about 0.8 km/h at 25 m to about 11 km/h at 95 m, with the share of vehicles measured at each distance.',
+        caption: 'Simulated video: the error grows with distance, and fewer vehicles are measured.',
+      },
+      {
+        src: '/images/authority/road-speed-audit/contact.png',
+        alt: 'Bar chart of the 95th-percentile speed error for four choices of tracked point: 1.1 km/h for the sub-pixel bottom edge, 2.6 for the raw blob edge, 3.4 for a height-corrected box centre and 17.4 for the uncorrected box centre.',
+        caption: 'Simulated video: tracking where the tyres meet the road, located to a fraction of a pixel, matters most.',
+      },
+    ],
+    sources: [
+      {
+        label: 'GitHub — road-speed-audit',
+        href: 'https://github.com/Kronbii/road-speed-audit',
+        kind: 'repository',
+        note: 'Code, the simulator, every experiment’s results and the field protocol.',
+      },
+    ],
+    articleSlug: 'measuring-road-speed-with-one-camera',
+    topics: ['computer-vision', 'civic-technology'],
+    keywords: ['vehicle speed measurement', 'homography', 'multi-object tracking', 'V85', 'road safety', 'traffic camera'],
+  },
 ]
 
 export const projectMap = Object.fromEntries(projects.map((p) => [p.slug, p]))

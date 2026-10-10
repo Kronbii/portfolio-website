@@ -107,3 +107,17 @@
 - Rewrote the ready project and writing copy in Rami's own voice (see CONTENT_REGISTRY "Voice revision"). A crawl of all 60 sitemap pages found none of the old meta-language left.
 - Published the FPV drone article; added Juno as a project and article. All 22 ready projects now have a ready write-up.
 - Added `/feed.xml` (full-text RSS, linked from every page's head) and `docs/crosspost/` (Markdown exports, a DEV/Medium/Hashnode publisher with a dry run by default, and instructions). No platform keys exist on this machine, and Hashnode's API now needs a Pro plan, so nothing was posted.
+
+## 2026-10-10 — New projects branch (`new-projects-2026-10`)
+
+- Added four projects with write-ups for Rami to keep or drop: rotor-fault detection and recovery (with his essay as
+  the article), the ESP32 star tracker, the drone-control bootcamp, and the road-speed audit. All four repositories are
+  private; each page labels its evidence (simulation, SITL, design-only, not taught).
+- Replaced the thermal super-resolution figures with the reproducible benchmark everywhere they appear (record,
+  article, Heat scene, card, reel line). This reverses the 2026-09-20 decision and needs Rami's sign-off.
+- Images are plates drawn by scripts committed in each project's repository, sized for the square hero and 4:3 gallery.
+- Checks: `tsc`, eslint on the changed files, `npm run build` (all new routes prerendered), desktop and phone renders
+  of every new page (no overflow, no broken images, no page errors). The duplicate `juno` key on `/projects` predates
+  this branch.
+- To drop a project: delete its record in `projects.ts`, its article in `articles.ts`, its entry in
+  `src/content/v3/work.ts` and its folder in `public/images/authority/`.

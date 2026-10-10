@@ -1567,6 +1567,85 @@ export const articles: ArticleRecord[] = [
     },
     keywords: ['control education', 'PID', 'easyPID', 'quadrotor', 'drone control'],
   },
+  {
+    slug: 'measuring-road-speed-with-one-camera',
+    state: 'ready',
+    title: 'Measuring road speed with one camera, and knowing how wrong it is',
+    metaTitle: 'Measuring road speed with one camera, and knowing how wrong it is',
+    metaDescription:
+      'A fixed camera can measure vehicle speeds cheaply, but a speed survey is only useful if its error is known. How simulated video with exact ground truth shows where the method holds and where it breaks.',
+    dek: 'A camera on a pole is the cheapest speed survey a street can get. The hard part is not measuring speed; it is knowing how far to trust the number.',
+    body: [
+      {
+        kind: 'p',
+        text: 'Speed is one of the main risk factors on roads: the World Health Organization estimates that every 1 % increase in mean speed raises the risk of a fatal crash by about 4 %. A municipality that wants to calm a street, argue for a crossing or check whether a measure worked needs speed data for that particular street. Radar surveys cost money and staff time. A camera on a lamp post is cheap, but its numbers are only useful if their error is known, and only acceptable if it does not become a surveillance device.',
+      },
+      {
+        kind: 'h2',
+        text: 'From pixels to metres',
+      },
+      {
+        kind: 'p',
+        text: 'The method is classical computer vision. A handful of points on the road, measured with a tape and clicked on one frame, give a homography: a mapping from the image to metres on the road plane. Background subtraction finds moving vehicles, a Kalman tracker follows each one through the frames, and the point where the tyres meet the road is mapped onto the road. A robust straight-line fit of position against time, inside a defined measurement zone, gives the speed.',
+      },
+      {
+        kind: 'p',
+        text: 'Each record leaves with an uncertainty, computed by perturbing the calibration and the pixel positions and fitting again. Records that look doubtful, such as merged vehicles, gaps or large residuals, go to a human review queue instead of into the statistics. The tool writes numbers, not images.',
+      },
+      {
+        kind: 'h2',
+        text: 'Ground truth from a simulator',
+      },
+      {
+        kind: 'p',
+        text: 'The difficulty with validating speed measurement is ground truth: on a real road, the true speed of every car is exactly what nobody has. So the project includes a renderer that draws road scenes through a calibrated camera, with lane markings, buildings, shadows, sensor noise, compression and motion blur, and knows every vehicle’s true speed. The full pipeline runs on those frames exactly as it would on a video file.',
+      },
+      {
+        kind: 'p',
+        text: 'On the baseline setup, a camera on a 6 m pole watching a zone 20 to 50 m away at 30 frames per second, 95 % of measured speeds were within about 1 km/h of the truth, with no false records. Over 20 simulated traffic runs, the 85th-percentile speed that planners use came out within about 1.2 km/h (RMSE).',
+      },
+      {
+        kind: 'h2',
+        text: 'Where it breaks',
+      },
+      {
+        kind: 'p',
+        text: 'The useful part of 221 simulated runs is the map of failures. Distance matters most: each pixel covers more road further away, so at 75 m the 95th-percentile error reaches 7.6 km/h and fewer than half the vehicles are measured. The point that is tracked matters almost as much. Tracking the centre of the vehicle’s box, without correcting for its height, gave 95th-percentile errors of 17 km/h; the bottom edge, located to a fraction of a pixel, gave about 1 km/h. Sensor noise, compression and motion blur barely mattered. Dusk and flat lighting without cast shadows did, and there the stated uncertainty was too small, which is the more dangerous failure.',
+      },
+      {
+        kind: 'p',
+        text: 'A few passes of a car driven at a known speed correct most of the calibration error. In one simulated low-resolution, far-zone setup, five such passes cut the speed bias from about 6 % to under 2 %.',
+      },
+      {
+        kind: 'h2',
+        text: 'What simulation cannot say',
+      },
+      {
+        kind: 'p',
+        text: 'The simulated road is flat and straight, the lens is ideal and the vehicles are boxes. These numbers describe the method when its assumptions hold. The next step is a field check against radar or GPS on one real road, following a protocol written for it. Until then the tool is an audit aid for planning, and it is not, and should not become, an enforcement device.',
+      },
+    ],
+    sources: [
+      {
+        label: 'GitHub — road-speed-audit',
+        href: 'https://github.com/Kronbii/road-speed-audit',
+        kind: 'repository',
+      },
+      {
+        label: 'World Health Organization — Road traffic injuries fact sheet',
+        href: 'https://www.who.int/news-room/fact-sheets/detail/road-traffic-injuries',
+        kind: 'documentation',
+      },
+    ],
+    projectSlug: 'road-speed-audit',
+    topics: ['computer-vision', 'civic-technology'],
+    heroMedia: {
+      src: '/images/authority/road-speed-audit/scene.png',
+      alt: 'A rendered street scene labelled “Simulated scene”, with tracked vehicles showing measured and true speeds.',
+      caption: 'A frame from the simulator, with measured and true speeds. Simulated, not a real road.',
+    },
+    keywords: ['vehicle speed measurement', 'traffic camera', 'homography', 'V85', 'road safety'],
+  },
 ]
 
 export const articleMap = Object.fromEntries(articles.map((a) => [a.slug, a]))
