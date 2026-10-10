@@ -226,6 +226,28 @@ export const plain: Record<string, PlainWork> = {
       position: '0% 0%',
     },
   },
+  'quadrotor-rotor-fault-recovery': {
+    kind: 'Drones · control research',
+    line: 'Teaches a small quadrotor to notice a damaged or lost rotor within a fraction of a second and keep flying.',
+    proof: '200 of 200 simulated faults caught, median 30 ms',
+    part: 'Sole author',
+    field: 'machines',
+    image: {
+      src: '/images/authority/quadrotor-rotor-fault-recovery/plate.png',
+      alt: 'Plot of position error after one rotor stops in simulated hover: the nominal controller flips, the estimating pipeline recovers.',
+    },
+  },
+  'esp32-barn-door-star-tracker': {
+    kind: 'Embedded · astrophotography',
+    line: 'A 3D-printed camera mount that turns with the sky, so long night-sky photos stay sharp; designed, not yet built.',
+    proof: '±0.32″ from the sky over two hours, in simulation',
+    part: 'Sole designer',
+    field: 'machines',
+    image: {
+      src: '/images/authority/esp32-barn-door-star-tracker/cad-render-square.png',
+      alt: 'CAD render of the unbuilt tracker, labelled in the image as a render and not a photograph.',
+    },
+  },
   'ree-personal-finance-tracker': {
     kind: 'Desktop app',
     line: 'A private, offline personal-finance app for wallets, subscriptions, debts, and savings goals.',

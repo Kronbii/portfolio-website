@@ -1299,6 +1299,195 @@ export const articles: ArticleRecord[] = [
     topics: ['product-engineering', 'lebanon'],
     keywords: ['motorcycle', 'Lebanon', 'Flutter'],
   },
+  {
+    slug: 'what-losing-a-rotor-teaches-about-estimation',
+    state: 'ready',
+    title: 'What losing a rotor teaches about estimation',
+    metaTitle: 'What losing a rotor teaches about estimation',
+    metaDescription:
+      'A quadrotor that loses a rotor has a fraction of a second to notice. Why detecting it is an estimation problem, and why the hard part is knowing what the healthy machine looks like.',
+    dek: 'A quadrotor that loses a rotor has a fraction of a second to notice. Noticing turns out to be an estimation problem, and most of it is about what you assume the healthy machine is.',
+    body: [
+      {
+        kind: 'p',
+        text: 'A quadrotor has exactly as many actuators as it has things to control: one collective thrust and three torques. A hexacopter can route around a damaged propeller; a quadrotor cannot. When one rotor weakens, the vehicle has to notice and compensate before its attitude loop saturates, and when a rotor stops entirely, the only way to stay in the air is to give up control of yaw and let the vehicle spin.',
+      },
+      {
+        kind: 'p',
+        text: 'The study models that situation for a 5-inch FPV-class quadrotor, about 0.64 kg with a thrust-to-weight ratio of 3.6, with sensor noise, a 10 ms motion-capture latency, parameter uncertainty and light turbulence. Everything below is simulation; the parameters are assumed, not identified on a real frame.',
+      },
+      {
+        kind: 'h2',
+        text: 'The hard part is knowing, not steering',
+      },
+      {
+        kind: 'p',
+        text: 'The clearest result is the gap between two controllers that differ only in what they know. After a complete loss of one rotor in hover, the nominal controller, never told about the fault, lost the vehicle in all 32 runs, typically by flipping within about 0.3 seconds. A yaw-relaxed controller in the spirit of Mueller and D’Andrea, handed the true fault the instant it happened, recovered every one.',
+      },
+      {
+        kind: 'p',
+        text: 'So the control law that survives a rotor loss already exists. What separates a crash from a recovery is information: that a fault happened, which rotor it hit, and how much effectiveness is left, delivered fast enough to act on.',
+      },
+      {
+        kind: 'h2',
+        text: 'Estimating something no sensor measures',
+      },
+      {
+        kind: 'p',
+        text: 'A small quadrotor usually has no direct measurement of how well each rotor is working. The pipeline infers it. The rotational dynamics and the vertical force balance are linear in the four rotor-effectiveness factors once each rotor’s thrust is predicted from the motor commands, so a Kalman filter can track those factors from the gyro, the accelerometer and the velocity estimate.',
+      },
+      {
+        kind: 'p',
+        text: 'One detail matters more than it looks: the gyro has to be differentiated to get angular acceleration, and differentiating noise is a bad idea, so it goes through a filter. Every other signal in the regression goes through the same filter, so the equation stays exact for a constant fault instead of being exact for none of its terms.',
+      },
+      {
+        kind: 'h2',
+        text: 'The healthy vehicle is not the nominal vehicle',
+      },
+      {
+        kind: 'p',
+        text: 'The next lesson was about the baseline. A thrust coefficient a few percent off, or a mass error, looks exactly like a few percent of lost effectiveness. A detector that compares the vehicle against its nominal model therefore starts every flight slightly alarmed.',
+      },
+      {
+        kind: 'p',
+        text: 'The fix is to learn what healthy looks like on this particular vehicle: the estimate is averaged over the first 2.5 seconds of hover and detection runs against that. With this step removed in an ablation, static mismatch stayed in the residual: one fault-free flight raised a false alarm, and so did one faulty flight before its fault even began.',
+      },
+      {
+        kind: 'h2',
+        text: 'Deciding fast, and deciding once',
+      },
+      {
+        kind: 'p',
+        text: 'Estimation produces a number; detection has to make a decision. The detector uses a bank of CUSUM tests, each designed for a different size of loss: 15, 30 and 60 percent. A single test tuned for small faults roughly doubled the median detection delay, from 30 to 61 ms, because a large fault then accumulates evidence at the rate of the small one it was designed for.',
+      },
+      {
+        kind: 'p',
+        text: 'With the bank, all 200 injected losses between 20 and 90 percent were detected (median 30 ms, 95th percentile 58 ms) and isolated to the correct rotor, with no false alarm in 32 minutes of fault-free flight, including aggressive manoeuvres that were not used to set the thresholds. The yaw-relaxed controller then took over complete losses about 60 ms after the failure and held position while the vehicle spun at about 23 rad/s.',
+      },
+      {
+        kind: 'h2',
+        text: 'What the oracle got wrong',
+      },
+      {
+        kind: 'p',
+        text: 'At 70 to 80 percent loss, the estimating pipeline had a smaller peak deviation than the oracle that knew the truth. The oracle idles a weakened rotor the moment it fails; the estimating pipeline keeps using it for the 70 to 90 ms it takes the alarm and the estimate to cross the switching threshold, and that partial thrust helps. An oracle is an upper bound on information, not on the decisions made with it.',
+      },
+      {
+        kind: 'h2',
+        text: 'Where it breaks',
+      },
+      {
+        kind: 'p',
+        text: 'Mapping where it fails is the most useful result. In the robustness sweeps, recovery from a complete loss started to fail at 24 ms of actuator delay (the controller assumes 2 ms), with motors 3.2 times slower than modelled, and at three times the default turbulence. All three act during the spin-up transient, when the relaxed equilibrium leaves little margin and the body tilts by 40 degrees or more.',
+      },
+      {
+        kind: 'p',
+        text: 'The limits of the evidence are just as clear. The noise in the simulation is white and the turbulence a simple random process; the vibration on a real 5-inch frame is narrow-band, much larger and tied to motor speed. The detection numbers describe what the method does when its model is right.',
+      },
+      {
+        kind: 'p',
+        text: 'The first step beyond the original simulator is done. Replayed offline on 110 PX4 software-in-the-loop flights of a 2 kg quadrotor in Gazebo, the same diagnoser detected all 40 partial and 16 complete losses, with median delays of 120 and 132 ms, and flagged every complete loss before the vehicle tilted past 90 degrees. PX4’s own failure detector raised nothing for the partial losses and flagged the complete ones only after about 660 ms, once the attitude limit was crossed. Gazebo’s IMU is nearly noise-free, though, so that run says little about false alarms on a real frame. Blackbox logs from a real flight, then a tethered rig, come next.',
+      },
+      {
+        kind: 'p',
+        text: 'Losing a rotor is a lesson in estimation. The controller that survives is the one that knows soonest, and how soon it knows depends less on clever control than on an honest model of the healthy machine.',
+      },
+    ],
+    sources: [
+      {
+        label: 'GitHub — rotor-fault-recovery',
+        href: 'https://github.com/Kronbii/rotor-fault-recovery',
+        kind: 'repository',
+      },
+      {
+        label: 'Mueller and D’Andrea, Stability and control of a quadrocopter despite the complete loss of one, two, or three propellers (ICRA 2014)',
+        href: 'https://doi.org/10.1109/ICRA.2014.6906588',
+        kind: 'article',
+      },
+    ],
+    projectSlug: 'quadrotor-rotor-fault-recovery',
+    topics: ['control-systems', 'robotics-perception'],
+    heroMedia: {
+      src: '/images/authority/quadrotor-rotor-fault-recovery/complete-loss.png',
+      alt: 'Plot of position error after one rotor stops in simulated hover: the nominal controller flips, while the estimating pipeline and a controller told the true fault both recover.',
+      caption: 'Simulation: one rotor stops at 2 s; the nominal controller flips, the pipeline recovers.',
+    },
+    keywords: ['rotor fault detection', 'quadrotor', 'Kalman filter', 'CUSUM', 'fault-tolerant control'],
+  },
+  {
+    slug: 'a-barn-door-tracker-that-does-the-maths',
+    state: 'ready',
+    title: 'A barn-door tracker that does the maths',
+    metaTitle: 'A barn-door star tracker that does the maths',
+    metaDescription:
+      'The barn-door tracker’s tangent error is pure geometry, so an ESP32 can remove it exactly by timing every microstep, and an error model shows what limits the exposure next.',
+    dek: 'The barn-door tracker’s famous tangent error is pure geometry, so the firmware can remove it exactly instead of the mechanics approximating it.',
+    body: [
+      {
+        kind: 'p',
+        text: 'A barn-door tracker is two boards on a hinge. Point the hinge at the celestial pole, open the boards at the rate the sky turns, and a camera on the top board follows the stars. It is the cheapest way to take long exposures of the night sky, and it has one famous flaw: a straight screw pushing a board that swings in an arc does not open it at a constant angular rate. Driven at constant speed, the design in this project would drift off the sky by about 30 arcminutes in the first hour and more than four degrees over its full travel.',
+      },
+      {
+        kind: 'p',
+        text: 'The classic fixes are mechanical: a curved rod, or a second arm that cancels most of the error. This design takes the other route. The error is pure geometry, so the firmware can remove it exactly.',
+      },
+      {
+        kind: 'h2',
+        text: 'Schedule steps, not speed',
+      },
+      {
+        kind: 'p',
+        text: 'The firmware never runs the motor at a speed. The geometry of a roller pushing a strike plate gives a closed-form relation between the screw position and the board angle, and its inverse. For each microstep, the firmware computes the instant at which the ideal sidereal angle crosses that step’s true angle and fires the step then. Because every step is placed against the ideal angle rather than added to the previous one, errors cannot accumulate: in a two-hour simulated run of the same C++ code the ESP32 runs, the board stays within half a microstep, 0.32 arcseconds, of the sky.',
+      },
+      {
+        kind: 'p',
+        text: 'The ESP32 cannot use its floating-point unit inside interrupts, so the work is split. A 1 kHz task does the trigonometry and fills a small lock-free queue of step times; a 20 kHz interrupt only compares integer timestamps and pulses the driver.',
+      },
+      {
+        kind: 'h2',
+        text: 'Choosing the drive by division',
+      },
+      {
+        kind: 'p',
+        text: 'The deciding argument for the lead screw was division. Every error that starts at the motor, such as uneven microsteps or an eccentric coupler, is divided by the reduction ratio before it reaches the sky. A 2 mm-lead screw pushing a 200 mm arm gives 629:1 from parts sold for 3D-printer Z axes, about 0.64 arcseconds per microstep. Printed worm gears and belt drums reach a fraction of that.',
+      },
+      {
+        kind: 'h2',
+        text: 'Predicting before building',
+      },
+      {
+        kind: 'p',
+        text: 'Nothing has been built yet, so the useful question was what would limit it. A Python error model converts each source, from polar misalignment and drive-rate error to the screw’s periodic error and refraction, into on-sky trail, and from that into the longest sharp exposure for each lens. At 200 mm on an APS-C camera it predicts about 21 seconds per frame, against 0.38 seconds without tracking.',
+      },
+      {
+        kind: 'p',
+        text: 'The model also changed the plan. With an assumed periodic error of ±4 µm, the screw’s wobble outweighs polar-alignment error up to about one degree of misalignment. A better polar scope would buy little; a periodic-error correction table, which the firmware already supports, could raise the 200 mm limit to over a minute. That assumption is also the model’s biggest uncertainty, and measuring the real screw is the first job after the build.',
+      },
+      {
+        kind: 'h2',
+        text: 'What is left',
+      },
+      {
+        kind: 'p',
+        text: 'The parts are modelled for printing, the firmware compiles, and the tests pass, but every performance number is a prediction until the tracker is built and pointed at the Orion Nebula. The first session is planned for a moonless window in November. After that, an autoguiding camera, prototyped so far only on synthetic star fields, is the next step.',
+      },
+    ],
+    sources: [
+      {
+        label: 'GitHub — star-tracker',
+        href: 'https://github.com/Kronbii/star-tracker',
+        kind: 'repository',
+      },
+    ],
+    projectSlug: 'esp32-barn-door-star-tracker',
+    topics: ['embedded-systems', 'control-systems'],
+    heroMedia: {
+      src: '/images/authority/esp32-barn-door-star-tracker/tangent-correction.png',
+      alt: 'Two plots: the tangent error of a constant-speed barn door growing over two hours, and the firmware schedule staying within plus or minus 0.3 arcseconds.',
+      caption: 'Constant speed against the firmware’s schedule, from a host simulation of the firmware code.',
+    },
+    keywords: ['barn door tracker', 'ESP32', 'stepper motor', 'astrophotography'],
+  },
 ]
 
 export const articleMap = Object.fromEntries(articles.map((a) => [a.slug, a]))

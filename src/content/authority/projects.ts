@@ -2427,6 +2427,234 @@ export const projects: ProjectRecord[] = [
     topics: ['product-engineering', 'lebanon'],
     keywords: ['Flutter', 'motorcycle', 'Lebanon', 'maintenance', 'Mapbox'],
   },
+  {
+    slug: 'quadrotor-rotor-fault-recovery',
+    state: 'ready',
+    title: 'Rotor-fault detection and recovery for a quadrotor',
+    metaTitle: 'Rotor-fault detection and recovery for a 5-inch quadrotor — simulation and PX4 SITL',
+    metaDescription:
+      'How a 5-inch quadrotor can detect a weakened or lost rotor within tens of milliseconds and keep flying: a Kalman-filter estimator, a CUSUM detector and a yaw-relaxed controller, tested in simulation and on PX4 software-in-the-loop.',
+    summary:
+      'A reproducible study of rotor-fault tolerance for a 5-inch quadrotor: estimate how well each rotor still works, detect and isolate a loss within tens of milliseconds, and recover, including from the complete loss of one rotor. Validated offline on PX4 software-in-the-loop flights; the test on the real vehicle is prepared, not done.',
+    role: 'Sole author: vehicle model, estimator, detector, controllers, simulator, experiments, PX4 software-in-the-loop automation, analysis and the paper.',
+    form: 'artifact',
+    schemaType: 'SoftwareSourceCode',
+    hero: {
+      kind: 'image',
+      media: {
+        src: '/images/authority/quadrotor-rotor-fault-recovery/complete-loss.png',
+        alt: 'Plot of position error after one rotor stops at two seconds in simulated hover: the nominal controller flips within a few tenths of a second, while the estimating pipeline and a controller told the true fault both recover, with the alarm and the switch to the yaw-relaxed controller marked.',
+        caption:
+          'Simulation: one rotor stops at 2 s. The nominal controller flips; the pipeline raises the alarm, switches to the yaw-relaxed controller and recovers.',
+      },
+    },
+    answer: {
+      what: 'A detect, isolate and recover pipeline for rotor faults on a small quadrotor, built and evaluated in a 6-DOF simulator and then replayed on PX4 software-in-the-loop flights.',
+      problem:
+        'A quadrotor has no spare actuators. A chipped propeller or failing motor has to be noticed and compensated within tens of milliseconds, and a rotor that stops entirely can only be survived by giving up control of yaw. Flight software for small quadrotors mostly just disarms.',
+      how: 'A Kalman filter estimates each rotor’s remaining effectiveness from a filtered rigid-body regression on gyro, accelerometer and velocity data, against a baseline learned in the first seconds of hover. A bank of CUSUM tests decides when a loss has happened and which rotor it hit. Partial losses are handled by re-allocating thrust; a complete loss switches to a gain-scheduled yaw-relaxed LQR controller after Mueller and D’Andrea.',
+      role: 'I wrote the models, the algorithms, the simulator and the experiments, automated the PX4 software-in-the-loop runs, and wrote the paper.',
+    },
+    stages: [
+      {
+        step: '01',
+        title: 'Model',
+        detail:
+          'A 5-inch FPV-class vehicle, about 0.64 kg with a thrust-to-weight ratio of 3.6, with sensor noise, 10 ms motion-capture latency, parameter spread and light turbulence.',
+      },
+      {
+        step: '02',
+        title: 'Diagnose',
+        detail:
+          'Effectiveness regression with one common filter on every signal, a Kalman filter, a learned healthy baseline, and a CUSUM bank tuned for 15, 30 and 60 % losses and calibrated on separate fault-free flights.',
+      },
+      {
+        step: '03',
+        title: 'Recover',
+        detail:
+          'Thrust re-allocation for partial losses; a numerically solved relaxed-hover equilibrium and gain-scheduled LQR for a complete loss, accepting a spin of about 23 rad/s.',
+      },
+      {
+        step: '04',
+        title: 'Stress',
+        detail:
+          'Monte-Carlo experiments with passive and oracle baselines, an ablation, and robustness sweeps over actuator delay, motor lag and turbulence to find where recovery breaks.',
+      },
+      {
+        step: '05',
+        title: 'Validate',
+        detail:
+          '110 headless PX4 software-in-the-loop flights of the x500 model in Gazebo, with motor faults injected in the simulated ESC and the diagnoser replayed offline on the flight logs. The log pipeline for Betaflight blackbox data and a tethered-test protocol are ready for the real quad.',
+      },
+    ],
+    measurements: [
+      {
+        label: 'Detection, simulation',
+        value: '200 / 200',
+        context: '20–90 % losses detected and isolated to the right rotor; median 30 ms, 95th percentile 58 ms',
+      },
+      {
+        label: 'Complete losses recovered, simulation',
+        value: '56 / 56',
+        context: '32 in hover, 24 during a 3.3 m/s figure-eight; the nominal controller lost every one',
+      },
+      {
+        label: 'Detection, PX4 SITL',
+        value: '56 / 56',
+        context: '40 partial and 16 complete losses; median 120 and 132 ms. PX4’s own detector flagged no partial loss',
+      },
+      {
+        label: 'False alarms',
+        value: '0',
+        context: 'in 32 min of fault-free simulated flight and 22 min of fault-free SITL flight',
+      },
+    ],
+    limits: [
+      'Everything is simulation or software-in-the-loop. Nothing has flown with a fault yet, and the vehicle parameters are assumed rather than identified on a real frame.',
+      'Simulated and Gazebo sensors are far cleaner than a vibrating 5-inch frame, so the false-alarm numbers are optimistic.',
+      'In PX4 software-in-the-loop the diagnoser ran offline on the flight logs; no fault-tolerant controller ran inside PX4.',
+      'Complete-loss recovery started to fail at 24 ms of actuator delay (2 ms assumed), motors 3.2 times slower than modelled, and three times the default turbulence.',
+      'The tethered test on the real quadrotor is planned, not done.',
+    ],
+    media: [
+      {
+        src: '/images/authority/quadrotor-rotor-fault-recovery/sitl-complete.png',
+        alt: 'Chart of 16 complete rotor losses in PX4 software-in-the-loop: the diagnoser alarm at about 120 to 145 ms on every run, the vehicle tilting past 90 degrees at about 450 to 540 ms, and PX4’s failure detector at about 640 to 690 ms.',
+        caption:
+          'PX4 software-in-the-loop: on every complete loss the diagnoser alarms long before the vehicle tilts past 90°; PX4’s own detector triggers after it.',
+      },
+      {
+        src: '/images/authority/quadrotor-rotor-fault-recovery/partial-sweep.png',
+        alt: 'Plot of median peak position deviation against the share of effectiveness lost on one rotor in simulated hover, for the nominal controller, a controller told the true fault, and the estimating pipeline.',
+        caption:
+          'Simulation: up to 60 % loss, the pipeline holds position as well as a controller told the true fault.',
+      },
+    ],
+    sources: [
+      {
+        label: 'GitHub — rotor-fault-recovery',
+        href: 'https://github.com/Kronbii/rotor-fault-recovery',
+        kind: 'repository',
+        note: 'Code, generated results, figures and the paper.',
+      },
+    ],
+    articleSlug: 'what-losing-a-rotor-teaches-about-estimation',
+    topics: ['control-systems', 'robotics-perception'],
+    keywords: [
+      'rotor fault detection',
+      'fault-tolerant control',
+      'quadrotor',
+      'CUSUM',
+      'Kalman filter',
+      'PX4 SITL',
+    ],
+  },
+  {
+    slug: 'esp32-barn-door-star-tracker',
+    state: 'ready',
+    title: 'ESP32 barn-door star tracker',
+    metaTitle: 'ESP32 barn-door star tracker — firmware that removes the tangent error',
+    metaDescription:
+      'A 3D-printed star tracker whose ESP32 firmware removes the barn door’s tangent error by timing every microstep from the mechanism’s geometry, with an error model that predicts the longest sharp exposure. Designed and tested in software; not yet built.',
+    summary:
+      'A 3D-printed barn-door tracker for photographing the Orion Nebula with a DSLR. The ESP32 firmware times every microstep from the exact geometry of the mechanism, a Python model predicts the longest sharp exposure for each lens, and a planner picks the night. Designed, compiled and tested in software; not yet built.',
+    role: 'Sole designer and developer: mechanism and CAD, electronics, firmware, error model, planner and documentation.',
+    form: 'artifact',
+    schemaType: 'CreativeWork',
+    hero: {
+      kind: 'image',
+      media: {
+        src: '/images/authority/esp32-barn-door-star-tracker/cad-render.png',
+        alt: 'CAD render of the unbuilt tracker: two hinged boards, a vertical lead-screw tower with a carriage, an electronics box and a sight tube along the hinge. A label in the image reads “CAD render, unbuilt design, not a photograph”.',
+        caption: 'CAD render of the design. It has not been built yet; this is not a photograph.',
+      },
+    },
+    answer: {
+      what: 'An ESP32 barn-door star tracker for DSLR astrophotography: parametric CAD, firmware, a tracking-error model, an observing planner and an autoguiding prototype.',
+      problem:
+        'The sky turns 15 arcseconds per second, so at 200 mm a fixed camera smears stars in under half a second. Cheap barn-door trackers are simple, but their geometry adds a tangent error that grows the longer they run.',
+      how: 'A 2 mm-lead screw pushing a 200 mm arm gives a 629:1 reduction from 3D-printer parts. Instead of running the motor at a speed, the firmware schedules each microstep for the instant the ideal sidereal angle crosses it, using the closed-form inverse of the geometry, so the tangent error is removed exactly and errors cannot accumulate.',
+      role: 'I chose the mechanism, derived the geometry, wrote the firmware and the models, and modelled the parts for printing.',
+    },
+    stages: [
+      {
+        step: '01',
+        title: 'Choose the mechanism',
+        detail:
+          'Worm, belt, geared-stepper and lead-screw drives compared by how much they divide motor-side error; a tangent-arm barn door wins at 629:1, 0.64 arcseconds per microstep.',
+      },
+      {
+        step: '02',
+        title: 'Let the firmware do the geometry',
+        detail:
+          'Position-based microstep scheduling from the inverse kinematics, a 20 kHz integer-only step interrupt, slews, homing, guide pulses, periodic-error correction and an intervalometer.',
+      },
+      {
+        step: '03',
+        title: 'Predict before building',
+        detail:
+          'An error budget per source, from polar alignment to the screw’s periodic error, converted into the longest sharp exposure per focal length.',
+      },
+      {
+        step: '04',
+        title: 'Plan the night',
+        detail:
+          'Every night from October to March scanned with JPL ephemerides for darkness, the Moon and the target’s altitude, ending in a first-session plan.',
+      },
+    ],
+    measurements: [
+      {
+        label: 'Tracking residual',
+        value: '±0.32″',
+        context: 'host simulation of the firmware scheduler over a 2 h sidereal run (half a microstep)',
+      },
+      {
+        label: 'Sharp exposure at 200 mm',
+        value: '21 s',
+        context: 'predicted, APS-C 3.72 µm pixels, 0.25° polar error, 1.5 px trail; 0.38 s untracked',
+      },
+      {
+        label: 'Per microstep',
+        value: '0.64″',
+        context: 'design value, 629:1 effective reduction',
+      },
+      {
+        label: 'Tests',
+        value: '110',
+        context: '60 C++ on the firmware core under address and undefined-behaviour sanitizers, 50 Python; models checked against JPL ephemerides',
+      },
+    ],
+    limits: [
+      'Not built and not tested under the sky. Every performance figure is a model prediction.',
+      'The lead screw’s periodic error, assumed ±4 µm, is the largest uncertainty and dominates the predicted budget.',
+      'Single axis: declination drift can be measured, not corrected.',
+      'Polar alignment with the sight tube is coarse, predicted 0.15–0.4°.',
+      'The autoguiding prototype has only seen synthetic star fields.',
+    ],
+    media: [
+      {
+        src: '/images/authority/esp32-barn-door-star-tracker/tangent-correction.png',
+        alt: 'Two plots: the tangent error of a constant-speed barn door growing past 250 arcminutes over two hours, and the firmware schedule staying within plus or minus 0.3 arcseconds.',
+        caption: 'Why the firmware schedules steps: constant speed drifts by degrees; the schedule stays within half a microstep. Host simulation of the firmware code.',
+      },
+      {
+        src: '/images/authority/esp32-barn-door-star-tracker/exposure-vs-focal-length.png',
+        alt: 'Log-log plot of predicted longest sharp exposure against focal length, tracked, worst case, with periodic-error correction and untracked.',
+        caption: 'Predicted longest sharp exposure per focal length. Model predictions, not sky measurements.',
+      },
+    ],
+    sources: [
+      {
+        label: 'GitHub — star-tracker',
+        href: 'https://github.com/Kronbii/star-tracker',
+        kind: 'repository',
+        note: 'Firmware, Python models, OpenSCAD files, bill of materials and build guides.',
+      },
+    ],
+    articleSlug: 'a-barn-door-tracker-that-does-the-maths',
+    topics: ['embedded-systems', 'control-systems'],
+    keywords: ['star tracker', 'barn door tracker', 'ESP32', 'astrophotography', 'stepper scheduling'],
+  },
 ]
 
 export const projectMap = Object.fromEntries(projects.map((p) => [p.slug, p]))
