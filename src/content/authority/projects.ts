@@ -2655,6 +2655,124 @@ export const projects: ProjectRecord[] = [
     topics: ['embedded-systems', 'control-systems'],
     keywords: ['star tracker', 'barn door tracker', 'ESP32', 'astrophotography', 'stepper scheduling'],
   },
+  {
+    slug: 'drone-control-bootcamp',
+    state: 'ready',
+    title: 'Teach it: a drone-control bootcamp',
+    metaTitle: 'Teach it — a seven-evening drone-control bootcamp, from PID to rotor-fault tolerance',
+    metaDescription:
+      'A seven-evening course that takes engineering students from PID on an RC circuit to a quadrotor that survives losing a rotor, with auto-checked notebooks, Arduino labs on a seesaw rig and a cohort plan. Ready for a first cohort; not taught yet.',
+    summary:
+      'A seven-evening course that takes engineering students from PID on an RC circuit to a quadrotor that survives losing a rotor, taught with my easyPID library and my rotor-fault study. Every session has notes, an auto-checked notebook, a lab, a quiz and slides. It is ready for a first cohort and has not been taught yet.',
+    role: 'Sole author: curriculum, notebooks, Python package, Arduino labs, rig design, slides and cohort plan.',
+    form: 'artifact',
+    schemaType: 'CreativeWork',
+    hero: {
+      kind: 'image',
+      media: {
+        src: '/images/authority/drone-control-bootcamp/rig-cascade.png',
+        alt: 'Plot of the seesaw rig’s beam angle stepping to 10 degrees and then absorbing a tap: a single PID loop swings to 17 degrees, a rate and angle cascade to 13.',
+        caption:
+          'Session 4 on the rig model: a single loop against a rate and angle cascade, both stepping to 10° and then hit by a tap. Simulation with assumed parameters.',
+      },
+    },
+    answer: {
+      what: 'A ready-to-run, seven-evening bootcamp on drone control — PID, attitude, fault tolerance — with auto-checked notebooks, Arduino labs on a two-motor seesaw rig, slides, an instructor guide and a cohort plan.',
+      problem:
+        'Control theory is usually taught on paper. Students with printers and electronics still lack a structured path from “what is PID” to “how does a drone stay up, and what happens when a propeller breaks”.',
+      how: 'Bench electronics first, then one drone axis on a rig with a potentiometer for ground truth, then the full quadrotor and its faults in simulation. Every exercise is auto-checked, every lab is predicted by a notebook before it is measured, and the capstone is scored by the same code on the rig and in simulation.',
+      role: 'I wrote the curriculum and its software, ported easyPID to Python for the notebooks, designed the rig, and set up CI that runs every notebook and compiles every sketch.',
+    },
+    stages: [
+      {
+        step: '01',
+        title: 'Bench PID',
+        detail:
+          'An RC circuit and a three-stage RC ladder with easyPID: windup, filtering and relay autotuning, each measured against a known answer.',
+      },
+      {
+        step: '02',
+        title: 'One drone axis',
+        detail:
+          'A two-motor seesaw rig with a potentiometer on the pivot: a thrust curve from a kitchen scale, interlocks, and the first closed loop on a clean angle.',
+      },
+      {
+        step: '03',
+        title: 'Attitude',
+        detail:
+          'The MPU-6050 estimate measured against the potentiometer, complementary and Kalman filters, and a rate and angle cascade built from two easyPID instances.',
+      },
+      {
+        step: '04',
+        title: 'The full vehicle',
+        detail:
+          'A minimal quadrotor simulator checked against the research model, mixing priorities, and a four-loop cascade.',
+      },
+      {
+        step: '05',
+        title: 'Faults and capstone',
+        detail:
+          'Fault signatures, CUSUM and re-allocation with the rotor-fault simulator, then an acceptance test that runs identically on the rig and in simulation.',
+      },
+    ],
+    measurements: [
+      {
+        label: 'Sessions',
+        value: '7',
+        context: 'about three hours each, plus optional build and open-lab evenings',
+      },
+      {
+        label: 'Auto-checked exercises',
+        value: '41',
+        context: 'in 7 notebooks built into student and solution versions; CI executes all 14',
+      },
+      {
+        label: 'easyPID port',
+        value: '≤ 4.8 × 10⁻⁴',
+        context: 'worst relative difference from the compiled C++ library over 3,274 randomised updates',
+      },
+      {
+        label: 'Kit per team',
+        value: 'USD 96–168',
+        context: 'bench kit and rig, a planning range before shipping and contingency',
+      },
+    ],
+    limits: [
+      'Not taught yet: no student has taken the course, so it claims no learning outcomes. A pilot plan says what the first cohort will measure.',
+      'No rig has been built from the documents. The printable parts have not been printed, and the sketches’ motor and IMU drivers have been compiled but not run on hardware.',
+      'Rig parameters, capstone pass limits and performance figures come from simulation with assumed values; session timings are estimates.',
+      'Testing easyPID for the course found a first-run bias in its relay autotuner: an ultimate gain of about 42 on the first run and 28 on the second, against an exact 29. The lab runs it twice; the library is unchanged so far.',
+    ],
+    media: [
+      {
+        src: '/images/authority/drone-control-bootcamp/pid-rc.png',
+        alt: 'Plot of capacitor voltage under P and PI control on an RC circuit: P settles below the 2.5 V setpoint, PI reaches it, and PI with too much integral gain overshoots.',
+        caption: 'Session 1: P leaves an offset, PI removes it, too much integral gain overshoots. easyPID’s Python port on a simulated RC circuit.',
+      },
+      {
+        src: '/images/authority/drone-control-bootcamp/rotor-loss.png',
+        alt: 'Plot of position error after rotor 1 is lost at two seconds: the passive controller diverges, the detect and yaw-relaxed pipeline peaks near 40 cm and recovers.',
+        caption: 'Session 6: losing a rotor in the rotor-fault simulator, passive controller against detection and yaw-relaxed control.',
+      },
+    ],
+    sources: [
+      {
+        label: 'GitHub — drone-control-bootcamp',
+        href: 'https://github.com/Kronbii/drone-control-bootcamp',
+        kind: 'repository',
+        note: 'Sessions, notebooks, Arduino labs, rig design, slides and the cohort plan.',
+      },
+      {
+        label: 'GitHub — easyPID',
+        href: 'https://github.com/Kronbii/easyPID',
+        kind: 'repository',
+        note: 'The Arduino library every lab uses.',
+      },
+    ],
+    articleSlug: 'teaching-drone-control-from-an-rc-circuit-up',
+    topics: ['control-systems', 'embedded-systems'],
+    keywords: ['drone control course', 'PID', 'easyPID', 'quadrotor', 'control education', 'Arduino'],
+  },
 ]
 
 export const projectMap = Object.fromEntries(projects.map((p) => [p.slug, p]))

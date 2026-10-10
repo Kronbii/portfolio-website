@@ -248,6 +248,17 @@ export const plain: Record<string, PlainWork> = {
       alt: 'CAD render of the unbuilt tracker, labelled in the image as a render and not a photograph.',
     },
   },
+  'drone-control-bootcamp': {
+    kind: 'Teaching · control',
+    line: 'A seven-evening course that takes students from a simple circuit to a drone that survives losing a propeller; ready, not yet taught.',
+    proof: '41 auto-checked exercises, every one tested',
+    part: 'Sole author',
+    field: 'machines',
+    image: {
+      src: '/images/authority/drone-control-bootcamp/plate.png',
+      alt: 'Plot of the seesaw rig’s beam angle under a single PID loop and a rate and angle cascade, with a tap at four seconds.',
+    },
+  },
   'ree-personal-finance-tracker': {
     kind: 'Desktop app',
     line: 'A private, offline personal-finance app for wallets, subscriptions, debts, and savings goals.',
